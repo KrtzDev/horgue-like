@@ -1,18 +1,30 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class EnemyMovement : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField]
+    private Transform playerTarget;
+
+    public NavMeshAgent agent;
+
+    public bool canMove;
+
+    private void Start()
     {
-        
+        playerTarget = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        
+        MoveTowardsPlayer();
+    }
+
+    private void MoveTowardsPlayer()
+    {
+        if (canMove)
+        {
+            agent.SetDestination(playerTarget.transform.position);
+        }
     }
 }
