@@ -6,6 +6,9 @@ public class EnemyProjectile : MonoBehaviour
 {
     [SerializeField]
     private LayerMask hitLayerMask;
+    [SerializeField]
+    private int baseDamage;
+
 
     private void OnTriggerEnter(Collider other)
     {
@@ -14,8 +17,12 @@ public class EnemyProjectile : MonoBehaviour
 
             if (other.CompareTag("Player"))
             {
+                // Damage? 
+                if (other.GetComponent<HealthComponent>() != null)
+                {
+                    other.GetComponent<HealthComponent>().TakeDamage(baseDamage);
+                }
                 Destroy(gameObject);
-                // Damage?
             }
             else
             {
@@ -23,5 +30,4 @@ public class EnemyProjectile : MonoBehaviour
             }
         }
     }
-
 }
