@@ -32,6 +32,8 @@ public class EnemySpawner : MonoBehaviour
     {
         Triangulation = NavMesh.CalculateTriangulation();
 
+        SetBounds();
+
         StartCoroutine(SpawnEnemies());
     }
 
@@ -98,10 +100,8 @@ public class EnemySpawner : MonoBehaviour
         return new Vector3(Random.Range(Bounds.min.x, Bounds.max.x), Bounds.min.y, Random.Range(Bounds.min.z, Bounds.max.z));
     }
 
-    private void DoSpawnEnemy(int SpawnIndex, Vector3 SpawnPosition)
+    private void SetBounds()
     {
-        PoolableObject poolableObject = EnemyObjectPools[SpawnIndex].GetObject();
-
         if (EnemyLocationMethod == LocationMethod.Collider)
         {
             List<int> possibleSpawns = new List<int>();
@@ -112,14 +112,20 @@ public class EnemySpawner : MonoBehaviour
             }
 
             int numberInList = 0;
-
-            float lowestDist = 5000f;
+            bool lowestDistEmpty = true;
+            float lowestDist = 0;
 
             for (int i = 0; i < SpawnCollider.Length; i++)
             {
                 float dist = Vector3.Distance(SpawnCollider[i].transform.position, Player.position);
 
-                if(dist < lowestDist)
+                if (lowestDistEmpty)
+                {
+                    lowestDist = dist;
+                    lowestDistEmpty = false;
+                }
+
+                if (dist < lowestDist)
                 {
                     lowestDist = dist;
                     numberInList = i;
@@ -131,6 +137,13 @@ public class EnemySpawner : MonoBehaviour
             int x = Random.Range(0, possibleSpawns.Count);
             Bounds = SpawnCollider[possibleSpawns[x]].bounds;
         }
+    }
+
+    private void DoSpawnEnemy(int SpawnIndex, Vector3 SpawnPosition)
+    {
+        PoolableObject poolableObject = EnemyObjectPools[SpawnIndex].GetObject();
+
+        SetBounds();
 
         if (poolableObject != null)
         {
@@ -143,7 +156,7 @@ public class EnemySpawner : MonoBehaviour
                 // enemy needs to get enabled and start chasing now.
                 enemy.Movement.playerTarget = Player;
                 enemy.Agent.enabled = true;
-                // enemy.Movement.StartChasing();
+                enemy.Movement.StartChasing();
             }
             else
             {
@@ -168,5 +181,6 @@ public class EnemySpawner : MonoBehaviour
     {
         Collider,
         Random
+        // Other location methods can be added here
     }
 }
