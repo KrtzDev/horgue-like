@@ -30,6 +30,14 @@ public class EnemyMovement : MonoBehaviour
     [SerializeField]
     private LayerMask playerLaskMask;
 
+    [Header("Attack & Retreat")]
+    [SerializeField]
+    private bool AttackRetreat;
+    private bool useRetreat;
+    public Vector3 RetreatPosition;
+    [SerializeField]
+    private float retreatTime;
+
 
     private void Awake()
     {
@@ -46,7 +54,7 @@ public class EnemyMovement : MonoBehaviour
         CheckAttackTime();
         CheckAttackTarget();
 
-        if (inRangedAttackRange)
+        if (inRangedAttackRange && !useRetreat)
         {
             if(timeSinceLastAttack >= attackSpeed)
             {
@@ -54,21 +62,41 @@ public class EnemyMovement : MonoBehaviour
                 timeSinceLastAttack = 0;
             }
         }
+
+        if(timeSinceLastAttack < retreatTime)
+        {
+            useRetreat = true;
+        }
+        else
+        {
+            useRetreat = false;
+
+            if(agent.destination != playerTarget.position)
+            {
+                StartChasing(playerTarget.position);
+            }
+        }
     }
 
-    public void StartChasing()
+    public void StartChasing(Vector3 targetPosition)
     {
-        if(agent.enabled == false)
-        {
-            agent.enabled = true;
-        }
-
-        StartCoroutine(FollowTarget());
+        agent.SetDestination(targetPosition);
     }
 
     private void StopFollowing()
     {
         agent.SetDestination(this.transform.position);
+    }
+
+    private void Retreat()
+    {
+        SetRetreatPosition();
+        StartChasing(RetreatPosition);
+    }
+
+    private void SetRetreatPosition()
+    {
+        // Set Retreat Position based on current enemy & player positions
     }
 
     private void Shoot()
@@ -79,17 +107,14 @@ public class EnemyMovement : MonoBehaviour
 
     private void CheckAttackTime()
     {
-        if(timeSinceLastAttack <= attackSpeed)
-        {
-            timeSinceLastAttack += Time.deltaTime;
-        }
+        timeSinceLastAttack += Time.deltaTime;
     }
 
     private void CheckAttackTarget()
     {
         Vector3 fromPosition = ProjectileSpawnPoints[projectileSpawnPoint].transform.position;
         Vector3 toPosition = playerTarget.transform.position;
-        Vector3 direction = toPosition - fromPosition;
+        Vector3 direction = (toPosition - fromPosition).normalized;
 
         Ray ray = new Ray(ProjectileSpawnPoints[projectileSpawnPoint].transform.position, direction);
         Debug.DrawRay(ProjectileSpawnPoints[projectileSpawnPoint].transform.position, direction * attackRange, Color.green);
@@ -103,21 +128,10 @@ public class EnemyMovement : MonoBehaviour
                 attackDirection = direction;
                 inRangedAttackRange = true;
             }
-            else
-            {
-                inRangedAttackRange = false;
-            }
         }
-    }
-
-    private IEnumerator FollowTarget()
-    {
-        WaitForSeconds Wait = new WaitForSeconds(UpdateRate);
-
-        while(gameObject.activeSelf)
+        else
         {
-            agent.SetDestination(playerTarget.transform.position);
-            yield return Wait;
+            inRangedAttackRange = false;
         }
     }
 
@@ -138,7 +152,14 @@ public class EnemyMovement : MonoBehaviour
     {
         WaitForSeconds Wait = new WaitForSeconds(UpdateRate);
 
-        StartChasing();
+        if (!AttackRetreat && !useRetreat)
+        {
+            StartChasing(playerTarget.position);
+        }
+        else
+        {
+            Retreat();
+        }
 
         yield return Wait;
     }

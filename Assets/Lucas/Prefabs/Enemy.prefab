@@ -353,11 +353,14 @@ MonoBehaviour:
     type: 3}
   attackForce: 10
   attackSpeed: 3
-  attackRange: 20
+  attackRange: 2
   inRangedAttackRange: 0
   playerLaskMask:
     serializedVersion: 2
     m_Bits: 65
+  AttackRetreat: 1
+  RetreatPosition: {x: 0, y: 0, z: 0}
+  retreatTime: 4
 --- !u!195 &5465025598197332767
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -372,7 +375,7 @@ NavMeshAgent:
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
-  m_StoppingDistance: 5
+  m_StoppingDistance: 1
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
