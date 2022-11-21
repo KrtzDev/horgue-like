@@ -1,23 +1,28 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class HealthComponent : MonoBehaviour
 {
-    [SerializeField]
-    private int maxHealth = 100;
-    [SerializeField]
-    private int health;
+    public int maxHealth = 100;
+    public int currentHealth;
+
+    public event Action<float> OnHealthPctChanged = delegate { };
 
     private void Awake()
     {
-        health = maxHealth;
+        currentHealth = maxHealth;
     }
 
     public void TakeDamage(int damage)
     {
-        health -= damage;
-        if(health <= 0)
+        currentHealth -= damage;
+
+        float currentHealthPct = (float)currentHealth / (float)maxHealth;
+        OnHealthPctChanged(currentHealthPct);
+
+        if(currentHealth <= 0)
         {
             Debug.Log("isDead");
 
