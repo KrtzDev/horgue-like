@@ -62,6 +62,11 @@ public class Player_Movement : MonoBehaviour
             float acceleration = _acceleration.Evaluate(_timeMoving);
             movement = relativeMoveDirection * _movementSpeed * acceleration * Time.fixedDeltaTime;
             _lastDirection = relativeMoveDirection;
+
+            _character.transform.rotation = 
+                Quaternion.RotateTowards(_character.transform.rotation, 
+                Quaternion.LookRotation(relativeMoveDirection, Vector3.up), 
+                500f * Time.deltaTime);
         }
         else
         {
@@ -69,9 +74,7 @@ public class Player_Movement : MonoBehaviour
             float decceleration = _decceleration.Evaluate(_timeStopping);
             movement = _lastDirection * _movementSpeed * decceleration * Time.fixedDeltaTime;
         }
-
         _character.CharacterRigidbody.MovePosition(transform.position + movement);
-
     }
 
     private void Move(InputAction.CallbackContext ctx)
@@ -79,6 +82,9 @@ public class Player_Movement : MonoBehaviour
         if (ctx.performed)
         {
             _moveDir = ctx.ReadValue<Vector2>();
+            _moveDir.Normalize();
+            _moveDir.x *= .66f;
+
             _isMoving = true;
             _timeStopping = 0;
         }

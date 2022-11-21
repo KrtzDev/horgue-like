@@ -32,7 +32,7 @@ public partial class @Player_Input_Mappings : IInputActionCollection2, IDisposab
                     ""type"": ""Value"",
                     ""id"": ""78b2ab1e-4e1c-40d4-a1c7-9e19e8ada89b"",
                     ""expectedControlType"": ""Delta"",
-                    ""processors"": ""NormalizeVector2,ScaleVector2(y=1.33)"",
+                    ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
                 }
@@ -43,7 +43,7 @@ public partial class @Player_Input_Mappings : IInputActionCollection2, IDisposab
                     ""id"": ""99fef8fb-07af-4ddb-9622-71178f1a22df"",
                     ""path"": ""2DVector"",
                     ""interactions"": """",
-                    ""processors"": """",
+                    ""processors"": ""ScaleVector2(x=0.66)"",
                     ""groups"": """",
                     ""action"": ""Movement"",
                     ""isComposite"": true,
@@ -92,11 +92,88 @@ public partial class @Player_Input_Mappings : IInputActionCollection2, IDisposab
                     ""action"": ""Movement"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""Direction"",
+                    ""id"": ""2d39f6de-82cb-45c0-a826-81d91ec4c98b"",
+                    ""path"": ""2DVector(mode=2)"",
+                    ""interactions"": """",
+                    ""processors"": ""ScaleVector2(x=0.66)"",
+                    ""groups"": """",
+                    ""action"": ""Movement"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""4a782daa-7055-422d-b00d-384747b322cf"",
+                    ""path"": ""<Gamepad>/leftStick/up"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""ControllScheme"",
+                    ""action"": ""Movement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""606f56aa-7893-466e-aa27-587de665d971"",
+                    ""path"": ""<Gamepad>/leftStick/down"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""ControllScheme"",
+                    ""action"": ""Movement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""9535096d-71c7-4b12-856b-a7ca349de094"",
+                    ""path"": ""<Gamepad>/leftStick/left"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""ControllScheme"",
+                    ""action"": ""Movement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""26b6975b-9ea1-4494-8e14-7924d675b4ce"",
+                    ""path"": ""<Gamepad>/leftStick/right"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""ControllScheme"",
+                    ""action"": ""Movement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
                 }
             ]
         }
     ],
-    ""controlSchemes"": []
+    ""controlSchemes"": [
+        {
+            ""name"": ""ControllScheme"",
+            ""bindingGroup"": ""ControllScheme"",
+            ""devices"": [
+                {
+                    ""devicePath"": ""<Gamepad>"",
+                    ""isOptional"": true,
+                    ""isOR"": false
+                },
+                {
+                    ""devicePath"": ""<Keyboard>"",
+                    ""isOptional"": true,
+                    ""isOR"": false
+                },
+                {
+                    ""devicePath"": ""<Mouse>"",
+                    ""isOptional"": true,
+                    ""isOR"": false
+                }
+            ]
+        }
+    ]
 }");
         // Character
         m_Character = asset.FindActionMap("Character", throwIfNotFound: true);
@@ -189,6 +266,15 @@ public partial class @Player_Input_Mappings : IInputActionCollection2, IDisposab
         }
     }
     public CharacterActions @Character => new CharacterActions(this);
+    private int m_ControllSchemeSchemeIndex = -1;
+    public InputControlScheme ControllSchemeScheme
+    {
+        get
+        {
+            if (m_ControllSchemeSchemeIndex == -1) m_ControllSchemeSchemeIndex = asset.FindControlSchemeIndex("ControllScheme");
+            return asset.controlSchemes[m_ControllSchemeSchemeIndex];
+        }
+    }
     public interface ICharacterActions
     {
         void OnMovement(InputAction.CallbackContext context);
