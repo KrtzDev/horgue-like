@@ -1,14 +1,23 @@
-using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class Player_Movement : MonoBehaviour
 {
+    [SerializeField]
+    private AnimationCurve _acceleration;
+    [SerializeField]
+    private AnimationCurve _decceleration;
+    [SerializeField]
+    private float _movementSpeed = 10f;
+
     private Player_Character _character;
     private Player_Input_Mappings _inputActions;
 
-    private float _movementSpeed = 10f;
     private Vector2 _moveDir;
+    private Vector3 _lastDirection;
+    private bool _isMoving;
+    private float _timeMoving;
+    private float _timeStopping;
 
     private void Awake()
     {
@@ -34,6 +43,7 @@ public class Player_Movement : MonoBehaviour
 
     private void FixedUpdate()
     {
+
         Vector3 cameraForward = _character.Camera.transform.forward;
         Vector3 cameraRight = _character.Camera.transform.right;
 
@@ -44,20 +54,43 @@ public class Player_Movement : MonoBehaviour
         cameraRight = cameraRight.normalized;
 
         Vector3 relativeMoveDirection = _moveDir.y * cameraForward + _moveDir.x * cameraRight;
+        Vector3 movement;
 
-        _character.CharacterRigidbody.MovePosition(transform.position + (relativeMoveDirection * _movementSpeed * Time.fixedDeltaTime));
+        if (_isMoving)
+        {
+            _timeMoving += Time.deltaTime;
+            float acceleration = _acceleration.Evaluate(_timeMoving);
+            movement = relativeMoveDirection * _movementSpeed * acceleration * Time.fixedDeltaTime;
+            _lastDirection = relativeMoveDirection;
+        }
+        else
+        {
+            _timeStopping += Time.deltaTime;
+            float decceleration = _decceleration.Evaluate(_timeStopping);
+            movement = _lastDirection * _movementSpeed * decceleration * Time.fixedDeltaTime;
+        }
+
+        _character.CharacterRigidbody.MovePosition(transform.position + movement);
+
     }
 
     private void Move(InputAction.CallbackContext ctx)
     {
-        if(ctx.performed)
+        if (ctx.performed)
+        {
             _moveDir = ctx.ReadValue<Vector2>();
-       
+            _isMoving = true;
+            _timeStopping = 0;
+        }
     }
 
     private void StopMove(InputAction.CallbackContext ctx)
     {
         if (ctx.canceled)
+        {
             _moveDir = Vector2.zero;
+            _isMoving = false;
+            _timeMoving = 0;
+        }
     }
 }

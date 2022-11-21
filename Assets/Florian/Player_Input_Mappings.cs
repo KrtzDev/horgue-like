@@ -32,7 +32,7 @@ public partial class @Player_Input_Mappings : IInputActionCollection2, IDisposab
                     ""type"": ""Value"",
                     ""id"": ""78b2ab1e-4e1c-40d4-a1c7-9e19e8ada89b"",
                     ""expectedControlType"": ""Delta"",
-                    ""processors"": ""NormalizeVector2"",
+                    ""processors"": ""NormalizeVector2,ScaleVector2(y=1.33)"",
                     ""interactions"": """",
                     ""initialStateCheck"": true
                 }
