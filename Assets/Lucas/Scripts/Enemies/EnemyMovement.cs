@@ -113,7 +113,7 @@ public class EnemyMovement : MonoBehaviour
     private void CheckAttackTarget()
     {
         Vector3 fromPosition = ProjectileSpawnPoints[projectileSpawnPoint].transform.position;
-        Vector3 toPosition = playerTarget.transform.position;
+        Vector3 toPosition = playerTarget.transform.position + Vector3.up;
         Vector3 direction = (toPosition - fromPosition).normalized;
 
         Ray ray = new Ray(ProjectileSpawnPoints[projectileSpawnPoint].transform.position, direction);
