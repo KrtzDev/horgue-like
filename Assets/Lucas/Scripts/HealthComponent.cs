@@ -1,14 +1,15 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class HealthComponent : MonoBehaviour
 {
-    public int maxHealth = 100;
-    public int currentHealth;
-
     public event Action<float> OnHealthPctChanged = delegate { };
+
+    [SerializeField]
+    private int maxHealth = 100;
+    [SerializeField]
+    private int currentHealth;
+
 
     private void Awake()
     {
@@ -22,7 +23,7 @@ public class HealthComponent : MonoBehaviour
         float currentHealthPct = (float)currentHealth / (float)maxHealth;
         OnHealthPctChanged(currentHealthPct);
 
-        if(currentHealth <= 0)
+        if (currentHealth <= 0)
         {
             Debug.Log("isDead");
 
