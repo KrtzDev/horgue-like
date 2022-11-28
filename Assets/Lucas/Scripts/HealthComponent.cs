@@ -25,10 +25,14 @@ public class HealthComponent : MonoBehaviour
 
         if (currentHealth <= 0)
         {
-            Debug.Log("isDead");
+            if (this.gameObject.CompareTag("Player"))
+            {
+                Debug.Log("isDead");
+            }
 
             if (this.gameObject.CompareTag("Enemy"))
             {
+                Debug.Log("Enemy Died");
                 Destroy(this.gameObject);
             }
         }

@@ -8,6 +8,7 @@ public class EnemySpawner : MonoBehaviour
     public Transform Player;
     public int EnemyWavesToSpawn = 5;
     public int EnemyWaveSize = 2;
+    private int EnemyMaxAmount;
     public float SpawnDelay = 1f;
     public List<Enemy> EnemyPrefabs = new List<Enemy>();
     public SpawnMethod EnemySpawnMethod = SpawnMethod.RoundRobin;
@@ -22,9 +23,11 @@ public class EnemySpawner : MonoBehaviour
 
     private void Awake()
     {
+        EnemyMaxAmount = EnemyWavesToSpawn * EnemyWaveSize;
+
         for (int i = 0; i < EnemyPrefabs.Count; i++)
         {
-            EnemyObjectPools.Add(i, ObjectPool.CreateInstance(EnemyPrefabs[i], EnemyWavesToSpawn));
+            EnemyObjectPools.Add(i, ObjectPool.CreateInstance(EnemyPrefabs[i], EnemyMaxAmount));
         }
     }
 
@@ -43,7 +46,7 @@ public class EnemySpawner : MonoBehaviour
 
         int SpawnedEnemies = 0;
 
-        while (SpawnedEnemies < EnemyWavesToSpawn)
+        while (SpawnedEnemies < EnemyMaxAmount)
         {
             for(int i = 0; i < EnemyWaveSize; i++)
             {
