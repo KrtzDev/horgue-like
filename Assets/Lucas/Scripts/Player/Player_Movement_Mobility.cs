@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -5,8 +6,8 @@ public class Player_Movement_Mobility : MonoBehaviour
 {
     [Header("Player General Ability")]
     [SerializeField]
-    private float abilityCDTimer;
-    private bool isUsingAbility;
+    private float _abilityCDTimer;
+    private bool _isUsingAbility;
 
     private Player_Character _character;
     private Player_Movement _playerMovement;
@@ -15,38 +16,37 @@ public class Player_Movement_Mobility : MonoBehaviour
     [Header("Which (one) Ability can be used?")]
 
     [SerializeField]
-    bool canUseJumpAbility;
+    bool _canUseJumpAbility;
     [SerializeField]
-    bool canUseDashAbility;
+    bool _canUseDashAbility;
     [SerializeField]
-    bool canUseStealthAbility;
+    bool _canUseStealthAbility;
     [SerializeField]
-    bool canUseFlickerStrikeAbility;
+    bool _canUseFlickerStrikeAbility;
 
     [Header("Player Jump Ability")]
     [SerializeField]
-    private float jumpCD;
-    private bool isUsingJumpAbility;
+    private float _jumpCD;
+    private bool _isUsingJumpAbility;
 
     [Header("Player Dash Ability")]
     [SerializeField]
-    private float dashCD;
+    private float _dashCD;
     [SerializeField]
-    private float dashTime;
-    private bool isUsingDashAbility;
-
+    private bool _isUsingDashAbility;
     [SerializeField]
-    private float dashForce = 30;
+    private float _dashForce = 30;
+    private float _dashTime = 0.25f;
 
     [Header("Player Stealth Ability")]
     [SerializeField]
-    private float stealthCD;
-    private bool isUsingStealthAbility;
+    private float _stealthCD;
+    private bool i_sUsingStealthAbility;
 
     [Header("Player Flicker Strike Ability")]
     [SerializeField]
-    private float flickerStrikeCD;
-    private bool isUsingFlickerStrikeAbility;
+    private float _flickerStrikeCD;
+    private bool _isUsingFlickerStrikeAbility;
 
     private void Awake()
     {
@@ -79,24 +79,24 @@ public class Player_Movement_Mobility : MonoBehaviour
 
     private void UseAbility(InputAction.CallbackContext ctx)
     {
-        if (ctx.performed && !isUsingAbility)
+        if (ctx.performed && !_isUsingAbility)
         {
-            if (canUseJumpAbility && abilityCDTimer <= 0)
+            if (_canUseJumpAbility && _abilityCDTimer <= 0)
             {
                 JumpAbility();
             }
 
-            if (canUseDashAbility && abilityCDTimer <= 0)
+            if (_canUseDashAbility && _abilityCDTimer <= 0)
             {
                 DashAbility();
             }
 
-            if (canUseStealthAbility && abilityCDTimer <= 0)
+            if (_canUseStealthAbility && _abilityCDTimer <= 0)
             {
                 StealthAbility();
             }
 
-            if (canUseFlickerStrikeAbility && abilityCDTimer <= 0)
+            if (_canUseFlickerStrikeAbility && _abilityCDTimer <= 0)
             {
                 FlickerStrikeAbility();
             }
@@ -105,82 +105,92 @@ public class Player_Movement_Mobility : MonoBehaviour
 
     private void TrackTimer()
     {
-        if (abilityCDTimer > 0) abilityCDTimer -= Time.deltaTime;
+        if (_abilityCDTimer > 0) _abilityCDTimer -= Time.deltaTime;
     }
 
     // Jump
 
     private void ResetAbilityTimer(float cd)
     {
-        abilityCDTimer = cd;
+        _abilityCDTimer = cd;
     }
 
     private void JumpAbility()
     {
-        isUsingAbility = true;
-        isUsingJumpAbility = true;
+        _isUsingAbility = true;
+        _isUsingJumpAbility = true;
     }
 
     private void ResetJumpAbility()
     {
-        isUsingAbility = false;
-        isUsingJumpAbility = false;
+        _isUsingAbility = false;
+        _isUsingJumpAbility = false;
 
-        ResetAbilityTimer(jumpCD);
+        ResetAbilityTimer(_jumpCD);
     }
 
     // Dash
 
     private void DashAbility()
     {
-        isUsingAbility = true;
-        isUsingDashAbility = true;
+        _playerMovement._canMove = false;
+        _isUsingAbility = true;
+        _isUsingDashAbility = true;
 
-        Vector3 forceToApply = transform.TransformDirection(Vector3.forward) * dashForce;
+        Vector3 dashDir = transform.TransformDirection(Vector3.forward);
+        Vector3 forceToApply = dashDir * _dashForce;
 
         _character.CharacterRigidbody.velocity = Vector3.zero;
         _character.CharacterRigidbody.AddForce(forceToApply, ForceMode.Impulse);
+
+        StartCoroutine(StopDash());
+    }
+
+    private IEnumerator StopDash()
+    {
+        yield return new WaitForSeconds(_dashTime);
 
         ResetDashAbility();
     }
 
     private void ResetDashAbility()
     {
-        isUsingAbility = false;
-        isUsingDashAbility = false;
+        _playerMovement._canMove = true;
+        _isUsingAbility = false;
+        _isUsingDashAbility = false;
 
-        ResetAbilityTimer(dashCD);
+        ResetAbilityTimer(_dashCD);
     }
 
     // Stealth
 
     private void StealthAbility()
     {
-        isUsingAbility = true;
-        isUsingStealthAbility = true;
+        _isUsingAbility = true;
+        i_sUsingStealthAbility = true;
     }
 
     private void ResetStealthbility()
     {
-        isUsingAbility = false;
-        isUsingStealthAbility = false;
+        _isUsingAbility = false;
+        i_sUsingStealthAbility = false;
 
-        ResetAbilityTimer(stealthCD);
+        ResetAbilityTimer(_stealthCD);
     }
 
     // Flicker Strike
 
     private void FlickerStrikeAbility()
     {
-        isUsingAbility = true;
-        isUsingFlickerStrikeAbility = true;
+        _isUsingAbility = true;
+        _isUsingFlickerStrikeAbility = true;
     }
 
     private void ResetFlickerStrikeAbility()
     {
-        isUsingAbility = false;
-        isUsingFlickerStrikeAbility = false;
+        _isUsingAbility = false;
+        _isUsingFlickerStrikeAbility = false;
 
-        ResetAbilityTimer(flickerStrikeCD);
+        ResetAbilityTimer(_flickerStrikeCD);
     }
 }

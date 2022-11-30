@@ -16,11 +16,9 @@ public class Player_Movement : MonoBehaviour
     private Vector2 _moveDir;
     public Vector3 _lastDirection;
     private bool _isMoving;
+    public bool _canMove = true;
     private float _timeMoving;
     private float _timeStopping;
-
-    [SerializeField]
-    private Vector3 movementGlobal;
 
     private void Awake()
     {
@@ -46,41 +44,42 @@ public class Player_Movement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        Vector3 cameraForward = _character.Camera.transform.forward;
-        Vector3 cameraRight = _character.Camera.transform.right;
-
-        cameraForward.y = 0;
-        cameraRight.y = 0;
-
-        cameraForward = cameraForward.normalized;
-        cameraRight = cameraRight.normalized;
-
-        Vector3 relativeMoveDirection = _moveDir.y * cameraForward + _moveDir.x * cameraRight;
-        Vector3 movement;
-
-        if (_isMoving)
-        {
-            _timeMoving += Time.deltaTime;
-            float acceleration = _acceleration.Evaluate(_timeMoving);
-            movement = relativeMoveDirection * _movementSpeed * acceleration * Time.fixedDeltaTime;
-            _lastDirection = relativeMoveDirection;
-
-            _character.transform.rotation = 
-                Quaternion.RotateTowards(_character.transform.rotation, 
-                Quaternion.LookRotation(relativeMoveDirection, Vector3.up), 
-                500f * Time.deltaTime);
-        }
+        if (!_canMove) return;
         else
         {
-            _timeStopping += Time.deltaTime;
-            float decceleration = _decceleration.Evaluate(_timeStopping);
-            movement = _lastDirection * _movementSpeed * decceleration * Time.fixedDeltaTime;
+            Vector3 cameraForward = _character.Camera.transform.forward;
+            Vector3 cameraRight = _character.Camera.transform.right;
+
+            cameraForward.y = 0;
+            cameraRight.y = 0;
+
+            cameraForward = cameraForward.normalized;
+            cameraRight = cameraRight.normalized;
+
+            Vector3 relativeMoveDirection = _moveDir.y * cameraForward + _moveDir.x * cameraRight;
+            Vector3 movement;
+
+            if (_isMoving)
+            {
+                _timeMoving += Time.deltaTime;
+                float acceleration = _acceleration.Evaluate(_timeMoving);
+                movement = relativeMoveDirection * _movementSpeed * acceleration * Time.fixedDeltaTime;
+                _lastDirection = relativeMoveDirection;
+
+                _character.transform.rotation =
+                    Quaternion.RotateTowards(_character.transform.rotation,
+                    Quaternion.LookRotation(relativeMoveDirection, Vector3.up),
+                    500f * Time.deltaTime);
+            }
+            else
+            {
+                _timeStopping += Time.deltaTime;
+                float decceleration = _decceleration.Evaluate(_timeStopping);
+                movement = _lastDirection * _movementSpeed * decceleration * Time.fixedDeltaTime;
+            }
+
+            _character.CharacterRigidbody.MovePosition(transform.position + movement);
         }
-
-        movementGlobal = movement;
-        movementGlobal.Normalize();
-
-        _character.CharacterRigidbody.MovePosition(transform.position + movement);
     }
 
     private void Move(InputAction.CallbackContext ctx)
