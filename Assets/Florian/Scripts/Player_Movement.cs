@@ -14,10 +14,13 @@ public class Player_Movement : MonoBehaviour
     private Player_Input_Mappings _inputActions;
 
     private Vector2 _moveDir;
-    private Vector3 _lastDirection;
+    public Vector3 _lastDirection;
     private bool _isMoving;
     private float _timeMoving;
     private float _timeStopping;
+
+    [SerializeField]
+    private Vector3 movementGlobal;
 
     private void Awake()
     {
@@ -43,7 +46,6 @@ public class Player_Movement : MonoBehaviour
 
     private void FixedUpdate()
     {
-
         Vector3 cameraForward = _character.Camera.transform.forward;
         Vector3 cameraRight = _character.Camera.transform.right;
 
@@ -74,6 +76,10 @@ public class Player_Movement : MonoBehaviour
             float decceleration = _decceleration.Evaluate(_timeStopping);
             movement = _lastDirection * _movementSpeed * decceleration * Time.fixedDeltaTime;
         }
+
+        movementGlobal = movement;
+        movementGlobal.Normalize();
+
         _character.CharacterRigidbody.MovePosition(transform.position + movement);
     }
 
@@ -99,4 +105,12 @@ public class Player_Movement : MonoBehaviour
             _timeMoving = 0;
         }
     }
+
+    #region Draw_Gizmos
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.green;
+        Gizmos.DrawLine(this.transform.position, this.transform.position + transform.TransformDirection(Vector3.forward));
+    }
+    #endregion
 }
