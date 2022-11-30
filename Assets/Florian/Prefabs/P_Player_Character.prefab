@@ -92,7 +92,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1820945064239900912}
-  m_LocalRotation: {x: 0.21045254, y: 0.37262258, z: -0.087172285, w: 0.89959055}
+  m_LocalRotation: {x: 0.21045256, y: 0.37262264, z: -0.08717229, w: 0.89959055}
   m_LocalPosition: {x: -10, y: 8, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -179,7 +179,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4698856430178366363}
-  m_LocalRotation: {x: 0.21045254, y: 0.37262258, z: -0.087172285, w: 0.89959055}
+  m_LocalRotation: {x: 0.21045256, y: 0.37262264, z: -0.08717229, w: 0.89959055}
   m_LocalPosition: {x: -10, y: 8, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -418,6 +418,7 @@ GameObject:
   - component: {fileID: 4698856430502407208}
   - component: {fileID: 2984215811683998150}
   - component: {fileID: 8773851501896812125}
+  - component: {fileID: 513094526}
   m_Layer: 0
   m_Name: P_Player_Character
   m_TagString: Player
@@ -473,7 +474,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 112
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!114 &4698856430502407213
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -499,7 +500,15 @@ MonoBehaviour:
   m_ControlsChangedEvent:
     m_PersistentCalls:
       m_Calls: []
-  m_ActionEvents: []
+  m_ActionEvents:
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 78b2ab1e-4e1c-40d4-a1c7-9e19e8ada89b
+    m_ActionName: Character/Movement[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: ec13812d-9832-4b93-9378-fe0bb83cb6d0
+    m_ActionName: Character/Movement Action[/Keyboard/space]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Character
@@ -580,6 +589,7 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   _movementSpeed: 10
+  _lastDirection: {x: 0, y: 0, z: 0}
 --- !u!114 &2984215811683998150
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -611,9 +621,32 @@ MonoBehaviour:
   _enemyLayer:
     serializedVersion: 2
     m_Bits: 128
-  _range: 7
+  _range: 15
   _attackDelay: 0.1
   _attackForce: 10
+--- !u!114 &513094526
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4698856430502407209}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d77f2c814ba0d2439230330d48d587e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _abilityCDTimer: 0
+  _canUseJumpAbility: 0
+  _canUseDashAbility: 1
+  _canUseStealthAbility: 0
+  _canUseFlickerStrikeAbility: 0
+  _jumpCD: 0
+  _dashCD: 5
+  _isUsingDashAbility: 0
+  _dashForce: 30
+  _stealthCD: 0
+  _flickerStrikeCD: 0
 --- !u!1 &4698856430750863150
 GameObject:
   m_ObjectHideFlags: 0

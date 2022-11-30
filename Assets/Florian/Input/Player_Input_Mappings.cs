@@ -35,6 +35,15 @@ public partial class @Player_Input_Mappings : IInputActionCollection2, IDisposab
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Movement Action"",
+                    ""type"": ""Button"",
+                    ""id"": ""ec13812d-9832-4b93-9378-fe0bb83cb6d0"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -147,6 +156,28 @@ public partial class @Player_Input_Mappings : IInputActionCollection2, IDisposab
                     ""action"": ""Movement"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b8b1cfea-c081-44fa-a1db-1e60f0561163"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Movement Action"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7f4e3093-eacb-498b-b3dd-1d0127211e2f"",
+                    ""path"": ""<Gamepad>/rightShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Movement Action"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -178,6 +209,7 @@ public partial class @Player_Input_Mappings : IInputActionCollection2, IDisposab
         // Character
         m_Character = asset.FindActionMap("Character", throwIfNotFound: true);
         m_Character_Movement = m_Character.FindAction("Movement", throwIfNotFound: true);
+        m_Character_MovementAction = m_Character.FindAction("Movement Action", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -238,11 +270,13 @@ public partial class @Player_Input_Mappings : IInputActionCollection2, IDisposab
     private readonly InputActionMap m_Character;
     private ICharacterActions m_CharacterActionsCallbackInterface;
     private readonly InputAction m_Character_Movement;
+    private readonly InputAction m_Character_MovementAction;
     public struct CharacterActions
     {
         private @Player_Input_Mappings m_Wrapper;
         public CharacterActions(@Player_Input_Mappings wrapper) { m_Wrapper = wrapper; }
         public InputAction @Movement => m_Wrapper.m_Character_Movement;
+        public InputAction @MovementAction => m_Wrapper.m_Character_MovementAction;
         public InputActionMap Get() { return m_Wrapper.m_Character; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -255,6 +289,9 @@ public partial class @Player_Input_Mappings : IInputActionCollection2, IDisposab
                 @Movement.started -= m_Wrapper.m_CharacterActionsCallbackInterface.OnMovement;
                 @Movement.performed -= m_Wrapper.m_CharacterActionsCallbackInterface.OnMovement;
                 @Movement.canceled -= m_Wrapper.m_CharacterActionsCallbackInterface.OnMovement;
+                @MovementAction.started -= m_Wrapper.m_CharacterActionsCallbackInterface.OnMovementAction;
+                @MovementAction.performed -= m_Wrapper.m_CharacterActionsCallbackInterface.OnMovementAction;
+                @MovementAction.canceled -= m_Wrapper.m_CharacterActionsCallbackInterface.OnMovementAction;
             }
             m_Wrapper.m_CharacterActionsCallbackInterface = instance;
             if (instance != null)
@@ -262,6 +299,9 @@ public partial class @Player_Input_Mappings : IInputActionCollection2, IDisposab
                 @Movement.started += instance.OnMovement;
                 @Movement.performed += instance.OnMovement;
                 @Movement.canceled += instance.OnMovement;
+                @MovementAction.started += instance.OnMovementAction;
+                @MovementAction.performed += instance.OnMovementAction;
+                @MovementAction.canceled += instance.OnMovementAction;
             }
         }
     }
@@ -278,5 +318,6 @@ public partial class @Player_Input_Mappings : IInputActionCollection2, IDisposab
     public interface ICharacterActions
     {
         void OnMovement(InputAction.CallbackContext context);
+        void OnMovementAction(InputAction.CallbackContext context);
     }
 }
