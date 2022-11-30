@@ -7,6 +7,12 @@ public class Player_Movement_Mobility : MonoBehaviour
     [Header("Player General Ability")]
     [SerializeField] private float _abilityCDTimer;
     private bool _isUsingAbility;
+    [SerializeField]
+    private bool _isGrounded;
+    [SerializeField]
+    private float _isGroundedLength = 0.0725f;
+    [SerializeField]
+    private LayerMask _groundLayerMask;
 
     private Player_Character _character;
     private Player_Movement _playerMovement;
@@ -30,8 +36,6 @@ public class Player_Movement_Mobility : MonoBehaviour
     [SerializeField] private float _fallMultiplier = 7;
     [SerializeField] private float _jumpVelocityFalloff = 8;
     [SerializeField] private float _jumpForce = 15;
-    // isgrounded
-
 
     [Header("Player Dash Ability")]
     [SerializeField]
@@ -77,7 +81,8 @@ public class Player_Movement_Mobility : MonoBehaviour
     private void Update()
     {
         TrackTimer();
-        JumpPhysics();
+        MovementPhysiscs();
+        CheckIfGrounded();
     }
 
     // General
@@ -113,6 +118,21 @@ public class Player_Movement_Mobility : MonoBehaviour
         if (_abilityCDTimer > 0) _abilityCDTimer -= Time.deltaTime;
     }
 
+    private void CheckIfGrounded()
+    {
+        RaycastHit hit;
+        if(Physics.Raycast(transform.position, transform.TransformDirection(Vector3.down), out hit, _isGroundedLength, _groundLayerMask))
+        {
+            Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.down) * hit.distance, Color.yellow);
+            _isGrounded = true;
+        }
+        else
+        {
+            Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.down) * 1000, Color.white);
+            _isGrounded = false;
+        }
+    }
+
     // Jump
 
     private void ResetAbilityTimer(float cd)
@@ -129,14 +149,19 @@ public class Player_Movement_Mobility : MonoBehaviour
         _character.CharacterRigidbody.velocity = jumpDir;
     }
 
-    private void JumpPhysics()
+    private void MovementPhysiscs()
     {
         if (_isUsingJumpAbility)
         {
             if (_character.CharacterRigidbody.velocity.y < _jumpVelocityFalloff || _character.CharacterRigidbody.velocity.y > 0 && !_inputActions.Character.MovementAction.triggered)
+            {
                 _character.CharacterRigidbody.velocity += _fallMultiplier * Physics.gravity.y * Vector3.up * Time.deltaTime;
+            }
 
-            // if isgrounded ResetJumpAbility
+            if (_isGrounded && _character.CharacterRigidbody.velocity.y < 1)
+            {
+                ResetJumpAbility();
+            }
         }
     }
 
