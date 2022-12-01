@@ -10,7 +10,9 @@ public class Player_Movement_Mobility : MonoBehaviour
     [SerializeField]
     private bool _isGrounded;
     [SerializeField]
-    private float _isGroundedLength = 0.0725f;
+    private float _groundCheckValueY;
+    [SerializeField]
+    private Vector3 _groundCheckBox;
     [SerializeField]
     private LayerMask _groundLayerMask;
 
@@ -81,7 +83,7 @@ public class Player_Movement_Mobility : MonoBehaviour
     private void Update()
     {
         TrackTimer();
-        MovementPhysiscs();
+        FallPhysics();
         CheckIfGrounded();
     }
 
@@ -120,15 +122,14 @@ public class Player_Movement_Mobility : MonoBehaviour
 
     private void CheckIfGrounded()
     {
-        RaycastHit hit;
-        if(Physics.Raycast(transform.position, transform.TransformDirection(Vector3.down), out hit, _isGroundedLength, _groundLayerMask))
+        Collider[] hitColliders = (Physics.OverlapBox(this.transform.position + new Vector3(0, _groundCheckValueY, 0), _groundCheckBox, Quaternion.identity, _groundLayerMask));
+
+        if(hitColliders.Length > 0)
         {
-            Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.down) * hit.distance, Color.yellow);
             _isGrounded = true;
         }
         else
         {
-            Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.down) * 1000, Color.white);
             _isGrounded = false;
         }
     }
@@ -146,18 +147,18 @@ public class Player_Movement_Mobility : MonoBehaviour
         _isUsingJumpAbility = true;
 
         Vector2 jumpDir = new Vector2(_character.CharacterRigidbody.velocity.x, _jumpForce);
-        _character.CharacterRigidbody.velocity = jumpDir;
+        _character.CharacterRigidbody.AddForce(jumpDir, ForceMode.Impulse);
     }
 
-    private void MovementPhysiscs()
+    private void FallPhysics()
     {
+        if ((_character.CharacterRigidbody.velocity.y < _jumpVelocityFalloff || _character.CharacterRigidbody.velocity.y > 0 && !_inputActions.Character.MovementAction.triggered) && !_isGrounded)
+        {
+            _character.CharacterRigidbody.velocity += _fallMultiplier * Physics.gravity.y * Vector3.up * Time.deltaTime;
+        }
+
         if (_isUsingJumpAbility)
         {
-            if (_character.CharacterRigidbody.velocity.y < _jumpVelocityFalloff || _character.CharacterRigidbody.velocity.y > 0 && !_inputActions.Character.MovementAction.triggered)
-            {
-                _character.CharacterRigidbody.velocity += _fallMultiplier * Physics.gravity.y * Vector3.up * Time.deltaTime;
-            }
-
             if (_isGrounded && _character.CharacterRigidbody.velocity.y < 1)
             {
                 ResetJumpAbility();
@@ -239,4 +240,12 @@ public class Player_Movement_Mobility : MonoBehaviour
 
         ResetAbilityTimer(_flickerStrikeCD);
     }
+
+    #region Draw_Gizmos
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireCube(this.transform.position + new Vector3(0, _groundCheckValueY, 0), _groundCheckBox);
+    }
+    #endregion
 }

@@ -638,13 +638,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _abilityCDTimer: 0
+  _isGrounded: 0
+  _groundCheckValueY: 0.225
+  _groundCheckBox: {x: 0.5, y: 0.5, z: 0.5}
+  _groundLayerMask:
+    serializedVersion: 2
+    m_Bits: 512
   _canUseJumpAbility: 0
   _canUseDashAbility: 0
   _canUseStealthAbility: 0
   _canUseFlickerStrikeAbility: 0
   _jumpCD: 2
-  _fallMultiplier: 7
-  _jumpVelocityFalloff: 8
+  _fallMultiplier: 10
+  _jumpVelocityFalloff: 11
   _jumpForce: 30
   _dashCD: 3
   _dashForce: 30
