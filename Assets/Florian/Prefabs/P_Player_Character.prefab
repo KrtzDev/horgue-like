@@ -590,6 +590,7 @@ MonoBehaviour:
     m_RotationOrder: 4
   _movementSpeed: 10
   _lastDirection: {x: 0, y: 0, z: 0}
+  _canMove: 1
 --- !u!114 &2984215811683998150
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -637,14 +638,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _abilityCDTimer: 0
+  _isGrounded: 0
+  _groundCheckValueY: 0.225
+  _groundCheckBox: {x: 0.5, y: 0.5, z: 0.5}
+  _groundLayerMask:
+    serializedVersion: 2
+    m_Bits: 512
   _canUseJumpAbility: 0
-  _canUseDashAbility: 1
+  _canUseDashAbility: 0
   _canUseStealthAbility: 0
   _canUseFlickerStrikeAbility: 0
-  _jumpCD: 0
-  _dashCD: 5
-  _isUsingDashAbility: 0
+  _jumpCD: 2
+  _fallMultiplier: 10
+  _jumpVelocityFalloff: 11
+  _jumpForce: 30
+  _dashCD: 3
   _dashForce: 30
+  _dashTime: 0.2
   _stealthCD: 0
   _flickerStrikeCD: 0
 --- !u!1 &4698856430750863150

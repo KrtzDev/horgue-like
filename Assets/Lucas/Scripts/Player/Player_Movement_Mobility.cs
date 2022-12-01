@@ -5,9 +5,16 @@ using UnityEngine.InputSystem;
 public class Player_Movement_Mobility : MonoBehaviour
 {
     [Header("Player General Ability")]
-    [SerializeField]
-    private float _abilityCDTimer;
+    [SerializeField] private float _abilityCDTimer;
     private bool _isUsingAbility;
+    [SerializeField]
+    private bool _isGrounded;
+    [SerializeField]
+    private float _groundCheckValueY;
+    [SerializeField]
+    private Vector3 _groundCheckBox;
+    [SerializeField]
+    private LayerMask _groundLayerMask;
 
     private Player_Character _character;
     private Player_Movement _playerMovement;
@@ -28,14 +35,17 @@ public class Player_Movement_Mobility : MonoBehaviour
     [SerializeField]
     private float _jumpCD;
     private bool _isUsingJumpAbility;
+    [SerializeField] private float _fallMultiplier = 7;
+    [SerializeField] private float _jumpVelocityFalloff = 8;
+    [SerializeField] private float _jumpForce = 15;
 
     [Header("Player Dash Ability")]
     [SerializeField]
     private float _dashCD;
-    [SerializeField]
     private bool _isUsingDashAbility;
     [SerializeField]
     private float _dashForce = 30;
+    [SerializeField]
     private float _dashTime = 0.25f;
 
     [Header("Player Stealth Ability")]
@@ -73,6 +83,8 @@ public class Player_Movement_Mobility : MonoBehaviour
     private void Update()
     {
         TrackTimer();
+        FallPhysics();
+        CheckIfGrounded();
     }
 
     // General
@@ -108,6 +120,20 @@ public class Player_Movement_Mobility : MonoBehaviour
         if (_abilityCDTimer > 0) _abilityCDTimer -= Time.deltaTime;
     }
 
+    private void CheckIfGrounded()
+    {
+        Collider[] hitColliders = (Physics.OverlapBox(this.transform.position + new Vector3(0, _groundCheckValueY, 0), _groundCheckBox, Quaternion.identity, _groundLayerMask));
+
+        if(hitColliders.Length > 0)
+        {
+            _isGrounded = true;
+        }
+        else
+        {
+            _isGrounded = false;
+        }
+    }
+
     // Jump
 
     private void ResetAbilityTimer(float cd)
@@ -119,6 +145,25 @@ public class Player_Movement_Mobility : MonoBehaviour
     {
         _isUsingAbility = true;
         _isUsingJumpAbility = true;
+
+        Vector2 jumpDir = new Vector2(_character.CharacterRigidbody.velocity.x, _jumpForce);
+        _character.CharacterRigidbody.AddForce(jumpDir, ForceMode.Impulse);
+    }
+
+    private void FallPhysics()
+    {
+        if ((_character.CharacterRigidbody.velocity.y < _jumpVelocityFalloff || _character.CharacterRigidbody.velocity.y > 0 && !_inputActions.Character.MovementAction.triggered) && !_isGrounded)
+        {
+            _character.CharacterRigidbody.velocity += _fallMultiplier * Physics.gravity.y * Vector3.up * Time.deltaTime;
+        }
+
+        if (_isUsingJumpAbility)
+        {
+            if (_isGrounded && _character.CharacterRigidbody.velocity.y < 1)
+            {
+                ResetJumpAbility();
+            }
+        }
     }
 
     private void ResetJumpAbility()
@@ -141,6 +186,7 @@ public class Player_Movement_Mobility : MonoBehaviour
         Vector3 forceToApply = dashDir * _dashForce;
 
         _character.CharacterRigidbody.velocity = Vector3.zero;
+        _character.CharacterRigidbody.useGravity = false;
         _character.CharacterRigidbody.AddForce(forceToApply, ForceMode.Impulse);
 
         StartCoroutine(StopDash());
@@ -156,6 +202,7 @@ public class Player_Movement_Mobility : MonoBehaviour
     private void ResetDashAbility()
     {
         _playerMovement._canMove = true;
+        _character.CharacterRigidbody.useGravity = true;
         _isUsingAbility = false;
         _isUsingDashAbility = false;
 
@@ -193,4 +240,12 @@ public class Player_Movement_Mobility : MonoBehaviour
 
         ResetAbilityTimer(_flickerStrikeCD);
     }
+
+    #region Draw_Gizmos
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireCube(this.transform.position + new Vector3(0, _groundCheckValueY, 0), _groundCheckBox);
+    }
+    #endregion
 }
