@@ -41,6 +41,8 @@ public class Player_Movement_Mobility : MonoBehaviour
 
     [Header("Player Dash Ability")]
     [SerializeField]
+    private Transform _Decoy;
+    [SerializeField]
     private float _dashCD;
     private bool _isUsingDashAbility;
     [SerializeField]
@@ -51,7 +53,11 @@ public class Player_Movement_Mobility : MonoBehaviour
     [Header("Player Stealth Ability")]
     [SerializeField]
     private float _stealthCD;
-    private bool i_sUsingStealthAbility;
+    [SerializeField]
+    private float _stealthTime;
+    private bool _isUsingStealthAbility;
+    [SerializeField]
+    private EnemySpawner _EnemySpawner;
 
     [Header("Player Flicker Strike Ability")]
     [SerializeField]
@@ -62,6 +68,7 @@ public class Player_Movement_Mobility : MonoBehaviour
     {
         _inputActions = new Player_Input_Mappings();
         _inputActions.Character.MovementAction.performed += UseAbility;
+        _EnemySpawner = GameObject.Find("EnemySpawner").GetComponent<EnemySpawner>();
     }
 
     private void Start()
@@ -214,13 +221,50 @@ public class Player_Movement_Mobility : MonoBehaviour
     private void StealthAbility()
     {
         _isUsingAbility = true;
-        i_sUsingStealthAbility = true;
+        _isUsingStealthAbility = true;
+
+        // gehe die Child Objekte in Enemy Spawner (und Unterchilds) durch und verändere dort das Player Target
+
+        _Decoy.parent = null;
+        _Decoy.transform.position = this.transform.position;
+        _Decoy.transform.rotation = this.transform.rotation;
+        _Decoy.transform.GetChild(0).gameObject.SetActive(true);
+
+        for (int i = 0; i < _EnemySpawner.transform.childCount; i++)
+        {
+            for (int j = 0; j < _EnemySpawner.transform.GetChild(i).childCount; j++)
+            {
+                _EnemySpawner.transform.GetChild(i).GetChild(j).GetComponent<EnemyMovement>().playerTarget = _Decoy;
+            }
+        }
+
+        StartCoroutine(StopStealth());
+    }
+
+    private IEnumerator StopStealth()
+    {
+        yield return new WaitForSeconds(_stealthTime);
+
+        ResetStealthbility();
     }
 
     private void ResetStealthbility()
     {
         _isUsingAbility = false;
-        i_sUsingStealthAbility = false;
+        _isUsingStealthAbility = false;
+
+        for (int i = 0; i < _EnemySpawner.transform.childCount; i++)
+        {
+            for (int j = 0; j < _EnemySpawner.transform.GetChild(i).childCount; j++)
+            {
+                _EnemySpawner.transform.GetChild(i).GetChild(j).GetComponent<EnemyMovement>().playerTarget = this.transform;
+            }
+        }
+
+        _Decoy.transform.GetChild(0).gameObject.SetActive(false);
+        _Decoy.transform.position = new Vector3(0, 0, 0);
+        _Decoy.transform.rotation = Quaternion.identity;
+        _Decoy.parent = this.transform;
 
         ResetAbilityTimer(_stealthCD);
     }

@@ -323,7 +323,7 @@ GameObject:
   - component: {fileID: 5465025598197332767}
   - component: {fileID: 6187450705128671417}
   m_Layer: 7
-  m_Name: Enemy
+  m_Name: Enemy_Close_Range
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -462,12 +462,12 @@ MonoBehaviour:
     type: 3}
   attackForce: 10
   attackSpeed: 3
-  attackRange: 2
+  attackRange: 3
   inRangedAttackRange: 0
   playerLaskMask:
     serializedVersion: 2
     m_Bits: 65
-  AttackRetreat: 1
+  AttackRetreat: 0
   RetreatPosition: {x: 0, y: 0, z: 0}
   retreatTime: 4
 --- !u!195 &5465025598197332767
