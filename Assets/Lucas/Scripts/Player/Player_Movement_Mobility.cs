@@ -34,15 +34,16 @@ public class Player_Movement_Mobility : MonoBehaviour
     [Header("Player Jump Ability")]
     [SerializeField]
     private float _jumpCD;
-    private bool _isUsingJumpAbility;
+    private bool _hasJumped;
     [SerializeField] private float _fallMultiplier = 7;
     [SerializeField] private float _jumpVelocityFalloff = 8;
     [SerializeField] private float _jumpForce = 15;
 
     [Header("Player Dash Ability")]
     [SerializeField]
+    private GameObject _Decoy;
+    [SerializeField]
     private float _dashCD;
-    private bool _isUsingDashAbility;
     [SerializeField]
     private float _dashForce = 30;
     [SerializeField]
@@ -51,17 +52,24 @@ public class Player_Movement_Mobility : MonoBehaviour
     [Header("Player Stealth Ability")]
     [SerializeField]
     private float _stealthCD;
-    private bool i_sUsingStealthAbility;
+    [SerializeField]
+    private float _stealthTime;
+    [SerializeField]
+    private EnemySpawner _EnemySpawner;
+    [SerializeField]
+    private float _movementSpeedMultiplier;
+    private float _stealthMovementSpeed;
+    private float _originalMovementSpeed;
 
     [Header("Player Flicker Strike Ability")]
     [SerializeField]
     private float _flickerStrikeCD;
-    private bool _isUsingFlickerStrikeAbility;
 
     private void Awake()
     {
         _inputActions = new Player_Input_Mappings();
         _inputActions.Character.MovementAction.performed += UseAbility;
+        _EnemySpawner = GameObject.Find("EnemySpawner").GetComponent<EnemySpawner>();
     }
 
     private void Start()
@@ -144,7 +152,7 @@ public class Player_Movement_Mobility : MonoBehaviour
     private void JumpAbility()
     {
         _isUsingAbility = true;
-        _isUsingJumpAbility = true;
+        _hasJumped = true;
 
         Vector2 jumpDir = new Vector2(_character.CharacterRigidbody.velocity.x, _jumpForce);
         _character.CharacterRigidbody.AddForce(jumpDir, ForceMode.Impulse);
@@ -157,7 +165,7 @@ public class Player_Movement_Mobility : MonoBehaviour
             _character.CharacterRigidbody.velocity += _fallMultiplier * Physics.gravity.y * Vector3.up * Time.deltaTime;
         }
 
-        if (_isUsingJumpAbility)
+        if (_hasJumped)
         {
             if (_isGrounded && _character.CharacterRigidbody.velocity.y < 1)
             {
@@ -169,7 +177,7 @@ public class Player_Movement_Mobility : MonoBehaviour
     private void ResetJumpAbility()
     {
         _isUsingAbility = false;
-        _isUsingJumpAbility = false;
+        _hasJumped = false;
 
         ResetAbilityTimer(_jumpCD);
     }
@@ -180,7 +188,6 @@ public class Player_Movement_Mobility : MonoBehaviour
     {
         _playerMovement._canMove = false;
         _isUsingAbility = true;
-        _isUsingDashAbility = true;
 
         Vector3 dashDir = transform.TransformDirection(Vector3.forward);
         Vector3 forceToApply = dashDir * _dashForce;
@@ -204,7 +211,6 @@ public class Player_Movement_Mobility : MonoBehaviour
         _playerMovement._canMove = true;
         _character.CharacterRigidbody.useGravity = true;
         _isUsingAbility = false;
-        _isUsingDashAbility = false;
 
         ResetAbilityTimer(_dashCD);
     }
@@ -214,13 +220,54 @@ public class Player_Movement_Mobility : MonoBehaviour
     private void StealthAbility()
     {
         _isUsingAbility = true;
-        i_sUsingStealthAbility = true;
+
+        _Decoy.transform.parent = null;
+        _Decoy.GetComponent<CapsuleCollider>().enabled = true;
+        _Decoy.transform.position = this.transform.position;
+        _Decoy.transform.rotation = this.transform.rotation;
+        _Decoy.transform.GetChild(0).gameObject.SetActive(true);
+
+        _originalMovementSpeed = _playerMovement._movementSpeed;
+        _stealthMovementSpeed = _originalMovementSpeed * _movementSpeedMultiplier;
+        _playerMovement._movementSpeed = _stealthMovementSpeed;
+
+        for (int i = 0; i < _EnemySpawner.transform.childCount; i++)
+        {
+            for (int j = 0; j < _EnemySpawner.transform.GetChild(i).childCount; j++)
+            {
+                _EnemySpawner.transform.GetChild(i).GetChild(j).GetComponent<EnemyMovement>().playerTarget = _Decoy.transform;
+            }
+        }
+
+        StartCoroutine(StopStealth());
+    }
+
+    private IEnumerator StopStealth()
+    {
+        yield return new WaitForSeconds(_stealthTime);
+
+        ResetStealthbility();
     }
 
     private void ResetStealthbility()
     {
         _isUsingAbility = false;
-        i_sUsingStealthAbility = false;
+
+        for (int i = 0; i < _EnemySpawner.transform.childCount; i++)
+        {
+            for (int j = 0; j < _EnemySpawner.transform.GetChild(i).childCount; j++)
+            {
+                _EnemySpawner.transform.GetChild(i).GetChild(j).GetComponent<EnemyMovement>().playerTarget = this.transform;
+            }
+        }
+
+        _playerMovement._movementSpeed = _originalMovementSpeed;
+
+        _Decoy.transform.GetChild(0).gameObject.SetActive(false);
+        _Decoy.transform.position = new Vector3(0, 0, 0);
+        _Decoy.transform.rotation = Quaternion.identity;
+        _Decoy.GetComponent<CapsuleCollider>().enabled = false;
+        _Decoy.transform.parent = this.transform;
 
         ResetAbilityTimer(_stealthCD);
     }
@@ -230,13 +277,11 @@ public class Player_Movement_Mobility : MonoBehaviour
     private void FlickerStrikeAbility()
     {
         _isUsingAbility = true;
-        _isUsingFlickerStrikeAbility = true;
     }
 
     private void ResetFlickerStrikeAbility()
     {
         _isUsingAbility = false;
-        _isUsingFlickerStrikeAbility = false;
 
         ResetAbilityTimer(_flickerStrikeCD);
     }

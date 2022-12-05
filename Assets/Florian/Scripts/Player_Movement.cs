@@ -7,8 +7,7 @@ public class Player_Movement : MonoBehaviour
     private AnimationCurve _acceleration;
     [SerializeField]
     private AnimationCurve _decceleration;
-    [SerializeField]
-    private float _movementSpeed = 10f;
+    public float _movementSpeed = 10f;
 
     private Player_Character _character;
     private Player_Input_Mappings _inputActions;

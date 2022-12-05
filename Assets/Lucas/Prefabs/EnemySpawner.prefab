@@ -46,10 +46,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Player: {fileID: 0}
   EnemyWavesToSpawn: 50
-  EnemyWaveSize: 1
-  SpawnDelay: 20
+  EnemyWaveSize: 5
+  SpawnDelay: 5
   EnemyPrefabs:
   - {fileID: 2546052084757511351, guid: 8f744d67b52fc6049b6e2a66508d9777, type: 3}
+  - {fileID: 2546052084757511351, guid: 6c82450bb4617c34095c9709dcef2bd6, type: 3}
   EnemySpawnMethod: 0
   SpawnCollider:
   - {fileID: 0}

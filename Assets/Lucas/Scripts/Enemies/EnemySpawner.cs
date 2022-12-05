@@ -19,7 +19,7 @@ public class EnemySpawner : MonoBehaviour
     public LocationMethod EnemyLocationMethod = LocationMethod.Collider;
 
     private NavMeshTriangulation Triangulation;
-    private Dictionary<int, ObjectPool> EnemyObjectPools = new Dictionary<int, ObjectPool>();
+    public Dictionary<int, ObjectPool> EnemyObjectPools = new Dictionary<int, ObjectPool>();
 
     private void Awake()
     {
