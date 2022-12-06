@@ -14,7 +14,9 @@ public class Player_Movement_Mobility : MonoBehaviour
     [SerializeField]
     private Vector3 _groundCheckBox;
     [SerializeField]
-    private LayerMask _groundLayerMask;
+    private LayerMask _groundLayer;
+    [SerializeField]
+    private LayerMask _enemyLayer;
 
     private Player_Character _character;
     private Player_Movement _playerMovement;
@@ -64,12 +66,19 @@ public class Player_Movement_Mobility : MonoBehaviour
     [Header("Player Flicker Strike Ability")]
     [SerializeField]
     private float _flickerStrikeCD;
+    [SerializeField]
+    private float _flickerStrikeTime;
+    [SerializeField]
+    private float _flickerStrikeRange;
+    private Enemy _closestEnemy;
+    private Player_Simple_Shot _simpleShot;
 
     private void Awake()
     {
         _inputActions = new Player_Input_Mappings();
         _inputActions.Character.MovementAction.performed += UseAbility;
         _EnemySpawner = GameObject.Find("EnemySpawner").GetComponent<EnemySpawner>();
+        _simpleShot = this.GetComponent<Player_Simple_Shot>();
     }
 
     private void Start()
@@ -130,7 +139,7 @@ public class Player_Movement_Mobility : MonoBehaviour
 
     private void CheckIfGrounded()
     {
-        Collider[] hitColliders = (Physics.OverlapBox(this.transform.position + new Vector3(0, _groundCheckValueY, 0), _groundCheckBox, Quaternion.identity, _groundLayerMask));
+        Collider[] hitColliders = (Physics.OverlapBox(this.transform.position + new Vector3(0, _groundCheckValueY, 0), _groundCheckBox, Quaternion.identity, _groundLayer));
 
         if(hitColliders.Length > 0)
         {
@@ -198,6 +207,8 @@ public class Player_Movement_Mobility : MonoBehaviour
 
         StartCoroutine(StopDash());
     }
+
+
 
     private IEnumerator StopDash()
     {
@@ -276,12 +287,57 @@ public class Player_Movement_Mobility : MonoBehaviour
 
     private void FlickerStrikeAbility()
     {
-        _isUsingAbility = true;
+        FindClosestEnemy();
+
+        if(_closestEnemy != null)
+        {
+            _simpleShot.canShoot = false;
+
+            _isUsingAbility = true;
+            _playerMovement._canMove = false;
+
+            Vector3 dashDir = (_closestEnemy.transform.position - transform.position).normalized;
+            Vector3 forceToApply = dashDir * _dashForce;
+
+            _character.transform.rotation = Quaternion.LookRotation(dashDir, Vector3.up);
+
+            _character.CharacterRigidbody.velocity = Vector3.zero;
+            _character.CharacterRigidbody.useGravity = false;
+            _character.CharacterRigidbody.AddForce(forceToApply, ForceMode.Impulse);
+
+            StartCoroutine(StopFlickerStrike());
+        }
+    }
+
+    private IEnumerator StopFlickerStrike()
+    {
+        yield return new WaitForSeconds(_flickerStrikeTime);
+
+        ResetFlickerStrikeAbility();
+    }
+
+    private void FindClosestEnemy()
+    {
+        float currentclosestdistance = Mathf.Infinity;
+        _closestEnemy = null;
+
+        Collider[] enemies = Physics.OverlapSphere(transform.position, _flickerStrikeRange, _enemyLayer);
+        foreach (var enemy in enemies)
+        {
+            float distanceToEnemy = Vector3.Distance(transform.position, enemy.transform.position);
+            if (distanceToEnemy < currentclosestdistance)
+            {
+                _closestEnemy = enemy.GetComponent<Enemy>();
+                currentclosestdistance = distanceToEnemy;
+            }
+        }
     }
 
     private void ResetFlickerStrikeAbility()
     {
         _isUsingAbility = false;
+        _playerMovement._canMove = true;
+        _simpleShot.canShoot = true;
 
         ResetAbilityTimer(_flickerStrikeCD);
     }

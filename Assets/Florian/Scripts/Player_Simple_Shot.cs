@@ -13,17 +13,17 @@ public class Player_Simple_Shot : MonoBehaviour
     private float _attackDelay;
     [SerializeField]
     private float _attackForce;
+    public bool canShoot = true;
 
     private float _currentAttackDelay;
 
     private void FixedUpdate()
     {
         _currentAttackDelay -= Time.deltaTime;
-        if (_currentAttackDelay <= 0)
+        if (_currentAttackDelay <= 0 && canShoot)
         {
             float currentclosestdistance = Mathf.Infinity;
             Enemy closestEnemy = null;
-
 
             Collider[] enemies = Physics.OverlapSphere(transform.position, _range, _enemyLayer);
             foreach (var enemy in enemies)

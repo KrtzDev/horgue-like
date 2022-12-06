@@ -93,6 +93,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1125293544}
+  - component: {fileID: 568192801}
   m_Layer: 0
   m_Name: Decoy
   m_TagString: Untagged
@@ -116,6 +117,20 @@ Transform:
   m_Father: {fileID: 4698856430502407210}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!136 &568192801
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1125293543}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 0
+  m_Radius: 0.5
+  m_Height: 2
+  m_Direction: 1
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!1 &1681370109
 GameObject:
   m_ObjectHideFlags: 0
@@ -808,9 +823,10 @@ MonoBehaviour:
   _enemyLayer:
     serializedVersion: 2
     m_Bits: 128
-  _range: 15
+  _range: 10
   _attackDelay: 0.1
   _attackForce: 10
+  canShoot: 0
 --- !u!114 &513094526
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -827,25 +843,31 @@ MonoBehaviour:
   _isGrounded: 0
   _groundCheckValueY: 0.225
   _groundCheckBox: {x: 0.5, y: 0.5, z: 0.5}
-  _groundLayerMask:
+  _groundLayer:
     serializedVersion: 2
     m_Bits: 512
-  _canUseJumpAbility: 1
+  _enemyLayer:
+    serializedVersion: 2
+    m_Bits: 128
+  _canUseJumpAbility: 0
   _canUseDashAbility: 0
   _canUseStealthAbility: 0
-  _canUseFlickerStrikeAbility: 0
+  _canUseFlickerStrikeAbility: 1
   _jumpCD: 2
   _fallMultiplier: 10
   _jumpVelocityFalloff: 11
   _jumpForce: 30
-  _Decoy: {fileID: 1125293544}
+  _Decoy: {fileID: 1125293543}
   _dashCD: 3
   _dashForce: 30
   _dashTime: 0.2
   _stealthCD: 5
   _stealthTime: 5
   _EnemySpawner: {fileID: 0}
-  _flickerStrikeCD: 0
+  _movementSpeedMultiplier: 1.25
+  _flickerStrikeCD: 5
+  _flickerStrikeTime: 0.25
+  _flickerStrikeRange: 12
 --- !u!1 &4698856430750863150
 GameObject:
   m_ObjectHideFlags: 0
