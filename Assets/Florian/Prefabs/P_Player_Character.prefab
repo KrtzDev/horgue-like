@@ -619,6 +619,7 @@ GameObject:
   - component: {fileID: 2984215811683998150}
   - component: {fileID: 8773851501896812125}
   - component: {fileID: 513094526}
+  - component: {fileID: 5738317267094421720}
   m_Layer: 0
   m_Name: P_Player_Character
   m_TagString: Player
@@ -868,6 +869,21 @@ MonoBehaviour:
   _flickerStrikeCD: 5
   _flickerStrikeTime: 0.25
   _flickerStrikeRange: 12
+--- !u!114 &5738317267094421720
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4698856430502407209}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da02311811525494bbef5cd591e33386, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weapons:
+  - {fileID: 11400000, guid: 708f5adf8cabfce4398f45b3ff84534d, type: 2}
+  - {fileID: 11400000, guid: fac34be9c54e1f24296fa512dd720a98, type: 2}
 --- !u!1 &4698856430750863150
 GameObject:
   m_ObjectHideFlags: 0
