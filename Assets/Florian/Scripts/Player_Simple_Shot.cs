@@ -8,6 +8,8 @@ public class Player_Simple_Shot : MonoBehaviour
     [SerializeField]
     private LayerMask _enemyLayer;
     [SerializeField]
+    private LayerMask _groundLayer;
+    [SerializeField]
     private float _range;
     [SerializeField]
     private float _attackDelay;
@@ -31,8 +33,15 @@ public class Player_Simple_Shot : MonoBehaviour
                 float distanceToEnemy = Vector3.Distance(transform.position, enemy.transform.position);
                 if (distanceToEnemy < currentclosestdistance)
                 {
-                    closestEnemy = enemy.GetComponent<Enemy>();
-                    currentclosestdistance = distanceToEnemy;
+                    RaycastHit hit;
+                    if (Physics.Raycast(transform.position, (enemy.transform.position - transform.position), out hit, distanceToEnemy, _groundLayer))
+                    {
+                    }
+                    else
+                    {
+                        closestEnemy = enemy.GetComponent<Enemy>();
+                        currentclosestdistance = distanceToEnemy;
+                    }
                 }
             }
 

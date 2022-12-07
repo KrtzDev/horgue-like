@@ -327,9 +327,17 @@ public class Player_Movement_Mobility : MonoBehaviour
             float distanceToEnemy = Vector3.Distance(transform.position, enemy.transform.position);
             if (distanceToEnemy < currentclosestdistance)
             {
-                _closestEnemy = enemy.GetComponent<Enemy>();
-                currentclosestdistance = distanceToEnemy;
+                RaycastHit hit;
+                if (Physics.Raycast(transform.position, (enemy.transform.position - transform.position), out hit, distanceToEnemy, _groundLayer))
+                {
+                }
+                else
+                {
+                    _closestEnemy = enemy.GetComponent<Enemy>();
+                    currentclosestdistance = distanceToEnemy;
+                }
             }
+
         }
     }
 
