@@ -100,14 +100,48 @@ public class Player_Movement_Mobility : MonoBehaviour
     private void Update()
     {
         TrackTimer();
+        ActivateAbilityBool();
         FallPhysics();
         CheckIfGrounded();
     }
 
     // General
 
+    private void ActivateAbilityBool()
+    {
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            _canUseJumpAbility = true;
+            _canUseDashAbility = false;
+            _canUseStealthAbility = false;
+            _canUseFlickerStrikeAbility = false;
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            _canUseJumpAbility = false;
+            _canUseDashAbility = true;
+            _canUseStealthAbility = false;
+            _canUseFlickerStrikeAbility = false;
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            _canUseJumpAbility = false;
+            _canUseDashAbility = false;
+            _canUseStealthAbility = true;
+            _canUseFlickerStrikeAbility = false;
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha4))
+        {
+            _canUseJumpAbility = false;
+            _canUseDashAbility = false;
+            _canUseStealthAbility = false;
+            _canUseFlickerStrikeAbility = true;
+        }
+    }
+
     private void UseAbility(InputAction.CallbackContext ctx)
     {
+
         if (ctx.performed && !_isUsingAbility)
         {
             if (_canUseJumpAbility && _abilityCDTimer <= 0)
