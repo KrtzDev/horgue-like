@@ -227,6 +227,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 439441861, guid: 537fc3e4e368e0f4cb2f800d5ecb95d7, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1125293543, guid: 537fc3e4e368e0f4cb2f800d5ecb95d7, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1681370109, guid: 537fc3e4e368e0f4cb2f800d5ecb95d7, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4698856430502407209, guid: 537fc3e4e368e0f4cb2f800d5ecb95d7,
         type: 3}
       propertyPath: m_Name
@@ -286,16 +298,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8773851501896812125, guid: 537fc3e4e368e0f4cb2f800d5ecb95d7,
-        type: 3}
-      propertyPath: canShoot
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8773851501896812125, guid: 537fc3e4e368e0f4cb2f800d5ecb95d7,
-        type: 3}
-      propertyPath: _groundLayer.m_Bits
-      value: 512
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 537fc3e4e368e0f4cb2f800d5ecb95d7, type: 3}
@@ -2864,6 +2866,10 @@ PrefabInstance:
       propertyPath: Player
       value: 
       objectReference: {fileID: 513094525}
+    - target: {fileID: 199202193, guid: 24e4eca4c6fc7054f936273b1a1d6d7e, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 199202193, guid: 24e4eca4c6fc7054f936273b1a1d6d7e, type: 3}
       propertyPath: SpawnCollider.Array.data[0]
       value: 
