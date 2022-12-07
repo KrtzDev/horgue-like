@@ -157,7 +157,10 @@ public class EnemySpawner : MonoBehaviour
             {
                 enemy.Agent.Warp(Hit.position);
                 // enemy needs to get enabled and start chasing now.
-                enemy.Movement.playerTarget = Player;
+                if(enemy.Movement.playerTarget == null)
+                {
+                    enemy.Movement.playerTarget = Player;
+                }
                 enemy.Agent.enabled = true;
                 enemy.Movement.StartChasing(enemy.Movement.playerTarget.position);
                 enemy.Movement.RetreatPosition = enemy.transform.position;

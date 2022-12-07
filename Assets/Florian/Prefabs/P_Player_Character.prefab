@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 439441862}
   - component: {fileID: 439441864}
   - component: {fileID: 439441863}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Player_Decoy_Visuals
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1125293544}
   - component: {fileID: 568192801}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Decoy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -142,7 +142,7 @@ GameObject:
   - component: {fileID: 1681370110}
   - component: {fileID: 1681370113}
   - component: {fileID: 1681370112}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -338,7 +338,7 @@ MonoBehaviour:
   m_Lens:
     FieldOfView: 60
     OrthographicSize: 10
-    NearClipPlane: -10
+    NearClipPlane: -50
     FarClipPlane: 100
     Dutch: 0
     ModeOverride: 1
@@ -424,7 +424,7 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: -10
+  near clip plane: -50
   far clip plane: 100
   field of view: 60
   orthographic: 1
@@ -857,12 +857,12 @@ MonoBehaviour:
   _canUseDashAbility: 0
   _canUseStealthAbility: 0
   _canUseFlickerStrikeAbility: 0
-  _jumpCD: 2
+  _jumpCD: 0.75
   _fallMultiplier: 10
   _jumpVelocityFalloff: 11
   _jumpForce: 30
   _Decoy: {fileID: 1125293543}
-  _dashCD: 3
+  _dashCD: 2.5
   _dashForce: 30
   _dashTime: 0.2
   _stealthCD: 5
