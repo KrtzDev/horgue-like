@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface IPattern
+public interface IDoDamage
 {
-    void AttackInPattern() ;
+    void DoDamage();
 }
