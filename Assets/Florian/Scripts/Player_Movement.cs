@@ -68,7 +68,7 @@ public class Player_Movement : MonoBehaviour
                 _character.transform.rotation =
                     Quaternion.RotateTowards(_character.transform.rotation,
                     Quaternion.LookRotation(relativeMoveDirection, Vector3.up),
-                    500f * Time.deltaTime);
+                    700f * Time.deltaTime);
             }
             else
             {
@@ -77,7 +77,11 @@ public class Player_Movement : MonoBehaviour
                 movement = _lastDirection * _movementSpeed * decceleration * Time.fixedDeltaTime;
             }
 
-            _character.CharacterRigidbody.MovePosition(transform.position + movement);
+            //_character.CharacterRigidbody.MovePosition(transform.position + movement);
+
+            //_character.CharacterRigidbody.AddForce(movement * 3, ForceMode.VelocityChange);
+
+            _character.CharacterRigidbody.velocity = new Vector3(movement.x * 50, _character.CharacterRigidbody.velocity.y, movement.z * 50);
         }
     }
 
@@ -87,6 +91,9 @@ public class Player_Movement : MonoBehaviour
         {
             _moveDir = ctx.ReadValue<Vector2>();
             _moveDir.Normalize();
+
+            //scewes the walking direction
+            //TODO: rework movement 
             _moveDir.x *= .66f;
 
             _isMoving = true;
