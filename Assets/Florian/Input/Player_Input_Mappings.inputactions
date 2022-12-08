@@ -13,6 +13,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "Movement Action",
+                    "type": "Button",
+                    "id": "ec13812d-9832-4b93-9378-fe0bb83cb6d0",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -21,7 +30,7 @@
                     "id": "99fef8fb-07af-4ddb-9622-71178f1a22df",
                     "path": "2DVector",
                     "interactions": "",
-                    "processors": "ScaleVector2(x=0.66)",
+                    "processors": "",
                     "groups": "",
                     "action": "Movement",
                     "isComposite": true,
@@ -76,7 +85,7 @@
                     "id": "2d39f6de-82cb-45c0-a826-81d91ec4c98b",
                     "path": "2DVector(mode=2)",
                     "interactions": "",
-                    "processors": "ScaleVector2(x=0.66)",
+                    "processors": "",
                     "groups": "",
                     "action": "Movement",
                     "isComposite": true,
@@ -125,6 +134,28 @@
                     "action": "Movement",
                     "isComposite": false,
                     "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "b8b1cfea-c081-44fa-a1db-1e60f0561163",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Movement Action",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "7f4e3093-eacb-498b-b3dd-1d0127211e2f",
+                    "path": "<Gamepad>/rightShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Movement Action",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         }

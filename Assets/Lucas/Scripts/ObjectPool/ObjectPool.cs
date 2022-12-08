@@ -18,8 +18,9 @@ public class ObjectPool
     public static ObjectPool CreateInstance(PoolableObject Prefab, int Size)
     {
         ObjectPool pool = new ObjectPool(Prefab, Size);
-
+        
         pool.Parent = new GameObject(Prefab + " Pool");
+        pool.Parent.transform.parent = GameObject.Find("EnemySpawner").transform;
         pool.CreateObjects();
 
         return pool;

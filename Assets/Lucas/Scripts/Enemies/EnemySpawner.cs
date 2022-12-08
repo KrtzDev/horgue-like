@@ -8,6 +8,7 @@ public class EnemySpawner : MonoBehaviour
     public Transform Player;
     public int EnemyWavesToSpawn = 5;
     public int EnemyWaveSize = 2;
+    private int EnemyMaxAmount;
     public float SpawnDelay = 1f;
     public List<Enemy> EnemyPrefabs = new List<Enemy>();
     public SpawnMethod EnemySpawnMethod = SpawnMethod.RoundRobin;
@@ -18,13 +19,15 @@ public class EnemySpawner : MonoBehaviour
     public LocationMethod EnemyLocationMethod = LocationMethod.Collider;
 
     private NavMeshTriangulation Triangulation;
-    private Dictionary<int, ObjectPool> EnemyObjectPools = new Dictionary<int, ObjectPool>();
+    public Dictionary<int, ObjectPool> EnemyObjectPools = new Dictionary<int, ObjectPool>();
 
     private void Awake()
     {
+        EnemyMaxAmount = EnemyWavesToSpawn * EnemyWaveSize;
+
         for (int i = 0; i < EnemyPrefabs.Count; i++)
         {
-            EnemyObjectPools.Add(i, ObjectPool.CreateInstance(EnemyPrefabs[i], EnemyWavesToSpawn));
+            EnemyObjectPools.Add(i, ObjectPool.CreateInstance(EnemyPrefabs[i], EnemyMaxAmount));
         }
     }
 
@@ -43,7 +46,7 @@ public class EnemySpawner : MonoBehaviour
 
         int SpawnedEnemies = 0;
 
-        while (SpawnedEnemies < EnemyWavesToSpawn)
+        while (SpawnedEnemies < EnemyMaxAmount)
         {
             for(int i = 0; i < EnemyWaveSize; i++)
             {
@@ -154,7 +157,10 @@ public class EnemySpawner : MonoBehaviour
             {
                 enemy.Agent.Warp(Hit.position);
                 // enemy needs to get enabled and start chasing now.
-                enemy.Movement.playerTarget = Player;
+                if(enemy.Movement.playerTarget == null)
+                {
+                    enemy.Movement.playerTarget = Player;
+                }
                 enemy.Agent.enabled = true;
                 enemy.Movement.StartChasing(enemy.Movement.playerTarget.position);
                 enemy.Movement.RetreatPosition = enemy.transform.position;

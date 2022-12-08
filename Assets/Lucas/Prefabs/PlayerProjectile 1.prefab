@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: -4007479725491826198}
   - component: {fileID: 6064448851983090240}
   - component: {fileID: 8331073926669857340}
+  - component: {fileID: 7135431789190820771}
   m_Layer: 6
   m_Name: PlayerProjectile 1
   m_TagString: Untagged
@@ -132,3 +133,16 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 129
   baseDamage: 20
+--- !u!114 &7135431789190820771
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8451927325676435795}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 984647a50083e004a9b7c26e5b7a90d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damageType: {fileID: 11400000, guid: 3513b9eeb4adb3c4b9d4866394f26fd6, type: 2}
