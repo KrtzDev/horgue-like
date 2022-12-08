@@ -57,7 +57,7 @@ public class Player_Simple_Shot : MonoBehaviour
     {
         Vector3 direction = enemy.transform.position - transform.position;
         EnemyProjectile newProjectile = Instantiate(_enemyProjectile_Prefab, transform.position + Vector3.up + new Vector3(direction.x, 0, direction.z).normalized, Quaternion.identity);
-        newProjectile.GetComponent<Rigidbody>().velocity = new Vector3(direction.x, 0, direction.z).normalized * _attackForce;
+        newProjectile.GetComponent<Rigidbody>().velocity = new Vector3(direction.x, direction.y - 1, direction.z).normalized * _attackForce;
     }
 
     #region Draw_Gizmos

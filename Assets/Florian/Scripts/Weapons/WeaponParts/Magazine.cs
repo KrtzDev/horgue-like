@@ -12,4 +12,9 @@ public class Magazine : ScriptableObject
     public Projectile projectile;
 
     public bool isReloading;
+
+    private void OnEnable()
+    {
+        isReloading = false;      
+    }
 }

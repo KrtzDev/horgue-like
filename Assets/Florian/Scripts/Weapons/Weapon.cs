@@ -63,6 +63,6 @@ public class Weapon : ScriptableObject
 
         Vector3 direction = enemy.transform.position - weaponHolster.transform.position;
         Projectile newProjectile = Instantiate(mag.projectile, weaponHolster.transform.position + Vector3.up + new Vector3(direction.x, 0, direction.z).normalized, Quaternion.identity);
-        newProjectile.GetComponent<Rigidbody>().velocity = new Vector3(direction.x, 0, direction.z).normalized * _attackForce;
+        newProjectile.GetComponent<Rigidbody>().velocity = new Vector3(direction.x, direction.y - 1, direction.z).normalized * _attackForce;
     }
 }
