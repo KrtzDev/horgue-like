@@ -9,9 +9,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1840ed087b613334e9bf87d5c6d038cd, type: 3}
+  m_Script: {fileID: 11500000, guid: 77594afdb0545dd428fad65e0e2d5cc2, type: 3}
   m_Name: New Weapon
   m_EditorClassIdentifier: 
-  weaponModulePrefabs:
-  - {fileID: 0}
-  weaponType: {fileID: 11400000, guid: 7c23ada52e3ab9e42a67b6aa6f2b07e3, type: 2}
+  grip: {fileID: 11400000, guid: 9e22e89ad7badfb4a81d7db5f27fac87, type: 2}
+  _magazines:
+  - {fileID: 11400000, guid: 216d95edf2aeac84db8e9e9eb050ce7b, type: 2}
+  _enemyLayer:
+    serializedVersion: 2
+    m_Bits: 128
+  _range: 30
+  _attackForce: 10
+  weaponHolster: {fileID: 0}

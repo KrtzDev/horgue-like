@@ -9,8 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 77594afdb0545dd428fad65e0e2d5cc2, type: 3}
-  m_Name: New Weapon Type
+  m_Script: {fileID: 11500000, guid: 41ce7b992483656469ceb6bdc5fce804, type: 3}
+  m_Name: New Grip
   m_EditorClassIdentifier: 
-  _patterns:
-  - {fileID: 11400000, guid: 7b3aac0f75dad0d4baa0ef2cb07791dd, type: 2}
+  cooldown: 2
+  maxBarrels: 0
+  maxMagazines: 0
