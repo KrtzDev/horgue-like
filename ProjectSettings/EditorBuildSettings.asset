@@ -5,7 +5,19 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
-    path: 
-    guid: 00000000000000000000000000000000
+  - enabled: 1
+    path: Assets/Scenes/SCENE_Main_Menu.unity
+    guid: 6dd9264c898ee1d40a48331813648033
+  - enabled: 1
+    path: Assets/Scenes/SCENE_Enemy_Creation.unity
+    guid: 0f94e494dd9f0eb40a81b2242ab00578
+  - enabled: 1
+    path: Assets/Scenes/SCENE_Enemy_Spawner_Bug_Fix.unity
+    guid: c92499a369b77954eb36c1b82f9fcc3b
+  - enabled: 1
+    path: Assets/Scenes/SCENE_Player_Mobility_Test.unity
+    guid: 93a36bcfa1fc64d419fc8aa44dda52bb
+  - enabled: 1
+    path: Assets/Scenes/SCENE_Player_Test.unity
+    guid: a69e781a2fdfd1a4d85f902abca84cb3
   m_configObjects: {}
