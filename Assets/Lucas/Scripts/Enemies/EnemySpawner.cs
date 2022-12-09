@@ -8,6 +8,7 @@ public class EnemySpawner : MonoBehaviour
     public Transform Player;
     public int EnemyWavesToSpawn = 5;
     public int EnemyWaveSize = 2;
+    public int EnemiesThatHaveSpawned = 0;
     private int EnemyMaxAmount;
     public float SpawnDelay = 1f;
     public List<Enemy> EnemyPrefabs = new List<Enemy>();
@@ -164,6 +165,8 @@ public class EnemySpawner : MonoBehaviour
                 enemy.Agent.enabled = true;
                 enemy.Movement.StartChasing(enemy.Movement.playerTarget.position);
                 enemy.Movement.RetreatPosition = enemy.transform.position;
+
+                EnemiesThatHaveSpawned += 1;
             }
             else
             {

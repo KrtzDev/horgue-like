@@ -5,10 +5,8 @@ public class HealthComponent : MonoBehaviour
 {
     public event Action<float> OnHealthPctChanged = delegate { };
 
-    [SerializeField]
-    private int maxHealth = 100;
-    [SerializeField]
-    private int currentHealth;
+    public int maxHealth = 100;
+    public int currentHealth;
 
 
     private void Awake()

@@ -5,7 +5,8 @@ using UnityEngine.InputSystem;
 public class Player_Movement_Mobility : MonoBehaviour
 {
     [Header("Player General Ability")]
-    [SerializeField] private float _abilityCDTimer;
+    public float _abilityCDTimer;
+    public float _currentMaxCD;
     private bool _isUsingAbility;
     [SerializeField]
     private bool _isGrounded;
@@ -189,6 +190,7 @@ public class Player_Movement_Mobility : MonoBehaviour
 
     private void ResetAbilityTimer(float cd)
     {
+        _currentMaxCD = cd;
         _abilityCDTimer = cd;
     }
 
