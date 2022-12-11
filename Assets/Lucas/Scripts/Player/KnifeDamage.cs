@@ -2,25 +2,34 @@ using UnityEngine;
 
 public class KnifeDamage : MonoBehaviour
 {
-    private Player_Simple_Melee _PlayerSimpleMelee;
+    private Simple_Knife_Attack _SimpleKnifeAttack;
 
     [SerializeField]
     private int baseDamage;
+    private bool _didDamage = false;
 
     private void Awake()
     {
-        _PlayerSimpleMelee = GameObject.FindGameObjectWithTag("Player").GetComponent<Player_Simple_Melee>();
+        _SimpleKnifeAttack = this.gameObject.GetComponent<Simple_Knife_Attack>();
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Enemy") && _PlayerSimpleMelee.didDamage == false)
+        if (other.CompareTag("Enemy") && !_didDamage)
         {
             if (other.GetComponent<HealthComponent>() != null)
             {
                 other.GetComponent<HealthComponent>().TakeDamage(baseDamage);
-                _PlayerSimpleMelee.didDamage = true;
+                _didDamage = true;
             }
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Enemy") && _didDamage)
+        {
+            _didDamage = false;
         }
     }
 }

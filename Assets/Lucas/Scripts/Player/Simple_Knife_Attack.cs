@@ -1,17 +1,11 @@
 using System.Collections;
 using UnityEngine;
 
-public class Player_Simple_Melee : MonoBehaviour
+public class Simple_Knife_Attack : MonoBehaviour
 {
     [SerializeField]
-    private GameObject Weapon1;
-    [SerializeField]
-    private GameObject Weapon2;
-    [SerializeField]
-    private bool dualAttack;
-
-    private Vector3 startWeapon1Pos;
-    private Vector3 startWeapon2Pos;
+    private GameObject startParent;
+    private Transform startTransform;
 
     [SerializeField]
     private LayerMask _enemyLayer;
@@ -21,26 +15,23 @@ public class Player_Simple_Melee : MonoBehaviour
     private float _attackRange;
     [SerializeField]
     private float _attackDelay;
-    [SerializeField]
-    private float _attackRetreat;
-    public bool canAttack = true;
-    public bool didDamage = false;
+    private bool _isAttacking;
+
+    private Vector3 enemyPositionAtAttack;
 
     private float _currentAttackDelay;
 
     private void Awake()
     {
-        if (Weapon1 != null && Weapon2 != null)
-        {
-            startWeapon1Pos = Weapon1.transform.position;
-            startWeapon2Pos = Weapon2.transform.position;
-        }
+        startTransform = transform;
+        startParent = gameObject.transform.parent.gameObject;
+        _isAttacking = false;
     }
 
     private void FixedUpdate()
     {
         _currentAttackDelay -= Time.deltaTime;
-        if (_currentAttackDelay <= 0 && canAttack)
+        if (_currentAttackDelay <= 0 && !_isAttacking)
         {
             float currentclosestdistance = Mathf.Infinity;
             Enemy closestEnemy = null;
@@ -69,59 +60,54 @@ public class Player_Simple_Melee : MonoBehaviour
                 _currentAttackDelay = _attackDelay;
             }
         }
-    }
-    private void Attack(Enemy enemy)
-    {
-        if (dualAttack)
+        else if (_isAttacking)
         {
-            if (Weapon1 != null && Weapon2 != null)
-            {
-                canAttack = false;
+            AttackMove();
+        }
 
-                Weapon1.transform.localPosition += new Vector3(0,0, _attackRange);
-                Weapon2.transform.localPosition += new Vector3(0,0, _attackRange);
+        /* if (_isAttacking)
+        {
+            transform.position = Vector3.MoveTowards(transform.position, enemyPositionAtAttack, 10 * Time.deltaTime);
 
-                StartCoroutine(StartAttackReset());
-            }
-            else
+            if(transform.position == enemyPositionAtAttack)
             {
-                Debug.Log("Weapon 1 or 2 is not equipped");
+                _isAttacking = false;
             }
         }
         else
         {
-            if(Weapon1 != null)
+            if (gameObject.transform.parent == null)
             {
-                Weapon1.transform.localPosition += new Vector3(0, 0, _attackRange);
+                gameObject.transform.parent = startParent.transform;
+            }
+            else if (transform.position != startTransform.localPosition)
+            {
+                transform.position = Vector3.MoveTowards(transform.position, startTransform.localPosition, 10 * Time.deltaTime);
+            }
+            else if (transform.rotation != startTransform.rotation)
+            {
+                transform.rotation = startTransform.rotation;
+            }
+        } */
+    }
+    private void Attack(Enemy enemy)
+    {
+        // _isAttacking = true;
+        enemyPositionAtAttack = enemy.transform.position;
+
+        gameObject.transform.parent = null;
+    }
+
+    private void AttackMove()
+    {
+            if(transform.position != enemyPositionAtAttack)
+            {
+                transform.position = Vector3.MoveTowards(transform.position, enemyPositionAtAttack, 10 * Time.deltaTime);
             }
             else
             {
-                Debug.Log("No Weapon 1 equipped");
-            }
-        }
-    }
-
-    private IEnumerator StartAttackReset()
-    {
-        yield return new WaitForSeconds(_attackRetreat);
-
-        AttackReset();
-    }
-
-    private void AttackReset()
-    {
-        if(Weapon1 != null)
-        {
-            Weapon1.transform.localPosition = startWeapon1Pos;
-        }
-
-        if(Weapon2 != null)
-        {
-            Weapon2.transform.localPosition = startWeapon2Pos;
-        }
-
-        canAttack = true;
-        didDamage = false;
+                Debug.Log("Range");
+            }     
     }
 
     #region Draw_Gizmos
