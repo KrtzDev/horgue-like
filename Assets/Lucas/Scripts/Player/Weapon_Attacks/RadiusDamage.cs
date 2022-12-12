@@ -1,20 +1,20 @@
 using UnityEngine;
 
-public class KnifeDamage : MonoBehaviour
+public class RadiusDamage : MonoBehaviour
 {
-    private Simple_Knife_Attack _SimpleKnifeAttack;
+    private Simple_Radius_Attack SimpleRadiusAttack;
 
     [SerializeField]
     private int baseDamage;
 
     private void Awake()
     {
-        _SimpleKnifeAttack = this.gameObject.GetComponentInParent<Simple_Knife_Attack>();
+        SimpleRadiusAttack = this.gameObject.GetComponentInParent<Simple_Radius_Attack>();
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Enemy") && _SimpleKnifeAttack._isAttacking)
+        if (other.CompareTag("Enemy") && SimpleRadiusAttack._isAttacking)
         {
             if (other.GetComponent<HealthComponent>() != null)
             {

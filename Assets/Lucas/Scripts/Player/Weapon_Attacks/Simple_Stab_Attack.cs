@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class Simple_Knife_Attack : MonoBehaviour
+public class Simple_Stab_Attack : MonoBehaviour
 {
     [SerializeField]
     private GameObject startParent;
