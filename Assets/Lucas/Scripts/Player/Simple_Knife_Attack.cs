@@ -5,7 +5,10 @@ public class Simple_Knife_Attack : MonoBehaviour
 {
     [SerializeField]
     private GameObject startParent;
-    private Transform startTransform;
+    [SerializeField]
+    private Vector3 startPosition;
+    [SerializeField]
+    private Vector3 startRotation;
 
     [SerializeField]
     private LayerMask _enemyLayer;
@@ -15,7 +18,10 @@ public class Simple_Knife_Attack : MonoBehaviour
     private float _attackRange;
     [SerializeField]
     private float _attackDelay;
-    private bool _isAttacking;
+    [SerializeField]
+    private float _attackTime;
+    public bool _isAttacking;
+    private bool _startAttacking;
 
     private Vector3 enemyPositionAtAttack;
 
@@ -23,9 +29,12 @@ public class Simple_Knife_Attack : MonoBehaviour
 
     private void Awake()
     {
-        startTransform = transform;
-        startParent = gameObject.transform.parent.gameObject;
+        startParent = transform.parent.gameObject;
+        startPosition = transform.localPosition;
+        startRotation = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y, transform.eulerAngles.z);
+
         _isAttacking = false;
+        _startAttacking = false;
     }
 
     private void FixedUpdate()
@@ -33,66 +42,49 @@ public class Simple_Knife_Attack : MonoBehaviour
         _currentAttackDelay -= Time.deltaTime;
         if (_currentAttackDelay <= 0 && !_isAttacking)
         {
-            float currentclosestdistance = Mathf.Infinity;
-            Enemy closestEnemy = null;
-
-            Collider[] enemies = Physics.OverlapSphere(transform.position, _attackRange, _enemyLayer);
-            foreach (var enemy in enemies)
-            {
-                float distanceToEnemy = Vector3.Distance(transform.position, enemy.transform.position);
-                if (distanceToEnemy < currentclosestdistance)
-                {
-                    RaycastHit hit;
-                    if (Physics.Raycast(transform.position, (enemy.transform.position - transform.position), out hit, distanceToEnemy, _groundLayer))
-                    {
-                    }
-                    else
-                    {
-                        closestEnemy = enemy.GetComponent<Enemy>();
-                        currentclosestdistance = distanceToEnemy;
-                    }
-                }
-            }
-
-            if (closestEnemy)
-            {
-                Attack(closestEnemy);
-                _currentAttackDelay = _attackDelay;
-            }
+            LookForClosestEnemy();
         }
         else if (_isAttacking)
         {
             AttackMove();
         }
+    }
 
-        /* if (_isAttacking)
+    private void LookForClosestEnemy()
+    {
+        float currentclosestdistance = Mathf.Infinity;
+        Enemy closestEnemy = null;
+
+        Collider[] enemies = Physics.OverlapSphere(transform.position, _attackRange, _enemyLayer);
+        foreach (var enemy in enemies)
         {
-            transform.position = Vector3.MoveTowards(transform.position, enemyPositionAtAttack, 10 * Time.deltaTime);
-
-            if(transform.position == enemyPositionAtAttack)
+            float distanceToEnemy = Vector3.Distance(transform.position, enemy.transform.position);
+            if (distanceToEnemy < currentclosestdistance)
             {
-                _isAttacking = false;
+                RaycastHit hit;
+                if (Physics.Raycast(transform.position, (enemy.transform.position - transform.position), out hit, distanceToEnemy, _groundLayer))
+                {
+                }
+                else
+                {
+                    closestEnemy = enemy.GetComponent<Enemy>();
+                    currentclosestdistance = distanceToEnemy;
+                }
             }
         }
-        else
+
+        if (closestEnemy)
         {
-            if (gameObject.transform.parent == null)
-            {
-                gameObject.transform.parent = startParent.transform;
-            }
-            else if (transform.position != startTransform.localPosition)
-            {
-                transform.position = Vector3.MoveTowards(transform.position, startTransform.localPosition, 10 * Time.deltaTime);
-            }
-            else if (transform.rotation != startTransform.rotation)
-            {
-                transform.rotation = startTransform.rotation;
-            }
-        } */
+            Attack(closestEnemy);
+            _currentAttackDelay = _attackDelay;
+        }
     }
+
     private void Attack(Enemy enemy)
     {
-        // _isAttacking = true;
+        _startAttacking = true;
+        _isAttacking = true;
+
         enemyPositionAtAttack = enemy.transform.position;
 
         gameObject.transform.parent = null;
@@ -100,14 +92,34 @@ public class Simple_Knife_Attack : MonoBehaviour
 
     private void AttackMove()
     {
-            if(transform.position != enemyPositionAtAttack)
+        if (_startAttacking)
+        {
+            if (transform.position != enemyPositionAtAttack)
             {
-                transform.position = Vector3.MoveTowards(transform.position, enemyPositionAtAttack, 10 * Time.deltaTime);
+                transform.position = Vector3.MoveTowards(transform.position, enemyPositionAtAttack, _attackTime * Time.deltaTime);
+                transform.LookAt(enemyPositionAtAttack);
             }
             else
             {
-                Debug.Log("Range");
-            }     
+                _startAttacking = false;
+            }
+        }
+        else
+        {
+            if(gameObject.transform.parent != startParent.transform)
+            {
+                gameObject.transform.parent = startParent.transform;
+            }
+            
+            transform.localPosition = Vector3.MoveTowards(transform.localPosition, startPosition, _attackTime * Time.deltaTime);
+
+            if (transform.localPosition == startPosition)
+            {
+                transform.localEulerAngles = startRotation;
+
+                _isAttacking = false;
+            }
+        }
     }
 
     #region Draw_Gizmos

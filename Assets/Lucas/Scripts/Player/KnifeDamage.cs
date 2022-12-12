@@ -6,7 +6,6 @@ public class KnifeDamage : MonoBehaviour
 
     [SerializeField]
     private int baseDamage;
-    private bool _didDamage = false;
 
     private void Awake()
     {
@@ -15,21 +14,12 @@ public class KnifeDamage : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Enemy") && !_didDamage)
+        if (other.CompareTag("Enemy") && _SimpleKnifeAttack._isAttacking)
         {
             if (other.GetComponent<HealthComponent>() != null)
             {
                 other.GetComponent<HealthComponent>().TakeDamage(baseDamage);
-                _didDamage = true;
             }
-        }
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.CompareTag("Enemy") && _didDamage)
-        {
-            _didDamage = false;
         }
     }
 }
