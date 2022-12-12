@@ -9,7 +9,7 @@ public class KnifeDamage : MonoBehaviour
 
     private void Awake()
     {
-        _SimpleKnifeAttack = this.gameObject.GetComponent<Simple_Knife_Attack>();
+        _SimpleKnifeAttack = this.gameObject.GetComponentInParent<Simple_Knife_Attack>();
     }
 
     private void OnTriggerEnter(Collider other)

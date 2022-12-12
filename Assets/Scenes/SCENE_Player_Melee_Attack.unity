@@ -2055,32 +2055,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1150700421}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &61512238
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 61512236}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c20f6c831b0861a44ba45b6da68ea2f1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  baseDamage: 25
---- !u!65 &61512239
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 61512236}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.075, y: 0.225, z: 0.075}
-  m_Center: {x: 0, y: 0.2, z: 0}
 --- !u!114 &61512241
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2102,8 +2076,8 @@ MonoBehaviour:
   _groundLayer:
     serializedVersion: 2
     m_Bits: 512
-  _attackRange: 3
-  _attackDelay: 1
+  _attackRange: 4
+  _attackDelay: 1.25
   _attackTime: 15
   _isAttacking: 0
 --- !u!1 &62770116
@@ -2554,6 +2528,38 @@ Transform:
   m_Father: {fileID: 1928633450}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: -180, z: 0}
+--- !u!1 &101257205 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 961290448522719897, guid: 537fc3e4e368e0f4cb2f800d5ecb95d7,
+    type: 3}
+  m_PrefabInstance: {fileID: 1150700421}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &101257207
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 101257205}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.075, y: 0.225, z: 0.075}
+  m_Center: {x: 0, y: 0.2, z: 0}
+--- !u!114 &101257208
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 101257205}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c20f6c831b0861a44ba45b6da68ea2f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  baseDamage: 25
 --- !u!850595691 &103807033
 LightingSettings:
   m_ObjectHideFlags: 0
@@ -12669,6 +12675,38 @@ MonoBehaviour:
   m_SelectedFaces: 
   m_SelectedEdges: []
   m_SelectedVertices: 
+--- !u!1 &1009380626 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 583003615796969197, guid: 537fc3e4e368e0f4cb2f800d5ecb95d7,
+    type: 3}
+  m_PrefabInstance: {fileID: 1150700421}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &1009380628
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1009380626}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.075, y: 0.225, z: 0.075}
+  m_Center: {x: 0, y: 0.2, z: 0}
+--- !u!114 &1009380629
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1009380626}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c20f6c831b0861a44ba45b6da68ea2f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  baseDamage: 25
 --- !u!1 &1030520346
 GameObject:
   m_ObjectHideFlags: 0
@@ -21530,32 +21568,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1150700421}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1437639765
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1437639763}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c20f6c831b0861a44ba45b6da68ea2f1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  baseDamage: 25
---- !u!65 &1437639766
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1437639763}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.075, y: 0.225, z: 0.075}
-  m_Center: {x: 0, y: 0.2, z: 0}
 --- !u!114 &1437639768
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21577,8 +21589,8 @@ MonoBehaviour:
   _groundLayer:
     serializedVersion: 2
     m_Bits: 512
-  _attackRange: 3
-  _attackDelay: 2
+  _attackRange: 6
+  _attackDelay: 1.25
   _attackTime: 15
   _isAttacking: 0
 --- !u!1 &1448147098
