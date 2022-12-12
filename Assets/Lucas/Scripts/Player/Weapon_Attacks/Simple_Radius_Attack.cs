@@ -4,11 +4,11 @@ using UnityEngine;
 public class Simple_Radius_Attack : MonoBehaviour
 {
     [SerializeField]
-    private GameObject startParent;
-    [SerializeField]
     private Vector3 startPosition;
     [SerializeField]
     private Vector3 startRotation;
+
+    private BoxCollider _boxCollider;
 
     [SerializeField]
     private LayerMask _enemyLayer;
@@ -21,20 +21,23 @@ public class Simple_Radius_Attack : MonoBehaviour
     [SerializeField]
     private float _attackTime;
     public bool _isAttacking;
-    private bool _startAttacking;
 
-    private Vector3 enemyPositionAtAttack;
+    [SerializeField]
+    private Vector3 addRotation;
+
+    [SerializeField]
+    private bool fullRadius;
 
     private float _currentAttackDelay;
 
     private void Awake()
     {
-        startParent = transform.parent.gameObject;
         startPosition = transform.localPosition;
         startRotation = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y, transform.eulerAngles.z);
 
+        _boxCollider = this.transform.GetComponent<BoxCollider>();
+
         _isAttacking = false;
-        _startAttacking = false;
     }
 
     private void FixedUpdate()
@@ -48,14 +51,14 @@ public class Simple_Radius_Attack : MonoBehaviour
 
     private void LookForClosestEnemy()
     {
-        float currentclosestdistance = Mathf.Infinity;
-        Enemy closestEnemy = null;
+        float currentHighestDistance = 0;
+        Enemy enemyAtMaxRange = null;
 
         Collider[] enemies = Physics.OverlapSphere(transform.position, _attackRange, _enemyLayer);
         foreach (var enemy in enemies)
         {
             float distanceToEnemy = Vector3.Distance(transform.position, enemy.transform.position);
-            if (distanceToEnemy < currentclosestdistance)
+            if (distanceToEnemy > currentHighestDistance)
             {
                 RaycastHit hit;
                 if (Physics.Raycast(transform.position, (enemy.transform.position - transform.position), out hit, distanceToEnemy, _groundLayer))
@@ -63,58 +66,102 @@ public class Simple_Radius_Attack : MonoBehaviour
                 }
                 else
                 {
-                    closestEnemy = enemy.GetComponent<Enemy>();
-                    currentclosestdistance = distanceToEnemy;
+                    enemyAtMaxRange = enemy.GetComponent<Enemy>();
+                    currentHighestDistance = distanceToEnemy;
                 }
             }
         }
 
-        if (closestEnemy)
+        if (enemyAtMaxRange)
         {
-            Attack(closestEnemy);
-            _currentAttackDelay = _attackDelay;
+            Attack(enemyAtMaxRange);
         }
     }
 
     private void Attack(Enemy enemy)
     {
-        _startAttacking = true;
         _isAttacking = true;
-
-        enemyPositionAtAttack = enemy.transform.position;
 
         // gameObject.transform.parent = null;
 
-        StartCoroutine(LerpPosition(enemy.transform.position, _attackTime));
+        _boxCollider.center -= new Vector3(0, _attackRange / 8, 0);
+        _boxCollider.size += new Vector3(0, _attackRange / 4, 0);
+
+        Vector3 startAttackPos = new Vector3(startPosition.x - _attackRange, startPosition.y, startPosition.z);
+        Vector3 middleAttackPos = new Vector3(startPosition.x, startPosition.y, startPosition.z + _attackRange);
+        Vector3 endAttackPos = new Vector3(startPosition.x + _attackRange, startPosition.y, startPosition.z);
+
+        this.transform.localPosition = startAttackPos;
+        this.transform.localEulerAngles += addRotation;
+
+
+        StartCoroutine(LerpPosition(startAttackPos, middleAttackPos, endAttackPos, _attackTime));
     }
 
-    IEnumerator LerpPosition(Vector3 endPosition, float duration)
+    IEnumerator LerpPosition(Vector3 startPosition, Vector3 middlePosition, Vector3 endPosition, float duration)
     {
         float time = 0;
-        while (time < duration)
+        if (fullRadius)
         {
-            transform.position = Vector3.Lerp(startPosition, endPosition, time / duration);
-            time += Time.deltaTime;
-            yield return null;
+            while (time < duration)
+            {
+                transform.localPosition = Vector3.Lerp(startPosition, middlePosition, time / duration);
+                time += Time.deltaTime;
+                yield return null;
+            }
+            time = 0;
+            while (time < duration)
+            {
+                transform.localPosition = Vector3.Lerp(middlePosition, endPosition, time / duration);
+                time += Time.deltaTime;
+                yield return null;
+            }
+            transform.localEulerAngles = new Vector3(transform.localEulerAngles.x, 180, 180);
+            middlePosition -= new Vector3(0, 0, 2 * _attackRange);
+            time = 0;
+            while (time < duration)
+            {
+                transform.localPosition = Vector3.Lerp(endPosition, middlePosition, time / duration);
+                time += Time.deltaTime;
+                yield return null;
+            }
+            time = 0;
+            while (time < duration)
+            {
+                transform.localPosition = Vector3.Lerp(middlePosition, startPosition, time / duration);
+                time += Time.deltaTime;
+                yield return null;
+            }
         }
-        transform.position = endPosition;
-        // gameObject.transform.parent = startParent.transform;
-        _isAttacking = false;
-        _startAttacking = false;
+        else
+        {
+            while (time < duration)
+            {
+                transform.localPosition = Vector3.Lerp(startPosition, middlePosition, time / duration);
+                time += Time.deltaTime;
+                yield return null;
+            }
+            time = 0;
+            while (time < duration)
+            {
+                transform.localPosition = Vector3.Lerp(middlePosition, endPosition, time / duration);
+                time += Time.deltaTime;
+                yield return null;
+            }
+        }
 
+        ResetAttackPosition();
     }
 
-    private void AttackMove()
+    private void ResetAttackPosition()
     {
-        transform.position = Vector3.Lerp(startPosition, new Vector3(10, 10, 10), 4500);
+        _isAttacking = false;
+        this.transform.localPosition = startPosition;
+        this.transform.localEulerAngles = startRotation;
+        _currentAttackDelay = _attackDelay;
 
-        if(transform.position == new Vector3(10, 10, 10))
-        {
-            _isAttacking = false;
-            _startAttacking = false;
-            gameObject.transform.parent = startParent.transform;
-            transform.position = startPosition;
-        }
+        _boxCollider.center += new Vector3(0, _attackRange / 8, 0);
+        _boxCollider.size -= new Vector3(0, _attackRange / 4, 0);
     }
 
     #region Draw_Gizmos

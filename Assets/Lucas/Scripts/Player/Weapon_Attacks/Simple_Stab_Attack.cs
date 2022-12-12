@@ -76,7 +76,6 @@ public class Simple_Stab_Attack : MonoBehaviour
         if (closestEnemy)
         {
             Attack(closestEnemy);
-            _currentAttackDelay = _attackDelay;
         }
     }
 
@@ -116,6 +115,11 @@ public class Simple_Stab_Attack : MonoBehaviour
             if (transform.localPosition == startPosition)
             {
                 transform.localEulerAngles = startRotation;
+
+                if (_isAttacking)
+                {
+                    _currentAttackDelay = _attackDelay;
+                }
 
                 _isAttacking = false;
             }
