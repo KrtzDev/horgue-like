@@ -8,8 +8,6 @@ public class Simple_Radius_Attack : MonoBehaviour
     [SerializeField]
     private Vector3 startRotation;
 
-    private BoxCollider _boxCollider;
-
     [SerializeField]
     private LayerMask _enemyLayer;
     [SerializeField]
@@ -34,8 +32,6 @@ public class Simple_Radius_Attack : MonoBehaviour
     {
         startPosition = transform.localPosition;
         startRotation = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y, transform.eulerAngles.z);
-
-        _boxCollider = this.transform.GetComponent<BoxCollider>();
 
         _isAttacking = false;
     }
@@ -81,11 +77,6 @@ public class Simple_Radius_Attack : MonoBehaviour
     private void Attack(Enemy enemy)
     {
         _isAttacking = true;
-
-        // gameObject.transform.parent = null;
-
-        _boxCollider.center -= new Vector3(0, _attackRange / 8, 0);
-        _boxCollider.size += new Vector3(0, _attackRange / 4, 0);
 
         Vector3 startAttackPos = new Vector3(startPosition.x - _attackRange, startPosition.y, startPosition.z);
         Vector3 middleAttackPos = new Vector3(startPosition.x, startPosition.y, startPosition.z + _attackRange);
@@ -159,9 +150,6 @@ public class Simple_Radius_Attack : MonoBehaviour
         this.transform.localPosition = startPosition;
         this.transform.localEulerAngles = startRotation;
         _currentAttackDelay = _attackDelay;
-
-        _boxCollider.center += new Vector3(0, _attackRange / 8, 0);
-        _boxCollider.size -= new Vector3(0, _attackRange / 4, 0);
     }
 
     #region Draw_Gizmos
