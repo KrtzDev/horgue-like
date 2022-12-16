@@ -184,8 +184,8 @@ RectTransform:
   m_Children:
   - {fileID: 5270070543576010600}
   - {fileID: 5270070543428867373}
-  - {fileID: 5270070543256129022}
   - {fileID: 7449955767863035792}
+  - {fileID: 5270070543256129022}
   m_Father: {fileID: 6725698580850891483}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -455,7 +455,7 @@ RectTransform:
   - {fileID: 5270070543512425402}
   - {fileID: 5270070544585530316}
   m_Father: {fileID: 5270070542468958790}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -543,7 +543,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 5270070543256129016}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 7625480102595686751}
+        m_TargetAssemblyTypeName: Endscreen, Assembly-CSharp
+        m_MethodName: BackToMainMenu
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &5270070543277130859
 GameObject:
   m_ObjectHideFlags: 0
@@ -1083,7 +1095,7 @@ RectTransform:
   - {fileID: 7552047977979554237}
   - {fileID: 1644662160706119194}
   m_Father: {fileID: 5270070542468958790}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -1102,6 +1114,7 @@ GameObject:
   - component: {fileID: 3916250861231576475}
   - component: {fileID: 5068189214331198108}
   - component: {fileID: 122135388087004334}
+  - component: {fileID: 7625480102595686751}
   m_Layer: 5
   m_Name: P_UI_EndScreen
   m_TagString: Untagged
@@ -1192,6 +1205,18 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &7625480102595686751
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6614940772560601928}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71252dfe5206f7048ba4cec414884396, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6733836761766719108
 GameObject:
   m_ObjectHideFlags: 0
