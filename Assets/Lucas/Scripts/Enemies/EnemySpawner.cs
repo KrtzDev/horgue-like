@@ -81,7 +81,7 @@ public class EnemySpawner : MonoBehaviour
         }
     }
 
-    private void SpawnRandomEnemy()
+    public void SpawnRandomEnemy()
     {
         if (EnemyLocationMethod == LocationMethod.Collider)
         {
