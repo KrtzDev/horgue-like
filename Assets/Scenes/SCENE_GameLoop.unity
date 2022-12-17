@@ -18206,6 +18206,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _endscreen_Prefab: {fileID: 1865004716}
+  _winningCondition: 0
+  _timeToSurvive: 20
 --- !u!4 &883372302
 Transform:
   m_ObjectHideFlags: 0
@@ -34458,8 +34460,12 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 199202193, guid: 24e4eca4c6fc7054f936273b1a1d6d7e, type: 3}
+      propertyPath: EnemySpawnMethod
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 199202193, guid: 24e4eca4c6fc7054f936273b1a1d6d7e, type: 3}
       propertyPath: EnemyWavesToSpawn
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 199202193, guid: 24e4eca4c6fc7054f936273b1a1d6d7e, type: 3}
       propertyPath: EnemyLocationMethod
