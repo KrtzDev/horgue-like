@@ -5,22 +5,25 @@ using UnityEngine.AI;
 
 public class EnemySpawner : MonoBehaviour
 {
-    public Transform Player;
-    public int EnemyWavesToSpawn = 5;
-    public int EnemyWaveSize = 2;
-    public int EnemiesThatHaveSpawned = 0;
-    private int EnemyMaxAmount;
-    public float SpawnDelay = 1f;
-    public List<Enemy> EnemyPrefabs = new List<Enemy>();
-    public SpawnMethod EnemySpawnMethod = SpawnMethod.RoundRobin;
+    [field: SerializeField] public int EnemyWavesToSpawn { get; set; }
+    [field: SerializeField] public int EnemyWaveSize { get; set; }
+    [field: SerializeField] public float SpawnDelay { get; set; }
+    public int EnemiesThatHaveSpawned { get; set; }
 
-    [SerializeField]
-    private Collider[] SpawnCollider;
-    private Bounds Bounds;
+    [SerializeField] private Collider[] SpawnCollider;
+
+    public Transform Player;
+
+    public List<Enemy> EnemyPrefabs = new List<Enemy>();
+    public Dictionary<int, ObjectPool> EnemyObjectPools = new Dictionary<int, ObjectPool>();
+
+    public SpawnMethod EnemySpawnMethod = SpawnMethod.RoundRobin;
     public LocationMethod EnemyLocationMethod = LocationMethod.Collider;
 
+    private int EnemyMaxAmount;
+
+    private Bounds Bounds;
     private NavMeshTriangulation Triangulation;
-    public Dictionary<int, ObjectPool> EnemyObjectPools = new Dictionary<int, ObjectPool>();
 
     private void Awake()
     {
@@ -67,9 +70,9 @@ public class EnemySpawner : MonoBehaviour
         }
     }
 
-    private void SpawnRoundRobinEnemy(int SpawnedEnemies)
+    public void SpawnRoundRobinEnemy(int spawnedEnemies)
     {
-        int SpawnIndex = SpawnedEnemies % EnemyPrefabs.Count;
+        int SpawnIndex = spawnedEnemies % EnemyPrefabs.Count;
 
         if(EnemyLocationMethod == LocationMethod.Collider)
         {
@@ -143,9 +146,9 @@ public class EnemySpawner : MonoBehaviour
         }
     }
 
-    private void DoSpawnEnemy(int SpawnIndex, Vector3 SpawnPosition)
+    private void DoSpawnEnemy(int spawnIndex, Vector3 spawnPosition)
     {
-        PoolableObject poolableObject = EnemyObjectPools[SpawnIndex].GetObject();
+        PoolableObject poolableObject = EnemyObjectPools[spawnIndex].GetObject();
 
         SetBounds();
 
@@ -154,28 +157,28 @@ public class EnemySpawner : MonoBehaviour
             Enemy enemy = poolableObject.GetComponent<Enemy>();
 
             NavMeshHit Hit;
-            if (NavMesh.SamplePosition(SpawnPosition, out Hit, 2f, -1))
+            if (NavMesh.SamplePosition(spawnPosition, out Hit, 2f, -1))
             {
                 enemy.Agent.Warp(Hit.position);
                 // enemy needs to get enabled and start chasing now.
-                if(enemy.Movement.playerTarget == null)
+                if(enemy.Movement.PlayerTarget == null)
                 {
-                    enemy.Movement.playerTarget = Player;
+                    enemy.Movement.PlayerTarget = Player;
                 }
                 enemy.Agent.enabled = true;
-                enemy.Movement.StartChasing(enemy.Movement.playerTarget.position);
+                enemy.Movement.StartChasing(enemy.Movement.PlayerTarget.position);
                 enemy.Movement.RetreatPosition = enemy.transform.position;
 
                 EnemiesThatHaveSpawned += 1;
             }
             else
             {
-                Debug.LogError($"Unable to place NavMeshAgent on NavMesh. Tried to use {SpawnPosition}");
+                Debug.LogError($"Unable to place NavMeshAgent on NavMesh. Tried to use {spawnPosition}");
             }
         }
         else
         {
-            Debug.LogError($"Unable to fetch enemy of type {SpawnIndex} from object pool. Out of objects?");
+            Debug.LogError($"Unable to fetch enemy of type {spawnIndex} from object pool. Out of objects?");
         }
     }
 

@@ -37624,6 +37624,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 199202193, guid: 24e4eca4c6fc7054f936273b1a1d6d7e, type: 3}
+      propertyPath: <SpawnDelay>k__BackingField
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 199202193, guid: 24e4eca4c6fc7054f936273b1a1d6d7e, type: 3}
       propertyPath: SpawnCollider.Array.data[0]
       value: 
       objectReference: {fileID: 857701690}
@@ -37643,6 +37647,18 @@ PrefabInstance:
       propertyPath: SpawnCollider.Array.data[4]
       value: 
       objectReference: {fileID: 1689094498}
+    - target: {fileID: 199202193, guid: 24e4eca4c6fc7054f936273b1a1d6d7e, type: 3}
+      propertyPath: <EnemyWaveSize>k__BackingField
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 199202193, guid: 24e4eca4c6fc7054f936273b1a1d6d7e, type: 3}
+      propertyPath: <EnemyWavesToSpawn>k__BackingField
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 199202193, guid: 24e4eca4c6fc7054f936273b1a1d6d7e, type: 3}
+      propertyPath: <EnemiesThatHaveSpawned>k__BackingField
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3225790080061917108, guid: 24e4eca4c6fc7054f936273b1a1d6d7e,
         type: 3}
       propertyPath: m_RootOrder

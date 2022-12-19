@@ -7,8 +7,8 @@ public class UI_Image_FillAmount_Healthbar : UI_Image_FillAmount
     public override void Awake()
     {
         _HealthComponent = GameObject.FindGameObjectWithTag("Player").GetComponent<HealthComponent>();
-        _maxValue = _HealthComponent.maxHealth;
-        _currentValue = _HealthComponent.currentHealth;
+        _maxValue = _HealthComponent.MaxHealth;
+        _currentValue = _HealthComponent.CurrentHealth;
 
         base.Awake();
     }
@@ -16,7 +16,7 @@ public class UI_Image_FillAmount_Healthbar : UI_Image_FillAmount
     public override void FixedUpdate()
     {
         // maxHealth Update falls man mehr Health dazu bekommt
-        _currentValue = _HealthComponent.currentHealth;
+        _currentValue = _HealthComponent.CurrentHealth;
 
         base.FixedUpdate();
     }

@@ -1,12 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
 public class Enemy : PoolableObject
 {
-    public EnemyMovement Movement;
-    public NavMeshAgent Agent;
+    [field: SerializeField] public EnemyMovement Movement { get; set; }
+    [field: SerializeField] public NavMeshAgent Agent { get; set; }
 
     public override void OnDisable()
     {

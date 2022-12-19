@@ -3,25 +3,24 @@ using UnityEngine;
 
 public class HealthComponent : MonoBehaviour
 {
-    public event Action<float> OnHealthPctChanged = delegate { };
+    public event Action<float> OnHealthPercentChanged = delegate { };
 
-    public int maxHealth = 100;
-    public int currentHealth;
-
+    [field: SerializeField] public int MaxHealth { get; set; } = 100;
+    [field: SerializeField] public int CurrentHealth { get; set; }
 
     private void Awake()
     {
-        currentHealth = maxHealth;
+        CurrentHealth = MaxHealth;
     }
 
     public void TakeDamage(int damage)
     {
-        currentHealth -= damage;
+        CurrentHealth -= damage;
 
-        float currentHealthPct = (float)currentHealth / (float)maxHealth;
-        OnHealthPctChanged(currentHealthPct);
+        float currentHealthPct = (float)CurrentHealth / (float)MaxHealth;
+        OnHealthPercentChanged(currentHealthPct);
 
-        if (currentHealth <= 0)
+        if (CurrentHealth <= 0)
         {
             if (this.gameObject.CompareTag("Player"))
             {

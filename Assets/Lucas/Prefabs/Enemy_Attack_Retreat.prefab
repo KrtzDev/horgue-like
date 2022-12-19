@@ -341,8 +341,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ad244b7fad3c0b41a8272dfe705ac8a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Movement: {fileID: 5465025598197332764}
-  Agent: {fileID: 5465025598197332767}
+  <Movement>k__BackingField: {fileID: 5465025598197332764}
+  <Agent>k__BackingField: {fileID: 5465025598197332767}
 --- !u!114 &5465025598197332764
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -355,22 +355,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01aa83180986b5f4580de03ec090ea9f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerTarget: {fileID: 0}
-  ProjectileSpawnPoints:
-  - {fileID: 2102040302081940939}
-  projectileSpawnPoint: 0
-  projectilePrefab: {fileID: -4007479725491826198, guid: 4746290bed9561b4590c43ddb406e723,
+  <PlayerTarget>k__BackingField: {fileID: 0}
+  _projectileSpawnPoints:
+  - {fileID: 5465025598197332762}
+  _projectilePrefab: {fileID: -4007479725491826198, guid: 4746290bed9561b4590c43ddb406e723,
     type: 3}
-  attackForce: 10
-  attackSpeed: 3
-  attackRange: 3.5
-  inRangedAttackRange: 0
-  playerLaskMask:
+  _projectileSpawnPoint: 0
+  _attackForce: 1
+  _attackSpeed: 1
+  _attackRange: 10
+  _inRangedAttackRange: 0
+  _playerLaskMask:
     serializedVersion: 2
-    m_Bits: 65
-  AttackRetreat: 1
-  RetreatPosition: {x: 0, y: 0, z: 0}
-  retreatTime: 4
+    m_Bits: 64
+  _attackRetreat: 1
+  _retreatTime: 4
 --- !u!195 &5465025598197332767
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -405,8 +404,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe0fc43883faa7c4884164c087e77334, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
-  currentHealth: 0
+  <MaxHealth>k__BackingField: 100
+  <CurrentHealth>k__BackingField: 0
 --- !u!1 &5793418955654442813
 GameObject:
   m_ObjectHideFlags: 0
@@ -727,5 +726,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3577be14f3df00e47b279aa4cc59cd49, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentHealth: {fileID: 8370513199523848229}
-  updateSpeedSeconds: 0.25
+  _healthBar: {fileID: 8370513199523848229}
+  _updateSpeedPerSeconds: 0.15
