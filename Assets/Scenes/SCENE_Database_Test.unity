@@ -2035,6 +2035,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: BackToMenu
       objectReference: {fileID: 0}
+    - target: {fileID: 7747444371065174972, guid: 49a24ff1f910e5646bcc26ae9afe7664,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8691922246029654994, guid: 49a24ff1f910e5646bcc26ae9afe7664,
         type: 3}
       propertyPath: m_RootOrder
