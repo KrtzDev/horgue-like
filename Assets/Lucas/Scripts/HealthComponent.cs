@@ -31,7 +31,7 @@ public class HealthComponent : MonoBehaviour
             if (this.gameObject.CompareTag("Enemy"))
             {
                 Debug.Log("Enemy Died");
-                GameManager.instance.EnemyDied();
+                GameManager.Instance.EnemyDied();
                 Destroy(this.gameObject);
             }
         }

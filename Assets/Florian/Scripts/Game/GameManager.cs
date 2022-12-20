@@ -1,11 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class GameManager : MonoBehaviour
+public class GameManager : Singleton<GameManager>
 {
-    public static GameManager instance { get; private set; }
-
     private enum WinningCondition
     {
         KillAllEnemies,
@@ -25,14 +21,6 @@ public class GameManager : MonoBehaviour
     private EnemySpawner _enemySpawner;
     private int _neededEnemyKill;
     private bool _hasWon;
-
-    private void Awake()
-    {
-        if (!instance)
-        {
-            instance = this;
-        }
-    }
 
     private void Start()
     {
