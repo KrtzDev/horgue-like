@@ -61,6 +61,6 @@ public class GameManager : Singleton<GameManager>
 
     private void RoundWon()
     {
-        _endscreen_Prefab.SetActive(true);
+        UIManager.Instance.Endscreen.gameObject.SetActive(true);
     }
 }
