@@ -1,10 +1,14 @@
 public class InputManager : Singleton<InputManager>
 {
-    public Player_Input_Mappings PlayerInputActions { get; private set; }
+    public Player_Input_Mappings CharacterInputActions { get; set; }
 
-    protected override void Awake()
+    public void DisableCharacterInputs()
     {
-        base.Awake();
-        PlayerInputActions = new Player_Input_Mappings();
+        CharacterInputActions?.Disable();
+    }
+
+    public void EnableCharacterInputs()
+    {
+        CharacterInputActions?.Enable();
     }
 }

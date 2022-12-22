@@ -48,7 +48,6 @@ public class Bootstrapper
 
     ~Bootstrapper()
     {
-        Debug.Log("destroyed Bootstraper");
         EditorApplication.playModeStateChanged -= OnPlayModeStateChanged;
     }
 }

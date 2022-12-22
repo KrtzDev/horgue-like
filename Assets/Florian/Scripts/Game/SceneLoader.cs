@@ -1,18 +1,31 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class SceneLoader : Singleton<SceneLoader>
 {
+    public event Action CompletedSceneLoad;
+
     private Scene _currentScene;
     private int _sceneToLoad;
+
+    public void LoadScene(string sceneToLoad)
+    {
+        _sceneToLoad = SceneManager.GetSceneByName(sceneToLoad).buildIndex;
+        _currentScene = SceneManager.GetActiveScene();
+
+        InputManager.Instance.DisableCharacterInputs();
+
+        StartCoroutine(FadeOut());
+    }
 
     public void LoadScene(int sceneToLoad)
     {
         _sceneToLoad = sceneToLoad;
         _currentScene = SceneManager.GetActiveScene();
 
-        InputManager.Instance.PlayerInputActions.Disable();
+        InputManager.Instance.DisableCharacterInputs();
 
         StartCoroutine(FadeOut());
     }
@@ -38,7 +51,7 @@ public class SceneLoader : Singleton<SceneLoader>
     {
         SceneManager.SetActiveScene(SceneManager.GetSceneByBuildIndex(_sceneToLoad));
 
-        InputManager.Instance.PlayerInputActions.Enable();
+        InputManager.Instance.EnableCharacterInputs();
 
         StartCoroutine(FadeIn());
     }

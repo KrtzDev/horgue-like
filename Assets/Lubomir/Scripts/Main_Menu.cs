@@ -38,7 +38,7 @@ public class Main_Menu : MonoBehaviour
 
     public void LevelButton(int _levelIndex)
     {
-        SceneManager.LoadScene(_levelIndex);
+        SceneLoader.Instance.LoadScene(_levelIndex);
     }
 
     public void Quit()

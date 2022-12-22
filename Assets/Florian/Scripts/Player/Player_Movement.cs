@@ -21,14 +21,13 @@ public class Player_Movement : MonoBehaviour
 
     private void Awake()
     {
-        _inputActions = InputManager.Instance?.PlayerInputActions;
+        _inputActions = new Player_Input_Mappings();
+        if (InputManager.Instance)
+        {
+            InputManager.Instance.CharacterInputActions = _inputActions;
+        }
         _inputActions.Character.Movement.performed += Move;
         _inputActions.Character.Movement.canceled += StopMove;
-    }
-
-    private void OnSetInputAction(Player_Input_Mappings inputActions)
-    {
-        _inputActions = inputActions;
     }
 
     private void OnEnable()

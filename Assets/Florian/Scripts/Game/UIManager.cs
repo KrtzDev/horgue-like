@@ -16,11 +16,15 @@ public class UIManager : Singleton<UIManager>
     protected override void Awake()
     {
         base.Awake();
-
-        
+        OnCompletedSceneLoad();
     }
 
     private void Start()
+    {
+        SceneLoader.Instance.CompletedSceneLoad += OnCompletedSceneLoad;
+        
+    }
+    private void OnCompletedSceneLoad()
     {
         SceneFader = Instantiate(_sceneFaderUI_prefab);
         SceneFader.gameObject.SetActive(false);

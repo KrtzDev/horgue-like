@@ -22,9 +22,10 @@ public class GameManager : Singleton<GameManager>
     private int _neededEnemyKill;
     private bool _hasWon;
 
+
     private void Start()
     {
-        _enemySpawner = GameObject.Find("EnemySpawner").GetComponent<EnemySpawner>();
+        _enemySpawner = GameObject.Find("EnemySpawner")?.GetComponent<EnemySpawner>();
         _neededEnemyKill = _enemySpawner.EnemyWavesToSpawn * _enemySpawner.EnemyWaveSize;
     }
 
@@ -61,7 +62,7 @@ public class GameManager : Singleton<GameManager>
 
     private void RoundWon()
     {
-        InputManager.Instance.PlayerInputActions.Disable();
+        InputManager.Instance.CharacterInputActions.Disable();
         UIManager.Instance.Endscreen.gameObject.SetActive(true);
     }
 }
