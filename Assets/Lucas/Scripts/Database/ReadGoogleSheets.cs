@@ -3,16 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
-using TMPro;
 
-public class ReadGoogleSheets : MonoBehaviour
+public abstract class ReadGoogleSheets : MonoBehaviour
 {
-    public TextMeshProUGUI outPutArea;
+    [HideInInspector] public List<string> _variables;
+    [HideInInspector] public string _GoogleURL;
 
-    string rowsInJSON = "";
-    List<string> currentRow;
-
-    private void Start()
+    public virtual void Start()
     {
         StartCoroutine(ObtainSheetData());
     }
@@ -24,9 +21,9 @@ public class ReadGoogleSheets : MonoBehaviour
          */
     }
 
-    IEnumerator ObtainSheetData()
+    public IEnumerator ObtainSheetData()
     {
-        UnityWebRequest www = UnityWebRequest.Get("https://sheets.googleapis.com/v4/spreadsheets/1dbgvJsZAh6RdSJZYxfwGvvmaSeoRMNVGeIIugai8UIU/values/PlayerValues?key=AIzaSyD2YFsTjKNGDId31Yus0bkFR5hr9WK9yyY"); 
+        UnityWebRequest www = UnityWebRequest.Get(_GoogleURL); 
         // get Spreadsheet: https://sheets.googleapis.com/v4/spreadsheets/<ID>/values/<SheetName>?key=<APIKey>
         // müsste dann pro Database Spreadsheet (Spieler, Gegner, Waffe, etc.) ein neues Skript oder einen String erstellen
         yield return www.SendWebRequest();
@@ -40,12 +37,13 @@ public class ReadGoogleSheets : MonoBehaviour
             string json = www.downloadHandler.text;
             var objectInSpreadsheet = JSON.Parse(json);
 
+            List<string> _currentRow;
             int currentRow = 0; // neglect first Row
 
             foreach (var item in objectInSpreadsheet["values"])
             {
                 var itemObject = JSON.Parse(item.ToString());
-                this.currentRow = itemObject[0].AsStringList; // currentRow = aktuelle Zeile; currentRow[index] = aktuelle Spalte (startet bei 0)
+                _currentRow = itemObject[0].AsStringList; // currentRow = aktuelle Zeile; currentRow[index] = aktuelle Spalte (startet bei 0)
 
                 if (currentRow == 0)
                 {
@@ -53,20 +51,21 @@ public class ReadGoogleSheets : MonoBehaviour
                     continue;
                 }
 
-                for (int j = 0; j < this.currentRow.Count; j++)
+                for (int j = 0; j < _currentRow.Count; j++)
                 {
-                    rowsInJSON += this.currentRow[j];
-                    if(j == 0)
+                    if (j == 1)
                     {
-                        rowsInJSON += ": ";
+                        _variables.Add(_currentRow[j]);
                     }
                 }
 
                 currentRow++;
-                rowsInJSON += "\n";
             }
-
-            outPutArea.text = rowsInJSON;
         }
+
+        StartCoroutine(ApplySheetData());
     }
+
+    public abstract IEnumerator ApplySheetData();
+
 }
