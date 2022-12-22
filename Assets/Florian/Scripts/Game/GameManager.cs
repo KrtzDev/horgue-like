@@ -61,6 +61,7 @@ public class GameManager : Singleton<GameManager>
 
     private void RoundWon()
     {
+        InputManager.Instance.PlayerInputActions.Disable();
         UIManager.Instance.Endscreen.gameObject.SetActive(true);
     }
 }

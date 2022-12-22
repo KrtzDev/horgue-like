@@ -5,20 +5,22 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-[InitializeOnLoad]
 public class Bootstrapper
 {
     private const string INIT_SCENE_NAME = "SCENE_Init";
 
     private static List<string> activeEditorScenes = new List<string>();
 
-    static Bootstrapper()
+    [InitializeOnEnterPlayMode]
+    private static void OnEnterPlayMode()
     {
+        Debug.Log("Ping");
         EditorApplication.playModeStateChanged += OnPlayModeStateChanged;
     }
 
     private static void OnPlayModeStateChanged(PlayModeStateChange state)
     {
+        Debug.Log("Ping2");
         for (int i = 0; i < SceneManager.sceneCount; i++)
         {
             if(SceneManager.GetSceneAt(i).name != INIT_SCENE_NAME)

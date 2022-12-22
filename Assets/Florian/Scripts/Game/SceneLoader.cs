@@ -12,7 +12,7 @@ public class SceneLoader : Singleton<SceneLoader>
         _sceneToLoad = sceneToLoad;
         _currentScene = SceneManager.GetActiveScene();
 
-        //InputManager.Instance.PlayerInputActions.Disable();
+        InputManager.Instance.PlayerInputActions.Disable();
 
         StartCoroutine(FadeOut());
     }
@@ -38,7 +38,7 @@ public class SceneLoader : Singleton<SceneLoader>
     {
         SceneManager.SetActiveScene(SceneManager.GetSceneByBuildIndex(_sceneToLoad));
 
-        //InputManager.Instance.PlayerInputActions.Enable();
+        InputManager.Instance.PlayerInputActions.Enable();
 
         StartCoroutine(FadeIn());
     }

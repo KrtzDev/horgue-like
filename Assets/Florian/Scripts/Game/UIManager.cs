@@ -16,6 +16,12 @@ public class UIManager : Singleton<UIManager>
     protected override void Awake()
     {
         base.Awake();
+
+        
+    }
+
+    private void Start()
+    {
         SceneFader = Instantiate(_sceneFaderUI_prefab);
         SceneFader.gameObject.SetActive(false);
         Endscreen = Instantiate(_endScreenUI_prefab);
