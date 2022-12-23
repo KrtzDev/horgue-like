@@ -5,10 +5,22 @@ using UnityEngine.SceneManagement;
 
 public class SceneLoader : Singleton<SceneLoader>
 {
-    public event Action CompletedSceneLoad;
+    public Action CompletedSceneLoad;
+
+    public SceneFader SceneFader { get; private set; }
+
+    [SerializeField]
+    private SceneFader _sceneFaderUI_prefab;
 
     private Scene _currentScene;
     private int _sceneToLoad;
+
+    protected override void Awake()
+    {
+        base.Awake();
+        SceneFader = Instantiate(_sceneFaderUI_prefab);
+        SceneFader.gameObject.SetActive(false);
+    }
 
     public void LoadScene(string sceneToLoad)
     {
@@ -32,7 +44,7 @@ public class SceneLoader : Singleton<SceneLoader>
 
     private IEnumerator FadeOut()
     {
-        WaitForSeconds waitTime = new WaitForSeconds(UIManager.Instance.SceneFader.FadeOut());
+        WaitForSeconds waitTime = new WaitForSeconds(SceneFader.FadeOut());
         yield return waitTime;
         UnloadScene();
     }
@@ -53,12 +65,14 @@ public class SceneLoader : Singleton<SceneLoader>
 
         InputManager.Instance.EnableCharacterInputs();
 
+        CompletedSceneLoad?.Invoke();
+
         StartCoroutine(FadeIn());
     }
 
     private IEnumerator FadeIn()
     {
-        WaitForSeconds waitTime = new WaitForSeconds(UIManager.Instance.SceneFader.FadeIn());
+        WaitForSeconds waitTime = new WaitForSeconds(SceneFader.FadeIn());
         yield return waitTime;
     }
 }

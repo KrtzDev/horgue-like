@@ -26,4 +26,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/SCENE_Prototype.unity
     guid: ba6cb1f0c4bc3024eba30548a892363f
+  - enabled: 1
+    path: Assets/Scenes/SCENE_GameLoop.unity
+    guid: 4fd6f6c06cd05084191343d873c34004
   m_configObjects: {}

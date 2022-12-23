@@ -1,7 +1,8 @@
-#if UNITY_EDITOR
 using System.Collections.Generic;
 using System.Linq;
+#if UNITY_EDITOR
 using UnityEditor;
+#endif
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -10,6 +11,7 @@ public class Bootstrapper
     private const string INIT_SCENE_NAME = "SCENE_Init";
 
     private static List<string> activeEditorScenes = new List<string>();
+#if UNITY_EDITOR 
 
     [InitializeOnEnterPlayMode]
     private static void OnEnterPlayMode()
@@ -29,26 +31,42 @@ public class Bootstrapper
 
         if (state == PlayModeStateChange.EnteredPlayMode)
         {
-            SceneManager.LoadScene(INIT_SCENE_NAME);
+            SceneManager.LoadSceneAsync(INIT_SCENE_NAME).completed += LoadGameplayScene;
+        }
+    }
 
-            if (activeEditorScenes.Count > 0)
+    private static void LoadGameplayScene(AsyncOperation asyncOperation)
+    {
+        if (activeEditorScenes.Count > 0)
+        {
+            foreach (var scene in activeEditorScenes)
             {
-                foreach (var scene in activeEditorScenes)
-                {
-                    SceneManager.LoadSceneAsync(scene, LoadSceneMode.Additive).completed += SetGameplaySceneActive;
-                }
+                SceneManager.LoadSceneAsync(scene, LoadSceneMode.Additive).completed += SetGameplaySceneActive;
             }
         }
     }
 
-    private static void SetGameplaySceneActive(AsyncOperation obj)
+    private static void SetGameplaySceneActive(AsyncOperation asyncOperation)
     {
         SceneManager.SetActiveScene(SceneManager.GetSceneByName(activeEditorScenes.Last()));
+        SceneLoader.Instance.CompletedSceneLoad.Invoke();
     }
 
     ~Bootstrapper()
     {
         EditorApplication.playModeStateChanged -= OnPlayModeStateChanged;
     }
-}
+#else
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
+    private static void LoadMainMenuScene()
+    {
+        SceneManager.LoadSceneAsync("SCENE_Main_Menu",LoadSceneMode.Additive).completed += SetGameplaySceneActive;
+        activeEditorScenes.Add("SCENE_Main_Menu");
+    }
+
+    private static void SetGameplaySceneActive(AsyncOperation asyncOperation)
+    {
+        SceneManager.SetActiveScene(SceneManager.GetSceneByName(activeEditorScenes.Last()));
+    }
 #endif
+}

@@ -1,4 +1,6 @@
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : Singleton<GameManager>
 {
@@ -10,11 +12,15 @@ public class GameManager : Singleton<GameManager>
     }
 
     [SerializeField]
+    private List<GameObject> managers = new List<GameObject>();
+
+    [SerializeField]
     private GameObject _endscreen_Prefab;
+
+    [Header("WinningCondition")]
     [SerializeField]
     private WinningCondition _winningCondition;
 
-    [Header("WinningCondition")]
     [SerializeField]
     private float _timeToSurvive;
 
@@ -22,10 +28,15 @@ public class GameManager : Singleton<GameManager>
     private int _neededEnemyKill;
     private bool _hasWon;
 
-
     private void Start()
     {
-        _enemySpawner = GameObject.Find("EnemySpawner")?.GetComponent<EnemySpawner>();
+        SceneLoader.Instance.CompletedSceneLoad += OnCompletedSceneLoad;
+    }
+
+    private void OnCompletedSceneLoad()
+    {
+        if (SceneManager.GetActiveScene().name == "SCENE_Main_Menu") return; 
+        _enemySpawner = GameObject.Find("EnemySpawner").GetComponent<EnemySpawner>();
         _neededEnemyKill = _enemySpawner.EnemyWavesToSpawn * _enemySpawner.EnemyWaveSize;
     }
 
