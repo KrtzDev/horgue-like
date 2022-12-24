@@ -1,11 +1,9 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
-public class GameManager : MonoBehaviour
+public class GameManager : Singleton<GameManager>
 {
-    public static GameManager instance { get; private set; }
-
     private enum WinningCondition
     {
         KillAllEnemies,
@@ -14,11 +12,15 @@ public class GameManager : MonoBehaviour
     }
 
     [SerializeField]
+    private List<GameObject> managers = new List<GameObject>();
+
+    [SerializeField]
     private GameObject _endscreen_Prefab;
+
+    [Header("WinningCondition")]
     [SerializeField]
     private WinningCondition _winningCondition;
 
-    [Header("WinningCondition")]
     [SerializeField]
     private float _timeToSurvive;
 
@@ -26,16 +28,15 @@ public class GameManager : MonoBehaviour
     private int _neededEnemyKill;
     private bool _hasWon;
 
-    private void Awake()
-    {
-        if (!instance)
-        {
-            instance = this;
-        }
-    }
-
     private void Start()
     {
+        SceneLoader.Instance.CompletedSceneLoad += OnCompletedSceneLoad;
+    }
+
+    private void OnCompletedSceneLoad()
+    {
+        Debug.Log("Scene Load");
+        if (SceneManager.GetActiveScene().name == "SCENE_Main_Menu") return; 
         _enemySpawner = GameObject.Find("EnemySpawner").GetComponent<EnemySpawner>();
         _neededEnemyKill = _enemySpawner.EnemyWavesToSpawn * _enemySpawner.EnemyWaveSize;
     }
@@ -73,6 +74,9 @@ public class GameManager : MonoBehaviour
 
     private void RoundWon()
     {
-        _endscreen_Prefab.SetActive(true);
+        Debug.Log("Round won");
+        InputManager.Instance.CharacterInputActions.Disable();
+        UIManager.Instance.Endscreen.gameObject.SetActive(true);
+        _hasWon = false;
     }
 }
