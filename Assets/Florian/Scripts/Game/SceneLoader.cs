@@ -19,7 +19,6 @@ public class SceneLoader : Singleton<SceneLoader>
     {
         base.Awake();
         SceneFader = Instantiate(_sceneFaderUI_prefab);
-        SceneFader.gameObject.SetActive(false);
     }
 
     public void LoadScene(string sceneToLoad)

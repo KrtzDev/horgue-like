@@ -35,6 +35,7 @@ public class GameManager : Singleton<GameManager>
 
     private void OnCompletedSceneLoad()
     {
+        Debug.Log("Scene Load");
         if (SceneManager.GetActiveScene().name == "SCENE_Main_Menu") return; 
         _enemySpawner = GameObject.Find("EnemySpawner").GetComponent<EnemySpawner>();
         _neededEnemyKill = _enemySpawner.EnemyWavesToSpawn * _enemySpawner.EnemyWaveSize;
@@ -73,7 +74,9 @@ public class GameManager : Singleton<GameManager>
 
     private void RoundWon()
     {
+        Debug.Log("Round won");
         InputManager.Instance.CharacterInputActions.Disable();
         UIManager.Instance.Endscreen.gameObject.SetActive(true);
+        _hasWon = false;
     }
 }
