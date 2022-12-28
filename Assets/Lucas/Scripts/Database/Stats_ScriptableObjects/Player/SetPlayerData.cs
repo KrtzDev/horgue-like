@@ -1,12 +1,10 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerData : ReadGoogleSheets
+[RequireComponent(typeof(PlayerData))]
+public class SetPlayerData : ReadGoogleSheets
 {
-
-    [field: SerializeField] public int _movementSpeed { get; set; }
-    [field: SerializeField] public int _maxHealth { get; set; }
+    private PlayerData _playerData;
 
     public override void Start()
     {
@@ -17,8 +15,8 @@ public class PlayerData : ReadGoogleSheets
 
     public override IEnumerator ApplySheetData()
     {
-        _movementSpeed = int.Parse(_variables[0]);
-        _maxHealth = int.Parse(_variables[1]);
+        _playerData._movementSpeed = int.Parse(_variables[0]);
+        _playerData._maxHealth = int.Parse(_variables[1]);
 
         yield return null;
     }
