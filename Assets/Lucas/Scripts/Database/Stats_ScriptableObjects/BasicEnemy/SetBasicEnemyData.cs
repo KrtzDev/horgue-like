@@ -1,17 +1,16 @@
 using System.Collections;
 using UnityEngine;
 
-[RequireComponent(typeof(BasicEnemyData))]
 public class SetBasicEnemyData: ReadGoogleSheets
 {
     [SerializeField]
     private BasicEnemyData _basicEnemyData;
 
-    public override void Start()
+    public override void Awake()
     {
         _GoogleURL = "https://sheets.googleapis.com/v4/spreadsheets/1dbgvJsZAh6RdSJZYxfwGvvmaSeoRMNVGeIIugai8UIU/values/BasicEnemyValues?key=AIzaSyD2YFsTjKNGDId31Yus0bkFR5hr9WK9yyY";
 
-        base.Start();
+        base.Awake();
     }
 
     public override IEnumerator ApplySheetData()

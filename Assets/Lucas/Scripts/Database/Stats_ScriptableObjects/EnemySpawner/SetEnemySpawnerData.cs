@@ -1,17 +1,17 @@
 using System.Collections;
 using UnityEngine;
 
-[RequireComponent(typeof(EnemySpawnerData))]
+
 public class SetEnemySpawnerData : ReadGoogleSheets
 {
     [SerializeField]
     private EnemySpawnerData _enemySpawnerData;
 
-    public override void Start()
+    public override void Awake()
     {
         _GoogleURL = "https://sheets.googleapis.com/v4/spreadsheets/1dbgvJsZAh6RdSJZYxfwGvvmaSeoRMNVGeIIugai8UIU/values/EnemySpawnerValues?key=AIzaSyD2YFsTjKNGDId31Yus0bkFR5hr9WK9yyY";
 
-        base.Start();
+        base.Awake();
     }
 
     public override IEnumerator ApplySheetData()

@@ -9,7 +9,7 @@ public abstract class ReadGoogleSheets : MonoBehaviour
     [HideInInspector] public List<string> _variables;
     [HideInInspector] public string _GoogleURL;
 
-    public virtual void Start()
+    public virtual void Awake()
     {
         StartCoroutine(ObtainSheetData());
     }
