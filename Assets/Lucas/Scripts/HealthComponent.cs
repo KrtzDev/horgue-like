@@ -8,6 +8,8 @@ public class HealthComponent : MonoBehaviour
     [field: SerializeField] public int MaxHealth { get; set; } = 100;
     [field: SerializeField] public int CurrentHealth { get; set; }
 
+    EnemyAgent agent;
+
     private void Awake()
     {
         CurrentHealth = MaxHealth;
@@ -31,9 +33,12 @@ public class HealthComponent : MonoBehaviour
             {
                 Debug.Log("Enemy Died");
 
-                GameManager.Instance.EnemyDied();
+                agent = GetComponent<EnemyAgent>();
 
-                gameObject.SetActive(false);
+                EnemyDeathState deathState = agent.stateMachine.GetState(EnemyStateID.Death) as EnemyDeathState;
+                agent.stateMachine.ChangeState(EnemyStateID.Death);
+
+                GameManager.Instance.EnemyDied();
             }
         }
     }
