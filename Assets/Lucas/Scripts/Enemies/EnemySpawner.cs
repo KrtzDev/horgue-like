@@ -3,11 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
+[RequireComponent(typeof(SetEnemySpawnerData))]
 public class EnemySpawner : MonoBehaviour
 {
+    [SerializeField] private EnemySpawnerData _enemySpawnerData;
+
     [field: SerializeField] public int EnemyWavesToSpawn { get; set; }
     [field: SerializeField] public int EnemyWaveSize { get; set; }
-    [field: SerializeField] public float SpawnDelay { get; set; }
+    [field: SerializeField] public float EnemySpawnDelay { get; set; }
     public int EnemiesThatHaveSpawned { get; set; }
 
     [SerializeField] private Collider[] SpawnCollider;
@@ -25,18 +28,19 @@ public class EnemySpawner : MonoBehaviour
     private Bounds Bounds;
     private NavMeshTriangulation Triangulation;
 
-    private void Awake()
+    private void Start()
     {
+        EnemyWavesToSpawn = _enemySpawnerData._enemyWavesToSpawn;
+        EnemyWaveSize = _enemySpawnerData._enemyWaveSize;
+        EnemySpawnDelay = _enemySpawnerData._enemySpawnDelay;
+
         EnemyMaxAmount = EnemyWavesToSpawn * EnemyWaveSize;
 
         for (int i = 0; i < EnemyPrefabs.Count; i++)
         {
             EnemyObjectPools.Add(i, ObjectPool.CreateInstance(EnemyPrefabs[i], EnemyMaxAmount));
         }
-    }
 
-    private void Start()
-    {
         Triangulation = NavMesh.CalculateTriangulation();
 
         SetBounds();
@@ -46,7 +50,7 @@ public class EnemySpawner : MonoBehaviour
 
     private IEnumerator SpawnEnemies()
     {
-        WaitForSeconds Wait = new WaitForSeconds(SpawnDelay);
+        WaitForSeconds Wait = new WaitForSeconds(EnemySpawnDelay);
 
         int SpawnedEnemies = 0;
 
