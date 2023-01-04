@@ -37757,8 +37757,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _variables: []
   _GoogleURL: 
-  <_movementSpeed>k__BackingField: 0
-  <_maxHealth>k__BackingField: 0
+  _playerData: {fileID: 11400000, guid: f1f5e7d0dc811114fbdc1e3cee110906, type: 2}
 --- !u!1 &7016118837565436987 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7016118836434173886, guid: 537fc3e4e368e0f4cb2f800d5ecb95d7,
