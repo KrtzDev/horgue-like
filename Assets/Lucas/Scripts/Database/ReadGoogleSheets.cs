@@ -63,9 +63,9 @@ public abstract class ReadGoogleSheets : MonoBehaviour
             }
         }
 
-        StartCoroutine(ApplySheetData());
+        ApplySheetData();
     }
 
-    public abstract IEnumerator ApplySheetData();
+    public abstract void ApplySheetData();
 
 }

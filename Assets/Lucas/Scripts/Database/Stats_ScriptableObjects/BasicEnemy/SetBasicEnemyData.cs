@@ -13,7 +13,7 @@ public class SetBasicEnemyData: ReadGoogleSheets
         base.Awake();
     }
 
-    public override IEnumerator ApplySheetData()
+    public override void ApplySheetData()
     {
         _basicEnemyData._maxHealth = int.Parse(_variables[0]);
         _basicEnemyData._damagePerHit = int.Parse(_variables[1]);
@@ -23,9 +23,5 @@ public class SetBasicEnemyData: ReadGoogleSheets
         _basicEnemyData._armor = int.Parse(_variables[5]);
         _basicEnemyData._elementalResistance = int.Parse(_variables[6]);
         _basicEnemyData._technicalResistance = int.Parse(_variables[7]);
-
-        yield return null;
     }
-
-
 }

@@ -6,19 +6,30 @@ using UnityEngine.AI;
 public class RunState : StateMachineBehaviour
 {
     NavMeshAgent agent;
+    Enemy enemy;
     Transform player;
+    Transform decoy;
 
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         agent = animator.GetComponent<NavMeshAgent>();
+        enemy = animator.GetComponent<Enemy>();
         player = GameObject.FindGameObjectWithTag("Player").transform;
+        decoy = GameObject.FindGameObjectWithTag("Decoy").transform;
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        agent.SetDestination(player.position);
+        if (!enemy._followDecoy)
+        {
+            agent.SetDestination(player.position);
+        }
+        else
+        {
+            agent.SetDestination(decoy.position);
+        }
 
         float distance = Vector3.Distance(animator.transform.position, player.position);
 

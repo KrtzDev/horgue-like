@@ -23,16 +23,17 @@ public class EnemySpawner : MonoBehaviour
     public SpawnMethod EnemySpawnMethod = SpawnMethod.RoundRobin;
     public LocationMethod EnemyLocationMethod = LocationMethod.Collider;
 
+    [SerializeField]
     private int EnemyMaxAmount;
 
     private Bounds Bounds;
     private NavMeshTriangulation Triangulation;
 
-    private void Start()
+    private void OnEnable()
     {
-        EnemyWavesToSpawn = _enemySpawnerData._enemyWavesToSpawn;
-        EnemyWaveSize = _enemySpawnerData._enemyWaveSize;
-        EnemySpawnDelay = _enemySpawnerData._enemySpawnDelay;
+        // EnemyWavesToSpawn = _enemySpawnerData._enemyWavesToSpawn;
+        // EnemyWaveSize = _enemySpawnerData._enemyWaveSize;
+        // EnemySpawnDelay = _enemySpawnerData._enemySpawnDelay;
 
         EnemyMaxAmount = EnemyWavesToSpawn * EnemyWaveSize;
 
@@ -41,6 +42,11 @@ public class EnemySpawner : MonoBehaviour
             EnemyObjectPools.Add(i, ObjectPool.CreateInstance(EnemyPrefabs[i], EnemyMaxAmount));
         }
 
+        Debug.Log(EnemyMaxAmount);
+    }
+
+    private void Start()
+    {
         Triangulation = NavMesh.CalculateTriangulation();
 
         SetBounds();
@@ -158,20 +164,26 @@ public class EnemySpawner : MonoBehaviour
 
         if (poolableObject != null)
         {
-            Enemy enemy = poolableObject.GetComponent<Enemy>();
+            // Enemy enemy = poolableObject.GetComponent<Enemy>();
+            Animator anim = poolableObject.GetComponent<Animator>();
+            NavMeshAgent agent = poolableObject.GetComponent<NavMeshAgent>();
 
             NavMeshHit Hit;
             if (NavMesh.SamplePosition(spawnPosition, out Hit, 2f, -1))
             {
-                enemy.Agent.Warp(Hit.position);
-                // enemy needs to get enabled and start chasing now.
+                /* enemy.Agent.Warp(Hit.position);
+                    // enemy needs to get enabled and start chasing now.
                 if(enemy.Movement.PlayerTarget == null)
                 {
                     enemy.Movement.PlayerTarget = Player;
                 }
                 enemy.Agent.enabled = true;
                 enemy.Movement.StartChasing(enemy.Movement.PlayerTarget.position);
-                enemy.Movement.RetreatPosition = enemy.transform.position;
+                enemy.Movement.RetreatPosition = enemy.transform.position; */
+
+                agent.Warp(Hit.position);
+                agent.enabled = true;
+                anim.SetBool("isChasing", true);
 
                 EnemiesThatHaveSpawned += 1;
             }
