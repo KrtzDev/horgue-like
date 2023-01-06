@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5563836045591924760}
   - component: {fileID: 2768109298642520161}
   - component: {fileID: 5619960344370679839}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Blade6
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -92,7 +92,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5514423338539251092}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: KnifeBlade
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -131,7 +131,10 @@ GameObject:
   m_Component:
   - component: {fileID: 5626035656440199047}
   - component: {fileID: 2986084409697047897}
-  m_Layer: 0
+  - component: {fileID: 14606692}
+  - component: {fileID: 14606693}
+  - component: {fileID: 8912524533400224775}
+  m_Layer: 6
   m_Name: Axe
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -145,16 +148,16 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3389272742827284083}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: 0.27059805, y: 0.6532815, z: 0.27059805, w: 0.6532815}
+  m_LocalPosition: {x: -0.7, y: 1, z: 0.45}
+  m_LocalScale: {x: 3, y: 3, z: 3}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4062269599024327130}
   - {fileID: 5514423338539251092}
   m_Father: {fileID: 3761940482982487038}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 45}
 --- !u!65 &2986084409697047897
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -166,8 +169,60 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.25, y: 0.25, z: 0.075}
-  m_Center: {x: -0.08, y: 0.2, z: 0}
+  m_Size: {x: 0.25, y: 0.6, z: 0.075}
+  m_Center: {x: -0.0800009, y: 0, z: 0}
+--- !u!114 &14606692
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3389272742827284083}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38fe2161950f05a4dac0c084d3fd9b86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  baseDamage: 25
+--- !u!114 &14606693
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3389272742827284083}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d9bf98e8aa3dbb428b573bb7f816c7f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startPosition: {x: 0, y: 0, z: 0}
+  startRotation: {x: 0, y: 0, z: 0}
+  _enemyLayer:
+    serializedVersion: 2
+    m_Bits: 128
+  _groundLayer:
+    serializedVersion: 2
+    m_Bits: 512
+  _attackRange: 0
+  _attackDelay: 0
+  _attackTime: 0
+  _isAttacking: 0
+  addRotation: {x: 0, y: 0, z: 0}
+  fullRadius: 0
+--- !u!114 &8912524533400224775
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3389272742827284083}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38ad2636dda6d2d4e8b813d82b2676cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _pushForce: 15
 --- !u!1 &4208351000218392456
 GameObject:
   m_ObjectHideFlags: 0
@@ -179,7 +234,7 @@ GameObject:
   - component: {fileID: 3479674039536525758}
   - component: {fileID: 6258696479041046285}
   - component: {fileID: 4961357421528425917}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Blade2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -262,7 +317,7 @@ GameObject:
   - component: {fileID: 7855303149363211983}
   - component: {fileID: 4954041046776492504}
   - component: {fileID: 7711958469859377575}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Blade7
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -343,8 +398,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3761940482982487038}
-  m_Layer: 0
-  m_Name: Axe
+  m_Layer: 6
+  m_Name: P_Axe
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -359,7 +414,7 @@ Transform:
   m_GameObject: {fileID: 4827981822474034004}
   m_LocalRotation: {x: 0.21263108, y: 0.67437977, z: 0.21263108, w: 0.67437977}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 4, y: 4, z: 4}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5626035656440199047}
@@ -377,7 +432,7 @@ GameObject:
   - component: {fileID: 3371703753052241551}
   - component: {fileID: 6994646512802318803}
   - component: {fileID: 5667123630193186423}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Blade5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -460,7 +515,7 @@ GameObject:
   - component: {fileID: 3711554591303402044}
   - component: {fileID: 6314170246302503913}
   - component: {fileID: 3831241550306063519}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Blade3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -543,7 +598,7 @@ GameObject:
   - component: {fileID: 8951346678765061872}
   - component: {fileID: 7431711107003321788}
   - component: {fileID: 7772398953272094448}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Blade1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -626,7 +681,7 @@ GameObject:
   - component: {fileID: 4062269599024327130}
   - component: {fileID: 6706793809189145429}
   - component: {fileID: 8068935378413232883}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: AxeHandle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -709,7 +764,7 @@ GameObject:
   - component: {fileID: 1715779803901453198}
   - component: {fileID: 8748264146761526122}
   - component: {fileID: 5710997408330762775}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Blade4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
