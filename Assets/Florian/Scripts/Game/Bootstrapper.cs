@@ -16,13 +16,11 @@ public class Bootstrapper
     [InitializeOnEnterPlayMode]
     private static void OnEnterPlayMode()
     {
-        Debug.Log("Ping");
         EditorApplication.playModeStateChanged += OnPlayModeStateChanged;
     }
 
     private static void OnPlayModeStateChanged(PlayModeStateChange state)
     {
-        Debug.Log("Ping2");
         for (int i = 0; i < SceneManager.sceneCount; i++)
         {
             if(SceneManager.GetSceneAt(i).name != INIT_SCENE_NAME)

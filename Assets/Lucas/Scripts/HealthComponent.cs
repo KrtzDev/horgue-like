@@ -25,6 +25,8 @@ public class HealthComponent : MonoBehaviour
             if (this.gameObject.CompareTag("Player"))
             {
                 Debug.Log("isDead");
+
+                GameManager.Instance.PlayerDied();
             }
 
             if (this.gameObject.CompareTag("Enemy"))
