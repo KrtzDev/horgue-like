@@ -7,7 +7,7 @@ public class PlayerMovementMobility : MonoBehaviour
     [Header("Player General Ability")]
     public float _abilityCDTimer;
     public float _currentMaxCD;
-    private bool _isUsingAbility;
+
     [SerializeField]
     private bool _isGrounded;
     [SerializeField]
@@ -23,6 +23,8 @@ public class PlayerMovementMobility : MonoBehaviour
     private PlayerMovement _playerMovement;
     private PlayerInputMappings _inputActions;
 
+    private bool _isUsingAbility;
+
     [Header("Which (one) Ability can be used?")]
 
     [SerializeField]
@@ -37,14 +39,18 @@ public class PlayerMovementMobility : MonoBehaviour
     [Header("Player Jump Ability")]
     [SerializeField]
     private float _jumpCD;
+    [SerializeField] 
+    private float _fallMultiplier = 7;
+    [SerializeField] 
+    private float _jumpVelocityFalloff = 8;
+    [SerializeField] 
+    private float _jumpForce = 15;
+
     private bool _hasJumped;
-    [SerializeField] private float _fallMultiplier = 7;
-    [SerializeField] private float _jumpVelocityFalloff = 8;
-    [SerializeField] private float _jumpForce = 15;
 
     [Header("Player Dash Ability")]
     [SerializeField]
-    private GameObject _Decoy;
+    private GameObject _decoy;
     [SerializeField]
     private float _dashCD;
     [SerializeField]
@@ -58,9 +64,10 @@ public class PlayerMovementMobility : MonoBehaviour
     [SerializeField]
     private float _stealthTime;
     [SerializeField]
-    private EnemySpawner _EnemySpawner;
+    private EnemySpawner _enemySpawner;
     [SerializeField]
     private float _movementSpeedMultiplier;
+
     private float _stealthMovementSpeed;
     private float _originalMovementSpeed;
 
@@ -71,6 +78,7 @@ public class PlayerMovementMobility : MonoBehaviour
     private float _flickerStrikeTime;
     [SerializeField]
     private float _flickerStrikeRange;
+
     private Enemy _closestEnemy;
     private PlayerSimpleShot _simpleShot;
 
@@ -78,7 +86,7 @@ public class PlayerMovementMobility : MonoBehaviour
     {
         _inputActions = new PlayerInputMappings();
         _inputActions.Character.MovementAction.performed += UseAbility;
-        _EnemySpawner = GameObject.Find("EnemySpawner").GetComponent<EnemySpawner>();
+        _enemySpawner = GameObject.Find("EnemySpawner").GetComponent<EnemySpawner>();
         _simpleShot = this.GetComponent<PlayerSimpleShot>();
     }
 
@@ -268,21 +276,21 @@ public class PlayerMovementMobility : MonoBehaviour
     {
         _isUsingAbility = true;
 
-        _Decoy.transform.parent = null;
-        _Decoy.GetComponent<CapsuleCollider>().enabled = true;
-        _Decoy.transform.position = this.transform.position;
-        _Decoy.transform.rotation = this.transform.rotation;
-        _Decoy.transform.GetChild(0).gameObject.SetActive(true);
+        _decoy.transform.parent = null;
+        _decoy.GetComponent<CapsuleCollider>().enabled = true;
+        _decoy.transform.position = this.transform.position;
+        _decoy.transform.rotation = this.transform.rotation;
+        _decoy.transform.GetChild(0).gameObject.SetActive(true);
 
-        _originalMovementSpeed = _playerMovement._movementSpeed;
+        _originalMovementSpeed = _playerMovement.MovementSpeed;
         _stealthMovementSpeed = _originalMovementSpeed * _movementSpeedMultiplier;
-        _playerMovement._movementSpeed = _stealthMovementSpeed;
+        _playerMovement.MovementSpeed = _stealthMovementSpeed;
 
-        for (int i = 0; i < _EnemySpawner.transform.childCount; i++)
+        for (int i = 0; i < _enemySpawner.transform.childCount; i++)
         {
-            for (int j = 0; j < _EnemySpawner.transform.GetChild(i).childCount; j++)
+            for (int j = 0; j < _enemySpawner.transform.GetChild(i).childCount; j++)
             {
-                _EnemySpawner.transform.GetChild(i).GetChild(j).GetComponent<EnemyMovement>().PlayerTarget = _Decoy.transform;
+                _enemySpawner.transform.GetChild(i).GetChild(j).GetComponent<EnemyMovement>().PlayerTarget = _decoy.transform;
             }
         }
 
@@ -300,21 +308,21 @@ public class PlayerMovementMobility : MonoBehaviour
     {
         _isUsingAbility = false;
 
-        for (int i = 0; i < _EnemySpawner.transform.childCount; i++)
+        for (int i = 0; i < _enemySpawner.transform.childCount; i++)
         {
-            for (int j = 0; j < _EnemySpawner.transform.GetChild(i).childCount; j++)
+            for (int j = 0; j < _enemySpawner.transform.GetChild(i).childCount; j++)
             {
-                _EnemySpawner.transform.GetChild(i).GetChild(j).GetComponent<EnemyMovement>().PlayerTarget = this.transform;
+                _enemySpawner.transform.GetChild(i).GetChild(j).GetComponent<EnemyMovement>().PlayerTarget = this.transform;
             }
         }
 
-        _playerMovement._movementSpeed = _originalMovementSpeed;
+        _playerMovement.MovementSpeed = _originalMovementSpeed;
 
-        _Decoy.transform.GetChild(0).gameObject.SetActive(false);
-        _Decoy.transform.position = new Vector3(0, 0, 0);
-        _Decoy.transform.rotation = Quaternion.identity;
-        _Decoy.GetComponent<CapsuleCollider>().enabled = false;
-        _Decoy.transform.parent = this.transform;
+        _decoy.transform.GetChild(0).gameObject.SetActive(false);
+        _decoy.transform.position = new Vector3(0, 0, 0);
+        _decoy.transform.rotation = Quaternion.identity;
+        _decoy.GetComponent<CapsuleCollider>().enabled = false;
+        _decoy.transform.parent = this.transform;
 
         ResetAbilityTimer(_stealthCD);
     }

@@ -2,6 +2,9 @@ using UnityEngine;
 
 public class PlayerSimpleShot : MonoBehaviour
 {
+
+    public bool canShoot = true;
+
     [SerializeField]
     private EnemyProjectile _enemyProjectile_Prefab;
 
@@ -15,7 +18,6 @@ public class PlayerSimpleShot : MonoBehaviour
     private float _attackDelay;
     [SerializeField]
     private float _attackForce;
-    public bool canShoot = true;
 
     private float _currentAttackDelay;
 
