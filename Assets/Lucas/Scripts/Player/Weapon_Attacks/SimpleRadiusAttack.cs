@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class Simple_Radius_Attack : MonoBehaviour
+public class SimpleRadiusAttack : MonoBehaviour
 {
     [SerializeField]
     private Vector3 startPosition;

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class UI_Image_FillAmount_WaveProgress : UI_Image_FillAmount
+public class UIImageFillAmountWaveProgress : UIImageFillAmount
 {
     private EnemySpawner _EnemySpawner;
 

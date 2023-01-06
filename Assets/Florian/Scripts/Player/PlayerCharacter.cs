@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player_Character : MonoBehaviour
+public class PlayerCharacter : MonoBehaviour
 {
     [SerializeField]
     private Rigidbody _characterRigidbody;

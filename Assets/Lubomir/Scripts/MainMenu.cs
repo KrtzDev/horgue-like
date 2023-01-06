@@ -4,7 +4,7 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class Main_Menu : MonoBehaviour
+public class MainMenu : MonoBehaviour
 {
     [SerializeField]
     private GameObject _levelButtonPrefab;
@@ -23,11 +23,11 @@ public class Main_Menu : MonoBehaviour
             for (int i = 1; i < SceneManager.sceneCountInBuildSettings; i++)
             {
                 GameObject _newLevelButton = Instantiate(_levelButtonPrefab, _levelButtonParent);
-                Level_Button _level_Button = _newLevelButton.GetComponent<Level_Button>();
+                LevelButton _level_Button = _newLevelButton.GetComponent<LevelButton>();
 
                 _level_Button._name.text = "Level " + i.ToString();
                 _level_Button._levelIndex = i;
-                _level_Button._main_menu = this;
+                _level_Button._mainMenu = this;
             }
         }
         else

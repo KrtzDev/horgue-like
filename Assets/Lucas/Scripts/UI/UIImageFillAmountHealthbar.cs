@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class UI_Image_FillAmount_Healthbar : UI_Image_FillAmount
+public class UIImageFillAmountHealthbar : UIImageFillAmount
 {
     private HealthComponent _HealthComponent;
 

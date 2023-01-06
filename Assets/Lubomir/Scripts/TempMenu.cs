@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
-public class Temp_Menu : MonoBehaviour
+public class TempMenu : MonoBehaviour
 {
     private void Update()
     {

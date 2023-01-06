@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class Player_Movement : MonoBehaviour
+public class PlayerMovement : MonoBehaviour
 {
     [SerializeField]
     private AnimationCurve _acceleration;
@@ -9,8 +9,8 @@ public class Player_Movement : MonoBehaviour
     private AnimationCurve _decceleration;
     public float _movementSpeed = 10f;
 
-    private Player_Character _character;
-    private Player_Input_Mappings _inputActions;
+    private PlayerCharacter _character;
+    private PlayerInputMappings _inputActions;
 
     private Vector2 _moveDir;
     public Vector3 _lastDirection;
@@ -21,7 +21,7 @@ public class Player_Movement : MonoBehaviour
 
     private void Awake()
     {
-        _inputActions = new Player_Input_Mappings();
+        _inputActions = new PlayerInputMappings();
         if (InputManager.Instance)
         {
             InputManager.Instance.CharacterInputActions = _inputActions;
@@ -37,7 +37,7 @@ public class Player_Movement : MonoBehaviour
 
     private void Start()
     {
-        _character = GetComponent<Player_Character>();
+        _character = GetComponent<PlayerCharacter>();
     }
 
     private void OnDisable()

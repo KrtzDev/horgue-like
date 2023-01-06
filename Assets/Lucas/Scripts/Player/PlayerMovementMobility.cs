@@ -2,7 +2,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class Player_Movement_Mobility : MonoBehaviour
+public class PlayerMovementMobility : MonoBehaviour
 {
     [Header("Player General Ability")]
     public float _abilityCDTimer;
@@ -19,9 +19,9 @@ public class Player_Movement_Mobility : MonoBehaviour
     [SerializeField]
     private LayerMask _enemyLayer;
 
-    private Player_Character _character;
-    private Player_Movement _playerMovement;
-    private Player_Input_Mappings _inputActions;
+    private PlayerCharacter _character;
+    private PlayerMovement _playerMovement;
+    private PlayerInputMappings _inputActions;
 
     [Header("Which (one) Ability can be used?")]
 
@@ -72,20 +72,20 @@ public class Player_Movement_Mobility : MonoBehaviour
     [SerializeField]
     private float _flickerStrikeRange;
     private Enemy _closestEnemy;
-    private Player_Simple_Shot _simpleShot;
+    private PlayerSimpleShot _simpleShot;
 
     private void Awake()
     {
-        _inputActions = new Player_Input_Mappings();
+        _inputActions = new PlayerInputMappings();
         _inputActions.Character.MovementAction.performed += UseAbility;
         _EnemySpawner = GameObject.Find("EnemySpawner").GetComponent<EnemySpawner>();
-        _simpleShot = this.GetComponent<Player_Simple_Shot>();
+        _simpleShot = this.GetComponent<PlayerSimpleShot>();
     }
 
     private void Start()
     {
-        _character = GetComponent<Player_Character>();
-        _playerMovement = GetComponent<Player_Movement>();
+        _character = GetComponent<PlayerCharacter>();
+        _playerMovement = GetComponent<PlayerMovement>();
     }
 
     private void OnEnable()

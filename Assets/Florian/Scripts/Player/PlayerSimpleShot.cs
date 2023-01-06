@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Player_Simple_Shot : MonoBehaviour
+public class PlayerSimpleShot : MonoBehaviour
 {
     [SerializeField]
     private EnemyProjectile _enemyProjectile_Prefab;

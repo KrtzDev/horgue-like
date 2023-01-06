@@ -1,12 +1,12 @@
 using UnityEngine;
 
-public class UI_Image_FillAmount_Ability : UI_Image_FillAmount
+public class UIImageFillAmountAbility : UIImageFillAmount
 {
-    private Player_Movement_Mobility _PlayerMovementMoblity;
+    private PlayerMovementMobility _PlayerMovementMoblity;
 
     public override void Awake()
     {
-        _PlayerMovementMoblity = GameObject.FindGameObjectWithTag("Player").GetComponent<Player_Movement_Mobility>();
+        _PlayerMovementMoblity = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovementMobility>();
 
         _maxValue = _PlayerMovementMoblity._currentMaxCD;
         _currentValue = _PlayerMovementMoblity._abilityCDTimer;
