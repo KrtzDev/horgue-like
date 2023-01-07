@@ -8,16 +8,16 @@ public class UIImageFillAmountAbility : UIImageFillAmount
     {
         _PlayerMovementMoblity = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovementMobility>();
 
-        _maxValue = _PlayerMovementMoblity._currentMaxCD;
-        _currentValue = _PlayerMovementMoblity._abilityCDTimer;
+        _maxValue = _PlayerMovementMoblity.CurrentMaxCD;
+        _currentValue = _PlayerMovementMoblity.AbilityCDTimer;
 
         base.Awake();
     }
 
     public override void FixedUpdate()
     {
-        _maxValue = _PlayerMovementMoblity._currentMaxCD;
-        _currentValue = _PlayerMovementMoblity._abilityCDTimer;
+        _maxValue = _PlayerMovementMoblity.CurrentMaxCD;
+        _currentValue = _PlayerMovementMoblity.AbilityCDTimer;
 
         base.FixedUpdate();
     }

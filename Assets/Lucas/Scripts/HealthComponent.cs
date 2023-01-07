@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class HealthComponent : MonoBehaviour
 {
-    public event Action<float> OnHealthPercentChanged = delegate { };
+    public event Action<float> OnHealthPercentChanged;
 
     [field: SerializeField] public int MaxHealth { get; set; } = 100;
     [field: SerializeField] public int CurrentHealth { get; set; }
@@ -18,7 +18,7 @@ public class HealthComponent : MonoBehaviour
         CurrentHealth -= damage;
 
         float currentHealthPct = (float)CurrentHealth / (float)MaxHealth;
-        OnHealthPercentChanged(currentHealthPct);
+        OnHealthPercentChanged?.Invoke(currentHealthPct);
 
         if (CurrentHealth <= 0)
         {

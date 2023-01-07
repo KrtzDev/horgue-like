@@ -1,9 +1,10 @@
 using UnityEngine;
+using System.Threading.Tasks;
 
 public class PlayerSimpleShot : MonoBehaviour
 {
-
-    public bool canShoot = true;
+    [field: SerializeField]
+    public bool CanShoot { get; set; } = true;
 
     [SerializeField]
     private EnemyProjectile _enemyProjectile_Prefab;
@@ -24,22 +25,22 @@ public class PlayerSimpleShot : MonoBehaviour
     private void FixedUpdate()
     {
         _currentAttackDelay -= Time.deltaTime;
-        if (_currentAttackDelay <= 0 && canShoot)
+        if (_currentAttackDelay <= 0 && CanShoot)
         {
             float currentclosestdistance = Mathf.Infinity;
             Enemy closestEnemy = null;
 
+            Debug.Log(transform.position);
+            Debug.Log(_range);
+
             Collider[] enemies = Physics.OverlapSphere(transform.position, _range, _enemyLayer);
             foreach (var enemy in enemies)
             {
+                Debug.Log(enemy.name);
                 float distanceToEnemy = Vector3.Distance(transform.position, enemy.transform.position);
                 if (distanceToEnemy < currentclosestdistance)
                 {
-                    RaycastHit hit;
-                    if (Physics.Raycast(transform.position, (enemy.transform.position - transform.position), out hit, distanceToEnemy, _groundLayer))
-                    {
-                    }
-                    else
+                    if (!Physics.Raycast(transform.position, (enemy.transform.position - transform.position), distanceToEnemy, _groundLayer))
                     {
                         closestEnemy = enemy.GetComponent<Enemy>();
                         currentclosestdistance = distanceToEnemy;

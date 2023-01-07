@@ -4,9 +4,10 @@ using UnityEngine.InputSystem;
 
 public class PlayerMovementMobility : MonoBehaviour
 {
-    [Header("Player General Ability")]
-    public float _abilityCDTimer;
-    public float _currentMaxCD;
+    [field: SerializeField, Header("Player General Ability")]
+    public float AbilityCDTimer { get; set; }
+    [field: SerializeField]
+    public float CurrentMaxCD { get; set; }
 
     [SerializeField]
     private bool _isGrounded;
@@ -28,13 +29,13 @@ public class PlayerMovementMobility : MonoBehaviour
     [Header("Which (one) Ability can be used?")]
 
     [SerializeField]
-    bool _canUseJumpAbility;
+    private bool _canUseJumpAbility;
     [SerializeField]
-    bool _canUseDashAbility;
+    private bool _canUseDashAbility;
     [SerializeField]
-    bool _canUseStealthAbility;
+    private bool _canUseStealthAbility;
     [SerializeField]
-    bool _canUseFlickerStrikeAbility;
+    private bool _canUseFlickerStrikeAbility;
 
     [Header("Player Jump Ability")]
     [SerializeField]
@@ -153,22 +154,22 @@ public class PlayerMovementMobility : MonoBehaviour
 
         if (ctx.performed && !_isUsingAbility)
         {
-            if (_canUseJumpAbility && _abilityCDTimer <= 0)
+            if (_canUseJumpAbility && AbilityCDTimer <= 0)
             {
                 JumpAbility();
             }
 
-            if (_canUseDashAbility && _abilityCDTimer <= 0)
+            if (_canUseDashAbility && AbilityCDTimer <= 0)
             {
                 DashAbility();
             }
 
-            if (_canUseStealthAbility && _abilityCDTimer <= 0)
+            if (_canUseStealthAbility && AbilityCDTimer <= 0)
             {
                 StealthAbility();
             }
 
-            if (_canUseFlickerStrikeAbility && _abilityCDTimer <= 0)
+            if (_canUseFlickerStrikeAbility && AbilityCDTimer <= 0)
             {
                 FlickerStrikeAbility();
             }
@@ -177,7 +178,7 @@ public class PlayerMovementMobility : MonoBehaviour
 
     private void TrackTimer()
     {
-        if (_abilityCDTimer > 0) _abilityCDTimer -= Time.deltaTime;
+        if (AbilityCDTimer > 0) AbilityCDTimer -= Time.deltaTime;
     }
 
     private void CheckIfGrounded()
@@ -198,8 +199,8 @@ public class PlayerMovementMobility : MonoBehaviour
 
     private void ResetAbilityTimer(float cd)
     {
-        _currentMaxCD = cd;
-        _abilityCDTimer = cd;
+        CurrentMaxCD = cd;
+        AbilityCDTimer = cd;
     }
 
     private void JumpAbility()
@@ -335,7 +336,7 @@ public class PlayerMovementMobility : MonoBehaviour
 
         if(_closestEnemy != null)
         {
-            _simpleShot.canShoot = false;
+            _simpleShot.CanShoot = false;
 
             _isUsingAbility = true;
             _playerMovement._canMove = false;
@@ -389,7 +390,7 @@ public class PlayerMovementMobility : MonoBehaviour
     {
         _isUsingAbility = false;
         _playerMovement._canMove = true;
-        _simpleShot.canShoot = true;
+        _simpleShot.CanShoot = true;
 
         ResetAbilityTimer(_flickerStrikeCD);
     }

@@ -793,6 +793,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 751547ef52aa1aa49a10574416b918ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <MovementSpeed>k__BackingField: 10
   _acceleration:
     serializedVersion: 2
     m_Curve:
@@ -841,9 +842,8 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  _movementSpeed: 10
-  _lastDirection: {x: 0, y: 0, z: 0}
-  _canMove: 1
+  <_lastDirection>k__BackingField: {x: 0, y: 0, z: 0}
+  <_canMove>k__BackingField: 1
 --- !u!114 &2984215811683998150
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -865,11 +865,12 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4698856430502407209}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 06c4b7cd7c619794694bbfe954acd77a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <CanShoot>k__BackingField: 1
   _enemyProjectile_Prefab: {fileID: 8331073926669857340, guid: 519256511bcaca747924245807496f73,
     type: 3}
   _enemyLayer:
@@ -881,7 +882,6 @@ MonoBehaviour:
   _range: 10
   _attackDelay: 0.1
   _attackForce: 10
-  canShoot: 1
 --- !u!114 &513094526
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -894,8 +894,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d77f2c814ba0d2439230330d48d587e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _abilityCDTimer: 0
-  _currentMaxCD: 0
+  <AbilityCDTimer>k__BackingField: 0
+  <CurrentMaxCD>k__BackingField: 0
   _isGrounded: 0
   _groundCheckValueY: 0.225
   _groundCheckBox: {x: 0.5, y: 0.5, z: 0.5}
@@ -905,7 +905,7 @@ MonoBehaviour:
   _enemyLayer:
     serializedVersion: 2
     m_Bits: 128
-  _canUseJumpAbility: 0
+  _canUseJumpAbility: 1
   _canUseDashAbility: 0
   _canUseStealthAbility: 0
   _canUseFlickerStrikeAbility: 0
@@ -913,13 +913,13 @@ MonoBehaviour:
   _fallMultiplier: 10
   _jumpVelocityFalloff: 11
   _jumpForce: 30
-  _Decoy: {fileID: 1125293543}
+  _decoy: {fileID: 0}
   _dashCD: 2.5
   _dashForce: 30
   _dashTime: 0.2
   _stealthCD: 5
   _stealthTime: 5
-  _EnemySpawner: {fileID: 0}
+  _enemySpawner: {fileID: 0}
   _movementSpeedMultiplier: 1.25
   _flickerStrikeCD: 5
   _flickerStrikeTime: 0.25

@@ -3,8 +3,7 @@ using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
-    //[Header("Movement")]
-    [field: SerializeField]
+    [field: SerializeField, Header("Movement")]
     public float MovementSpeed { get; set; } = 10f;
 
     [SerializeField]
@@ -12,8 +11,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField]
     private AnimationCurve _decceleration;
 
-    //[Header("Misc")]
-    [field: SerializeField]
+    [field: SerializeField, Header("Misc")]
     public Vector3 _lastDirection { get; set; }
     [field: SerializeField]
     public bool _canMove { get; set; } = true;
