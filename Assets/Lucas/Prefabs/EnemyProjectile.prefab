@@ -130,5 +130,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hitLayerMask:
     serializedVersion: 2
-    m_Bits: 65
+    m_Bits: 576
   baseDamage: 5

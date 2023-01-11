@@ -3,6 +3,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "newBasicEnemyData", menuName = "Data/Enemy Data/Base Data")]
 public class BasicEnemyData : ScriptableObject
 {
+    [Header("General")]
     public int _maxHealth = 100;
     public int _damagePerHit = 100;
     public int _attackSpeed = 1;
@@ -11,4 +12,9 @@ public class BasicEnemyData : ScriptableObject
     public int _armor = 1;
     public int _elementalResistance = 1;
     public int _technicalResistance = 1;
+
+    [Header("Movement")]
+    public float _attackRange;
+    public float _retreatRange;
+    public float _followTime;
 }

@@ -14,13 +14,11 @@ public class SetEnemySpawnerData : ReadGoogleSheets
         base.Awake();
     }
 
-    public override IEnumerator ApplySheetData()
+    public override void ApplySheetData()
     {
         _enemySpawnerData._enemyWavesToSpawn = int.Parse(_variables[0]);
         _enemySpawnerData._enemyWaveSize = int.Parse(_variables[1]);
         _enemySpawnerData._enemySpawnDelay = int.Parse(_variables[2]);
-
-        yield return null;
     }
 
 

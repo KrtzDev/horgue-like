@@ -146,3 +146,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damageType: {fileID: 11400000, guid: 3513b9eeb4adb3c4b9d4866394f26fd6, type: 2}
+  hitLayerMask:
+    serializedVersion: 2
+    m_Bits: 128
+  baseDamage: 5

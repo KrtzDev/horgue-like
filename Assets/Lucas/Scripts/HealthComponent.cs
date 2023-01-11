@@ -8,9 +8,14 @@ public class HealthComponent : MonoBehaviour
     [field: SerializeField] public int MaxHealth { get; set; } = 100;
     [field: SerializeField] public int CurrentHealth { get; set; }
 
+    [field: SerializeField] public Animator Animator { get; private set; }
+
+    private bool _isDead = false;
+
     private void Awake()
     {
         CurrentHealth = MaxHealth;
+        _isDead = false;
     }
 
     public void TakeDamage(int damage)
@@ -20,7 +25,16 @@ public class HealthComponent : MonoBehaviour
         float currentHealthPct = (float)CurrentHealth / (float)MaxHealth;
         OnHealthPercentChanged(currentHealthPct);
 
-        if (CurrentHealth <= 0)
+        /* if (this.gameObject.CompareTag("Enemy"))
+        {
+            if(CurrentHealth > 0)
+            {
+                Animator.SetTrigger("damage");
+            }
+        }
+        */
+
+        if (CurrentHealth <= 0 && !_isDead)
         {
             if (this.gameObject.CompareTag("Player"))
             {
@@ -35,8 +49,10 @@ public class HealthComponent : MonoBehaviour
 
                 GameManager.Instance.EnemyDied();
 
-                this.gameObject.SetActive(false);
+                Animator.SetTrigger("death");
             }
+
+            _isDead = true;
         }
     }
 }
