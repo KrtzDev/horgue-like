@@ -2,14 +2,14 @@ using UnityEngine;
 
 public class RadiusDamage : MonoBehaviour
 {
-    private Simple_Radius_Attack _SimpleRadiusAttack;
+    private SimpleRadiusAttack _SimpleRadiusAttack;
 
     [SerializeField]
     private int baseDamage;
 
     private void Awake()
     {
-        _SimpleRadiusAttack = this.gameObject.GetComponentInParent<Simple_Radius_Attack>();
+        _SimpleRadiusAttack = this.gameObject.GetComponentInParent<SimpleRadiusAttack>();
     }
 
     private void OnTriggerEnter(Collider other)

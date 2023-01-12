@@ -2,14 +2,14 @@ using UnityEngine;
 
 public class StabDamage : MonoBehaviour
 {
-    private Simple_Stab_Attack _SimpleStabAttack;
+    private SimpleStabAttack _SimpleStabAttack;
 
     [SerializeField]
     private int baseDamage;
 
     private void Awake()
     {
-        _SimpleStabAttack = this.gameObject.GetComponentInParent<Simple_Stab_Attack>();
+        _SimpleStabAttack = this.gameObject.GetComponentInParent<SimpleStabAttack>();
     }
 
     private void OnTriggerEnter(Collider other)
