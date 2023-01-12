@@ -101,7 +101,7 @@ public class PlayerMovement : MonoBehaviour
 
             //scewes the walking direction
             //TODO: rework movement or make Camera not othographic
-            _moveDir.x *= .66f;
+            //_moveDir.x *= .66f;
 
             _isMoving = true;
             _timeStopping = 0;
