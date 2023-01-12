@@ -41,7 +41,7 @@ public class RangedRobot_RetreatState : StateMachineBehaviour
 
         float distance = Vector3.Distance(animator.transform.position, _followPosition);
 
-        if (distance > enemy.enemyData._attackRange)
+        if (distance > enemy.EnemyData._attackRange)
         {
             animator.SetBool("isRetreating", false);
             animator.SetBool("isAttacking", false);

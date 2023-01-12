@@ -1951,13 +1951,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ad244b7fad3c0b41a8272dfe705ac8a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <enemyData>k__BackingField: {fileID: 11400000, guid: fdf791b2749b7224699643a8d5477270,
+  <EnemyData>k__BackingField: {fileID: 11400000, guid: fdf791b2749b7224699643a8d5477270,
     type: 2}
   <Agent>k__BackingField: {fileID: 4301312500149274905}
-  <projectile>k__BackingField: {fileID: 8451927325676435795, guid: 4746290bed9561b4590c43ddb406e723,
+  <Projectile>k__BackingField: {fileID: 8451927325676435795, guid: 4746290bed9561b4590c43ddb406e723,
     type: 3}
-  <projectilePoint>k__BackingField: {fileID: 7221469875420454319}
-  projectileSpeed: 12
+  <ProjectilePoint>k__BackingField: {fileID: 7221469875420454319}
+  _projectileSpeed: 12
   <GroundLayer>k__BackingField:
     serializedVersion: 2
     m_Bits: 512

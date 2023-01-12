@@ -1,34 +1,55 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI;
 
-public class RangedRobot_IdleState : StateMachineBehaviour
+public class PasuKan_IdleState : StateMachineBehaviour
 {
-    NavMeshAgent agent;
     Enemy enemy;
+    Transform player;
+    Transform decoy;
 
-    private float followTimer;
+    private Vector3 _followPosition;
+
+    private float _attackTimer;
 
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        agent = animator.GetComponent<NavMeshAgent>();
         enemy = animator.GetComponent<Enemy>();
+        player = GameObject.FindGameObjectWithTag("Player").transform;
+        decoy = GameObject.FindGameObjectWithTag("Decoy").transform;
 
-        agent.SetDestination(agent.transform.position);
-
-        followTimer = 0;
+        _attackTimer = enemy.EnemyData._attackSpeed;
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        followTimer += Time.deltaTime;
+        if (!enemy.FollowDecoy)
+        {
+            _followPosition = new Vector3(player.position.x, player.position.y, player.position.z);
+        }
+        else
+        {
+            _followPosition = new Vector3(decoy.position.x, decoy.position.y, decoy.position.z);
+        }
 
-        if (followTimer >= enemy.EnemyData._followTime)
+        animator.transform.LookAt(_followPosition);
+
+        float distance = Vector3.Distance(animator.transform.position, _followPosition);
+
+        if (distance > enemy.EnemyData._attackRange)
         {
             animator.SetBool("isChasing", true);
+        }
+        else if (_attackTimer < 0)
+        {
+            _attackTimer = enemy.EnemyData._attackSpeed;
+            animator.SetTrigger("attack");
+        }
+        else
+        {
+            _attackTimer -= Time.deltaTime;
         }
     }
 

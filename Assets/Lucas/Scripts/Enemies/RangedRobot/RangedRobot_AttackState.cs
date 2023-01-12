@@ -39,7 +39,7 @@ public class RangedRobot_AttackState : StateMachineBehaviour
 
         if (_attackTimer < 0)
         {
-            _attackTimer = enemy.enemyData._attackSpeed;
+            _attackTimer = enemy.EnemyData._attackSpeed;
             animator.SetTrigger("shoot");
         }
         else
@@ -48,12 +48,12 @@ public class RangedRobot_AttackState : StateMachineBehaviour
 
             float distance = Vector3.Distance(animator.transform.position, _followPosition);
 
-            if (distance > enemy.enemyData._attackRange)
+            if (distance > enemy.EnemyData._attackRange)
             {
                 animator.SetBool("isAttacking", false);
                 animator.SetBool("isChasing", false);
             }
-            else if (distance < enemy.enemyData._retreatRange)
+            else if (distance < enemy.EnemyData._retreatRange)
             {
                 animator.SetBool("isAttacking", false);
                 animator.SetBool("isChasing", false);

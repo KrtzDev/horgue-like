@@ -49,7 +49,7 @@ public class HealthComponent : MonoBehaviour
 
                 GameManager.Instance.EnemyDied();
 
-                Animator.SetTrigger("death");
+                this.Animator.SetTrigger("death");
             }
 
             _isDead = true;

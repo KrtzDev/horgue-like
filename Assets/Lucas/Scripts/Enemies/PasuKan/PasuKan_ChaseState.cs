@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class RangedRobot_ChaseState : StateMachineBehaviour
+public class PasuKan_ChaseState : StateMachineBehaviour
 {
     NavMeshAgent agent;
     Enemy enemy;
@@ -11,6 +11,9 @@ public class RangedRobot_ChaseState : StateMachineBehaviour
     Transform decoy;
 
     private Vector3 _followPosition;
+
+    private float _attackTimer;
+    private float _jumpAttackTimer;
 
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -37,27 +40,36 @@ public class RangedRobot_ChaseState : StateMachineBehaviour
 
         float distance = Vector3.Distance(animator.transform.position, _followPosition);
 
-        // CirclePlayer(animator);
-
-        RaycastHit hit;
-        if (Physics.Raycast(animator.transform.position, (_followPosition - animator.transform.position), out hit, distance, enemy.GroundLayer))
+        if(distance < enemy.EnemyData._maxJumpAttackRange && distance > enemy.EnemyData._minJumpAttackRange && distance > enemy.EnemyData._attackRange && _jumpAttackTimer < 0)
         {
+            int random = Random.Range(0, 100);
 
+            if(random < enemy.EnemyData._jumpAttackChance)
+            {
+                _jumpAttackTimer = enemy.EnemyData._jumpAttackCooldown;
+                animator.transform.LookAt(_followPosition);
+                animator.SetTrigger("jumpAttack");
+            }
+            else
+            {
+                _jumpAttackTimer = enemy.EnemyData._jumpAttackCooldown;
+            }
         }
         else
         {
-            if (distance < enemy.EnemyData._attackRange && distance > enemy.EnemyData._retreatRange)
-            {
-                animator.SetBool("isAttacking", true);
-                animator.SetBool("isChasing", false);
-                animator.SetBool("isRetreating", false);
-            }
-            else if (distance < enemy.EnemyData._retreatRange)
-            {
-                animator.SetBool("isRetreating", true);
-                animator.SetBool("isAttacking", false);
-                animator.SetBool("isChasing", false);
-            }
+            _jumpAttackTimer -= Time.deltaTime;
+        }
+         
+        if (distance < enemy.EnemyData._attackRange && _attackTimer < 0)
+        {
+            _attackTimer = enemy.EnemyData._attackSpeed;
+            animator.transform.LookAt(_followPosition);
+            animator.SetTrigger("attack");
+            animator.SetBool("isChasing", false);
+        }
+        else
+        {
+            _attackTimer -= Time.deltaTime;
         }
     }
 
@@ -78,37 +90,4 @@ public class RangedRobot_ChaseState : StateMachineBehaviour
     //{
     //    // Implement code that sets up animation IK (inverse kinematics)
     //}
-
-    /* private void CirclePlayer(Animator animator)
-    {
-        float currentclosestdistance = Mathf.Infinity;
-        Enemy closestEnemy = null;
-
-        Collider[] enemies = Physics.OverlapSphere(enemy.transform.position, enemy.enemyData._attackRange, enemy.EnemyLayer);
-        foreach (var rangedRobot in enemies)
-        {
-            if (rangedRobot.gameObject.name.Contains("RangedRobot") && rangedRobot.gameObject != enemy.gameObject)
-            {
-                Debug.Log("found Name");
-
-                float distanceToEnemy = Vector3.Distance(enemy.transform.position, rangedRobot.transform.position);
-                if (distanceToEnemy < currentclosestdistance)
-                {
-                    closestEnemy = rangedRobot.GetComponent<Enemy>();
-                    currentclosestdistance = distanceToEnemy;
-                }
-            }
-        }
-
-        if (closestEnemy)
-        {
-           
-            Vector3 dirToClosestEnemy = _followPosition - animator.transform.position;
-            Vector3 newPos = _followPosition - dirToClosestEnemy;
-
-            animator.transform.LookAt(newPos);
-            agent.SetDestination(newPos);
-        }
-    }
-    */
 }
