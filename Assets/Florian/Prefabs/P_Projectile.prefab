@@ -132,4 +132,4 @@ MonoBehaviour:
   hitLayerMask:
     serializedVersion: 2
     m_Bits: 129
-  baseDamage: 20
+  baseDamage: 25
