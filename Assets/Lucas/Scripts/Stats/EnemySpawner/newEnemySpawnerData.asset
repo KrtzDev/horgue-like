@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be6e2ff82e748554fac9aa08b7a7fad0, type: 3}
   m_Name: newEnemySpawnerData
   m_EditorClassIdentifier: 
-  _enemyWavesToSpawn: 5
-  _enemyWaveSize: 50
-  _enemySpawnDelay: 5
+  _enemyWavesToSpawn: 2
+  _enemyWaveSize: 1
+  _enemySpawnDelay: 6

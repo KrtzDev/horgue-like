@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class WeaponPush : MonoBehaviour
 {
-    private Simple_Radius_Attack _SimpleRadiusAttack;
+    private SimpleRadiusAttack _SimpleRadiusAttack;
 
     private GameObject _Player;
 
@@ -15,7 +15,7 @@ public class WeaponPush : MonoBehaviour
     {
         _Player = GameObject.FindGameObjectWithTag("Player");
 
-        _SimpleRadiusAttack = this.gameObject.GetComponentInParent<Simple_Radius_Attack>();
+        _SimpleRadiusAttack = this.gameObject.GetComponentInParent<SimpleRadiusAttack>();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -30,7 +30,7 @@ public class WeaponPush : MonoBehaviour
             {
                 Debug.Log("push");
                 Vector3 pushDir = (other.transform.position - _Player.GetComponent<Transform>().position).normalized;
-                other.GetComponent<Rigidbody>().AddForce(_pushForce * pushDir, ForceMode.Impulse);
+                other.GetComponent<Rigidbody>().AddForce(_pushForce * pushDir, ForceMode.VelocityChange);
             }
         }
     }
