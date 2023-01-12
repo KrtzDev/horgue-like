@@ -41,8 +41,6 @@ public class EnemySpawner : MonoBehaviour
         {
             EnemyObjectPools.Add(i, ObjectPool.CreateInstance(EnemyPrefabs[i], EnemyMaxAmount));
         }
-
-        Debug.Log(EnemyMaxAmount);
     }
 
     private void Start()

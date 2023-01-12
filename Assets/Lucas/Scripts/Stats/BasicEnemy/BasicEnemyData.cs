@@ -17,4 +17,13 @@ public class BasicEnemyData : ScriptableObject
     public float _attackRange;
     public float _retreatRange;
     public float _followTime;
+    public float _maxJumpAttackRange;
+    public float _minJumpAttackRange;
+    public float _jumpAttackChance;
+    public float _jumpAttackCooldown;
+    public float _jumpPrepTime;
+    public float _jumpTime;
+    public float _jumpForce;
+    public int _basicDamage;
+    public AnimationCurve HeightCurve;
 }
