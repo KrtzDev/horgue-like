@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.AI;
 
 public class Player_Movement_Mobility : MonoBehaviour
 {
@@ -282,7 +283,8 @@ public class Player_Movement_Mobility : MonoBehaviour
         {
             for (int j = 0; j < _EnemySpawner.transform.GetChild(i).childCount; j++)
             {
-                _EnemySpawner.transform.GetChild(i).GetChild(j).GetComponent<EnemyMovement>().playerTarget = _Decoy.transform;
+                // _EnemySpawner.transform.GetChild(i).GetChild(j).GetComponent<EnemyMovement>().PlayerTarget = _Decoy.transform;
+                _EnemySpawner.transform.GetChild(i).GetChild(j).GetComponent<Enemy>().FollowDecoy = true;
             }
         }
 
@@ -304,7 +306,8 @@ public class Player_Movement_Mobility : MonoBehaviour
         {
             for (int j = 0; j < _EnemySpawner.transform.GetChild(i).childCount; j++)
             {
-                _EnemySpawner.transform.GetChild(i).GetChild(j).GetComponent<EnemyMovement>().playerTarget = this.transform;
+                // _EnemySpawner.transform.GetChild(i).GetChild(j).GetComponent<EnemyMovement>().PlayerTarget = this.transform;
+                _EnemySpawner.transform.GetChild(i).GetChild(j).GetComponent<Enemy>().FollowDecoy = false;
             }
         }
 

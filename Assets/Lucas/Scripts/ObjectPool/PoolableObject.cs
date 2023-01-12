@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class PoolableObject : MonoBehaviour
 {
-    public ObjectPool Parent;
+    public ObjectPool Parent { get; set; }
 
     public virtual void OnDisable()
     {

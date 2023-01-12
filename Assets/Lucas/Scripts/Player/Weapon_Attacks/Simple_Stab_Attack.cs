@@ -29,7 +29,7 @@ public class Simple_Stab_Attack : MonoBehaviour
 
     private void Awake()
     {
-        startParent = transform.parent.gameObject;
+        startParent = transform.gameObject;
         startPosition = transform.localPosition;
         startRotation = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y, transform.eulerAngles.z);
 

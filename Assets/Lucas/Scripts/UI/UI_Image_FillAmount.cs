@@ -1,6 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
-public class UI_Image_FillAmount : MonoBehaviour
+public abstract class UI_Image_FillAmount : MonoBehaviour
 {
     protected Image _ImageToFill;
     protected float _currentValue;
