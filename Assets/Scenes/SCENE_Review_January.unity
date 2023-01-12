@@ -12516,18 +12516,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 14606692, guid: 537fc3e4e368e0f4cb2f800d5ecb95d7, type: 3}
-      propertyPath: baseDamage
-      value: 40
-      objectReference: {fileID: 0}
-    - target: {fileID: 101257208, guid: 537fc3e4e368e0f4cb2f800d5ecb95d7, type: 3}
-      propertyPath: baseDamage
-      value: 30
-      objectReference: {fileID: 0}
-    - target: {fileID: 1214328679, guid: 537fc3e4e368e0f4cb2f800d5ecb95d7, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 4698856430502407209, guid: 537fc3e4e368e0f4cb2f800d5ecb95d7,
         type: 3}
       propertyPath: m_Name
@@ -12588,26 +12576,12 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8773851501896812125, guid: 537fc3e4e368e0f4cb2f800d5ecb95d7,
+    - target: {fileID: 4698856430502407215, guid: 537fc3e4e368e0f4cb2f800d5ecb95d7,
         type: 3}
-      propertyPath: _range
-      value: 12
-      objectReference: {fileID: 0}
-    - target: {fileID: 8773851501896812125, guid: 537fc3e4e368e0f4cb2f800d5ecb95d7,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8773851501896812125, guid: 537fc3e4e368e0f4cb2f800d5ecb95d7,
-        type: 3}
-      propertyPath: _attackDelay
-      value: 0.225
-      objectReference: {fileID: 0}
-    - target: {fileID: 8912524533400224775, guid: 537fc3e4e368e0f4cb2f800d5ecb95d7,
-        type: 3}
-      propertyPath: _pushForce
-      value: 50
-      objectReference: {fileID: 0}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 13400000, guid: 0518bcfbcfd190a489c0338365d640ba,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 537fc3e4e368e0f4cb2f800d5ecb95d7, type: 3}
 --- !u!1 &1152716698
@@ -36978,7 +36952,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 199202193, guid: 24e4eca4c6fc7054f936273b1a1d6d7e, type: 3}
       propertyPath: <EnemyWavesToSpawn>k__BackingField
-      value: 10
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 3225790080061917108, guid: 24e4eca4c6fc7054f936273b1a1d6d7e,
         type: 3}

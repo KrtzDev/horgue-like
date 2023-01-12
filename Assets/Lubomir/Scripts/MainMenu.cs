@@ -20,12 +20,14 @@ public class MainMenu : MonoBehaviour
     {
         if (SceneManager.sceneCountInBuildSettings > 0)
         {
-            for (int i = 1; i < SceneManager.sceneCountInBuildSettings; i++)
+            for (int i = 2; i < SceneManager.sceneCountInBuildSettings; i++)
             {
                 GameObject _newLevelButton = Instantiate(_levelButtonPrefab, _levelButtonParent);
                 LevelButton _level_Button = _newLevelButton.GetComponent<LevelButton>();
 
-                _level_Button._name.text = "Level " + i.ToString();
+                int levelNumber = i-1;
+
+                _level_Button._name.text = "Level " +  levelNumber.ToString();
                 _level_Button._levelIndex = i;
                 _level_Button._mainMenu = this;
             }

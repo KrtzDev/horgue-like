@@ -293,7 +293,7 @@ public class PlayerMovementMobility : MonoBehaviour
             for (int j = 0; j < _enemySpawner.transform.GetChild(i).childCount; j++)
             {
                 // _EnemySpawner.transform.GetChild(i).GetChild(j).GetComponent<EnemyMovement>().PlayerTarget = _Decoy.transform;
-                _EnemySpawner.transform.GetChild(i).GetChild(j).GetComponent<Enemy>().FollowDecoy = true;
+                _enemySpawner.transform.GetChild(i).GetChild(j).GetComponent<Enemy>().FollowDecoy = true;
             }
         }
 
@@ -316,7 +316,7 @@ public class PlayerMovementMobility : MonoBehaviour
             for (int j = 0; j < _enemySpawner.transform.GetChild(i).childCount; j++)
             {
                 // _EnemySpawner.transform.GetChild(i).GetChild(j).GetComponent<EnemyMovement>().PlayerTarget = this.transform;
-                _EnemySpawner.transform.GetChild(i).GetChild(j).GetComponent<Enemy>().FollowDecoy = false;
+                _enemySpawner.transform.GetChild(i).GetChild(j).GetComponent<Enemy>().FollowDecoy = false;
             }
         }
 
