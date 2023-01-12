@@ -31,6 +31,15 @@ public class PasuKan_JumpAttackState : StateMachineBehaviour
         animator.SetFloat("jumpTime", -1);
 
         agent.enabled = false;
+
+        if (!enemy.FollowDecoy)
+        {
+            _followPosition = new Vector3(player.position.x, player.position.y, player.position.z);
+        }
+        else
+        {
+            _followPosition = new Vector3(decoy.position.x, decoy.position.y, decoy.position.z);
+        }
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
@@ -44,7 +53,7 @@ public class PasuKan_JumpAttackState : StateMachineBehaviour
         {
             Vector3 startingPosition = animator.transform.position;
 
-            if (_jumpTime <= 0.75 * enemy.EnemyData._jumpTime )
+            /* if (_jumpTime <= 0.75 * enemy.EnemyData._jumpTime )
             {
                 if (!enemy.FollowDecoy)
                 {
@@ -56,6 +65,12 @@ public class PasuKan_JumpAttackState : StateMachineBehaviour
                 }
             }
 
+            */
+
+            // Vector3 dirToPlayer = _followPosition - animator.transform.position;
+            // Vector3 newPos = _followPosition - dirToPlayer.normalized * 2.5f;
+            // _followPosition = newPos;
+
             if (_jumpTime <= enemy.EnemyData._jumpTime)
             {
                 _jumpTime += Time.deltaTime;
@@ -64,6 +79,11 @@ public class PasuKan_JumpAttackState : StateMachineBehaviour
                 animator.transform.position = Vector3.Lerp(startingPosition, _followPosition, _jumpFactor) + Vector3.up * enemy.EnemyData.HeightCurve.Evaluate(_jumpTime) * enemy.EnemyData._jumpForce;
                 animator.transform.rotation = Quaternion.Slerp(animator.transform.rotation, Quaternion.LookRotation(_followPosition - animator.transform.position), _jumpFactor);
                 animator.SetFloat("jumpTime", _jumpTime);
+
+                if(animator.transform.position == _followPosition)
+                {
+                    animator.SetTrigger("jumpAttackEnded");
+                }
             }
             else
             {

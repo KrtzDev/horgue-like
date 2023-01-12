@@ -30,7 +30,7 @@ public class WeaponPush : MonoBehaviour
             {
                 Debug.Log("push");
                 Vector3 pushDir = (other.transform.position - _Player.GetComponent<Transform>().position).normalized;
-                other.GetComponent<Rigidbody>().AddForce(_pushForce * pushDir, ForceMode.Impulse);
+                other.GetComponent<Rigidbody>().AddForce(_pushForce * pushDir, ForceMode.VelocityChange);
             }
         }
     }
