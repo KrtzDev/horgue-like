@@ -10,11 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f11e42008a9795b42bd707c33009fa2d, type: 3}
-  m_Name: New Magazine
+  m_Name: IronCylinder
   m_EditorClassIdentifier: 
-  maxAmmoCount: 5
-  ammoCount: 0
-  damageType: {fileID: 11400000, guid: 3513b9eeb4adb3c4b9d4866394f26fd6, type: 2}
-  projectile: {fileID: 4954643210180333314, guid: 1e1bd1f410de17e4d8d0626befd96471,
-    type: 3}
-  isReloading: 1
+  attackSpeed: 0
+  cooldown: 0
+  projectileSize: 0
+  capacity: 0
+  maxAmmoSlots: 0

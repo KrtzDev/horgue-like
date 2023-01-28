@@ -1,20 +1,15 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "ModularWeapon/WeaponParts/Magazine")]
+[CreateAssetMenu(fileName = "new Magazine", menuName = "ModularWeapon/WeaponParts/Magazine")]
 public class Magazine : ScriptableObject
 {
-    public uint maxAmmoCount;
-    public uint ammoCount;
-    public DamageType damageType;
+    [Header("Stats")]
+    public float attackSpeed;
+    public float cooldown;
+    public float projectileSize;
 
-    public Projectile projectile;
+    public int capacity;
 
-    public bool isReloading;
-
-    private void OnEnable()
-    {
-        isReloading = false;      
-    }
+    [Header("Attachements")]
+    public int maxAmmoSlots;
 }

@@ -10,5 +10,5 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 75d6c0d56468f5e40a2923ceda4abc10, type: 3}
-  m_Name: New Fire Damage
+  m_Name: new FireDamage
   m_EditorClassIdentifier: 
