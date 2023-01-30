@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa48d95108cca0142a62cd1ccf37139d, type: 3}
   m_Name: IronRevolverBarrel
   m_EditorClassIdentifier: 
-  baseDamage: 0
-  attackSpeed: 0
-  cooldown: 0
-  projectileSize: 0
-  critChance: 0
-  range: 0
+  baseDamage: 40
+  attackSpeed: 0.8
+  cooldown: 1.3
+  projectileSize: 0.25
+  critChance: 30
+  range: 12.5
   attackPattern: {fileID: 11400000, guid: 526278176c5d56e4b9357d9dc8b3ed6e, type: 2}

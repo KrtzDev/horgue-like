@@ -1,4 +1,6 @@
+using UnityEngine;
+
 public interface IAttackInPattern
 {
-    void AttackInPattern();
+    void AttackInPattern(Projectile projectile, Transform spawnPosition);
 }

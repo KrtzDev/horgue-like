@@ -1,10 +1,11 @@
+using System;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "new StraightLineShot", menuName = "ModularWeapon/Data/AttackPattern/StraightLineShot")]
 public class StraightLineShot : AttackPattern
 {
-    public override void AttackInPattern()
+    public override void AttackInPattern(Projectile projectile, Transform spawnPosition)
     {
-        Debug.Log("Shot in Straight Line");
+        Instantiate(projectile,spawnPosition.position,spawnPosition.rotation);
     }
 }

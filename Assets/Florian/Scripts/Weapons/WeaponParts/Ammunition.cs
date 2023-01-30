@@ -10,7 +10,7 @@ public class Ammunition : ScriptableObject
     public float attackSpeed;
     public float cooldown;
     public float projectileSize;
-    public float critchance;
+    public float critChance;
     public float range;
 
     public DamageType damageType;

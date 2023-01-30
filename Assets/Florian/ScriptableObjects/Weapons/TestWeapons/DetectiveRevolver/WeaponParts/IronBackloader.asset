@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c73c2eef1d04bd242bb9e55a17097781, type: 3}
   m_Name: IronBackloader
   m_EditorClassIdentifier: 
-  baseDamage: 0
-  attackSpeed: 0
-  cooldown: 0
-  critChance: 0
-  range: 0
+  baseDamage: 70
+  attackSpeed: 0.8
+  cooldown: 1.4
+  critChance: 40
+  range: 22.5

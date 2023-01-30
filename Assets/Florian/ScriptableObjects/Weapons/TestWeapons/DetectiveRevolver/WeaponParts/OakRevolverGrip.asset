@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41ce7b992483656469ceb6bdc5fce804, type: 3}
   m_Name: OakRevolverGrip
   m_EditorClassIdentifier: 
-  attackSpeed: 0
-  cooldown: 0
-  critChance: 0
+  attackSpeed: 1.1
+  cooldown: 1.7
+  critChance: 30
   maxBarrels: 0
   maxMagazines: 0

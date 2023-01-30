@@ -12,12 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1bf20d05e70cc05468fb4fcbb07d565a, type: 3}
   m_Name: Caliber.38
   m_EditorClassIdentifier: 
-  projectilePrefab: {fileID: 7135431789190820771, guid: 519256511bcaca747924245807496f73,
+  projectilePrefab: {fileID: 4954643210180333314, guid: 1e1bd1f410de17e4d8d0626befd96471,
     type: 3}
-  baseDamage: 0
-  attackSpeed: 0
-  cooldown: 0
-  projectileSize: 0
-  critchance: 0
-  range: 0
+  baseDamage: 60
+  attackSpeed: 1.25
+  cooldown: 0.7
+  projectileSize: 0.1
+  critChance: 40
+  range: 6.25
   damageType: {fileID: 11400000, guid: 5fa20b50775f5b3438f8908c6cade453, type: 2}

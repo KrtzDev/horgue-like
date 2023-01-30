@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3939a441ca7dd8b46bc594c5db649c5e, type: 3}
   m_Name: BasicIronSight
   m_EditorClassIdentifier: 
-  attackSpeed: 0
-  critChance: 0
-  range: 0
+  attackSpeed: 1.1
+  critChance: 10
+  range: 10
