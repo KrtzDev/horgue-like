@@ -10,7 +10,7 @@ public class WeaponHolster : MonoBehaviour
     {
         foreach (Weapon weapon in weapons)
         {
-            weapon.Initialize();
+            weapon.Initialize(transform);
         }
     }
 

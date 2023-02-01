@@ -20,3 +20,9 @@ MonoBehaviour:
   _ammunition: {fileID: 11400000, guid: ce027e4cefc323d4c89abb3dc8a8a051, type: 2}
   _triggerMechanism: {fileID: 11400000, guid: 91c39c5e52357aa40b95e54bae74ee3d, type: 2}
   _sight: {fileID: 11400000, guid: d12bab2c89ef4024d8b1cff458e02898, type: 2}
+  _enemyLayer:
+    serializedVersion: 2
+    m_Bits: 128
+  _groundLayer:
+    serializedVersion: 2
+    m_Bits: 513

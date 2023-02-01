@@ -28,8 +28,19 @@ public class Weapon : ScriptableObject
 
     float _shotDelay;
 
-    public void Initialize()
+    private bool _isReloading;
+    private WeaponSkeleton _currentWeaponPrefab;
+    private Transform _playerTransform;
+    [SerializeField]
+    private LayerMask _enemyLayer;
+    [SerializeField]
+    private LayerMask _groundLayer;
+
+    public void Initialize(Transform owningTransform)
     {
+        _playerTransform = owningTransform;
+        _currentWeaponPrefab = Instantiate(weaponPrefab, _playerTransform);
+
         _possibleProjectile = _ammunition.projectilePrefab;
         _possibleProjectile.finalBaseDamage = CalculateDamage();
         _possibleProjectile.finalAttackSpeed = CalculateAttackSpeed();
@@ -41,7 +52,7 @@ public class Weapon : ScriptableObject
         _capacity = _magazine.capacity;
 
         _possibleProjectile.attackPattern = _barrel.attackPattern;
-        _possibleProjectile.spawnPosition = weaponPrefab.PprojectileSpawnPosition;
+        _possibleProjectile.spawnPosition = _currentWeaponPrefab.ProjectileSpawnPosition;
 
         if (_possibleProjectile.finalAttackSpeed != 0)
         {
@@ -195,7 +206,11 @@ public class Weapon : ScriptableObject
         {
             return true;
         }
-        Reload();
+        if (!_isReloading)
+        {
+            Reload();
+            _isReloading = true;
+        }
         return false;
     }
 
@@ -203,18 +218,46 @@ public class Weapon : ScriptableObject
     {
         if (_possibleProjectile.finalAttackSpeed == 0) return;
         _shotDelay -= Time.deltaTime;
-        Debug.Log(_shotDelay);
-        if (_shotDelay <=0) 
+        if (_shotDelay <= 0)
         {
+            RotateTowardsEnemy();
             _capacity--;
-            _possibleProjectile.attackPattern.AttackInPattern(_possibleProjectile,_possibleProjectile.spawnPosition);
+            _possibleProjectile.attackPattern.AttackInPattern(_possibleProjectile, _possibleProjectile.spawnPosition);
             _shotDelay = 1 / _possibleProjectile.finalAttackSpeed;
+        }
+    }
+
+    private void RotateTowardsEnemy()
+    {
+        float currentclosestdistance = Mathf.Infinity;
+        Enemy closestEnemy = null;
+
+        Collider[] enemies = Physics.OverlapSphere(_playerTransform.position, _possibleProjectile.finalRange, _enemyLayer);
+        foreach (var enemy in enemies)
+        {
+            Debug.Log(enemy.name);
+            float distanceToEnemy = Vector3.Distance(_playerTransform.position, enemy.transform.position);
+            if (distanceToEnemy < currentclosestdistance)
+            {
+                if (!Physics.Raycast(_playerTransform.position, (enemy.transform.position - _playerTransform.position), distanceToEnemy, _groundLayer))
+                {
+                    closestEnemy = enemy.GetComponent<Enemy>();
+                    currentclosestdistance = distanceToEnemy;
+                }
+            }
+        }
+        if (closestEnemy)
+        {
+            Vector3 direction = closestEnemy.transform.position - _playerTransform.position;
+            _playerTransform.transform.rotation = Quaternion.LookRotation(direction);
         }
     }
 
     private async void Reload()
     {
         await Task.Delay((int)(_possibleProjectile.finalCooldown * 1000));
+
         _capacity = _magazine.capacity;
+        _isReloading = false;
     }
 }
