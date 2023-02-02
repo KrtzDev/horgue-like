@@ -4,28 +4,27 @@ using UnityEngine;
 
 public class TrapSpikes : MonoBehaviour
 {
-    [SerializeField]
-    private Animator spikes;
+    private Animator _spikes;
 
     [SerializeField]
-    private bool isTriggered;
+    private bool _isTriggered;
 
     private void Start()
     {
-        spikes = GetComponent<Animator>();
+        _spikes = GetComponent<Animator>();
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (!isTriggered)
+        if (!_isTriggered)
         {
-            spikes.SetTrigger("Triggered");
-            isTriggered = true;
+            _spikes.SetTrigger("Triggered");
+            _isTriggered = true;
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        isTriggered = false;
+        _isTriggered = false;
     }
 }

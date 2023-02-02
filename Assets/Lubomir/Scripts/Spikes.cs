@@ -3,7 +3,7 @@ using UnityEngine;
 public class Spikes : MonoBehaviour
 {
     [SerializeField]
-    private int trapDamage = 10;
+    private int _trapDamage = 10;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -12,14 +12,14 @@ public class Spikes : MonoBehaviour
         {
             if (other.GetComponent<HealthComponent>() != null)
             {
-                other.GetComponent<HealthComponent>().TakeDamage(trapDamage);
+                other.GetComponent<HealthComponent>().TakeDamage(_trapDamage);
             }
         }
         else if (other.CompareTag("Player"))
         {
             if (other.GetComponent<HealthComponent>() != null)
             {
-                other.GetComponent<HealthComponent>().TakeDamage(trapDamage);
+                other.GetComponent<HealthComponent>().TakeDamage(_trapDamage);
             }
         }
     }
