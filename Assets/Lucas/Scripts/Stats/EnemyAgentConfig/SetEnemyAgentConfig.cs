@@ -15,7 +15,7 @@ public class SetEnemyAgentConfig : ReadGoogleSheets
 
     public override void ApplySheetData()
     {
-        _enemyAgentConfig.maxTime = float.Parse(_variables[0]);
-        _enemyAgentConfig.maxDistance = float.Parse(_variables[0]);
+        // _enemyAgentConfig.maxTime = float.Parse(_variables[0]);
+        // _enemyAgentConfig.maxDistance = float.Parse(_variables[0]);
     }
 }

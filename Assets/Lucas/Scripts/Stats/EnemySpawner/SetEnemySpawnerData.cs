@@ -16,9 +16,9 @@ public class SetEnemySpawnerData : ReadGoogleSheets
 
     public override void ApplySheetData()
     {
-        _enemySpawnerData._enemyWavesToSpawn = int.Parse(_variables[0]);
-        _enemySpawnerData._enemyWaveSize = int.Parse(_variables[1]);
-        _enemySpawnerData._enemySpawnDelay = int.Parse(_variables[2]);
+        // _enemySpawnerData._enemyWavesToSpawn = int.Parse(_variables[0]);
+        // _enemySpawnerData._enemyWaveSize = int.Parse(_variables[1]);
+        // _enemySpawnerData._enemySpawnDelay = int.Parse(_variables[2]);
     }
 
 
