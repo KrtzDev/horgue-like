@@ -1,7 +1,8 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
-public class SetPlayerData : ReadGoogleSheets
+public class LoadPlayerData : ReadGoogleSheets
 {
     [SerializeField]
     private PlayerData _playerData;
@@ -13,9 +14,9 @@ public class SetPlayerData : ReadGoogleSheets
         base.Awake();
     }
 
-    public override void ApplySheetData()
+    public override void ApplySheetData(List<string> tempPlayerData)
     {
-        _playerData._movementSpeed = float.Parse(_variables[0]);
-        _playerData._maxHealth = int.Parse(_variables[1]);
+        _playerData._movementSpeed = float.Parse(tempPlayerData[1]);
+        _playerData._maxHealth = int.Parse(tempPlayerData[2]);
     }
 }

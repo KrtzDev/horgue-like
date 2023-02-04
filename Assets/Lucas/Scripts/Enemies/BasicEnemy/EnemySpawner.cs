@@ -3,14 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-[RequireComponent(typeof(SetEnemySpawnerData))]
+[RequireComponent(typeof(LoadEnemySpawnerData))]
 public class EnemySpawner : MonoBehaviour
 {
-    [SerializeField] private EnemySpawnerData _enemySpawnerData;
+    public EnemySpawnerData _enemySpawnerData;
 
-    [field: SerializeField] public int EnemyWavesToSpawn { get; set; }
-    [field: SerializeField] public int EnemyWaveSize { get; set; }
-    [field: SerializeField] public float EnemySpawnDelay { get; set; }
     public int EnemiesThatHaveSpawned { get; set; }
 
     [SerializeField] private Collider[] SpawnCollider;
@@ -31,11 +28,7 @@ public class EnemySpawner : MonoBehaviour
 
     private void OnEnable()
     {
-        // EnemyWavesToSpawn = _enemySpawnerData._enemyWavesToSpawn;
-        // EnemyWaveSize = _enemySpawnerData._enemyWaveSize;
-        // EnemySpawnDelay = _enemySpawnerData._enemySpawnDelay;
-
-        EnemyMaxAmount = EnemyWavesToSpawn * EnemyWaveSize;
+        EnemyMaxAmount = _enemySpawnerData._enemyWavesToSpawn * _enemySpawnerData._enemyWaveSize;
 
         for (int i = 0; i < EnemyPrefabs.Count; i++)
         {
@@ -54,13 +47,13 @@ public class EnemySpawner : MonoBehaviour
 
     private IEnumerator SpawnEnemies()
     {
-        WaitForSeconds Wait = new WaitForSeconds(EnemySpawnDelay);
+        WaitForSeconds Wait = new WaitForSeconds(_enemySpawnerData._enemySpawnDelay);
 
         int SpawnedEnemies = 0;
 
         while (SpawnedEnemies < EnemyMaxAmount)
         {
-            for(int i = 0; i < EnemyWaveSize; i++)
+            for(int i = 0; i < _enemySpawnerData._enemyWaveSize; i++)
             {
                 if (EnemySpawnMethod == SpawnMethod.RoundRobin)
                 {
