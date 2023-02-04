@@ -38,7 +38,7 @@ public class GameManager : Singleton<GameManager>
         Debug.Log("Scene Load");
         if (SceneManager.GetActiveScene().name == "SCENE_Main_Menu") return;
         _enemySpawner = GameObject.Find("EnemySpawner").GetComponent<EnemySpawner>();
-        _neededEnemyKill = _enemySpawner._enemySpawnerData._enemyWavesToSpawn * _enemySpawner._enemySpawnerData._enemyWaveSize;
+        _neededEnemyKill = _enemySpawner.EnemyMaxAmount;
     }
 
     private void Update()

@@ -7,9 +7,13 @@ public class UIImageFillAmountWaveProgress : UIImageFillAmount
     public override void Awake()
     {
         _EnemySpawner = GameObject.FindGameObjectWithTag("EnemySpawner").GetComponent<EnemySpawner>();
-        _maxValue = _EnemySpawner._enemySpawnerData._enemyWavesToSpawn * _EnemySpawner._enemySpawnerData._enemyWaveSize;
 
         base.Awake();
+    }
+
+    public void Start()
+    {
+        _maxValue = _EnemySpawner.EnemyMaxAmount;
     }
 
     public override void FixedUpdate()

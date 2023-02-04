@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-[RequireComponent(typeof(LoadEnemySpawnerData))]
 public class EnemySpawner : MonoBehaviour
 {
-    public EnemySpawnerData _enemySpawnerData;
+    [SerializeField]
+    private EnemySpawnerData _enemySpawnerData;
 
     public int EnemiesThatHaveSpawned { get; set; }
 
@@ -20,13 +20,13 @@ public class EnemySpawner : MonoBehaviour
     public SpawnMethod EnemySpawnMethod = SpawnMethod.RoundRobin;
     public LocationMethod EnemyLocationMethod = LocationMethod.Collider;
 
-    [SerializeField]
-    private int EnemyMaxAmount;
+    [HideInInspector]
+    public int EnemyMaxAmount;
 
     private Bounds Bounds;
     private NavMeshTriangulation Triangulation;
 
-    private void OnEnable()
+    private void Start()
     {
         EnemyMaxAmount = _enemySpawnerData._enemyWavesToSpawn * _enemySpawnerData._enemyWaveSize;
 
@@ -34,15 +34,17 @@ public class EnemySpawner : MonoBehaviour
         {
             EnemyObjectPools.Add(i, ObjectPool.CreateInstance(EnemyPrefabs[i], EnemyMaxAmount));
         }
-    }
 
-    private void Start()
-    {
         Triangulation = NavMesh.CalculateTriangulation();
 
         SetBounds();
 
         StartCoroutine(SpawnEnemies());
+    }
+
+    private void Update()
+    {
+        Debug.Log("EnemyMaxAmount = " + EnemyMaxAmount);
     }
 
     private IEnumerator SpawnEnemies()
