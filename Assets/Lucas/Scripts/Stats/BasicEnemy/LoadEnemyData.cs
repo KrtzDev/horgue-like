@@ -1,14 +1,9 @@
-using SimpleJSON;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Networking;
 
-public class LoadEnemyData : MonoBehaviour
+public class LoadEnemyData : ReadGoogleSheets
 {
     [Header("ENEMY DATA")]
-    [SerializeField]
-    private int _enemyDataAmount;
     [SerializeField]
     private BasicEnemyData _basicEnemyData;
     [SerializeField]
@@ -16,63 +11,14 @@ public class LoadEnemyData : MonoBehaviour
     [SerializeField]
     private BasicEnemyData _pasuKanData;
 
-    private string _GoogleURL;
-
-    string[] notes;
-    int column = 1;
-    int iteration = 0;
-
-    string rowsjson = "";
-    string[] lines;
-    List<string> eachrow;
-
-    private void Awake()
-    {
-        for (iteration = 0;  iteration < _enemyDataAmount; iteration++)
-        {
-            StartCoroutine(ObtainSheetData());
-        }
-    }
-
-    public IEnumerator ObtainSheetData()
+    public override void Awake()
     {
         _GoogleURL = "https://sheets.googleapis.com/v4/spreadsheets/1dbgvJsZAh6RdSJZYxfwGvvmaSeoRMNVGeIIugai8UIU/values/Enemies?key=AIzaSyD2YFsTjKNGDId31Yus0bkFR5hr9WK9yyY";
 
-        UnityWebRequest www = UnityWebRequest.Get(_GoogleURL);
-        // get Spreadsheet: https://sheets.googleapis.com/v4/spreadsheets/<ID>/values/<SheetName>?key=<APIKey>
-        yield return www.SendWebRequest();
-
-        if (www.result == UnityWebRequest.Result.ConnectionError || www.result == UnityWebRequest.Result.ProtocolError || www.timeout > 2)
-        {
-            Debug.LogError("ERROR: " + www.error);
-        }
-        else
-        {
-            string json = www.downloadHandler.text;
-            var objectInSpreadsheet = JSON.Parse(json);
-            foreach (var item in objectInSpreadsheet["values"])
-            {
-                var itemo = JSON.Parse(item.ToString());
-                eachrow = itemo[0].AsStringList;
-                foreach (var bro in eachrow)
-                {
-                    rowsjson += bro + ",";
-                }
-                rowsjson += "\n";
-            }
-            lines = rowsjson.Split(new char[] { '\n' });
-            notes = lines[column].Split(new char[] { ',' });
-            List<string> tempData = new List<string>();
-            for (iteration = 0; iteration < notes.Length - 1; iteration++)
-            {
-                tempData.Add(notes[iteration]);
-            }
-            ApplySheetData(tempData);
-            column++;
-        }
+        base.Awake();
     }
 
-    private void ApplySheetData(List<string> tempEnemyData)
+    public override void ApplySheetData(List<string> tempEnemyData)
     {
         switch (tempEnemyData[0])
         {

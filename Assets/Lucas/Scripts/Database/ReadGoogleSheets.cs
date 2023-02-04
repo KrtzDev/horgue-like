@@ -16,11 +16,15 @@ public abstract class ReadGoogleSheets : MonoBehaviour
     string[] lines;
     List<string> eachrow;
 
-    string testString;
+    [SerializeField]
+    private int _dataEntries;
 
     public virtual void Awake()
     {
-        StartCoroutine(ObtainSheetData());
+        for (iteration = 0; iteration < _dataEntries; iteration++)
+        {
+            StartCoroutine(ObtainSheetData());
+        }
     }
 
     private void Update()
@@ -30,7 +34,7 @@ public abstract class ReadGoogleSheets : MonoBehaviour
          */
     }
 
-    public IEnumerator ObtainSheetData()
+    public virtual IEnumerator ObtainSheetData()
     {
         UnityWebRequest www = UnityWebRequest.Get(_GoogleURL);
         // get Spreadsheet: https://sheets.googleapis.com/v4/spreadsheets/<ID>/values/<SheetName>?key=<APIKey>
@@ -56,19 +60,16 @@ public abstract class ReadGoogleSheets : MonoBehaviour
             }
             lines = rowsjson.Split(new char[] { '\n' });
             notes = lines[column].Split(new char[] { ',' });
-            for (iteration = 1; iteration < notes.Length - 1; iteration++)
+            List<string> tempData = new List<string>();
+            for (iteration = 0; iteration < notes.Length - 1; iteration++)
             {
-                // output               
-                testString += ", " + notes[iteration];
-                Debug.Log(testString);
+                tempData.Add(notes[iteration]);
             }
+            ApplySheetData(tempData);
             column++;
-
         }
-
-        ApplySheetData();
     }
 
-    public abstract void ApplySheetData();
+    public abstract void ApplySheetData(List<string> tempData);
 
 }
