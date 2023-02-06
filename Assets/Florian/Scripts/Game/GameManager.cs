@@ -21,11 +21,10 @@ public class GameManager : Singleton<GameManager>
     [SerializeField]
     private WinningCondition _winningCondition;
 
-    [SerializeField]
-    private float _timeToSurvive;
+    public float _timeToSurvive;
 
     private EnemySpawner _enemySpawner;
-    private int _neededEnemyKill;
+    public int _neededEnemyKill;
     private bool _hasWon;
 
     private void Start()
@@ -39,6 +38,7 @@ public class GameManager : Singleton<GameManager>
         if (SceneManager.GetActiveScene().name == "SCENE_Main_Menu") return;
         _enemySpawner = GameObject.Find("EnemySpawner").GetComponent<EnemySpawner>();
         _neededEnemyKill = _enemySpawner.EnemyMaxAmount;
+        Debug.Log("neededEnemyKill ( " + _neededEnemyKill + " ) = enemySpawner.MaxAmount ( " + _enemySpawner.EnemyMaxAmount + " )");
     }
 
     private void Update()

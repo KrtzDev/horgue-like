@@ -26,7 +26,7 @@ public class EnemySpawner : MonoBehaviour
     private Bounds Bounds;
     private NavMeshTriangulation Triangulation;
 
-    private void Start()
+    private void Awake()
     {
         EnemyMaxAmount = _enemySpawnerData._enemyWavesToSpawn * _enemySpawnerData._enemyWaveSize;
 

@@ -1,11 +1,11 @@
 using UnityEngine;
-using TMPro;
+using UnityEngine.UI;
 
 public class UIImageFillAmountHealthbar : UIImageFillAmount
 {
     private HealthComponent _HealthComponent;
     [SerializeField]
-    private TextMeshProUGUI _healthText;
+    private Text _healthText;
 
     public override void Awake()
     {
