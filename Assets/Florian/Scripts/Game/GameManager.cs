@@ -23,6 +23,8 @@ public class GameManager : Singleton<GameManager>
 
     public float _timeToSurvive;
 
+    public int _currentScore;
+
     private EnemySpawner _enemySpawner;
     public int _neededEnemyKill;
     private bool _hasWon;
@@ -30,6 +32,8 @@ public class GameManager : Singleton<GameManager>
     private void Start()
     {
         SceneLoader.Instance.CompletedSceneLoad += OnCompletedSceneLoad;
+
+        _currentScore = 0;
     }
 
     private void OnCompletedSceneLoad()

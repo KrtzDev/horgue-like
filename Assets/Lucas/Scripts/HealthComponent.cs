@@ -9,6 +9,7 @@ public class HealthComponent : MonoBehaviour
     [field: SerializeField] public int CurrentHealth { get; set; }
 
     [field: SerializeField] public Animator Animator { get; private set; }
+    [field: SerializeField] public Enemy Enemy { get; private set; }
 
     private bool _isDead = false;
 
@@ -16,6 +17,11 @@ public class HealthComponent : MonoBehaviour
     {
         CurrentHealth = MaxHealth;
         _isDead = false;
+
+        if(this.gameObject.CompareTag("Enemy"))
+        {
+            Enemy = gameObject.GetComponent<Enemy>();
+        }
     }
 
     public void TakeDamage(int damage)
@@ -48,6 +54,7 @@ public class HealthComponent : MonoBehaviour
                 Debug.Log("Enemy Died");
 
                 GameManager.Instance.EnemyDied();
+                GameManager.Instance._currentScore += Enemy.EnemyData._givenXP;
 
                 this.Animator.SetTrigger("death");
             }

@@ -5168,7 +5168,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 1000
+  m_Text: 0000
 --- !u!1 &249841073
 GameObject:
   m_ObjectHideFlags: 0
@@ -32689,6 +32689,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   EnemiesKilledText: {fileID: 648795565}
+  ScoreText: {fileID: 245704410}
   LevelTimer: {fileID: 767009574}
 --- !u!1 &1996571050
 GameObject:
