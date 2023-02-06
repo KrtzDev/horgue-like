@@ -90,6 +90,8 @@ public class PlayerMovementMobility : MonoBehaviour
         _inputActions.Character.MovementAction.performed += UseAbility;
         _enemySpawner = GameObject.Find("EnemySpawner").GetComponent<EnemySpawner>();
         _simpleShot = this.GetComponent<PlayerSimpleShot>();
+
+        AbilityCDTimer = -1;
     }
 
     private void Start()
