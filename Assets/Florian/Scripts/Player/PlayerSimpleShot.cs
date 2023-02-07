@@ -30,8 +30,8 @@ public class PlayerSimpleShot : MonoBehaviour
             float currentclosestdistance = Mathf.Infinity;
             Enemy closestEnemy = null;
 
-            Debug.Log(transform.position);
-            Debug.Log(_range);
+            // Debug.Log(transform.position);
+            // Debug.Log(_range);
 
             Collider[] enemies = Physics.OverlapSphere(transform.position, _range, _enemyLayer);
             foreach (var enemy in enemies)

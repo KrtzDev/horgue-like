@@ -21,16 +21,19 @@ public class GameManager : Singleton<GameManager>
     [SerializeField]
     private WinningCondition _winningCondition;
 
-    [SerializeField]
-    private float _timeToSurvive;
+    public float _timeToSurvive;
+
+    public int _currentScore;
 
     private EnemySpawner _enemySpawner;
-    private int _neededEnemyKill;
+    public int _neededEnemyKill;
     private bool _hasWon;
 
     private void Start()
     {
         SceneLoader.Instance.CompletedSceneLoad += OnCompletedSceneLoad;
+
+        _currentScore = 0;
     }
 
     private void OnCompletedSceneLoad()
@@ -38,7 +41,8 @@ public class GameManager : Singleton<GameManager>
         Debug.Log("Scene Load");
         if (SceneManager.GetActiveScene().name == "SCENE_Main_Menu") return;
         _enemySpawner = GameObject.Find("EnemySpawner").GetComponent<EnemySpawner>();
-        _neededEnemyKill = _enemySpawner.EnemyWavesToSpawn * _enemySpawner.EnemyWaveSize;
+        _neededEnemyKill = _enemySpawner.EnemyMaxAmount;
+        Debug.Log("neededEnemyKill ( " + _neededEnemyKill + " ) = enemySpawner.MaxAmount ( " + _enemySpawner.EnemyMaxAmount + " )");
     }
 
     private void Update()
