@@ -9,6 +9,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 26d39e37c3da948429cd916429cf2511, type: 3}
-  m_Name: New Poison Damage
+  m_Script: {fileID: 11500000, guid: 69cee93de81d78c4c9db100e30c2fbfd, type: 3}
+  m_Name: new StraightLineShot
   m_EditorClassIdentifier: 

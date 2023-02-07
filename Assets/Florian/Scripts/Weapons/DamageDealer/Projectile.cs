@@ -1,48 +1,29 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
-    public DamageType damageType;
+	public float finalBaseDamage;
+	public float finalAttackSpeed;
+	public float finalCooldown;
+	public float finalProjectileSize;
+	public float finalCritChance;
+	public float finalRange;
 
-    [SerializeField]
-    private LayerMask hitLayerMask;
-    [SerializeField]
-    private int baseDamage;
+	public AttackPattern attackPattern;
+	public Transform spawnPosition;
 
-    private void Start()
-    {
-        Destroy(gameObject, 10f);
-    }
+	[SerializeField]
+	private LayerMask _hitLayerMask;
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if ((hitLayerMask.value & (1 << other.gameObject.layer)) > 0)
-        {
-            if (other.CompareTag("Player"))
-            {
-                // Damage? 
-                if (other.GetComponent<HealthComponent>() != null)
-                {
-                    other.GetComponent<HealthComponent>().TakeDamage(baseDamage);
-                }
-                Destroy(gameObject);
-            }
-            else if (other.CompareTag("Enemy"))
-            {
-                if (other.GetComponent<HealthComponent>() != null)
-                {
-                    other.GetComponent<HealthComponent>().TakeDamage(baseDamage);
-
-                    damageType.DoDamage();
-                }
-                Destroy(gameObject);
-            }
-            else
-            {
-                Destroy(gameObject);
-            }
-        }
-    }
+	private void OnTriggerEnter(Collider other)
+	{
+		if ((_hitLayerMask.value & (1 << other.gameObject.layer)) > 0)
+		{
+			if (other.TryGetComponent(out HealthComponent enemyHealth))
+			{
+				enemyHealth.TakeDamage((int)finalBaseDamage);
+			}
+		}
+		Destroy(gameObject);
+	}
 }
