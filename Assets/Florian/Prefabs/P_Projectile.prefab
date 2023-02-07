@@ -128,8 +128,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 984647a50083e004a9b7c26e5b7a90d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageType: {fileID: 11400000, guid: 3513b9eeb4adb3c4b9d4866394f26fd6, type: 2}
-  hitLayerMask:
+  finalBaseDamage: 0
+  finalAttackSpeed: 0
+  finalCooldown: 0
+  finalProjectileSize: 0
+  finalCritChance: 0
+  finalRange: 0
+  attackPattern: {fileID: 0}
+  spawnPosition: {fileID: 0}
+  _hitLayerMask:
     serializedVersion: 2
-    m_Bits: 129
-  baseDamage: 25
+    m_Bits: 128

@@ -31,6 +31,7 @@ public class Weapon : ScriptableObject
     private bool _isReloading;
     private WeaponSkeleton _currentWeaponPrefab;
     private Transform _playerTransform;
+	private Transform _weaponTransform;
     [SerializeField]
     private LayerMask _enemyLayer;
     [SerializeField]
@@ -39,7 +40,8 @@ public class Weapon : ScriptableObject
     public void Initialize(Transform owningTransform)
     {
         _playerTransform = owningTransform;
-        _currentWeaponPrefab = Instantiate(weaponPrefab, _playerTransform);
+		_weaponTransform = _playerTransform.GetComponent<PlayerCharacter>().WeaponSpawnTransform;
+        _currentWeaponPrefab = Instantiate(weaponPrefab, _weaponTransform);
 
         _possibleProjectile = _ammunition.projectilePrefab;
         _possibleProjectile.finalBaseDamage = CalculateDamage();
@@ -200,7 +202,13 @@ public class Weapon : ScriptableObject
         return range;
     }
 
-    public bool CanShoot()
+	public void TryShoot()
+	{
+		if (CanShoot())
+			Shoot();
+	}
+
+    private bool CanShoot()
     {
         if (_capacity > 0)
         {
@@ -214,32 +222,32 @@ public class Weapon : ScriptableObject
         return false;
     }
 
-    public void Shoot()
+    private void Shoot()
     {
         if (_possibleProjectile.finalAttackSpeed == 0) return;
         _shotDelay -= Time.deltaTime;
         if (_shotDelay <= 0)
         {
-            RotateTowardsEnemy();
+            if(!RotateTowardsEnemy()) return;
             _capacity--;
             _possibleProjectile.attackPattern.AttackInPattern(_possibleProjectile, _possibleProjectile.spawnPosition);
             _shotDelay = 1 / _possibleProjectile.finalAttackSpeed;
         }
     }
 
-    private void RotateTowardsEnemy()
+    private bool RotateTowardsEnemy()
     {
         float currentclosestdistance = Mathf.Infinity;
         Enemy closestEnemy = null;
 
-        Collider[] enemies = Physics.OverlapSphere(_playerTransform.position, _possibleProjectile.finalRange, _enemyLayer);
+        Collider[] enemies = Physics.OverlapSphere(_weaponTransform.position, _possibleProjectile.finalRange, _enemyLayer);
         foreach (var enemy in enemies)
         {
             Debug.Log(enemy.name);
-            float distanceToEnemy = Vector3.Distance(_playerTransform.position, enemy.transform.position);
+            float distanceToEnemy = Vector3.Distance(_weaponTransform.position, enemy.transform.position);
             if (distanceToEnemy < currentclosestdistance)
             {
-                if (!Physics.Raycast(_playerTransform.position, (enemy.transform.position - _playerTransform.position), distanceToEnemy, _groundLayer))
+                if (!Physics.Raycast(_weaponTransform.position, (enemy.transform.position - _weaponTransform.position), distanceToEnemy, _groundLayer))
                 {
                     closestEnemy = enemy.GetComponent<Enemy>();
                     currentclosestdistance = distanceToEnemy;
@@ -248,9 +256,11 @@ public class Weapon : ScriptableObject
         }
         if (closestEnemy)
         {
-            Vector3 direction = closestEnemy.transform.position - _playerTransform.position;
-            _playerTransform.transform.rotation = Quaternion.LookRotation(direction);
+            Vector3 direction = closestEnemy.transform.position - _weaponTransform.position;
+			_weaponTransform.transform.rotation = Quaternion.LookRotation(direction);
+			return true;
         }
+		return false;
     }
 
     private async void Reload()

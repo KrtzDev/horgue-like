@@ -24,10 +24,7 @@ public class WeaponHolster : MonoBehaviour
     {
         foreach (Weapon weapon in weapons)
         {
-            if (weapon.CanShoot())
-            {
-                weapon.Shoot();
-            }
+			weapon.TryShoot();
         }
     }
 }
