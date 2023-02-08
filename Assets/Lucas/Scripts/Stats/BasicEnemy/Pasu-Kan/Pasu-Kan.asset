@@ -30,7 +30,7 @@ MonoBehaviour:
   _jumpPrepTime: 0.5
   _jumpTime: 1
   _jumpForce: 0.05
-  _basicDamage: 5
+  _basicDamage: 8
   HeightCurve:
     serializedVersion: 2
     m_Curve:

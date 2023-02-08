@@ -15,13 +15,15 @@ public class HealthComponent : MonoBehaviour
 
     private void Awake()
     {
-        CurrentHealth = MaxHealth;
-        _isDead = false;
 
-        if(this.gameObject.CompareTag("Enemy"))
+        if (this.gameObject.CompareTag("Enemy"))
         {
             Enemy = gameObject.GetComponent<Enemy>();
+            MaxHealth = Enemy.EnemyData._maxHealth;
         }
+       
+        CurrentHealth = MaxHealth;
+        _isDead = false;
     }
 
     public void TakeDamage(int damage)

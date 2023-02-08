@@ -54,6 +54,9 @@ MonoBehaviour:
   Player: {fileID: 0}
   EnemyPrefabs:
   - {fileID: 2751320019283796165, guid: 2a6539935274eac47890703bacc52741, type: 3}
+  - {fileID: 2751320019283796165, guid: 2a6539935274eac47890703bacc52741, type: 3}
+  - {fileID: 2751320019283796165, guid: 2a6539935274eac47890703bacc52741, type: 3}
+  - {fileID: 7300998086142530308, guid: d30f34610fd5f8444b39f9f1cebdd5dc, type: 3}
   - {fileID: 7300998086142530308, guid: d30f34610fd5f8444b39f9f1cebdd5dc, type: 3}
   EnemySpawnMethod: 0
   EnemyLocationMethod: 0

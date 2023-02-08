@@ -131,4 +131,4 @@ MonoBehaviour:
   hitLayerMask:
     serializedVersion: 2
     m_Bits: 576
-  baseDamage: 5
+  baseDamage: 8
