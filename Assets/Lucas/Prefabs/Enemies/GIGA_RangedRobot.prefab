@@ -1955,7 +1955,7 @@ MonoBehaviour:
   <EnemyData>k__BackingField: {fileID: 11400000, guid: 8dc834b5e34dc44468852d86bbd441ba,
     type: 2}
   <Agent>k__BackingField: {fileID: 4301312500149274905}
-  <Projectile>k__BackingField: {fileID: 8451927325676435795, guid: 4746290bed9561b4590c43ddb406e723,
+  <Projectile>k__BackingField: {fileID: 8451927325676435795, guid: cfda9bcf2cc39a54282424fcca06f77b,
     type: 3}
   <ProjectilePoint>k__BackingField: {fileID: 7221469875420454319}
   _projectileSpeed: 22
