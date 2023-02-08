@@ -10,18 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e53ff1b8ade7b5340af8b4e886fb2c85, type: 3}
-  m_Name: RangedRobotData
+  m_Name: GIGA_RangedRobot
   m_EditorClassIdentifier: 
   _maxHealth: 60
   _damagePerHit: 100
-  _attackSpeed: 1.5
+  _attackSpeed: 3.5
   _givenXP: 3
   _moveSpeed: 1
   _armor: 1
   _elementalResistance: 1
   _technicalResistance: 1
-  _attackRange: 10
-  _retreatRange: 7
+  _attackRange: 15
+  _retreatRange: 12
   _followTime: 1.5
   _maxJumpAttackRange: 0
   _minJumpAttackRange: 0

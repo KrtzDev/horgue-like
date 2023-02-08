@@ -53,6 +53,8 @@ MonoBehaviour:
   - {fileID: 0}
   Player: {fileID: 0}
   EnemyPrefabs:
+  - {fileID: 7300998086142530308, guid: 2f7dfe7c04c5a34479faeb99aee024e8, type: 3}
+  - {fileID: 2751320019283796165, guid: 2a6539935274eac47890703bacc52741, type: 3}
   - {fileID: 2751320019283796165, guid: 2a6539935274eac47890703bacc52741, type: 3}
   - {fileID: 2751320019283796165, guid: 2a6539935274eac47890703bacc52741, type: 3}
   - {fileID: 2751320019283796165, guid: 2a6539935274eac47890703bacc52741, type: 3}
