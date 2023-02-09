@@ -224,6 +224,7 @@ public class Weapon : ScriptableObject
 
     private void Shoot()
     {
+		Debug.Log(this.name);
         if (_possibleProjectile.finalAttackSpeed == 0) return;
         _shotDelay -= Time.deltaTime;
         if (_shotDelay <= 0)

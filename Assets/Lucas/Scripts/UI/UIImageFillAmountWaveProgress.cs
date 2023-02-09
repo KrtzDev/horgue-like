@@ -10,6 +10,7 @@ public class UIImageFillAmountWaveProgress : UIImageFillAmount
     public Text LevelTimer;
 
     private int _enemiesKilled;
+    private int _maxEnemiesAmount;
 
     public override void Awake()
     {
@@ -20,20 +21,25 @@ public class UIImageFillAmountWaveProgress : UIImageFillAmount
 
     public void Start()
     {
-        _maxValue = _EnemySpawner.EnemyMaxAmount;
-    }
+		_maxEnemiesAmount = _EnemySpawner.EnemyMaxAmount;
+	}
 
     public override void FixedUpdate()
     {
-        // maxValue Update falls es im Level verändert wird
-        _enemiesKilled = (int)(_maxValue - Mathf.Abs(GameManager.Instance._neededEnemyKill));
+		if (!GameManager.Instance) return;
+
+		if (_maxValue == 0)
+			_maxValue = Mathf.Abs(GameManager.Instance._currentTimeToSurvive);
+
+		// maxValue Update falls es im Level verändert wird
+		_enemiesKilled = (int)(_maxEnemiesAmount - Mathf.Abs(GameManager.Instance._neededEnemyKill));
 
         // _currentValue = _EnemySpawner.EnemiesThatHaveSpawned;
-        _currentValue = _enemiesKilled;
 
-        if(GameManager.Instance._timeToSurvive <= 0)
+        if(GameManager.Instance._currentTimeToSurvive >= 0)
         {
-            float tempTimer = Mathf.Abs(GameManager.Instance._timeToSurvive);
+            float tempTimer = Mathf.Abs(GameManager.Instance._currentTimeToSurvive);
+			_currentValue = tempTimer;
 
             float minutes = Mathf.FloorToInt(tempTimer / 60);
             float seconds = Mathf.FloorToInt(tempTimer % 60);
@@ -42,7 +48,7 @@ public class UIImageFillAmountWaveProgress : UIImageFillAmount
 
             LevelTimer.text = string.Format("{0:00}:{1:00}.{2:000}", minutes, seconds, milliseconds);
         }
-        EnemiesKilledText.text = _enemiesKilled + " / " + _maxValue;
+        EnemiesKilledText.text = _enemiesKilled + " / " + _maxEnemiesAmount;
         ScoreText.text = GameManager.Instance._currentScore.ToString("0000");
 
         base.FixedUpdate();

@@ -42,11 +42,6 @@ public class EnemySpawner : MonoBehaviour
         StartCoroutine(SpawnEnemies());
     }
 
-    private void Update()
-    {
-        Debug.Log("EnemyMaxAmount = " + EnemyMaxAmount);
-    }
-
     private IEnumerator SpawnEnemies()
     {
         WaitForSeconds Wait = new WaitForSeconds(_enemySpawnerData._enemySpawnDelay);

@@ -21,7 +21,7 @@ MonoBehaviour:
   _elementalResistance: 1
   _technicalResistance: 1
   _attackRange: 15
-  _retreatRange: 12
+  _retreatRange: 8
   _followTime: 1.5
   _maxJumpAttackRange: 0
   _minJumpAttackRange: 0

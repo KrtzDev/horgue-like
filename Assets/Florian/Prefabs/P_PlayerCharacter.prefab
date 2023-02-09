@@ -951,13 +951,13 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4698856430502407209}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: da02311811525494bbef5cd591e33386, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   weapons:
-  - {fileID: 11400000, guid: 708f5adf8cabfce4398f45b3ff84534d, type: 2}
+  - {fileID: 11400000, guid: 7a12e50f6e9942d4aa8d94a6400be84c, type: 2}
 --- !u!1 &4698856430750863150
 GameObject:
   m_ObjectHideFlags: 0
