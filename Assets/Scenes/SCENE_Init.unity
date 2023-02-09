@@ -261,8 +261,11 @@ MonoBehaviour:
   - {fileID: 8721330641953635277, guid: 578780241b2c5d54086e4a2080d153ce, type: 3}
   _endscreen_Prefab: {fileID: 6614940772560601928, guid: e59baac1b66fcd04e9cc785e5bca11ca,
     type: 3}
-  _winningCondition: 0
-  _timeToSurvive: 0
+  _winningCondition: 1
+  _timeToSurvive: 90
+  _currentTimeToSurvive: 0
+  _currentScore: 0
+  _neededEnemyKill: 0
 --- !u!1001 &1776022109
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -330,6 +333,12 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8721330641953635283, guid: 578780241b2c5d54086e4a2080d153ce,
+        type: 3}
+      propertyPath: _gameUI_prefab
+      value: 
+      objectReference: {fileID: 1274344090816168882, guid: 2ea18690c85b8b246a41a54ecd8fded5,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 578780241b2c5d54086e4a2080d153ce, type: 3}
 --- !u!4 &1776022110 stripped

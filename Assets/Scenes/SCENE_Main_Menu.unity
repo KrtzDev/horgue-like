@@ -1023,6 +1023,17 @@ PrefabInstance:
       propertyPath: m_Name
       value: LoadData
       objectReference: {fileID: 0}
+    - target: {fileID: 3440539924923434845, guid: db4216ec71e55ed45accaad00a2c76c1,
+        type: 3}
+      propertyPath: _dataEntries
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3440539924923434845, guid: db4216ec71e55ed45accaad00a2c76c1,
+        type: 3}
+      propertyPath: _gigaRangedRobotData
+      value: 
+      objectReference: {fileID: 11400000, guid: 8dc834b5e34dc44468852d86bbd441ba,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: db4216ec71e55ed45accaad00a2c76c1, type: 3}
 --- !u!1 &1936234652

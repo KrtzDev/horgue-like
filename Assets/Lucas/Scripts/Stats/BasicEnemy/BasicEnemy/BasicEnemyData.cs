@@ -6,7 +6,7 @@ public class BasicEnemyData : ScriptableObject
     [Header("General")]
     public int _maxHealth = 100;
     public int _damagePerHit = 100;
-    public int _attackSpeed = 1;
+    public float _attackSpeed = 1;
     public int _givenXP = 1;
     public int _moveSpeed = 1;
     public int _armor = 1;

@@ -27741,12 +27741,6 @@ Transform:
   m_Father: {fileID: 1928633450}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
---- !u!4 &1901676197 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 6356963750585930601, guid: 62d6286d223d00e49ba8ca796795cc73,
-    type: 3}
-  m_PrefabInstance: {fileID: 240057999750417194}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1902928831
 GameObject:
   m_ObjectHideFlags: 0
@@ -34561,16 +34555,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2907804301207705110, guid: 62d6286d223d00e49ba8ca796795cc73,
-        type: 3}
-      propertyPath: _WeaponSpawnTransform
-      value: 
-      objectReference: {fileID: 1901676197}
-    - target: {fileID: 6356963750585930601, guid: 62d6286d223d00e49ba8ca796795cc73,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 1.185
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 62d6286d223d00e49ba8ca796795cc73, type: 3}

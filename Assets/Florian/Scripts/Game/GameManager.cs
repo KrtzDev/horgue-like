@@ -1,99 +1,123 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.AI;
 
 public class GameManager : Singleton<GameManager>
 {
-    private enum WinningCondition
-    {
-        KillAllEnemies,
-        SurviveForTime,
-        KillSpecificEnemy
-    }
+	private enum WinningCondition
+	{
+		KillAllEnemies,
+		SurviveForTime,
+		KillSpecificEnemy
+	}
 
-    [SerializeField]
-    private List<GameObject> managers = new List<GameObject>();
+	[SerializeField]
+	private List<GameObject> managers = new List<GameObject>();
 
-    [SerializeField]
-    private GameObject _endscreen_Prefab;
+	[SerializeField]
+	private GameObject _endscreen_Prefab;
 
-    [Header("WinningCondition")]
-    [SerializeField]
-    private WinningCondition _winningCondition;
+	[Header("WinningCondition")]
+	[SerializeField]
+	private WinningCondition _winningCondition;
+	[SerializeField]
+	private float _timeToSurvive;
 
-    public float _timeToSurvive;
+	[HideInInspector]
+	public float _currentTimeToSurvive;
 
-    public int _currentScore;
+	public int _currentScore;
 
-    private EnemySpawner _enemySpawner;
-    public int _neededEnemyKill;
-    private bool _hasWon;
+	private EnemySpawner _enemySpawner;
+	public int _neededEnemyKill;
+	private bool _hasWon;
 
-    private void Start()
-    {
-        SceneLoader.Instance.CompletedSceneLoad += OnCompletedSceneLoad;
+	private void Start()
+	{
+		SceneLoader.Instance.CompletedSceneLoad += OnCompletedSceneLoad;
 
-        _currentScore = 0;
-    }
+		_currentScore = 0;
+		_currentTimeToSurvive = _timeToSurvive;
+	}
 
-    private void OnCompletedSceneLoad()
-    {
-        Debug.Log("Scene Load");
-        if (SceneManager.GetActiveScene().name == "SCENE_Main_Menu") return;
-        _enemySpawner = GameObject.Find("EnemySpawner").GetComponent<EnemySpawner>();
-        _neededEnemyKill = _enemySpawner.EnemyMaxAmount;
-        Debug.Log("neededEnemyKill ( " + _neededEnemyKill + " ) = enemySpawner.MaxAmount ( " + _enemySpawner.EnemyMaxAmount + " )");
-    }
+	private void OnCompletedSceneLoad()
+	{
+		Debug.Log("Scene Load");
+		if (SceneManager.GetActiveScene().name == "SCENE_Main_Menu") return;
+		_hasWon = false;
+		_enemySpawner = GameObject.Find("EnemySpawner").GetComponent<EnemySpawner>();
+		_neededEnemyKill = _enemySpawner.EnemyMaxAmount;
+		Debug.Log("neededEnemyKill ( " + _neededEnemyKill + " ) = enemySpawner.MaxAmount ( " + _enemySpawner.EnemyMaxAmount + " )");
+	}
 
-    private void Update()
-    {
-        _timeToSurvive -= Time.deltaTime;
-        if (!_hasWon && _timeToSurvive <= 0 && _winningCondition == WinningCondition.SurviveForTime)
-        {
-            _hasWon = true;
-            RoundWon();
-        }
-    }
+	private void Update()
+	{
+		if (SceneManager.GetActiveScene().name == "SCENE_Main_Menu") return;
+		if (!_hasWon)
+			_currentTimeToSurvive -= Time.deltaTime;
+		if (!_hasWon && _currentTimeToSurvive <= 0 && _winningCondition == WinningCondition.SurviveForTime)
+		{
+			_hasWon = true;
+			_currentTimeToSurvive = _timeToSurvive;
+			RoundWon();
+		}
+	}
 
-    public void EnemyDied()
-    {
-        _neededEnemyKill--;
-        if (!_hasWon && _neededEnemyKill == 0 && _winningCondition == WinningCondition.KillAllEnemies)
-        {
-            _hasWon = true;
-            RoundWon();
-        }
+	public void EnemyDied()
+	{
+		_neededEnemyKill--;
+		if (!_hasWon && _neededEnemyKill == 0 && _winningCondition == WinningCondition.KillAllEnemies)
+		{
+			_hasWon = true;
+			RoundWon();
+		}
 
-        if (!_hasWon && _neededEnemyKill == 0 && _winningCondition == WinningCondition.KillSpecificEnemy)
-        {
-            _enemySpawner.SpawnRandomEnemy();
-        }
-        if (!_hasWon && _neededEnemyKill == -1 && _winningCondition == WinningCondition.KillSpecificEnemy)
-        {
+		if (!_hasWon && _neededEnemyKill == 0 && _winningCondition == WinningCondition.KillSpecificEnemy)
+		{
+			_enemySpawner.SpawnRandomEnemy();
+		}
+		if (!_hasWon && _neededEnemyKill == -1 && _winningCondition == WinningCondition.KillSpecificEnemy)
+		{
 
-            _hasWon = true;
-            RoundWon();
-        }
-    }
+			_hasWon = true;
+			RoundWon();
+		}
+	}
 
-    public void PlayerDied()
-    {
-        RoundLost();
-    }
+	public void PlayerDied()
+	{
+		if (!_hasWon)
+			RoundLost();
+	}
 
-    private void RoundWon()
-    {
-        Debug.Log("Round won");
-        InputManager.Instance.CharacterInputActions.Disable();
-        UIManager.Instance.Endscreen.gameObject.SetActive(true);
-        _hasWon = false;
-    }
+	private void RoundWon()
+	{
+		Debug.Log("Round won");
+		InputManager.Instance.CharacterInputActions.Disable();
+		UIManager.Instance.Endscreen.gameObject.SetActive(true);
+		EnemyStopFollowing();
+	}
 
-    private void RoundLost()
-    {
-        Debug.Log("Round Lost");
-        InputManager.Instance.CharacterInputActions.Disable();
-        UIManager.Instance.Endscreen.gameObject.SetActive(true);
-        _hasWon = false;
-    }
+	private void EnemyStopFollowing()
+	{
+		for (int i = 0; i < _enemySpawner.transform.childCount; i++)
+		{
+			for (int j = 0; j < _enemySpawner.transform.GetChild(i).childCount; j++)
+			{
+				// _EnemySpawner.transform.GetChild(i).GetChild(j).GetComponent<EnemyMovement>().PlayerTarget = _Decoy.transform;
+				_enemySpawner.transform.GetChild(i).GetChild(j).GetComponent<NavMeshAgent>().enabled = false;
+			}
+		}
+		_enemySpawner.gameObject.SetActive(false);
+	}
+
+	private void RoundLost()
+	{
+		Debug.Log("Round Lost");
+		InputManager.Instance.CharacterInputActions.Disable();
+		UIManager.Instance.Endscreen.gameObject.SetActive(true);
+		EnemyStopFollowing();
+	}
 }

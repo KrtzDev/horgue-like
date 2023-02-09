@@ -12,14 +12,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e53ff1b8ade7b5340af8b4e886fb2c85, type: 3}
   m_Name: RangedRobotData
   m_EditorClassIdentifier: 
-  _maxHealth: 85
+  _maxHealth: 60
   _damagePerHit: 100
-  _attackSpeed: 2
+  _attackSpeed: 1.5
   _givenXP: 3
   _moveSpeed: 1
   _armor: 1
   _elementalResistance: 1
   _technicalResistance: 1
-  _attackRange: 8
+  _attackRange: 10
   _retreatRange: 5
   _followTime: 1.5
+  _maxJumpAttackRange: 0
+  _minJumpAttackRange: 0
+  _jumpAttackChance: 0
+  _jumpAttackCooldown: 0
+  _jumpPrepTime: 0
+  _jumpTime: 0
+  _jumpForce: 0
+  _basicDamage: 0
+  HeightCurve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4

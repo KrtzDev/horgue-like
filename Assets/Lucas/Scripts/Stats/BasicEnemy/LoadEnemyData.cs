@@ -10,6 +10,8 @@ public class LoadEnemyData : ReadGoogleSheets
     private BasicEnemyData _rangedRobotData;
     [SerializeField]
     private BasicEnemyData _pasuKanData;
+    [SerializeField]
+    private BasicEnemyData _gigaRangedRobotData;
 
     public override void Awake()
     {
@@ -54,6 +56,17 @@ public class LoadEnemyData : ReadGoogleSheets
                 _pasuKanData._elementalResistance = int.Parse(tempEnemyData[7]);
                 _pasuKanData._technicalResistance = int.Parse(tempEnemyData[8]);
                 Debug.Log("PasuKan");
+                break;
+            case "GIGARangedRobot":
+                _gigaRangedRobotData._maxHealth = int.Parse(tempEnemyData[1]);
+                _gigaRangedRobotData._damagePerHit = int.Parse(tempEnemyData[2]);
+                _gigaRangedRobotData._attackSpeed = int.Parse(tempEnemyData[3]);
+                _gigaRangedRobotData._givenXP = int.Parse(tempEnemyData[4]);
+                _gigaRangedRobotData._moveSpeed = int.Parse(tempEnemyData[5]);
+                _gigaRangedRobotData._armor = int.Parse(tempEnemyData[6]);
+                _gigaRangedRobotData._elementalResistance = int.Parse(tempEnemyData[7]);
+                _gigaRangedRobotData._technicalResistance = int.Parse(tempEnemyData[8]);
+                Debug.Log("GIGA RangedRobot");
                 break;
         }
     }

@@ -1937,8 +1937,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.25, y: 3, z: 1.25}
-  m_Center: {x: 0, y: 1, z: 0}
+  m_Size: {x: 1.25, y: 2.5032604, z: 1.25}
+  m_Center: {x: 0, y: 1.2483698, z: 0}
 --- !u!114 &7300998086142530308
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1957,7 +1957,7 @@ MonoBehaviour:
   <Projectile>k__BackingField: {fileID: 8451927325676435795, guid: 4746290bed9561b4590c43ddb406e723,
     type: 3}
   <ProjectilePoint>k__BackingField: {fileID: 7221469875420454319}
-  _projectileSpeed: 12
+  _projectileSpeed: 18
   <GroundLayer>k__BackingField:
     serializedVersion: 2
     m_Bits: 512
@@ -1966,7 +1966,7 @@ MonoBehaviour:
     m_Bits: 128
   <PlayerLayer>k__BackingField:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
 --- !u!114 &7238498638767744560
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1982,6 +1982,7 @@ MonoBehaviour:
   <MaxHealth>k__BackingField: 100
   <CurrentHealth>k__BackingField: 0
   <Animator>k__BackingField: {fileID: 4301312500157032124}
+  <Enemy>k__BackingField: {fileID: 0}
 --- !u!1 &4301312500149769568
 GameObject:
   m_ObjectHideFlags: 0

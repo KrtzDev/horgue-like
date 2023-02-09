@@ -767,6 +767,7 @@ MonoBehaviour:
   <MaxHealth>k__BackingField: 100
   <CurrentHealth>k__BackingField: 0
   <Animator>k__BackingField: {fileID: 716891242282492267}
+  <Enemy>k__BackingField: {fileID: 0}
 --- !u!114 &2751320019283796165
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -793,7 +794,7 @@ MonoBehaviour:
     m_Bits: 128
   <PlayerLayer>k__BackingField:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
 --- !u!1 &716891242273133263
 GameObject:
   m_ObjectHideFlags: 0
