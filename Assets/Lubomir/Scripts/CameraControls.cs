@@ -21,7 +21,7 @@ public class CameraControls : MonoBehaviour
     }
 
 
-    private void FixedUpdate()
+    private void Update()
     {
         var keyboard = Keyboard.current;
 

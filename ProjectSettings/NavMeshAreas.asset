@@ -15,8 +15,8 @@ NavMeshProjectSettings:
     cost: 1
   - name: Jumpable / Walkable
     cost: 1
-  - name: 
-    cost: 1
+  - name: Hazard
+    cost: 0
   - name: 
     cost: 1
   - name: 
