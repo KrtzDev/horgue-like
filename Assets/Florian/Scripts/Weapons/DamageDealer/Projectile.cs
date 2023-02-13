@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Projectile : MonoBehaviour
+public class Projectile : DamageDealer
 {
 	public float finalBaseDamage;
 	public float finalAttackSpeed;

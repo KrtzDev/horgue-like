@@ -64,143 +64,183 @@ public class Weapon : ScriptableObject
 
     private float CalculateDamage()
     {
-        float damage = 0;
+        float totalDamage = 0;
+		int partCount = 0;
+
         if (_triggerMechanism)
         {
-            damage += _triggerMechanism.baseDamage;
+            totalDamage += _triggerMechanism.baseDamage;
+			partCount++;
         }
         if (_barrel)
         {
-            damage += _barrel.baseDamage;
+            totalDamage += _barrel.baseDamage;
+			partCount++;
         }
         if (_ammunition)
         {
-            damage += _ammunition.baseDamage;
+            totalDamage += _ammunition.baseDamage;
+			partCount++;
         }
-        return damage;
-    }
+
+		return partCount > 0 ? totalDamage / partCount : -1;
+	}
 
     private float CalculateAttackSpeed()
     {
-        float attackSpeed = 0;
+        float totalAttackSpeed = 0;
+		int partCount = 0;
+
         if (_grip)
         {
-            attackSpeed += _grip.attackSpeed;
+            totalAttackSpeed += _grip.attackSpeed;
+			partCount++;
         }
         if (_barrel)
         {
-            attackSpeed += _barrel.attackSpeed;
+            totalAttackSpeed += _barrel.attackSpeed;
+			partCount++;
         }
         if (_magazine)
         {
-            attackSpeed += _magazine.attackSpeed;
+            totalAttackSpeed += _magazine.attackSpeed;
+			partCount++;
         }
         if (_ammunition)
         {
-            attackSpeed += _ammunition.attackSpeed;
+            totalAttackSpeed += _ammunition.attackSpeed;
+			partCount++;
         }
         if (_triggerMechanism)
         {
-            attackSpeed += _triggerMechanism.attackSpeed;
+            totalAttackSpeed += _triggerMechanism.attackSpeed;
+			partCount++;
         }
         if (_sight)
         {
-            attackSpeed += _sight.attackSpeed;
+            totalAttackSpeed += _sight.attackSpeed;
+			partCount++;
         }
-        return attackSpeed;
-    }
+		return partCount > 0 ? totalAttackSpeed / partCount : -1;
+	}
 
     private float CalculateCooldown()
     {
-        float cooldown = 0;
+        float totalCooldown = 0;
+		int partCount = 0;
+
         if (_grip)
         {
-            cooldown += _grip.cooldown;
+            totalCooldown += _grip.cooldown;
+			partCount++;
         }
         if (_barrel)
         {
-            cooldown += _barrel.cooldown;
+            totalCooldown += _barrel.cooldown;
+			partCount++;
         }
         if (_magazine)
         {
-            cooldown += _magazine.cooldown;
+            totalCooldown += _magazine.cooldown;
+			partCount++;
         }
         if (_ammunition)
         {
-            cooldown += _ammunition.cooldown;
+            totalCooldown += _ammunition.cooldown;
+			partCount++;
         }
         if (_triggerMechanism)
         {
-            cooldown += _triggerMechanism.cooldown;
+            totalCooldown += _triggerMechanism.cooldown;
+			partCount++;
         }
-        return cooldown;
+
+		return partCount > 0 ? totalCooldown / partCount : -1;
     }
 
     private float CalculateProjectileSize()
     {
-        float projectileSize = 0;
+        float totalProjectileSize = 0;
+		int partCount = 0;
+
         if (_barrel)
         {
-            projectileSize += _barrel.projectileSize;
+            totalProjectileSize += _barrel.projectileSize;
+			partCount++;
         }
         if (_magazine)
         {
-            projectileSize += _magazine.projectileSize;
+            totalProjectileSize += _magazine.projectileSize;
+			partCount++;
         }
         if (_ammunition)
         {
-            projectileSize += _ammunition.projectileSize;
+            totalProjectileSize += _ammunition.projectileSize;
+			partCount++;
         }
-        return projectileSize;
-    }
+		return partCount > 0 ? totalProjectileSize / partCount : -1;
+	}
 
     private float CalculateCritChance()
     {
-        float critChance = 0;
+        float totalCritChance = 0;
+		int partCount = 0;
+
         if (_grip)
         {
-            critChance += _grip.critChance;
+            totalCritChance += _grip.critChance;
+			partCount++;
         }
         if (_barrel)
         {
-            critChance += _barrel.critChance;
+            totalCritChance += _barrel.critChance;
+			partCount++;
         }
         if (_ammunition)
         {
-            critChance += _ammunition.critChance;
+            totalCritChance += _ammunition.critChance;
+			partCount++;
         }
         if (_triggerMechanism)
         {
-            critChance += _triggerMechanism.critChance;
+            totalCritChance += _triggerMechanism.critChance;
+			partCount++;
         }
         if (_sight)
         {
-            critChance += _sight.critChance;
+            totalCritChance += _sight.critChance;
+			partCount++;
         }
-        return critChance;
-    }
+		return partCount > 0 ? totalCritChance / partCount : -1;
+	}
 
     private float CalculatefinalRange()
     {
-        float range = 0;
+        float totalRange = 0;
+		int partCount = 0;
+
         if (_barrel)
         {
-            range += _barrel.range;
+            totalRange += _barrel.range;
+			partCount++;
         }
         if (_ammunition)
         {
-            range += _ammunition.range;
+            totalRange += _ammunition.range;
+			partCount++;
         }
         if (_triggerMechanism)
         {
-            range += _triggerMechanism.range;
+            totalRange += _triggerMechanism.range;
+			partCount++;
         }
         if (_sight)
         {
-            range += _sight.range;
+            totalRange += _sight.range;
+			partCount++;
         }
-        return range;
-    }
+		return partCount > 0 ? totalRange / partCount : -1;
+	}
 
 	public void TryShoot()
 	{
@@ -224,16 +264,19 @@ public class Weapon : ScriptableObject
 
     private void Shoot()
     {
-		Debug.Log(this.name);
         if (_possibleProjectile.finalAttackSpeed == 0) return;
         _shotDelay -= Time.deltaTime;
         if (_shotDelay <= 0)
         {
             if(!RotateTowardsEnemy()) return;
+
+			DamageDealer spawnedDamageDealer;
+
             _capacity--;
-            _possibleProjectile.attackPattern.AttackInPattern(_possibleProjectile, _possibleProjectile.spawnPosition);
             _shotDelay = 1 / _possibleProjectile.finalAttackSpeed;
-        }
+            spawnedDamageDealer = _possibleProjectile.attackPattern.AttackInPattern(_possibleProjectile, _possibleProjectile.spawnPosition);
+			spawnedDamageDealer.gameObject.transform.localScale = Vector3.one * _possibleProjectile.finalProjectileSize;
+		}
     }
 
     private bool RotateTowardsEnemy()
