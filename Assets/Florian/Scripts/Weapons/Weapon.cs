@@ -40,8 +40,8 @@ public class Weapon : ScriptableObject
     public void Initialize(Transform owningTransform)
     {
         _playerTransform = owningTransform;
-		_weaponTransform = _playerTransform.GetComponent<PlayerCharacter>().WeaponSpawnTransform;
-        _currentWeaponPrefab = Instantiate(weaponPrefab, _weaponTransform);
+        _currentWeaponPrefab = Instantiate(weaponPrefab, _playerTransform.GetComponent<PlayerCharacter>().WeaponSpawnTransform);
+		_weaponTransform = _currentWeaponPrefab.transform;
 
         _possibleProjectile = _ammunition.projectilePrefab;
         _possibleProjectile.finalBaseDamage = CalculateDamage();
@@ -266,10 +266,9 @@ public class Weapon : ScriptableObject
     {
         if (_possibleProjectile.finalAttackSpeed == 0) return;
         _shotDelay -= Time.deltaTime;
+        if(!RotateTowardsEnemy()) return;
         if (_shotDelay <= 0)
         {
-            if(!RotateTowardsEnemy()) return;
-
 			DamageDealer spawnedDamageDealer;
 
             _capacity--;
@@ -291,7 +290,7 @@ public class Weapon : ScriptableObject
             float distanceToEnemy = Vector3.Distance(_weaponTransform.position, enemy.transform.position);
             if (distanceToEnemy < currentclosestdistance)
             {
-                if (!Physics.Raycast(_weaponTransform.position, (enemy.transform.position - _weaponTransform.position), distanceToEnemy, _groundLayer))
+                if (!Physics.Raycast(_weaponTransform.position, ((enemy.transform.position + Vector3.up) - _weaponTransform.position), distanceToEnemy, _groundLayer))
                 {
                     closestEnemy = enemy.GetComponent<Enemy>();
                     currentclosestdistance = distanceToEnemy;
@@ -300,9 +299,13 @@ public class Weapon : ScriptableObject
         }
         if (closestEnemy)
         {
-            Vector3 direction = closestEnemy.transform.position - _weaponTransform.position;
-			_weaponTransform.transform.rotation = Quaternion.LookRotation(direction);
-			return true;
+            Vector3 direction = (closestEnemy.transform.position + Vector3.up) - _weaponTransform.position;
+			Vector3 rotateTowardsDirection = Vector3.RotateTowards(_weaponTransform.forward, direction, 20 * Time.deltaTime, .0f);
+			_weaponTransform.transform.rotation = Quaternion.LookRotation(rotateTowardsDirection);
+			if ((_weaponTransform.forward - direction.normalized).magnitude <= .1f)
+			{
+				return true;
+			}
         }
 		return false;
     }
