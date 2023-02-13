@@ -2,5 +2,5 @@ using UnityEngine;
 
 public interface IAttackInPattern
 {
-    void AttackInPattern(Projectile projectile, Transform spawnPosition);
+    DamageDealer AttackInPattern(Projectile projectile, Transform spawnPosition);
 }
