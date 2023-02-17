@@ -5,11 +5,14 @@ public class UIManager : Singleton<UIManager>
 {
 
     public Endscreen Endscreen { get; private set; }
+    public Endscreen WaveEndScreen { get; private set; }
     public PauseMenu PauseMenu { get; private set; }
     public GameObject GameUI { get; private set; }
 
     [SerializeField]
     private Endscreen _endScreenUI_prefab;
+    [SerializeField]
+    private Endscreen _waveEndScreenUI_prefab;
     [SerializeField]
     private PauseMenu _pauseMenuUI_prefab;
 	[SerializeField]
@@ -24,6 +27,8 @@ public class UIManager : Singleton<UIManager>
     {
         Endscreen = Instantiate(_endScreenUI_prefab);
         Endscreen.gameObject.SetActive(false);
+        WaveEndScreen = Instantiate(_waveEndScreenUI_prefab);
+        WaveEndScreen.gameObject.SetActive(false);
         PauseMenu = Instantiate(_pauseMenuUI_prefab);
         PauseMenu.gameObject.SetActive(false);
 
