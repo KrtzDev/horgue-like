@@ -32,14 +32,14 @@ public class HealthComponent : MonoBehaviour
         float currentHealthPct = (float)CurrentHealth / (float)MaxHealth;
         OnHealthPercentChanged?.Invoke(currentHealthPct);
 
-        /* if (this.gameObject.CompareTag("Enemy"))
+        if (this.gameObject.CompareTag("Enemy"))
         {
             if(CurrentHealth > 0)
             {
                 Animator.SetTrigger("damage");
             }
         }
-        */
+        
 
         if (this.gameObject.CompareTag("Player"))
         {
