@@ -16,7 +16,10 @@ public class LoadPlayerData : ReadGoogleSheets
 
     public override void ApplySheetData(List<string> tempPlayerData)
     {
-        _playerData._movementSpeed = float.Parse(tempPlayerData[1]);
-        _playerData._maxHealth = int.Parse(tempPlayerData[2]);
+        if(tempPlayerData[0] == "Player")
+        {
+            _playerData._movementSpeed = float.Parse(tempPlayerData[1]);
+            _playerData._maxHealth = int.Parse(tempPlayerData[2]);
+        }
     }
 }

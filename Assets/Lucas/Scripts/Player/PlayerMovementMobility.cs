@@ -155,7 +155,7 @@ public class PlayerMovementMobility : MonoBehaviour
     private void UseAbility(InputAction.CallbackContext ctx)
     {
 
-        if (ctx.performed && !_isUsingAbility)
+        if (ctx.performed && !_isUsingAbility && GameManager.Instance._playerCanUseAbilities)
         {
             if (_canUseJumpAbility && AbilityCDTimer <= 0)
             {

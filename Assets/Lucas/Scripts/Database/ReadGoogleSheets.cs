@@ -27,6 +27,14 @@ public abstract class ReadGoogleSheets : MonoBehaviour
         }
     }
 
+    public virtual void OnEnable()
+    {
+        for (iteration = 0; iteration < _dataEntries; iteration++)
+        {
+            StartCoroutine(ObtainSheetData());
+        }
+    }
+
     private void Update()
     {
         /* Realtime - bessere Methode wohl möglich (call bei Spielstart etc. pp)
@@ -54,12 +62,12 @@ public abstract class ReadGoogleSheets : MonoBehaviour
                 eachrow = itemo[0].AsStringList;
                 foreach (var bro in eachrow)
                 {
-                    rowsjson += bro + ",";
+                    rowsjson += bro + ";";
                 }
                 rowsjson += "\n";
             }
             lines = rowsjson.Split(new char[] { '\n' });
-            notes = lines[column].Split(new char[] { ',' });
+            notes = lines[column].Split(new char[] { ';' });
             List<string> tempData = new List<string>();
             for (iteration = 0; iteration < notes.Length - 1; iteration++)
             {

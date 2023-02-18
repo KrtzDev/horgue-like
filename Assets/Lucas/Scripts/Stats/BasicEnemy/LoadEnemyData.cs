@@ -25,8 +25,8 @@ public class LoadEnemyData : ReadGoogleSheets
         switch (tempEnemyData[0])
         {
             case "Basic":
-                _basicEnemyData._maxHealth = int.Parse(tempEnemyData[1]);
-                _basicEnemyData._damagePerHit = int.Parse(tempEnemyData[2]);
+                _basicEnemyData._maxHealth = (int)(int.Parse(tempEnemyData[1]) * GameManager.Instance._GameManagerValues[GameManager.Instance._currentLevelArray]._healthBonus);
+                _basicEnemyData._damagePerHit = (int)(int.Parse(tempEnemyData[2]) * GameManager.Instance._GameManagerValues[GameManager.Instance._currentLevelArray]._damageBonus);
                 _basicEnemyData._attackSpeed = int.Parse(tempEnemyData[3]);
                 _basicEnemyData._givenXP = int.Parse(tempEnemyData[4]);
                 _basicEnemyData._moveSpeed = int.Parse(tempEnemyData[5]);
@@ -36,8 +36,8 @@ public class LoadEnemyData : ReadGoogleSheets
                 Debug.Log("Basic");
                 break;
             case "RangedRobot":
-                _rangedRobotData._maxHealth = int.Parse(tempEnemyData[1]);
-                _rangedRobotData._damagePerHit = int.Parse(tempEnemyData[2]);
+                _rangedRobotData._maxHealth = (int)((float.Parse(tempEnemyData[1]) * _basicEnemyData._maxHealth));
+                _rangedRobotData._damagePerHit = (int)(float.Parse(tempEnemyData[2]) * _basicEnemyData._damagePerHit);
                 _rangedRobotData._attackSpeed = int.Parse(tempEnemyData[3]);
                 _rangedRobotData._givenXP = int.Parse(tempEnemyData[4]);
                 _rangedRobotData._moveSpeed = int.Parse(tempEnemyData[5]);
@@ -47,8 +47,8 @@ public class LoadEnemyData : ReadGoogleSheets
                 Debug.Log("RangedRobot");
                 break;
             case "PasuKan":
-                _pasuKanData._maxHealth = int.Parse(tempEnemyData[1]);
-                _pasuKanData._damagePerHit = int.Parse(tempEnemyData[2]);
+                _pasuKanData._maxHealth = (int)(float.Parse(tempEnemyData[1]) * _basicEnemyData._maxHealth);
+                _pasuKanData._damagePerHit = (int)(float.Parse(tempEnemyData[2]) * _basicEnemyData._damagePerHit);
                 _pasuKanData._attackSpeed = int.Parse(tempEnemyData[3]);
                 _pasuKanData._givenXP = int.Parse(tempEnemyData[4]);
                 _pasuKanData._moveSpeed = int.Parse(tempEnemyData[5]);
@@ -58,8 +58,8 @@ public class LoadEnemyData : ReadGoogleSheets
                 Debug.Log("PasuKan");
                 break;
             case "GIGARangedRobot":
-                _gigaRangedRobotData._maxHealth = int.Parse(tempEnemyData[1]);
-                _gigaRangedRobotData._damagePerHit = int.Parse(tempEnemyData[2]);
+                _gigaRangedRobotData._maxHealth = (int)(float.Parse(tempEnemyData[1]) * _basicEnemyData._maxHealth);
+                _gigaRangedRobotData._damagePerHit = (int)(float.Parse(tempEnemyData[2]) * _basicEnemyData._damagePerHit);
                 _gigaRangedRobotData._attackSpeed = int.Parse(tempEnemyData[3]);
                 _gigaRangedRobotData._givenXP = int.Parse(tempEnemyData[4]);
                 _gigaRangedRobotData._moveSpeed = int.Parse(tempEnemyData[5]);

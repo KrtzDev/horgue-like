@@ -44,7 +44,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da3043a5ec43f7e418bb3bed27fe9dc7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _enemySpawnerData: {fileID: 11400000, guid: 66547b0600cd9b348938adf19e88ab68, type: 2}
+  _enemySpawnerData:
+  - {fileID: 11400000, guid: 66547b0600cd9b348938adf19e88ab68, type: 2}
+  - {fileID: 11400000, guid: bf53881ad9e341c4ba6211a4e7fabc6c, type: 2}
+  - {fileID: 11400000, guid: 1de1f6f20ca28814d80004febe7eed3a, type: 2}
   SpawnCollider:
   - {fileID: 0}
   - {fileID: 0}

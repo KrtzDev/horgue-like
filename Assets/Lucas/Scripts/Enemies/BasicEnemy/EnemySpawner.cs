@@ -6,7 +6,7 @@ using UnityEngine.AI;
 public class EnemySpawner : MonoBehaviour
 {
     [SerializeField]
-    private EnemySpawnerData _enemySpawnerData;
+    private EnemySpawnerData[] _enemySpawnerData;
 
     public int EnemiesThatHaveSpawned { get; set; }
 
@@ -28,7 +28,7 @@ public class EnemySpawner : MonoBehaviour
 
     private void Awake()
     {
-        EnemyMaxAmount = _enemySpawnerData._enemyWavesToSpawn * _enemySpawnerData._enemyWaveSize;
+        EnemyMaxAmount = _enemySpawnerData[GameManager.Instance._currentLevelArray]._enemyWavesToSpawn * _enemySpawnerData[GameManager.Instance._currentLevelArray]._enemyWaveSize;
 
         for (int i = 0; i < EnemyPrefabs.Count; i++)
         {
@@ -44,13 +44,13 @@ public class EnemySpawner : MonoBehaviour
 
     private IEnumerator SpawnEnemies()
     {
-        WaitForSeconds Wait = new WaitForSeconds(_enemySpawnerData._enemySpawnDelay);
+        WaitForSeconds Wait = new WaitForSeconds(_enemySpawnerData[GameManager.Instance._currentLevelArray]._enemySpawnDelay);
 
         int SpawnedEnemies = 0;
 
         while (SpawnedEnemies < EnemyMaxAmount)
         {
-            for(int i = 0; i < _enemySpawnerData._enemyWaveSize; i++)
+            for(int i = 0; i < _enemySpawnerData[GameManager.Instance._currentLevelArray]._enemyWaveSize; i++)
             {
                 if (EnemySpawnMethod == SpawnMethod.RoundRobin)
                 {
