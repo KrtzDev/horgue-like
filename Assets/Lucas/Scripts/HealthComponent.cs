@@ -15,7 +15,6 @@ public class HealthComponent : MonoBehaviour
 
     private void Awake()
     {
-
         if (this.gameObject.CompareTag("Enemy"))
         {
             Enemy = gameObject.GetComponent<Enemy>();
@@ -41,6 +40,11 @@ public class HealthComponent : MonoBehaviour
             }
         }
         */
+
+        if (this.gameObject.CompareTag("Player"))
+        {
+            GameObject.FindGameObjectWithTag("UI").GetComponentInChildren<UIDamageFlash>().DamageFlash(0.25f, .5f);
+        }
 
         if (CurrentHealth <= 0 && !_isDead)
         {

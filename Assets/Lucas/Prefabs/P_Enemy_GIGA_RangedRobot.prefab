@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 6064448851983090240}
   - component: {fileID: 8331073926669857340}
   m_Layer: 8
-  m_Name: P_GIGA_EnemyProjectile
+  m_Name: P_Enemy_GIGA_RangedRobot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

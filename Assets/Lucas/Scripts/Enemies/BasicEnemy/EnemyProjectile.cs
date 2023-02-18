@@ -6,8 +6,7 @@ public class EnemyProjectile : MonoBehaviour
 {
     [SerializeField]
     private LayerMask hitLayerMask;
-    [SerializeField]
-    private int baseDamage;
+    public int baseDamage;
 
     private void Start()
     {

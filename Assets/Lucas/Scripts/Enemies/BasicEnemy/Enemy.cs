@@ -17,6 +17,14 @@ public class Enemy : PoolableObject
 
     [HideInInspector] public Vector3 TargetDirection { get; set; }
 
+    public void Start()
+    {
+        if(Projectile != null)
+        {
+            Projectile.GetComponent<EnemyProjectile>().baseDamage = this.gameObject.GetComponent<Enemy>().EnemyData._damagePerHit;
+        }
+    }
+
     public override void OnDisable()
     {
         base.OnDisable();
