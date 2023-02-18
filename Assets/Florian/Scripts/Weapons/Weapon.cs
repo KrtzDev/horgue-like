@@ -40,7 +40,7 @@ public class Weapon : ScriptableObject
     public void Initialize(Transform owningTransform)
     {
         _playerTransform = owningTransform;
-        _currentWeaponPrefab = Instantiate(weaponPrefab, _playerTransform.GetComponent<PlayerCharacter>().WeaponSpawnTransform);
+        _currentWeaponPrefab = Instantiate(weaponPrefab, owningTransform);
 		_weaponTransform = _currentWeaponPrefab.transform;
 
         _possibleProjectile = _ammunition.projectilePrefab;

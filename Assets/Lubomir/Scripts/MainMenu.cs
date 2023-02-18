@@ -1,16 +1,18 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
-    [SerializeField]
-    private GameObject _levelButtonPrefab;
-    [SerializeField]
-    private Transform _levelButtonParent;
+	[SerializeField]
+	private GameObject _levelButtonPrefab;
+	[SerializeField]
+	private Transform _levelButtonParent;
 
+	[SerializeField]
+	private const bool _showLevelButtons = true;
+
+#if true
+	#region Create Level Seletion Buttons
     private void Awake()
     {
         SpawnButtons();
@@ -18,7 +20,8 @@ public class MainMenu : MonoBehaviour
 
     private void SpawnButtons()
     {
-        if (SceneManager.sceneCountInBuildSettings > 0)
+
+		if (SceneManager.sceneCountInBuildSettings > 0)
         {
             for (int i = 2; i < SceneManager.sceneCountInBuildSettings; i++)
             {
@@ -37,14 +40,22 @@ public class MainMenu : MonoBehaviour
             Debug.Log("No scenes in build");
         }
     }
+	#endregion
+#endif
 
-    public void LevelButton(int _levelIndex)
-    {
-        SceneLoader.Instance.LoadScene(_levelIndex);
-    }
+	public void StartGame()
+	{
+		SceneLoader.Instance.LoadScene(2);
+	}
 
-    public void Quit()
-    {
-        Application.Quit();
-    }
+	public void LevelButton(int _levelIndex)
+	{
+		SceneLoader.Instance.LoadScene(_levelIndex);
+	}
+
+	public void Quit()
+	{
+		Application.Quit();
+	}
+
 }
