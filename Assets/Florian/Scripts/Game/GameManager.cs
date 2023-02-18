@@ -58,9 +58,13 @@ public class GameManager : Singleton<GameManager>
 	private void OnCompletedSceneLoad()
 	{
 		Debug.Log("Scene Load");
-
-		
+	
 		_currentTimeToSurvive = _GameManagerValues[_currentLevelArray]._timeToSurvive;
+
+		if (SceneManager.GetActiveScene().name == "SCENE_Weapon_Crafting")
+		{
+			return;
+		}
 
 		if (SceneManager.GetActiveScene().name == "SCENE_Main_Menu")
         {

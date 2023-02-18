@@ -25,15 +25,15 @@ public class UIManager : Singleton<UIManager>
 
     private void OnCompletedSceneLoad()
     {
-        Endscreen = Instantiate(_endScreenUI_prefab);
-        Endscreen.gameObject.SetActive(false);
-        WaveEndScreen = Instantiate(_waveEndScreenUI_prefab);
-        WaveEndScreen.gameObject.SetActive(false);
+		if (SceneManager.GetActiveScene().name == "SCENE_Main_Menu" || SceneManager.GetActiveScene().name == "SCENE_Weapon_Crafting") 
+			return;
+
         PauseMenu = Instantiate(_pauseMenuUI_prefab);
         PauseMenu.gameObject.SetActive(false);
-
-		if (SceneManager.GetActiveScene().buildIndex == 1) return;
-
+		Endscreen = Instantiate(_endScreenUI_prefab);
+		Endscreen.gameObject.SetActive(false);
+		WaveEndScreen = Instantiate(_waveEndScreenUI_prefab);
+		WaveEndScreen.gameObject.SetActive(false);
 		GameUI = Instantiate(_gameUI_prefab);
 		GameUI.gameObject.SetActive(true);
     }

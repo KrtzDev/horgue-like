@@ -44,7 +44,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c370953bc6cba124b800daa04d649cf7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _endScreenUI_prefab: {fileID: 7625480102595686751, guid: e59baac1b66fcd04e9cc785e5bca11ca,
+  _endScreenUI_prefab: {fileID: 7625480102595686751, guid: 5656bd33a2bfa2a46914bfe532d26bda,
+    type: 3}
+  _waveEndScreenUI_prefab: {fileID: 7625480102595686751, guid: e59baac1b66fcd04e9cc785e5bca11ca,
     type: 3}
   _pauseMenuUI_prefab: {fileID: 7286049448992250832, guid: e59d1778905f0e54da3bc1a30713c34c,
+    type: 3}
+  _gameUI_prefab: {fileID: 1274344090816168882, guid: 2ea18690c85b8b246a41a54ecd8fded5,
     type: 3}

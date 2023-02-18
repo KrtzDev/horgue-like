@@ -5,6 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class SceneLoader : Singleton<SceneLoader>
 {
+	private const string scenePath = "Assets/Scenes/";
+
     public Action CompletedSceneLoad;
 
     public SceneFader SceneFader { get; private set; }
@@ -23,7 +25,7 @@ public class SceneLoader : Singleton<SceneLoader>
 
     public void LoadScene(string sceneToLoad)
     {
-        _sceneToLoad = SceneManager.GetSceneByName(sceneToLoad).buildIndex;
+        _sceneToLoad = SceneUtility.GetBuildIndexByScenePath(scenePath + sceneToLoad + ".unity");
         _currentScene = SceneManager.GetActiveScene();
 
         InputManager.Instance.DisableCharacterInputs();
