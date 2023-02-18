@@ -264,16 +264,16 @@ MonoBehaviour:
   _waveendscreen_Prefab: {fileID: 6614940772560601928, guid: e59baac1b66fcd04e9cc785e5bca11ca,
     type: 3}
   _loadData: {fileID: 1985540511}
-  levelBuff:
+  _GameManagerValues:
   - {fileID: 11400000, guid: d87aa26dde7df3e469ed4ce81cab15d7, type: 2}
   - {fileID: 11400000, guid: 15ce0c668d7fd6d46a6d3167086a31de, type: 2}
   - {fileID: 11400000, guid: ffb617e12eaa10942a1210052869048e, type: 2}
   _winningCondition: 1
-  _timeToSurvive: 15
   _currentTimeToSurvive: 0
   _currentScore: 0
   _neededEnemyKill: 0
-  _currentLevel: 0
+  _currentLevel: 1
+  _currentLevelArray: 0
   _currentWave: 0
   _playerCanUseAbilities: 0
 --- !u!1001 &1776022109
@@ -506,6 +506,29 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3440539924923434843, guid: db4216ec71e55ed45accaad00a2c76c1,
+        type: 3}
+      propertyPath: _dataEntries
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3440539924923434843, guid: db4216ec71e55ed45accaad00a2c76c1,
+        type: 3}
+      propertyPath: _enemySpawnerData1
+      value: 
+      objectReference: {fileID: 11400000, guid: 66547b0600cd9b348938adf19e88ab68,
+        type: 2}
+    - target: {fileID: 3440539924923434843, guid: db4216ec71e55ed45accaad00a2c76c1,
+        type: 3}
+      propertyPath: _enemySpawnerData2
+      value: 
+      objectReference: {fileID: 11400000, guid: bf53881ad9e341c4ba6211a4e7fabc6c,
+        type: 2}
+    - target: {fileID: 3440539924923434843, guid: db4216ec71e55ed45accaad00a2c76c1,
+        type: 3}
+      propertyPath: _enemySpawnerData3
+      value: 
+      objectReference: {fileID: 11400000, guid: 1de1f6f20ca28814d80004febe7eed3a,
+        type: 2}
     - target: {fileID: 3440539924923434844, guid: db4216ec71e55ed45accaad00a2c76c1,
         type: 3}
       propertyPath: m_Name

@@ -24,13 +24,11 @@ public class GameManager : Singleton<GameManager>
 	[SerializeField]
 	private GameObject _loadData;
 
-	public List<GameManagerValues> levelBuff = new List<GameManagerValues>();
+	public List<GameManagerValues> _GameManagerValues = new List<GameManagerValues>();
 
 	[Header("WinningCondition")]
 	[SerializeField]
 	private WinningCondition _winningCondition;
-	[SerializeField]
-	private float _timeToSurvive;
 
 	[HideInInspector]
 	public float _currentTimeToSurvive;
@@ -42,7 +40,8 @@ public class GameManager : Singleton<GameManager>
 	private bool _hasWon;
 	private bool _hasLost;
 
-	public int _currentLevel = 0;
+	public int _currentLevel = 1;
+	public int _currentLevelArray;
 	public int _currentWave = 0;
 
 	public bool _playerCanUseAbilities;
@@ -51,19 +50,17 @@ public class GameManager : Singleton<GameManager>
 	{
 		SceneLoader.Instance.CompletedSceneLoad += OnCompletedSceneLoad;
 
-		if (_currentLevel == 0)
-		{
-			_currentLevel += 1;
-		}
-
 		_currentScore = 0;
-		_currentTimeToSurvive = _timeToSurvive;
+		_currentLevel = 1;
+		_currentLevelArray = _currentLevel - 1;
 	}
 
 	private void OnCompletedSceneLoad()
 	{
 		Debug.Log("Scene Load");
 
+		
+		_currentTimeToSurvive = _GameManagerValues[_currentLevelArray]._timeToSurvive;
 
 		if (SceneManager.GetActiveScene().name == "SCENE_Main_Menu")
         {
@@ -105,7 +102,7 @@ public class GameManager : Singleton<GameManager>
 		if (!_hasWon && _currentTimeToSurvive <= 0 && _winningCondition == WinningCondition.SurviveForTime)
 		{
 			_hasWon = true;
-			_currentTimeToSurvive = _timeToSurvive;
+			_currentTimeToSurvive = _GameManagerValues[_currentLevelArray]._timeToSurvive;
 			RoundWon();
 		}
 	}
@@ -153,12 +150,14 @@ public class GameManager : Singleton<GameManager>
 			UIManager.Instance.Endscreen.gameObject.SetActive(true);
 
 			_currentLevel += 1;
+			_currentLevelArray = _currentLevel - 1;
 			_currentWave = 0;
 
 			if(_currentLevel > 3)
             {
-				_currentLevel = 0;
-            }
+				_currentLevel = 1;
+				_currentLevelArray = _currentLevel - 1;
+			}
         }
 		else
         {

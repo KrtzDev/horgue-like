@@ -6,4 +6,5 @@ public class GameManagerValues : ScriptableObject
     [Header("General")]
     public float _healthBonus;
     public float _damageBonus;
+    public int _timeToSurvive;
 }

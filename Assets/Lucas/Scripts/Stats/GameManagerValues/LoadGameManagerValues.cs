@@ -18,21 +18,24 @@ public class LoadGameManagerValues : ReadGoogleSheets
         base.Awake();
     }
 
-    public override void ApplySheetData(List<string> tempEnemyData)
+    public override void ApplySheetData(List<string> tempGameManagerData)
     {
-        switch (tempEnemyData[0])
+        switch (tempGameManagerData[0])
         {
             case "Level01":
-                _Level01._healthBonus = float.Parse(tempEnemyData[1]);
-                _Level01._damageBonus = float.Parse(tempEnemyData[2]);
+                _Level01._healthBonus = float.Parse(tempGameManagerData[1]);
+                _Level01._damageBonus = float.Parse(tempGameManagerData[2]);
+                _Level01._timeToSurvive = int.Parse(tempGameManagerData[6]);
                 break;
             case "Level02":
-                _Level02._healthBonus = float.Parse(tempEnemyData[1]);
-                _Level02._damageBonus = float.Parse(tempEnemyData[2]);
+                _Level02._healthBonus = float.Parse(tempGameManagerData[1]);
+                _Level02._damageBonus = float.Parse(tempGameManagerData[2]);
+                _Level02._timeToSurvive = int.Parse(tempGameManagerData[6]);
                 break;
             case "Level03":
-                _Level03._healthBonus = float.Parse(tempEnemyData[1]);
-                _Level03._damageBonus = float.Parse(tempEnemyData[2]);
+                _Level03._healthBonus = float.Parse(tempGameManagerData[1]);
+                _Level03._damageBonus = float.Parse(tempGameManagerData[2]);
+                _Level03._timeToSurvive = int.Parse(tempGameManagerData[6]);
                 break;
         }
     }

@@ -25,8 +25,8 @@ public class LoadEnemyData : ReadGoogleSheets
         switch (tempEnemyData[0])
         {
             case "Basic":
-                _basicEnemyData._maxHealth = (int)(int.Parse(tempEnemyData[1]) * GameManager.Instance.levelBuff[GameManager.Instance._currentLevel]._healthBonus);
-                _basicEnemyData._damagePerHit = (int)(int.Parse(tempEnemyData[2]) * GameManager.Instance.levelBuff[GameManager.Instance._currentLevel]._damageBonus);
+                _basicEnemyData._maxHealth = (int)(int.Parse(tempEnemyData[1]) * GameManager.Instance._GameManagerValues[GameManager.Instance._currentLevel]._healthBonus);
+                _basicEnemyData._damagePerHit = (int)(int.Parse(tempEnemyData[2]) * GameManager.Instance._GameManagerValues[GameManager.Instance._currentLevel]._damageBonus);
                 _basicEnemyData._attackSpeed = int.Parse(tempEnemyData[3]);
                 _basicEnemyData._givenXP = int.Parse(tempEnemyData[4]);
                 _basicEnemyData._moveSpeed = int.Parse(tempEnemyData[5]);
