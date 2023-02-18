@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 3440539924923434845}
   - component: {fileID: 3440539924923434840}
   - component: {fileID: 3440539924923434843}
+  - component: {fileID: 1349997560}
   m_Layer: 0
   m_Name: LoadData
   m_TagString: Untagged
@@ -47,10 +48,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _GoogleURL: 
-  _dataEntries: 3
+  _dataEntries: 4
   _basicEnemyData: {fileID: 11400000, guid: 97ce18f7045fdd943aeeee81c418c5cc, type: 2}
   _rangedRobotData: {fileID: 11400000, guid: fdf791b2749b7224699643a8d5477270, type: 2}
   _pasuKanData: {fileID: 11400000, guid: 1c6784eeb238619469f87bbb4a9877f5, type: 2}
+  _gigaRangedRobotData: {fileID: 11400000, guid: 8dc834b5e34dc44468852d86bbd441ba,
+    type: 2}
 --- !u!114 &3440539924923434840
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -81,3 +84,20 @@ MonoBehaviour:
   _GoogleURL: 
   _dataEntries: 1
   _enemySpawnerData: {fileID: 11400000, guid: 66547b0600cd9b348938adf19e88ab68, type: 2}
+--- !u!114 &1349997560
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3440539924923434844}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a16ccc1f210fdad448a40fb8f40ab69c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _GoogleURL: 
+  _dataEntries: 3
+  _Level01: {fileID: 11400000, guid: d87aa26dde7df3e469ed4ce81cab15d7, type: 2}
+  _Level02: {fileID: 11400000, guid: 15ce0c668d7fd6d46a6d3167086a31de, type: 2}
+  _Level03: {fileID: 11400000, guid: ffb617e12eaa10942a1210052869048e, type: 2}

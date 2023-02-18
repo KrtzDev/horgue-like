@@ -21,6 +21,11 @@ public class GameManager : Singleton<GameManager>
 	[SerializeField]
 	private GameObject _waveendscreen_Prefab;
 
+	[SerializeField]
+	private GameObject _loadData;
+
+	public List<GameManagerValues> levelBuff = new List<GameManagerValues>();
+
 	[Header("WinningCondition")]
 	[SerializeField]
 	private WinningCondition _winningCondition;
@@ -35,6 +40,7 @@ public class GameManager : Singleton<GameManager>
 	private EnemySpawner _enemySpawner;
 	public int _neededEnemyKill;
 	private bool _hasWon;
+	private bool _hasLost;
 
 	public int _currentLevel = 0;
 	public int _currentWave = 0;
@@ -45,6 +51,11 @@ public class GameManager : Singleton<GameManager>
 	{
 		SceneLoader.Instance.CompletedSceneLoad += OnCompletedSceneLoad;
 
+		if (_currentLevel == 0)
+		{
+			_currentLevel += 1;
+		}
+
 		_currentScore = 0;
 		_currentTimeToSurvive = _timeToSurvive;
 	}
@@ -52,15 +63,21 @@ public class GameManager : Singleton<GameManager>
 	private void OnCompletedSceneLoad()
 	{
 		Debug.Log("Scene Load");
-		if (SceneManager.GetActiveScene().name == "SCENE_Main_Menu") return;
+
+
+		if (SceneManager.GetActiveScene().name == "SCENE_Main_Menu")
+        {
+			_loadData.SetActive(true);
+			return;
+        }
+
+		_loadData.SetActive(false);
+
 		_hasWon = false;
+		_hasLost = false;
+
 		_enemySpawner = GameObject.Find("EnemySpawner").GetComponent<EnemySpawner>();
 		_neededEnemyKill = _enemySpawner.EnemyMaxAmount;
-
-		if (_currentLevel == 0)
-		{
-			_currentLevel += 1;
-		}
 
 		_currentWave += 1;
 
@@ -83,7 +100,8 @@ public class GameManager : Singleton<GameManager>
 		// Zeit abgelaufen
 
 		if (!_hasWon)
-			_currentTimeToSurvive -= Time.deltaTime;
+            if (!_hasLost)
+				_currentTimeToSurvive -= Time.deltaTime;
 		if (!_hasWon && _currentTimeToSurvive <= 0 && _winningCondition == WinningCondition.SurviveForTime)
 		{
 			_hasWon = true;
@@ -121,6 +139,7 @@ public class GameManager : Singleton<GameManager>
 	public void PlayerDied()
 	{
 		if (!_hasWon)
+			_hasLost = true;
 			RoundLost();
 	}
 
