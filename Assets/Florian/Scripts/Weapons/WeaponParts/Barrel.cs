@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "new Barrel", menuName = "ModularWeapon/WeaponParts/Barrel")]
-public class Barrel : ScriptableObject
+public class Barrel : WeaponPart
 {
     [Header("Stats")]
     public float baseDamage;

@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "new Barrel", menuName = "ModularWeapon/WeaponParts/Ammunition")]
-public class Ammunition : ScriptableObject
+public class Ammunition : WeaponPart
 {
     public Projectile projectilePrefab;
 

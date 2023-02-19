@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "new TriggerMechanism",menuName = "ModularWeapon/WeaponParts/TriggerMechanism")]
-public class TriggerMechanism : ScriptableObject
+public class TriggerMechanism : WeaponPart
 {
     [Header("Stats")]
     public float baseDamage;
