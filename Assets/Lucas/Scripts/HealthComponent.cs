@@ -11,6 +11,9 @@ public class HealthComponent : MonoBehaviour
     [field: SerializeField] public Animator Animator { get; private set; }
     [field: SerializeField] public Enemy Enemy { get; private set; }
 
+    [field: SerializeField] private Transform _HitParticlePosition;
+    [field: SerializeField] private ParticleSystem _HitParticle;
+
     private bool _isDead = false;
 
     private void Awake()
@@ -28,6 +31,9 @@ public class HealthComponent : MonoBehaviour
     public void TakeDamage(int damage)
     {
         CurrentHealth -= damage;
+
+        ParticleSystem HitParticle = Instantiate(_HitParticle, _HitParticlePosition.transform.position, Quaternion.identity);
+        HitParticle.Play();
 
         float currentHealthPct = (float)CurrentHealth / (float)MaxHealth;
         OnHealthPercentChanged?.Invoke(currentHealthPct);
