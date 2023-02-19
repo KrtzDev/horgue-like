@@ -32,7 +32,7 @@ public class HealthComponent : MonoBehaviour
     {
         CurrentHealth -= damage;
 
-        ParticleSystem HitParticle = Instantiate(_HitParticle, _HitParticlePosition.transform.position, Quaternion.identity);
+        ParticleSystem HitParticle = Instantiate(_HitParticle, _HitParticlePosition.transform.position, Quaternion.identity, this.transform);
         HitParticle.Play();
 
         float currentHealthPct = (float)CurrentHealth / (float)MaxHealth;
