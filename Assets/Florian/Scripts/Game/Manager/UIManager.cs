@@ -8,7 +8,9 @@ public class UIManager : Singleton<UIManager>
 	public Endscreen Endscreen { get; private set; }
 	public WaveEndScreen WaveEndScreen { get; private set; }
 	public PauseMenu PauseMenu { get; private set; }
+	public CraftingMenu CraftingMenu { get; private set; }
 	public GameObject GameUI { get; private set; }
+
 
 	[SerializeField]
 	private Endscreen _endScreenUI_prefab;
@@ -16,6 +18,8 @@ public class UIManager : Singleton<UIManager>
 	private WaveEndScreen _waveEndScreenUI_prefab;
 	[SerializeField]
 	private PauseMenu _pauseMenuUI_prefab;
+	[SerializeField]
+	private CraftingMenu _craftingMenuUI_prefab;
 	[SerializeField]
 	private GameObject _gameUI_prefab;
 	[SerializeField]
@@ -69,8 +73,15 @@ public class UIManager : Singleton<UIManager>
 
 	private void OnCompletedSceneLoad()
 	{
-		if (SceneManager.GetActiveScene().name == "SCENE_Main_Menu" || SceneManager.GetActiveScene().name == "SCENE_Weapon_Crafting")
+		if (SceneManager.GetActiveScene().name == "SCENE_Main_Menu")
 			return;
+
+		if (SceneManager.GetActiveScene().name == "SCENE_Weapon_Crafting")
+		{
+			CraftingMenu = Instantiate(_craftingMenuUI_prefab);
+			CraftingMenu.gameObject.SetActive(true);
+			return;
+		}
 
 		PauseMenu = Instantiate(_pauseMenuUI_prefab);
 		PauseMenu.gameObject.SetActive(false);

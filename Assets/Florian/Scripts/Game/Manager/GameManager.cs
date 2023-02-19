@@ -35,7 +35,7 @@ public class GameManager : Singleton<GameManager>
 	public int _currentLevelArray;
 	public int _currentWave = 0;
 
-	private int _numberOfRewards = 1;
+	private int _numberOfRewards = 3;
 
 	public bool _playerCanUseAbilities;
 

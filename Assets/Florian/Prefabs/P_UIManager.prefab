@@ -50,6 +50,8 @@ MonoBehaviour:
     type: 3}
   _pauseMenuUI_prefab: {fileID: 7286049448992250832, guid: e59d1778905f0e54da3bc1a30713c34c,
     type: 3}
+  _craftingMenuUI_prefab: {fileID: 7751430925920149868, guid: 3ec3ed2a8dfa4954d8684a2c16f7aeaf,
+    type: 3}
   _gameUI_prefab: {fileID: 1274344090816168882, guid: 2ea18690c85b8b246a41a54ecd8fded5,
     type: 3}
   _rewardUI_prefab: {fileID: 8270753814037413858, guid: 97021b92a4866c844ae8f8c8d345523b,
