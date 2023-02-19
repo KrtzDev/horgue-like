@@ -273,6 +273,9 @@ public class Weapon : ScriptableObject
 
             _capacity--;
             _shotDelay = 1 / _possibleProjectile.finalAttackSpeed;
+
+            _currentWeaponPrefab.MuzzleFlash.Play();
+
             spawnedDamageDealer = _possibleProjectile.attackPattern.AttackInPattern(_possibleProjectile, _possibleProjectile.spawnPosition);
 			spawnedDamageDealer.gameObject.transform.localScale = Vector3.one * _possibleProjectile.finalProjectileSize;
 		}

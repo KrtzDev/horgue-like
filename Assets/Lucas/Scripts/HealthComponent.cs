@@ -11,11 +11,13 @@ public class HealthComponent : MonoBehaviour
     [field: SerializeField] public Animator Animator { get; private set; }
     [field: SerializeField] public Enemy Enemy { get; private set; }
 
+    [field: SerializeField] private Transform _HitParticlePosition;
+    [field: SerializeField] private ParticleSystem _HitParticle;
+
     private bool _isDead = false;
 
     private void Awake()
     {
-
         if (this.gameObject.CompareTag("Enemy"))
         {
             Enemy = gameObject.GetComponent<Enemy>();
@@ -30,17 +32,25 @@ public class HealthComponent : MonoBehaviour
     {
         CurrentHealth -= damage;
 
+        ParticleSystem HitParticle = Instantiate(_HitParticle, _HitParticlePosition.transform.position, Quaternion.identity, this.transform);
+        HitParticle.Play();
+
         float currentHealthPct = (float)CurrentHealth / (float)MaxHealth;
         OnHealthPercentChanged?.Invoke(currentHealthPct);
 
-        /* if (this.gameObject.CompareTag("Enemy"))
+        if (this.gameObject.CompareTag("Enemy"))
         {
             if(CurrentHealth > 0)
             {
                 Animator.SetTrigger("damage");
             }
         }
-        */
+        
+
+        if (this.gameObject.CompareTag("Player"))
+        {
+            GameObject.FindGameObjectWithTag("UI").GetComponentInChildren<UIDamageFlash>().DamageFlash(0.25f, .5f);
+        }
 
         if (CurrentHealth <= 0 && !_isDead)
         {

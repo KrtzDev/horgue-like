@@ -49,6 +49,7 @@ public class PasuKan_ChaseState : StateMachineBehaviour
                 _jumpAttackTimer = enemy.EnemyData._jumpAttackCooldown;
                 animator.transform.LookAt(_followPosition);
                 animator.SetTrigger("jumpAttack");
+                animator.SetBool("isChasing", false);
             }
             else
             {

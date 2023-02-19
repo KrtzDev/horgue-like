@@ -878,6 +878,7 @@ MonoBehaviour:
   <CurrentHealth>k__BackingField: 0
   <Animator>k__BackingField: {fileID: 0}
   <Enemy>k__BackingField: {fileID: 0}
+  _HitParticle: {fileID: 0}
 --- !u!114 &8773851501896812125
 MonoBehaviour:
   m_ObjectHideFlags: 0
