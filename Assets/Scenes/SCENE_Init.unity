@@ -256,13 +256,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: faab6ec51635667428680f73973bcae7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  managers:
-  - {fileID: 5230501354439474706, guid: 4de969029f783fb4cbe5a1da39f3cf2d, type: 3}
-  - {fileID: 8721330641953635277, guid: 578780241b2c5d54086e4a2080d153ce, type: 3}
-  _endscreen_Prefab: {fileID: 6614940772560601928, guid: 5656bd33a2bfa2a46914bfe532d26bda,
-    type: 3}
-  _waveendscreen_Prefab: {fileID: 6614940772560601928, guid: e59baac1b66fcd04e9cc785e5bca11ca,
-    type: 3}
   _loadData: {fileID: 1985540511}
   _GameManagerValues:
   - {fileID: 11400000, guid: d87aa26dde7df3e469ed4ce81cab15d7, type: 2}
@@ -276,6 +269,52 @@ MonoBehaviour:
   _currentLevelArray: 0
   _currentWave: 0
   _playerCanUseAbilities: 0
+--- !u!1 &1115456804
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1115456805}
+  - component: {fileID: 1115456806}
+  m_Layer: 0
+  m_Name: RewardManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1115456805
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1115456804}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2028828741}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1115456806
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1115456804}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b3999f354236034ea5313822afec58b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _WeaponPartRewards:
+  - {fileID: 11400000, guid: 13ee628900dcfd145989993ec9dffdb3, type: 2}
 --- !u!1001 &1776022109
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -343,24 +382,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8721330641953635283, guid: 578780241b2c5d54086e4a2080d153ce,
-        type: 3}
-      propertyPath: _gameUI_prefab
-      value: 
-      objectReference: {fileID: 1274344090816168882, guid: 2ea18690c85b8b246a41a54ecd8fded5,
-        type: 3}
-    - target: {fileID: 8721330641953635283, guid: 578780241b2c5d54086e4a2080d153ce,
-        type: 3}
-      propertyPath: _endScreenUI_prefab
-      value: 
-      objectReference: {fileID: 7625480102595686751, guid: 5656bd33a2bfa2a46914bfe532d26bda,
-        type: 3}
-    - target: {fileID: 8721330641953635283, guid: 578780241b2c5d54086e4a2080d153ce,
-        type: 3}
-      propertyPath: _waveEndScreenUI_prefab
-      value: 
-      objectReference: {fileID: 7625480102595686751, guid: e59baac1b66fcd04e9cc785e5bca11ca,
-        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 578780241b2c5d54086e4a2080d153ce, type: 3}
 --- !u!4 &1776022110 stripped
@@ -506,29 +527,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3440539924923434843, guid: db4216ec71e55ed45accaad00a2c76c1,
-        type: 3}
-      propertyPath: _dataEntries
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 3440539924923434843, guid: db4216ec71e55ed45accaad00a2c76c1,
-        type: 3}
-      propertyPath: _enemySpawnerData1
-      value: 
-      objectReference: {fileID: 11400000, guid: 66547b0600cd9b348938adf19e88ab68,
-        type: 2}
-    - target: {fileID: 3440539924923434843, guid: db4216ec71e55ed45accaad00a2c76c1,
-        type: 3}
-      propertyPath: _enemySpawnerData2
-      value: 
-      objectReference: {fileID: 11400000, guid: bf53881ad9e341c4ba6211a4e7fabc6c,
-        type: 2}
-    - target: {fileID: 3440539924923434843, guid: db4216ec71e55ed45accaad00a2c76c1,
-        type: 3}
-      propertyPath: _enemySpawnerData3
-      value: 
-      objectReference: {fileID: 11400000, guid: 1de1f6f20ca28814d80004febe7eed3a,
-        type: 2}
     - target: {fileID: 3440539924923434844, guid: db4216ec71e55ed45accaad00a2c76c1,
         type: 3}
       propertyPath: m_Name
@@ -574,6 +572,7 @@ Transform:
   - {fileID: 795601514089258370}
   - {fileID: 1810713759}
   - {fileID: 1776022110}
+  - {fileID: 1115456805}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

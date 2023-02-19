@@ -82,8 +82,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _GoogleURL: 
-  _dataEntries: 1
-  _enemySpawnerData: {fileID: 11400000, guid: 66547b0600cd9b348938adf19e88ab68, type: 2}
+  _dataEntries: 3
+  _enemySpawnerData1: {fileID: 11400000, guid: 66547b0600cd9b348938adf19e88ab68, type: 2}
+  _enemySpawnerData2: {fileID: 11400000, guid: bf53881ad9e341c4ba6211a4e7fabc6c, type: 2}
+  _enemySpawnerData3: {fileID: 11400000, guid: 1de1f6f20ca28814d80004febe7eed3a, type: 2}
 --- !u!114 &1349997560
 MonoBehaviour:
   m_ObjectHideFlags: 0

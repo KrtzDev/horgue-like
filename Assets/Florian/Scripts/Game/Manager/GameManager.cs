@@ -1,8 +1,7 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.AI;
+using UnityEngine.SceneManagement;
 
 public class GameManager : Singleton<GameManager>
 {
@@ -12,14 +11,6 @@ public class GameManager : Singleton<GameManager>
 		SurviveForTime,
 		KillSpecificEnemy
 	}
-
-	[SerializeField]
-	private List<GameObject> managers = new List<GameObject>();
-
-	[SerializeField]
-	private GameObject _endscreen_Prefab;
-	[SerializeField]
-	private GameObject _waveendscreen_Prefab;
 
 	[SerializeField]
 	private GameObject _loadData;
@@ -44,6 +35,8 @@ public class GameManager : Singleton<GameManager>
 	public int _currentLevelArray;
 	public int _currentWave = 0;
 
+	private int _numberOfRewards = 3;
+
 	public bool _playerCanUseAbilities;
 
 	private void Start()
@@ -59,14 +52,18 @@ public class GameManager : Singleton<GameManager>
 	{
 		Debug.Log("Scene Load");
 
-		
 		_currentTimeToSurvive = _GameManagerValues[_currentLevelArray]._timeToSurvive;
 
+		if (SceneManager.GetActiveScene().name == "SCENE_Weapon_Crafting")
+		{
+			return;
+		}
+
 		if (SceneManager.GetActiveScene().name == "SCENE_Main_Menu")
-        {
+		{
 			_loadData.SetActive(true);
 			return;
-        }
+		}
 
 		_loadData.SetActive(false);
 
@@ -97,7 +94,7 @@ public class GameManager : Singleton<GameManager>
 		// Zeit abgelaufen
 
 		if (!_hasWon)
-            if (!_hasLost)
+			if (!_hasLost)
 				_currentTimeToSurvive -= Time.deltaTime;
 		if (!_hasWon && _currentTimeToSurvive <= 0 && _winningCondition == WinningCondition.SurviveForTime)
 		{
@@ -137,7 +134,7 @@ public class GameManager : Singleton<GameManager>
 	{
 		if (!_hasWon)
 			_hasLost = true;
-			RoundLost();
+		RoundLost();
 	}
 
 	private void RoundWon()
@@ -145,23 +142,31 @@ public class GameManager : Singleton<GameManager>
 		Debug.Log("Round won");
 		InputManager.Instance.CharacterInputActions.Disable();
 
-		if(_currentWave >= 3)
-        {
-			UIManager.Instance.Endscreen.gameObject.SetActive(true);
+		if (_currentWave >= 3)
+		{
+			List<Reward> rewards = new List<Reward>();
+			for (int i = 0; i < _numberOfRewards; i++)
+			{
+				rewards.Add(RewardManager.Instance.GetRandomReward());
+			}
+
+			UIManager.Instance.ShowLevelEndScreen(LevelStatus.Won);
+			UIManager.Instance.DisplayRewards(rewards);
+
 
 			_currentLevel += 1;
 			_currentLevelArray = _currentLevel - 1;
 			_currentWave = 0;
 
-			if(_currentLevel > 3)
-            {
+			if (_currentLevel > 3)
+			{
 				_currentLevel = 1;
 				_currentLevelArray = _currentLevel - 1;
 			}
-        }
+		}
 		else
-        {
-			UIManager.Instance.WaveEndScreen.gameObject.SetActive(true);
+		{
+			UIManager.Instance.ShowWaveEndScreen(LevelStatus.Won);
 		}
 
 		EnemyStopFollowing();
@@ -184,7 +189,7 @@ public class GameManager : Singleton<GameManager>
 	{
 		Debug.Log("Round Lost");
 		InputManager.Instance.CharacterInputActions.Disable();
-		UIManager.Instance.Endscreen.gameObject.SetActive(true);
+		UIManager.Instance.ShowLevelEndScreen(LevelStatus.Lost);
 		UIManager.Instance.WaveEndScreen.gameObject.SetActive(false);
 		EnemyStopFollowing();
 	}

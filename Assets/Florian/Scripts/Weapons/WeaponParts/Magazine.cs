@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "new Magazine", menuName = "ModularWeapon/WeaponParts/Magazine")]
-public class Magazine : ScriptableObject
+public class Magazine : WeaponPart
 {
     [Header("Stats")]
     public float attackSpeed;

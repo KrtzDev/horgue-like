@@ -20,4 +20,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/SCENE_Level_02.unity
     guid: ce9ce29c12a36ea4c90644a90ed096d9
+  - enabled: 1
+    path: Assets/Scenes/SCENE_Weapon_Crafting.unity
+    guid: fbbb3b1e874237c42bf7c071f9f12af7
   m_configObjects: {}

@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "new Grip", menuName = "ModularWeapon/WeaponParts/Grip")]
-public class Grip : ScriptableObject
+public class Grip : WeaponPart
 {
     [Header("Stats")]
     public float attackSpeed;
