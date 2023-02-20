@@ -29,7 +29,7 @@ public abstract class ReadGoogleSheets : MonoBehaviour
 
     public virtual void OnEnable()
     {
-        for (iteration = 0; iteration < _dataEntries; iteration++)
+        for (iteration = 0; iteration <= _dataEntries; iteration++)
         {
             StartCoroutine(ObtainSheetData());
         }
