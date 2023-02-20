@@ -30,7 +30,6 @@ public class Weapon : ScriptableObject
 
     private bool _isReloading;
     private WeaponSkeleton _currentWeaponPrefab;
-    private Transform _playerTransform;
 	private Transform _weaponTransform;
     [SerializeField]
     private LayerMask _enemyLayer;
@@ -39,7 +38,6 @@ public class Weapon : ScriptableObject
 
     public void Initialize(Transform owningTransform)
     {
-        _playerTransform = owningTransform;
         _currentWeaponPrefab = Instantiate(weaponPrefab, owningTransform);
 		_weaponTransform = _currentWeaponPrefab.transform;
 
@@ -269,6 +267,7 @@ public class Weapon : ScriptableObject
         if(!RotateTowardsEnemy()) return;
         if (_shotDelay <= 0)
         {
+			Debug.Log(this.name);
 			DamageDealer spawnedDamageDealer;
 
             _capacity--;
@@ -289,7 +288,6 @@ public class Weapon : ScriptableObject
         Collider[] enemies = Physics.OverlapSphere(_weaponTransform.position, _possibleProjectile.finalRange, _enemyLayer);
         foreach (var enemy in enemies)
         {
-            Debug.Log(enemy.name);
             float distanceToEnemy = Vector3.Distance(_weaponTransform.position, enemy.transform.position);
             if (distanceToEnemy < currentclosestdistance)
             {

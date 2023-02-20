@@ -17,7 +17,6 @@ public class Projectile : DamageDealer
 
 	private void OnTriggerEnter(Collider other)
 	{
-		Debug.Log(other.name);
 		if ((_hitLayerMask.value & (1 << other.gameObject.layer)) > 0)
 		{
 			if (other.TryGetComponent(out HealthComponent enemyHealth))
