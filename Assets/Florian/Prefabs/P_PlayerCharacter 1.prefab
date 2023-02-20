@@ -441,7 +441,7 @@ MonoBehaviour:
   _jumpCD: 0.75
   _fallMultiplier: 10
   _jumpVelocityFalloff: 11
-  _jumpForce: 25
+  _jumpForce: 20
   _decoy: {fileID: 6670527697290465931}
   _dashCD: 2.5
   _dashForce: 30
@@ -465,13 +465,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da02311811525494bbef5cd591e33386, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _weaponSpawnSlots:
-  - spawnTransform: {fileID: 1519811092967642993}
-    isOccupied: 0
-  - spawnTransform: {fileID: 6558037404220602614}
-    isOccupied: 0
   weapons:
   - {fileID: 11400000, guid: 7a12e50f6e9942d4aa8d94a6400be84c, type: 2}
+  - {fileID: 11400000, guid: c82686377885c5b45bb908aa042c721c, type: 2}
 --- !u!1 &2136897129718072671
 GameObject:
   m_ObjectHideFlags: 0
