@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -27,8 +28,9 @@ public class RewardManager : Singleton<RewardManager>
 		SceneLoader.Instance.CompletedSceneLoad += OnCompletedSceneLoad;
 	}
 
-	private void OnCompletedSceneLoad()
+	private async void OnCompletedSceneLoad()
 	{
+		await Task.Delay(10);
 		if (SceneManager.GetActiveScene().name == "SCENE_Weapon_Crafting")
 		{
 			UIManager.Instance.CraftingMenu.PopulateRewardUI(drawnRewards);
