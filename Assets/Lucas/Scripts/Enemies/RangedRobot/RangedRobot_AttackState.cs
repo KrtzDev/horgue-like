@@ -42,8 +42,9 @@ public class RangedRobot_AttackState : StateMachineBehaviour
             _attackTimer = enemy.EnemyData._attackSpeed;
             enemy.TargetDirection = (_followPosition - animator.transform.position).normalized;
             animator.SetTrigger("shoot");
+            animator.SetBool("isShooting", true);
         }
-        else
+        else if (animator.GetBool("isShooting") == false)
         {
             _attackTimer -= Time.deltaTime;
 

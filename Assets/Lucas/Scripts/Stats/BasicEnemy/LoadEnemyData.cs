@@ -38,7 +38,7 @@ public class LoadEnemyData : ReadGoogleSheets
             case "RangedRobot":
                 _rangedRobotData._maxHealth = (int)((float.Parse(tempEnemyData[1]) * _basicEnemyData._maxHealth));
                 _rangedRobotData._damagePerHit = (int)(float.Parse(tempEnemyData[2]) * _basicEnemyData._damagePerHit);
-                _rangedRobotData._attackSpeed = int.Parse(tempEnemyData[3]);
+                _rangedRobotData._attackSpeed = float.Parse(tempEnemyData[3]);
                 _rangedRobotData._givenXP = int.Parse(tempEnemyData[4]);
                 _rangedRobotData._moveSpeed = int.Parse(tempEnemyData[5]);
                 _rangedRobotData._armor = int.Parse(tempEnemyData[6]);
@@ -49,7 +49,7 @@ public class LoadEnemyData : ReadGoogleSheets
             case "PasuKan":
                 _pasuKanData._maxHealth = (int)(float.Parse(tempEnemyData[1]) * _basicEnemyData._maxHealth);
                 _pasuKanData._damagePerHit = (int)(float.Parse(tempEnemyData[2]) * _basicEnemyData._damagePerHit);
-                _pasuKanData._attackSpeed = int.Parse(tempEnemyData[3]);
+                _pasuKanData._attackSpeed = float.Parse(tempEnemyData[3]);
                 _pasuKanData._givenXP = int.Parse(tempEnemyData[4]);
                 _pasuKanData._moveSpeed = int.Parse(tempEnemyData[5]);
                 _pasuKanData._armor = int.Parse(tempEnemyData[6]);
@@ -60,7 +60,7 @@ public class LoadEnemyData : ReadGoogleSheets
             case "GIGARangedRobot":
                 _gigaRangedRobotData._maxHealth = (int)(float.Parse(tempEnemyData[1]) * _basicEnemyData._maxHealth);
                 _gigaRangedRobotData._damagePerHit = (int)(float.Parse(tempEnemyData[2]) * _basicEnemyData._damagePerHit);
-                _gigaRangedRobotData._attackSpeed = int.Parse(tempEnemyData[3]);
+                _gigaRangedRobotData._attackSpeed = float.Parse(tempEnemyData[3]);
                 _gigaRangedRobotData._givenXP = int.Parse(tempEnemyData[4]);
                 _gigaRangedRobotData._moveSpeed = int.Parse(tempEnemyData[5]);
                 _gigaRangedRobotData._armor = int.Parse(tempEnemyData[6]);

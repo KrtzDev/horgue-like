@@ -8,7 +8,7 @@ public class BasicEnemyData : ScriptableObject
     public int _damagePerHit = 100;
     public float _attackSpeed = 1;
     public int _givenXP = 1;
-    public int _moveSpeed = 1;
+    public float _moveSpeed = 1;
     public int _armor = 1;
     public int _elementalResistance = 1;
     public int _technicalResistance = 1;

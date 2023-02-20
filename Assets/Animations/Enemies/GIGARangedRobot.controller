@@ -314,7 +314,7 @@ AnimatorController:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: RangedRobot
+  m_Name: GIGARangedRobot
   serializedVersion: 5
   m_AnimatorParameters:
   - m_Name: isChasing
@@ -593,7 +593,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: MultiShot
+  m_Name: Shoot
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -607,7 +607,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 2288842b68a013e4996d256e7e9917ea, type: 2}
+  m_Motion: {fileID: 7400000, guid: 714547937257f624ba7342b0ef078b1d, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 

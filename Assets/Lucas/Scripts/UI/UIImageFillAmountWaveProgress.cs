@@ -44,15 +44,24 @@ public class UIImageFillAmountWaveProgress : UIImageFillAmount
             float tempTimer = Mathf.Abs(GameManager.Instance._currentTimeToSurvive);
 			_currentValue = tempTimer;
 
-            float minutes = Mathf.FloorToInt(tempTimer / 60);
+            /* float minutes = Mathf.FloorToInt(tempTimer / 60);
             float seconds = Mathf.FloorToInt(tempTimer % 60);
             float milliseconds = tempTimer * 1000;
             milliseconds = (milliseconds % 1000);
 
             LevelTimer.text = string.Format("{0:00}:{1:00}.{2:000}", minutes, seconds, milliseconds);
+            */
+
+            float seconds = Mathf.FloorToInt(tempTimer);
+            float milliseconds = tempTimer * 1000;
+            milliseconds = (milliseconds % 1000);
+
+            LevelTimer.text = string.Format("{0:00}.{1:000}", seconds, milliseconds);
         }
-        EnemiesKilledText.text = _enemiesKilled + " / " + _maxEnemiesAmount;
-        ScoreText.text = GameManager.Instance._currentScore.ToString("0000");
+
+        // EnemiesKilledText.text = _enemiesKilled + " / " + _maxEnemiesAmount;
+        EnemiesKilledText.text = _enemiesKilled.ToString("000");
+        ScoreText.text = GameManager.Instance._currentScore.ToString("000");
 
         base.FixedUpdate();
     }

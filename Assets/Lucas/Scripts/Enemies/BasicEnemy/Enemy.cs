@@ -38,8 +38,18 @@ public class Enemy : PoolableObject
         rb.AddForce(TargetDirection * _projectileSpeed, ForceMode.Impulse);
     }
 
+    public void DoneShooting()
+    {
+        Agent.GetComponent<Animator>().SetBool("isShooting", false);
+    }
+
     public void SetDeactive()
     {
         this.gameObject.SetActive(false);
+    }
+
+    public void SetColliderDeactive()
+    {
+        this.gameObject.GetComponent<Collider>().enabled = false;
     }
 }

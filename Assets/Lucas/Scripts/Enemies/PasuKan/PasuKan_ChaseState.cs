@@ -15,6 +15,9 @@ public class PasuKan_ChaseState : StateMachineBehaviour
     private float _attackTimer;
     private float _jumpAttackTimer;
 
+    private float oldSpeed;
+    private bool rageMode = false;
+
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
@@ -40,27 +43,48 @@ public class PasuKan_ChaseState : StateMachineBehaviour
 
         float distance = Vector3.Distance(animator.transform.position, _followPosition);
 
-        if(distance < enemy.EnemyData._maxJumpAttackRange && distance > enemy.EnemyData._minJumpAttackRange && distance > enemy.EnemyData._attackRange && _jumpAttackTimer < 0)
-        {
-            int random = Random.Range(0, 100);
+        RaycastHit hit;
+        Debug.DrawRay(animator.transform.position + new Vector3(0, 0.5f, 0), ((_followPosition + new Vector3(0, 0.5f, 0))- (animator.transform.position + new Vector3(0, 0.5f, 0))));
+        Debug.DrawRay(animator.transform.position + new Vector3(0, 0.5f, 0), ((new Vector3(_followPosition.x, enemy.transform.position.y, _followPosition.z) + new Vector3(0, 0.5f, 0)) - (animator.transform.position + new Vector3(0, 0.5f, 0))), Color.green);
 
-            if(random < enemy.EnemyData._jumpAttackChance)
-            {
-                _jumpAttackTimer = enemy.EnemyData._jumpAttackCooldown;
-                animator.transform.LookAt(_followPosition);
-                animator.SetTrigger("jumpAttack");
-                animator.SetBool("isChasing", false);
-            }
-            else
-            {
-                _jumpAttackTimer = enemy.EnemyData._jumpAttackCooldown;
-            }
-        }
-        else
+        if (!Physics.Raycast(enemy.transform.position + new Vector3(0, 0.5f, 0), ((new Vector3(_followPosition.x, enemy.transform.position.y, _followPosition.z) + new Vector3(0, 0.5f, 0)) - (animator.transform.position + new Vector3(0, 0.5f, 0))), out hit, distance, enemy.GroundLayer))
         {
-            _jumpAttackTimer -= Time.deltaTime;
+            if (Physics.Raycast(enemy.transform.position + new Vector3(0, 0.5f, 0), Vector3.forward * distance, out hit, enemy.PlayerLayer))
+            {
+                if (distance < enemy.EnemyData._maxJumpAttackRange && distance > enemy.EnemyData._minJumpAttackRange && distance > enemy.EnemyData._attackRange && _jumpAttackTimer < 0)
+                {
+                    int random = Random.Range(0, 100);
+
+                    if (random < enemy.EnemyData._jumpAttackChance)
+                    {
+                        /* _jumpAttackTimer = enemy.EnemyData._jumpAttackCooldown;
+                        animator.transform.LookAt(_followPosition);
+                        animator.SetTrigger("jumpAttack");
+                        animator.SetBool("isChasing", false);
+                        */
+
+                        _jumpAttackTimer = enemy.EnemyData._jumpAttackCooldown;
+                        animator.transform.LookAt(_followPosition);
+                        animator.SetTrigger("rageSpeed");
+                        rageMode = true;
+                        oldSpeed = agent.speed;
+                        agent.speed *= 2.5f;
+                    }
+                    else
+                    {
+                        _jumpAttackTimer = enemy.EnemyData._jumpAttackCooldown;
+                    }
+                }
+            }
         }
-         
+        
+        _jumpAttackTimer -= Time.deltaTime;
+
+        if(rageMode && _jumpAttackTimer <= enemy.EnemyData._jumpAttackCooldown / 2)
+        {
+            agent.speed = oldSpeed;
+        }
+
         if (distance < enemy.EnemyData._attackRange && _attackTimer < 0)
         {
             _attackTimer = enemy.EnemyData._attackSpeed;
