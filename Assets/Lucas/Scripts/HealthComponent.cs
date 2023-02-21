@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class HealthComponent : MonoBehaviour
 {
@@ -82,6 +83,11 @@ public class HealthComponent : MonoBehaviour
         if (this.gameObject.GetComponent<Rigidbody>() != null)
         {
             this.gameObject.GetComponent<Rigidbody>().isKinematic = true;
+        }
+
+        if(this.gameObject.GetComponent<NavMeshAgent>() != null)
+        {
+            this.gameObject.GetComponent<NavMeshAgent>().enabled = false;
         }
 
         if(this.gameObject.GetComponent<Enemy>() != null)

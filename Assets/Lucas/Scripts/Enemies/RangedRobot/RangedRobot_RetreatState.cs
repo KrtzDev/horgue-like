@@ -41,7 +41,8 @@ public class RangedRobot_RetreatState : StateMachineBehaviour
         Vector3 newPos = animator.transform.position + dirToPlayer;
 
         animator.transform.LookAt(newPos);
-        agent.SetDestination(newPos);
+        if (agent.enabled)
+            agent.SetDestination(newPos);
 
         float distance = Vector3.Distance(animator.transform.position, _followPosition);
 

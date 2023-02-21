@@ -14,4 +14,22 @@ public class PlayerCharacter : MonoBehaviour
     public Rigidbody CharacterRigidbody { get => _characterRigidbody; set => _characterRigidbody = value; }
     public Camera Camera { get => _camera; set => _camera = value; }
 	public Transform WeaponSpawnTransform { get => _WeaponSpawnTransform; set => _WeaponSpawnTransform = value; }
+
+    private float waterDamageTimer;
+
+    private void Update()
+    {
+        if(waterDamageTimer >= 0)
+            waterDamageTimer -= Time.deltaTime;
+    }
+
+    private void OnCollisionStay(Collision collision)
+    {
+        if(collision.collider.CompareTag("Wasser") && waterDamageTimer <= 0)
+        {
+            this.GetComponent<HealthComponent>().TakeDamage(1);
+            waterDamageTimer = 0.5f;
+        }
+
+    }
 }

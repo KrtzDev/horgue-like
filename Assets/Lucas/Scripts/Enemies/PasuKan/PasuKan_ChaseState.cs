@@ -33,12 +33,14 @@ public class PasuKan_ChaseState : StateMachineBehaviour
         if (!enemy.FollowDecoy)
         {
             _followPosition = new Vector3(player.position.x, player.position.y, player.position.z);
-            agent.SetDestination(_followPosition);
+            if (agent.enabled)
+                agent.SetDestination(_followPosition);
         }
         else
         {
             _followPosition = new Vector3(decoy.position.x, decoy.position.y, decoy.position.z);
-            agent.SetDestination(_followPosition);
+            if (agent.enabled)
+                agent.SetDestination(_followPosition);
         }
 
         float distance = Vector3.Distance(animator.transform.position, _followPosition);
@@ -134,7 +136,8 @@ public class PasuKan_ChaseState : StateMachineBehaviour
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        agent.SetDestination(agent.transform.position);
+        if(agent.enabled)
+            agent.SetDestination(agent.transform.position);
     }
 
     // OnStateMove is called right after Animator.OnAnimatorMove()
