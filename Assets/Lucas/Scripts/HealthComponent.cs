@@ -50,17 +50,17 @@ public class HealthComponent : MonoBehaviour
         }
         else if (this.gameObject.CompareTag("Enemy"))
         {
-            if(CurrentHealth > 0 && !_isDead)
-            {
-                this.Animator.SetTrigger("damage");
-            }
-            else if (CurrentHealth <= 0 && !_isDead)
+            if (CurrentHealth <= 0 && !_isDead)
             {
                 GameManager.Instance.EnemyDied();
                 GameManager.Instance._currentScore += Enemy.EnemyData._givenXP;
 
                 this.Animator.SetTrigger("death");
                 _isDead = true;
+            }
+            else if (CurrentHealth > 0 && !_isDead)
+            {
+                this.Animator.SetTrigger("damage");
             }
         }
     }

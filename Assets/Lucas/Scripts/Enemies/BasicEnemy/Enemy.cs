@@ -48,8 +48,21 @@ public class Enemy : PoolableObject
         this.gameObject.SetActive(false);
     }
 
-    public void SetColliderDeactive()
+    public void MarkToDie()
     {
-        this.gameObject.GetComponent<Collider>().enabled = false;
+        if (this.gameObject.GetComponent<Animator>() != null)
+        {
+            this.gameObject.GetComponent<Animator>().SetBool("isDying", true);
+        }
+
+        if (this.gameObject.GetComponent<Collider>() != null)
+        {
+            this.gameObject.GetComponent<Collider>().enabled = false;
+        }
+
+        if (this.gameObject.GetComponent<Rigidbody>() != null)
+        {
+            this.gameObject.GetComponent<Rigidbody>().isKinematic = true;
+        }
     }
 }

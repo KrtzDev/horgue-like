@@ -47,7 +47,7 @@ public class PasuKan_ChaseState : StateMachineBehaviour
         Debug.DrawRay(animator.transform.position + new Vector3(0, 0.5f, 0), ((_followPosition + new Vector3(0, 0.5f, 0))- (animator.transform.position + new Vector3(0, 0.5f, 0))));
         Debug.DrawRay(animator.transform.position + new Vector3(0, 0.5f, 0), ((new Vector3(_followPosition.x, enemy.transform.position.y, _followPosition.z) + new Vector3(0, 0.5f, 0)) - (animator.transform.position + new Vector3(0, 0.5f, 0))), Color.green);
 
-        if (!Physics.Raycast(enemy.transform.position + new Vector3(0, 0.5f, 0), ((new Vector3(_followPosition.x, enemy.transform.position.y, _followPosition.z) + new Vector3(0, 0.5f, 0)) - (animator.transform.position + new Vector3(0, 0.5f, 0))), out hit, distance, enemy.GroundLayer))
+        /* if (!Physics.Raycast(enemy.transform.position + new Vector3(0, 0.5f, 0), ((new Vector3(_followPosition.x, enemy.transform.position.y, _followPosition.z) + new Vector3(0, 0.5f, 0)) - (animator.transform.position + new Vector3(0, 0.5f, 0))), out hit, distance, enemy.GroundLayer))
         {
             if (Physics.Raycast(enemy.transform.position + new Vector3(0, 0.5f, 0), Vector3.forward * distance, out hit, enemy.PlayerLayer))
             {
@@ -57,18 +57,17 @@ public class PasuKan_ChaseState : StateMachineBehaviour
 
                     if (random < enemy.EnemyData._jumpAttackChance)
                     {
-                        /* _jumpAttackTimer = enemy.EnemyData._jumpAttackCooldown;
-                        animator.transform.LookAt(_followPosition);
-                        animator.SetTrigger("jumpAttack");
-                        animator.SetBool("isChasing", false);
-                        */
+                        // _jumpAttackTimer = enemy.EnemyData._jumpAttackCooldown;
+                        // animator.transform.LookAt(_followPosition);
+                        // animator.SetTrigger("jumpAttack");
+                        // animator.SetBool("isChasing", false);                       
 
                         _jumpAttackTimer = enemy.EnemyData._jumpAttackCooldown;
                         animator.transform.LookAt(_followPosition);
-                        animator.SetTrigger("rageSpeed");
+                        animator.SetTrigger("rageMode");
                         rageMode = true;
                         oldSpeed = agent.speed;
-                        agent.speed *= 2.5f;
+                        agent.speed *= 2;
                     }
                     else
                     {
@@ -76,14 +75,48 @@ public class PasuKan_ChaseState : StateMachineBehaviour
                     }
                 }
             }
-        }
-        
-        _jumpAttackTimer -= Time.deltaTime;
+        } */
 
-        if(rageMode && _jumpAttackTimer <= enemy.EnemyData._jumpAttackCooldown / 2)
+        if (distance < enemy.EnemyData._maxJumpAttackRange && distance > enemy.EnemyData._minJumpAttackRange && distance > enemy.EnemyData._attackRange && _jumpAttackTimer < 0 && !rageMode)
         {
-            agent.speed = oldSpeed;
+            int random = Random.Range(0, 100);
+
+            if (random < enemy.EnemyData._jumpAttackChance)
+            {
+                _jumpAttackTimer = enemy.EnemyData._jumpAttackCooldown;
+                animator.transform.LookAt(_followPosition);
+                animator.SetTrigger("rageMode");
+                animator.SetBool("isRageMode", true);
+                rageMode = true;
+                oldSpeed = agent.speed;
+                agent.speed *= 3f;
+
+                if(enemy.GetComponent<HealthComponent>().CurrentHealth > 0)
+                {
+                    enemy.GetComponent<HealthComponent>().MaxHealth *= 2;
+                    enemy.GetComponent<HealthComponent>().CurrentHealth = enemy.GetComponent<HealthComponent>().MaxHealth;
+                }
+            }
+            else
+            {
+                _jumpAttackTimer = enemy.EnemyData._jumpAttackCooldown;
+            }
         }
+
+        if (_jumpAttackTimer >= 0)
+        {
+            _jumpAttackTimer -= Time.deltaTime;
+        }
+        else 
+        {
+            if (rageMode && agent.speed != oldSpeed)
+            {
+                agent.speed = oldSpeed;
+                animator.SetBool("isRageMode", false);
+            }
+        }
+
+        Debug.Log(agent.speed);
 
         if (distance < enemy.EnemyData._attackRange && _attackTimer < 0)
         {
