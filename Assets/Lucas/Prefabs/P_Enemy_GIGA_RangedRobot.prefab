@@ -31,7 +31,7 @@ Transform:
   m_GameObject: {fileID: 8451927325676435795}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_LocalScale: {x: 0.4, y: 0.4, z: 0.4}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -132,7 +132,7 @@ MonoBehaviour:
   hitLayerMask:
     serializedVersion: 2
     m_Bits: 576
-  baseDamage: 12
+  baseDamage: 100
 --- !u!96 &-2540252099999053896
 TrailRenderer:
   serializedVersion: 2

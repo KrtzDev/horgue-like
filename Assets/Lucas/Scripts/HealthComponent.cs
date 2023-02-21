@@ -55,6 +55,8 @@ public class HealthComponent : MonoBehaviour
                 GameManager.Instance.EnemyDied();
                 GameManager.Instance._currentScore += Enemy.EnemyData._givenXP;
 
+                MarkEnemyToDie();
+
                 this.Animator.SetTrigger("death");
                 _isDead = true;
             }
@@ -63,5 +65,30 @@ public class HealthComponent : MonoBehaviour
                 this.Animator.SetTrigger("damage");
             }
         }
+    }
+
+    private void MarkEnemyToDie()
+    {
+        if (this.gameObject.GetComponent<Animator>() != null)
+        {
+            this.gameObject.GetComponent<Animator>().SetBool("isDying", true);
+        }
+
+        if (this.gameObject.GetComponent<Collider>() != null)
+        {
+            this.gameObject.GetComponent<Collider>().enabled = false;
+        }
+
+        if (this.gameObject.GetComponent<Rigidbody>() != null)
+        {
+            this.gameObject.GetComponent<Rigidbody>().isKinematic = true;
+        }
+
+        if(this.gameObject.GetComponent<Enemy>() != null)
+        {
+            this.gameObject.GetComponent<Enemy>().enabled = false;
+        }
+
+        this.gameObject.tag = "Default";
     }
 }

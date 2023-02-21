@@ -4,14 +4,14 @@ using UnityEngine;
 public class BasicEnemyData : ScriptableObject
 {
     [Header("General")]
-    public int _maxHealth = 100;
-    public int _damagePerHit = 100;
-    public float _attackSpeed = 1;
-    public int _givenXP = 1;
-    public float _moveSpeed = 1;
-    public int _armor = 1;
-    public int _elementalResistance = 1;
-    public int _technicalResistance = 1;
+    public int _maxHealth;
+    public int _damagePerHit;
+    public float _attackSpeed;
+    public int _givenXP;
+    public float _moveSpeed;
+    public int _armor;
+    public int _elementalResistance;
+    public int _technicalResistance;
 
     [Header("Movement")]
     public float _attackRange;
