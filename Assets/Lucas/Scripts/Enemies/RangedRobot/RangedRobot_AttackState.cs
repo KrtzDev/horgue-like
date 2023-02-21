@@ -44,7 +44,7 @@ public class RangedRobot_AttackState : StateMachineBehaviour
             animator.SetTrigger("shoot");
             animator.SetBool("isShooting", true);
         }
-        else if (animator.GetBool("isShooting") == false)
+        else if(!animator.GetBool("isShooting"))
         {
             _attackTimer -= Time.deltaTime;
 
@@ -53,7 +53,7 @@ public class RangedRobot_AttackState : StateMachineBehaviour
             if (distance > enemy.EnemyData._attackRange)
             {
                 animator.SetBool("isAttacking", false);
-                animator.SetBool("isChasing", false);
+                animator.SetBool("isChasing", true);
             }
             else if (distance < enemy.EnemyData._retreatRange)
             {

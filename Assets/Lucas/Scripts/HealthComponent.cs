@@ -89,6 +89,6 @@ public class HealthComponent : MonoBehaviour
             this.gameObject.GetComponent<Enemy>().enabled = false;
         }
 
-        this.gameObject.tag = "Default";
+        this.gameObject.tag = "Untagged";
     }
 }

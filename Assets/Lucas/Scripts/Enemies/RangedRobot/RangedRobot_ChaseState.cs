@@ -43,7 +43,12 @@ public class RangedRobot_ChaseState : StateMachineBehaviour
         Debug.DrawRay(enemy.ProjectilePoint.transform.position, (_followPosition - enemy.ProjectilePoint.transform.position));
         if (Physics.Raycast(enemy.ProjectilePoint.transform.position, (_followPosition + new Vector3(0, 0.5f, 0) - enemy.ProjectilePoint.transform.position), out hit, distance, enemy.GroundLayer))
         {
-            
+            if (distance < enemy.EnemyData._retreatRange)
+            {
+                animator.SetBool("isRetreating", true);
+                animator.SetBool("isAttacking", false);
+                animator.SetBool("isChasing", false);
+            }
         }
         else
         {
