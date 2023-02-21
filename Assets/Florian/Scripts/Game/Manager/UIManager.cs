@@ -35,10 +35,10 @@ public class UIManager : Singleton<UIManager>
 		switch (levelStatus)
 		{
 			case LevelStatus.Won:
-				Endscreen.TitleText.text = "Won";
+				Endscreen.ShowWonStateUI();
 				break;
 			case LevelStatus.Lost:
-				Endscreen.TitleText.text = "Lost";
+				Endscreen.ShowLostStateUI();
 				break;
 			default:
 				break;

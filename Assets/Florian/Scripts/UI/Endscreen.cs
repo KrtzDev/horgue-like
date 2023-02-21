@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -5,10 +6,42 @@ using UnityEngine.SceneManagement;
 public class Endscreen : MonoBehaviour
 {
 	[field: SerializeField]
-	public TMP_Text TitleText { get; private set; }
-
-	[field: SerializeField]
 	public RectTransform RewardParent { get; private set; }
+
+	[SerializeField]
+	private TMP_Text _titleText;
+	[SerializeField]
+	private List<GameObject> _wonStateUIElements = new List<GameObject>();
+	[SerializeField]
+	private List<GameObject> _lostStateUIElements = new List<GameObject>();
+
+	public void ShowWonStateUI()
+	{
+		foreach (var UIElement in _wonStateUIElements)
+		{
+			UIElement.SetActive(true);
+		}
+		foreach (var UIElement in _lostStateUIElements)
+		{
+			UIElement.SetActive(false);
+		}
+
+		_titleText.text = "Won";
+	}
+
+	public void ShowLostStateUI()
+	{
+		foreach (var UIElement in _wonStateUIElements)
+		{
+			UIElement.SetActive(false);
+		}
+		foreach (var UIElement in _lostStateUIElements)
+		{
+			UIElement.SetActive(true);
+		}
+
+		_titleText.text = "Lost";
+	}
 
 	public void BackToMainMenu()
 	{
