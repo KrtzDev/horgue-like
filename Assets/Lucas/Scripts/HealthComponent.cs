@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class HealthComponent : MonoBehaviour
 {
@@ -36,42 +37,64 @@ public class HealthComponent : MonoBehaviour
         HitParticle.Play();
 
         float currentHealthPct = (float)CurrentHealth / (float)MaxHealth;
-        OnHealthPercentChanged?.Invoke(currentHealthPct);
-
-        if (this.gameObject.CompareTag("Enemy"))
-        {
-            if(CurrentHealth > 0)
-            {
-                Animator.SetTrigger("damage");
-            }
-        }
-        
+        OnHealthPercentChanged?.Invoke(currentHealthPct);        
 
         if (this.gameObject.CompareTag("Player"))
         {
             GameObject.FindGameObjectWithTag("UI").GetComponentInChildren<UIDamageFlash>().DamageFlash(0.25f, .5f);
-        }
 
-        if (CurrentHealth <= 0 && !_isDead)
-        {
-            if (this.gameObject.CompareTag("Player"))
+            if(CurrentHealth <= 0 && !_isDead)
             {
-                Debug.Log("isDead");
-
                 GameManager.Instance.PlayerDied();
+                _isDead = true;
             }
-
-            if (this.gameObject.CompareTag("Enemy"))
+        }
+        else if (this.gameObject.CompareTag("Enemy"))
+        {
+            if (CurrentHealth <= 0 && !_isDead)
             {
-                Debug.Log("Enemy Died");
-
                 GameManager.Instance.EnemyDied();
                 GameManager.Instance._currentScore += Enemy.EnemyData._givenXP;
 
-                this.Animator.SetTrigger("death");
-            }
+                MarkEnemyToDie();
 
-            _isDead = true;
+                this.Animator.SetTrigger("death");
+                _isDead = true;
+            }
+            else if (CurrentHealth > 0 && !_isDead)
+            {
+                this.Animator.SetTrigger("damage");
+            }
         }
+    }
+
+    private void MarkEnemyToDie()
+    {
+        if (this.gameObject.GetComponent<Animator>() != null)
+        {
+            this.gameObject.GetComponent<Animator>().SetBool("isDying", true);
+        }
+
+        if (this.gameObject.GetComponent<Collider>() != null)
+        {
+            this.gameObject.GetComponent<Collider>().enabled = false;
+        }
+
+        if (this.gameObject.GetComponent<Rigidbody>() != null)
+        {
+            this.gameObject.GetComponent<Rigidbody>().isKinematic = true;
+        }
+
+        if(this.gameObject.GetComponent<NavMeshAgent>() != null)
+        {
+            this.gameObject.GetComponent<NavMeshAgent>().enabled = false;
+        }
+
+        if(this.gameObject.GetComponent<Enemy>() != null)
+        {
+            this.gameObject.GetComponent<Enemy>().enabled = false;
+        }
+
+        this.gameObject.tag = "Untagged";
     }
 }

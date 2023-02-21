@@ -430,7 +430,7 @@ MonoBehaviour:
   _groundCheckBox: {x: 0.5, y: 0.5, z: 0.5}
   _groundLayer:
     serializedVersion: 2
-    m_Bits: 512
+    m_Bits: 528
   _enemyLayer:
     serializedVersion: 2
     m_Bits: 128

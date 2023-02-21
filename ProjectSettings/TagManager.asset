@@ -8,6 +8,7 @@ TagManager:
   - EnemySpawner
   - Decoy
   - UI
+  - Wasser
   layers:
   - Default
   - TransparentFX

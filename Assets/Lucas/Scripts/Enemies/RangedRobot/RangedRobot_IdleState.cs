@@ -16,7 +16,8 @@ public class RangedRobot_IdleState : StateMachineBehaviour
         agent = animator.GetComponent<NavMeshAgent>();
         enemy = animator.GetComponent<Enemy>();
 
-        agent.SetDestination(agent.transform.position);
+        if (agent.enabled)
+            agent.SetDestination(agent.transform.position);
 
         followTimer = 0;
     }

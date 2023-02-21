@@ -68,12 +68,14 @@ public class EnemyMovement : MonoBehaviour
 
     public void StartChasing(Vector3 targetPosition)
     {
-        _agent.SetDestination(targetPosition);
+        if (_agent.enabled)
+            _agent.SetDestination(targetPosition);
     }
 
     private void StopFollowing()
     {
-        _agent.SetDestination(this.transform.position);
+        if (_agent.enabled)
+            _agent.SetDestination(this.transform.position);
     }
 
     private void Retreat()

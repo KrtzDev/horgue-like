@@ -45,7 +45,7 @@ public class PasuKan_JumpAttackState : StateMachineBehaviour
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        if(_jumpPrepTime <= enemy.EnemyData._jumpPrepTime)
+        if (_jumpPrepTime <= enemy.EnemyData._jumpPrepTime)
         {
             _jumpPrepTime += Time.deltaTime;
         }
@@ -80,7 +80,7 @@ public class PasuKan_JumpAttackState : StateMachineBehaviour
                 animator.transform.rotation = Quaternion.Slerp(animator.transform.rotation, Quaternion.LookRotation(_followPosition - animator.transform.position), _jumpFactor);
                 animator.SetFloat("jumpTime", _jumpTime);
 
-                if(animator.transform.position == _followPosition)
+                if (animator.transform.position == _followPosition)
                 {
                     animator.SetTrigger("jumpAttackEnded");
                 }
