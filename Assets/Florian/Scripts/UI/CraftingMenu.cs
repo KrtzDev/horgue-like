@@ -13,7 +13,7 @@ public class CraftingMenu : MonoBehaviour
 		foreach (Reward reward in rewards)
 		{
 			RewardUI rewardUI = Instantiate(rewardUI_prefab,rewardedWeaponPartsParent);
-			rewardUI.RewardImage.sprite = reward.weaponPartReward.WeaponPartUISprite;
+			rewardUI.Initialize(reward);
 		}
 	}
 }
