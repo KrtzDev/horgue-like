@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f11e42008a9795b42bd707c33009fa2d, type: 3}
   m_Name: CurvedBoxMagazine
   m_EditorClassIdentifier: 
-  <WeaponPartUISprite>k__BackingField: {fileID: 0}
+  <WeaponPartUISprite>k__BackingField: {fileID: 21300000, guid: 9cadde7a0d5f9024ab3f2cd5f6a740d6,
+    type: 3}
   <WeaponPartPrefab>k__BackingField: {fileID: 0}
   attackSpeed: 3
   cooldown: 1.5

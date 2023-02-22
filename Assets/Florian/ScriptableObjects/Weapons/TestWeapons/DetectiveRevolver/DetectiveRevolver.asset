@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1840ed087b613334e9bf87d5c6d038cd, type: 3}
   m_Name: DetectiveRevolver
   m_EditorClassIdentifier: 
-  weaponPrefab: {fileID: 3480419835550209389, guid: b1d6eb9be4236bd42b4cc35c06a394f8,
+  _weaponPrefab: {fileID: 3480419835550209389, guid: b1d6eb9be4236bd42b4cc35c06a394f8,
     type: 3}
+  _weaponSprite: {fileID: 0}
   _grip: {fileID: 11400000, guid: 447aef067792b064b87806eed730cd4e, type: 2}
   _barrel: {fileID: 11400000, guid: e18b30524c89cd64eaa028eb6e327e03, type: 2}
   _magazine: {fileID: 11400000, guid: 13ee628900dcfd145989993ec9dffdb3, type: 2}

@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa48d95108cca0142a62cd1ccf37139d, type: 3}
   m_Name: SovietSteelBarrel
   m_EditorClassIdentifier: 
-  <WeaponPartUISprite>k__BackingField: {fileID: 0}
+  <WeaponPartUISprite>k__BackingField: {fileID: 21300000, guid: cdb88fdb0cf46b244a667edaff21c7df,
+    type: 3}
   <WeaponPartPrefab>k__BackingField: {fileID: 0}
   baseDamage: 34
   attackSpeed: 3

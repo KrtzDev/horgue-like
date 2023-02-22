@@ -4,7 +4,7 @@ using UnityEngine;
 public class WeaponHolster : MonoBehaviour
 {
 	[SerializeField]
-	private List<Weapon> weapons = new List<Weapon>();
+	public List<Weapon> weapons = new List<Weapon>();
 
 	private List<WeaponSpawnSlot> _weaponSpawnSlots = new List<WeaponSpawnSlot>();
 

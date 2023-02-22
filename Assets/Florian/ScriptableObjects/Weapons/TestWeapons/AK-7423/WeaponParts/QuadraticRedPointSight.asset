@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3939a441ca7dd8b46bc594c5db649c5e, type: 3}
   m_Name: QuadraticRedPointSight
   m_EditorClassIdentifier: 
-  <WeaponPartUISprite>k__BackingField: {fileID: 0}
+  <WeaponPartUISprite>k__BackingField: {fileID: 21300000, guid: ae53a7884da90e94eb5dfeab594b746c,
+    type: 3}
   <WeaponPartPrefab>k__BackingField: {fileID: 0}
   attackSpeed: 5
   critChance: 22

@@ -6,21 +6,23 @@ public class Weapon : ScriptableObject
 {
     [Header("Visuals")]
     [SerializeField]
-    private WeaponSkeleton weaponPrefab;
+    private WeaponSkeleton _weaponPrefab;
+	[SerializeField]
+	public Sprite _weaponSprite;
 
     [Header("WeaponParts")]
     [SerializeField]
-    private Grip _grip;
+    public Grip _grip;
     [SerializeField]
-    private Barrel _barrel;
+    public Barrel _barrel;
     [SerializeField]
-    private Magazine _magazine;
+    public Magazine _magazine;
     [SerializeField]
-    private Ammunition _ammunition;
+    public Ammunition _ammunition;
     [SerializeField]
-    private TriggerMechanism _triggerMechanism;
+    public TriggerMechanism _triggerMechanism;
     [SerializeField]
-    private Sight _sight;
+    public Sight _sight;
 
     private int _capacity;
 
@@ -38,7 +40,7 @@ public class Weapon : ScriptableObject
 
     public void Initialize(Transform owningTransform)
     {
-        _currentWeaponPrefab = Instantiate(weaponPrefab, owningTransform);
+        _currentWeaponPrefab = Instantiate(_weaponPrefab, owningTransform);
 		_weaponTransform = _currentWeaponPrefab.transform;
 
         _possibleProjectile = _ammunition.projectilePrefab;
