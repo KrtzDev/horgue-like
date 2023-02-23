@@ -46,8 +46,8 @@ public class PasuKan_ChaseState : StateMachineBehaviour
         float distance = Vector3.Distance(animator.transform.position, _followPosition);
 
         RaycastHit hit;
-        Debug.DrawRay(animator.transform.position + new Vector3(0, 0.5f, 0), ((_followPosition + new Vector3(0, 0.5f, 0))- (animator.transform.position + new Vector3(0, 0.5f, 0))));
-        Debug.DrawRay(animator.transform.position + new Vector3(0, 0.5f, 0), ((new Vector3(_followPosition.x, enemy.transform.position.y, _followPosition.z) + new Vector3(0, 0.5f, 0)) - (animator.transform.position + new Vector3(0, 0.5f, 0))), Color.green);
+        // Debug.DrawRay(animator.transform.position + new Vector3(0, 0.5f, 0), ((_followPosition + new Vector3(0, 0.5f, 0))- (animator.transform.position + new Vector3(0, 0.5f, 0))));
+        // Debug.DrawRay(animator.transform.position + new Vector3(0, 0.5f, 0), ((new Vector3(_followPosition.x, enemy.transform.position.y, _followPosition.z) + new Vector3(0, 0.5f, 0)) - (animator.transform.position + new Vector3(0, 0.5f, 0))), Color.green);
 
         /* if (!Physics.Raycast(enemy.transform.position + new Vector3(0, 0.5f, 0), ((new Vector3(_followPosition.x, enemy.transform.position.y, _followPosition.z) + new Vector3(0, 0.5f, 0)) - (animator.transform.position + new Vector3(0, 0.5f, 0))), out hit, distance, enemy.GroundLayer))
         {
@@ -91,7 +91,7 @@ public class PasuKan_ChaseState : StateMachineBehaviour
                 animator.SetBool("isRageMode", true);
                 rageMode = true;
                 oldSpeed = agent.speed;
-                agent.speed *= 3f;
+                agent.speed *= 4f;
 
                 if(enemy.GetComponent<HealthComponent>().CurrentHealth > 0)
                 {
@@ -117,8 +117,6 @@ public class PasuKan_ChaseState : StateMachineBehaviour
                 animator.SetBool("isRageMode", false);
             }
         }
-
-        Debug.Log(agent.speed);
 
         if (distance < enemy.EnemyData._attackRange && _attackTimer < 0)
         {
