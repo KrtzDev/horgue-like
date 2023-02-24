@@ -12,6 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41ce7b992483656469ceb6bdc5fce804, type: 3}
   m_Name: OakRevolverGrip
   m_EditorClassIdentifier: 
+  <WeaponPartUISprite>k__BackingField: {fileID: 21300000, guid: 8cfad73774dabfa48afd69ddddd8bd48,
+    type: 3}
+  <WeaponPartPrefab>k__BackingField: {fileID: 0}
   attackSpeed: 1.1
   cooldown: 1.7
   critChance: 30

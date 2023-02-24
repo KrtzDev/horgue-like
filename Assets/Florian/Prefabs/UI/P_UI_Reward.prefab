@@ -60,7 +60,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 0.1792453, g: 0.1792453, b: 0.1792453, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -189,7 +189,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 200, y: 100}
+  m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &8270753814037413858
 MonoBehaviour:
@@ -203,4 +203,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c03f9edd84fb924f875a567b951b173, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <RewardImage>k__BackingField: {fileID: 5527056251863638102}
+  _rewardImage: {fileID: 5527056251863638102}
+  _toolTip_prefab: {fileID: 1632619086718026943, guid: 060763a266677f6469ac0e95f2facdfc,
+    type: 3}

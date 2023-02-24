@@ -67,7 +67,7 @@ public class UIManager : Singleton<UIManager>
 		foreach (Reward reward in rewards)
 		{
 			RewardUI newReward = Instantiate(_rewardUI_prefab,Endscreen.RewardParent);
-			newReward.RewardImage.sprite = reward.weaponPartReward.WeaponPartUISprite;
+			newReward.Initialize(reward);
 		}
 	}
 

@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c73c2eef1d04bd242bb9e55a17097781, type: 3}
   m_Name: BinaryPowderTrigger
   m_EditorClassIdentifier: 
-  <WeaponPartUISprite>k__BackingField: {fileID: 0}
+  <WeaponPartUISprite>k__BackingField: {fileID: 21300000, guid: 522d7816fdf1b6a41a5bdd37fd6568f0,
+    type: 3}
   <WeaponPartPrefab>k__BackingField: {fileID: 0}
   baseDamage: 30
   attackSpeed: 3

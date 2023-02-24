@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1bf20d05e70cc05468fb4fcbb07d565a, type: 3}
   m_Name: Caliber5.3
   m_EditorClassIdentifier: 
-  <WeaponPartUISprite>k__BackingField: {fileID: 0}
+  <WeaponPartUISprite>k__BackingField: {fileID: 21300000, guid: dba5b79ea1a59f943b29a910b4098f8f,
+    type: 3}
   <WeaponPartPrefab>k__BackingField: {fileID: 0}
   projectilePrefab: {fileID: 4954643210180333314, guid: 71610fc810078fc42b6427a07682dca3,
     type: 3}
