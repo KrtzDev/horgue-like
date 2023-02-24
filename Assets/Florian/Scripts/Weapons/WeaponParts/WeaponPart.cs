@@ -8,4 +8,7 @@ public class WeaponPart : ScriptableObject
 
 	[field: SerializeField]
 	public GameObject WeaponPartPrefab { get; private set; }
+
+	[HideInInspector]
+	public bool isSlotted;
 }

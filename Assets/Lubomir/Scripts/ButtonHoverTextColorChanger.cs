@@ -18,6 +18,18 @@ public class ButtonHoverTextColorChanger : MonoBehaviour , IPointerEnterHandler,
 		_defaultColor = _buttonText.color;
 	}
 
+	private void Update()
+	{
+		if (EventSystem.current.currentSelectedGameObject == gameObject) 
+		{
+			_buttonText.color = _textColorOnHover;
+		}
+		else
+		{
+			_buttonText.color = _defaultColor;
+		}
+	}
+
 	public void OnPointerEnter(PointerEventData eventData)
 	{
 		_buttonText.color = _textColorOnHover;

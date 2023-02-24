@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
@@ -69,14 +70,27 @@ public class RewardUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 	{
 		if (SceneManager.GetActiveScene().name == "SCENE_Weapon_Crafting")
 		{
-			//if ()
-			//{
-
-			//}
-			//else
+			List<RaycastResult> hits = new List<RaycastResult>();
+			EventSystem.current.RaycastAll(eventData, hits);
+			foreach (var hit in hits)
 			{
-				transform.SetParent(_parent);
-				_rectTransform.localPosition = _defaultPos;
+				if (hit.gameObject.TryGetComponent(out WeaponPartSlot weaponPartSlot))
+				{
+					if(weaponPartSlot._owningWeaponUI.SetNewWeaponPart(_reward.weaponPartReward, weaponPartSlot))
+					{
+						Destroy(gameObject);
+					}
+					else
+					{
+						transform.SetParent(_parent);
+						_rectTransform.localPosition = _defaultPos;
+					}
+				}
+				else
+				{
+					transform.SetParent(_parent);
+					_rectTransform.localPosition = _defaultPos;
+				}
 			}
 		}
 	}

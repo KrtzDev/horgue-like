@@ -433,6 +433,7 @@ GameObject:
   - component: {fileID: 5270070543256129019}
   - component: {fileID: 5270070543256129016}
   - component: {fileID: 5270070543256129017}
+  - component: {fileID: 6696497182655568847}
   m_Layer: 5
   m_Name: NextWave
   m_TagString: Untagged
@@ -556,6 +557,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &6696497182655568847
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5270070543256129023}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 15799e52de4236741962e922d3941e94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5270070543277130859
 GameObject:
   m_ObjectHideFlags: 0

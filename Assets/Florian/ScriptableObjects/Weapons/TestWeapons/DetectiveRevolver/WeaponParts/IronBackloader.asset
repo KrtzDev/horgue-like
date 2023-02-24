@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c73c2eef1d04bd242bb9e55a17097781, type: 3}
   m_Name: IronBackloader
   m_EditorClassIdentifier: 
-  <WeaponPartUISprite>k__BackingField: {fileID: 21300000, guid: be340a165cb9c8d4cb50f1deeb51d4ea,
+  <WeaponPartUISprite>k__BackingField: {fileID: 21300000, guid: 522d7816fdf1b6a41a5bdd37fd6568f0,
     type: 3}
   <WeaponPartPrefab>k__BackingField: {fileID: 0}
   baseDamage: 70

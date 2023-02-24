@@ -10,7 +10,21 @@ public class Weapon : ScriptableObject
 	[SerializeField]
 	public Sprite _weaponSprite;
 
-    [Header("WeaponParts")]
+	[Header("DefaultWeaponParts")]
+	[SerializeField]
+	public Grip _defaultGrip;
+	[SerializeField]
+	public Barrel _defaultBarrel;
+	[SerializeField]
+	public Magazine _defaultMagazine;
+	[SerializeField]
+	public Ammunition _defaultAmmunition;
+	[SerializeField]
+	public TriggerMechanism _defaultTriggerMechanism;
+	[SerializeField]
+	public Sight _defaultSight;
+
+	[Header("WeaponParts")]
     [SerializeField]
     public Grip _grip;
     [SerializeField]
@@ -33,13 +47,28 @@ public class Weapon : ScriptableObject
     private bool _isReloading;
     private WeaponSkeleton _currentWeaponPrefab;
 	private Transform _weaponTransform;
+
+	[HideInInspector]
+	public Transform _owningTransform;
+
     [SerializeField]
     private LayerMask _enemyLayer;
     [SerializeField]
     private LayerMask _groundLayer;
 
+	public void ResetWeaponParts()
+	{
+		_grip = _defaultGrip; 
+		_barrel = _defaultBarrel;
+		_magazine = _defaultMagazine;
+		_ammunition = _defaultAmmunition;
+		_triggerMechanism = _defaultTriggerMechanism;
+		_sight = _defaultSight;
+	}
+
     public void Initialize(Transform owningTransform)
     {
+		_owningTransform = owningTransform;
         _currentWeaponPrefab = Instantiate(_weaponPrefab, owningTransform);
 		_weaponTransform = _currentWeaponPrefab.transform;
 
@@ -269,7 +298,6 @@ public class Weapon : ScriptableObject
         if(!RotateTowardsEnemy()) return;
         if (_shotDelay <= 0)
         {
-			Debug.Log(this.name);
 			DamageDealer spawnedDamageDealer;
 
             _capacity--;

@@ -964,6 +964,7 @@ GameObject:
   - component: {fileID: 1686482361}
   - component: {fileID: 1686482360}
   - component: {fileID: 1686482363}
+  - component: {fileID: 1686482364}
   m_Layer: 5
   m_Name: StartButton
   m_TagString: Untagged
@@ -1099,6 +1100,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _textColorOnHover: {r: 0.14150941, g: 0.14150941, b: 0.14150941, a: 1}
+--- !u!114 &1686482364
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1686482358}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 15799e52de4236741962e922d3941e94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1828069359
 GameObject:
   m_ObjectHideFlags: 0

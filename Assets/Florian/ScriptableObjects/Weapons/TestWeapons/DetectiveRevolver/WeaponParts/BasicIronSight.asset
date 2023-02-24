@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3939a441ca7dd8b46bc594c5db649c5e, type: 3}
   m_Name: BasicIronSight
   m_EditorClassIdentifier: 
-  <WeaponPartUISprite>k__BackingField: {fileID: 21300000, guid: a67b58d6cddcd4345b1e001340de5a76,
+  <WeaponPartUISprite>k__BackingField: {fileID: 21300000, guid: af4501ccf558c544a968f99d4c92c04b,
     type: 3}
   <WeaponPartPrefab>k__BackingField: {fileID: 0}
   attackSpeed: 1.1

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f11e42008a9795b42bd707c33009fa2d, type: 3}
   m_Name: IronCylinder
   m_EditorClassIdentifier: 
-  <WeaponPartUISprite>k__BackingField: {fileID: 21300000, guid: 874d8401331ede14087e8d8d486ddda6,
+  <WeaponPartUISprite>k__BackingField: {fileID: 21300000, guid: 7e39db67f4eb23a4eb546143f71520fd,
     type: 3}
   <WeaponPartPrefab>k__BackingField: {fileID: 0}
   attackSpeed: 0.75

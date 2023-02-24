@@ -73,6 +73,15 @@ public class GameManager : Singleton<GameManager>
 		_enemySpawner = GameObject.Find("EnemySpawner").GetComponent<EnemySpawner>();
 		_neededEnemyKill = _enemySpawner.EnemyMaxAmount;
 
+		if (_currentLevel == 1 && _currentWave == 0)
+		{
+			WeaponHolster weaponHolster = FindObjectOfType<WeaponHolster>();
+			foreach (var weapon in weaponHolster.weapons)
+			{
+				weapon.ResetWeaponParts();
+			}
+		}
+
 		_currentWave += 1;
 
 		if (_currentLevel >= 2)
