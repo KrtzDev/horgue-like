@@ -12,6 +12,8 @@ public class ButtonHoverTextColorChanger : MonoBehaviour , IPointerEnterHandler,
 	private TMP_Text _buttonText;
 	private Color _defaultColor;
 
+	private bool _isHovered;
+
 	private void Awake()
 	{
 		_buttonText = GetComponentInChildren<TMP_Text>();	
@@ -20,7 +22,7 @@ public class ButtonHoverTextColorChanger : MonoBehaviour , IPointerEnterHandler,
 
 	private void Update()
 	{
-		if (EventSystem.current.currentSelectedGameObject == gameObject) 
+		if (EventSystem.current.currentSelectedGameObject == gameObject || _isHovered) 
 		{
 			_buttonText.color = _textColorOnHover;
 		}
@@ -33,11 +35,13 @@ public class ButtonHoverTextColorChanger : MonoBehaviour , IPointerEnterHandler,
 	public void OnPointerEnter(PointerEventData eventData)
 	{
 		_buttonText.color = _textColorOnHover;
+		_isHovered = true;
 	}
 
 	public void OnPointerExit(PointerEventData eventData)
 	{
 		_buttonText.color = _defaultColor;
 		eventData.selectedObject = null;
+		_isHovered = false;
 	}
 }
