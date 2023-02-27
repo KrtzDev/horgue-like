@@ -6,12 +6,33 @@ using UnityEngine.Networking;
 
 public abstract class ReadGoogleSheets : MonoBehaviour
 {
-    [HideInInspector] public List<string> _variables;
     [HideInInspector] public string _GoogleURL;
+
+    string[] notes;
+    int column = 1;
+    int iteration = 0;
+
+    string rowsjson = "";
+    string[] lines;
+    List<string> eachrow;
+
+    [SerializeField]
+    private int _dataEntries;
 
     public virtual void Awake()
     {
-        StartCoroutine(ObtainSheetData());
+        for (iteration = 0; iteration < _dataEntries; iteration++)
+        {
+            StartCoroutine(ObtainSheetData());
+        }
+    }
+
+    public virtual void OnEnable()
+    {
+        for (iteration = 0; iteration <= _dataEntries; iteration++)
+        {
+            StartCoroutine(ObtainSheetData());
+        }
     }
 
     private void Update()
@@ -21,11 +42,10 @@ public abstract class ReadGoogleSheets : MonoBehaviour
          */
     }
 
-    public IEnumerator ObtainSheetData()
+    public virtual IEnumerator ObtainSheetData()
     {
-        UnityWebRequest www = UnityWebRequest.Get(_GoogleURL); 
+        UnityWebRequest www = UnityWebRequest.Get(_GoogleURL);
         // get Spreadsheet: https://sheets.googleapis.com/v4/spreadsheets/<ID>/values/<SheetName>?key=<APIKey>
-        // müsste dann pro Database Spreadsheet (Spieler, Gegner, Waffe, etc.) ein neues Skript oder einen String erstellen
         yield return www.SendWebRequest();
 
         if (www.result == UnityWebRequest.Result.ConnectionError || www.result == UnityWebRequest.Result.ProtocolError || www.timeout > 2)
@@ -36,36 +56,28 @@ public abstract class ReadGoogleSheets : MonoBehaviour
         {
             string json = www.downloadHandler.text;
             var objectInSpreadsheet = JSON.Parse(json);
-
-            List<string> _currentRow;
-            int currentRow = 0; // neglect first Row
-
             foreach (var item in objectInSpreadsheet["values"])
             {
-                var itemObject = JSON.Parse(item.ToString());
-                _currentRow = itemObject[0].AsStringList; // currentRow = aktuelle Zeile; currentRow[index] = aktuelle Spalte (startet bei 0)
-
-                if (currentRow == 0)
+                var itemo = JSON.Parse(item.ToString());
+                eachrow = itemo[0].AsStringList;
+                foreach (var bro in eachrow)
                 {
-                    currentRow++;
-                    continue;
+                    rowsjson += bro + ";";
                 }
-
-                for (int j = 0; j < _currentRow.Count; j++)
-                {
-                    if (j == 1)
-                    {
-                        _variables.Add(_currentRow[j]);
-                    }
-                }
-
-                currentRow++;
+                rowsjson += "\n";
             }
+            lines = rowsjson.Split(new char[] { '\n' });
+            notes = lines[column].Split(new char[] { ';' });
+            List<string> tempData = new List<string>();
+            for (iteration = 0; iteration < notes.Length - 1; iteration++)
+            {
+                tempData.Add(notes[iteration]);
+            }
+            ApplySheetData(tempData);
+            column++;
         }
-
-        ApplySheetData();
     }
 
-    public abstract void ApplySheetData();
+    public abstract void ApplySheetData(List<string> tempData);
 
 }

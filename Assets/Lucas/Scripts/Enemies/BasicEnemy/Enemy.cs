@@ -15,6 +15,16 @@ public class Enemy : PoolableObject
     [field: SerializeField] public LayerMask EnemyLayer { get; private set; }
     [field: SerializeField] public LayerMask PlayerLayer { get; private set; }
 
+    [HideInInspector] public Vector3 TargetDirection { get; set; }
+
+    public void Start()
+    {
+        if(Projectile != null)
+        {
+            Projectile.GetComponent<EnemyProjectile>().baseDamage = this.gameObject.GetComponent<Enemy>().EnemyData._damagePerHit;
+        }
+    }
+
     public override void OnDisable()
     {
         base.OnDisable();
@@ -25,7 +35,12 @@ public class Enemy : PoolableObject
     public void Shoot()
     {
         Rigidbody rb = Instantiate(Projectile, ProjectilePoint.position, Quaternion.identity).GetComponent<Rigidbody>();
-        rb.AddForce(transform.forward * _projectileSpeed, ForceMode.Impulse);
+        rb.AddForce(TargetDirection * _projectileSpeed, ForceMode.Impulse);
+    }
+
+    public void DoneShooting()
+    {
+        Agent.GetComponent<Animator>().SetBool("isShooting", false);
     }
 
     public void SetDeactive()

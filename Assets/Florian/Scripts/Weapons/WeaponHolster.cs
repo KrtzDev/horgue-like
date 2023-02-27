@@ -1,51 +1,60 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class WeaponHolster : MonoBehaviour
 {
-    [SerializeField]
-    private List<Weapon> weapons = new List<Weapon>();
+	[SerializeField]
+	public List<Weapon> weapons = new List<Weapon>();
 
-    [SerializeField]
-    private float _attackDelay;
+	private List<WeaponSpawnSlot> _weaponSpawnSlots = new List<WeaponSpawnSlot>();
 
-    public bool canShoot = true;
+	private void Start()
+	{
+		PlayerCharacter playerCharacter = GetComponent<PlayerCharacter>();
+		for (int i = 0; i < playerCharacter.WeaponSpawnTransform.childCount; ++i)
+		{
+			_weaponSpawnSlots.Add(new WeaponSpawnSlot(playerCharacter.WeaponSpawnTransform.GetChild(i), false));
+		}
+		foreach (Weapon weapon in weapons)
+		{
+			WeaponSpawnSlot freeWeaponSpawnSlot;
+			if (GetFreeWeaponSlot(out freeWeaponSpawnSlot))
+			{
+				weapon.Initialize(freeWeaponSpawnSlot.spawnTransform);
+				freeWeaponSpawnSlot.isOccupied = true;
+			}
+			else
+			{
+				Debug.LogError("No Free WeaponSpawnSlot found");
+			}
+		}
+	}
 
-    private float _currentAttackDelay;
+	private void Update()
+	{
+		TryShootAllWeapons();
+	}
 
-    private void Awake()
-    {
-        foreach (var weapon in weapons)
-        {
-            weapon.weaponHolster = this;
-        }
-    }
+	private bool GetFreeWeaponSlot(out WeaponSpawnSlot freeweaponSpawnSlot)
+	{
+		foreach (var slot in _weaponSpawnSlots)
+		{
+			if (!slot.isOccupied)
+			{
+				freeweaponSpawnSlot = slot;
+				return true;
+			}
+		}
+		freeweaponSpawnSlot = null;
+		return false;
+	}
 
-    private void Update()
-    {
-        _currentAttackDelay -= Time.deltaTime;
-
-        if (_currentAttackDelay <= 0 && canShoot)
-        {
-            foreach (var weapon in weapons)
-            {
-                weapon.DoAttack();
-            }
-            _currentAttackDelay = _attackDelay;
-        }
-    }
-
-    public void Reload(Weapon weapon, Magazine mag)
-    {
-        StartCoroutine(ReloadWeapon(weapon,mag));
-        mag.isReloading = true;
-    }
-
-    IEnumerator ReloadWeapon(Weapon weapon, Magazine mag)
-    {
-        yield return new WaitForSeconds(weapon.grip.cooldown);
-        mag.ammoCount = mag.maxAmmoCount;
-        mag.isReloading = false;
-    }
+	[ContextMenu("TryShootAllWeapons")]
+	private void TryShootAllWeapons()
+	{
+		foreach (Weapon weapon in weapons)
+		{
+			weapon.TryShoot();
+		}
+	}
 }

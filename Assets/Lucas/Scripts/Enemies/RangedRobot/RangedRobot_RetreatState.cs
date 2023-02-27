@@ -12,6 +12,8 @@ public class RangedRobot_RetreatState : StateMachineBehaviour
 
     private Vector3 _followPosition;
 
+    float retreatDistance;
+
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
@@ -19,6 +21,8 @@ public class RangedRobot_RetreatState : StateMachineBehaviour
         enemy = animator.GetComponent<Enemy>();
         player = GameObject.FindGameObjectWithTag("Player").transform;
         decoy = GameObject.FindGameObjectWithTag("Decoy").transform;
+
+        retreatDistance = Random.Range(enemy.EnemyData._retreatRange + 1, enemy.EnemyData._attackRange - 1);
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
@@ -37,11 +41,12 @@ public class RangedRobot_RetreatState : StateMachineBehaviour
         Vector3 newPos = animator.transform.position + dirToPlayer;
 
         animator.transform.LookAt(newPos);
-        agent.SetDestination(newPos);
+        if (agent.enabled)
+            agent.SetDestination(newPos);
 
         float distance = Vector3.Distance(animator.transform.position, _followPosition);
 
-        if (distance > enemy.EnemyData._attackRange)
+        if (distance > retreatDistance)
         {
             animator.SetBool("isRetreating", false);
             animator.SetBool("isAttacking", false);

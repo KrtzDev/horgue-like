@@ -3,14 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-[RequireComponent(typeof(SetEnemySpawnerData))]
 public class EnemySpawner : MonoBehaviour
 {
-    [SerializeField] private EnemySpawnerData _enemySpawnerData;
+    [SerializeField]
+    private EnemySpawnerData[] _enemySpawnerData;
 
-    [field: SerializeField] public int EnemyWavesToSpawn { get; set; }
-    [field: SerializeField] public int EnemyWaveSize { get; set; }
-    [field: SerializeField] public float EnemySpawnDelay { get; set; }
     public int EnemiesThatHaveSpawned { get; set; }
 
     [SerializeField] private Collider[] SpawnCollider;
@@ -23,28 +20,21 @@ public class EnemySpawner : MonoBehaviour
     public SpawnMethod EnemySpawnMethod = SpawnMethod.RoundRobin;
     public LocationMethod EnemyLocationMethod = LocationMethod.Collider;
 
-    [SerializeField]
-    private int EnemyMaxAmount;
+    [HideInInspector]
+    public int EnemyMaxAmount;
 
     private Bounds Bounds;
     private NavMeshTriangulation Triangulation;
 
-    private void OnEnable()
+    private void Awake()
     {
-        // EnemyWavesToSpawn = _enemySpawnerData._enemyWavesToSpawn;
-        // EnemyWaveSize = _enemySpawnerData._enemyWaveSize;
-        // EnemySpawnDelay = _enemySpawnerData._enemySpawnDelay;
-
-        EnemyMaxAmount = EnemyWavesToSpawn * EnemyWaveSize;
+        EnemyMaxAmount = _enemySpawnerData[GameManager.Instance._currentLevelArray]._enemyWavesToSpawn * _enemySpawnerData[GameManager.Instance._currentLevelArray]._enemyWaveSize;
 
         for (int i = 0; i < EnemyPrefabs.Count; i++)
         {
             EnemyObjectPools.Add(i, ObjectPool.CreateInstance(EnemyPrefabs[i], EnemyMaxAmount));
         }
-    }
 
-    private void Start()
-    {
         Triangulation = NavMesh.CalculateTriangulation();
 
         SetBounds();
@@ -54,13 +44,13 @@ public class EnemySpawner : MonoBehaviour
 
     private IEnumerator SpawnEnemies()
     {
-        WaitForSeconds Wait = new WaitForSeconds(EnemySpawnDelay);
+        WaitForSeconds Wait = new WaitForSeconds(_enemySpawnerData[GameManager.Instance._currentLevelArray]._enemySpawnDelay);
 
         int SpawnedEnemies = 0;
 
         while (SpawnedEnemies < EnemyMaxAmount)
         {
-            for(int i = 0; i < EnemyWaveSize; i++)
+            for(int i = 0; i < _enemySpawnerData[GameManager.Instance._currentLevelArray]._enemyWaveSize; i++)
             {
                 if (EnemySpawnMethod == SpawnMethod.RoundRobin)
                 {

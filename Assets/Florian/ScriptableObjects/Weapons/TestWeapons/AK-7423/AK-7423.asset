@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1840ed087b613334e9bf87d5c6d038cd, type: 3}
+  m_Name: AK-7423
+  m_EditorClassIdentifier: 
+  _weaponPrefab: {fileID: 4852173439239307193, guid: 534ea9bec0f3ace4cb13174feb65375c,
+    type: 3}
+  _weaponSprite: {fileID: 21300000, guid: eca85a8e4e3a2ff4fb87267d50041074, type: 3}
+  _defaultGrip: {fileID: 11400000, guid: 0276b4dcb70fffb41b116150bb36184b, type: 2}
+  _defaultBarrel: {fileID: 11400000, guid: 515593ea7be837b42a2b624475df7156, type: 2}
+  _defaultMagazine: {fileID: 11400000, guid: 656a4e1564f625e479b4f25ced411e93, type: 2}
+  _defaultAmmunition: {fileID: 11400000, guid: f5a77338c7e17fc45a1deac92addcff1, type: 2}
+  _defaultTriggerMechanism: {fileID: 11400000, guid: 0f7624e58b0f3704dbc533de49e53d62,
+    type: 2}
+  _defaultSight: {fileID: 11400000, guid: 612593ce1e077ac4cac55bf8ff35000b, type: 2}
+  _grip: {fileID: 11400000, guid: 0276b4dcb70fffb41b116150bb36184b, type: 2}
+  _barrel: {fileID: 11400000, guid: 515593ea7be837b42a2b624475df7156, type: 2}
+  _magazine: {fileID: 11400000, guid: 656a4e1564f625e479b4f25ced411e93, type: 2}
+  _ammunition: {fileID: 11400000, guid: f5a77338c7e17fc45a1deac92addcff1, type: 2}
+  _triggerMechanism: {fileID: 11400000, guid: 0f7624e58b0f3704dbc533de49e53d62, type: 2}
+  _sight: {fileID: 11400000, guid: 612593ce1e077ac4cac55bf8ff35000b, type: 2}
+  _owningTransform: {fileID: 0}
+  _enemyLayer:
+    serializedVersion: 2
+    m_Bits: 128
+  _groundLayer:
+    serializedVersion: 2
+    m_Bits: 513

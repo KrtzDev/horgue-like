@@ -306,7 +306,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 1
-  m_FollowOffset: {x: -10, y: 7, z: -10}
+  m_FollowOffset: {x: -15, y: 20, z: -15}
   m_XDamping: 0.25
   m_YDamping: 0.5
   m_ZDamping: 0.5
@@ -326,6 +326,7 @@ GameObject:
   - component: {fileID: 1820945064239900913}
   - component: {fileID: 1820945064239900914}
   - component: {fileID: 3759784139014888568}
+  - component: {fileID: 7315911907169730014}
   m_Layer: 6
   m_Name: P_CinemachineCam
   m_TagString: Untagged
@@ -340,15 +341,15 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1820945064239900912}
-  m_LocalRotation: {x: 0.21045256, y: 0.37262264, z: -0.08717229, w: 0.89959055}
-  m_LocalPosition: {x: -10, y: 8, z: -10}
+  m_LocalRotation: {x: 0.3409571, y: 0.35566974, z: -0.14122905, w: 0.8586628}
+  m_LocalPosition: {x: -15, y: 21, z: -15}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1820945064121568358}
   m_Father: {fileID: 4698856430502407210}
   m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 20, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 43.314, y: 45, z: 0}
 --- !u!114 &1820945064239900914
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -370,12 +371,12 @@ MonoBehaviour:
   m_LookAt: {fileID: 4698856431667231555}
   m_Follow: {fileID: 4698856431667231555}
   m_Lens:
-    FieldOfView: 60
+    FieldOfView: 45
     OrthographicSize: 10
-    NearClipPlane: -50
-    FarClipPlane: 100
+    NearClipPlane: 0.001
+    FarClipPlane: 200
     Dutch: 0
-    ModeOverride: 1
+    ModeOverride: 2
     LensShift: {x: 0, y: 0}
     GateFit: 2
     m_SensorSize: {x: 1, y: 1}
@@ -400,6 +401,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _parent: {fileID: 0}
+--- !u!114 &7315911907169730014
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1820945064239900912}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75f35b83dd407b9438f1cf1c28c139e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _cameraPresets:
+  - {x: -15, y: 20, z: -15}
+  - {x: 15, y: 20, z: -15}
+  - {x: 15, y: 20, z: 15}
+  - {x: -15, y: 20, z: 15}
 --- !u!1 &4698856430178366363
 GameObject:
   m_ObjectHideFlags: 0
@@ -428,8 +446,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4698856430178366363}
-  m_LocalRotation: {x: 0.21045256, y: 0.37262264, z: -0.08717229, w: 0.89959055}
-  m_LocalPosition: {x: -10, y: 8, z: -10}
+  m_LocalRotation: {x: 0.3409571, y: 0.35566974, z: -0.14122905, w: 0.8586628}
+  m_LocalPosition: {x: -15, y: 21, z: -15}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -459,10 +477,10 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: -50
-  far clip plane: 100
-  field of view: 60
-  orthographic: 1
+  near clip plane: 0.01
+  far clip plane: 200
+  field of view: 45
+  orthographic: 0
   orthographic size: 10
   m_Depth: 0
   m_CullingMask:
@@ -668,7 +686,6 @@ GameObject:
   - component: {fileID: 8773851501896812125}
   - component: {fileID: 513094526}
   - component: {fileID: 5738317267094421720}
-  - component: {fileID: 4698856431501289401}
   m_Layer: 6
   m_Name: P_PlayerCharacter
   m_TagString: Player
@@ -704,7 +721,7 @@ CapsuleCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4698856430502407209}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 0518bcfbcfd190a489c0338365d640ba, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.5
@@ -780,6 +797,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _characterRigidbody: {fileID: 4698856430502407212}
   _camera: {fileID: 4698856430178366364}
+  _WeaponSpawnTransform: {fileID: 0}
   _playerData: {fileID: 11400000, guid: f1f5e7d0dc811114fbdc1e3cee110906, type: 2}
 --- !u!114 &4698856430502407208
 MonoBehaviour:
@@ -859,6 +877,8 @@ MonoBehaviour:
   <MaxHealth>k__BackingField: 100
   <CurrentHealth>k__BackingField: 0
   <Animator>k__BackingField: {fileID: 0}
+  <Enemy>k__BackingField: {fileID: 0}
+  _HitParticle: {fileID: 0}
 --- !u!114 &8773851501896812125
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -913,7 +933,7 @@ MonoBehaviour:
   _jumpCD: 0.75
   _fallMultiplier: 10
   _jumpVelocityFalloff: 11
-  _jumpForce: 30
+  _jumpForce: 25
   _decoy: {fileID: 1125293543}
   _dashCD: 2.5
   _dashForce: 30
@@ -932,30 +952,13 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4698856430502407209}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: da02311811525494bbef5cd591e33386, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   weapons:
-  - {fileID: 11400000, guid: 708f5adf8cabfce4398f45b3ff84534d, type: 2}
-  _attackDelay: 0.1
-  canShoot: 1
---- !u!114 &4698856431501289401
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4698856430502407209}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6b2000ff5adc2d649a3806cb42c8f97d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _variables: []
-  _GoogleURL: 
-  _playerData: {fileID: 11400000, guid: f1f5e7d0dc811114fbdc1e3cee110906, type: 2}
+  - {fileID: 11400000, guid: 7a12e50f6e9942d4aa8d94a6400be84c, type: 2}
 --- !u!1 &4698856430750863150
 GameObject:
   m_ObjectHideFlags: 0

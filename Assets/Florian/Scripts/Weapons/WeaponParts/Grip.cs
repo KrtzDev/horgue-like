@@ -1,12 +1,12 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "ModularWeapon/WeaponParts/Grip")]
-public class Grip : ScriptableObject
+[CreateAssetMenu(fileName = "new Grip", menuName = "ModularWeapon/WeaponParts/Grip")]
+public class Grip : WeaponPart
 {
     [Header("Stats")]
+    public float attackSpeed;
     public float cooldown;
+    public float critChance;
 
     [Header("Attachements")]
     public uint maxBarrels;
