@@ -6,7 +6,7 @@ public class StraightLineShot : AttackPattern
     public override DamageDealer AttackInPattern(Projectile projectile, Transform spawnPosition)
     {
         Projectile currentProjectile = Instantiate(projectile, spawnPosition.position, spawnPosition.rotation);
-        currentProjectile.GetComponent<Rigidbody>().velocity = currentProjectile.transform.forward * 12f;
+        currentProjectile.GetComponent<Rigidbody>().velocity = currentProjectile.transform.forward * 18f;
         Destroy(currentProjectile, 10f);
 		return currentProjectile;
     }
