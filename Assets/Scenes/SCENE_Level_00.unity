@@ -2646,7 +2646,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 264548418d1c3e248bfcd4824aef05c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayerTransform: {fileID: 1122862688}
+  PlayerTransform: {fileID: 739186901}
 --- !u!4 &356307109
 Transform:
   m_ObjectHideFlags: 0
@@ -4945,6 +4945,12 @@ Mesh:
     offset: 0
     size: 0
     path: 
+--- !u!4 &739186901 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2136897130925667375, guid: 62d6286d223d00e49ba8ca796795cc73,
+    type: 3}
+  m_PrefabInstance: {fileID: 1122862687}
+  m_PrefabAsset: {fileID: 0}
 --- !u!43 &749501605
 Mesh:
   m_ObjectHideFlags: 0
