@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class NEW_EnemySpawner : MonoBehaviour
 {
+    [Header("Transform")]
     [SerializeField]
     private Transform PlayerTransform;
 
@@ -11,6 +12,7 @@ public class NEW_EnemySpawner : MonoBehaviour
     private bool _enableGizmos;
 
     // Variablen
+    [Header("Variables")]
     [SerializeField]
     private float _boxHeight = 0.25f;
     [SerializeField]
@@ -20,22 +22,33 @@ public class NEW_EnemySpawner : MonoBehaviour
     [SerializeField]
     private float _farZoneRadius = 24f;
 
+
+    [Header("Box Colliders")]
     [SerializeField]
-    private BoxCollider Frontal;
+    private BoxCollider FrontalZone;
     [SerializeField]
-    private BoxCollider Rear;
+    private BoxCollider RearZone;
     [SerializeField]
-    private BoxCollider LeftLateral;
+    private BoxCollider LeftLateralZone;
     [SerializeField]
-    private BoxCollider RightLateral;
+    private BoxCollider RightLateralZone;
     [SerializeField]
-    private BoxCollider LeftUpPeripheral;
+    private BoxCollider LeftUpPeripheralZone;
     [SerializeField]
-    private BoxCollider RightUpPeripheral;
+    private BoxCollider RightUpPeripheralZone;
     [SerializeField]
-    private BoxCollider LeftDownPeripheral;
+    private BoxCollider LeftDownPeripheralZone;
     [SerializeField]
-    private BoxCollider RightDownPeripheral;
+    private BoxCollider RightDownPeripheralZone;
+
+    [Header("Sphere Colliders")]
+    [SerializeField]
+    private SphereCollider CloseZone;
+    [SerializeField]
+    private SphereCollider MidZone;
+    [SerializeField]
+    private SphereCollider FarZone;
+
 
     private void Start()
     {
@@ -52,29 +65,37 @@ public class NEW_EnemySpawner : MonoBehaviour
 
     private void SetColliderSizeCenter()
     {
-        Frontal.size = new Vector3(_closeZoneRadius * 2, _boxHeight, _farZoneRadius);
-        Frontal.center = PlayerTransform.position + new Vector3(0, 0, _farZoneRadius / 2);
+        // Box Colliders
 
-        Rear.size = new Vector3(_closeZoneRadius * 2, _boxHeight, _farZoneRadius);
-        Rear.center = PlayerTransform.position - new Vector3(0, 0, _farZoneRadius / 2);
+        FrontalZone.size = new Vector3(_closeZoneRadius * 2, _boxHeight, _farZoneRadius);
+        FrontalZone.center = PlayerTransform.position + new Vector3(0, 0, _farZoneRadius / 2);
 
-        LeftLateral.size = new Vector3(_closeZoneRadius * 2, _boxHeight, _closeZoneRadius * 2);
-        LeftLateral.center = PlayerTransform.position + new Vector3(_closeZoneRadius * 2, 0, 0);
+        RearZone.size = new Vector3(_closeZoneRadius * 2, _boxHeight, _farZoneRadius);
+        RearZone.center = PlayerTransform.position - new Vector3(0, 0, _farZoneRadius / 2);
 
-        RightLateral.size = new Vector3(_closeZoneRadius * 2, _boxHeight, _closeZoneRadius * 2);
-        RightLateral.center = PlayerTransform.position - new Vector3(_closeZoneRadius * 2, 0, 0);
+        LeftLateralZone.size = new Vector3(_closeZoneRadius * 2, _boxHeight, _closeZoneRadius * 2);
+        LeftLateralZone.center = PlayerTransform.position + new Vector3(_closeZoneRadius * 2, 0, 0);
 
-        LeftUpPeripheral.size = new Vector3(_closeZoneRadius * 2, _boxHeight, _closeZoneRadius * 2);
-        LeftUpPeripheral.center = PlayerTransform.position + new Vector3(_closeZoneRadius * 2, 0, _closeZoneRadius * 2);
+        RightLateralZone.size = new Vector3(_closeZoneRadius * 2, _boxHeight, _closeZoneRadius * 2);
+        RightLateralZone.center = PlayerTransform.position - new Vector3(_closeZoneRadius * 2, 0, 0);
 
-        RightUpPeripheral.size = new Vector3(_closeZoneRadius * 2, _boxHeight, _closeZoneRadius * 2);
-        RightUpPeripheral.center = PlayerTransform.position + new Vector3(-_closeZoneRadius * 2, 0, _closeZoneRadius * 2);
+        LeftUpPeripheralZone.size = new Vector3(_closeZoneRadius * 2, _boxHeight, _closeZoneRadius * 2);
+        LeftUpPeripheralZone.center = PlayerTransform.position + new Vector3(_closeZoneRadius * 2, 0, _closeZoneRadius * 2);
 
-        LeftDownPeripheral.size = new Vector3(_closeZoneRadius * 2, _boxHeight, _closeZoneRadius * 2);
-        LeftDownPeripheral.center = PlayerTransform.position + new Vector3(_closeZoneRadius * 2, 0, -_closeZoneRadius * 2);
+        RightUpPeripheralZone.size = new Vector3(_closeZoneRadius * 2, _boxHeight, _closeZoneRadius * 2);
+        RightUpPeripheralZone.center = PlayerTransform.position + new Vector3(-_closeZoneRadius * 2, 0, _closeZoneRadius * 2);
 
-        RightDownPeripheral.size = new Vector3(_closeZoneRadius * 2, _boxHeight, _closeZoneRadius * 2);
-        RightDownPeripheral.center = PlayerTransform.position + new Vector3(-_closeZoneRadius * 2, 0, -_closeZoneRadius * 2);
+        LeftDownPeripheralZone.size = new Vector3(_closeZoneRadius * 2, _boxHeight, _closeZoneRadius * 2);
+        LeftDownPeripheralZone.center = PlayerTransform.position + new Vector3(_closeZoneRadius * 2, 0, -_closeZoneRadius * 2);
+
+        RightDownPeripheralZone.size = new Vector3(_closeZoneRadius * 2, _boxHeight, _closeZoneRadius * 2);
+        RightDownPeripheralZone.center = PlayerTransform.position + new Vector3(-_closeZoneRadius * 2, 0, -_closeZoneRadius * 2);
+
+        // Sphere Colliders
+
+        CloseZone.radius = _closeZoneRadius;
+        MidZone.radius = _midZoneRadius;
+        FarZone.radius = _farZoneRadius;
     }
 
     // GIZMOS
