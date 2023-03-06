@@ -909,7 +909,7 @@ GameObject:
   m_Component:
   - component: {fileID: 74292736}
   - component: {fileID: 74292735}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: RightDownPeripheral
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3108,7 +3108,7 @@ GameObject:
   m_Component:
   - component: {fileID: 399000671}
   - component: {fileID: 399000670}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Frontal
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3153,7 +3153,7 @@ GameObject:
   m_Component:
   - component: {fileID: 415493051}
   - component: {fileID: 415493050}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Rear
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3542,7 +3542,7 @@ GameObject:
   m_Component:
   - component: {fileID: 532912660}
   - component: {fileID: 532912659}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: LeftDownPeripheral
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4452,7 +4452,7 @@ GameObject:
   m_Component:
   - component: {fileID: 645745103}
   - component: {fileID: 645745102}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: RightUpPeripheral
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5735,7 +5735,7 @@ GameObject:
   m_Component:
   - component: {fileID: 793325823}
   - component: {fileID: 793325822}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: FarZone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7900,7 +7900,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1061554262}
   - component: {fileID: 1061554261}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: LeftUpPeripheral
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8234,7 +8234,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1160409588}
   - component: {fileID: 1160409589}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: CloseZone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9125,7 +9125,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1413276628}
   - component: {fileID: 1413276627}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: LeftLateral
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9379,7 +9379,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1462558769}
   - component: {fileID: 1462558768}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: RightLateral
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11855,7 +11855,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1927873302}
   - component: {fileID: 1927873303}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: MidZone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
