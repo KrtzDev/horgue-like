@@ -3,12 +3,13 @@ using UnityEngine;
 
 public class CraftingMenu : MonoBehaviour
 {
-
+	[Header("Weapon")]
 	[SerializeField]
 	private WeaponUI _weaponUI_prefab;
 	[SerializeField]
-	private List<RectTransform> _weaponUIParents;
+	private RectTransform _weaponUIParent;
 
+	[Header("Inventory")]
 	[SerializeField]
 	private RewardUI _rewardUI_prefab;
 	[SerializeField]
@@ -16,11 +17,10 @@ public class CraftingMenu : MonoBehaviour
 
 	public void PopulateWeaponUI()
 	{
-		for (int i = 0; i < _weaponUIParents.Count; i++)
+		foreach (Weapon weapon in RewardManager.Instance.equippedWeapons)
 		{
-			RectTransform parent = _weaponUIParents[i];
-			WeaponUI weaponUI = Instantiate(_weaponUI_prefab, parent);
-			weaponUI.Initialize(RewardManager.Instance.equippedWeapons[i]);
+			WeaponUI weaponUI = Instantiate(_weaponUI_prefab, _weaponUIParent);
+			weaponUI.Initialize(weapon);
 		}
 	}
 
