@@ -7,21 +7,21 @@ public class NEW_EnemySpawner : MonoBehaviour
     [Header("Transform")]
     [SerializeField]
     private Transform PlayerTransform;
+    [SerializeField]
+    private LayerMask _enemyLayer;
 
     [SerializeField]
     private bool _enableGizmos;
 
     // Variablen
     [Header("Variables")]
-    [SerializeField]
-    private float _boxHeight = 0.25f;
+    private float _boxHeight;
     [SerializeField]
     private float _closeZoneRadius = 8f;
     [SerializeField]
     private float _midZoneRadius = 16f;
     [SerializeField]
     private float _farZoneRadius = 24f;
-
 
     [Header("Box Colliders")]
     [SerializeField]
@@ -65,37 +65,64 @@ public class NEW_EnemySpawner : MonoBehaviour
 
     private void SetColliderSizeCenter()
     {
+        _boxHeight = _farZoneRadius;
+
+        Vector3 size;
+        Vector3 center;
+
         // Box Colliders
 
-        FrontalZone.size = new Vector3(_closeZoneRadius * 2, _boxHeight, _farZoneRadius);
-        FrontalZone.center = PlayerTransform.position + new Vector3(0, 0, _farZoneRadius / 2);
+        size = new Vector3(_closeZoneRadius * 2, _boxHeight, _farZoneRadius);
+        center = PlayerTransform.position + new Vector3(0, 0, _farZoneRadius / 2);
+        FrontalZone.size = size;
+        FrontalZone.center = center;
 
-        RearZone.size = new Vector3(_closeZoneRadius * 2, _boxHeight, _farZoneRadius);
-        RearZone.center = PlayerTransform.position - new Vector3(0, 0, _farZoneRadius / 2);
+        size = new Vector3(_closeZoneRadius * 2, _boxHeight, _farZoneRadius);
+        center = PlayerTransform.position - new Vector3(0, 0, _farZoneRadius / 2);
+        RearZone.size = size;
+        RearZone.center = center;
 
-        LeftLateralZone.size = new Vector3(_closeZoneRadius * 2, _boxHeight, _closeZoneRadius * 2);
-        LeftLateralZone.center = PlayerTransform.position + new Vector3(_closeZoneRadius * 2, 0, 0);
+        size = new Vector3(_closeZoneRadius * 2, _boxHeight, _closeZoneRadius * 2);
+        center = PlayerTransform.position + new Vector3(_closeZoneRadius * 2, 0, 0);
+        LeftLateralZone.size = size;
+        LeftLateralZone.center = center;
 
-        RightLateralZone.size = new Vector3(_closeZoneRadius * 2, _boxHeight, _closeZoneRadius * 2);
-        RightLateralZone.center = PlayerTransform.position - new Vector3(_closeZoneRadius * 2, 0, 0);
+        size = new Vector3(_closeZoneRadius * 2, _boxHeight, _closeZoneRadius * 2);
+        center = PlayerTransform.position - new Vector3(_closeZoneRadius * 2, 0, 0);
+        RightLateralZone.size = size;
+        RightLateralZone.center = center;
 
-        LeftUpPeripheralZone.size = new Vector3(_closeZoneRadius * 2, _boxHeight, _closeZoneRadius * 2);
-        LeftUpPeripheralZone.center = PlayerTransform.position + new Vector3(_closeZoneRadius * 2, 0, _closeZoneRadius * 2);
+        size = new Vector3(_closeZoneRadius * 2, _boxHeight, _closeZoneRadius * 2);
+        center = PlayerTransform.position + new Vector3(_closeZoneRadius * 2, 0, _closeZoneRadius * 2);
+        LeftUpPeripheralZone.size = size;
+        LeftUpPeripheralZone.center = center;
 
-        RightUpPeripheralZone.size = new Vector3(_closeZoneRadius * 2, _boxHeight, _closeZoneRadius * 2);
-        RightUpPeripheralZone.center = PlayerTransform.position + new Vector3(-_closeZoneRadius * 2, 0, _closeZoneRadius * 2);
+        size = new Vector3(_closeZoneRadius * 2, _boxHeight, _closeZoneRadius * 2);
+        center = PlayerTransform.position + new Vector3(-_closeZoneRadius * 2, 0, _closeZoneRadius * 2);
+        RightUpPeripheralZone.size = size;
+        RightUpPeripheralZone.center = center;
 
-        LeftDownPeripheralZone.size = new Vector3(_closeZoneRadius * 2, _boxHeight, _closeZoneRadius * 2);
-        LeftDownPeripheralZone.center = PlayerTransform.position + new Vector3(_closeZoneRadius * 2, 0, -_closeZoneRadius * 2);
+        size = new Vector3(_closeZoneRadius * 2, _boxHeight, _closeZoneRadius * 2);
+        center = PlayerTransform.position + new Vector3(_closeZoneRadius * 2, 0, -_closeZoneRadius * 2);
+        LeftDownPeripheralZone.size = size;
+        LeftDownPeripheralZone.center = center;
 
-        RightDownPeripheralZone.size = new Vector3(_closeZoneRadius * 2, _boxHeight, _closeZoneRadius * 2);
-        RightDownPeripheralZone.center = PlayerTransform.position + new Vector3(-_closeZoneRadius * 2, 0, -_closeZoneRadius * 2);
+        size = new Vector3(_closeZoneRadius * 2, _boxHeight, _closeZoneRadius * 2);
+        center = PlayerTransform.position + new Vector3(-_closeZoneRadius * 2, 0, -_closeZoneRadius * 2);
+        RightDownPeripheralZone.size = size;
+        RightDownPeripheralZone.center = center;
+
+        // Collider[] hitColliders = Physics.OverlapBox(center, size / 2, Quaternion.identity, _enemyLayer);
 
         // Sphere Colliders
 
         CloseZone.radius = _closeZoneRadius;
+        // Collider[] hitColliders = Physics.OverlapSphere(transform.position, _closeZoneRadius, _enemyLayer);
         MidZone.radius = _midZoneRadius;
+        // Collider[] hitColliders = Physics.OverlapSphere(transform.position, _midZoneRadius, _enemyLayer);
         FarZone.radius = _farZoneRadius;
+        // Collider[] hitColliders = Physics.OverlapSphere(transform.position, _farZoneRadius, _enemyLayer);
+
     }
 
     // GIZMOS
