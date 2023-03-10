@@ -5,11 +5,15 @@ using UnityEngine.UI;
 
 public class WeaponUI : MonoBehaviour
 {
-	[SerializeField]
-	private Image _weaponImage;
+	[Header("Header")]
 	[SerializeField]
 	private TMP_Text _weaponName;
 
+	[Header("Weapon Image")]
+	[SerializeField]
+	private Image _weaponImage;
+
+	[Header("Weapon Parts")]
 	[SerializeField]
 	private WeaponPartSlot _ammunitionParent;
 	[SerializeField]
@@ -26,15 +30,25 @@ public class WeaponUI : MonoBehaviour
 	[SerializeField]
 	private RewardUI _rewardUI_prefab;
 
+	[Header("Weapon Stats")]
+	[SerializeField]
+	private RectTransform _weaponStatsParent;
+	[SerializeField]
+	private StatUI _statUI_prefab;
+
 	private Weapon _weapon;
 
 	public void Initialize(Weapon weapon)
 	{
 		_weapon = weapon;
+
 		ShowWeaponName();
 		ShowWeaponBackground();
 		ShowWeaponParts();
 		InitializeWeaponSlots();
+
+		ClearWeaponStats();
+		ShowWeaponStats();
 	}
 
 	public bool SetNewWeaponPart(WeaponPart newWeaponPart, WeaponPartSlot weaponPartSlot)
@@ -65,8 +79,11 @@ public class WeaponUI : MonoBehaviour
 			{
 				_weapon._sight = newWeaponPart as Sight;
 			}
+
+			_weapon.Initialize(_weapon.OwningTransform);
+
 			Initialize(_weapon);
-			_weapon.Initialize(_weapon._owningTransform);
+
 			return true;
 		}
 		return false;
@@ -114,5 +131,33 @@ public class WeaponUI : MonoBehaviour
 		_magazineParent.Initialize(this, _weapon._magazine);
 		_sightParent.Initialize(this, _weapon._sight);
 		_triggerParent.Initialize(this, _weapon._triggerMechanism);
+	}
+
+	private void ClearWeaponStats()
+	{
+		for (int i = 0; i < _weaponStatsParent.childCount; i++)
+		{
+			Destroy(_weaponStatsParent.GetChild(i).gameObject);
+		}
+	}
+
+	private void ShowWeaponStats()
+	{
+		StatUI currenStat = Instantiate(_statUI_prefab, _weaponStatsParent);
+		currenStat.Initialize("Damage: ", _weapon.PossibleProjectile.finalBaseDamage.ToString());
+		currenStat = Instantiate(_statUI_prefab, _weaponStatsParent);
+		currenStat.Initialize("Attack Speed: ", _weapon.PossibleProjectile.finalAttackSpeed.ToString());
+		currenStat = Instantiate(_statUI_prefab, _weaponStatsParent);
+		currenStat.Initialize("Reload Time: ", _weapon.PossibleProjectile.finalCooldown.ToString());
+		currenStat = Instantiate(_statUI_prefab, _weaponStatsParent);
+		currenStat.Initialize("Projectile Size: ", _weapon.PossibleProjectile.finalProjectileSize.ToString());
+		currenStat = Instantiate(_statUI_prefab, _weaponStatsParent);
+		currenStat.Initialize("Crit Chance: ", _weapon.PossibleProjectile.finalCritChance.ToString());
+		currenStat = Instantiate(_statUI_prefab, _weaponStatsParent);
+		currenStat.Initialize("Range: ", _weapon.PossibleProjectile.finalRange.ToString());
+		currenStat = Instantiate(_statUI_prefab, _weaponStatsParent);
+		currenStat.Initialize("Capacity: ", _weapon._magazine.capacity.ToString());
+		currenStat = Instantiate(_statUI_prefab, _weaponStatsParent);
+		currenStat.Initialize("Projectile trajectory: ", _weapon.PossibleProjectile.attackPattern.PatternName().ToString());
 	}
 }

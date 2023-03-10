@@ -38,23 +38,20 @@ public class Weapon : ScriptableObject
     [SerializeField]
     public Sight _sight;
 
-    private int _capacity;
+    public Projectile PossibleProjectile { get; private set; }
+	public Transform OwningTransform { get; private set; }
 
-    private Projectile _possibleProjectile;
-
-    float _shotDelay;
-
-    private bool _isReloading;
     private WeaponSkeleton _currentWeaponPrefab;
 	private Transform _weaponTransform;
-
-	[HideInInspector]
-	public Transform _owningTransform;
 
     [SerializeField]
     private LayerMask _enemyLayer;
     [SerializeField]
     private LayerMask _groundLayer;
+
+    private float _shotDelay;
+    private int _capacity;
+    private bool _isReloading;
 
 	public void ResetWeaponParts()
 	{
@@ -68,26 +65,26 @@ public class Weapon : ScriptableObject
 
     public void Initialize(Transform owningTransform)
     {
-		_owningTransform = owningTransform;
+		OwningTransform = owningTransform;
         _currentWeaponPrefab = Instantiate(_weaponPrefab, owningTransform);
 		_weaponTransform = _currentWeaponPrefab.transform;
 
-        _possibleProjectile = _ammunition.projectilePrefab;
-        _possibleProjectile.finalBaseDamage = CalculateDamage();
-        _possibleProjectile.finalAttackSpeed = CalculateAttackSpeed();
-        _possibleProjectile.finalCooldown = CalculateCooldown();
-        _possibleProjectile.finalProjectileSize = CalculateProjectileSize();
-        _possibleProjectile.finalCritChance = CalculateCritChance();
-        _possibleProjectile.finalRange = CalculatefinalRange();
+        PossibleProjectile = _ammunition.projectilePrefab;
+        PossibleProjectile.finalBaseDamage = CalculateDamage();
+        PossibleProjectile.finalAttackSpeed = CalculateAttackSpeed();
+        PossibleProjectile.finalCooldown = CalculateCooldown();
+        PossibleProjectile.finalProjectileSize = CalculateProjectileSize();
+        PossibleProjectile.finalCritChance = CalculateCritChance();
+        PossibleProjectile.finalRange = CalculatefinalRange();
 
         _capacity = _magazine.capacity;
 
-        _possibleProjectile.attackPattern = _barrel.attackPattern;
-        _possibleProjectile.spawnPosition = _currentWeaponPrefab.ProjectileSpawnPosition;
+        PossibleProjectile.attackPattern = _barrel.attackPattern;
+        PossibleProjectile.spawnPosition = _currentWeaponPrefab.ProjectileSpawnPosition;
 
-        if (_possibleProjectile.finalAttackSpeed != 0)
+        if (PossibleProjectile.finalAttackSpeed != 0)
         {
-            _shotDelay = 1 / _possibleProjectile.finalAttackSpeed;
+            _shotDelay = 1 / PossibleProjectile.finalAttackSpeed;
         }
     }
 
@@ -293,7 +290,7 @@ public class Weapon : ScriptableObject
 
     private void Shoot()
     {
-        if (_possibleProjectile.finalAttackSpeed == 0) return;
+        if (PossibleProjectile.finalAttackSpeed == 0) return;
         _shotDelay -= Time.deltaTime;
         if(!RotateTowardsEnemy()) return;
         if (_shotDelay <= 0)
@@ -301,12 +298,12 @@ public class Weapon : ScriptableObject
 			DamageDealer spawnedDamageDealer;
 
             _capacity--;
-            _shotDelay = 1 / _possibleProjectile.finalAttackSpeed;
+            _shotDelay = 1 / PossibleProjectile.finalAttackSpeed;
 
             _currentWeaponPrefab.MuzzleFlash.Play();
 
-            spawnedDamageDealer = _possibleProjectile.attackPattern.AttackInPattern(_possibleProjectile, _possibleProjectile.spawnPosition);
-			spawnedDamageDealer.gameObject.transform.localScale = Vector3.one * _possibleProjectile.finalProjectileSize;
+            spawnedDamageDealer = PossibleProjectile.attackPattern.AttackInPattern(PossibleProjectile, PossibleProjectile.spawnPosition);
+			spawnedDamageDealer.gameObject.transform.localScale = Vector3.one * PossibleProjectile.finalProjectileSize;
 		}
     }
 
@@ -315,7 +312,7 @@ public class Weapon : ScriptableObject
         float currentclosestdistance = Mathf.Infinity;
         Enemy closestEnemy = null;
 
-        Collider[] enemies = Physics.OverlapSphere(_weaponTransform.position, _possibleProjectile.finalRange, _enemyLayer);
+        Collider[] enemies = Physics.OverlapSphere(_weaponTransform.position, PossibleProjectile.finalRange, _enemyLayer);
         foreach (var enemy in enemies)
         {
             float distanceToEnemy = Vector3.Distance(_weaponTransform.position, enemy.transform.position);
@@ -343,7 +340,7 @@ public class Weapon : ScriptableObject
 
     private async void Reload()
     {
-        await Task.Delay((int)(_possibleProjectile.finalCooldown * 1000));
+        await Task.Delay((int)(PossibleProjectile.finalCooldown * 1000));
 
         _capacity = _magazine.capacity;
         _isReloading = false;

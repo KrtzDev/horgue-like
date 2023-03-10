@@ -4,7 +4,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class RewardUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerMoveHandler, IDragHandler, IBeginDragHandler, IEndDragHandler
+public class RewardUI : MonoBehaviour, IPointerClickHandler, IPointerExitHandler, IPointerMoveHandler, IDragHandler, IBeginDragHandler, IEndDragHandler
 {
 	[SerializeField]
 	private Image _rewardImage;
@@ -28,18 +28,36 @@ public class RewardUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 		_defaultPos = _rectTransform.localPosition;
 	}
 
-	public void OnPointerEnter(PointerEventData eventData)
+	public void OnPointerClick(PointerEventData eventData)
 	{
-		_currentToolTipUI = Instantiate(_toolTip_prefab, transform.root);
-		_currentToolTipUI.Initialize(_reward.weaponPartReward);
+		DestroyToolTip();
 
-		_currentToolTipUI.transform.position = eventData.position + Vector2.right * 50 * transform.root.GetComponent<Canvas>().scaleFactor;
+		if (eventData.button == PointerEventData.InputButton.Right)
+		{
+			_currentToolTipUI = Instantiate(_toolTip_prefab, transform.root);
+			_currentToolTipUI.Initialize(_reward.weaponPartReward);
+
+			_currentToolTipUI.transform.position = eventData.position + Vector2.right * 50 * transform.root.GetComponent<Canvas>().scaleFactor;
+		}
 	}
+
 	public void OnPointerMove(PointerEventData eventData)
 	{
 		if (_currentToolTipUI)
 		{
 			_currentToolTipUI.transform.position += (Vector3)eventData.delta;
+			
+			RectTransform currentToolTipUiRect = _currentToolTipUI.GetComponent<RectTransform>();
+
+			Vector3 pos = currentToolTipUiRect.localPosition;
+
+			Vector3 minPosition = transform.root.GetComponent<RectTransform>().rect.min - currentToolTipUiRect.rect.min;
+			Vector3 maxPosition = transform.root.GetComponent<RectTransform>().rect.max - currentToolTipUiRect.rect.max;
+
+			pos.x = Mathf.Clamp(currentToolTipUiRect.localPosition.x, minPosition.x, maxPosition.x);
+			pos.y = Mathf.Clamp(currentToolTipUiRect.localPosition.y, minPosition.y, maxPosition.y);
+
+			currentToolTipUiRect.localPosition = pos;
 		}
 	}
 
@@ -76,7 +94,7 @@ public class RewardUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 			{
 				if (hit.gameObject.TryGetComponent(out WeaponPartSlot weaponPartSlot))
 				{
-					if(weaponPartSlot._owningWeaponUI.SetNewWeaponPart(_reward.weaponPartReward, weaponPartSlot))
+					if (weaponPartSlot._owningWeaponUI.SetNewWeaponPart(_reward.weaponPartReward, weaponPartSlot))
 					{
 						Destroy(gameObject);
 					}
