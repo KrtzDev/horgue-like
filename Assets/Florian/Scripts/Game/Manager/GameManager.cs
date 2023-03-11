@@ -61,6 +61,9 @@ public class GameManager : Singleton<GameManager>
 
 		if (SceneManager.GetActiveScene().name == "SCENE_Main_Menu")
 		{
+			_currentLevel = 1;
+			_currentWave = 0;
+
 			_loadData.SetActive(true);
 			return;
 		}

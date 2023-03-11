@@ -39,7 +39,7 @@ public class ToolTipUI : MonoBehaviour
 			currentStat = Instantiate(_statUI_prefab, _statParent);
 			currentStat.Initialize("Range: ", barrel.range.ToString());
 			currentStat = Instantiate(_statUI_prefab, _statParent);
-			currentStat.Initialize("Projectile trajectory: ", barrel.attackPattern.name.ToString());
+			currentStat.Initialize("Projectile trajectory: ", barrel.attackPattern.PatternName().ToString());
 		}
 		else if (weaponPartData is Magazine)
 		{

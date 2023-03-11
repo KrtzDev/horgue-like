@@ -10,6 +10,10 @@ public class Endscreen : MonoBehaviour
 
 	[SerializeField]
 	private TMP_Text _titleText;
+
+	[SerializeField]
+	private TMP_Text _StatsText;
+
 	[SerializeField]
 	private List<GameObject> _wonStateUIElements = new List<GameObject>();
 	[SerializeField]

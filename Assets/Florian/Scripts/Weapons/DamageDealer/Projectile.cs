@@ -21,6 +21,9 @@ public class Projectile : DamageDealer
 		{
 			if (other.TryGetComponent(out HealthComponent enemyHealth))
 			{
+				if (finalCritChance > Random.Range(0,100))
+					finalBaseDamage *= 2;
+
 				enemyHealth.TakeDamage((int)finalBaseDamage);
 			}
 			Destroy(gameObject);
