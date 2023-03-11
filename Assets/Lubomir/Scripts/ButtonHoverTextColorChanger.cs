@@ -22,7 +22,7 @@ public class ButtonHoverTextColorChanger : MonoBehaviour , IPointerEnterHandler,
 
 	private void Update()
 	{
-		if (EventSystem.current.currentSelectedGameObject == gameObject || _isHovered) 
+		if (EventSystem.current?.currentSelectedGameObject == gameObject || _isHovered) 
 		{
 			_buttonText.color = _textColorOnHover;
 		}

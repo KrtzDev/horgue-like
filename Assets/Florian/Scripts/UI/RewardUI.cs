@@ -4,7 +4,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class RewardUI : MonoBehaviour, IPointerClickHandler, IPointerExitHandler, IPointerMoveHandler, IDragHandler, IBeginDragHandler, IEndDragHandler
+public class RewardUI : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler, IPointerMoveHandler, IDragHandler, IBeginDragHandler, IEndDragHandler
 {
 	[SerializeField]
 	private Image _rewardImage;
@@ -28,17 +28,28 @@ public class RewardUI : MonoBehaviour, IPointerClickHandler, IPointerExitHandler
 		_defaultPos = _rectTransform.localPosition;
 	}
 
+	public void OnPointerEnter(PointerEventData eventData)
+	{
+		if (_reward.weaponPartReward.isSlotted) 
+			return;
+
+		if (SceneManager.GetActiveScene().name == "SCENE_Weapon_Crafting")
+		{
+			foreach (WeaponUI weaponUI in UIManager.Instance.CraftingMenu.weaponUIs)
+			{
+				weaponUI.ShowPotentilaUpdatedWeaponStats(_reward.weaponPartReward);
+			}
+		}
+	}
+
 	public void OnPointerClick(PointerEventData eventData)
 	{
 		DestroyToolTip();
 
-		if (eventData.button == PointerEventData.InputButton.Right)
-		{
-			_currentToolTipUI = Instantiate(_toolTip_prefab, transform.root);
-			_currentToolTipUI.Initialize(_reward.weaponPartReward);
+		_currentToolTipUI = Instantiate(_toolTip_prefab, transform.root);
+		_currentToolTipUI.Initialize(_reward.weaponPartReward);
 
-			_currentToolTipUI.transform.position = eventData.position + Vector2.right * 50 * transform.root.GetComponent<Canvas>().scaleFactor;
-		}
+		_currentToolTipUI.transform.position = eventData.position + Vector2.right * 50 * transform.root.GetComponent<Canvas>().scaleFactor;
 	}
 
 	public void OnPointerMove(PointerEventData eventData)
@@ -46,7 +57,7 @@ public class RewardUI : MonoBehaviour, IPointerClickHandler, IPointerExitHandler
 		if (_currentToolTipUI)
 		{
 			_currentToolTipUI.transform.position += (Vector3)eventData.delta;
-			
+
 			RectTransform currentToolTipUiRect = _currentToolTipUI.GetComponent<RectTransform>();
 
 			Vector3 pos = currentToolTipUiRect.localPosition;
@@ -64,6 +75,17 @@ public class RewardUI : MonoBehaviour, IPointerClickHandler, IPointerExitHandler
 	public void OnPointerExit(PointerEventData eventData)
 	{
 		DestroyToolTip();
+
+		if (_reward.weaponPartReward.isSlotted)
+			return;
+
+		if (SceneManager.GetActiveScene().name == "SCENE_Weapon_Crafting")
+		{
+			foreach (WeaponUI weaponUI in UIManager.Instance.CraftingMenu.weaponUIs)
+			{
+				weaponUI.ShowWeaponStats(weaponUI._weapon.CalculateWeaponStats(weaponUI._weapon));
+			}
+		}
 	}
 
 	public void OnBeginDrag(PointerEventData eventData)
@@ -88,6 +110,8 @@ public class RewardUI : MonoBehaviour, IPointerClickHandler, IPointerExitHandler
 	{
 		if (SceneManager.GetActiveScene().name == "SCENE_Weapon_Crafting")
 		{
+			DestroyToolTip();
+
 			List<RaycastResult> hits = new List<RaycastResult>();
 			EventSystem.current.RaycastAll(eventData, hits);
 			foreach (var hit in hits)

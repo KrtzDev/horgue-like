@@ -93,6 +93,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _statName: {fileID: 5157241904084585480}
   _value: {fileID: 8909615849906530040}
+  statBackground: {fileID: 8713472024154021306}
+  positiveColor: {r: 0.0995016, g: 0.49056602, b: 0.11637182, a: 1}
+  negativeColor: {r: 0.5377358, g: 0.13950695, b: 0.13950695, a: 1}
 --- !u!1 &7361048270457705148
 GameObject:
   m_ObjectHideFlags: 0
@@ -128,7 +131,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 110, y: 0}
+  m_AnchoredPosition: {x: 112, y: 0}
   m_SizeDelta: {x: 100, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1484114060825231086
@@ -263,7 +266,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -50, y: 0}
+  m_AnchoredPosition: {x: -52, y: 0}
   m_SizeDelta: {x: 220, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5906548403508629163

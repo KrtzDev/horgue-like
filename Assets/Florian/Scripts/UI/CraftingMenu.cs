@@ -3,6 +3,9 @@ using UnityEngine;
 
 public class CraftingMenu : MonoBehaviour
 {
+	[HideInInspector]
+	public List<WeaponUI> weaponUIs = new List<WeaponUI>();
+
 	[Header("Weapon")]
 	[SerializeField]
 	private WeaponUI _weaponUI_prefab;
@@ -21,6 +24,7 @@ public class CraftingMenu : MonoBehaviour
 		{
 			WeaponUI weaponUI = Instantiate(_weaponUI_prefab, _weaponUIParent);
 			weaponUI.Initialize(weapon);
+			weaponUIs.Add(weaponUI);
 		}
 	}
 
