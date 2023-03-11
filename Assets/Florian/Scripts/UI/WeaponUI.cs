@@ -1,15 +1,19 @@
-﻿using System;
-using TMPro;
+﻿using TMPro;
 using UnityEngine;
+using UnityEngine.ProBuilder.MeshOperations;
 using UnityEngine.UI;
 
 public class WeaponUI : MonoBehaviour
 {
-	[SerializeField]
-	private Image _weaponImage;
+	[Header("Header")]
 	[SerializeField]
 	private TMP_Text _weaponName;
 
+	[Header("Weapon Image")]
+	[SerializeField]
+	private Image _weaponImage;
+
+	[Header("Weapon Parts")]
 	[SerializeField]
 	private WeaponPartSlot _ammunitionParent;
 	[SerializeField]
@@ -26,15 +30,24 @@ public class WeaponUI : MonoBehaviour
 	[SerializeField]
 	private RewardUI _rewardUI_prefab;
 
-	private Weapon _weapon;
+	[Header("Weapon Stats")]
+	[SerializeField]
+	private RectTransform _weaponStatsParent;
+	[SerializeField]
+	private StatUI _statUI_prefab;
+
+	public Weapon _weapon;
 
 	public void Initialize(Weapon weapon)
 	{
 		_weapon = weapon;
+
 		ShowWeaponName();
 		ShowWeaponBackground();
 		ShowWeaponParts();
 		InitializeWeaponSlots();
+
+		ShowWeaponStats(_weapon.CalculateWeaponStats(_weapon));
 	}
 
 	public bool SetNewWeaponPart(WeaponPart newWeaponPart, WeaponPartSlot weaponPartSlot)
@@ -65,8 +78,11 @@ public class WeaponUI : MonoBehaviour
 			{
 				_weapon._sight = newWeaponPart as Sight;
 			}
+
+			_weapon.Initialize(_weapon.OwningTransform);
+
 			Initialize(_weapon);
-			_weapon.Initialize(_weapon._owningTransform);
+
 			return true;
 		}
 		return false;
@@ -79,7 +95,7 @@ public class WeaponUI : MonoBehaviour
 
 	private void ShowWeaponBackground()
 	{
-		_weaponImage.sprite = _weapon._weaponSprite;	
+		_weaponImage.sprite = _weapon._weaponSprite;
 	}
 
 	private void ShowWeaponParts()
@@ -114,5 +130,122 @@ public class WeaponUI : MonoBehaviour
 		_magazineParent.Initialize(this, _weapon._magazine);
 		_sightParent.Initialize(this, _weapon._sight);
 		_triggerParent.Initialize(this, _weapon._triggerMechanism);
+	}
+
+	private void ClearWeaponStats()
+	{
+		for (int i = 0; i < _weaponStatsParent.childCount; i++)
+		{
+			Destroy(_weaponStatsParent.GetChild(i).gameObject);
+		}
+	}
+
+
+
+	WeaponStats _previousWeaponStats;
+
+	public void ShowWeaponStats(WeaponStats weaponStats, bool colorStats = false)
+	{
+		ClearWeaponStats();
+
+		if (!colorStats) 
+		{ 
+		StatUI currenStat = Instantiate(_statUI_prefab, _weaponStatsParent);
+		currenStat.Initialize("Damage: ", weaponStats.damage.ToString());
+		currenStat = Instantiate(_statUI_prefab, _weaponStatsParent);
+		currenStat.Initialize("Attack Speed: ", weaponStats.attackspeed.ToString());
+		currenStat = Instantiate(_statUI_prefab, _weaponStatsParent);
+		currenStat.Initialize("Reload Time: ", weaponStats.cooldown.ToString());
+		currenStat = Instantiate(_statUI_prefab, _weaponStatsParent);
+		currenStat.Initialize("Projectile Size: ", weaponStats.projectileSize.ToString());
+		currenStat = Instantiate(_statUI_prefab, _weaponStatsParent);
+		currenStat.Initialize("Crit Chance: ", weaponStats.critChance.ToString());
+		currenStat = Instantiate(_statUI_prefab, _weaponStatsParent);
+		currenStat.Initialize("Range: ", weaponStats.range.ToString());
+		currenStat = Instantiate(_statUI_prefab, _weaponStatsParent);
+		currenStat.Initialize("Capacity: ", weaponStats.capacity.ToString());
+		currenStat = Instantiate(_statUI_prefab, _weaponStatsParent);
+		currenStat.Initialize("Projectile trajectory: ", weaponStats.attackPattern.PatternName().ToString());
+		}
+		else if (_previousWeaponStats != null && colorStats)
+		{
+			StatUI currenStat = Instantiate(_statUI_prefab, _weaponStatsParent);
+			currenStat.Initialize("Damage: ", weaponStats.damage.ToString());
+			if (weaponStats.damage > _previousWeaponStats.damage)
+				currenStat.statBackground.color = currenStat.positiveColor;
+			else if (weaponStats.damage < _previousWeaponStats.damage)
+				currenStat.statBackground.color = currenStat.negativeColor;
+
+			currenStat = Instantiate(_statUI_prefab, _weaponStatsParent);
+			currenStat.Initialize("Attack Speed: ", weaponStats.attackspeed.ToString());
+			if (weaponStats.attackspeed > _previousWeaponStats.attackspeed)
+				currenStat.statBackground.color = currenStat.positiveColor;
+			else if (weaponStats.attackspeed < _previousWeaponStats.attackspeed)
+				currenStat.statBackground.color = currenStat.negativeColor;
+
+			currenStat = Instantiate(_statUI_prefab, _weaponStatsParent);
+			currenStat.Initialize("Reload Time: ", weaponStats.cooldown.ToString());
+			if (weaponStats.cooldown > _previousWeaponStats.cooldown)
+				currenStat.statBackground.color = currenStat.positiveColor;
+			else if (weaponStats.cooldown < _previousWeaponStats.cooldown)
+				currenStat.statBackground.color = currenStat.negativeColor;
+
+			currenStat = Instantiate(_statUI_prefab, _weaponStatsParent);
+			currenStat.Initialize("Projectile Size: ", weaponStats.projectileSize.ToString());
+			if (weaponStats.projectileSize > _previousWeaponStats.projectileSize)
+				currenStat.statBackground.color = currenStat.positiveColor;
+			else if (weaponStats.projectileSize < _previousWeaponStats.projectileSize)
+				currenStat.statBackground.color = currenStat.negativeColor;
+
+			currenStat = Instantiate(_statUI_prefab, _weaponStatsParent);
+			currenStat.Initialize("Crit Chance: ", weaponStats.critChance.ToString());
+			if (weaponStats.critChance > _previousWeaponStats.critChance)
+				currenStat.statBackground.color = currenStat.positiveColor;
+			else if (weaponStats.critChance < _previousWeaponStats.critChance)
+				currenStat.statBackground.color = currenStat.negativeColor;
+
+			currenStat = Instantiate(_statUI_prefab, _weaponStatsParent);
+			currenStat.Initialize("Range: ", weaponStats.range.ToString());
+			if (weaponStats.range > _previousWeaponStats.range)
+				currenStat.statBackground.color = currenStat.positiveColor;
+			else if (weaponStats.range < _previousWeaponStats.range)
+				currenStat.statBackground.color = currenStat.negativeColor;
+
+			currenStat = Instantiate(_statUI_prefab, _weaponStatsParent);
+			currenStat.Initialize("Capacity: ", weaponStats.capacity.ToString());
+			if (weaponStats.capacity > _previousWeaponStats.capacity)
+				currenStat.statBackground.color = currenStat.positiveColor;
+			else if (weaponStats.capacity < _previousWeaponStats.capacity)
+				currenStat.statBackground.color = currenStat.negativeColor;
+
+			currenStat = Instantiate(_statUI_prefab, _weaponStatsParent);
+			currenStat.Initialize("Projectile trajectory: ", weaponStats.attackPattern.PatternName().ToString());
+		}
+		else
+		{
+			StatUI currenStat = Instantiate(_statUI_prefab, _weaponStatsParent);
+			currenStat.Initialize("Damage: ", weaponStats.damage.ToString());
+			currenStat = Instantiate(_statUI_prefab, _weaponStatsParent);
+			currenStat.Initialize("Attack Speed: ", weaponStats.attackspeed.ToString());
+			currenStat = Instantiate(_statUI_prefab, _weaponStatsParent);
+			currenStat.Initialize("Reload Time: ", weaponStats.cooldown.ToString());
+			currenStat = Instantiate(_statUI_prefab, _weaponStatsParent);
+			currenStat.Initialize("Projectile Size: ", weaponStats.projectileSize.ToString());
+			currenStat = Instantiate(_statUI_prefab, _weaponStatsParent);
+			currenStat.Initialize("Crit Chance: ", weaponStats.critChance.ToString());
+			currenStat = Instantiate(_statUI_prefab, _weaponStatsParent);
+			currenStat.Initialize("Range: ", weaponStats.range.ToString());
+			currenStat = Instantiate(_statUI_prefab, _weaponStatsParent);
+			currenStat.Initialize("Capacity: ", weaponStats.capacity.ToString());
+			currenStat = Instantiate(_statUI_prefab, _weaponStatsParent);
+			currenStat.Initialize("Projectile trajectory: ", weaponStats.attackPattern.PatternName().ToString());
+		}
+
+		_previousWeaponStats = weaponStats;
+	}
+
+	public void ShowPotentilaUpdatedWeaponStats(WeaponPart weaponPart)
+	{
+		ShowWeaponStats(_weapon.CalculatePotentialStats(weaponPart), true);
 	}
 }
