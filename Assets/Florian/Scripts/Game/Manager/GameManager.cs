@@ -87,7 +87,8 @@ public class GameManager : Singleton<GameManager>
 
 		_currentWave += 1;
 
-		if (_currentLevel >= 2)
+		// if (_currentLevel >= 2)
+		if (_currentLevel >= 0)
 		{
 			_playerCanUseAbilities = true;
 		}
