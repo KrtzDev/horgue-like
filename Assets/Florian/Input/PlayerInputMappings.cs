@@ -171,7 +171,7 @@ public partial class @PlayerInputMappings : IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""7f4e3093-eacb-498b-b3dd-1d0127211e2f"",
-                    ""path"": ""<XInputController>/buttonSouth"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
