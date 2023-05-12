@@ -13,6 +13,28 @@ public class LoadEnemyData : ReadGoogleSheets
     [SerializeField]
     private BasicEnemyData _gigaRangedRobotData;
 
+    [System.Serializable]
+    public class _EnemyData
+    {
+        public string name;
+        public float maxHealth;
+        public float damagePerHit;
+        public float attackSpeed;
+        public int givenXP;
+        public float moveSpeed;
+        public float armor;
+        public float elementalResistance;
+        public float technicalResistance;
+    }
+
+    [System.Serializable]
+    public class EnemyDataList
+    {
+        public _EnemyData[] Enemies;
+    }
+
+    public EnemyDataList myEnemyDataList = new EnemyDataList();
+
     public override void Awake()
     {
         _GoogleURL = "https://sheets.googleapis.com/v4/spreadsheets/1dbgvJsZAh6RdSJZYxfwGvvmaSeoRMNVGeIIugai8UIU/values/Enemies?key=AIzaSyD2YFsTjKNGDId31Yus0bkFR5hr9WK9yyY";
@@ -69,5 +91,10 @@ public class LoadEnemyData : ReadGoogleSheets
                 Debug.Log("GIGA RangedRobot");
                 break;
         }
+    }
+
+    public override void ReadJSON()
+    {
+        myEnemyDataList = JsonUtility.FromJson<EnemyDataList>(JSONFile.text);
     }
 }

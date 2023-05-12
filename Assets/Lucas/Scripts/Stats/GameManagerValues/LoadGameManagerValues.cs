@@ -11,6 +11,26 @@ public class LoadGameManagerValues : ReadGoogleSheets
     [SerializeField]
     private GameManagerValues _Level03;
 
+    [System.Serializable]
+    public class LevelData
+    {
+        public string name;
+        public float healthBonus;
+        public float damageBonus;
+        public int wavesToSpawn;
+        public int waveSize;
+        public int spawnDelay;
+        public int timeToSurvive;
+    }
+
+    [System.Serializable]
+    public class LevelDataList
+    {
+        public LevelData[] values;
+    }
+
+    public LevelDataList myLevelDataList = new LevelDataList();
+
     public override void Awake()
     {
         _GoogleURL = "https://sheets.googleapis.com/v4/spreadsheets/1dbgvJsZAh6RdSJZYxfwGvvmaSeoRMNVGeIIugai8UIU/values/GameManagerValues?key=AIzaSyD2YFsTjKNGDId31Yus0bkFR5hr9WK9yyY";
@@ -38,5 +58,10 @@ public class LoadGameManagerValues : ReadGoogleSheets
                 _Level03._timeToSurvive = int.Parse(tempGameManagerData[6]);
                 break;
         }
+    }
+
+    public override void ReadJSON()
+    {
+        myLevelDataList = JsonUtility.FromJson<LevelDataList>(JSONFile.text);
     }
 }

@@ -1,0 +1,42 @@
+{
+  "range": "GameManagerValues!A1:Z1000",
+  "majorDimension": "ROWS",
+  "values": [
+    [
+      "Name",
+      "healthBonus",
+      "damageBonus",
+      "WavesToSpawn",
+      "WaveSize",
+      "SpawnDelay",
+      "TimeToSurvive"
+    ],
+    [
+      "Level01",
+      "1",
+      "1",
+      "7",
+      "10",
+      "5",
+      "40"
+    ],
+    [
+      "Level02",
+      "1,25",
+      "1,25",
+      "9",
+      "12",
+      "5",
+      "50"
+    ],
+    [
+      "Level03",
+      "1,5",
+      "1,5",
+      "11",
+      "14",
+      "5",
+      "60"
+    ]
+  ]
+}

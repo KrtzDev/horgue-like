@@ -1,0 +1,84 @@
+{
+  "Enemies": [
+    {
+      "name": "Basic",
+      "maxHealth": 150,
+      "damagePerHit": 10,
+      "attackSpeed": 1,
+      "givenXP": 1,
+      "moveSpeed": 1,
+      "armor": 1,
+      "elementalResistance": 1,
+      "technicalResistance": 1
+    },
+    {
+      "name": "RangedRobot",
+      "maxHealth": 0.35,
+      "damagePerHit": 0.8,
+      "attackSpeed": 1.5,
+      "givenXP": 3,
+      "moveSpeed": 7.5,
+      "armor": 15,
+      "elementalResistance": -100,
+      "technicalResistance": 0
+    },
+    {
+      "name": "PasuKan",
+      "maxHealth": 0.65,
+      "damagePerHit": 0.8,
+      "attackSpeed": 2.5,
+      "givenXP": 10,
+      "moveSpeed": 9,
+      "armor": 100,
+      "elementalResistance": 50,
+      "technicalResistance": -50
+    },
+    {
+      "name": "GIGARangedRobot",
+      "maxHealth": 0.75,
+      "damagePerHit": 1.2,
+      "attackSpeed": 2.5,
+      "givenXP": 15,
+      "moveSpeed": 6.5,
+      "armor": 15,
+      "elementalResistance": -100,
+      "technicalResistance": 0
+    }
+  ],
+  "Level": [
+    {
+      "Name": "Level01",
+      "healthBonus": 1,
+      "damageBonus": 1,
+      "WavesToSpawn": 7,
+      "WaveSize": 10,
+      "SpawnDelay": 5,
+      "TimeToSurvive": 40
+    },
+    {
+      "Name": "Level02",
+      "healthBonus": 1.25,
+      "damageBonus": 1.25,
+      "WavesToSpawn": 9,
+      "WaveSize": 12,
+      "SpawnDelay": 5,
+      "TimeToSurvive": 50
+    },
+    {
+      "Name": "Level03",
+      "healthBonus": 1.5,
+      "damageBonus": 1.5,
+      "WavesToSpawn": 11,
+      "WaveSize": 14,
+      "SpawnDelay": 5,
+      "TimeToSurvive": 60
+    }
+  ],
+  "Player": [
+    {
+      "Name": "Player",
+      "movementSpeed": 12,
+      "maxHealth": 100
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "range": "PlayerValues!A1:Z1000",
+  "majorDimension": "ROWS",
+  "values": [
+    [
+      "Name",
+      "movementSpeed",
+      "maxHealth"
+    ],
+    [
+      "Player",
+      "12,00",
+      "100"
+    ]
+  ]
+}
