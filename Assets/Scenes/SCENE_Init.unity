@@ -578,6 +578,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: LoadData
       objectReference: {fileID: 0}
+    - target: {fileID: 3440539924923434844, guid: db4216ec71e55ed45accaad00a2c76c1,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3440539924923434845, guid: db4216ec71e55ed45accaad00a2c76c1,
         type: 3}
       propertyPath: JSONFile

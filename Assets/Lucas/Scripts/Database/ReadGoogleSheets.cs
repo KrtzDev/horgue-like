@@ -19,9 +19,6 @@ public abstract class ReadGoogleSheets : MonoBehaviour
     [SerializeField]
     private int _dataEntries;
 
-    public string jsonfile;
-    public TextAsset JSONFile;
-
     public virtual void Awake()
     {
         for (iteration = 0; iteration < _dataEntries; iteration++)
