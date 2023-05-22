@@ -51,8 +51,6 @@ public abstract class ReadGoogleSheets : MonoBehaviour
         // get Spreadsheet: https://sheets.googleapis.com/v4/spreadsheets/<ID>/values/<SheetName>?key=<APIKey>
         yield return www.SendWebRequest();
 
-        ReadJSON();
-
         if (www.result == UnityWebRequest.Result.ConnectionError || www.result == UnityWebRequest.Result.ProtocolError || www.timeout > 2)
         {
             Debug.LogError("ERROR: " + www.error);
@@ -60,8 +58,6 @@ public abstract class ReadGoogleSheets : MonoBehaviour
         else
         {
             string json = www.downloadHandler.text;
-            SaveIntoJson(json);
-            ReadJSON();
             var objectInSpreadsheet = JSON.Parse(json);
             foreach (var item in objectInSpreadsheet["values"])
             {
@@ -86,13 +82,4 @@ public abstract class ReadGoogleSheets : MonoBehaviour
     }
 
     public abstract void ApplySheetData(List<string> tempData);
-
-    public void SaveIntoJson(string json)
-    {
-        System.IO.File.WriteAllText("Assets/JSON" + jsonfile, json);
-    }
-
-    public abstract void ReadJSON();
-
-
 }

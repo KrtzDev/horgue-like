@@ -13,31 +13,26 @@ using UnityEngine.Networking;
 
 public class UpdateTuningData : MonoBehaviour
 {
-    private void Start()
-    {
-		GetTuningData();
-    }
-
     public class ExportError
 	{
 		public string status;
 		public string error;
 	}
 
-	private static string ExportSheetScriptURL = "https://script.google.com/macros/s/AKfycbzyotr6Zni94D5wpgeFqMgC_RLB2DRRktj6tF57EcXNHPzUI4TW8kqj_KeVQ3Vou6Q/exec";
+	private static string ExportSheetScriptURL = "https://script.google.com/macros/s/AKfycbze8vlsLrVsqLOOiF3C_Pej46VasIxAPmjKVRM6LqcEYSJE4cSxcE6fbA6MNyyu_C8/exec";
 
 
 	private static List<string[]> s_DataUpdateQueue = new List<string[]>();
 	static UnityWebRequest www;
 
-	[MenuItem("Tuning/Update Tuning Data")]
+	[MenuItem("GetJSON/Get Game Data")]
 	public static void GetTuningData()
 	{
 
 		s_DataUpdateQueue.Clear();
 		// ADD ALL SPREADSHEETS YOU WANT DO RETRIEVE CONFIG DATA FROM
 		// FIRST PART IS LOCAL FILE NAME TO CACHE (IN ASSETS FOLDER), SECOND IS SPREADSHEET KEY
-		s_DataUpdateQueue.Add(new string[] { "TuningData.json", "1dbgvJsZAh6RdSJZYxfwGvvmaSeoRMNVGeIIugai8UIU" });
+		s_DataUpdateQueue.Add(new string[] { "GameData.json", "1dbgvJsZAh6RdSJZYxfwGvvmaSeoRMNVGeIIugai8UIU" });
 
 		SendNextRequest();
 		if (www != null) EditorApplication.update += EditorUpdate;
@@ -57,7 +52,7 @@ public class UpdateTuningData : MonoBehaviour
 		www.Send();
 	}
 
-    static void EditorUpdate()
+	static void EditorUpdate()
 	{
 		while (!www.isDone)
 			return;

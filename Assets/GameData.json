@@ -1,7 +1,7 @@
 {
   "Enemies": [
     {
-      "name": "Basic",
+      "Name": "Basic",
       "maxHealth": 150,
       "damagePerHit": 10,
       "attackSpeed": 1,
@@ -12,7 +12,7 @@
       "technicalResistance": 1
     },
     {
-      "name": "RangedRobot",
+      "Name": "RangedRobot",
       "maxHealth": 0.35,
       "damagePerHit": 0.8,
       "attackSpeed": 1.5,
@@ -23,7 +23,7 @@
       "technicalResistance": 0
     },
     {
-      "name": "PasuKan",
+      "Name": "PasuKan",
       "maxHealth": 0.65,
       "damagePerHit": 0.8,
       "attackSpeed": 2.5,
@@ -34,7 +34,7 @@
       "technicalResistance": -50
     },
     {
-      "name": "GIGARangedRobot",
+      "Name": "GIGARangedRobot",
       "maxHealth": 0.75,
       "damagePerHit": 1.2,
       "attackSpeed": 2.5,

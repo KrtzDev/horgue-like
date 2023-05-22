@@ -92,9 +92,4 @@ public class LoadEnemyData : ReadGoogleSheets
                 break;
         }
     }
-
-    public override void ReadJSON()
-    {
-        myEnemyDataList = JsonUtility.FromJson<EnemyDataList>(JSONFile.text);
-    }
 }

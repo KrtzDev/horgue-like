@@ -38,9 +38,4 @@ public class LoadPlayerData : ReadGoogleSheets
             _playerData._maxHealth = int.Parse(tempPlayerData[2]);
         }
     }
-
-    public override void ReadJSON()
-    {
-        myPlayerDataList = JsonUtility.FromJson<PlayerDataList>(JSONFile.text);
-    }
 }

@@ -59,9 +59,4 @@ public class LoadGameManagerValues : ReadGoogleSheets
                 break;
         }
     }
-
-    public override void ReadJSON()
-    {
-        myLevelDataList = JsonUtility.FromJson<LevelDataList>(JSONFile.text);
-    }
 }
