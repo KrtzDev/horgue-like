@@ -79,5 +79,4 @@ public abstract class ReadGoogleSheets : MonoBehaviour
     }
 
     public abstract void ApplySheetData(List<string> tempData);
-
 }

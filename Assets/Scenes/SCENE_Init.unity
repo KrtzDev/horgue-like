@@ -490,6 +490,24 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1349997560, guid: db4216ec71e55ed45accaad00a2c76c1, type: 3}
+      propertyPath: JSONFile
+      value: 
+      objectReference: {fileID: 4900000, guid: 70b4fba3c69e13743bd91e5e0194cd7b, type: 3}
+    - target: {fileID: 1349997560, guid: db4216ec71e55ed45accaad00a2c76c1, type: 3}
+      propertyPath: jsonfile
+      value: /LevelData.json
+      objectReference: {fileID: 0}
+    - target: {fileID: 3440539924923434840, guid: db4216ec71e55ed45accaad00a2c76c1,
+        type: 3}
+      propertyPath: JSONFile
+      value: 
+      objectReference: {fileID: 4900000, guid: 7c50ae52431463549b9c6de0dd916a0c, type: 3}
+    - target: {fileID: 3440539924923434840, guid: db4216ec71e55ed45accaad00a2c76c1,
+        type: 3}
+      propertyPath: jsonfile
+      value: /PlayerData.json
+      objectReference: {fileID: 0}
     - target: {fileID: 3440539924923434842, guid: db4216ec71e55ed45accaad00a2c76c1,
         type: 3}
       propertyPath: m_RootOrder
@@ -545,10 +563,35 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3440539924923434843, guid: db4216ec71e55ed45accaad00a2c76c1,
+        type: 3}
+      propertyPath: JSONFile
+      value: 
+      objectReference: {fileID: 4900000, guid: b446a8aa642db054aa62b9dcf607ca89, type: 3}
+    - target: {fileID: 3440539924923434843, guid: db4216ec71e55ed45accaad00a2c76c1,
+        type: 3}
+      propertyPath: jsonfile
+      value: /EnemySpawnerData.json
+      objectReference: {fileID: 0}
     - target: {fileID: 3440539924923434844, guid: db4216ec71e55ed45accaad00a2c76c1,
         type: 3}
       propertyPath: m_Name
       value: LoadData
+      objectReference: {fileID: 0}
+    - target: {fileID: 3440539924923434844, guid: db4216ec71e55ed45accaad00a2c76c1,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3440539924923434845, guid: db4216ec71e55ed45accaad00a2c76c1,
+        type: 3}
+      propertyPath: JSONFile
+      value: 
+      objectReference: {fileID: 4900000, guid: f1819611aaf7af34e93be9312b57c60f, type: 3}
+    - target: {fileID: 3440539924923434845, guid: db4216ec71e55ed45accaad00a2c76c1,
+        type: 3}
+      propertyPath: jsonfile
+      value: /EnemyData.json
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: db4216ec71e55ed45accaad00a2c76c1, type: 3}
