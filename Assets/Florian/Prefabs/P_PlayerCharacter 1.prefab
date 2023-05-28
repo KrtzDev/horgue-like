@@ -426,8 +426,8 @@ MonoBehaviour:
   <AbilityCDTimer>k__BackingField: 0
   <CurrentMaxCD>k__BackingField: 0
   _isGrounded: 0
-  _groundCheckValueY: 0.225
-  _groundCheckBox: {x: 0.5, y: 0.5, z: 0.5}
+  _groundCheckValueY: 0.1
+  _groundCheckBox: {x: 0.25, y: 0.2, z: 0.25}
   _groundLayer:
     serializedVersion: 2
     m_Bits: 528
