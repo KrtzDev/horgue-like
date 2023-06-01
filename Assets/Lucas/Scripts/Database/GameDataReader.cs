@@ -121,7 +121,10 @@ public class GameDataReader : MonoBehaviour
 
         Debug.Log("DONE DATA");
 
-        StartCoroutine(EnableButton());
+        if(startButton != null)
+        {
+            StartCoroutine(EnableButton());
+        }
     }
 
     private IEnumerator EnableButton()

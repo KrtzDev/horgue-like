@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
@@ -14,6 +15,8 @@ public class GameManager : Singleton<GameManager>
 
 	[SerializeField]
 	private GameObject _loadData;
+	[SerializeField]
+	private GameObject _gameDataReader;
 
 	public List<GameManagerValues> _GameManagerValues = new List<GameManagerValues>();
 
@@ -41,6 +44,8 @@ public class GameManager : Singleton<GameManager>
 
 	private void Start()
 	{
+		StartCoroutine(GetGameData());
+
 		SceneLoader.Instance.CompletedSceneLoad += OnCompletedSceneLoad;
 
 		_currentScore = 0;
@@ -205,5 +210,11 @@ public class GameManager : Singleton<GameManager>
 		UIManager.Instance.ShowLevelEndScreen(LevelStatus.Lost);
 		UIManager.Instance.WaveEndScreen.gameObject.SetActive(false);
 		EnemyStopFollowing();
+	}
+
+	IEnumerator GetGameData()
+    {
+		_gameDataReader.SetActive(true);
+		yield return null;
 	}
 }
