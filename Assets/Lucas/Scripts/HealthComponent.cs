@@ -22,6 +22,7 @@ public class HealthComponent : MonoBehaviour
     [Range(0, 100)]
     public int dropChance;
     public GameObject HealthDrop;
+    public GameObject CoinDrop;
 
     private void Awake()
     {
@@ -105,6 +106,7 @@ public class HealthComponent : MonoBehaviour
 
     private void DropScore()
     {
+        Instantiate(CoinDrop, _HitParticlePosition.position, Quaternion.identity);
         GameManager.Instance._currentScore += Enemy.EnemyData._givenXP;
     }
 

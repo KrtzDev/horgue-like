@@ -1990,7 +1990,8 @@ MonoBehaviour:
   dropChance: 5
   HealthDrop: {fileID: 4318080567083893032, guid: 03c15c294a93b874ca9153b08ea682dd,
     type: 3}
-  HealthDropSpawnPosition: {fileID: 0}
+  CoinDrop: {fileID: 2954434917669188068, guid: bc346ef89f6462d419a727974cda75b8,
+    type: 3}
 --- !u!1 &4301312500149769568
 GameObject:
   m_ObjectHideFlags: 0

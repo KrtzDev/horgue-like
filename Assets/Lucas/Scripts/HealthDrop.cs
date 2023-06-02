@@ -6,6 +6,8 @@ public class HealthDrop : MonoBehaviour
 {
     public int HealthAmount;
     public LayerMask _groundLayer;
+    [SerializeField]
+    private AudioSource _collectSound;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -18,7 +20,18 @@ public class HealthDrop : MonoBehaviour
             {
                 hp.CurrentHealth = hp.MaxHealth;
             }
-            Destroy(transform.parent.gameObject);
+
+            StartCoroutine(DeleteGameObject());
         }
+    }
+
+    IEnumerator DeleteGameObject()
+    {
+        _collectSound.Play();
+        gameObject.SetActive(false);
+
+        yield return new WaitForSeconds(_collectSound.clip.length);
+
+        Destroy(transform.parent.gameObject);
     }
 }
