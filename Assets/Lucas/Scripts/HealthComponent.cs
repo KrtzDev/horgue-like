@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -16,6 +17,11 @@ public class HealthComponent : MonoBehaviour
     [field: SerializeField] private ParticleSystem _HitParticle;
 
     private bool _isDead = false;
+
+    [Header("Enemy Drops")]
+    [Range(0, 100)]
+    public int dropChance;
+    public GameObject HealthDrop;
 
     private void Awake()
     {
@@ -41,7 +47,7 @@ public class HealthComponent : MonoBehaviour
 
         if (this.gameObject.CompareTag("Player"))
         {
-            GameObject.FindGameObjectWithTag("UI").GetComponentInChildren<UIDamageFlash>().DamageFlash(0.25f, .5f);
+            GameObject.FindGameObjectWithTag("UI")?.GetComponentInChildren<UIDamageFlash>().DamageFlash(0.25f, .5f);
 
             if(CurrentHealth <= 0 && !_isDead)
             {
@@ -54,7 +60,6 @@ public class HealthComponent : MonoBehaviour
             if (CurrentHealth <= 0 && !_isDead)
             {
                 GameManager.Instance.EnemyDied();
-                GameManager.Instance._currentScore += Enemy.EnemyData._givenXP;
 
                 MarkEnemyToDie();
 
@@ -96,5 +101,19 @@ public class HealthComponent : MonoBehaviour
         }
 
         this.gameObject.tag = "Untagged";
+    }
+
+    private void DropScore()
+    {
+        GameManager.Instance._currentScore += Enemy.EnemyData._givenXP;
+    }
+
+    private void DropHealthPotion()
+    {
+        int random = UnityEngine.Random.Range(0, 100);
+        if (random <= dropChance)
+        {
+            Instantiate(HealthDrop, _HitParticlePosition.position, Quaternion.identity);
+        }
     }
 }

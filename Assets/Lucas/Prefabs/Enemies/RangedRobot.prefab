@@ -1987,6 +1987,10 @@ MonoBehaviour:
   _HitParticlePosition: {fileID: 866945960097510711}
   _HitParticle: {fileID: 6362102834014993675, guid: 5561755790406d148a233f12b01260c5,
     type: 3}
+  dropChance: 5
+  HealthDrop: {fileID: 4318080567083893032, guid: 03c15c294a93b874ca9153b08ea682dd,
+    type: 3}
+  HealthDropSpawnPosition: {fileID: 0}
 --- !u!1 &4301312500149769568
 GameObject:
   m_ObjectHideFlags: 0
