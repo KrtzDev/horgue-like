@@ -1,21 +1,45 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
+
+[System.Serializable]
+public class EnemiesToSpawn
+{
+    public Enemy Enemy;
+    public int SpawnChance;
+
+    public EnemiesToSpawn (Enemy enemy, int spawnChance)
+    {
+        Enemy = enemy;
+        SpawnChance = spawnChance;
+    }
+}
 
 public class NEW_EnemySpawner : MonoBehaviour
 {
-    [Header("Transform")]
-    [SerializeField]
     private Transform PlayerTransform;
+
+    [Header("Settings")]
+    private EnemySpawnerData[] _enemySpawnerData;
     [SerializeField]
     private LayerMask _enemyLayer;
-
     [SerializeField]
     private bool _enableGizmos;
+    [SerializeField]
+    private float _spawnTick;
+    [SerializeField]
+    private int _maxEnemyCount;
+    [SerializeField]
+    private int _minEnemyCount;
+    private int _enemyCount;
+    [SerializeField]
+
+    public List<EnemiesToSpawn> _EnemiesToSpawn = new List<EnemiesToSpawn>();
 
     // Variablen
-    [Header("Variables")]
     private float _boxHeight;
+    [Header("Variables")] 
     [SerializeField]
     private float _closeZoneRadius = 8f;
     [SerializeField]
@@ -49,13 +73,52 @@ public class NEW_EnemySpawner : MonoBehaviour
     [SerializeField]
     private SphereCollider FarZone;
 
+    // Object Pooling
+    public Dictionary<int, ObjectPool> EnemyObjectPools = new Dictionary<int, ObjectPool>();
+    private NavMeshTriangulation Triangulation;
 
-    private void Start()
+
+    private void Awake()
     {
         if(PlayerTransform == null)
             PlayerTransform = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
 
         SetColliderSizeCenter();
+    }
+
+    private void Start()
+    {
+        for (int i = 0; i < _EnemiesToSpawn.Count; i++)
+        {
+            EnemyObjectPools.Add(i, ObjectPool.CreateInstance(_EnemiesToSpawn[i].Enemy, _maxEnemyCount));
+        }
+
+        Triangulation = NavMesh.CalculateTriangulation();
+
+        foreach (EnemiesToSpawn enemy in _EnemiesToSpawn)
+        {
+            StartCoroutine(SpawnEnemies(enemy.Enemy));
+        }
+
+    }
+
+    private IEnumerator SpawnEnemies(Enemy enemy)
+    {
+        WaitForSeconds Wait = new WaitForSeconds(_spawnTick);
+
+        int spawnedEnemies = 0;
+
+        while(spawnedEnemies < _maxEnemyCount)
+        {
+            for (int i = 0; i < _minEnemyCount; i++)
+            {
+                // DoSpawnEnemy();
+
+                spawnedEnemies++;
+            }
+            yield return Wait;
+        }
+
     }
 
     private void Update()

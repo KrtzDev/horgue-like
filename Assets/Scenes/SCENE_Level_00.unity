@@ -2855,9 +2855,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 264548418d1c3e248bfcd4824aef05c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayerTransform: {fileID: 1122862688}
+  _enemyLayer:
+    serializedVersion: 2
+    m_Bits: 128
   _enableGizmos: 0
-  _boxHeight: 0.25
+  _spawnTick: 5
+  _maxEnemyCount: 35
+  _minEnemyCount: 65
+  _EnemiesToSpawn: []
   _closeZoneRadius: 8
   _midZoneRadius: 16
   _farZoneRadius: 24
