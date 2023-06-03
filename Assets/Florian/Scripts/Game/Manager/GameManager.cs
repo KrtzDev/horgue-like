@@ -28,6 +28,7 @@ public class GameManager : Singleton<GameManager>
 
 	private EnemySpawner _enemySpawner;
 	public int _neededEnemyKill;
+	public int _enemyCount;
 	private bool _hasWon;
 	private bool _hasLost;
 

@@ -29,11 +29,13 @@ public class NEW_EnemySpawner : MonoBehaviour
     [SerializeField]
     private float _spawnTick;
     [SerializeField]
-    private int _maxEnemyCount;
+    private int _spawnsPerTick;
     [SerializeField]
     private int _minEnemyCount;
-    private int _enemyCount;
     [SerializeField]
+    private int _maxEnemyCount;
+    private int _spawnedEnemies;
+    private float _spawnTimer = 0;
 
     public List<EnemiesToSpawn> _EnemiesToSpawn = new List<EnemiesToSpawn>();
 
@@ -94,36 +96,82 @@ public class NEW_EnemySpawner : MonoBehaviour
         }
 
         Triangulation = NavMesh.CalculateTriangulation();
-
-        foreach (EnemiesToSpawn enemy in _EnemiesToSpawn)
-        {
-            StartCoroutine(SpawnEnemies(enemy.Enemy));
-        }
-
-    }
-
-    private IEnumerator SpawnEnemies(Enemy enemy)
-    {
-        WaitForSeconds Wait = new WaitForSeconds(_spawnTick);
-
-        int spawnedEnemies = 0;
-
-        while(spawnedEnemies < _maxEnemyCount)
-        {
-            for (int i = 0; i < _minEnemyCount; i++)
-            {
-                // DoSpawnEnemy();
-
-                spawnedEnemies++;
-            }
-            yield return Wait;
-        }
-
     }
 
     private void Update()
     {
         transform.SetPositionAndRotation(PlayerTransform.position, PlayerTransform.rotation);
+
+        if(_spawnTimer >= _spawnTick)
+        {
+            int currentEnemies = Mathf.RoundToInt((_minEnemyCount - GameManager.Instance._enemyCount));
+            int spawnIndex = 0;
+
+            foreach (EnemiesToSpawn enemy in _EnemiesToSpawn)
+            {
+                int enemiesToBeSpawned;
+                enemiesToBeSpawned = 0;
+
+                if(GameManager.Instance._enemyCount <= _minEnemyCount)
+                {
+                    enemiesToBeSpawned = Mathf.RoundToInt(currentEnemies * (enemy.SpawnChance * 0.01f) + 0.4f);
+                }
+                else if (GameManager.Instance._enemyCount < _maxEnemyCount)
+                {
+                    enemiesToBeSpawned = Mathf.RoundToInt(_spawnsPerTick * (enemy.SpawnChance * 0.01f) + 0.4f);
+                }
+                SpawnEnemies(enemy, enemiesToBeSpawned, spawnIndex);
+                spawnIndex++;
+            }
+
+            _spawnTimer = 0;
+        }
+        _spawnTimer += Time.deltaTime;
+    }
+
+    private void SpawnEnemies(EnemiesToSpawn enemies, int enemiesToBeSpawned, int spawnIndex) // GameManager.Instance._enemyCount has to be subtracted on Enemy Death in Enemy Script
+    {
+        for (int i = 0; i < enemiesToBeSpawned; i++)
+        {
+            DoSpawnEnemy(enemies, spawnIndex);
+            GameManager.Instance._enemyCount++;
+            _spawnedEnemies++;
+            if (GameManager.Instance._enemyCount >= _minEnemyCount)
+            {
+                break;
+            }
+        }
+    }
+
+    private void DoSpawnEnemy(EnemiesToSpawn enemies, int spawnIndex)
+    {
+        PoolableObject poolableObject = EnemyObjectPools[spawnIndex].GetObject();
+
+        // Determine Position
+        int VertexIndex = Random.Range(0, Triangulation.vertices.Length);
+        Vector3 spawnPosition = Triangulation.vertices[VertexIndex];
+
+        if (poolableObject != null)
+        {
+            Animator anim = poolableObject.GetComponent<Animator>();
+            NavMeshAgent agent = poolableObject.GetComponent<NavMeshAgent>();
+
+            NavMeshHit Hit;
+            if (NavMesh.SamplePosition(spawnPosition, out Hit, 2f, -1))
+            {
+                agent.Warp(Hit.position);
+                agent.enabled = true;
+                anim.SetBool("isChasing", true);
+            }
+            else
+            {
+                Debug.LogError($"Unable to place NavMeshAgent on NavMesh. Tried to use {spawnPosition}");
+            }
+        }
+        else
+        {
+            Debug.LogError($"Unable to fetch enemy of type {spawnIndex} from object pool. Out of objects?");
+        }
     }
 
     private void SetColliderSizeCenter()

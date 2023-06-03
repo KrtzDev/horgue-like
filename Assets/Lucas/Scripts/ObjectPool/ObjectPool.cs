@@ -12,7 +12,7 @@ public class ObjectPool
         ObjectPool pool = new ObjectPool(prefab, size);
         
         pool._parent = new GameObject(prefab + " Pool");
-        pool._parent.transform.parent = GameObject.Find("EnemySpawner").transform;
+        pool._parent.transform.parent = GameObject.FindWithTag("EnemyPool").transform;
         pool.CreateObjects();
 
         return pool;
