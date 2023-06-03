@@ -117,6 +117,7 @@ public class GameManager : Singleton<GameManager>
 	public void EnemyDied()
 	{
 		_neededEnemyKill--;
+		_enemyCount--;
 
 		// alle Gegner getötet
 

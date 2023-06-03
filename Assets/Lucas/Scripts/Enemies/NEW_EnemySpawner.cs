@@ -112,7 +112,7 @@ public class NEW_EnemySpawner : MonoBehaviour
                 int enemiesToBeSpawned;
                 enemiesToBeSpawned = 0;
 
-                if(GameManager.Instance._enemyCount <= _minEnemyCount)
+                if (GameManager.Instance._enemyCount < _minEnemyCount) // if enemies are slightly below minEnemyCount, there are only a few enemies spawned
                 {
                     enemiesToBeSpawned = Mathf.RoundToInt(currentEnemies * (enemy.SpawnChance * 0.01f) + 0.4f);
                 }
@@ -136,7 +136,7 @@ public class NEW_EnemySpawner : MonoBehaviour
             DoSpawnEnemy(enemies, spawnIndex);
             GameManager.Instance._enemyCount++;
             _spawnedEnemies++;
-            if (GameManager.Instance._enemyCount >= _minEnemyCount)
+            if (GameManager.Instance._enemyCount >= _maxEnemyCount)
             {
                 break;
             }
