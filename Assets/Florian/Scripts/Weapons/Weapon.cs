@@ -51,7 +51,7 @@ public class Weapon : ScriptableObject
 	private WeaponSkeleton _currentWeaponPrefab;
 	private Transform _weaponTransform;
 
-	private ObjectPool _projectilePool;
+	private ObjectPool<Projectile> _projectilePool;
 
 	private float _shotDelay;
 	private int _capacity;
@@ -76,7 +76,7 @@ public class Weapon : ScriptableObject
 
 		ApplyStats(CalculateWeaponStats(this));
 
-		_projectilePool = ObjectPool.CreatePool(Projectile, 100, null);
+		_projectilePool = ObjectPool<Projectile>.CreatePool(Projectile, 100, null);
 	}
 
 	public WeaponStats CalculateWeaponStats(Weapon weapon)
@@ -362,11 +362,7 @@ public class Weapon : ScriptableObject
 		}
 	}
 
-	private void CleanUpProjectile(Projectile projectile)
-	{
-		Debug.Log("Returned projectile");
-		_projectilePool.ReturnObjectToPool(projectile);
-	}
+	private void CleanUpProjectile(Projectile projectile) => _projectilePool.ReturnObjectToPool(projectile);
 
 	private bool RotateTowardsEnemy()
 	{
@@ -388,7 +384,7 @@ public class Weapon : ScriptableObject
 			}
 		}
 
-		if (closestEnemy)
+		if (closestEnemy != null)
 		{
 			Vector3 direction = (closestEnemy.transform.position + Vector3.up) - _weaponTransform.position;
 			Vector3 rotateTowardsDirection = Vector3.RotateTowards(_weaponTransform.forward, direction, 20 * Time.deltaTime, .0f);

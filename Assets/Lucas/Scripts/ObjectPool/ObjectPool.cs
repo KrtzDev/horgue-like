@@ -1,15 +1,16 @@
 using System.Collections.Generic;
 using UnityEngine;
-public class ObjectPool
+
+public class ObjectPool<T> where T : MonoBehaviour
 {
     private GameObject _parent;
-    private PoolableObject _prefab;
+    private T _prefab;
     private int _size;
-    private List<PoolableObject> _availableObjectsPool;
+    private List<T> _availableObjectsPool;
 
-    public static ObjectPool CreatePool(PoolableObject prefab, int size, Transform parentTransform)
+    public static ObjectPool<T> CreatePool(T prefab, int size, Transform parentTransform)
     {
-        ObjectPool pool = new ObjectPool(prefab, size);
+        ObjectPool<T> pool = new ObjectPool<T>(prefab, size);
         
         pool._parent = new GameObject(prefab + " Pool");
         pool._parent.transform.parent = parentTransform;
@@ -18,21 +19,22 @@ public class ObjectPool
         return pool;
     }
 
-    private ObjectPool(PoolableObject prefab, int size)
+    private ObjectPool(T prefab, int size)
     {
         this._prefab = prefab;
         this._size = size;
-        _availableObjectsPool = new List<PoolableObject>(size);
+        _availableObjectsPool = new List<T>(size);
     }
 
-    public PoolableObject GetObject()
+    public T GetObject()
     {
         if (_availableObjectsPool.Count == 0)
         {
             CreateObject();
         }
 
-        PoolableObject instance = _availableObjectsPool[0];
+
+        T instance = _availableObjectsPool[0];
 
         _availableObjectsPool.RemoveAt(0);
 
@@ -51,12 +53,13 @@ public class ObjectPool
 
     private void CreateObject()
     {
-        PoolableObject poolableObject = Object.Instantiate(_prefab, Vector3.zero, Quaternion.identity, _parent.transform);
-        poolableObject.Parent = this;
-        poolableObject.gameObject.SetActive(false); // PoolableObject handles re-adding the object to the AvailableObjects
-    }
+        T poolableObject = Object.Instantiate(_prefab, Vector3.zero, Quaternion.identity, _parent.transform);
+        poolableObject.gameObject.transform.parent = _parent.transform;
+        poolableObject.gameObject.SetActive(false);
+		_availableObjectsPool.Add(poolableObject);
+	}
 
-    public void ReturnObjectToPool(PoolableObject returnObject)
+    public void ReturnObjectToPool(T returnObject)
     {
         _availableObjectsPool.Add(returnObject);
 		returnObject.gameObject.SetActive(false);

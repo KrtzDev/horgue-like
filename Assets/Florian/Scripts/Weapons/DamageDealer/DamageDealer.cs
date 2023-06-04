@@ -1,4 +1,6 @@
-public class DamageDealer : PoolableObject
+using UnityEngine;
+
+public class DamageDealer : MonoBehaviour
 {
 
 }

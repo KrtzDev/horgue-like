@@ -15,7 +15,7 @@ public class EnemySpawner : MonoBehaviour
     public Transform Player;
 
     public List<Enemy> EnemyPrefabs = new List<Enemy>();
-    public Dictionary<int, ObjectPool> EnemyObjectPools = new Dictionary<int, ObjectPool>();
+    public Dictionary<int, ObjectPool<Enemy>> enemyObjectPools = new Dictionary<int, ObjectPool<Enemy>>();
 
     public SpawnMethod EnemySpawnMethod = SpawnMethod.RoundRobin;
     public LocationMethod EnemyLocationMethod = LocationMethod.Collider;
@@ -32,7 +32,7 @@ public class EnemySpawner : MonoBehaviour
 
         for (int i = 0; i < EnemyPrefabs.Count; i++)
         {
-            EnemyObjectPools.Add(i, ObjectPool.CreatePool(EnemyPrefabs[i], EnemyMaxAmount, transform));
+            enemyObjectPools.Add(i, ObjectPool<Enemy>.CreatePool(EnemyPrefabs[i], EnemyMaxAmount, transform));
         }
 
         Triangulation = NavMesh.CalculateTriangulation();
@@ -146,7 +146,7 @@ public class EnemySpawner : MonoBehaviour
 
     private void DoSpawnEnemy(int spawnIndex, Vector3 spawnPosition)
     {
-        PoolableObject poolableObject = EnemyObjectPools[spawnIndex].GetObject();
+        Enemy poolableObject = enemyObjectPools[spawnIndex].GetObject();
 
         SetBounds();
 
@@ -186,8 +186,12 @@ public class EnemySpawner : MonoBehaviour
         }
     }
 
+	private void OnDisable()
+	{
+		enemyObjectPools.Clear();
+	}
 
-    public enum SpawnMethod
+	public enum SpawnMethod
     {
         RoundRobin,
         Random
