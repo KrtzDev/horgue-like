@@ -37,6 +37,7 @@ public class NEW_EnemySpawner : MonoBehaviour
     [SerializeField]
     private int _maxEnemyCount;
     private float _spawnTimer = 0;
+    private bool _canSpawnEnemies = true;
 
     public List<EnemiesToSpawn> _EnemiesToSpawn = new List<EnemiesToSpawn>();
 
@@ -86,7 +87,7 @@ public class NEW_EnemySpawner : MonoBehaviour
 
     private void Awake()
     {
-        if(PlayerTransform == null)
+        if (PlayerTransform == null)
             PlayerTransform = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
 
         SetColliderSizeCenter();
@@ -125,18 +126,20 @@ public class NEW_EnemySpawner : MonoBehaviour
                 SpawnEnemies(enemy, enemiesToBeSpawned, spawnIndex);
                 spawnIndex++;
             }
-
             _spawnTimer = 0;
         }
         _spawnTimer += Time.deltaTime;
     }
 
     private void SpawnEnemies(EnemiesToSpawn enemies, int enemiesToBeSpawned, int spawnIndex) // GameManager.Instance._enemyCount has to be subtracted on Enemy Death in Enemy Script
-    {    
+    {
         for (int i = 0; i < enemiesToBeSpawned; i++)
         {
             SetBounds();
-            DoSpawnEnemy(enemies, spawnIndex, GetRandomPositionInBounds());
+            if(BoundRadius(RearZone.bounds, _farZoneRadius, _midZoneRadius))
+            {
+                DoSpawnEnemy(enemies, spawnIndex, GetRandomPositionInBounds(RearZone.bounds, _farZoneRadius, _midZoneRadius));
+            }
             GameManager.Instance._enemyCount++;
             if (GameManager.Instance._enemyCount >= _maxEnemyCount)
             {
@@ -149,60 +152,108 @@ public class NEW_EnemySpawner : MonoBehaviour
         Bounds = RearZone.bounds;
     }
 
-    private Vector3 GetRandomPositionInBounds()
+    private bool BoundRadius(Bounds bounds, float _maxZoneRadius, float _minZoneRadius)
     {
-        bool _spawnPositionFound = false;
-        Vector3 possibleSpawnPosition = Vector3.zero;
+        float DistanceToPlayerMinMin = Vector3.Distance(new Vector3(bounds.min.x, PlayerTransform.position.y, bounds.min.z), PlayerTransform.position);
+        float DistanceToPlayerMinMax = Vector3.Distance(new Vector3(bounds.min.x, PlayerTransform.position.y, bounds.max.z), PlayerTransform.position);
+        float DistanceToPlayerMaxMin = Vector3.Distance(new Vector3(bounds.max.x, PlayerTransform.position.y, bounds.min.z), PlayerTransform.position);
+        float DistanceToPlayerMaxMax = Vector3.Distance(new Vector3(bounds.max.x, PlayerTransform.position.y, bounds.max.z), PlayerTransform.position);
 
-        while (!_spawnPositionFound)
+        List<float> Distances = new List<float>();
+        Distances.Add(DistanceToPlayerMinMin);
+        Distances.Add(DistanceToPlayerMinMax);
+        Distances.Add(DistanceToPlayerMaxMin);
+        Distances.Add(DistanceToPlayerMaxMax);
+
+        bool inRange = false;
+
+        foreach (float distance in Distances)
         {
+            if (distance <= _maxZoneRadius && distance >= _minZoneRadius)
+            {
+                inRange = true;
+                break;
+            }
+        }
+
+        return inRange;
+    }
+
+    private Vector3 GetRandomPositionInBounds(Bounds bounds, float _maxZoneRadius, float _minZoneRadius)
+    {
+        _canSpawnEnemies = false;
+        Vector3 possibleSpawnPosition = Vector3.zero;
+        int spawnPositionAttempts = 0;
+
+        while (!_canSpawnEnemies)
+        {
+            /*
+             * x and z have to be in radius from the the player
+             * spawn always greater than safe zone
+             */
+
             float xValueInBounds = Random.Range(Bounds.min.x, Bounds.max.x);
             float zValueInBounds = Random.Range(Bounds.min.z, Bounds.max.z);
 
-            RaycastHit rc_hit;
-            Physics.Raycast(new Vector3(xValueInBounds, Bounds.max.y, zValueInBounds), Vector3.down, out rc_hit, _boxHeight, _groundLayer);
+            float DistanceToPlayer = Vector3.Distance(new Vector3(xValueInBounds, PlayerTransform.position.y, zValueInBounds), PlayerTransform.position);
 
-            float yValue = Bounds.max.y - rc_hit.distance;
-            possibleSpawnPosition = new Vector3(xValueInBounds, yValue, zValueInBounds);
-
-
-            NavMeshHit nv_hit;
-            if (NavMesh.SamplePosition(possibleSpawnPosition, out nv_hit, 1.0f, NavMesh.AllAreas))
+            if(DistanceToPlayer <= _maxZoneRadius && DistanceToPlayer >= _minZoneRadius)
             {
-                possibleSpawnPosition = nv_hit.position;
-                _spawnPositionFound = true;
+                RaycastHit rc_hit;
+                Physics.Raycast(new Vector3(xValueInBounds, Bounds.max.y, zValueInBounds), Vector3.down, out rc_hit, _boxHeight, _groundLayer);
+
+                float yValue = Bounds.max.y - rc_hit.distance;
+                possibleSpawnPosition = new Vector3(xValueInBounds, yValue, zValueInBounds);
+
+
+                NavMeshHit nv_hit;
+                if (NavMesh.SamplePosition(possibleSpawnPosition, out nv_hit, 1.0f, NavMesh.AllAreas))
+                {
+                    possibleSpawnPosition = nv_hit.position;
+                    _canSpawnEnemies = true;
+                }
             }
-        }
+
+            spawnPositionAttempts++;
+
+            if(spawnPositionAttempts > 10)
+            {
+                break;
+            }
+        } 
 
         return possibleSpawnPosition;
     }
 
     private void DoSpawnEnemy(EnemiesToSpawn enemies, int spawnIndex, Vector3 spawnPosition)
     {
-        PoolableObject poolableObject = EnemyObjectPools[spawnIndex].GetObject();
-
-        // Determine Position
-
-        if (poolableObject != null)
+        if(_canSpawnEnemies)
         {
-            Animator anim = poolableObject.GetComponent<Animator>();
-            NavMeshAgent agent = poolableObject.GetComponent<NavMeshAgent>();
+            PoolableObject poolableObject = EnemyObjectPools[spawnIndex].GetObject();
 
-            NavMeshHit Hit;
-            if (NavMesh.SamplePosition(spawnPosition, out Hit, 2f, -1))
+            // Determine Position
+
+            if (poolableObject != null)
             {
-                agent.Warp(Hit.position);
-                agent.enabled = true;
-                anim.SetBool("isChasing", true);
+                Animator anim = poolableObject.GetComponent<Animator>();
+                NavMeshAgent agent = poolableObject.GetComponent<NavMeshAgent>();
+
+                NavMeshHit Hit;
+                if (NavMesh.SamplePosition(spawnPosition, out Hit, 2f, -1))
+                {
+                    agent.Warp(Hit.position);
+                    agent.enabled = true;
+                    anim.SetBool("isChasing", true);
+                }
+                else
+                {
+                    Debug.LogError($"Unable to place NavMeshAgent on NavMesh. Tried to use {spawnPosition}");
+                }
             }
             else
             {
-                Debug.LogError($"Unable to place NavMeshAgent on NavMesh. Tried to use {spawnPosition}");
+                Debug.LogError($"Unable to fetch enemy of type {spawnIndex} from object pool. Out of objects?");
             }
-        }
-        else
-        {
-            Debug.LogError($"Unable to fetch enemy of type {spawnIndex} from object pool. Out of objects?");
         }
     }
 
