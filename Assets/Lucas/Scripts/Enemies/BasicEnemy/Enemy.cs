@@ -3,11 +3,10 @@ using UnityEngine.AI;
 
 public class Enemy : MonoBehaviour
 {
-    [field: SerializeField] public BasicEnemyData EnemyData { get; set; }
-    [field: SerializeField] public NavMeshAgent Agent { get; set; }
-    public bool FollowDecoy { get; set; }
+	[SerializeField] private NavMeshAgent _agent;
 
-    [field: SerializeField] public GameObject Projectile { get; private set; }
+	[Header("Projectile")]
+	[SerializeField] private GameObject _projectile;
     [field: SerializeField] public Transform ProjectilePoint { get; private set; }
     [SerializeField] private float _projectileSpeed;
 
@@ -15,34 +14,37 @@ public class Enemy : MonoBehaviour
     [field: SerializeField] public LayerMask EnemyLayer { get; private set; }
     [field: SerializeField] public LayerMask PlayerLayer { get; private set; }
 
+    [field: SerializeField] public BasicEnemyData EnemyData { get; set; }
+
+    public bool FollowDecoy { get; set; }
     [HideInInspector] public Vector3 TargetDirection { get; set; }
 
     public void Start()
     {
-        if(Projectile != null)
+        if(_projectile != null)
         {
-            Projectile.GetComponent<EnemyProjectile>().baseDamage = this.gameObject.GetComponent<Enemy>().EnemyData._damagePerHit;
+            _projectile.GetComponent<EnemyProjectile>().baseDamage = gameObject.GetComponent<Enemy>().EnemyData._damagePerHit;
         }
     }
 
     public void OnDisable()
     {
-        Agent.enabled = false;
+        _agent.enabled = false;
     }
 
     public void Shoot()
     {
-        Rigidbody rb = Instantiate(Projectile, ProjectilePoint.position, Quaternion.identity).GetComponent<Rigidbody>();
+        Rigidbody rb = Instantiate(_projectile, ProjectilePoint.position, Quaternion.identity).GetComponent<Rigidbody>();
         rb.AddForce(TargetDirection * _projectileSpeed, ForceMode.Impulse);
     }
 
     public void DoneShooting()
     {
-        Agent.GetComponent<Animator>().SetBool("isShooting", false);
+        _agent.GetComponent<Animator>().SetBool("isShooting", false);
     }
 
     public void SetDeactive()
     {
-        this.gameObject.SetActive(false);
+        gameObject.SetActive(false);
     }
 }

@@ -1,8 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class DamageType : ScriptableObject, IDoDamage
+public abstract class DamageType : ScriptableObject, IApplyEffects
 {
-    public abstract void DoDamage();
+    public abstract void ApplyEffect(Enemy enemy);
 }
