@@ -25,6 +25,8 @@ public class NEW_EnemySpawner : MonoBehaviour
     [SerializeField]
     private LayerMask _enemyLayer;
     [SerializeField]
+    private LayerMask _groundLayer;
+    [SerializeField]
     private bool _enableGizmos;
     [SerializeField]
     private float _spawnTick;
@@ -34,14 +36,15 @@ public class NEW_EnemySpawner : MonoBehaviour
     private int _minEnemyCount;
     [SerializeField]
     private int _maxEnemyCount;
-    private int _spawnedEnemies;
     private float _spawnTimer = 0;
 
     public List<EnemiesToSpawn> _EnemiesToSpawn = new List<EnemiesToSpawn>();
 
     // Variablen
     private float _boxHeight;
-    [Header("Variables")] 
+    [Header("Variables")]
+    [SerializeField]
+    private float _safeZoneRadius = 3f;
     [SerializeField]
     private float _closeZoneRadius = 8f;
     [SerializeField]
@@ -69,6 +72,8 @@ public class NEW_EnemySpawner : MonoBehaviour
 
     [Header("Sphere Colliders")]
     [SerializeField]
+    private SphereCollider SafeZone;
+    [SerializeField]
     private SphereCollider CloseZone;
     [SerializeField]
     private SphereCollider MidZone;
@@ -77,8 +82,7 @@ public class NEW_EnemySpawner : MonoBehaviour
 
     // Object Pooling
     public Dictionary<int, ObjectPool> EnemyObjectPools = new Dictionary<int, ObjectPool>();
-    private NavMeshTriangulation Triangulation;
-
+    private Bounds Bounds;
 
     private void Awake()
     {
@@ -94,15 +98,13 @@ public class NEW_EnemySpawner : MonoBehaviour
         {
             EnemyObjectPools.Add(i, ObjectPool.CreateInstance(_EnemiesToSpawn[i].Enemy, _maxEnemyCount));
         }
-
-        Triangulation = NavMesh.CalculateTriangulation();
     }
 
     private void Update()
     {
         transform.SetPositionAndRotation(PlayerTransform.position, PlayerTransform.rotation);
 
-        if(_spawnTimer >= _spawnTick)
+        if (_spawnTimer >= _spawnTick)
         {
             int currentEnemies = Mathf.RoundToInt((_minEnemyCount - GameManager.Instance._enemyCount));
             int spawnIndex = 0;
@@ -130,26 +132,56 @@ public class NEW_EnemySpawner : MonoBehaviour
     }
 
     private void SpawnEnemies(EnemiesToSpawn enemies, int enemiesToBeSpawned, int spawnIndex) // GameManager.Instance._enemyCount has to be subtracted on Enemy Death in Enemy Script
-    {
+    {    
         for (int i = 0; i < enemiesToBeSpawned; i++)
         {
-            DoSpawnEnemy(enemies, spawnIndex);
+            SetBounds();
+            DoSpawnEnemy(enemies, spawnIndex, GetRandomPositionInBounds());
             GameManager.Instance._enemyCount++;
-            _spawnedEnemies++;
             if (GameManager.Instance._enemyCount >= _maxEnemyCount)
             {
                 break;
             }
         }
     }
+    private void SetBounds()
+    {
+        Bounds = RearZone.bounds;
+    }
 
-    private void DoSpawnEnemy(EnemiesToSpawn enemies, int spawnIndex)
+    private Vector3 GetRandomPositionInBounds()
+    {
+        bool _spawnPositionFound = false;
+        Vector3 possibleSpawnPosition = Vector3.zero;
+
+        while (!_spawnPositionFound)
+        {
+            float xValueInBounds = Random.Range(Bounds.min.x, Bounds.max.x);
+            float zValueInBounds = Random.Range(Bounds.min.z, Bounds.max.z);
+
+            RaycastHit rc_hit;
+            Physics.Raycast(new Vector3(xValueInBounds, Bounds.max.y, zValueInBounds), Vector3.down, out rc_hit, _boxHeight, _groundLayer);
+
+            float yValue = Bounds.max.y - rc_hit.distance;
+            possibleSpawnPosition = new Vector3(xValueInBounds, yValue, zValueInBounds);
+
+
+            NavMeshHit nv_hit;
+            if (NavMesh.SamplePosition(possibleSpawnPosition, out nv_hit, 1.0f, NavMesh.AllAreas))
+            {
+                possibleSpawnPosition = nv_hit.position;
+                _spawnPositionFound = true;
+            }
+        }
+
+        return possibleSpawnPosition;
+    }
+
+    private void DoSpawnEnemy(EnemiesToSpawn enemies, int spawnIndex, Vector3 spawnPosition)
     {
         PoolableObject poolableObject = EnemyObjectPools[spawnIndex].GetObject();
 
         // Determine Position
-        int VertexIndex = Random.Range(0, Triangulation.vertices.Length);
-        Vector3 spawnPosition = Triangulation.vertices[VertexIndex];
 
         if (poolableObject != null)
         {
@@ -227,6 +259,7 @@ public class NEW_EnemySpawner : MonoBehaviour
 
         // Sphere Colliders
 
+        SafeZone.radius = _safeZoneRadius;
         CloseZone.radius = _closeZoneRadius;
         // Collider[] hitColliders = Physics.OverlapSphere(transform.position, _closeZoneRadius, _enemyLayer);
         MidZone.radius = _midZoneRadius;
