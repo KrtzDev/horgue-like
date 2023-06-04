@@ -7,12 +7,12 @@ public class ObjectPool
     private int _size;
     private List<PoolableObject> _availableObjectsPool;
 
-    public static ObjectPool CreateInstance(PoolableObject prefab, int size)
+    public static ObjectPool CreatePool(PoolableObject prefab, int size, Transform parentTransform)
     {
         ObjectPool pool = new ObjectPool(prefab, size);
         
         pool._parent = new GameObject(prefab + " Pool");
-        pool._parent.transform.parent = GameObject.Find("EnemySpawner").transform;
+        pool._parent.transform.parent = parentTransform;
         pool.CreateObjects();
 
         return pool;
@@ -59,5 +59,6 @@ public class ObjectPool
     public void ReturnObjectToPool(PoolableObject returnObject)
     {
         _availableObjectsPool.Add(returnObject);
-    }
+		returnObject.gameObject.SetActive(false);
+	}
 }

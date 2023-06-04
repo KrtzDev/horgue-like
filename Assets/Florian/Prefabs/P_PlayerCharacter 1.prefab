@@ -390,8 +390,8 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  <_lastDirection>k__BackingField: {x: 0, y: 0, z: 0}
-  <_canMove>k__BackingField: 1
+  <LastDirection>k__BackingField: {x: 0, y: 0, z: 0}
+  <CanMove>k__BackingField: 1
 --- !u!114 &8500660712739362474
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -411,6 +411,9 @@ MonoBehaviour:
   _HitParticlePosition: {fileID: 7336742999931250485}
   _HitParticle: {fileID: 6362102834014993675, guid: 5561755790406d148a233f12b01260c5,
     type: 3}
+  dropChance: 0
+  HealthDrop: {fileID: 0}
+  CoinDrop: {fileID: 0}
 --- !u!114 &6670527696543464466
 MonoBehaviour:
   m_ObjectHideFlags: 0

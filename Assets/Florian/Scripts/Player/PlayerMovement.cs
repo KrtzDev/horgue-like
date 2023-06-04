@@ -12,9 +12,9 @@ public class PlayerMovement : MonoBehaviour
     private AnimationCurve _decceleration;
 
     [field: SerializeField, Header("Misc")]
-    public Vector3 _lastDirection { get; set; }
+    public Vector3 LastDirection { get; set; }
     [field: SerializeField]
-    public bool _canMove { get; set; } = true;
+    public bool CanMove { get; set; } = true;
 
     private PlayerCharacter _character;
     private PlayerInputMappings _inputActions;
@@ -52,7 +52,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (!_canMove) return;
+        if (!CanMove) return;
 
         Vector3 cameraForward = _character.Camera.transform.forward;
         Vector3 cameraRight = _character.Camera.transform.right;
@@ -71,7 +71,7 @@ public class PlayerMovement : MonoBehaviour
             _timeMoving += Time.deltaTime;
             float acceleration = _acceleration.Evaluate(_timeMoving);
             movement = relativeMoveDirection * MovementSpeed * acceleration * Time.fixedDeltaTime;
-            _lastDirection = relativeMoveDirection;
+            LastDirection = relativeMoveDirection;
 
             _character.transform.rotation =
                 Quaternion.RotateTowards(_character.transform.rotation,
@@ -82,7 +82,7 @@ public class PlayerMovement : MonoBehaviour
         {
             _timeStopping += Time.deltaTime;
             float decceleration = _decceleration.Evaluate(_timeStopping);
-            movement = _lastDirection * MovementSpeed * decceleration * Time.fixedDeltaTime;
+            movement = LastDirection * MovementSpeed * decceleration * Time.fixedDeltaTime;
         }
 
         //_character.CharacterRigidbody.MovePosition(transform.position + movement);
