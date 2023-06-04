@@ -4,6 +4,8 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "new Weapon", menuName = "ModularWeapon/Weapon")]
 public class Weapon : ScriptableObject
 {
+	private const float SLOWEST_POSSIBLE_ATTACKSPEED = 10;
+
 	[Header("Visuals")]
 	[SerializeField]
 	private WeaponSkeleton _weaponPrefab;
@@ -38,16 +40,18 @@ public class Weapon : ScriptableObject
 	[SerializeField]
 	public Sight _sight;
 
-	public Projectile PossibleProjectile { get; private set; }
+	[SerializeField]
+	private LayerMask _enemyLayer;
+	[SerializeField]
+	private LayerMask _groundLayer;
+
+	public Projectile Projectile { get; private set; }
 	public Transform OwningTransform { get; private set; }
 
 	private WeaponSkeleton _currentWeaponPrefab;
 	private Transform _weaponTransform;
 
-	[SerializeField]
-	private LayerMask _enemyLayer;
-	[SerializeField]
-	private LayerMask _groundLayer;
+	private ObjectPool<Projectile> _projectilePool;
 
 	private float _shotDelay;
 	private int _capacity;
@@ -65,11 +69,14 @@ public class Weapon : ScriptableObject
 
 	public void Initialize(Transform owningTransform)
 	{
+		Debug.Log("Inizialized " + _weaponPrefab);
 		OwningTransform = owningTransform;
 		_currentWeaponPrefab = Instantiate(_weaponPrefab, owningTransform);
 		_weaponTransform = _currentWeaponPrefab.transform;
 
 		ApplyStats(CalculateWeaponStats(this));
+
+		_projectilePool = ObjectPool<Projectile>.CreatePool(Projectile, 100, null);
 	}
 
 	public WeaponStats CalculateWeaponStats(Weapon weapon)
@@ -112,24 +119,21 @@ public class Weapon : ScriptableObject
 
 	private void ApplyStats(WeaponStats weaponStats)
 	{
-		PossibleProjectile = _ammunition.projectilePrefab;
+		Projectile = _ammunition.projectilePrefab;
 
-		PossibleProjectile.finalBaseDamage = weaponStats.damage;
-		PossibleProjectile.finalAttackSpeed = weaponStats.attackspeed;
-		PossibleProjectile.finalCooldown = weaponStats.cooldown;
-		PossibleProjectile.finalProjectileSize = weaponStats.projectileSize;
-		PossibleProjectile.finalCritChance = weaponStats.critChance;
-		PossibleProjectile.finalRange = weaponStats.range;
+		Projectile.finalBaseDamage = weaponStats.damage;
+		Projectile.finalAttackSpeed = weaponStats.attackspeed;
+		Projectile.finalCooldown = weaponStats.cooldown;
+		Projectile.finalProjectileSize = weaponStats.projectileSize;
+		Projectile.finalCritChance = weaponStats.critChance;
+		Projectile.finalRange = weaponStats.range;
+
+		_shotDelay = Projectile.finalAttackSpeed > 0 ? 1 / Projectile.finalAttackSpeed : SLOWEST_POSSIBLE_ATTACKSPEED;
 
 		_capacity = weaponStats.capacity;
-		PossibleProjectile.attackPattern = weaponStats.attackPattern;
+		Projectile.attackPattern = weaponStats.attackPattern;
 
-		PossibleProjectile.spawnPosition = _currentWeaponPrefab.ProjectileSpawnPosition;
-
-		if (PossibleProjectile.finalAttackSpeed != 0)
-		{
-			_shotDelay = 1 / PossibleProjectile.finalAttackSpeed;
-		}
+		Projectile.spawnTransform = _currentWeaponPrefab.ProjectileSpawnPosition;
 	}
 
 	private float CalculateDamage(Weapon weapon)
@@ -326,50 +330,61 @@ public class Weapon : ScriptableObject
 		}
 		if (!_isReloading)
 		{
-			Reload();
 			_isReloading = true;
+			Reload();
 		}
 		return false;
 	}
 
 	private void Shoot()
 	{
-		if (PossibleProjectile.finalAttackSpeed == 0) return;
+		if (Projectile.finalAttackSpeed == 0)
+			return;
+
 		_shotDelay -= Time.deltaTime;
-		if (!RotateTowardsEnemy()) return;
+		if (!RotateTowardsEnemy())
+			return;
+
 		if (_shotDelay <= 0)
 		{
-			DamageDealer spawnedDamageDealer;
-
 			_capacity--;
-			_shotDelay = 1 / PossibleProjectile.finalAttackSpeed;
+			_shotDelay = 1 / Projectile.finalAttackSpeed;
 
 			_currentWeaponPrefab.MuzzleFlash.Play();
 
-			spawnedDamageDealer = PossibleProjectile.attackPattern.AttackInPattern(PossibleProjectile, PossibleProjectile.spawnPosition);
-			spawnedDamageDealer.gameObject.transform.localScale = Vector3.one * PossibleProjectile.finalProjectileSize;
+			Projectile spawnedProjectile = (Projectile)_projectilePool.GetObject();
+			spawnedProjectile.transform.position = spawnedProjectile.spawnTransform.position;
+			spawnedProjectile.transform.rotation = spawnedProjectile.spawnTransform.rotation;
+			spawnedProjectile.attackPattern.AttackInPattern(spawnedProjectile);
+			spawnedProjectile.gameObject.transform.localScale = Vector3.one * Projectile.finalProjectileSize;
+			spawnedProjectile.OnHit += CleanUpProjectile;
+			spawnedProjectile.OnLifeTimeEnd += CleanUpProjectile;
 		}
 	}
+
+	private void CleanUpProjectile(Projectile projectile) => _projectilePool.ReturnObjectToPool(projectile);
 
 	private bool RotateTowardsEnemy()
 	{
 		float currentclosestdistance = Mathf.Infinity;
 		Enemy closestEnemy = null;
 
-		Collider[] enemies = Physics.OverlapSphere(_weaponTransform.position, PossibleProjectile.finalRange, _enemyLayer);
-		foreach (var enemy in enemies)
+		Collider[] enemies = Physics.OverlapSphere(_weaponTransform.position, Projectile.finalRange, _enemyLayer);
+		foreach (Collider enemy in enemies)
 		{
 			float distanceToEnemy = Vector3.Distance(_weaponTransform.position, enemy.transform.position);
-			if (distanceToEnemy < currentclosestdistance)
+			if (distanceToEnemy > currentclosestdistance)
+				continue;
+
+			Vector3 directionToEnemy = enemy.transform.position + Vector3.up - _weaponTransform.position;
+			if (!Physics.Raycast(_weaponTransform.position, directionToEnemy, distanceToEnemy, _groundLayer))
 			{
-				if (!Physics.Raycast(_weaponTransform.position, ((enemy.transform.position + Vector3.up) - _weaponTransform.position), distanceToEnemy, _groundLayer))
-				{
-					closestEnemy = enemy.GetComponent<Enemy>();
-					currentclosestdistance = distanceToEnemy;
-				}
+				closestEnemy = enemy.GetComponent<Enemy>();
+				currentclosestdistance = distanceToEnemy;
 			}
 		}
-		if (closestEnemy)
+
+		if (closestEnemy != null)
 		{
 			Vector3 direction = (closestEnemy.transform.position + Vector3.up) - _weaponTransform.position;
 			Vector3 rotateTowardsDirection = Vector3.RotateTowards(_weaponTransform.forward, direction, 20 * Time.deltaTime, .0f);
@@ -384,7 +399,7 @@ public class Weapon : ScriptableObject
 
 	private async void Reload()
 	{
-		await Task.Delay((int)(PossibleProjectile.finalCooldown * 1000));
+		await Task.Delay((int)(Projectile.finalCooldown * 1000));
 
 		_capacity = _magazine.capacity;
 		_isReloading = false;

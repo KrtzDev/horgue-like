@@ -8,12 +8,9 @@ public class StraightLineShot : AttackPattern
 		return "StraightLine";
 	}
 
-	public override DamageDealer AttackInPattern(Projectile projectile, Transform spawnPosition)
+	public override void AttackInPattern(Projectile projectile)
     {
-        Projectile currentProjectile = Instantiate(projectile, spawnPosition.position, spawnPosition.rotation);
-        currentProjectile.GetComponent<Rigidbody>().velocity = currentProjectile.transform.forward * 18f;
-        Destroy(currentProjectile, 10f);
-		return currentProjectile;
+		projectile.GetComponent<Rigidbody>().velocity = projectile.transform.forward * 18f;
     }
 
 }

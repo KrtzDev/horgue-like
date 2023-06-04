@@ -116,8 +116,6 @@ public class PlayerMovementMobility : MonoBehaviour
         ActivateAbilityBool();
         FallPhysics();
         CheckIfGrounded();
-
-        Debug.Log(_isGrounded);
     }
 
     // General
@@ -244,7 +242,7 @@ public class PlayerMovementMobility : MonoBehaviour
 
     private void DashAbility()
     {
-        _playerMovement._canMove = false;
+        _playerMovement.CanMove = false;
         _isUsingAbility = true;
 
         Vector3 dashDir = transform.TransformDirection(Vector3.forward);
@@ -268,7 +266,7 @@ public class PlayerMovementMobility : MonoBehaviour
 
     private void ResetDashAbility()
     {
-        _playerMovement._canMove = true;
+        _playerMovement.CanMove = true;
         _character.CharacterRigidbody.useGravity = true;
         _isUsingAbility = false;
 
@@ -345,7 +343,7 @@ public class PlayerMovementMobility : MonoBehaviour
             _simpleShot.CanShoot = false;
 
             _isUsingAbility = true;
-            _playerMovement._canMove = false;
+            _playerMovement.CanMove = false;
 
             Vector3 dashDir = (_closestEnemy.transform.position - transform.position).normalized;
             Vector3 forceToApply = dashDir * _dashForce;
@@ -395,7 +393,7 @@ public class PlayerMovementMobility : MonoBehaviour
     private void ResetFlickerStrikeAbility()
     {
         _isUsingAbility = false;
-        _playerMovement._canMove = true;
+        _playerMovement.CanMove = true;
         _simpleShot.CanShoot = true;
 
         ResetAbilityTimer(_flickerStrikeCD);

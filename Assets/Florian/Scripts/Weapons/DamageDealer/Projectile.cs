@@ -1,7 +1,11 @@
+using System;
 using UnityEngine;
 
 public class Projectile : DamageDealer
 {
+	public event Action<Projectile> OnHit;
+	public event Action<Projectile> OnLifeTimeEnd;
+
 	public float finalBaseDamage;
 	public float finalAttackSpeed;
 	public float finalCooldown;
@@ -10,10 +14,18 @@ public class Projectile : DamageDealer
 	public float finalRange;
 
 	public AttackPattern attackPattern;
-	public Transform spawnPosition;
+	public Transform spawnTransform;
 
 	[SerializeField]
 	private LayerMask _hitLayerMask;
+
+	private void OnEnable()
+	{
+		float lifeTime = 10;
+		lifeTime -= Time.deltaTime;
+		if (lifeTime <= 0)
+			OnLifeTimeEnd?.Invoke(this);
+	}
 
 	private void OnTriggerEnter(Collider other)
 	{
@@ -21,12 +33,12 @@ public class Projectile : DamageDealer
 		{
 			if (other.TryGetComponent(out HealthComponent enemyHealth))
 			{
-				if (finalCritChance > Random.Range(0,100))
+				if (finalCritChance > UnityEngine.Random.Range(0,100))
 					finalBaseDamage *= 2;
 
 				enemyHealth.TakeDamage((int)finalBaseDamage);
 			}
-			Destroy(gameObject);
+			OnHit?.Invoke(this);
 		}
 	}
 }
