@@ -103,7 +103,7 @@ public class NEW_EnemySpawner : MonoBehaviour
 
     private void Update()
     {
-        transform.SetPositionAndRotation(PlayerTransform.position, PlayerTransform.rotation);
+        transform.SetPositionAndRotation(PlayerTransform.position, PlayerTransform.rotation); // performance heavy?
 
         if (_spawnTimer >= _spawnTick)
         {
@@ -204,7 +204,6 @@ public class NEW_EnemySpawner : MonoBehaviour
 
                 float yValue = Bounds.max.y - rc_hit.distance;
                 possibleSpawnPosition = new Vector3(xValueInBounds, yValue, zValueInBounds);
-
 
                 NavMeshHit nv_hit;
                 if (NavMesh.SamplePosition(possibleSpawnPosition, out nv_hit, 1.0f, NavMesh.AllAreas))
