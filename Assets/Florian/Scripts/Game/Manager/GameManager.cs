@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
@@ -14,6 +15,8 @@ public class GameManager : Singleton<GameManager>
 
 	[SerializeField]
 	private GameObject _loadData;
+	[SerializeField]
+	private GameObject _gameDataReader;
 
 	public List<GameManagerValues> _GameManagerValues = new List<GameManagerValues>();
 
@@ -42,6 +45,8 @@ public class GameManager : Singleton<GameManager>
 
 	private void Start()
 	{
+		StartCoroutine(GetGameData());
+
 		SceneLoader.Instance.CompletedSceneLoad += OnCompletedSceneLoad;
 
 		_currentScore = 0;
@@ -62,6 +67,9 @@ public class GameManager : Singleton<GameManager>
 
 		if (SceneManager.GetActiveScene().name == "SCENE_Main_Menu")
 		{
+			_currentLevel = 1;
+			_currentWave = 0;
+
 			_loadData.SetActive(true);
 			return;
 		}
@@ -85,7 +93,8 @@ public class GameManager : Singleton<GameManager>
 
 		_currentWave += 1;
 
-		if (_currentLevel >= 2)
+		// if (_currentLevel >= 2)
+		if (_currentLevel >= 0)
 		{
 			_playerCanUseAbilities = true;
 		}
@@ -203,5 +212,11 @@ public class GameManager : Singleton<GameManager>
 		UIManager.Instance.ShowLevelEndScreen(LevelStatus.Lost);
 		UIManager.Instance.WaveEndScreen.gameObject.SetActive(false);
 		EnemyStopFollowing();
+	}
+
+	IEnumerator GetGameData()
+    {
+		_gameDataReader.SetActive(true);
+		yield return null;
 	}
 }

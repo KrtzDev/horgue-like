@@ -9,9 +9,9 @@ public class BasicEnemyData : ScriptableObject
     public float _attackSpeed;
     public int _givenXP;
     public float _moveSpeed;
-    public int _armor;
-    public int _elementalResistance;
-    public int _technicalResistance;
+    public float _armor;
+    public float _elementalResistance;
+    public float _technicalResistance;
 
     [Header("Movement")]
     public float _attackRange;

@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.AI;
 
-public class Enemy : PoolableObject
+public class Enemy : MonoBehaviour
 {
     [field: SerializeField] public BasicEnemyData EnemyData { get; set; }
     [field: SerializeField] public NavMeshAgent Agent { get; set; }
@@ -25,10 +25,8 @@ public class Enemy : PoolableObject
         }
     }
 
-    public override void OnDisable()
+    public void OnDisable()
     {
-        base.OnDisable();
-
         Agent.enabled = false;
     }
 
