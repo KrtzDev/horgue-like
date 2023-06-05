@@ -31,6 +31,7 @@ public class GameManager : Singleton<GameManager>
 
 	private EnemySpawner _enemySpawner;
 	public int _neededEnemyKill;
+	public int _enemyCount;
 	private bool _hasWon;
 	private bool _hasLost;
 
@@ -125,6 +126,7 @@ public class GameManager : Singleton<GameManager>
 	public void EnemyDied()
 	{
 		_neededEnemyKill--;
+		_enemyCount--;
 
 		// alle Gegner getötet
 

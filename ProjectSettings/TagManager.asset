@@ -9,6 +9,7 @@ TagManager:
   - Decoy
   - UI
   - Wasser
+  - EnemyPool
   layers:
   - Default
   - TransparentFX
@@ -21,7 +22,7 @@ TagManager:
   - EnemyProjectile
   - Ground
   - Obstacle
-  - 
+  - SpawningZones
   - 
   - 
   - 
