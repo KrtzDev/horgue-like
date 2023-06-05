@@ -82,7 +82,7 @@ public class NEW_EnemySpawner : MonoBehaviour
     private SphereCollider FarZone;
 
     // Object Pooling
-    public Dictionary<int, ObjectPool> EnemyObjectPools = new Dictionary<int, ObjectPool>();
+    public Dictionary<int, ObjectPool<Enemy>> EnemyObjectPools = new Dictionary<int, ObjectPool<Enemy>>();
     private Bounds Bounds;
 
     private void Awake()
@@ -97,7 +97,7 @@ public class NEW_EnemySpawner : MonoBehaviour
     {
         for (int i = 0; i < _EnemiesToSpawn.Count; i++)
         {
-            EnemyObjectPools.Add(i, ObjectPool.CreateInstance(_EnemiesToSpawn[i].Enemy, _maxEnemyCount));
+            EnemyObjectPools.Add(i, ObjectPool<Enemy>.CreatePool(_EnemiesToSpawn[i].Enemy, _maxEnemyCount,transform));
         }
     }
 
@@ -228,7 +228,7 @@ public class NEW_EnemySpawner : MonoBehaviour
     {
         if(_canSpawnEnemies)
         {
-            PoolableObject poolableObject = EnemyObjectPools[spawnIndex].GetObject();
+            Enemy poolableObject = EnemyObjectPools[spawnIndex].GetObject();
 
             // Determine Position
 
