@@ -97,7 +97,7 @@ public class NEW_EnemySpawner : MonoBehaviour
     {
         for (int i = 0; i < _EnemiesToSpawn.Count; i++)
         {
-            EnemyObjectPools.Add(i, ObjectPool<Enemy>.CreatePool(_EnemiesToSpawn[i].Enemy, _maxEnemyCount,transform));
+            EnemyObjectPools.Add(i, ObjectPool<Enemy>.CreatePool(_EnemiesToSpawn[i].Enemy, _maxEnemyCount,transform.parent));
         }
     }
 
