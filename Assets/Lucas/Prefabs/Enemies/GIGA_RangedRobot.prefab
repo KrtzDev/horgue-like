@@ -1839,6 +1839,7 @@ GameObject:
   - component: {fileID: 8076142010926168822}
   - component: {fileID: 7300998086142530308}
   - component: {fileID: 7238498638767744560}
+  - component: {fileID: 8519058135064799330}
   m_Layer: 7
   m_Name: GIGA_RangedRobot
   m_TagString: Enemy
@@ -1993,6 +1994,18 @@ MonoBehaviour:
     type: 3}
   coinDrop: {fileID: 2954434917669188068, guid: bc346ef89f6462d419a727974cda75b8,
     type: 3}
+--- !u!114 &8519058135064799330
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4301312500149769534}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f0ed12ae8b7ccd4aa9e40759c23fc18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4301312500149769568
 GameObject:
   m_ObjectHideFlags: 0
