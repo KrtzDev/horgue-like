@@ -10,11 +10,11 @@ public class DamageOverTime : StatusEffect
 
 	private float _randomTickTimer;
 
-	public DamageOverTime(HealthComponent enemyHealth, float burnDamage, float burnDuration, float propagationChance)
+	public DamageOverTime(HealthComponent enemyHealth, float dotDamage, float dotDuration, float propagationChance)
 	{
 		_enemyhealth = enemyHealth;
-		_dotDamage = burnDamage;
-		_dotDuration = burnDuration;
+		_dotDamage = dotDamage;
+		_dotDuration = dotDuration;
 		_propagationChance = propagationChance;
 
 		_randomTickTimer = Random.Range(1f,3f);

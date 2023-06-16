@@ -1,18 +1,20 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class IceDamage : MonoBehaviour
+[CreateAssetMenu(fileName = "new IceDamage", menuName = "ModularWeapon/Data/DamageType/Ice")]
+public class IceDamage : DamageType
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+	[SerializeField] private float _freezeChance;
+	[SerializeField] private float _freezeDamage;
+	[SerializeField] private float _freezeDuration;
+	[SerializeField] private float _slowAmount;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+	public override void ApplyEffect(Enemy enemy)
+	{
+		if (_freezeChance < Random.Range(1, 100))
+			return;
+
+		HealthComponent health = enemy.GetComponent<HealthComponent>();
+		enemy.GetComponent<Status>().AddEffect(new DamageOverTime(health,_freezeDamage,_freezeDuration,0f));
+		enemy.GetComponent<Status>().AddEffect(new Slow(enemy, _slowAmount, _freezeDuration));
+	}
 }

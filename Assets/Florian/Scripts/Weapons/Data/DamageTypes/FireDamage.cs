@@ -11,7 +11,11 @@ public class FireDamage : DamageType
 
     public override void ApplyEffect(Enemy enemy)
     {
-		enemy.GetComponent<HealthComponent>().TakeDamage((int)_additionalDamage);
-		enemy.GetComponent<Status>().AddEffect(new DamageOverTime(enemy, _burnDamage, _burnDuration, _propagationChance));
+		if (_burnChance < Random.Range(1, 100))
+			return;
+
+		HealthComponent health = enemy.GetComponent<HealthComponent>();
+		health.TakeDamage((int)_additionalDamage);
+		enemy.GetComponent<Status>().AddEffect(new DamageOverTime(health, _burnDamage, _burnDuration, _propagationChance));
     }
 }
