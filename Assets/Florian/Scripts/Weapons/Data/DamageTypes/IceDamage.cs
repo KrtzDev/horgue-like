@@ -8,13 +8,15 @@ public class IceDamage : DamageType
 	[SerializeField] private float _freezeDuration;
 	[SerializeField] private float _slowAmount;
 
+	[SerializeField] private float _statusDuration;
+	[SerializeField] private FloatRange _tickRate;
+
 	public override void ApplyEffect(Enemy enemy)
 	{
 		if (_freezeChance < Random.Range(1, 100))
 			return;
 
-		HealthComponent health = enemy.GetComponent<HealthComponent>();
-		enemy.GetComponent<Status>().AddEffect(new DamageOverTime(health,_freezeDamage,_freezeDuration,0f));
-		enemy.GetComponent<Status>().AddEffect(new Slow(enemy, _slowAmount, _freezeDuration));
+		enemy.GetComponent<Status>().AddEffect(new DamageOverTime(enemy, _freezeDamage, _statusDuration));
+		enemy.GetComponent<Status>().AddEffect(new Slow(enemy, _slowAmount, _freezeDuration, _statusDuration));
 	}
 }

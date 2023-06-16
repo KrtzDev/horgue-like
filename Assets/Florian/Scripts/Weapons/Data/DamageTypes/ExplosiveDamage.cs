@@ -1,18 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class ExplosiveDamage : MonoBehaviour
+public class ExplosiveDamage : DamageType
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+	[SerializeField] private float _additionalDamage;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+	public override void ApplyEffect(Enemy enemy)
+	{
+		
+	}
 }

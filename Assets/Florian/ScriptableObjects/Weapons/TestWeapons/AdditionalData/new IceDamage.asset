@@ -9,15 +9,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 75d6c0d56468f5e40a2923ceda4abc10, type: 3}
-  m_Name: new FireDamage
+  m_Script: {fileID: 11500000, guid: 670648028cf7be44cb6afa12cd99059b, type: 3}
+  m_Name: new IceDamage
   m_EditorClassIdentifier: 
-  _additionalDamage: 1
-  _burnChance: 100
-  _burnDamage: 2
-  _propagationChance: 50
-  _propagationRange: 2
-  _statusDuration: 10
+  _freezeChance: 100
+  _freezeDamage: 1
+  _freezeDuration: 10
+  _slowAmount: 50
   _tickRate:
-    min: 1
-    max: 3
+    _min: 1
+    _max: 3

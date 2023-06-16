@@ -1,18 +1,22 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class ShockDamage : MonoBehaviour
+public class ShockDamage : DamageType
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+	[SerializeField] private float _additionalDamage;
+	[SerializeField] private float _shockChance;
+	[SerializeField] private float _slowDuration;
+	[SerializeField] private float _slowAmount;
+	[SerializeField] private float _propagationChance;
+	[SerializeField] private float _propagationRange;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+	[SerializeField] private float _statusDuration;
+
+	public override void ApplyEffect(Enemy enemy)
+	{
+		if (_shockChance < Random.Range(1, 100))
+			return;
+
+		enemy.GetComponent<Status>().AddEffect(new DamageOnce(enemy, _additionalDamage, _propagationChance, _propagationRange));
+		enemy.GetComponent<Status>().AddEffect(new Slow(enemy, _slowAmount, _slowDuration, _statusDuration, new FloatRange(), _propagationChance, _propagationRange));
+	}
 }
