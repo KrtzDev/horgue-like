@@ -92,6 +92,7 @@ public class Weapon : ScriptableObject
 
 		weaponStats.capacity = weapon._magazine.capacity;
 		weaponStats.attackPattern = weapon._barrel.attackPattern;
+		weaponStats.damageType = weapon._ammunition.damageType;
 
 		return weaponStats;
 	}
@@ -132,6 +133,7 @@ public class Weapon : ScriptableObject
 
 		_capacity = weaponStats.capacity;
 		Projectile.attackPattern = weaponStats.attackPattern;
+		Projectile.damageType = weaponStats.damageType;
 
 		Projectile.spawnTransform = _currentWeaponPrefab.ProjectileSpawnPosition;
 	}

@@ -14,6 +14,7 @@ public class Projectile : DamageDealer
 	public float finalRange;
 
 	public AttackPattern attackPattern;
+	public StatusEffect damageType;
 	public Transform spawnTransform;
 
 	[SerializeField]
@@ -31,12 +32,14 @@ public class Projectile : DamageDealer
 	{
 		if ((_hitLayerMask.value & (1 << other.gameObject.layer)) > 0)
 		{
-			if (other.TryGetComponent(out HealthComponent enemyHealth))
+			if (other.TryGetComponent(out HealthComponent health))
 			{
 				if (finalCritChance > UnityEngine.Random.Range(0,100))
 					finalBaseDamage *= 2;
 
-				enemyHealth.TakeDamage((int)finalBaseDamage);
+				health.TakeDamage((int)finalBaseDamage);
+				if(health.TryGetComponent(out Enemy enemy))
+					damageType.ApplyStatusEffect(enemy);
 			}
 			OnHit?.Invoke(this);
 		}

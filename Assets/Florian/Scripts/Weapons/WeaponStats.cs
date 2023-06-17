@@ -10,4 +10,5 @@
 	public int capacity;
 
 	public AttackPattern attackPattern;
+	public StatusEffect damageType;
 }

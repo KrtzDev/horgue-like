@@ -1838,6 +1838,7 @@ GameObject:
   - component: {fileID: 8076142010926168822}
   - component: {fileID: 7300998086142530308}
   - component: {fileID: 7238498638767744560}
+  - component: {fileID: 3475975243860083133}
   m_Layer: 7
   m_Name: RangedRobot
   m_TagString: Enemy
@@ -1952,10 +1953,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ad244b7fad3c0b41a8272dfe705ac8a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <EnemyData>k__BackingField: {fileID: 11400000, guid: fdf791b2749b7224699643a8d5477270,
-    type: 2}
-  <Agent>k__BackingField: {fileID: 4301312500149274905}
-  <Projectile>k__BackingField: {fileID: 8451927325676435795, guid: 4746290bed9561b4590c43ddb406e723,
+  _agent: {fileID: 4301312500149274905}
+  _projectile: {fileID: 8451927325676435795, guid: 519256511bcaca747924245807496f73,
     type: 3}
   <ProjectilePoint>k__BackingField: {fileID: 7221469875420454319}
   _projectileSpeed: 18
@@ -1968,6 +1967,8 @@ MonoBehaviour:
   <PlayerLayer>k__BackingField:
     serializedVersion: 2
     m_Bits: 64
+  <EnemyData>k__BackingField: {fileID: 11400000, guid: fdf791b2749b7224699643a8d5477270,
+    type: 2}
 --- !u!114 &7238498638767744560
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1983,15 +1984,27 @@ MonoBehaviour:
   <MaxHealth>k__BackingField: 100
   <CurrentHealth>k__BackingField: 0
   <Animator>k__BackingField: {fileID: 4301312500157032124}
-  <Enemy>k__BackingField: {fileID: 0}
-  _HitParticlePosition: {fileID: 866945960097510711}
-  _HitParticle: {fileID: 6362102834014993675, guid: 5561755790406d148a233f12b01260c5,
+  <Enemy>k__BackingField: {fileID: 7300998086142530308}
+  _hitParticlePosition: {fileID: 866945960097510711}
+  _hitParticle: {fileID: 6362102834014993675, guid: 5561755790406d148a233f12b01260c5,
     type: 3}
   dropChance: 5
-  HealthDrop: {fileID: 4318080567083893032, guid: 03c15c294a93b874ca9153b08ea682dd,
+  healthDrop: {fileID: 4318080567083893032, guid: 03c15c294a93b874ca9153b08ea682dd,
     type: 3}
-  CoinDrop: {fileID: 2954434917669188068, guid: bc346ef89f6462d419a727974cda75b8,
+  coinDrop: {fileID: 2954434917669188068, guid: bc346ef89f6462d419a727974cda75b8,
     type: 3}
+--- !u!114 &3475975243860083133
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4301312500149769534}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f0ed12ae8b7ccd4aa9e40759c23fc18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4301312500149769568
 GameObject:
   m_ObjectHideFlags: 0

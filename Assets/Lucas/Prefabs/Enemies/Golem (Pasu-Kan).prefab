@@ -654,6 +654,7 @@ GameObject:
   - component: {fileID: 8936747675488740624}
   - component: {fileID: 4452630809966156967}
   - component: {fileID: 2751320019283796166}
+  - component: {fileID: 6067780497260314404}
   - component: {fileID: 2751320019283796165}
   m_Layer: 7
   m_Name: Golem (Pasu-Kan)
@@ -768,15 +769,27 @@ MonoBehaviour:
   <MaxHealth>k__BackingField: 100
   <CurrentHealth>k__BackingField: 0
   <Animator>k__BackingField: {fileID: 716891242282492267}
-  <Enemy>k__BackingField: {fileID: 0}
-  _HitParticlePosition: {fileID: 5332456720476653605}
-  _HitParticle: {fileID: 6362102834014993675, guid: 5561755790406d148a233f12b01260c5,
+  <Enemy>k__BackingField: {fileID: 2751320019283796165}
+  _hitParticlePosition: {fileID: 5332456720476653605}
+  _hitParticle: {fileID: 6362102834014993675, guid: 5561755790406d148a233f12b01260c5,
     type: 3}
   dropChance: 5
-  HealthDrop: {fileID: 4318080567083893032, guid: 03c15c294a93b874ca9153b08ea682dd,
+  healthDrop: {fileID: 4318080567083893032, guid: 03c15c294a93b874ca9153b08ea682dd,
     type: 3}
-  CoinDrop: {fileID: 2954434917669188068, guid: bc346ef89f6462d419a727974cda75b8,
+  coinDrop: {fileID: 2954434917669188068, guid: bc346ef89f6462d419a727974cda75b8,
     type: 3}
+--- !u!114 &6067780497260314404
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 716891242273133261}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f0ed12ae8b7ccd4aa9e40759c23fc18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &2751320019283796165
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -789,10 +802,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ad244b7fad3c0b41a8272dfe705ac8a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <EnemyData>k__BackingField: {fileID: 11400000, guid: 1c6784eeb238619469f87bbb4a9877f5,
-    type: 2}
-  <Agent>k__BackingField: {fileID: 8936747675488740624}
-  <Projectile>k__BackingField: {fileID: 0}
+  _agent: {fileID: 8936747675488740624}
+  _projectile: {fileID: 0}
   <ProjectilePoint>k__BackingField: {fileID: 0}
   _projectileSpeed: 0
   <GroundLayer>k__BackingField:
@@ -804,6 +815,8 @@ MonoBehaviour:
   <PlayerLayer>k__BackingField:
     serializedVersion: 2
     m_Bits: 64
+  <EnemyData>k__BackingField: {fileID: 11400000, guid: 1c6784eeb238619469f87bbb4a9877f5,
+    type: 2}
 --- !u!1 &716891242273133263
 GameObject:
   m_ObjectHideFlags: 0

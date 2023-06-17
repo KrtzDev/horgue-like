@@ -408,12 +408,12 @@ MonoBehaviour:
   <CurrentHealth>k__BackingField: 0
   <Animator>k__BackingField: {fileID: 0}
   <Enemy>k__BackingField: {fileID: 0}
-  _HitParticlePosition: {fileID: 7336742999931250485}
-  _HitParticle: {fileID: 6362102834014993675, guid: 5561755790406d148a233f12b01260c5,
+  _hitParticlePosition: {fileID: 7336742999931250485}
+  _hitParticle: {fileID: 6362102834014993675, guid: 5561755790406d148a233f12b01260c5,
     type: 3}
   dropChance: 0
-  HealthDrop: {fileID: 0}
-  CoinDrop: {fileID: 0}
+  healthDrop: {fileID: 0}
+  coinDrop: {fileID: 0}
 --- !u!114 &6670527696543464466
 MonoBehaviour:
   m_ObjectHideFlags: 0
