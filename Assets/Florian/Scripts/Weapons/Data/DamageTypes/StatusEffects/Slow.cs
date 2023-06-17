@@ -1,45 +1,29 @@
-﻿using UnityEngine;
-using UnityEngine.AI;
+﻿using UnityEngine.AI;
 
-public class Slow : StatusEffect
+public class Slow : Effect
 {
 	private float _slowAmount;
-	private float _slowDuration;
 
 	private NavMeshAgent _agent;
 	private float _originalSpeed;
 
 	private bool _shouldSlow = true;
-	private float _currentSlowDuration;
 
 	public Slow(Enemy enemy, 
 		float slowAmount, 
-		float slowDuration, 
-		float statusDuration, 
-		FloatRange tickRate = default,
-		float propagationChance = 0f,
-		float propagationRange = 0f)
+		float statusDuration)
 	{
 		_enemy = enemy;
 		_slowAmount = slowAmount;
-		_slowDuration = slowDuration;
 		_statusDuration = statusDuration;
-
-		_propagationChance = propagationChance;
-		_propagationRange = propagationRange;
-		_randomTickTimer = Random.Range(tickRate.min,tickRate.max);
 
 		_agent = enemy.GetComponent<NavMeshAgent>();
 		_originalSpeed = _agent.speed;
 	}
 
-	public override void Tick()
+	public override void Tick(float delta)
 	{
-		_statusDuration -= Time.deltaTime;
-		_currentSlowDuration -= Time.deltaTime;
-
-		if (_randomTickTimer > 0)
-			_randomTickTimer -= Time.deltaTime;
+		_statusDuration -= delta;
 
 		if (_statusDuration <= 0)
 		{
@@ -48,23 +32,10 @@ public class Slow : StatusEffect
 			return;
 		}
 
-		if(_randomTickTimer <= 0)
-		{
-			_currentSlowDuration = _slowDuration;
-			_shouldSlow = true;
-		}
-
-		if (_currentSlowDuration <= 0)
-		{
-			_agent.speed = _originalSpeed;
-		}
-
 		if (_shouldSlow)
 		{
 			_shouldSlow = false;
-			_agent.speed = _originalSpeed * (_slowAmount / 100);
-
-			CheckPropagation(this);
+			_agent.speed = _originalSpeed * ((100 - _slowAmount) / 100);
 		}
 	}
 }

@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3994f6e58a5c094469c1b2f716e61388, type: 3}
+  m_Name: AoeStun
+  m_EditorClassIdentifier: 
+  _triggerChance: 100
+  _effectDuration: 20
+  _tickRate:
+    min: 0
+    max: 0
+  _hasInitialExtraDamage: 0
+  _initialDamage: 0
+  _hasDamageOverTime: 0
+  _dotDamage: 0
+  _canSlow: 1
+  _slowAmount: 100
+  _canPropagate: 1
+  _propagatedEffect: {fileID: 11400000}
+  _propagationChance: 100
+  _propagationRange: 25
+  _maxPropagateToCount: 50
+  _consecutivePropagationCount: 2

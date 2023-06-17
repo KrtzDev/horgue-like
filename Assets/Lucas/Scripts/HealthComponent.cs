@@ -5,6 +5,7 @@ using UnityEngine.AI;
 public class HealthComponent : MonoBehaviour
 {
 	public event Action<float> OnHealthPercentChanged;
+	public event Action OnDeath;
 
 	[field: SerializeField] public int MaxHealth { get; set; } = 100;
 	[field: SerializeField] public int CurrentHealth { get; set; }
@@ -53,6 +54,8 @@ public class HealthComponent : MonoBehaviour
 			{
 				GameManager.Instance.PlayerDied();
 				_isDead = true;
+
+				OnDeath?.Invoke();
 			}
 		}
 		else if (gameObject.CompareTag("Enemy"))
@@ -65,6 +68,8 @@ public class HealthComponent : MonoBehaviour
 
 				Animator.SetTrigger("death");
 				_isDead = true;
+
+				OnDeath?.Invoke();
 			}
 			else if (CurrentHealth > 0 && !_isDead)
 			{

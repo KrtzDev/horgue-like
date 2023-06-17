@@ -15,6 +15,7 @@ MonoBehaviour:
   <WeaponPartUISprite>k__BackingField: {fileID: 21300000, guid: dba5b79ea1a59f943b29a910b4098f8f,
     type: 3}
   <WeaponPartPrefab>k__BackingField: {fileID: 0}
+  isSlotted: 0
   projectilePrefab: {fileID: 4954643210180333314, guid: 71610fc810078fc42b6427a07682dca3,
     type: 3}
   baseDamage: 90
@@ -23,4 +24,4 @@ MonoBehaviour:
   projectileSize: 0.2
   critChance: 18
   range: 16.75
-  damageType: {fileID: 11400000, guid: 5fa20b50775f5b3438f8908c6cade453, type: 2}
+  damageType: {fileID: 11400000, guid: 5a0f6ddcb31b9484cbc15f25672db89f, type: 2}

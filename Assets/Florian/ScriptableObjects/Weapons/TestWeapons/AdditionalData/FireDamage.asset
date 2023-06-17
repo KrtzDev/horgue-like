@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3994f6e58a5c094469c1b2f716e61388, type: 3}
+  m_Name: FireDamage
+  m_EditorClassIdentifier: 
+  _triggerChance: 50
+  _effectDuration: 5
+  _tickRate:
+    min: 0.5
+    max: 1
+  _hasInitialExtraDamage: 1
+  _initialDamage: 5
+  _hasDamageOverTime: 1
+  _dotDamage: 1
+  _canSlow: 0
+  _slowAmount: 0
+  _slowDuration: 0
+  _canPropagate: 1
+  _propagatedEffect: {fileID: 11400000}
+  _propagationChance: 50
+  _propagationRange: 5
+  _maxPropagateToCount: 3
+  _consecutivePropagationCount: 2

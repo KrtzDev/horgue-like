@@ -14,7 +14,7 @@ public class Projectile : DamageDealer
 	public float finalRange;
 
 	public AttackPattern attackPattern;
-	public DamageType damageType;
+	public StatusEffect damageType;
 	public Transform spawnTransform;
 
 	[SerializeField]
@@ -39,7 +39,7 @@ public class Projectile : DamageDealer
 
 				health.TakeDamage((int)finalBaseDamage);
 				if(health.TryGetComponent(out Enemy enemy))
-					damageType.ApplyEffect(enemy);
+					damageType.ApplyStatusEffect(enemy);
 			}
 			OnHit?.Invoke(this);
 		}

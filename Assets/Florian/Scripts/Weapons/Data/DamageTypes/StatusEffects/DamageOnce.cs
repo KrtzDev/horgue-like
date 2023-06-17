@@ -1,4 +1,4 @@
-﻿internal class DamageOnce : StatusEffect
+﻿internal class DamageOnce : Effect
 {
 	private float _additionalDamage;
 
@@ -9,16 +9,12 @@
 		_enemy = enemy;
 		_additionalDamage = additionalDamage;
 
-		_propagationChance = propagationChance;
-		_propagationRange = propagationRange;
-
 		_enemyHealth = enemy.GetComponent<HealthComponent>();
 	}
 
-	public override void Tick()
+	public override void Tick(float delta)
 	{
 		_enemyHealth.TakeDamage((int)_additionalDamage);
-		CheckPropagation(this);
 
 		OnEffectEnded?.Invoke(this);
 	}

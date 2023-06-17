@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class DamageOverTime : StatusEffect
+public class DamageOverTime : Effect
 {
 	private float _dotDamage;
 
@@ -8,29 +8,18 @@ public class DamageOverTime : StatusEffect
 
 	public DamageOverTime(Enemy enemy, 
 		float dotDamage, 
-		float statusDuration, 
-		FloatRange tickRate = default, 
-		float propagationChance = 0f, 
-		float propagationRange = 0f)
+		float statusDuration)
 	{
 		_enemy = enemy;
 		_dotDamage = dotDamage;
 		_statusDuration = statusDuration;
 
-		_propagationChance = propagationChance;
-		_propagationRange = propagationRange;
-		_tickRate = tickRate;
-		_randomTickTimer = Random.Range(tickRate.min,tickRate.max);
-
 		_enemyhealth = _enemy.GetComponent<HealthComponent>();
 	}
 
-	public override void Tick()
+	public override void Tick(float delta)
 	{
-		_statusDuration -= Time.deltaTime;
-
-		if (_randomTickTimer > 0)
-			_randomTickTimer -= Time.deltaTime;
+		_statusDuration -= delta;
 
 		if (_statusDuration <= 0)
 		{
@@ -38,12 +27,7 @@ public class DamageOverTime : StatusEffect
 			return;
 		}
 
-		if (_randomTickTimer <= 0f)
-		{
-			_randomTickTimer = Random.Range(_tickRate.min, _tickRate.max);
-			_enemyhealth.TakeDamage((int)_dotDamage);
+		_enemyhealth.TakeDamage((int)_dotDamage);
 
-			CheckPropagation(this);
-		}
 	}
 }
