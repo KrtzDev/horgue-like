@@ -3,7 +3,7 @@ using UnityEngine.UI;
 
 public class UIImageFillAmountWaveProgress : UIImageFillAmount
 {
-    private EnemySpawner _EnemySpawner;
+    private NEW_EnemySpawner _EnemySpawner;
 
     public Text EnemiesKilledText;
     public Text CurrentLevelWave;
@@ -15,14 +15,14 @@ public class UIImageFillAmountWaveProgress : UIImageFillAmount
 
     public override void Awake()
     {
-        _EnemySpawner = GameObject.FindGameObjectWithTag("EnemySpawner").GetComponent<EnemySpawner>();
+        _EnemySpawner = GameObject.FindGameObjectWithTag("EnemySpawner").GetComponent<NEW_EnemySpawner>();
 
         base.Awake();
     }
 
     public void Start()
     {
-		_maxEnemiesAmount = _EnemySpawner.EnemyMaxAmount;
+		_maxEnemiesAmount = _EnemySpawner._enemyMaxAmount;
 
         CurrentLevelWave.text = "Level: " + GameManager.Instance._currentLevel + " -- Wave: " + GameManager.Instance._currentWave;
 	}

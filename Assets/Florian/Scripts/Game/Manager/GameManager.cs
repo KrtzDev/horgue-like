@@ -29,7 +29,7 @@ public class GameManager : Singleton<GameManager>
 
 	public int _currentScore;
 
-	private EnemySpawner _enemySpawner;
+	private NEW_EnemySpawner _enemySpawner;
 	public int _neededEnemyKill;
 	public int _enemyCount;
 	private bool _hasWon;
@@ -79,8 +79,8 @@ public class GameManager : Singleton<GameManager>
 		_hasWon = false;
 		_hasLost = false;
 
-		_enemySpawner = GameObject.Find("EnemySpawner").GetComponent<EnemySpawner>();
-		_neededEnemyKill = _enemySpawner.EnemyMaxAmount;
+		_enemySpawner = GameObject.Find("EnemySpawner").GetComponent<NEW_EnemySpawner>();
+		_neededEnemyKill = _enemySpawner._enemyMaxAmount;
 
 		if (_currentLevel == 1 && _currentWave == 0)
 		{
@@ -103,7 +103,7 @@ public class GameManager : Singleton<GameManager>
 			_playerCanUseAbilities = false;
 		}
 
-		Debug.Log("neededEnemyKill ( " + _neededEnemyKill + " ) = enemySpawner.MaxAmount ( " + _enemySpawner.EnemyMaxAmount + " )");
+		Debug.Log("neededEnemyKill ( " + _neededEnemyKill + " ) = enemySpawner.MaxAmount ( " + _enemySpawner._enemyMaxAmount + " )");
 	}
 
 	private void Update()
@@ -140,7 +140,7 @@ public class GameManager : Singleton<GameManager>
 
 		if (!_hasWon && _neededEnemyKill == 0 && _winningCondition == WinningCondition.KillSpecificEnemy)
 		{
-			_enemySpawner.SpawnRandomEnemy();
+			// _enemySpawner.SpawnRandomEnemy();
 		}
 		if (!_hasWon && _neededEnemyKill == -1 && _winningCondition == WinningCondition.KillSpecificEnemy)
 		{
