@@ -92,7 +92,7 @@ public class Weapon : ScriptableObject
 
 		weaponStats.capacity = weapon._magazine.capacity;
 		weaponStats.attackPattern = weapon._barrel.attackPattern;
-		weaponStats.damageType = new StatusEffect(weapon._ammunition.damageType);
+		weaponStats.statusEffect = new StatusEffect(weapon._ammunition.statusEffect);
 
 		return weaponStats;
 	}
@@ -133,7 +133,7 @@ public class Weapon : ScriptableObject
 
 		_capacity = weaponStats.capacity;
 		Projectile.attackPattern = weaponStats.attackPattern;
-		Projectile.statusEffect = weaponStats.damageType;
+		Projectile.statusEffect = weaponStats.statusEffect;
 
 		Projectile.spawnTransform = _currentWeaponPrefab.ProjectileSpawnPosition;
 	}

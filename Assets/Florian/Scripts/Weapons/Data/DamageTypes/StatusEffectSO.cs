@@ -1,6 +1,8 @@
+using System;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "new StatusEffect", menuName = "ModularWeapon/Data/StatusEffect")]
+[Serializable]
 public class StatusEffectSO : ScriptableObject
 {
 	[Header("General")]
@@ -26,6 +28,7 @@ public class StatusEffectSO : ScriptableObject
 	[Header("Propagation")]
 	public bool canPropagate;
 	public StatusEffectSO propagatedEffect;
+	public LayerMask layersToPropagateTo;
 	public float propagationChance;
 	public float propagationRange;
 	public int maxPropagateToCount;

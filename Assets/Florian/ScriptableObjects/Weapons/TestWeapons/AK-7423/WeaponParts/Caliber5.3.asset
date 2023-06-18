@@ -24,4 +24,4 @@ MonoBehaviour:
   projectileSize: 0.2
   critChance: 18
   range: 16.75
-  damageType: {fileID: 11400000, guid: 5a0f6ddcb31b9484cbc15f25672db89f, type: 2}
+  statusEffect: {fileID: 11400000, guid: 5a0f6ddcb31b9484cbc15f25672db89f, type: 2}

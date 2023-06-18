@@ -13,5 +13,5 @@ public class Ammunition : WeaponPart
     public float critChance;
     public float range;
 
-    public StatusEffectSO damageType;
+    public StatusEffectSO statusEffect;
 }

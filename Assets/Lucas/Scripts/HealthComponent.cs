@@ -16,7 +16,7 @@ public class HealthComponent : MonoBehaviour
 	[field: SerializeField] private Transform _hitParticlePosition;
 	[field: SerializeField] private ParticleSystem _hitParticle;
 
-	private bool _isDead = false;
+	public bool IsDead { get; private set; } = false;
 
 	[Header("Enemy Drops")]
 	[Range(0, 100)]
@@ -33,7 +33,7 @@ public class HealthComponent : MonoBehaviour
 		}
 
 		CurrentHealth = MaxHealth;
-		_isDead = false;
+		IsDead = false;
 	}
 
 	public void TakeDamage(int damage)
@@ -50,28 +50,28 @@ public class HealthComponent : MonoBehaviour
 		{
 			GameObject.FindGameObjectWithTag("UI")?.GetComponentInChildren<UIDamageFlash>().DamageFlash(0.25f, .5f);
 
-			if (CurrentHealth <= 0 && !_isDead)
+			if (CurrentHealth <= 0 && !IsDead)
 			{
 				GameManager.Instance.PlayerDied();
-				_isDead = true;
+				IsDead = true;
 
 				OnDeath?.Invoke();
 			}
 		}
 		else if (gameObject.CompareTag("Enemy"))
 		{
-			if (CurrentHealth <= 0 && !_isDead)
+			if (CurrentHealth <= 0 && !IsDead)
 			{
 				GameManager.Instance.EnemyDied();
 
 				MarkEnemyToDie();
 
 				Animator.SetTrigger("death");
-				_isDead = true;
+				IsDead = true;
 
 				OnDeath?.Invoke();
 			}
-			else if (CurrentHealth > 0 && !_isDead)
+			else if (CurrentHealth > 0 && !IsDead)
 			{
 				Animator.SetTrigger("damage");
 			}

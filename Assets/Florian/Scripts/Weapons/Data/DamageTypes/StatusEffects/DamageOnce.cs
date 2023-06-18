@@ -4,7 +4,7 @@
 
 	private HealthComponent _enemyHealth;
 
-	public DamageOnce(Enemy enemy, float additionalDamage, float propagationChance = 0, float propagationRange = 0)
+	public DamageOnce(Enemy enemy, float additionalDamage)
 	{
 		_enemy = enemy;
 		_additionalDamage = additionalDamage;

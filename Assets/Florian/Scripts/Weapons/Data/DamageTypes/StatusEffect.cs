@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
+[Serializable]
 public class StatusEffect
 {
 	public Action<StatusEffect> OnStatusEffectEnded;
@@ -30,6 +31,7 @@ public class StatusEffect
 	[Header("Propagation")]
 	[SerializeField] private bool _canPropagate;
 	[SerializeField] private StatusEffectSO _propagatedEffect;
+	[SerializeField] private LayerMask _layersToPropagateTo;
 	[SerializeField] private float _propagationChance;
 	[SerializeField] private float _propagationRange;
 	[SerializeField] private int _maxPropagateToCount;
@@ -43,8 +45,8 @@ public class StatusEffect
 	private float _currentTickTimer;
 	float _delta = 0;
 
+	public List<Enemy> propagatedToEnemies = new List<Enemy>();
 	private int _timesPropagated;
-
 
 	public StatusEffect(StatusEffectSO statusEffectSO)
 	{
@@ -65,6 +67,7 @@ public class StatusEffect
 
 		_canPropagate = statusEffectSO.canPropagate;
 		_propagatedEffect = statusEffectSO.propagatedEffect;
+		_layersToPropagateTo = statusEffectSO.layersToPropagateTo;
 		_propagationChance = statusEffectSO.propagationChance;
 		_propagationRange = statusEffectSO.propagationRange;
 		_maxPropagateToCount = statusEffectSO.maxPropagateToCount;
@@ -104,6 +107,9 @@ public class StatusEffect
 
 	private void AddEffect(Effect effect)
 	{
+		if(_effects == null)
+			_effects = new List<Effect>();
+
 		_effects.Add(effect);
 		effect.OnEffectEnded += RemoveEffect;
 	}
@@ -142,8 +148,8 @@ public class StatusEffect
 	private void OnEnemyHit(Projectile projectile)
 	{
 		projectile.PierceAmount++;
-
-		if (_maxPierceAmount <= 0)
+		Debug.Log(projectile.PierceAmount);
+		if (projectile.PierceAmount >= _maxPierceAmount)
 			projectile.OnHit.Invoke(projectile);
 	}
 
@@ -160,30 +166,33 @@ public class StatusEffect
 		if (_propagationChance < UnityEngine.Random.Range(1, 100))
 			return;
 
-		StatusEffect effectToPropagate = new StatusEffect(_propagatedEffect);
-
-		int propagatedTo = 0;
-
-		Collider[] enemies = Physics.OverlapSphere(_enemy.gameObject.transform.position, _propagationRange, LayerMask.NameToLayer("Enemy"));
-
+		Collider[] enemies = Physics.OverlapSphere(_enemy.gameObject.transform.position, _propagationRange, _layersToPropagateTo);
 		if (enemies.Length < 0)
 			return;
 
+
+		int propagatedTo = 0;
+
+
 		for (int i = 0; i < enemies.Length; i++)
 		{
-			if (enemies[i].GetComponent<Enemy>() == _enemy)
+			Enemy enemy = enemies[i].GetComponent<Enemy>();
+			if (enemy == _enemy || propagatedToEnemies.Contains(enemy))
 				continue;
 
 			if (propagatedTo < _maxPropagateToCount)
 			{
 				if(enemies[i].TryGetComponent(out Status status))
 				{
-					status.AddStatusEffect(effectToPropagate);
+					StatusEffect effectToPropagate = new StatusEffect(_propagatedEffect);
+					effectToPropagate._timesPropagated++;
+					propagatedToEnemies.Add(enemy);
+					effectToPropagate.propagatedToEnemies = propagatedToEnemies;
+					effectToPropagate.ApplyStatusEffect(enemy);
 					propagatedTo++;
 				}
 			}
 		}
 
-		effectToPropagate._timesPropagated++;
 	}
 }
