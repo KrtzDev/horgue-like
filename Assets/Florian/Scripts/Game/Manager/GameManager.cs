@@ -30,6 +30,7 @@ public class GameManager : Singleton<GameManager>
 	public int _currentScore;
 
 	private NEW_EnemySpawner _enemySpawner;
+	private GameObject _enemyPool;
 	public int _neededEnemyKill;
 	public int _enemyCount;
 	private bool _hasWon;
@@ -80,7 +81,8 @@ public class GameManager : Singleton<GameManager>
 		_hasLost = false;
 
 		_enemySpawner = GameObject.Find("EnemySpawner").GetComponent<NEW_EnemySpawner>();
-		_neededEnemyKill = _enemySpawner._enemyMaxAmount;
+		_enemyPool = _enemySpawner.transform.parent.gameObject;
+		_neededEnemyKill = _enemySpawner._maxEnemyCount;
 
 		if (_currentLevel == 1 && _currentWave == 0)
 		{
@@ -103,7 +105,7 @@ public class GameManager : Singleton<GameManager>
 			_playerCanUseAbilities = false;
 		}
 
-		Debug.Log("neededEnemyKill ( " + _neededEnemyKill + " ) = enemySpawner.MaxAmount ( " + _enemySpawner._enemyMaxAmount + " )");
+		Debug.Log("neededEnemyKill ( " + _neededEnemyKill + " ) = enemySpawner.MaxAmount ( " + _enemySpawner._maxEnemyCount + " )");
 	}
 
 	private void Update()
@@ -194,7 +196,7 @@ public class GameManager : Singleton<GameManager>
 
 	private void EnemyStopFollowing()
 	{
-		for (int i = 0; i < _enemySpawner.transform.childCount; i++)
+		/* for (int i = 0; i < _enemySpawner.transform.childCount; i++)
 		{
 			for (int j = 0; j < _enemySpawner.transform.GetChild(i).childCount; j++)
 			{
@@ -203,6 +205,9 @@ public class GameManager : Singleton<GameManager>
 			}
 		}
 		_enemySpawner.gameObject.SetActive(false);
+		*/
+
+		_enemyPool.SetActive(false);
 	}
 
 	private void RoundLost()

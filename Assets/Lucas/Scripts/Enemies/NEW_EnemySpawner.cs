@@ -8,16 +8,21 @@ public class EnemiesToSpawn
 {
     public Enemy Enemy;
     public int SpawnChance;
+    public SpawnBias SpawnBias;
 
-    public EnemiesToSpawn (Enemy enemy, int spawnChance)
+    public EnemiesToSpawn (Enemy enemy, int spawnChance, SpawnBias spawnBias)
     {
         Enemy = enemy;
         SpawnChance = spawnChance;
+        SpawnBias = spawnBias;
     }
 }
 
+public enum SpawnBias { Close, Mid, Far };
+
 public class NEW_EnemySpawner : MonoBehaviour
 {
+    public GameObject EnemySpawnIndicator;
     private Transform PlayerTransform;
 
     [Header("Settings")]
@@ -33,9 +38,17 @@ public class NEW_EnemySpawner : MonoBehaviour
     [SerializeField]
     private int _minEnemyCount;
     [SerializeField]
-    public int _enemyMaxAmount;
+    public int _maxEnemyCount;
     private float _spawnTimer = 0;
     private bool _canSpawnEnemies = true;
+
+    [Header("Spawn Delay")]
+    [SerializeField]
+    private float _spawnAnimDelay;
+    [SerializeField]
+    private float _minSpawnDelay;
+    [SerializeField]
+    private float _maxSpawnDelay;
 
     public List<EnemiesToSpawn> _EnemiesToSpawn = new List<EnemiesToSpawn>();
 
@@ -43,13 +56,13 @@ public class NEW_EnemySpawner : MonoBehaviour
     private float _boxHeight;
     [Header("Variables")]
     [SerializeField]
-    private float _safeZoneSquareSize = 3f;
+    private float _safeZoneSquareSize;
     [SerializeField]
-    private float _closeZoneSquareSize = 8f;
+    private float _closeZoneSquareSize;
     [SerializeField]
-    private float _midZoneSquareSize = 16f;
+    private float _midZoneSquareSize;
     [SerializeField]
-    private float _farZoneSquareSize = 24f;
+    private float _farZoneSquareSize;
 
     [Header("Box Colliders")]
     [SerializeField]
@@ -78,7 +91,7 @@ public class NEW_EnemySpawner : MonoBehaviour
     {
         for (int i = 0; i < _EnemiesToSpawn.Count; i++)
         {
-            EnemyObjectPools.Add(i, ObjectPool<Enemy>.CreatePool(_EnemiesToSpawn[i].Enemy, _enemyMaxAmount,transform.parent));
+            EnemyObjectPools.Add(i, ObjectPool<Enemy>.CreatePool(_EnemiesToSpawn[i].Enemy, _maxEnemyCount,transform.parent));
         }
     }
 
@@ -88,7 +101,7 @@ public class NEW_EnemySpawner : MonoBehaviour
 
         if (_spawnTimer >= _spawnTick)
         {
-            int currentEnemies = Mathf.RoundToInt((_minEnemyCount - GameManager.Instance._enemyCount));
+            int currentEnemiesFromMin = Mathf.RoundToInt((_minEnemyCount - GameManager.Instance._enemyCount));
             int spawnIndex = 0;
 
             foreach (EnemiesToSpawn enemy in _EnemiesToSpawn)
@@ -96,11 +109,15 @@ public class NEW_EnemySpawner : MonoBehaviour
                 int enemiesToBeSpawned;
                 enemiesToBeSpawned = 0;
 
-                if (GameManager.Instance._enemyCount < _minEnemyCount) // if enemies are slightly below minEnemyCount, there are only a few enemies spawned
+                if (GameManager.Instance._enemyCount + _spawnsPerTick > _minEnemyCount)
                 {
-                    enemiesToBeSpawned = Mathf.RoundToInt(currentEnemies * (enemy.SpawnChance * 0.01f) + 0.4f);
+                    enemiesToBeSpawned = Mathf.RoundToInt(_spawnsPerTick * (enemy.SpawnChance * 0.01f) + 0.4f);
                 }
-                else if (GameManager.Instance._enemyCount < _enemyMaxAmount)
+                else if (GameManager.Instance._enemyCount < _minEnemyCount)
+                {
+                    enemiesToBeSpawned = Mathf.RoundToInt(currentEnemiesFromMin * (enemy.SpawnChance * 0.01f) + 0.4f);
+                }
+                else if (GameManager.Instance._enemyCount < _maxEnemyCount)
                 {
                     enemiesToBeSpawned = Mathf.RoundToInt(_spawnsPerTick * (enemy.SpawnChance * 0.01f) + 0.4f);
                 }
@@ -114,102 +131,83 @@ public class NEW_EnemySpawner : MonoBehaviour
 
     private void SpawnEnemies(EnemiesToSpawn enemies, int enemiesToBeSpawned, int spawnIndex) // GameManager.Instance._enemyCount has to be subtracted on Enemy Death in Enemy Script
     {
+        int zoneNumber = Random.Range(0,3);
+
         for (int i = 0; i < enemiesToBeSpawned; i++)
         {
-            /* SetBounds();
-            if(BoundRadius(RearZone.bounds, _farZoneRadius, _midZoneRadius))
-            {
-                DoSpawnEnemy(enemies, spawnIndex, GetRandomPositionInBounds(RearZone.bounds, _farZoneRadius, _midZoneRadius));
-            }
-            */
+            float spawnDelay = Random.Range(_minSpawnDelay, _maxSpawnDelay);
+
+            SetBounds(enemies.SpawnBias, zoneNumber);
+            StartCoroutine(DoSpawnEnemy(enemies, spawnIndex, GetRandomPositionInBounds(Bounds), spawnDelay));
+
+            zoneNumber++;
+            if (zoneNumber > 3)
+                zoneNumber = 0;
+
             GameManager.Instance._enemyCount++;
-            if (GameManager.Instance._enemyCount >= _enemyMaxAmount)
+            if (GameManager.Instance._enemyCount >= _maxEnemyCount)
             {
                 break;
             }
         }
     }
-    private void SetBounds()
+    private void SetBounds(SpawnBias spawnBias, int zoneNumber)
     {
-        // Bounds = RearZone.bounds;
-    }
-
-    private bool BoundRadius(Bounds bounds, float _maxZoneRadius, float _minZoneRadius)
-    {
-        float DistanceToPlayerMinMin = Vector3.Distance(new Vector3(bounds.min.x, PlayerTransform.position.y, bounds.min.z), PlayerTransform.position);
-        float DistanceToPlayerMinMax = Vector3.Distance(new Vector3(bounds.min.x, PlayerTransform.position.y, bounds.max.z), PlayerTransform.position);
-        float DistanceToPlayerMaxMin = Vector3.Distance(new Vector3(bounds.max.x, PlayerTransform.position.y, bounds.min.z), PlayerTransform.position);
-        float DistanceToPlayerMaxMax = Vector3.Distance(new Vector3(bounds.max.x, PlayerTransform.position.y, bounds.max.z), PlayerTransform.position);
-
-        List<float> Distances = new List<float>();
-        Distances.Add(DistanceToPlayerMinMin);
-        Distances.Add(DistanceToPlayerMinMax);
-        Distances.Add(DistanceToPlayerMaxMin);
-        Distances.Add(DistanceToPlayerMaxMax);
-
-        bool inRange = false;
-
-        foreach (float distance in Distances)
+        switch (spawnBias) // Add Detection if Zones are full
         {
-            if (distance <= _maxZoneRadius && distance >= _minZoneRadius)
-            {
-                inRange = true;
+            case SpawnBias.Close:
+                Bounds = CloseZones[zoneNumber].bounds;
                 break;
-            }
+            case SpawnBias.Mid:
+                Bounds = MidZones[zoneNumber].bounds;
+                break;
+            case SpawnBias.Far:
+                Bounds = FarZones[zoneNumber].bounds;
+                break;
         }
-
-        return inRange;
     }
 
-    private Vector3 GetRandomPositionInBounds(Bounds bounds, float _maxZoneRadius, float _minZoneRadius)
+    private Vector3 GetRandomPositionInBounds(Bounds bounds)
     {
         _canSpawnEnemies = false;
         Vector3 possibleSpawnPosition = Vector3.zero;
-        int spawnPositionAttempts = 0;
 
-        while (!_canSpawnEnemies)
+        float xValueInBounds = Random.Range(Bounds.min.x, Bounds.max.x);
+        float zValueInBounds = Random.Range(Bounds.min.z, Bounds.max.z);
+
+        float DistanceToPlayer = Vector3.Distance(new Vector3(xValueInBounds, PlayerTransform.position.y, zValueInBounds), PlayerTransform.position);
+
+        RaycastHit rc_hit;
+        Physics.Raycast(new Vector3(xValueInBounds, Bounds.max.y, zValueInBounds), Vector3.down, out rc_hit, _boxHeight, _groundLayer);
+
+        float yValue = Bounds.max.y - rc_hit.distance;
+        possibleSpawnPosition = new Vector3(xValueInBounds, yValue, zValueInBounds);
+
+        NavMeshHit nv_hit;
+        if (NavMesh.SamplePosition(possibleSpawnPosition, out nv_hit, 1.0f, NavMesh.AllAreas))
         {
-            /*
-             * x and z have to be in radius from the the player
-             * spawn always greater than safe zone
-             */
-
-            float xValueInBounds = Random.Range(Bounds.min.x, Bounds.max.x);
-            float zValueInBounds = Random.Range(Bounds.min.z, Bounds.max.z);
-
-            float DistanceToPlayer = Vector3.Distance(new Vector3(xValueInBounds, PlayerTransform.position.y, zValueInBounds), PlayerTransform.position);
-
-            if(DistanceToPlayer <= _maxZoneRadius && DistanceToPlayer >= _minZoneRadius)
-            {
-                RaycastHit rc_hit;
-                Physics.Raycast(new Vector3(xValueInBounds, Bounds.max.y, zValueInBounds), Vector3.down, out rc_hit, _boxHeight, _groundLayer);
-
-                float yValue = Bounds.max.y - rc_hit.distance;
-                possibleSpawnPosition = new Vector3(xValueInBounds, yValue, zValueInBounds);
-
-                NavMeshHit nv_hit;
-                if (NavMesh.SamplePosition(possibleSpawnPosition, out nv_hit, 1.0f, NavMesh.AllAreas))
-                {
-                    possibleSpawnPosition = nv_hit.position;
-                    _canSpawnEnemies = true;
-                }
-            }
-
-            spawnPositionAttempts++;
-
-            if(spawnPositionAttempts > 10)
-            {
-                break;
-            }
-        } 
+            possibleSpawnPosition = nv_hit.position;
+            _canSpawnEnemies = true;
+        }
 
         return possibleSpawnPosition;
     }
 
-    private void DoSpawnEnemy(EnemiesToSpawn enemies, int spawnIndex, Vector3 spawnPosition)
+    private IEnumerator DoSpawnEnemy(EnemiesToSpawn enemies, int spawnIndex, Vector3 spawnPosition, float spawnDelay)
     {
-        if(_canSpawnEnemies)
+
+        if (_canSpawnEnemies)
         {
+            yield return new WaitForSeconds(spawnDelay);
+
+            NavMeshHit Hit;
+            if (NavMesh.SamplePosition(spawnPosition, out Hit, 2f, -1))
+            {
+                Instantiate(EnemySpawnIndicator, Hit.position, Quaternion.identity);
+            }
+
+            yield return new WaitForSeconds(_spawnAnimDelay);
+
             Enemy poolableObject = EnemyObjectPools[spawnIndex].GetObject();
 
             // Determine Position
@@ -219,7 +217,6 @@ public class NEW_EnemySpawner : MonoBehaviour
                 Animator anim = poolableObject.GetComponent<Animator>();
                 NavMeshAgent agent = poolableObject.GetComponent<NavMeshAgent>();
 
-                NavMeshHit Hit;
                 if (NavMesh.SamplePosition(spawnPosition, out Hit, 2f, -1))
                 {
                     agent.Warp(Hit.position);
