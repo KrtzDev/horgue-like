@@ -51,7 +51,7 @@
       "healthBonus": 1,
       "damageBonus": 1,
       "WavesToSpawn": 7,
-      "WaveSize": 50,
+      "WaveSize": 10,
       "SpawnDelay": 5,
       "TimeToSurvive": 40
     },
