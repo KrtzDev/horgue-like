@@ -315,7 +315,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 264548418d1c3e248bfcd4824aef05c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  EnemySpawnIndicator: {fileID: 0}
+  EnemySpawnIndicator: {fileID: 8528560608847944058, guid: 79ff0b4c2fe9ebf42a32a42871e8f728,
+    type: 3}
   _enemyLayer:
     serializedVersion: 2
     m_Bits: 128
@@ -326,7 +327,7 @@ MonoBehaviour:
   _spawnsPerTick: 6
   _minEnemyCount: 10
   _maxEnemyCount: 35
-  _spawnAnimDelay: 0
+  _spawnAnimDelay: 1
   _minSpawnDelay: 0
   _maxSpawnDelay: 1
   _EnemiesToSpawn:
