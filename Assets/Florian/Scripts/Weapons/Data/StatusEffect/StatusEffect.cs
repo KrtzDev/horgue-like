@@ -27,15 +27,18 @@ public class StatusEffect
 	[Space]
 	[SerializeField] private bool _hasDamageOverTime;
 	[SerializeField] private float _dotDamage;
+	[SerializeField] private HorgueVFX _dotDamageVFX;
 
 	[Space]
 	[SerializeField] private bool _hasSlow;
 	[SerializeField] private float _slowAmount;
+	[SerializeField] private HorgueVFX _slowVFX;
 
 	[Space]
 	[SerializeField] private bool _hasKnockBack;
 	[SerializeField] private KnockBackType _knockBackType;
 	[SerializeField] private float _knockBackStrength;
+	[SerializeField] private HorgueVFX _knockBackVFX;
 
 	[Space]
 	[SerializeField] private bool _hasPierce;
@@ -49,6 +52,7 @@ public class StatusEffect
 	[SerializeField] private float _propagationRange;
 	[SerializeField] private int _maxPropagateToCount;
 	[SerializeField] private int _consecutivePropagationCount;
+	[SerializeField] private HorgueVFX _propagationVFX;
 
 	private Enemy _enemy;
 	private Projectile _projectile;
@@ -60,7 +64,7 @@ public class StatusEffect
 	float _delta = 0;
 
 	public List<Enemy> propagatedToEnemies = new List<Enemy>();
-	private int _timesPropagated;
+	private int _timesPropagated = 0;
 
 	public StatusEffect(StatusEffectSO statusEffectSO)
 	{
@@ -70,16 +74,20 @@ public class StatusEffect
 
 		_hasInitialExtraDamage = statusEffectSO.hasInitialExtraDamage;
 		_initialDamage = statusEffectSO.initialDamage;
+		_initialDamageVFX = statusEffectSO.initialDamageVFX;
 
 		_hasDamageOverTime = statusEffectSO.hasDamageOverTime;
 		_dotDamage = statusEffectSO.dotDamage;
+		_dotDamageVFX = statusEffectSO.dotDamageVFX;
 
 		_hasSlow = statusEffectSO.hasSlow;
 		_slowAmount = statusEffectSO.slowAmount;
+		_slowVFX = statusEffectSO.slowVFX;
 
 		_hasKnockBack = statusEffectSO.hasKnockBack;
 		_knockBackType = statusEffectSO.knockBackType;
 		_knockBackStrength = statusEffectSO.knockBackStrength;
+		_knockBackVFX = statusEffectSO.knockBackVFX;
 
 		_hasPierce = statusEffectSO.hasPierce;
 		_maxPierceAmount = statusEffectSO.maxPierceAmount;
@@ -91,6 +99,7 @@ public class StatusEffect
 		_propagationRange = statusEffectSO.propagationRange;
 		_maxPropagateToCount = statusEffectSO.maxPropagateToCount;
 		_consecutivePropagationCount = statusEffectSO.consecutivePropagationCount;
+		_propagationVFX = statusEffectSO.propagationVFX;
 	}
 
 	public void ApplyStatusEffect(Enemy enemy, Projectile projectile)
@@ -205,7 +214,8 @@ public class StatusEffect
 
 	private void OnEffectsTicked()
 	{
-		if (!_canPropagate && _timesPropagated < _consecutivePropagationCount)
+		Debug.Log(_timesPropagated);
+		if (!_canPropagate || _timesPropagated >= _consecutivePropagationCount)
 			return;
 
 		Propagate();
@@ -216,10 +226,12 @@ public class StatusEffect
 		if (_propagationChance < UnityEngine.Random.Range(1, 100))
 			return;
 
+		_propagationVFX?.Play();
+		_timesPropagated++;
+
 		Collider[] enemies = Physics.OverlapSphere(_enemy.gameObject.transform.position, _propagationRange, _layersToPropagateTo);
 		if (enemies.Length < 0)
 			return;
-
 
 		int propagatedTo = 0;
 

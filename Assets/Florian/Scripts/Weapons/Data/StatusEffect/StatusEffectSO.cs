@@ -14,17 +14,23 @@ public class StatusEffectSO : ScriptableObject
 	public bool hasInitialExtraDamage;
 	[DrawIf(nameof(hasInitialExtraDamage), true)]
 	public float initialDamage;
+	[DrawIf(nameof(hasInitialExtraDamage), true)]
 	public HorgueVFX initialDamageVFX;
 
 	[Space]
 	public bool hasDamageOverTime;
 	[DrawIf(nameof(hasDamageOverTime), true)]
 	public float dotDamage;
+	[DrawIf(nameof(hasDamageOverTime), true)]
+	public HorgueVFX dotDamageVFX;
 
 	[Space]
 	public bool hasSlow;
 	[DrawIf(nameof(hasSlow), true)]
 	public float slowAmount;
+	[DrawIf(nameof(hasSlow), true)]
+	public HorgueVFX slowVFX;
+
 
 	[Space]
 	public bool hasKnockBack;
@@ -32,6 +38,8 @@ public class StatusEffectSO : ScriptableObject
 	public KnockBackType knockBackType;
 	[DrawIf(nameof(hasKnockBack), true)]
 	public float knockBackStrength;
+	[DrawIf(nameof(hasKnockBack), true)]
+	public HorgueVFX knockBackVFX;
 
 	[Space]
 	public bool hasPierce;
@@ -52,4 +60,6 @@ public class StatusEffectSO : ScriptableObject
 	public int maxPropagateToCount;
 	[DrawIf(nameof(canPropagate), true)]
 	public int consecutivePropagationCount;
+	[DrawIf(nameof(canPropagate), true)]
+	public HorgueVFX propagationVFX;
 }

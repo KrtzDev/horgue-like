@@ -1,7 +1,9 @@
 ﻿using UnityEngine;
 
-public class HorgueVFX
+[System.Serializable]
+public class HorgueVFX : MonoBehaviour
 {
+
 	public void Play()
 	{
 		Debug.Log("VFX");

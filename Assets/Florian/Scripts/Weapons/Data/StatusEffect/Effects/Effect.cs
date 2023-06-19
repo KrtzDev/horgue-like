@@ -15,6 +15,7 @@ public abstract class Effect
 
 	public void TriggerVFX()
 	{
-		_TickVFX.Play();
+		if(_TickVFX != null)
+			_TickVFX.Play();
 	}
 }
