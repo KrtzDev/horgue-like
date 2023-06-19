@@ -45,7 +45,7 @@ public class Projectile : DamageDealer
 				{
 					if (health.TryGetComponent(out Enemy enemy))
 					{
-						statusEffect.ApplyStatusEffect(enemy);
+						statusEffect.ApplyStatusEffect(enemy, this);
 						statusEffect.OnHitEnemy.Invoke(this);
 					}
 				}

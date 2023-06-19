@@ -2,6 +2,12 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+public enum KnockBackType
+{
+	Push,
+	Pull
+}
 [Serializable]
 public class StatusEffect
 {
@@ -16,16 +22,23 @@ public class StatusEffect
 	[Header("Effects")]
 	[SerializeField] private bool _hasInitialExtraDamage;
 	[SerializeField] private float _initialDamage;
+	[SerializeField] private HorgueVFX _initialDamageVFX;
 
 	[Space]
 	[SerializeField] private bool _hasDamageOverTime;
 	[SerializeField] private float _dotDamage;
 
 	[Space]
-	[SerializeField] private bool _canSlow;
+	[SerializeField] private bool _hasSlow;
 	[SerializeField] private float _slowAmount;
 
 	[Space]
+	[SerializeField] private bool _hasKnockBack;
+	[SerializeField] private KnockBackType _knockBackType;
+	[SerializeField] private float _knockBackStrength;
+
+	[Space]
+	[SerializeField] private bool _hasPierce;
 	[SerializeField] private float _maxPierceAmount;
 
 	[Header("Propagation")]
@@ -38,6 +51,7 @@ public class StatusEffect
 	[SerializeField] private int _consecutivePropagationCount;
 
 	private Enemy _enemy;
+	private Projectile _projectile;
 
 	private List<Effect> _effects = new List<Effect>();
 	private float _currentEffectTimer;
@@ -60,9 +74,14 @@ public class StatusEffect
 		_hasDamageOverTime = statusEffectSO.hasDamageOverTime;
 		_dotDamage = statusEffectSO.dotDamage;
 
-		_canSlow = statusEffectSO.canSlow;
+		_hasSlow = statusEffectSO.hasSlow;
 		_slowAmount = statusEffectSO.slowAmount;
 
+		_hasKnockBack = statusEffectSO.hasKnockBack;
+		_knockBackType = statusEffectSO.knockBackType;
+		_knockBackStrength = statusEffectSO.knockBackStrength;
+
+		_hasPierce = statusEffectSO.hasPierce;
 		_maxPierceAmount = statusEffectSO.maxPierceAmount;
 
 		_canPropagate = statusEffectSO.canPropagate;
@@ -74,7 +93,7 @@ public class StatusEffect
 		_consecutivePropagationCount = statusEffectSO.consecutivePropagationCount;
 	}
 
-	public void ApplyStatusEffect(Enemy enemy)
+	public void ApplyStatusEffect(Enemy enemy, Projectile projectile)
 	{
 		OnHitEnemy += OnEnemyHit;
 
@@ -82,18 +101,43 @@ public class StatusEffect
 			return;
 
 		_enemy = enemy;
+		_projectile = projectile;
 
 		if (_hasInitialExtraDamage)
 			AddEffect(new DamageOnce(_enemy, _initialDamage));
 		if (_hasDamageOverTime)
 			AddEffect(new DamageOverTime(_enemy, _dotDamage, _effectDuration));
-		if (_canSlow)
+		if (_hasSlow)
 			AddEffect(new Slow(_enemy, _slowAmount, _effectDuration));
+		if (_hasKnockBack)
+		{
+			Vector3 knockBackDirection = Vector3.zero;
+			switch (_knockBackType)
+			{
+				case KnockBackType.Push:
+					knockBackDirection = _enemy.transform.position - _projectile.transform.position;
+					break;
+				case KnockBackType.Pull:
+					knockBackDirection = _projectile.transform.position - _enemy.transform.position;
+					break;
+			}
+			AddEffect(new KnockBack(_enemy, new Vector3(knockBackDirection.x, 0, knockBackDirection.z).normalized * _knockBackStrength));
+		}
+
+		for (int i = 0; i < _effects.Count; i++)
+		{
+			_effects[i].OnEffectTicked += TriggerVisualEffect;
+		}
 
 		_enemy.GetComponent<Status>().AddStatusEffect(this);
 
 		_currentEffectTimer = _effectDuration;
 		_thisTickRate = UnityEngine.Random.Range(_tickRate.min, _tickRate.max);
+	}
+
+	private void TriggerVisualEffect(Effect effect)
+	{
+		effect.TriggerVFX();
 	}
 
 	public void RemoveAllEffects()
@@ -107,7 +151,7 @@ public class StatusEffect
 
 	private void AddEffect(Effect effect)
 	{
-		if(_effects == null)
+		if (_effects == null)
 			_effects = new List<Effect>();
 
 		_effects.Add(effect);
@@ -147,8 +191,14 @@ public class StatusEffect
 
 	private void OnEnemyHit(Projectile projectile)
 	{
+		if (!_hasPierce)
+		{
+			projectile.OnHit.Invoke(projectile);
+			return;
+		}
+
 		projectile.PierceAmount++;
-		Debug.Log(projectile.PierceAmount);
+
 		if (projectile.PierceAmount >= _maxPierceAmount)
 			projectile.OnHit.Invoke(projectile);
 	}
@@ -182,13 +232,13 @@ public class StatusEffect
 
 			if (propagatedTo < _maxPropagateToCount)
 			{
-				if(enemies[i].TryGetComponent(out Status status))
+				if (enemies[i].TryGetComponent(out Status status))
 				{
 					StatusEffect effectToPropagate = new StatusEffect(_propagatedEffect);
 					effectToPropagate._timesPropagated++;
 					propagatedToEnemies.Add(enemy);
 					effectToPropagate.propagatedToEnemies = propagatedToEnemies;
-					effectToPropagate.ApplyStatusEffect(enemy);
+					effectToPropagate.ApplyStatusEffect(enemy, _projectile);
 					propagatedTo++;
 				}
 			}

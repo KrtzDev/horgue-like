@@ -1,4 +1,4 @@
-﻿internal class DamageOnce : Effect
+﻿public class DamageOnce : Effect
 {
 	private float _additionalDamage;
 
@@ -16,6 +16,7 @@
 	{
 		_enemyHealth.TakeDamage((int)_additionalDamage);
 
+		OnEffectTicked?.Invoke(this);
 		OnEffectEnded?.Invoke(this);
 	}
 }

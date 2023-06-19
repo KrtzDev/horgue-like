@@ -2,7 +2,7 @@
   "Enemies": [
     {
       "Name": "Basic",
-      "maxHealth": 150,
+      "maxHealth": 15000,
       "damagePerHit": 10,
       "attackSpeed": 1,
       "givenXP": 1,

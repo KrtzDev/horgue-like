@@ -9,9 +9,7 @@ public class Slow : Effect
 
 	private bool _shouldSlow = true;
 
-	public Slow(Enemy enemy, 
-		float slowAmount, 
-		float statusDuration)
+	public Slow(Enemy enemy, float slowAmount, float statusDuration)
 	{
 		_enemy = enemy;
 		_slowAmount = slowAmount;
@@ -28,7 +26,7 @@ public class Slow : Effect
 		if (_statusDuration <= 0)
 		{
 			_agent.speed = _originalSpeed;
-			OnEffectEnded.Invoke(this);
+			OnEffectEnded?.Invoke(this);
 			return;
 		}
 
@@ -36,6 +34,7 @@ public class Slow : Effect
 		{
 			_shouldSlow = false;
 			_agent.speed = _originalSpeed * ((100 - _slowAmount) / 100);
+			OnEffectTicked?.Invoke(this);
 		}
 	}
 }

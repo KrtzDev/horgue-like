@@ -1,14 +1,10 @@
-﻿using UnityEngine;
-
-public class DamageOverTime : Effect
+﻿public class DamageOverTime : Effect
 {
 	private float _dotDamage;
 
 	private HealthComponent _enemyhealth;
 
-	public DamageOverTime(Enemy enemy, 
-		float dotDamage, 
-		float statusDuration)
+	public DamageOverTime(Enemy enemy, float dotDamage, float statusDuration)
 	{
 		_enemy = enemy;
 		_dotDamage = dotDamage;
@@ -28,6 +24,6 @@ public class DamageOverTime : Effect
 		}
 
 		_enemyhealth.TakeDamage((int)_dotDamage);
-
+		OnEffectTicked.Invoke(this);
 	}
 }

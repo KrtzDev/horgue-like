@@ -13,23 +13,26 @@ MonoBehaviour:
   m_Name: AoeStun
   m_EditorClassIdentifier: 
   triggerChance: 100
-  effectDuration: 10
+  effectDuration: 1
   tickRate:
-    min: 1
-    max: 3
-  hasInitialExtraDamage: 1
+    min: 0
+    max: 0
+  hasInitialExtraDamage: 0
   initialDamage: 20
-  hasDamageOverTime: 1
+  hasDamageOverTime: 0
   dotDamage: 2
-  canSlow: 1
+  hasSlow: 0
   slowAmount: 100
-  maxPierceAmount: 2
+  hasKnockBack: 1
+  knockBackType: 0
+  knockBackStrength: 3
+  maxPierceAmount: 0
   canPropagate: 1
   propagatedEffect: {fileID: 11400000}
   layersToPropagateTo:
     serializedVersion: 2
     m_Bits: 128
   propagationChance: 100
-  propagationRange: 2
+  propagationRange: 5
   maxPropagateToCount: 5
   consecutivePropagationCount: 1
