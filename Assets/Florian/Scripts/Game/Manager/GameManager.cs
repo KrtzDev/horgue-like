@@ -81,7 +81,6 @@ public class GameManager : Singleton<GameManager>
 		_hasLost = false;
 
 		_enemySpawner = GameObject.Find("EnemySpawner").GetComponent<NEW_EnemySpawner>();
-		_enemyPool = _enemySpawner.transform.parent.gameObject;
 		_neededEnemyKill = _enemySpawner._maxEnemyCount;
 
 		if (_currentLevel == 1 && _currentWave == 0)
@@ -207,7 +206,6 @@ public class GameManager : Singleton<GameManager>
 		_enemySpawner.gameObject.SetActive(false);
 		*/
 
-		_enemyPool.SetActive(false);
 	}
 
 	private void RoundLost()
