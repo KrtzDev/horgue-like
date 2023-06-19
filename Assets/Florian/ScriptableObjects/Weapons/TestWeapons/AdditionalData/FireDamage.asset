@@ -9,24 +9,24 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3994f6e58a5c094469c1b2f716e61388, type: 3}
+  m_Script: {fileID: 11500000, guid: 440041b21ef39184fbb0689fc05748a2, type: 3}
   m_Name: FireDamage
   m_EditorClassIdentifier: 
-  _triggerChance: 50
-  _effectDuration: 5
-  _tickRate:
-    min: 0.5
-    max: 1
-  _hasInitialExtraDamage: 1
-  _initialDamage: 5
-  _hasDamageOverTime: 1
-  _dotDamage: 1
-  _canSlow: 0
-  _slowAmount: 0
-  _slowDuration: 0
-  _canPropagate: 1
-  _propagatedEffect: {fileID: 11400000}
-  _propagationChance: 50
-  _propagationRange: 5
-  _maxPropagateToCount: 3
-  _consecutivePropagationCount: 2
+  triggerChance: 0
+  effectDuration: 0
+  tickRate:
+    min: 0
+    max: 0
+  hasInitialExtraDamage: 0
+  initialDamage: 0
+  hasDamageOverTime: 0
+  dotDamage: 0
+  canSlow: 0
+  slowAmount: 0
+  maxPierceAmount: 0
+  canPropagate: 0
+  propagatedEffect: {fileID: 0}
+  propagationChance: 0
+  propagationRange: 0
+  maxPropagateToCount: 0
+  consecutivePropagationCount: 0

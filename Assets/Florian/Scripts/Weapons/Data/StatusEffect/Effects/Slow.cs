@@ -3,19 +3,20 @@
 public class Slow : Effect
 {
 	private float _slowAmount;
+	private float _startDuration;
 
 	private NavMeshAgent _agent;
 	private float _originalSpeed;
 
 	private bool _shouldSlow = true;
 
-	public Slow(Enemy enemy, 
-		float slowAmount, 
-		float statusDuration)
+	public Slow(Enemy enemy, float slowAmount, float statusDuration)
 	{
 		_enemy = enemy;
 		_slowAmount = slowAmount;
 		_statusDuration = statusDuration;
+
+		_startDuration = statusDuration;
 
 		_agent = enemy.GetComponent<NavMeshAgent>();
 		_originalSpeed = _agent.speed;
@@ -28,7 +29,7 @@ public class Slow : Effect
 		if (_statusDuration <= 0)
 		{
 			_agent.speed = _originalSpeed;
-			OnEffectEnded.Invoke(this);
+			OnEffectEnded?.Invoke(this);
 			return;
 		}
 
@@ -36,6 +37,12 @@ public class Slow : Effect
 		{
 			_shouldSlow = false;
 			_agent.speed = _originalSpeed * ((100 - _slowAmount) / 100);
+			OnEffectTicked?.Invoke(this);
 		}
+	}
+
+	public override void ResetDuration()
+	{
+		_statusDuration = _startDuration;
 	}
 }

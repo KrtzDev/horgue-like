@@ -9,23 +9,38 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3994f6e58a5c094469c1b2f716e61388, type: 3}
+  m_Script: {fileID: 11500000, guid: 440041b21ef39184fbb0689fc05748a2, type: 3}
   m_Name: AoeStun
   m_EditorClassIdentifier: 
-  _triggerChance: 100
-  _effectDuration: 20
-  _tickRate:
+  triggerChance: 100
+  effectDuration: 0.3
+  tickRate:
     min: 0
     max: 0
-  _hasInitialExtraDamage: 0
-  _initialDamage: 0
-  _hasDamageOverTime: 0
-  _dotDamage: 0
-  _canSlow: 1
-  _slowAmount: 100
-  _canPropagate: 1
-  _propagatedEffect: {fileID: 11400000}
-  _propagationChance: 100
-  _propagationRange: 25
-  _maxPropagateToCount: 50
-  _consecutivePropagationCount: 2
+  hasInitialExtraDamage: 1
+  initialDamage: 20
+  initialDamageVFX: {fileID: 0}
+  hasDamageOverTime: 0
+  dotDamage: 2
+  dotDuration: 0
+  dotDamageVFX: {fileID: 0}
+  hasSlow: 0
+  slowAmount: 100
+  slowDuration: 0
+  slowVFX: {fileID: 0}
+  hasKnockBack: 1
+  knockBackType: 1
+  knockBackStrength: 3
+  knockBackVFX: {fileID: 0}
+  hasPierce: 0
+  maxPierceAmount: 0
+  canPropagate: 1
+  propagatedEffect: {fileID: 11400000}
+  layersToPropagateTo:
+    serializedVersion: 2
+    m_Bits: 128
+  propagationChance: 100
+  propagationRange: 5
+  maxPropagateToCount: 5
+  consecutivePropagationCount: 1
+  propagationVFX: {fileID: 0}

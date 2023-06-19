@@ -34,6 +34,9 @@ public class EnemyHealthBar : MonoBehaviour
 
     private void HandleHealthChanged(float percent)
     {
+		if (_healthComponent.IsDead)
+			return;
+
         StartCoroutine(ChangeToPercent(percent));
 
         if(_healthComponent.CurrentHealth < _healthComponent.MaxHealth && !this.transform.GetChild(1).gameObject.activeInHierarchy)

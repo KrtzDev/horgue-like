@@ -16,7 +16,7 @@ MonoBehaviour:
     type: 3}
   <WeaponPartPrefab>k__BackingField: {fileID: 0}
   isSlotted: 0
-  projectilePrefab: {fileID: 4954643210180333314, guid: 71610fc810078fc42b6427a07682dca3,
+  projectilePrefab: {fileID: 4954643210180333314, guid: 1e1bd1f410de17e4d8d0626befd96471,
     type: 3}
   baseDamage: 90
   attackSpeed: 3
@@ -24,4 +24,4 @@ MonoBehaviour:
   projectileSize: 0.2
   critChance: 18
   range: 16.75
-  damageType: {fileID: 11400000, guid: 5a0f6ddcb31b9484cbc15f25672db89f, type: 2}
+  statusEffect: {fileID: 11400000, guid: 5a0f6ddcb31b9484cbc15f25672db89f, type: 2}

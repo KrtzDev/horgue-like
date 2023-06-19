@@ -45,7 +45,7 @@ public class Weapon : ScriptableObject
 	[SerializeField]
 	private LayerMask _groundLayer;
 
-	public Projectile Projectile { get; private set; }
+	private Projectile _projectile;
 	public Transform OwningTransform { get; private set; }
 
 	private WeaponSkeleton _currentWeaponPrefab;
@@ -56,6 +56,8 @@ public class Weapon : ScriptableObject
 	private float _shotDelay;
 	private int _capacity;
 	private bool _isReloading;
+	private float _reloadTime;
+
 
 	public void ResetWeaponParts()
 	{
@@ -74,9 +76,10 @@ public class Weapon : ScriptableObject
 		_currentWeaponPrefab = Instantiate(_weaponPrefab, owningTransform);
 		_weaponTransform = _currentWeaponPrefab.transform;
 
-		ApplyStats(CalculateWeaponStats(this));
+		_reloadTime = CalculateWeaponStats(this).cooldown;
+		_projectile = _ammunition.projectilePrefab;
 
-		_projectilePool = ObjectPool<Projectile>.CreatePool(Projectile, 100, null);
+		_projectilePool = ObjectPool<Projectile>.CreatePool(_projectile, 100, null);
 	}
 
 	public WeaponStats CalculateWeaponStats(Weapon weapon)
@@ -92,7 +95,7 @@ public class Weapon : ScriptableObject
 
 		weaponStats.capacity = weapon._magazine.capacity;
 		weaponStats.attackPattern = weapon._barrel.attackPattern;
-		weaponStats.damageType = weapon._ammunition.damageType;
+		weaponStats.statusEffect = weapon._ammunition.statusEffect;
 
 		return weaponStats;
 	}
@@ -118,24 +121,22 @@ public class Weapon : ScriptableObject
 		return CalculateWeaponStats(weapon);
 	}
 
-	private void ApplyStats(WeaponStats weaponStats)
+	private void ApplyStats(WeaponStats weaponStats, Projectile projectile)
 	{
-		Projectile = _ammunition.projectilePrefab;
+		projectile.finalBaseDamage = weaponStats.damage;
+		projectile.finalAttackSpeed = weaponStats.attackspeed;
+		projectile.finalCooldown = weaponStats.cooldown;
+		projectile.finalProjectileSize = weaponStats.projectileSize;
+		projectile.finalCritChance = weaponStats.critChance;
+		projectile.finalRange = weaponStats.range;
 
-		Projectile.finalBaseDamage = weaponStats.damage;
-		Projectile.finalAttackSpeed = weaponStats.attackspeed;
-		Projectile.finalCooldown = weaponStats.cooldown;
-		Projectile.finalProjectileSize = weaponStats.projectileSize;
-		Projectile.finalCritChance = weaponStats.critChance;
-		Projectile.finalRange = weaponStats.range;
-
-		_shotDelay = Projectile.finalAttackSpeed > 0 ? 1 / Projectile.finalAttackSpeed : SLOWEST_POSSIBLE_ATTACKSPEED;
+		_shotDelay = projectile.finalAttackSpeed > 0 ? 1 / projectile.finalAttackSpeed : SLOWEST_POSSIBLE_ATTACKSPEED;
 
 		_capacity = weaponStats.capacity;
-		Projectile.attackPattern = weaponStats.attackPattern;
-		Projectile.damageType = weaponStats.damageType;
+		projectile.attackPattern = weaponStats.attackPattern;
+		projectile.statusEffect = weaponStats.statusEffect;
 
-		Projectile.spawnTransform = _currentWeaponPrefab.ProjectileSpawnPosition;
+		projectile.spawnTransform = _currentWeaponPrefab.ProjectileSpawnPosition;
 	}
 
 	private float CalculateDamage(Weapon weapon)
@@ -340,25 +341,30 @@ public class Weapon : ScriptableObject
 
 	private void Shoot()
 	{
-		if (Projectile.finalAttackSpeed == 0)
+		WeaponStats weaponStats = CalculateWeaponStats(this);
+
+		if (weaponStats.attackspeed == 0)
+			return;
+
+		if (!RotateTowardsEnemy(weaponStats.range))
 			return;
 
 		_shotDelay -= Time.deltaTime;
-		if (!RotateTowardsEnemy())
-			return;
 
 		if (_shotDelay <= 0)
 		{
+			Projectile spawnedProjectile = (Projectile)_projectilePool.GetObject();
+			ApplyStats(weaponStats, spawnedProjectile);
+
 			_capacity--;
-			_shotDelay = 1 / Projectile.finalAttackSpeed;
+			_shotDelay = 1 / spawnedProjectile.finalAttackSpeed;
 
 			_currentWeaponPrefab.MuzzleFlash.Play();
 
-			Projectile spawnedProjectile = (Projectile)_projectilePool.GetObject();
 			spawnedProjectile.transform.position = spawnedProjectile.spawnTransform.position;
 			spawnedProjectile.transform.rotation = spawnedProjectile.spawnTransform.rotation;
 			spawnedProjectile.attackPattern.AttackInPattern(spawnedProjectile);
-			spawnedProjectile.gameObject.transform.localScale = Vector3.one * Projectile.finalProjectileSize;
+			spawnedProjectile.gameObject.transform.localScale = Vector3.one * spawnedProjectile.finalProjectileSize;
 			spawnedProjectile.OnHit += CleanUpProjectile;
 			spawnedProjectile.OnLifeTimeEnd += CleanUpProjectile;
 		}
@@ -366,12 +372,12 @@ public class Weapon : ScriptableObject
 
 	private void CleanUpProjectile(Projectile projectile) => _projectilePool.ReturnObjectToPool(projectile);
 
-	private bool RotateTowardsEnemy()
+	private bool RotateTowardsEnemy(float range)
 	{
 		float currentclosestdistance = Mathf.Infinity;
 		Enemy closestEnemy = null;
 
-		Collider[] enemies = Physics.OverlapSphere(_weaponTransform.position, Projectile.finalRange, _enemyLayer);
+		Collider[] enemies = Physics.OverlapSphere(_weaponTransform.position, range, _enemyLayer);
 		foreach (Collider enemy in enemies)
 		{
 			float distanceToEnemy = Vector3.Distance(_weaponTransform.position, enemy.transform.position);
@@ -401,7 +407,7 @@ public class Weapon : ScriptableObject
 
 	private async void Reload()
 	{
-		await Task.Delay((int)(Projectile.finalCooldown * 1000));
+		await Task.Delay((int)(_reloadTime * 1000));
 
 		_capacity = _magazine.capacity;
 		_isReloading = false;

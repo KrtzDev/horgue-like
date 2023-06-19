@@ -1,18 +1,17 @@
-﻿using UnityEngine;
-
-public class DamageOverTime : Effect
+﻿public class DamageOverTime : Effect
 {
 	private float _dotDamage;
+	private float _startDuration;
 
 	private HealthComponent _enemyhealth;
 
-	public DamageOverTime(Enemy enemy, 
-		float dotDamage, 
-		float statusDuration)
+	public DamageOverTime(Enemy enemy, float dotDamage, float statusDuration)
 	{
 		_enemy = enemy;
 		_dotDamage = dotDamage;
 		_statusDuration = statusDuration;
+
+		_startDuration = statusDuration;
 
 		_enemyhealth = _enemy.GetComponent<HealthComponent>();
 	}
@@ -28,6 +27,11 @@ public class DamageOverTime : Effect
 		}
 
 		_enemyhealth.TakeDamage((int)_dotDamage);
+		OnEffectTicked.Invoke(this);
+	}
 
+	public override void ResetDuration()
+	{
+		_statusDuration = _startDuration;
 	}
 }
