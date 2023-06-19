@@ -189,7 +189,7 @@ public class NEW_EnemySpawner : MonoBehaviour
 
     private void DeterminePossibleBound(SpawnBias spawnBias, int zoneNumber, int attempt)
     {
-        if (Physics.CheckBox(Bounds.center, Bounds.extents / 2, Quaternion.identity, _mapConstraintsLayer))
+        if (Physics.CheckBox(Bounds.center, Bounds.extents / 2, Quaternion.identity, _mapConstraintsLayer)) // check if 4 Ecken over Ground
         {
             if(attempt <= 4)
             {
