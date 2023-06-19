@@ -32,8 +32,6 @@ public class NEW_EnemySpawner : MonoBehaviour
     private LayerMask _enemyLayer;
     [SerializeField]
     private LayerMask _groundLayer;
-    [SerializeField]
-    private LayerMask _mapConstraintsLayer;
     private float _spawnTimer = 0;
     private bool _canSpawnEnemies = true;
     private float _boxHeight;
@@ -76,6 +74,11 @@ public class NEW_EnemySpawner : MonoBehaviour
     private void Update()
     {
         transform.SetPositionAndRotation(PlayerTransform.position, PlayerTransform.rotation); // performance heavy?
+
+        Debug.DrawLine(new Vector3(FarZones[0].center.x + FarZones[0].size.x / 2, FarZones[0].center.y + FarZones[0].size.y / 2, FarZones[0].center.z - FarZones[0].size.z / 2), new Vector3(FarZones[0].center.x - FarZones[0].size.x / 2, FarZones[0].center.y + FarZones[0].size.y / 2, FarZones[0].center.z - FarZones[0].size.z / 2), Color.blue, 10f);
+        Debug.DrawLine(new Vector3(FarZones[1].center.x + FarZones[1].size.x / 2, FarZones[1].center.y + FarZones[1].size.y / 2, FarZones[1].center.z + FarZones[1].size.z / 2), new Vector3(FarZones[1].center.x + FarZones[1].size.x / 2, FarZones[1].center.y + FarZones[1].size.y / 2, FarZones[1].center.z - FarZones[1].size.z / 2), Color.blue, 10f);
+        Debug.DrawLine(new Vector3(FarZones[2].center.x - FarZones[2].size.x / 2, FarZones[2].center.y + FarZones[2].size.y / 2, FarZones[2].center.z + FarZones[2].size.z / 2), new Vector3(FarZones[2].center.x + FarZones[2].size.x / 2, FarZones[2].center.y + FarZones[2].size.y / 2, FarZones[2].center.z + FarZones[2].size.z / 2), Color.blue, 10f);
+        Debug.DrawLine(new Vector3(FarZones[3].center.x - FarZones[3].size.x / 2, FarZones[3].center.y + FarZones[3].size.y / 2, FarZones[3].center.z - FarZones[3].size.z / 2), new Vector3(FarZones[3].center.x - FarZones[3].size.x / 2, FarZones[3].center.y + FarZones[3].size.y / 2, FarZones[3].center.z + FarZones[3].size.z / 2), Color.blue, 10f);
 
         if (_spawnTimer >= _enemySpawnerData._spawnTick)
         {
@@ -147,8 +150,17 @@ public class NEW_EnemySpawner : MonoBehaviour
                 Bounds = FarZones[zoneNumber].bounds;
                 DeterminePossibleBound(spawnBias, zoneNumber, 0);
                 break;
-            case SpawnBias.Level:             
-                Bounds = LevelZone[Random.Range(0, LevelZone.Count)].bounds;
+            case SpawnBias.Level: // Spawns the Enemies at the furthest away LevelSpawnPoint
+                float distanceToBounds = 0;              
+                for(int i = 0; i < LevelZone.Count; i++)
+                {
+                    if(distanceToBounds < Vector3.Distance(PlayerTransform.position, LevelZone[i].center))
+                    {
+                        distanceToBounds = Vector3.Distance(PlayerTransform.position, LevelZone[i].center);
+                        zoneNumber = i;
+                    }
+                }
+                Bounds = LevelZone[zoneNumber].bounds;
                 break;
         }
     }
@@ -156,16 +168,50 @@ public class NEW_EnemySpawner : MonoBehaviour
     private void DeterminePossibleBound(SpawnBias spawnBias, int zoneNumber, int attempt)
     {
         // if (Physics.CheckBox(Bounds.center, Bounds.extents / 2, Quaternion.identity, _mapConstraintsLayer)) 
-                // check if 4 Ecken over Ground
+        // check if 4 Ecken over Ground
+
+        Vector3 max1 = Vector3.zero;
+        Vector3 max2 = Vector3.zero;
+        Vector3 min1 = Vector3.zero;
+        Vector3 min2 = Vector3.zero;
+
+        switch (zoneNumber)
+        {
+            case 0:
+                max1 = new Vector3(Bounds.center.x - Bounds.size.x / 2, Bounds.center.y + Bounds.size.y / 2, Bounds.center.z + Bounds.size.z / 2);
+                max2 = new Vector3(Bounds.center.x + Bounds.size.x / 2, Bounds.center.y + Bounds.size.y / 2, Bounds.center.z + Bounds.size.z / 2);
+                min1 = new Vector3(Bounds.center.x + Bounds.size.x / 2, Bounds.center.y + Bounds.size.y / 2, Bounds.center.z - Bounds.size.z / 2);
+                min2 = new Vector3(Bounds.center.x - Bounds.size.x / 2, Bounds.center.y + Bounds.size.y / 2, Bounds.center.z - Bounds.size.z / 2);
+                break;
+            case 1:
+                max1 = new Vector3(Bounds.center.x - Bounds.size.x / 2, Bounds.center.y + Bounds.size.y / 2, Bounds.center.z - Bounds.size.z / 2);
+                max2 = new Vector3(Bounds.center.x - Bounds.size.x / 2, Bounds.center.y + Bounds.size.y / 2, Bounds.center.z + Bounds.size.z / 2);
+                min1 = new Vector3(Bounds.center.x + Bounds.size.x / 2, Bounds.center.y + Bounds.size.y / 2, Bounds.center.z + Bounds.size.z / 2);
+                min2 = new Vector3(Bounds.center.x + Bounds.size.x / 2, Bounds.center.y + Bounds.size.y / 2, Bounds.center.z - Bounds.size.z / 2);
+                break;
+            case 2:
+                max1 = new Vector3(Bounds.center.x + Bounds.size.x / 2, Bounds.center.y + Bounds.size.y / 2, Bounds.center.z - Bounds.size.z / 2);
+                max2 = new Vector3(Bounds.center.x - Bounds.size.x / 2, Bounds.center.y + Bounds.size.y / 2, Bounds.center.z - Bounds.size.z / 2);
+                min1 = new Vector3(Bounds.center.x - Bounds.size.x / 2, Bounds.center.y + Bounds.size.y / 2, Bounds.center.z + Bounds.size.z / 2);
+                min2 = new Vector3(Bounds.center.x + Bounds.size.x / 2, Bounds.center.y + Bounds.size.y / 2, Bounds.center.z + Bounds.size.z / 2);
+                break;
+            case 3:
+                max1 = new Vector3(Bounds.center.x + Bounds.size.x / 2, Bounds.center.y + Bounds.size.y / 2, Bounds.center.z + Bounds.size.z / 2);
+                max2 = new Vector3(Bounds.center.x + Bounds.size.x / 2, Bounds.center.y + Bounds.size.y / 2, Bounds.center.z - Bounds.size.z / 2);
+                min1 = new Vector3(Bounds.center.x - Bounds.size.x / 2, Bounds.center.y + Bounds.size.y / 2, Bounds.center.z - Bounds.size.z / 2);
+                min2 = new Vector3(Bounds.center.x - Bounds.size.x / 2, Bounds.center.y + Bounds.size.y / 2, Bounds.center.z + Bounds.size.z / 2);
+                break;
+        }
+
         if (
-            !(Physics.Raycast(new Vector3(Bounds.max.x, Bounds.max.y, Bounds.max.z), Vector3.down, Mathf.Infinity, _groundLayer)) &&
-            !(Physics.Raycast(new Vector3(Bounds.min.x, Bounds.max.y, Bounds.max.z), Vector3.down, Mathf.Infinity, _groundLayer)) &&
-            !(Physics.Raycast(new Vector3(Bounds.max.x, Bounds.max.y, Bounds.min.z), Vector3.down, Mathf.Infinity, _groundLayer)) &&
-            !(Physics.Raycast(new Vector3(Bounds.min.x, Bounds.max.y, Bounds.min.z), Vector3.down, Mathf.Infinity, _groundLayer)) // test this more
+            !(Physics.Raycast(max1, Vector3.down, Mathf.Infinity, _groundLayer)) ||
+            !(Physics.Raycast(max2, Vector3.down, Mathf.Infinity, _groundLayer)) ||
+            !(Physics.Raycast(min1, Vector3.down, Mathf.Infinity, _groundLayer)) ||
+            !(Physics.Raycast(min2, Vector3.down, Mathf.Infinity, _groundLayer))
+            // !(Physics.Raycast(new Vector3(Bounds.center.x, Bounds.center.y + Bounds.size.y / 2, Bounds.center.z), Vector3.down, Mathf.Infinity, _groundLayer))
+            // test this more
            )
         {
-            Debug.Log(Bounds + " Out of Map");
-
             if(attempt <= 4)
             {
                 switch (zoneNumber)
@@ -203,7 +249,7 @@ public class NEW_EnemySpawner : MonoBehaviour
         }
         else
         {
-            int enemyCount = 0;
+            int _enemyCountInCollider = 0;
 
             switch (spawnBias)
             {
@@ -211,10 +257,10 @@ public class NEW_EnemySpawner : MonoBehaviour
                     for (int i = 0; i < CloseZones.Count; i++)
                     {
                         Collider[] enemyHitColliders = Physics.OverlapBox(CloseZones[i].center, CloseZones[i].size / 2, Quaternion.identity, _enemyLayer);
-                        enemyCount += enemyHitColliders.Length;
+                        _enemyCountInCollider += enemyHitColliders.Length;
                     }
 
-                    if(enemyCount < _enemySpawnerData._maxCloseZoneOcc)
+                    if(_enemyCountInCollider < _enemySpawnerData._maxCloseZoneOcc)
                     {
                         Bounds = CloseZones[zoneNumber].bounds;
                     }
@@ -227,10 +273,10 @@ public class NEW_EnemySpawner : MonoBehaviour
                     for (int i = 0; i < MidZones.Count; i++)
                     {
                         Collider[] enemyHitColliders = Physics.OverlapBox(MidZones[i].center, MidZones[i].size / 2, Quaternion.identity, _enemyLayer);
-                        enemyCount += enemyHitColliders.Length;
+                        _enemyCountInCollider += enemyHitColliders.Length;
                     }
 
-                    if (enemyCount < _enemySpawnerData._maxMidZoneOcc)
+                    if (_enemyCountInCollider < _enemySpawnerData._maxMidZoneOcc)
                     {
                         Bounds = MidZones[zoneNumber].bounds;
                     }
@@ -243,10 +289,10 @@ public class NEW_EnemySpawner : MonoBehaviour
                     for (int i = 0; i < FarZones.Count; i++)
                     {
                         Collider[] enemyHitColliders = Physics.OverlapBox(FarZones[i].center, FarZones[i].size / 2, Quaternion.identity, _enemyLayer);
-                        enemyCount += enemyHitColliders.Length;
+                        _enemyCountInCollider += enemyHitColliders.Length;
                     }
 
-                    if (enemyCount < _enemySpawnerData._maxFarZoneOcc)
+                    if (_enemyCountInCollider < _enemySpawnerData._maxFarZoneOcc)
                     {
                         Bounds = FarZones[zoneNumber].bounds;
                     }
@@ -358,25 +404,21 @@ public class NEW_EnemySpawner : MonoBehaviour
         center = PlayerTransform.position + new Vector3(center_x, 0, center_y);
         CloseZones[0].size = size;
         CloseZones[0].center = center;
-        CloseZones[0].transform.rotation = Quaternion.Euler(0, 0, 0);
 
-        size = new Vector3(size_x, _boxHeight, size_y);
-        center = PlayerTransform.position + new Vector3(center_x, 0, center_y);
+        size = new Vector3(size_y, _boxHeight, size_x);
+        center = PlayerTransform.position + new Vector3(-center_y, 0, center_x);
         CloseZones[1].size = size;
         CloseZones[1].center = center;
-        CloseZones[1].transform.rotation = Quaternion.Euler(0, 90, 0);
 
         size = new Vector3(size_x, _boxHeight, size_y);
-        center = PlayerTransform.position + new Vector3(center_x, 0, center_y);
+        center = PlayerTransform.position + new Vector3(-center_x, 0, -center_y);
         CloseZones[2].size = size;
         CloseZones[2].center = center;
-        CloseZones[2].transform.rotation = Quaternion.Euler(0, 180, 0);
 
-        size = new Vector3(size_x, _boxHeight, size_y);
-        center = PlayerTransform.position + new Vector3(center_x, 0, center_y);
+        size = new Vector3(size_y, _boxHeight, size_x);
+        center = PlayerTransform.position + new Vector3(center_y, 0, -center_x);
         CloseZones[3].size = size;
         CloseZones[3].center = center;
-        CloseZones[3].transform.rotation = Quaternion.Euler(0, 270, 0);
 
         // Mid Zone
 
@@ -389,25 +431,21 @@ public class NEW_EnemySpawner : MonoBehaviour
         center = PlayerTransform.position + new Vector3(center_x, 0, center_y);
         MidZones[0].size = size;
         MidZones[0].center = center;
-        MidZones[0].transform.rotation = Quaternion.Euler(0, 0, 0);
 
-        size = new Vector3(size_x, _boxHeight, size_y);
-        center = PlayerTransform.position + new Vector3(center_x, 0, center_y);
+        size = new Vector3(size_y, _boxHeight, size_x);
+        center = PlayerTransform.position + new Vector3(-center_y, 0, center_x);
         MidZones[1].size = size;
         MidZones[1].center = center;
-        MidZones[1].transform.rotation = Quaternion.Euler(0, 90, 0);
 
         size = new Vector3(size_x, _boxHeight, size_y);
-        center = PlayerTransform.position + new Vector3(center_x, 0, center_y);
+        center = PlayerTransform.position + new Vector3(-center_x, 0, -center_y);
         MidZones[2].size = size;
         MidZones[2].center = center;
-        MidZones[2].transform.rotation = Quaternion.Euler(0, 180, 0);
 
-        size = new Vector3(size_x, _boxHeight, size_y);
-        center = PlayerTransform.position + new Vector3(center_x, 0, center_y);
+        size = new Vector3(size_y, _boxHeight, size_x);
+        center = PlayerTransform.position + new Vector3(center_y, 0, -center_x);
         MidZones[3].size = size;
         MidZones[3].center = center;
-        MidZones[3].transform.rotation = Quaternion.Euler(0, 270, 0);
 
         // Far Zone
 
@@ -420,25 +458,20 @@ public class NEW_EnemySpawner : MonoBehaviour
         center = PlayerTransform.position + new Vector3(center_x, 0, center_y);
         FarZones[0].size = size;
         FarZones[0].center = center;
-        FarZones[0].transform.rotation = Quaternion.Euler(0, 0, 0);
 
-        size = new Vector3(size_x, _boxHeight, size_y);
-        center = PlayerTransform.position + new Vector3(center_x, 0, center_y);
+        size = new Vector3(size_y, _boxHeight, size_x);
+        center = PlayerTransform.position + new Vector3(-center_y, 0, center_x);
         FarZones[1].size = size;
         FarZones[1].center = center;
-        FarZones[1].transform.rotation = Quaternion.Euler(0, 90, 0);
 
         size = new Vector3(size_x, _boxHeight, size_y);
-        center = PlayerTransform.position + new Vector3(center_x, 0, center_y);
+        center = PlayerTransform.position + new Vector3(-center_x, 0, -center_y);
         FarZones[2].size = size;
         FarZones[2].center = center;
-        FarZones[2].transform.rotation = Quaternion.Euler(0, 180, 0);
 
-        size = new Vector3(size_x, _boxHeight, size_y);
-        center = PlayerTransform.position + new Vector3(center_x, 0, center_y);
+        size = new Vector3(size_y, _boxHeight, size_x);
+        center = PlayerTransform.position + new Vector3(center_y, 0, -center_x);
         FarZones[3].size = size;
         FarZones[3].center = center;
-        FarZones[3].transform.rotation = Quaternion.Euler(0, 270, 0);
-
     }
 }
