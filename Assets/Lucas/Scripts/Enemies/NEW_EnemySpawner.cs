@@ -78,18 +78,23 @@ public class NEW_EnemySpawner : MonoBehaviour
     [SerializeField]
     private List<BoxCollider> LevelZone = new List<BoxCollider>();
 
+    [Header("Zone Max Occupation")]
+    [SerializeField]
+    private int _maxCloseZoneOcc;
+    [SerializeField]
+    private int _maxMidZoneOcc;
+    [SerializeField]
+    private int _maxFarZoneOcc;
+
 
     // Object Pooling
     public Dictionary<int, ObjectPool<Enemy>> EnemyObjectPools = new Dictionary<int, ObjectPool<Enemy>>();
     private Bounds Bounds;
-    private NavMeshTriangulation Triangulation;
 
     private void Awake()
     {
         if (PlayerTransform == null)
             PlayerTransform = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
-
-        Triangulation = NavMesh.CalculateTriangulation();
 
         SetColliderSizeCenter();
     }
@@ -223,16 +228,58 @@ public class NEW_EnemySpawner : MonoBehaviour
         }
         else
         {
+            int enemyCount = 0;
+
             switch (spawnBias)
             {
+
                 case SpawnBias.Close:
-                    Bounds = CloseZones[zoneNumber].bounds;
+                    for (int i = 0; i < CloseZones.Count; i++)
+                    {
+                        Collider[] enemyHitColliders = Physics.OverlapBox(CloseZones[i].center, CloseZones[i].size / 2, Quaternion.identity, _enemyLayer);
+                        enemyCount += enemyHitColliders.Length;
+                    }
+
+                    if(enemyCount < _maxCloseZoneOcc)
+                    {
+                        Bounds = CloseZones[zoneNumber].bounds;
+                    }
+                    else
+                    {
+                        DeterminePossibleBound(SpawnBias.Mid, 0, 0);
+                    }
                     break;
                 case SpawnBias.Mid:
-                    Bounds = MidZones[zoneNumber].bounds;
+                    for (int i = 0; i < MidZones.Count; i++)
+                    {
+                        Collider[] enemyHitColliders = Physics.OverlapBox(MidZones[i].center, MidZones[i].size / 2, Quaternion.identity, _enemyLayer);
+                        enemyCount += enemyHitColliders.Length;
+                    }
+
+                    if (enemyCount < _maxMidZoneOcc)
+                    {
+                        Bounds = MidZones[zoneNumber].bounds;
+                    }
+                    else
+                    {
+                        DeterminePossibleBound(SpawnBias.Far, 0, 0);
+                    }
                     break;
                 case SpawnBias.Far:
-                    Bounds = FarZones[zoneNumber].bounds;
+                    for (int i = 0; i < FarZones.Count; i++)
+                    {
+                        Collider[] enemyHitColliders = Physics.OverlapBox(FarZones[i].center, FarZones[i].size / 2, Quaternion.identity, _enemyLayer);
+                        enemyCount += enemyHitColliders.Length;
+                    }
+
+                    if (enemyCount < _maxFarZoneOcc)
+                    {
+                        Bounds = FarZones[zoneNumber].bounds;
+                    }
+                    else
+                    {
+                        DeterminePossibleBound(SpawnBias.Level, 0, 0);
+                    }
                     break;
             }
         }

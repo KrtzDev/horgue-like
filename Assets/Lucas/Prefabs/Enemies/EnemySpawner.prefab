@@ -326,7 +326,7 @@ MonoBehaviour:
   _mapConstraintsLayer:
     serializedVersion: 2
     m_Bits: 4096
-  _spawnTick: 5
+  _spawnTick: 3
   _spawnsPerTick: 6
   _minEnemyCount: 10
   _maxEnemyCount: 35
@@ -360,6 +360,11 @@ MonoBehaviour:
   - {fileID: 6843213764031750870}
   - {fileID: 6843213763256042512}
   - {fileID: 6843213763325713354}
+  LevelZone:
+  - {fileID: 0}
+  _maxCloseZoneOcc: 8
+  _maxMidZoneOcc: 15
+  _maxFarZoneOcc: 20
 --- !u!1 &6843213763256042514
 GameObject:
   m_ObjectHideFlags: 0
