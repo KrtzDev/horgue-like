@@ -18,7 +18,7 @@ public class EnemiesToSpawn
     }
 }
 
-public enum SpawnBias { Close, Mid, Far };
+public enum SpawnBias { Close, Mid, Far, Level };
 
 public class NEW_EnemySpawner : MonoBehaviour
 {
@@ -31,6 +31,8 @@ public class NEW_EnemySpawner : MonoBehaviour
     private LayerMask _enemyLayer;
     [SerializeField]
     private LayerMask _groundLayer;
+    [SerializeField]
+    private LayerMask _mapConstraintsLayer;
     [SerializeField]
     private float _spawnTick;
     [SerializeField]
@@ -68,11 +70,21 @@ public class NEW_EnemySpawner : MonoBehaviour
     [SerializeField]
     private BoxCollider SafeZone;
     [SerializeField]
-    private List<BoxCollider> CloseZones = new List<BoxCollider>(4);
+    private List<BoxCollider> CloseZones = new List<BoxCollider>();
     [SerializeField]
-    private List<BoxCollider> MidZones = new List<BoxCollider>(4);
+    private List<BoxCollider> MidZones = new List<BoxCollider>();
     [SerializeField]
-    private List<BoxCollider> FarZones = new List<BoxCollider>(4);
+    private List<BoxCollider> FarZones = new List<BoxCollider>();
+    [SerializeField]
+    private List<BoxCollider> LevelZone = new List<BoxCollider>();
+
+    [Header("Zone Max Occupation")]
+    [SerializeField]
+    private int _maxCloseZoneOcc;
+    [SerializeField]
+    private int _maxMidZoneOcc;
+    [SerializeField]
+    private int _maxFarZoneOcc;
 
 
     // Object Pooling
@@ -131,6 +143,8 @@ public class NEW_EnemySpawner : MonoBehaviour
 
     private void SpawnEnemies(EnemiesToSpawn enemies, int enemiesToBeSpawned, int spawnIndex) // GameManager.Instance._enemyCount has to be subtracted on Enemy Death in Enemy Script
     {
+        Debug.Log(enemiesToBeSpawned);
+
         int zoneNumber = Random.Range(0,3);
 
         for (int i = 0; i < enemiesToBeSpawned; i++)
@@ -157,13 +171,117 @@ public class NEW_EnemySpawner : MonoBehaviour
         {
             case SpawnBias.Close:
                 Bounds = CloseZones[zoneNumber].bounds;
+                DeterminePossibleBound(spawnBias, zoneNumber, 0);
                 break;
             case SpawnBias.Mid:
                 Bounds = MidZones[zoneNumber].bounds;
+                DeterminePossibleBound(spawnBias, zoneNumber, 0);
                 break;
             case SpawnBias.Far:
                 Bounds = FarZones[zoneNumber].bounds;
+                DeterminePossibleBound(spawnBias, zoneNumber, 0);
                 break;
+            case SpawnBias.Level:             
+                Bounds = LevelZone[Random.Range(0, LevelZone.Count)].bounds;
+                break;
+        }
+    }
+
+    private void DeterminePossibleBound(SpawnBias spawnBias, int zoneNumber, int attempt)
+    {
+        if (Physics.CheckBox(Bounds.center, Bounds.extents / 2, Quaternion.identity, _mapConstraintsLayer))
+        {
+            if(attempt <= 4)
+            {
+                switch (zoneNumber)
+                {
+                    case 0:
+                        DeterminePossibleBound(spawnBias, 1, attempt + 1);
+                        break;
+                    case 1:
+                        DeterminePossibleBound(spawnBias, 2, attempt + 1);
+                        break;
+                    case 2:
+                        DeterminePossibleBound(spawnBias, 3, attempt + 1);
+                        break;
+                    case 3:
+                        DeterminePossibleBound(spawnBias, 0, attempt + 1);
+                        break;
+                }
+            }
+            else
+            {
+                switch (spawnBias)
+                {
+                    case SpawnBias.Close:
+                        DeterminePossibleBound(SpawnBias.Mid, 0, 0);
+                        break;
+                    case SpawnBias.Mid:
+                        DeterminePossibleBound(SpawnBias.Far, 0, 0);
+                        break;
+                    case SpawnBias.Far:
+                        Debug.Log("Spawn Random");
+                        SetBounds(SpawnBias.Level, 0);
+                        break;
+                }
+            }
+        }
+        else
+        {
+            int enemyCount = 0;
+
+            switch (spawnBias)
+            {
+
+                case SpawnBias.Close:
+                    for (int i = 0; i < CloseZones.Count; i++)
+                    {
+                        Collider[] enemyHitColliders = Physics.OverlapBox(CloseZones[i].center, CloseZones[i].size / 2, Quaternion.identity, _enemyLayer);
+                        enemyCount += enemyHitColliders.Length;
+                    }
+
+                    if(enemyCount < _maxCloseZoneOcc)
+                    {
+                        Bounds = CloseZones[zoneNumber].bounds;
+                    }
+                    else
+                    {
+                        DeterminePossibleBound(SpawnBias.Mid, 0, 0);
+                    }
+                    break;
+                case SpawnBias.Mid:
+                    for (int i = 0; i < MidZones.Count; i++)
+                    {
+                        Collider[] enemyHitColliders = Physics.OverlapBox(MidZones[i].center, MidZones[i].size / 2, Quaternion.identity, _enemyLayer);
+                        enemyCount += enemyHitColliders.Length;
+                    }
+
+                    if (enemyCount < _maxMidZoneOcc)
+                    {
+                        Bounds = MidZones[zoneNumber].bounds;
+                    }
+                    else
+                    {
+                        DeterminePossibleBound(SpawnBias.Far, 0, 0);
+                    }
+                    break;
+                case SpawnBias.Far:
+                    for (int i = 0; i < FarZones.Count; i++)
+                    {
+                        Collider[] enemyHitColliders = Physics.OverlapBox(FarZones[i].center, FarZones[i].size / 2, Quaternion.identity, _enemyLayer);
+                        enemyCount += enemyHitColliders.Length;
+                    }
+
+                    if (enemyCount < _maxFarZoneOcc)
+                    {
+                        Bounds = FarZones[zoneNumber].bounds;
+                    }
+                    else
+                    {
+                        DeterminePossibleBound(SpawnBias.Level, 0, 0);
+                    }
+                    break;
+            }
         }
     }
 
@@ -195,7 +313,6 @@ public class NEW_EnemySpawner : MonoBehaviour
 
     private IEnumerator DoSpawnEnemy(EnemiesToSpawn enemies, int spawnIndex, Vector3 spawnPosition, float spawnDelay)
     {
-
         if (_canSpawnEnemies)
         {
             yield return new WaitForSeconds(spawnDelay);

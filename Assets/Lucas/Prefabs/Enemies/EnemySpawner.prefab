@@ -294,7 +294,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6843213763226438600}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -323,7 +323,10 @@ MonoBehaviour:
   _groundLayer:
     serializedVersion: 2
     m_Bits: 512
-  _spawnTick: 5
+  _mapConstraintsLayer:
+    serializedVersion: 2
+    m_Bits: 4096
+  _spawnTick: 3
   _spawnsPerTick: 6
   _minEnemyCount: 10
   _maxEnemyCount: 35
@@ -357,6 +360,11 @@ MonoBehaviour:
   - {fileID: 6843213764031750870}
   - {fileID: 6843213763256042512}
   - {fileID: 6843213763325713354}
+  LevelZone:
+  - {fileID: 0}
+  _maxCloseZoneOcc: 8
+  _maxMidZoneOcc: 15
+  _maxFarZoneOcc: 20
 --- !u!1 &6843213763256042514
 GameObject:
   m_ObjectHideFlags: 0

@@ -266,6 +266,7 @@ MonoBehaviour:
   _currentTimeToSurvive: 0
   _currentScore: 0
   _neededEnemyKill: 0
+  _enemyCount: 0
   _currentLevel: 1
   _currentLevelArray: 0
   _currentWave: 0
@@ -481,6 +482,12 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8721330641953635283, guid: 578780241b2c5d54086e4a2080d153ce,
+        type: 3}
+      propertyPath: _gameUI_prefab
+      value: 
+      objectReference: {fileID: 1274344090816168882, guid: 604223aa0afca004ab28de54417ead49,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 578780241b2c5d54086e4a2080d153ce, type: 3}
 --- !u!4 &1776022110 stripped
