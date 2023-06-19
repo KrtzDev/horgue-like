@@ -22,12 +22,16 @@ public class StatusEffectSO : ScriptableObject
 	[DrawIf(nameof(hasDamageOverTime), true)]
 	public float dotDamage;
 	[DrawIf(nameof(hasDamageOverTime), true)]
+	public float dotDuration;
+	[DrawIf(nameof(hasDamageOverTime), true)]
 	public HorgueVFX dotDamageVFX;
 
 	[Space]
 	public bool hasSlow;
 	[DrawIf(nameof(hasSlow), true)]
 	public float slowAmount;
+	[DrawIf(nameof(hasSlow), true)]
+	public float slowDuration;
 	[DrawIf(nameof(hasSlow), true)]
 	public HorgueVFX slowVFX;
 

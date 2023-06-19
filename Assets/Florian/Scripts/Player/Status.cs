@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -34,4 +35,13 @@ public class Status : MonoBehaviour
 		_statusEffects.Clear();
 	}
 
+	public bool HasStatusEffect(StatusEffectSO statusEffectSO)
+	{
+		for (int i = 0; i < _statusEffects.Count; i++)
+		{
+			if (_statusEffects[i].StatusEffectSO == statusEffectSO)
+				return true;
+		}
+		return false;
+	}
 }

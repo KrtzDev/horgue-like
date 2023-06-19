@@ -95,7 +95,7 @@ public class Weapon : ScriptableObject
 
 		weaponStats.capacity = weapon._magazine.capacity;
 		weaponStats.attackPattern = weapon._barrel.attackPattern;
-		weaponStats.statusEffect = new StatusEffect(weapon._ammunition.statusEffect);
+		weaponStats.statusEffect = weapon._ammunition.statusEffect;
 
 		return weaponStats;
 	}

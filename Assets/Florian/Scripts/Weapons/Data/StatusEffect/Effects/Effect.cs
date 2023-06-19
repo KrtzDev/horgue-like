@@ -13,6 +13,11 @@ public abstract class Effect
 
 	public abstract void Tick(float delta);
 
+	public virtual void ResetDuration()
+	{
+
+	}
+
 	public void TriggerVFX()
 	{
 		if(_TickVFX != null)

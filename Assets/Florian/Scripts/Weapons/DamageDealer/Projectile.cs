@@ -14,19 +14,19 @@ public class Projectile : DamageDealer
 	public float finalRange;
 
 	public AttackPattern attackPattern;
-	public StatusEffect statusEffect;
+	public StatusEffectSO statusEffect;
 	public Transform spawnTransform;
 
 	[SerializeField]
 	private LayerMask _hitLayerMask;
 
 	public int PierceAmount { get; set; }
+	private float _lifeTime = 10;
 
-	private void OnEnable()
-	{
-		float lifeTime = 10;
-		lifeTime -= Time.deltaTime;
-		if (lifeTime <= 0)
+	private void Update()
+	{		
+		_lifeTime -= Time.deltaTime;
+		if (_lifeTime <= 0)
 			OnLifeTimeEnd?.Invoke(this);
 	}
 
@@ -45,8 +45,9 @@ public class Projectile : DamageDealer
 				{
 					if (health.TryGetComponent(out Enemy enemy))
 					{
-						statusEffect.ApplyStatusEffect(enemy, this);
-						statusEffect.OnHitEnemy.Invoke(this);
+						StatusEffect thisStatusEffect = new StatusEffect(statusEffect);
+						thisStatusEffect.ApplyStatusEffect(enemy, this);
+						thisStatusEffect.OnHitEnemy.Invoke(this);
 					}
 				}
 			}

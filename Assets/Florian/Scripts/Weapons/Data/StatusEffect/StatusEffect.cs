@@ -2,17 +2,13 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-
-public enum KnockBackType
-{
-	Push,
-	Pull
-}
 [Serializable]
 public class StatusEffect
 {
 	public Action<StatusEffect> OnStatusEffectEnded;
 	public Action<Projectile> OnHitEnemy;
+
+	public StatusEffectSO StatusEffectSO { get; private set; }
 
 	[Header("General")]
 	[SerializeField] private float _triggerChance;
@@ -27,11 +23,13 @@ public class StatusEffect
 	[Space]
 	[SerializeField] private bool _hasDamageOverTime;
 	[SerializeField] private float _dotDamage;
+	[SerializeField] private float _dotDuration;
 	[SerializeField] private HorgueVFX _dotDamageVFX;
 
 	[Space]
 	[SerializeField] private bool _hasSlow;
 	[SerializeField] private float _slowAmount;
+	[SerializeField] private float _slowDuration;
 	[SerializeField] private HorgueVFX _slowVFX;
 
 	[Space]
@@ -68,6 +66,8 @@ public class StatusEffect
 
 	public StatusEffect(StatusEffectSO statusEffectSO)
 	{
+		StatusEffectSO = statusEffectSO;
+
 		_triggerChance = statusEffectSO.triggerChance;
 		_effectDuration = statusEffectSO.effectDuration;
 		_tickRate = statusEffectSO.tickRate;
@@ -78,10 +78,12 @@ public class StatusEffect
 
 		_hasDamageOverTime = statusEffectSO.hasDamageOverTime;
 		_dotDamage = statusEffectSO.dotDamage;
+		_dotDuration = statusEffectSO.dotDuration;
 		_dotDamageVFX = statusEffectSO.dotDamageVFX;
 
 		_hasSlow = statusEffectSO.hasSlow;
 		_slowAmount = statusEffectSO.slowAmount;
+		_slowDuration = statusEffectSO.slowDuration;
 		_slowVFX = statusEffectSO.slowVFX;
 
 		_hasKnockBack = statusEffectSO.hasKnockBack;
@@ -110,14 +112,26 @@ public class StatusEffect
 			return;
 
 		_enemy = enemy;
+		Status enemyStatus = _enemy.GetComponent<Status>();
+
+		if (enemyStatus.HasStatusEffect(StatusEffectSO))
+		{
+			_currentEffectTimer = StatusEffectSO.effectDuration;
+			for (int i = 0; i < _effects.Count; i++)
+			{
+				_effects[i].ResetDuration();
+			}
+			return;
+		}
+
 		_projectile = projectile;
 
 		if (_hasInitialExtraDamage)
 			AddEffect(new DamageOnce(_enemy, _initialDamage));
 		if (_hasDamageOverTime)
-			AddEffect(new DamageOverTime(_enemy, _dotDamage, _effectDuration));
+			AddEffect(new DamageOverTime(_enemy, _dotDamage, _dotDuration));
 		if (_hasSlow)
-			AddEffect(new Slow(_enemy, _slowAmount, _effectDuration));
+			AddEffect(new Slow(_enemy, _slowAmount, _slowDuration));
 		if (_hasKnockBack)
 		{
 			Vector3 knockBackDirection = Vector3.zero;
@@ -138,7 +152,7 @@ public class StatusEffect
 			_effects[i].OnEffectTicked += TriggerVisualEffect;
 		}
 
-		_enemy.GetComponent<Status>().AddStatusEffect(this);
+		enemyStatus.AddStatusEffect(this);
 
 		_currentEffectTimer = _effectDuration;
 		_thisTickRate = UnityEngine.Random.Range(_tickRate.min, _tickRate.max);
@@ -214,7 +228,6 @@ public class StatusEffect
 
 	private void OnEffectsTicked()
 	{
-		Debug.Log(_timesPropagated);
 		if (!_canPropagate || _timesPropagated >= _consecutivePropagationCount)
 			return;
 

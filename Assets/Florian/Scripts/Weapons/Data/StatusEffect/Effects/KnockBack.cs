@@ -34,7 +34,6 @@ public class KnockBack : Effect
 		_currentKnockBackTimer += Time.deltaTime;
 		if(_currentKnockBackTimer > .2f)
 		{
-			Debug.Log("ping");
 			_agent.enabled = true;
 			_rigidbody.velocity = Vector3.zero;
 			OnEffectEnded.Invoke(this);

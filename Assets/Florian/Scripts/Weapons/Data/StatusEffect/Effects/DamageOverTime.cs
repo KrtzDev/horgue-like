@@ -1,6 +1,7 @@
 ﻿public class DamageOverTime : Effect
 {
 	private float _dotDamage;
+	private float _startDuration;
 
 	private HealthComponent _enemyhealth;
 
@@ -9,6 +10,8 @@
 		_enemy = enemy;
 		_dotDamage = dotDamage;
 		_statusDuration = statusDuration;
+
+		_startDuration = statusDuration;
 
 		_enemyhealth = _enemy.GetComponent<HealthComponent>();
 	}
@@ -25,5 +28,10 @@
 
 		_enemyhealth.TakeDamage((int)_dotDamage);
 		OnEffectTicked.Invoke(this);
+	}
+
+	public override void ResetDuration()
+	{
+		_statusDuration = _startDuration;
 	}
 }
