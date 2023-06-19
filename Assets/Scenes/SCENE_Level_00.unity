@@ -14725,9 +14725,26 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6843213763226438607, guid: b0d5d15041526b8408159035025686a3,
         type: 3}
+      propertyPath: _enemySpawnerData
+      value: 
+      objectReference: {fileID: 11400000, guid: 66547b0600cd9b348938adf19e88ab68,
+        type: 2}
+    - target: {fileID: 6843213763226438607, guid: b0d5d15041526b8408159035025686a3,
+        type: 3}
       propertyPath: LevelZone.Array.data[0]
       value: 
       objectReference: {fileID: 1773989135}
+    - target: {fileID: 6843213763226438607, guid: b0d5d15041526b8408159035025686a3,
+        type: 3}
+      propertyPath: _enemySpawnerData.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6843213763226438607, guid: b0d5d15041526b8408159035025686a3,
+        type: 3}
+      propertyPath: _enemySpawnerData.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 66547b0600cd9b348938adf19e88ab68,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b0d5d15041526b8408159035025686a3, type: 3}
 --- !u!1 &1837641223

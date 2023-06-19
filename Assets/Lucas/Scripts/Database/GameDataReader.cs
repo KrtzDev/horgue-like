@@ -33,11 +33,7 @@ public class GameDataReader : MonoBehaviour
 
     [Header("ENEMY SPAWNER DATA")]
     [SerializeField]
-    private EnemySpawnerData _enemySpawnerData1;
-    [SerializeField]
-    private EnemySpawnerData _enemySpawnerData2;
-    [SerializeField]
-    private EnemySpawnerData _enemySpawnerData3;
+    private List<EnemySpawnerData> _enemySpawnerData = new List<EnemySpawnerData>();
 
     [System.Serializable]
     public class Player
@@ -67,10 +63,21 @@ public class GameDataReader : MonoBehaviour
         public string Name;
         public float healthBonus;
         public float damageBonus;
-        public int WavesToSpawn;
-        public int WaveSize;
-        public float SpawnDelay;
         public int TimeToSurvive;
+        public int spawnTick;
+        public int spawnsPerTick;
+        public int minEnemyCount;
+        public int maxEnemyCount;
+        public float spawnAnimDelay;
+        public float minSpawnDelay;
+        public float maxSpawnDelay;
+        public float safeZoneSize;
+        public float closeZoneSize;
+        public float midZoneSize;
+        public float farZoneSize;
+        public int maxCloseZoneOcc;
+        public int maxMidZoneOcc;
+        public int maxFarZoneOcc;
     }
 
     [System.Serializable]
@@ -191,26 +198,36 @@ public class GameDataReader : MonoBehaviour
     }
     private IEnumerator GetLevelData()
     {
+
+        for (int i = 0; i < _enemySpawnerData.Count; i++)
+        {
+            _enemySpawnerData[i]._spawnTick = myLevelList.Level[i].spawnTick;
+            _enemySpawnerData[i]._spawnsPerTick = myLevelList.Level[i].spawnsPerTick;
+            _enemySpawnerData[i]._minEnemyCount = myLevelList.Level[i].minEnemyCount;
+            _enemySpawnerData[i]._maxEnemyCount = myLevelList.Level[i].maxEnemyCount;
+            _enemySpawnerData[i]._spawnAnimDelay = myLevelList.Level[i].spawnAnimDelay;
+            _enemySpawnerData[i]._minSpawnDelay = myLevelList.Level[i].minSpawnDelay;
+            _enemySpawnerData[i]._maxSpawnDelay = myLevelList.Level[i].maxSpawnDelay;
+            _enemySpawnerData[i]._safeZoneSize = myLevelList.Level[i].safeZoneSize;
+            _enemySpawnerData[i]._closeZoneSize = myLevelList.Level[i].closeZoneSize;
+            _enemySpawnerData[i]._midZoneSize = myLevelList.Level[i].midZoneSize;
+            _enemySpawnerData[i]._farZoneSize = myLevelList.Level[i].farZoneSize;
+            _enemySpawnerData[i]._maxCloseZoneOcc = myLevelList.Level[i].maxCloseZoneOcc;
+            _enemySpawnerData[i]._maxMidZoneOcc = myLevelList.Level[i].maxMidZoneOcc;
+            _enemySpawnerData[i]._maxFarZoneOcc = myLevelList.Level[i].maxFarZoneOcc;
+        }
+
         _Level01._healthBonus = myLevelList.Level[0].healthBonus;
         _Level01._damageBonus = myLevelList.Level[0].damageBonus;
         _Level01._timeToSurvive = myLevelList.Level[0].TimeToSurvive;
-        _enemySpawnerData1._enemyWavesToSpawn = myLevelList.Level[0].WavesToSpawn;
-        _enemySpawnerData1._enemyWaveSize = myLevelList.Level[0].WaveSize;
-        _enemySpawnerData1._enemySpawnDelay = myLevelList.Level[0].SpawnDelay;
 
         _Level02._healthBonus = myLevelList.Level[1].healthBonus;
         _Level02._damageBonus = myLevelList.Level[1].damageBonus;
         _Level02._timeToSurvive = myLevelList.Level[1].TimeToSurvive;
-        _enemySpawnerData2._enemyWavesToSpawn = myLevelList.Level[1].WavesToSpawn;
-        _enemySpawnerData2._enemyWaveSize = myLevelList.Level[1].WaveSize;
-        _enemySpawnerData2._enemySpawnDelay = myLevelList.Level[1].SpawnDelay;
 
         _Level03._healthBonus = myLevelList.Level[2].healthBonus;
         _Level03._damageBonus = myLevelList.Level[2].damageBonus;
         _Level03._timeToSurvive = myLevelList.Level[2].TimeToSurvive;
-        _enemySpawnerData3._enemyWavesToSpawn = myLevelList.Level[2].WavesToSpawn;
-        _enemySpawnerData3._enemyWaveSize = myLevelList.Level[2].WaveSize;
-        _enemySpawnerData3._enemySpawnDelay = myLevelList.Level[2].SpawnDelay;
 
         yield return null;
     }

@@ -14,8 +14,6 @@ public class GameManager : Singleton<GameManager>
 	}
 
 	[SerializeField]
-	private GameObject _loadData;
-	[SerializeField]
 	private GameObject _gameDataReader;
 
 	public List<GameManagerValues> _GameManagerValues = new List<GameManagerValues>();
@@ -71,17 +69,14 @@ public class GameManager : Singleton<GameManager>
 			_currentLevel = 1;
 			_currentWave = 0;
 
-			_loadData.SetActive(true);
 			return;
 		}
-
-		_loadData.SetActive(false);
 
 		_hasWon = false;
 		_hasLost = false;
 
 		_enemySpawner = GameObject.Find("EnemySpawner").GetComponent<NEW_EnemySpawner>();
-		_neededEnemyKill = _enemySpawner._maxEnemyCount;
+		_neededEnemyKill = _enemySpawner._enemySpawnerData._maxEnemyCount;
 
 		if (_currentLevel == 1 && _currentWave == 0)
 		{
@@ -104,7 +99,7 @@ public class GameManager : Singleton<GameManager>
 			_playerCanUseAbilities = false;
 		}
 
-		Debug.Log("neededEnemyKill ( " + _neededEnemyKill + " ) = enemySpawner.MaxAmount ( " + _enemySpawner._maxEnemyCount + " )");
+		Debug.Log("neededEnemyKill ( " + _neededEnemyKill + " ) = enemySpawner.MaxAmount ( " + _enemySpawner._enemySpawnerData._maxEnemyCount + " )");
 	}
 
 	private void Update()

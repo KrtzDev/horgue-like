@@ -26,45 +26,19 @@ public class NEW_EnemySpawner : MonoBehaviour
     private Transform PlayerTransform;
 
     [Header("Settings")]
-    private EnemySpawnerData[] _enemySpawnerData;
+    [SerializeField]
+    public EnemySpawnerData _enemySpawnerData;
     [SerializeField]
     private LayerMask _enemyLayer;
     [SerializeField]
     private LayerMask _groundLayer;
     [SerializeField]
     private LayerMask _mapConstraintsLayer;
-    [SerializeField]
-    private float _spawnTick;
-    [SerializeField]
-    private int _spawnsPerTick;
-    [SerializeField]
-    private int _minEnemyCount;
-    [SerializeField]
-    public int _maxEnemyCount;
     private float _spawnTimer = 0;
     private bool _canSpawnEnemies = true;
-
-    [Header("Spawn Delay")]
-    [SerializeField]
-    private float _spawnAnimDelay;
-    [SerializeField]
-    private float _minSpawnDelay;
-    [SerializeField]
-    private float _maxSpawnDelay;
+    private float _boxHeight;
 
     public List<EnemiesToSpawn> _EnemiesToSpawn = new List<EnemiesToSpawn>();
-
-    // Variablen
-    private float _boxHeight;
-    [Header("Variables")]
-    [SerializeField]
-    private float _safeZoneSquareSize;
-    [SerializeField]
-    private float _closeZoneSquareSize;
-    [SerializeField]
-    private float _midZoneSquareSize;
-    [SerializeField]
-    private float _farZoneSquareSize;
 
     [Header("Box Colliders")]
     [SerializeField]
@@ -77,14 +51,6 @@ public class NEW_EnemySpawner : MonoBehaviour
     private List<BoxCollider> FarZones = new List<BoxCollider>();
     [SerializeField]
     private List<BoxCollider> LevelZone = new List<BoxCollider>();
-
-    [Header("Zone Max Occupation")]
-    [SerializeField]
-    private int _maxCloseZoneOcc;
-    [SerializeField]
-    private int _maxMidZoneOcc;
-    [SerializeField]
-    private int _maxFarZoneOcc;
 
 
     // Object Pooling
@@ -103,7 +69,7 @@ public class NEW_EnemySpawner : MonoBehaviour
     {
         for (int i = 0; i < _EnemiesToSpawn.Count; i++)
         {
-            EnemyObjectPools.Add(i, ObjectPool<Enemy>.CreatePool(_EnemiesToSpawn[i].Enemy, _maxEnemyCount,transform.parent));
+            EnemyObjectPools.Add(i, ObjectPool<Enemy>.CreatePool(_EnemiesToSpawn[i].Enemy, _enemySpawnerData._maxEnemyCount,transform.parent));
         }
     }
 
@@ -111,9 +77,9 @@ public class NEW_EnemySpawner : MonoBehaviour
     {
         transform.SetPositionAndRotation(PlayerTransform.position, PlayerTransform.rotation); // performance heavy?
 
-        if (_spawnTimer >= _spawnTick)
+        if (_spawnTimer >= _enemySpawnerData._spawnTick)
         {
-            int currentEnemiesFromMin = Mathf.RoundToInt((_minEnemyCount - GameManager.Instance._enemyCount));
+            int currentEnemiesFromMin = Mathf.RoundToInt((_enemySpawnerData._minEnemyCount - GameManager.Instance._enemyCount));
             int spawnIndex = 0;
 
             foreach (EnemiesToSpawn enemy in _EnemiesToSpawn)
@@ -121,17 +87,17 @@ public class NEW_EnemySpawner : MonoBehaviour
                 int enemiesToBeSpawned;
                 enemiesToBeSpawned = 0;
 
-                if (GameManager.Instance._enemyCount + _spawnsPerTick > _minEnemyCount)
+                if (GameManager.Instance._enemyCount + _enemySpawnerData._spawnsPerTick > _enemySpawnerData._minEnemyCount)
                 {
-                    enemiesToBeSpawned = Mathf.RoundToInt(_spawnsPerTick * (enemy.SpawnChance * 0.01f) + 0.4f);
+                    enemiesToBeSpawned = Mathf.RoundToInt(_enemySpawnerData._spawnsPerTick * (enemy.SpawnChance * 0.01f) + 0.4f);
                 }
-                else if (GameManager.Instance._enemyCount < _minEnemyCount)
+                else if (GameManager.Instance._enemyCount < _enemySpawnerData._minEnemyCount)
                 {
                     enemiesToBeSpawned = Mathf.RoundToInt(currentEnemiesFromMin * (enemy.SpawnChance * 0.01f) + 0.4f);
                 }
-                else if (GameManager.Instance._enemyCount < _maxEnemyCount)
+                else if (GameManager.Instance._enemyCount < _enemySpawnerData._maxEnemyCount)
                 {
-                    enemiesToBeSpawned = Mathf.RoundToInt(_spawnsPerTick * (enemy.SpawnChance * 0.01f) + 0.4f);
+                    enemiesToBeSpawned = Mathf.RoundToInt(_enemySpawnerData._spawnsPerTick * (enemy.SpawnChance * 0.01f) + 0.4f);
                 }
                 SpawnEnemies(enemy, enemiesToBeSpawned, spawnIndex);
                 spawnIndex++;
@@ -149,7 +115,7 @@ public class NEW_EnemySpawner : MonoBehaviour
 
         for (int i = 0; i < enemiesToBeSpawned; i++)
         {
-            float spawnDelay = Random.Range(_minSpawnDelay, _maxSpawnDelay);
+            float spawnDelay = Random.Range(_enemySpawnerData._minSpawnDelay, _enemySpawnerData._maxSpawnDelay);
 
             SetBounds(enemies.SpawnBias, zoneNumber);
             StartCoroutine(DoSpawnEnemy(enemies, spawnIndex, GetRandomPositionInBounds(Bounds), spawnDelay));
@@ -159,7 +125,7 @@ public class NEW_EnemySpawner : MonoBehaviour
                 zoneNumber = 0;
 
             GameManager.Instance._enemyCount++;
-            if (GameManager.Instance._enemyCount >= _maxEnemyCount)
+            if (GameManager.Instance._enemyCount >= _enemySpawnerData._maxEnemyCount)
             {
                 break;
             }
@@ -189,8 +155,17 @@ public class NEW_EnemySpawner : MonoBehaviour
 
     private void DeterminePossibleBound(SpawnBias spawnBias, int zoneNumber, int attempt)
     {
-        if (Physics.CheckBox(Bounds.center, Bounds.extents / 2, Quaternion.identity, _mapConstraintsLayer)) // check if 4 Ecken over Ground
+        // if (Physics.CheckBox(Bounds.center, Bounds.extents / 2, Quaternion.identity, _mapConstraintsLayer)) 
+                // check if 4 Ecken over Ground
+        if (
+            !(Physics.Raycast(new Vector3(Bounds.max.x, Bounds.max.y, Bounds.max.z), Vector3.down, Mathf.Infinity, _groundLayer)) &&
+            !(Physics.Raycast(new Vector3(Bounds.min.x, Bounds.max.y, Bounds.max.z), Vector3.down, Mathf.Infinity, _groundLayer)) &&
+            !(Physics.Raycast(new Vector3(Bounds.max.x, Bounds.max.y, Bounds.min.z), Vector3.down, Mathf.Infinity, _groundLayer)) &&
+            !(Physics.Raycast(new Vector3(Bounds.min.x, Bounds.max.y, Bounds.min.z), Vector3.down, Mathf.Infinity, _groundLayer)) // test this more
+           )
         {
+            Debug.Log(Bounds + " Out of Map");
+
             if(attempt <= 4)
             {
                 switch (zoneNumber)
@@ -232,7 +207,6 @@ public class NEW_EnemySpawner : MonoBehaviour
 
             switch (spawnBias)
             {
-
                 case SpawnBias.Close:
                     for (int i = 0; i < CloseZones.Count; i++)
                     {
@@ -240,7 +214,7 @@ public class NEW_EnemySpawner : MonoBehaviour
                         enemyCount += enemyHitColliders.Length;
                     }
 
-                    if(enemyCount < _maxCloseZoneOcc)
+                    if(enemyCount < _enemySpawnerData._maxCloseZoneOcc)
                     {
                         Bounds = CloseZones[zoneNumber].bounds;
                     }
@@ -256,7 +230,7 @@ public class NEW_EnemySpawner : MonoBehaviour
                         enemyCount += enemyHitColliders.Length;
                     }
 
-                    if (enemyCount < _maxMidZoneOcc)
+                    if (enemyCount < _enemySpawnerData._maxMidZoneOcc)
                     {
                         Bounds = MidZones[zoneNumber].bounds;
                     }
@@ -272,7 +246,7 @@ public class NEW_EnemySpawner : MonoBehaviour
                         enemyCount += enemyHitColliders.Length;
                     }
 
-                    if (enemyCount < _maxFarZoneOcc)
+                    if (enemyCount < _enemySpawnerData._maxFarZoneOcc)
                     {
                         Bounds = FarZones[zoneNumber].bounds;
                     }
@@ -323,7 +297,7 @@ public class NEW_EnemySpawner : MonoBehaviour
                 Instantiate(EnemySpawnIndicator, Hit.position, Quaternion.identity);
             }
 
-            yield return new WaitForSeconds(_spawnAnimDelay);
+            yield return new WaitForSeconds(_enemySpawnerData._spawnAnimDelay);
 
             Enemy poolableObject = EnemyObjectPools[spawnIndex].GetObject();
 
@@ -354,7 +328,7 @@ public class NEW_EnemySpawner : MonoBehaviour
 
     private void SetColliderSizeCenter()
     {
-        _boxHeight = _farZoneSquareSize;
+        _boxHeight = _enemySpawnerData._farZoneSize;
 
         Vector3 size;
         Vector3 center;
@@ -368,17 +342,17 @@ public class NEW_EnemySpawner : MonoBehaviour
 
         // Safe Zone
 
-        size = new Vector3(_safeZoneSquareSize, _boxHeight, _safeZoneSquareSize);
+        size = new Vector3(_enemySpawnerData._safeZoneSize, _boxHeight, _enemySpawnerData._safeZoneSize);
         center = PlayerTransform.position + new Vector3(0, 0, 0);
         SafeZone.size = size;
         SafeZone.center = center;
 
         // Close Zone
 
-        size_x = _closeZoneSquareSize - (_closeZoneSquareSize - _safeZoneSquareSize) / 2;
-        size_y = (_closeZoneSquareSize - _safeZoneSquareSize) / 2;
-        center_x = -(_safeZoneSquareSize / 2 + ((_closeZoneSquareSize - _safeZoneSquareSize) / 4) - _safeZoneSquareSize / 2);
-        center_y = _safeZoneSquareSize / 2 + (_closeZoneSquareSize - _safeZoneSquareSize) / 4;
+        size_x = _enemySpawnerData._closeZoneSize - (_enemySpawnerData._closeZoneSize - _enemySpawnerData._safeZoneSize) / 2;
+        size_y = (_enemySpawnerData._closeZoneSize - _enemySpawnerData._safeZoneSize) / 2;
+        center_x = -(_enemySpawnerData._safeZoneSize / 2 + ((_enemySpawnerData._closeZoneSize - _enemySpawnerData._safeZoneSize) / 4) - _enemySpawnerData._safeZoneSize / 2);
+        center_y = _enemySpawnerData._safeZoneSize / 2 + (_enemySpawnerData._closeZoneSize - _enemySpawnerData._safeZoneSize) / 4;
 
         size = new Vector3(size_x, _boxHeight, size_y);
         center = PlayerTransform.position + new Vector3(center_x, 0, center_y);
@@ -406,10 +380,10 @@ public class NEW_EnemySpawner : MonoBehaviour
 
         // Mid Zone
 
-        size_x = _midZoneSquareSize - (_midZoneSquareSize - _closeZoneSquareSize) / 2;
-        size_y = (_midZoneSquareSize - _closeZoneSquareSize) / 2;
-        center_x = -(_closeZoneSquareSize / 2 + ((_midZoneSquareSize - _closeZoneSquareSize) / 4) - _closeZoneSquareSize / 2);
-        center_y = _closeZoneSquareSize / 2 + (_midZoneSquareSize - _closeZoneSquareSize) / 4;
+        size_x = _enemySpawnerData._midZoneSize - (_enemySpawnerData._midZoneSize - _enemySpawnerData._closeZoneSize) / 2;
+        size_y = (_enemySpawnerData._midZoneSize - _enemySpawnerData._closeZoneSize) / 2;
+        center_x = -(_enemySpawnerData._closeZoneSize / 2 + ((_enemySpawnerData._midZoneSize - _enemySpawnerData._closeZoneSize) / 4) - _enemySpawnerData._closeZoneSize / 2);
+        center_y = _enemySpawnerData._closeZoneSize / 2 + (_enemySpawnerData._midZoneSize - _enemySpawnerData._closeZoneSize) / 4;
 
         size = new Vector3(size_x, _boxHeight, size_y);
         center = PlayerTransform.position + new Vector3(center_x, 0, center_y);
@@ -437,10 +411,10 @@ public class NEW_EnemySpawner : MonoBehaviour
 
         // Far Zone
 
-        size_x = _farZoneSquareSize - (_farZoneSquareSize - _midZoneSquareSize) / 2;
-        size_y = (_farZoneSquareSize - _midZoneSquareSize) / 2;
-        center_x = -(_midZoneSquareSize / 2 + ((_farZoneSquareSize - _midZoneSquareSize) / 4) - _midZoneSquareSize / 2);
-        center_y = _midZoneSquareSize / 2 + (_farZoneSquareSize - _midZoneSquareSize) / 4;
+        size_x = _enemySpawnerData._farZoneSize - (_enemySpawnerData._farZoneSize - _enemySpawnerData._midZoneSize) / 2;
+        size_y = (_enemySpawnerData._farZoneSize - _enemySpawnerData._midZoneSize) / 2;
+        center_x = -(_enemySpawnerData._midZoneSize / 2 + ((_enemySpawnerData._farZoneSize - _enemySpawnerData._midZoneSize) / 4) - _enemySpawnerData._midZoneSize / 2);
+        center_y = _enemySpawnerData._midZoneSize / 2 + (_enemySpawnerData._farZoneSize - _enemySpawnerData._midZoneSize) / 4;
 
         size = new Vector3(size_x, _boxHeight, size_y);
         center = PlayerTransform.position + new Vector3(center_x, 0, center_y);

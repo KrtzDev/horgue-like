@@ -17685,6 +17685,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6843213763226438607, guid: b0d5d15041526b8408159035025686a3,
         type: 3}
+      propertyPath: _enemySpawnerData
+      value: 
+      objectReference: {fileID: 11400000, guid: 1de1f6f20ca28814d80004febe7eed3a,
+        type: 2}
+    - target: {fileID: 6843213763226438607, guid: b0d5d15041526b8408159035025686a3,
+        type: 3}
       propertyPath: EnemySpawnIndicator
       value: 
       objectReference: {fileID: 8528560608847944058, guid: 79ff0b4c2fe9ebf42a32a42871e8f728,
