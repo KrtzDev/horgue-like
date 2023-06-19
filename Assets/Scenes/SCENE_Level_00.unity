@@ -9661,7 +9661,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh48658
+  m_Name: pb_Mesh29814
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -14611,51 +14611,6 @@ Mesh:
     offset: 0
     size: 0
     path: 
---- !u!1 &1773989134
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1773989136}
-  - component: {fileID: 1773989135}
-  m_Layer: 0
-  m_Name: LevelOverlap
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!65 &1773989135
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1773989134}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 50.03754, y: 32.89043, z: 59.76049}
-  m_Center: {x: -23.4336, y: -0.6984043, z: 15.434608}
---- !u!4 &1773989136
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1773989134}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 6526117094618591540}
-  m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1817782018
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14725,9 +14680,46 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6843213763226438607, guid: b0d5d15041526b8408159035025686a3,
         type: 3}
+      propertyPath: _enemySpawnerData
+      value: 
+      objectReference: {fileID: 11400000, guid: 66547b0600cd9b348938adf19e88ab68,
+        type: 2}
+    - target: {fileID: 6843213763226438607, guid: b0d5d15041526b8408159035025686a3,
+        type: 3}
+      propertyPath: LevelZone.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6843213763226438607, guid: b0d5d15041526b8408159035025686a3,
+        type: 3}
       propertyPath: LevelZone.Array.data[0]
       value: 
-      objectReference: {fileID: 1773989135}
+      objectReference: {fileID: 90500542}
+    - target: {fileID: 6843213763226438607, guid: b0d5d15041526b8408159035025686a3,
+        type: 3}
+      propertyPath: LevelZone.Array.data[1]
+      value: 
+      objectReference: {fileID: 1560157802}
+    - target: {fileID: 6843213763226438607, guid: b0d5d15041526b8408159035025686a3,
+        type: 3}
+      propertyPath: LevelZone.Array.data[2]
+      value: 
+      objectReference: {fileID: 2071002179}
+    - target: {fileID: 6843213763226438607, guid: b0d5d15041526b8408159035025686a3,
+        type: 3}
+      propertyPath: LevelZone.Array.data[3]
+      value: 
+      objectReference: {fileID: 2071002179}
+    - target: {fileID: 6843213763226438607, guid: b0d5d15041526b8408159035025686a3,
+        type: 3}
+      propertyPath: _enemySpawnerData.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6843213763226438607, guid: b0d5d15041526b8408159035025686a3,
+        type: 3}
+      propertyPath: _enemySpawnerData.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 66547b0600cd9b348938adf19e88ab68,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b0d5d15041526b8408159035025686a3, type: 3}
 --- !u!1 &1837641223
@@ -23706,7 +23698,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6526117094142527058}
   - component: {fileID: 6526117094142527060}
-  m_Layer: 12
+  m_Layer: 0
   m_Name: Barrier2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -27787,7 +27779,6 @@ Transform:
   - {fileID: 6526117094661121569}
   - {fileID: 6526117094843986789}
   - {fileID: 6526117094062766945}
-  - {fileID: 1773989136}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -38733,7 +38724,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6526117095246495539}
   - component: {fileID: 6526117095246495549}
-  m_Layer: 12
+  m_Layer: 0
   m_Name: Barrier1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -52703,7 +52694,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6526117095798955944}
   - component: {fileID: 6526117095798955946}
-  m_Layer: 12
+  m_Layer: 0
   m_Name: Barrier3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -53321,7 +53312,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6526117095881725468}
   - component: {fileID: 6526117095881725470}
-  m_Layer: 12
+  m_Layer: 0
   m_Name: Barrier4
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -3,7 +3,7 @@
     {
       "Name": "Basic",
       "maxHealth": 15000,
-      "damagePerHit": 10,
+      "damagePerHit": 0,
       "attackSpeed": 1,
       "givenXP": 1,
       "moveSpeed": 1,

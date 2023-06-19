@@ -2571,11 +2571,6 @@ Transform:
   - {fileID: 531591565}
   - {fileID: 530080662172578908}
   - {fileID: 530080663079317447}
-  - {fileID: 197191664}
-  - {fileID: 345945422}
-  - {fileID: 584688360}
-  - {fileID: 1768354505}
-  - {fileID: 1531478322}
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -5525,51 +5520,6 @@ Transform:
   m_Father: {fileID: 136991109}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &197191663
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 197191664}
-  - component: {fileID: 197191665}
-  m_Layer: 0
-  m_Name: LevelOverlap
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &197191664
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 197191663}
-  m_LocalRotation: {x: -0, y: -0, z: -1.7461771e-15, w: 1}
-  m_LocalPosition: {x: 12.78, y: 1, z: -29.45}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 136991109}
-  m_RootOrder: 10
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &197191665
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 197191663}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 48.01409, y: 32.448326, z: 101.19406}
-  m_Center: {x: -3.2048607, y: -0.9194565, z: 19.688326}
 --- !u!43 &208332188
 Mesh:
   m_ObjectHideFlags: 0
@@ -7952,51 +7902,6 @@ Mesh:
     offset: 0
     size: 0
     path: 
---- !u!1 &345945421
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 345945422}
-  - component: {fileID: 345945423}
-  m_Layer: 0
-  m_Name: LevelOverlap_01
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &345945422
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 345945421}
-  m_LocalRotation: {x: -0, y: -0, z: -1.7461771e-15, w: 1}
-  m_LocalPosition: {x: 12.78, y: 1, z: -29.45}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 136991109}
-  m_RootOrder: 11
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &345945423
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 345945421}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 11.935791, y: 32.448326, z: 49.735027}
-  m_Center: {x: -33.68125, y: -0.9194565, z: 19.955439}
 --- !u!43 &348580423
 Mesh:
   m_ObjectHideFlags: 0
@@ -14591,51 +14496,6 @@ Mesh:
     offset: 0
     size: 0
     path: 
---- !u!1 &584688359
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 584688360}
-  - component: {fileID: 584688361}
-  m_Layer: 0
-  m_Name: LevelOverlap_02
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &584688360
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 584688359}
-  m_LocalRotation: {x: -0, y: -0, z: -1.7461771e-15, w: 1}
-  m_LocalPosition: {x: 12.78, y: 1, z: -29.45}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 136991109}
-  m_RootOrder: 12
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &584688361
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 584688359}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 13.094894, y: 32.448326, z: 23.832129}
-  m_Center: {x: -46.538826, y: -0.9194565, z: 7.0039854}
 --- !u!43 &606667267
 Mesh:
   m_ObjectHideFlags: 0
@@ -17685,6 +17545,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6843213763226438607, guid: b0d5d15041526b8408159035025686a3,
         type: 3}
+      propertyPath: _enemySpawnerData
+      value: 
+      objectReference: {fileID: 11400000, guid: 1de1f6f20ca28814d80004febe7eed3a,
+        type: 2}
+    - target: {fileID: 6843213763226438607, guid: b0d5d15041526b8408159035025686a3,
+        type: 3}
       propertyPath: EnemySpawnIndicator
       value: 
       objectReference: {fileID: 8528560608847944058, guid: 79ff0b4c2fe9ebf42a32a42871e8f728,
@@ -17692,33 +17558,33 @@ PrefabInstance:
     - target: {fileID: 6843213763226438607, guid: b0d5d15041526b8408159035025686a3,
         type: 3}
       propertyPath: LevelZone.Array.size
-      value: 5
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6843213763226438607, guid: b0d5d15041526b8408159035025686a3,
         type: 3}
       propertyPath: LevelZone.Array.data[0]
       value: 
-      objectReference: {fileID: 197191665}
+      objectReference: {fileID: 1399023048}
     - target: {fileID: 6843213763226438607, guid: b0d5d15041526b8408159035025686a3,
         type: 3}
       propertyPath: LevelZone.Array.data[1]
       value: 
-      objectReference: {fileID: 345945423}
+      objectReference: {fileID: 1422751063}
     - target: {fileID: 6843213763226438607, guid: b0d5d15041526b8408159035025686a3,
         type: 3}
       propertyPath: LevelZone.Array.data[2]
       value: 
-      objectReference: {fileID: 584688361}
+      objectReference: {fileID: 1700852168}
     - target: {fileID: 6843213763226438607, guid: b0d5d15041526b8408159035025686a3,
         type: 3}
       propertyPath: LevelZone.Array.data[3]
       value: 
-      objectReference: {fileID: 1768354506}
+      objectReference: {fileID: 0}
     - target: {fileID: 6843213763226438607, guid: b0d5d15041526b8408159035025686a3,
         type: 3}
       propertyPath: LevelZone.Array.data[4]
       value: 
-      objectReference: {fileID: 1531478321}
+      objectReference: {fileID: 0}
     - target: {fileID: 6843213763226438607, guid: b0d5d15041526b8408159035025686a3,
         type: 3}
       propertyPath: _EnemiesToSpawn.Array.size
@@ -54008,51 +53874,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1527928339}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1531478320
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1531478322}
-  - component: {fileID: 1531478321}
-  m_Layer: 0
-  m_Name: LevelOverlap_04
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!65 &1531478321
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1531478320}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 11.360413, y: 34.29396, z: 62.794075}
-  m_Center: {x: 40.31005, y: 0.0033607483, z: 14.771183}
---- !u!4 &1531478322
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1531478320}
-  m_LocalRotation: {x: -0, y: -0, z: -1.7461771e-15, w: 1}
-  m_LocalPosition: {x: 12.78, y: 1, z: -29.45}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 136991109}
-  m_RootOrder: 14
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!43 &1532906496
 Mesh:
   m_ObjectHideFlags: 0
@@ -70618,51 +70439,6 @@ MonoBehaviour:
   m_SelectedFaces: 
   m_SelectedEdges: []
   m_SelectedVertices: 
---- !u!1 &1768354504
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1768354505}
-  - component: {fileID: 1768354506}
-  m_Layer: 0
-  m_Name: LevelOverlap_03
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1768354505
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1768354504}
-  m_LocalRotation: {x: -0, y: -0, z: -1.7461771e-15, w: 1}
-  m_LocalPosition: {x: 12.78, y: 1, z: -29.45}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 136991109}
-  m_RootOrder: 13
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &1768354506
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1768354504}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 12.309048, y: 34.29396, z: 77.076935}
-  m_Center: {x: 28.38436, y: 0.0033607483, z: 7.629753}
 --- !u!1 &1770232289
 GameObject:
   m_ObjectHideFlags: 0

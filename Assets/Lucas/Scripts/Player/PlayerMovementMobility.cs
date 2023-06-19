@@ -66,7 +66,7 @@ public class PlayerMovementMobility : MonoBehaviour
     [SerializeField]
     private float _stealthTime;
     [SerializeField]
-    private EnemySpawner _enemySpawner;
+    private NEW_EnemySpawner _enemySpawner;
     [SerializeField]
     private float _movementSpeedMultiplier;
 
@@ -88,7 +88,7 @@ public class PlayerMovementMobility : MonoBehaviour
     {
         _inputActions = new PlayerInputMappings();
         _inputActions.Character.MovementAction.performed += UseAbility;
-        _enemySpawner = GameObject.Find("EnemySpawner").GetComponent<EnemySpawner>();
+        _enemySpawner = GameObject.FindGameObjectWithTag("EnemySpawner").GetComponent<NEW_EnemySpawner>();
         _simpleShot = this.GetComponent<PlayerSimpleShot>();
 
         AbilityCDTimer = -1;

@@ -3,7 +3,25 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "newEnemySpawnerData", menuName = "Data/EnemySpawner Data/Base Data")]
 public class EnemySpawnerData : ScriptableObject
 {
-    public int _enemyWavesToSpawn = 5;
-    public int _enemyWaveSize = 50;
-    public float _enemySpawnDelay = 5;
+    [Header("Spawn Settings")]
+    public int _spawnTick;
+    public int _spawnsPerTick;
+    public int _minEnemyCount;
+    public int _maxEnemyCount;
+
+    [Header("Spawn Delay")]
+    public float _spawnAnimDelay;
+    public float _minSpawnDelay;
+    public float _maxSpawnDelay;
+
+    [Header("Square Zone Sizes")]
+    public float _safeZoneSize;
+    public float _closeZoneSize;
+    public float _midZoneSize;
+    public float _farZoneSize;
+
+    [Header("Zone Maxx Occupation")]
+    public int _maxCloseZoneOcc;
+    public int _maxMidZoneOcc;
+    public int _maxFarZoneOcc;
 }

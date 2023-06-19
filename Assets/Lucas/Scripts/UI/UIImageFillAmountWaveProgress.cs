@@ -22,7 +22,7 @@ public class UIImageFillAmountWaveProgress : UIImageFillAmount
 
     public void Start()
     {
-		_maxEnemiesAmount = _EnemySpawner._maxEnemyCount;
+		_maxEnemiesAmount = _EnemySpawner._enemySpawnerData._maxEnemyCount;
 
         CurrentLevelWave.text = "Level: " + GameManager.Instance._currentLevel + " -- Wave: " + GameManager.Instance._currentWave;
 	}
