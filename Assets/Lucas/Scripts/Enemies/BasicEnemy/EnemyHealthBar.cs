@@ -24,6 +24,14 @@ public class EnemyHealthBar : MonoBehaviour
         transform.Rotate(0, 180, 0);
     }
 
+    private void Update()
+    {
+        if (_healthComponent.CurrentHealth <= 0)
+        {
+            gameObject.SetActive(false);
+        }
+    }
+
     private void HandleHealthChanged(float percent)
     {
 		if (_healthComponent.IsDead)

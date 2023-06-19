@@ -8,16 +8,21 @@ public class EnemiesToSpawn
 {
     public Enemy Enemy;
     public int SpawnChance;
+    public SpawnBias SpawnBias;
 
-    public EnemiesToSpawn (Enemy enemy, int spawnChance)
+    public EnemiesToSpawn (Enemy enemy, int spawnChance, SpawnBias spawnBias)
     {
         Enemy = enemy;
         SpawnChance = spawnChance;
+        SpawnBias = spawnBias;
     }
 }
 
+public enum SpawnBias { Close, Mid, Far };
+
 public class NEW_EnemySpawner : MonoBehaviour
 {
+    public GameObject EnemySpawnIndicator;
     private Transform PlayerTransform;
 
     [Header("Settings")]
@@ -27,17 +32,23 @@ public class NEW_EnemySpawner : MonoBehaviour
     [SerializeField]
     private LayerMask _groundLayer;
     [SerializeField]
-    private bool _enableGizmos;
-    [SerializeField]
     private float _spawnTick;
     [SerializeField]
     private int _spawnsPerTick;
     [SerializeField]
     private int _minEnemyCount;
     [SerializeField]
-    private int _maxEnemyCount;
+    public int _maxEnemyCount;
     private float _spawnTimer = 0;
     private bool _canSpawnEnemies = true;
+
+    [Header("Spawn Delay")]
+    [SerializeField]
+    private float _spawnAnimDelay;
+    [SerializeField]
+    private float _minSpawnDelay;
+    [SerializeField]
+    private float _maxSpawnDelay;
 
     public List<EnemiesToSpawn> _EnemiesToSpawn = new List<EnemiesToSpawn>();
 
@@ -45,41 +56,24 @@ public class NEW_EnemySpawner : MonoBehaviour
     private float _boxHeight;
     [Header("Variables")]
     [SerializeField]
-    private float _safeZoneRadius = 3f;
+    private float _safeZoneSquareSize;
     [SerializeField]
-    private float _closeZoneRadius = 8f;
+    private float _closeZoneSquareSize;
     [SerializeField]
-    private float _midZoneRadius = 16f;
+    private float _midZoneSquareSize;
     [SerializeField]
-    private float _farZoneRadius = 24f;
+    private float _farZoneSquareSize;
 
     [Header("Box Colliders")]
     [SerializeField]
-    private BoxCollider FrontalZone;
+    private BoxCollider SafeZone;
     [SerializeField]
-    private BoxCollider RearZone;
+    private List<BoxCollider> CloseZones = new List<BoxCollider>(4);
     [SerializeField]
-    private BoxCollider LeftLateralZone;
+    private List<BoxCollider> MidZones = new List<BoxCollider>(4);
     [SerializeField]
-    private BoxCollider RightLateralZone;
-    [SerializeField]
-    private BoxCollider LeftUpPeripheralZone;
-    [SerializeField]
-    private BoxCollider RightUpPeripheralZone;
-    [SerializeField]
-    private BoxCollider LeftDownPeripheralZone;
-    [SerializeField]
-    private BoxCollider RightDownPeripheralZone;
+    private List<BoxCollider> FarZones = new List<BoxCollider>(4);
 
-    [Header("Sphere Colliders")]
-    [SerializeField]
-    private SphereCollider SafeZone;
-    [SerializeField]
-    private SphereCollider CloseZone;
-    [SerializeField]
-    private SphereCollider MidZone;
-    [SerializeField]
-    private SphereCollider FarZone;
 
     // Object Pooling
     public Dictionary<int, ObjectPool<Enemy>> EnemyObjectPools = new Dictionary<int, ObjectPool<Enemy>>();
@@ -97,7 +91,7 @@ public class NEW_EnemySpawner : MonoBehaviour
     {
         for (int i = 0; i < _EnemiesToSpawn.Count; i++)
         {
-            EnemyObjectPools.Add(i, ObjectPool<Enemy>.CreatePool(_EnemiesToSpawn[i].Enemy, _maxEnemyCount,transform));
+            EnemyObjectPools.Add(i, ObjectPool<Enemy>.CreatePool(_EnemiesToSpawn[i].Enemy, _maxEnemyCount,transform.parent));
         }
     }
 
@@ -107,7 +101,7 @@ public class NEW_EnemySpawner : MonoBehaviour
 
         if (_spawnTimer >= _spawnTick)
         {
-            int currentEnemies = Mathf.RoundToInt((_minEnemyCount - GameManager.Instance._enemyCount));
+            int currentEnemiesFromMin = Mathf.RoundToInt((_minEnemyCount - GameManager.Instance._enemyCount));
             int spawnIndex = 0;
 
             foreach (EnemiesToSpawn enemy in _EnemiesToSpawn)
@@ -115,9 +109,13 @@ public class NEW_EnemySpawner : MonoBehaviour
                 int enemiesToBeSpawned;
                 enemiesToBeSpawned = 0;
 
-                if (GameManager.Instance._enemyCount < _minEnemyCount) // if enemies are slightly below minEnemyCount, there are only a few enemies spawned
+                if (GameManager.Instance._enemyCount + _spawnsPerTick > _minEnemyCount)
                 {
-                    enemiesToBeSpawned = Mathf.RoundToInt(currentEnemies * (enemy.SpawnChance * 0.01f) + 0.4f);
+                    enemiesToBeSpawned = Mathf.RoundToInt(_spawnsPerTick * (enemy.SpawnChance * 0.01f) + 0.4f);
+                }
+                else if (GameManager.Instance._enemyCount < _minEnemyCount)
+                {
+                    enemiesToBeSpawned = Mathf.RoundToInt(currentEnemiesFromMin * (enemy.SpawnChance * 0.01f) + 0.4f);
                 }
                 else if (GameManager.Instance._enemyCount < _maxEnemyCount)
                 {
@@ -133,13 +131,19 @@ public class NEW_EnemySpawner : MonoBehaviour
 
     private void SpawnEnemies(EnemiesToSpawn enemies, int enemiesToBeSpawned, int spawnIndex) // GameManager.Instance._enemyCount has to be subtracted on Enemy Death in Enemy Script
     {
+        int zoneNumber = Random.Range(0,3);
+
         for (int i = 0; i < enemiesToBeSpawned; i++)
         {
-            SetBounds();
-            if(BoundRadius(RearZone.bounds, _farZoneRadius, _midZoneRadius))
-            {
-                DoSpawnEnemy(enemies, spawnIndex, GetRandomPositionInBounds(RearZone.bounds, _farZoneRadius, _midZoneRadius));
-            }
+            float spawnDelay = Random.Range(_minSpawnDelay, _maxSpawnDelay);
+
+            SetBounds(enemies.SpawnBias, zoneNumber);
+            StartCoroutine(DoSpawnEnemy(enemies, spawnIndex, GetRandomPositionInBounds(Bounds), spawnDelay));
+
+            zoneNumber++;
+            if (zoneNumber > 3)
+                zoneNumber = 0;
+
             GameManager.Instance._enemyCount++;
             if (GameManager.Instance._enemyCount >= _maxEnemyCount)
             {
@@ -147,87 +151,63 @@ public class NEW_EnemySpawner : MonoBehaviour
             }
         }
     }
-    private void SetBounds()
+    private void SetBounds(SpawnBias spawnBias, int zoneNumber)
     {
-        Bounds = RearZone.bounds;
-    }
-
-    private bool BoundRadius(Bounds bounds, float _maxZoneRadius, float _minZoneRadius)
-    {
-        float DistanceToPlayerMinMin = Vector3.Distance(new Vector3(bounds.min.x, PlayerTransform.position.y, bounds.min.z), PlayerTransform.position);
-        float DistanceToPlayerMinMax = Vector3.Distance(new Vector3(bounds.min.x, PlayerTransform.position.y, bounds.max.z), PlayerTransform.position);
-        float DistanceToPlayerMaxMin = Vector3.Distance(new Vector3(bounds.max.x, PlayerTransform.position.y, bounds.min.z), PlayerTransform.position);
-        float DistanceToPlayerMaxMax = Vector3.Distance(new Vector3(bounds.max.x, PlayerTransform.position.y, bounds.max.z), PlayerTransform.position);
-
-        List<float> Distances = new List<float>();
-        Distances.Add(DistanceToPlayerMinMin);
-        Distances.Add(DistanceToPlayerMinMax);
-        Distances.Add(DistanceToPlayerMaxMin);
-        Distances.Add(DistanceToPlayerMaxMax);
-
-        bool inRange = false;
-
-        foreach (float distance in Distances)
+        switch (spawnBias) // Add Detection if Zones are full
         {
-            if (distance <= _maxZoneRadius && distance >= _minZoneRadius)
-            {
-                inRange = true;
+            case SpawnBias.Close:
+                Bounds = CloseZones[zoneNumber].bounds;
                 break;
-            }
+            case SpawnBias.Mid:
+                Bounds = MidZones[zoneNumber].bounds;
+                break;
+            case SpawnBias.Far:
+                Bounds = FarZones[zoneNumber].bounds;
+                break;
         }
-
-        return inRange;
     }
 
-    private Vector3 GetRandomPositionInBounds(Bounds bounds, float _maxZoneRadius, float _minZoneRadius)
+    private Vector3 GetRandomPositionInBounds(Bounds bounds)
     {
         _canSpawnEnemies = false;
         Vector3 possibleSpawnPosition = Vector3.zero;
-        int spawnPositionAttempts = 0;
 
-        while (!_canSpawnEnemies)
+        float xValueInBounds = Random.Range(Bounds.min.x, Bounds.max.x);
+        float zValueInBounds = Random.Range(Bounds.min.z, Bounds.max.z);
+
+        float DistanceToPlayer = Vector3.Distance(new Vector3(xValueInBounds, PlayerTransform.position.y, zValueInBounds), PlayerTransform.position);
+
+        RaycastHit rc_hit;
+        Physics.Raycast(new Vector3(xValueInBounds, Bounds.max.y, zValueInBounds), Vector3.down, out rc_hit, _boxHeight, _groundLayer);
+
+        float yValue = Bounds.max.y - rc_hit.distance;
+        possibleSpawnPosition = new Vector3(xValueInBounds, yValue, zValueInBounds);
+
+        NavMeshHit nv_hit;
+        if (NavMesh.SamplePosition(possibleSpawnPosition, out nv_hit, 1.0f, NavMesh.AllAreas))
         {
-            /*
-             * x and z have to be in radius from the the player
-             * spawn always greater than safe zone
-             */
-
-            float xValueInBounds = Random.Range(Bounds.min.x, Bounds.max.x);
-            float zValueInBounds = Random.Range(Bounds.min.z, Bounds.max.z);
-
-            float DistanceToPlayer = Vector3.Distance(new Vector3(xValueInBounds, PlayerTransform.position.y, zValueInBounds), PlayerTransform.position);
-
-            if(DistanceToPlayer <= _maxZoneRadius && DistanceToPlayer >= _minZoneRadius)
-            {
-                RaycastHit rc_hit;
-                Physics.Raycast(new Vector3(xValueInBounds, Bounds.max.y, zValueInBounds), Vector3.down, out rc_hit, _boxHeight, _groundLayer);
-
-                float yValue = Bounds.max.y - rc_hit.distance;
-                possibleSpawnPosition = new Vector3(xValueInBounds, yValue, zValueInBounds);
-
-                NavMeshHit nv_hit;
-                if (NavMesh.SamplePosition(possibleSpawnPosition, out nv_hit, 1.0f, NavMesh.AllAreas))
-                {
-                    possibleSpawnPosition = nv_hit.position;
-                    _canSpawnEnemies = true;
-                }
-            }
-
-            spawnPositionAttempts++;
-
-            if(spawnPositionAttempts > 10)
-            {
-                break;
-            }
-        } 
+            possibleSpawnPosition = nv_hit.position;
+            _canSpawnEnemies = true;
+        }
 
         return possibleSpawnPosition;
     }
 
-    private void DoSpawnEnemy(EnemiesToSpawn enemies, int spawnIndex, Vector3 spawnPosition)
+    private IEnumerator DoSpawnEnemy(EnemiesToSpawn enemies, int spawnIndex, Vector3 spawnPosition, float spawnDelay)
     {
-        if(_canSpawnEnemies)
+
+        if (_canSpawnEnemies)
         {
+            yield return new WaitForSeconds(spawnDelay);
+
+            NavMeshHit Hit;
+            if (NavMesh.SamplePosition(spawnPosition, out Hit, 2f, -1))
+            {
+                Instantiate(EnemySpawnIndicator, Hit.position, Quaternion.identity);
+            }
+
+            yield return new WaitForSeconds(_spawnAnimDelay);
+
             Enemy poolableObject = EnemyObjectPools[spawnIndex].GetObject();
 
             // Determine Position
@@ -237,7 +217,6 @@ public class NEW_EnemySpawner : MonoBehaviour
                 Animator anim = poolableObject.GetComponent<Animator>();
                 NavMeshAgent agent = poolableObject.GetComponent<NavMeshAgent>();
 
-                NavMeshHit Hit;
                 if (NavMesh.SamplePosition(spawnPosition, out Hit, 2f, -1))
                 {
                     agent.Warp(Hit.position);
@@ -258,135 +237,117 @@ public class NEW_EnemySpawner : MonoBehaviour
 
     private void SetColliderSizeCenter()
     {
-        _boxHeight = _farZoneRadius;
+        _boxHeight = _farZoneSquareSize;
 
         Vector3 size;
         Vector3 center;
 
+        float size_x;
+        float size_y;
+        float center_x;
+        float center_y;
+
         // Box Colliders
 
-        size = new Vector3(_closeZoneRadius * 2, _boxHeight, _farZoneRadius);
-        center = PlayerTransform.position + new Vector3(0, 0, _farZoneRadius / 2);
-        FrontalZone.size = size;
-        FrontalZone.center = center;
+        // Safe Zone
 
-        size = new Vector3(_closeZoneRadius * 2, _boxHeight, _farZoneRadius);
-        center = PlayerTransform.position - new Vector3(0, 0, _farZoneRadius / 2);
-        RearZone.size = size;
-        RearZone.center = center;
+        size = new Vector3(_safeZoneSquareSize, _boxHeight, _safeZoneSquareSize);
+        center = PlayerTransform.position + new Vector3(0, 0, 0);
+        SafeZone.size = size;
+        SafeZone.center = center;
 
-        size = new Vector3(_closeZoneRadius * 2, _boxHeight, _closeZoneRadius * 2);
-        center = PlayerTransform.position + new Vector3(_closeZoneRadius * 2, 0, 0);
-        LeftLateralZone.size = size;
-        LeftLateralZone.center = center;
+        // Close Zone
 
-        size = new Vector3(_closeZoneRadius * 2, _boxHeight, _closeZoneRadius * 2);
-        center = PlayerTransform.position - new Vector3(_closeZoneRadius * 2, 0, 0);
-        RightLateralZone.size = size;
-        RightLateralZone.center = center;
+        size_x = _closeZoneSquareSize - (_closeZoneSquareSize - _safeZoneSquareSize) / 2;
+        size_y = (_closeZoneSquareSize - _safeZoneSquareSize) / 2;
+        center_x = -(_safeZoneSquareSize / 2 + ((_closeZoneSquareSize - _safeZoneSquareSize) / 4) - _safeZoneSquareSize / 2);
+        center_y = _safeZoneSquareSize / 2 + (_closeZoneSquareSize - _safeZoneSquareSize) / 4;
 
-        size = new Vector3(_closeZoneRadius * 2, _boxHeight, _closeZoneRadius * 2);
-        center = PlayerTransform.position + new Vector3(_closeZoneRadius * 2, 0, _closeZoneRadius * 2);
-        LeftUpPeripheralZone.size = size;
-        LeftUpPeripheralZone.center = center;
+        size = new Vector3(size_x, _boxHeight, size_y);
+        center = PlayerTransform.position + new Vector3(center_x, 0, center_y);
+        CloseZones[0].size = size;
+        CloseZones[0].center = center;
+        CloseZones[0].transform.rotation = Quaternion.Euler(0, 0, 0);
 
-        size = new Vector3(_closeZoneRadius * 2, _boxHeight, _closeZoneRadius * 2);
-        center = PlayerTransform.position + new Vector3(-_closeZoneRadius * 2, 0, _closeZoneRadius * 2);
-        RightUpPeripheralZone.size = size;
-        RightUpPeripheralZone.center = center;
+        size = new Vector3(size_x, _boxHeight, size_y);
+        center = PlayerTransform.position + new Vector3(center_x, 0, center_y);
+        CloseZones[1].size = size;
+        CloseZones[1].center = center;
+        CloseZones[1].transform.rotation = Quaternion.Euler(0, 90, 0);
 
-        size = new Vector3(_closeZoneRadius * 2, _boxHeight, _closeZoneRadius * 2);
-        center = PlayerTransform.position + new Vector3(_closeZoneRadius * 2, 0, -_closeZoneRadius * 2);
-        LeftDownPeripheralZone.size = size;
-        LeftDownPeripheralZone.center = center;
+        size = new Vector3(size_x, _boxHeight, size_y);
+        center = PlayerTransform.position + new Vector3(center_x, 0, center_y);
+        CloseZones[2].size = size;
+        CloseZones[2].center = center;
+        CloseZones[2].transform.rotation = Quaternion.Euler(0, 180, 0);
 
-        size = new Vector3(_closeZoneRadius * 2, _boxHeight, _closeZoneRadius * 2);
-        center = PlayerTransform.position + new Vector3(-_closeZoneRadius * 2, 0, -_closeZoneRadius * 2);
-        RightDownPeripheralZone.size = size;
-        RightDownPeripheralZone.center = center;
+        size = new Vector3(size_x, _boxHeight, size_y);
+        center = PlayerTransform.position + new Vector3(center_x, 0, center_y);
+        CloseZones[3].size = size;
+        CloseZones[3].center = center;
+        CloseZones[3].transform.rotation = Quaternion.Euler(0, 270, 0);
 
-        // Collider[] hitColliders = Physics.OverlapBox(center, size / 2, Quaternion.identity, _enemyLayer);
+        // Mid Zone
 
-        // Sphere Colliders
+        size_x = _midZoneSquareSize - (_midZoneSquareSize - _closeZoneSquareSize) / 2;
+        size_y = (_midZoneSquareSize - _closeZoneSquareSize) / 2;
+        center_x = -(_closeZoneSquareSize / 2 + ((_midZoneSquareSize - _closeZoneSquareSize) / 4) - _closeZoneSquareSize / 2);
+        center_y = _closeZoneSquareSize / 2 + (_midZoneSquareSize - _closeZoneSquareSize) / 4;
 
-        SafeZone.radius = _safeZoneRadius;
-        CloseZone.radius = _closeZoneRadius;
-        // Collider[] hitColliders = Physics.OverlapSphere(transform.position, _closeZoneRadius, _enemyLayer);
-        MidZone.radius = _midZoneRadius;
-        // Collider[] hitColliders = Physics.OverlapSphere(transform.position, _midZoneRadius, _enemyLayer);
-        FarZone.radius = _farZoneRadius;
-        // Collider[] hitColliders = Physics.OverlapSphere(transform.position, _farZoneRadius, _enemyLayer);
+        size = new Vector3(size_x, _boxHeight, size_y);
+        center = PlayerTransform.position + new Vector3(center_x, 0, center_y);
+        MidZones[0].size = size;
+        MidZones[0].center = center;
+        MidZones[0].transform.rotation = Quaternion.Euler(0, 0, 0);
+
+        size = new Vector3(size_x, _boxHeight, size_y);
+        center = PlayerTransform.position + new Vector3(center_x, 0, center_y);
+        MidZones[1].size = size;
+        MidZones[1].center = center;
+        MidZones[1].transform.rotation = Quaternion.Euler(0, 90, 0);
+
+        size = new Vector3(size_x, _boxHeight, size_y);
+        center = PlayerTransform.position + new Vector3(center_x, 0, center_y);
+        MidZones[2].size = size;
+        MidZones[2].center = center;
+        MidZones[2].transform.rotation = Quaternion.Euler(0, 180, 0);
+
+        size = new Vector3(size_x, _boxHeight, size_y);
+        center = PlayerTransform.position + new Vector3(center_x, 0, center_y);
+        MidZones[3].size = size;
+        MidZones[3].center = center;
+        MidZones[3].transform.rotation = Quaternion.Euler(0, 270, 0);
+
+        // Far Zone
+
+        size_x = _farZoneSquareSize - (_farZoneSquareSize - _midZoneSquareSize) / 2;
+        size_y = (_farZoneSquareSize - _midZoneSquareSize) / 2;
+        center_x = -(_midZoneSquareSize / 2 + ((_farZoneSquareSize - _midZoneSquareSize) / 4) - _midZoneSquareSize / 2);
+        center_y = _midZoneSquareSize / 2 + (_farZoneSquareSize - _midZoneSquareSize) / 4;
+
+        size = new Vector3(size_x, _boxHeight, size_y);
+        center = PlayerTransform.position + new Vector3(center_x, 0, center_y);
+        FarZones[0].size = size;
+        FarZones[0].center = center;
+        FarZones[0].transform.rotation = Quaternion.Euler(0, 0, 0);
+
+        size = new Vector3(size_x, _boxHeight, size_y);
+        center = PlayerTransform.position + new Vector3(center_x, 0, center_y);
+        FarZones[1].size = size;
+        FarZones[1].center = center;
+        FarZones[1].transform.rotation = Quaternion.Euler(0, 90, 0);
+
+        size = new Vector3(size_x, _boxHeight, size_y);
+        center = PlayerTransform.position + new Vector3(center_x, 0, center_y);
+        FarZones[2].size = size;
+        FarZones[2].center = center;
+        FarZones[2].transform.rotation = Quaternion.Euler(0, 180, 0);
+
+        size = new Vector3(size_x, _boxHeight, size_y);
+        center = PlayerTransform.position + new Vector3(center_x, 0, center_y);
+        FarZones[3].size = size;
+        FarZones[3].center = center;
+        FarZones[3].transform.rotation = Quaternion.Euler(0, 270, 0);
 
     }
-
-    // GIZMOS
-
-    private void OnDrawGizmos()
-    {
-        if (_enableGizmos)
-        {
-            Vector3 _startPos;
-
-            // Settings speichern
-            Color prevColor = Gizmos.color;
-            Matrix4x4 prevMatrix = Gizmos.matrix;
-
-            // Frontal
-            Gizmos.color = Color.cyan;
-            Vector3 FrontalVector = new Vector3(_closeZoneRadius * 2, _boxHeight, _farZoneRadius);
-            _startPos = PlayerTransform.position + new Vector3(0, 0, _farZoneRadius / 2);
-            _startPos = transform.InverseTransformPoint(_startPos);
-            Gizmos.DrawCube(_startPos, FrontalVector);
-
-            // Rear
-            Gizmos.color = Color.magenta;
-            Vector3 RearVector = new Vector3(_closeZoneRadius * 2, _boxHeight, _farZoneRadius);
-            _startPos = PlayerTransform.position - new Vector3(0, 0, _farZoneRadius / 2);
-            _startPos = transform.InverseTransformPoint(_startPos);
-            Gizmos.DrawCube(_startPos, RearVector);
-
-            // Left Lateral
-            Gizmos.color = Color.green;
-            Vector3 LeftLateralVector = new Vector3(_closeZoneRadius * 2, _boxHeight, _closeZoneRadius * 2);
-            _startPos = PlayerTransform.position + new Vector3(_closeZoneRadius * 2, 0, 0);
-            _startPos = transform.InverseTransformPoint(_startPos);
-            Gizmos.DrawCube(_startPos, LeftLateralVector);
-
-            // Right Lateral
-            Vector3 RightLateralVector = new Vector3(_closeZoneRadius * 2, _boxHeight, _closeZoneRadius * 2);
-            _startPos = PlayerTransform.position - new Vector3(_closeZoneRadius * 2, 0, 0);
-            _startPos = transform.InverseTransformPoint(_startPos);
-            Gizmos.DrawCube(_startPos, RightLateralVector);
-
-            // Left Up Peripheral
-            Gizmos.color = Color.yellow;
-            Vector3 LeftUpPeripheralVector = new Vector3(_closeZoneRadius * 2, _boxHeight, _closeZoneRadius * 2);
-            _startPos = PlayerTransform.position + new Vector3(_closeZoneRadius * 2, 0, _closeZoneRadius * 2);
-            _startPos = transform.InverseTransformPoint(_startPos);
-            Gizmos.DrawCube(_startPos, LeftUpPeripheralVector);
-
-            // Right Up Peripheral
-            Vector3 RightUpPeripheralVector = new Vector3(_closeZoneRadius * 2, _boxHeight, _closeZoneRadius * 2);
-            _startPos = PlayerTransform.position + new Vector3(-_closeZoneRadius * 2, 0, _closeZoneRadius * 2);
-            _startPos = transform.InverseTransformPoint(_startPos);
-            Gizmos.DrawCube(_startPos, RightUpPeripheralVector);
-
-            // Left Down Peripheral
-            Vector3 LeftDownPeripheralVector = new Vector3(_closeZoneRadius * 2, _boxHeight, _closeZoneRadius * 2);
-            _startPos = PlayerTransform.position + new Vector3(_closeZoneRadius * 2, 0, -_closeZoneRadius * 2);
-            _startPos = transform.InverseTransformPoint(_startPos);
-            Gizmos.DrawCube(_startPos, LeftDownPeripheralVector);
-
-            // Right Down Peripheral
-            Vector3 RightDownPeripheralVector = new Vector3(_closeZoneRadius * 2, _boxHeight, _closeZoneRadius * 2);
-            _startPos = PlayerTransform.position + new Vector3(-_closeZoneRadius * 2, 0, -_closeZoneRadius * 2);
-            _startPos = transform.InverseTransformPoint(_startPos);
-            Gizmos.DrawCube(_startPos, RightDownPeripheralVector);
-
-            // Settings resetten
-            Gizmos.color = prevColor;
-            Gizmos.matrix = prevMatrix;
-        }
-    }
-
 }
