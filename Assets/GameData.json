@@ -1,9 +1,9 @@
 {
   "Enemies": [
     {
-      "Name": "Basic",
-      "maxHealth": 15000,
-      "damagePerHit": 0,
+      "name": "Basic",
+      "maxHealth": 150,
+      "damagePerHit": 10,
       "attackSpeed": 1,
       "givenXP": 1,
       "moveSpeed": 1,
@@ -12,7 +12,7 @@
       "technicalResistance": 1
     },
     {
-      "Name": "RangedRobot",
+      "name": "RangedRobot",
       "maxHealth": 0.35,
       "damagePerHit": 0.8,
       "attackSpeed": 1.5,
@@ -23,7 +23,7 @@
       "technicalResistance": 0
     },
     {
-      "Name": "PasuKan",
+      "name": "PasuKan",
       "maxHealth": 0.65,
       "damagePerHit": 0.8,
       "attackSpeed": 2.5,
@@ -34,7 +34,7 @@
       "technicalResistance": -50
     },
     {
-      "Name": "GIGARangedRobot",
+      "name": "GIGARangedRobot",
       "maxHealth": 0.75,
       "damagePerHit": 1.2,
       "attackSpeed": 2.5,
@@ -47,7 +47,7 @@
   ],
   "Level": [
     {
-      "Name": "Level01",
+      "name": "Level01",
       "healthBonus": 1,
       "damageBonus": 1,
       "TimeToSurvive": 40,
@@ -67,7 +67,7 @@
       "maxFarZoneOcc": 20
     },
     {
-      "Name": "Level02",
+      "name": "Level02",
       "healthBonus": 1.25,
       "damageBonus": 1.25,
       "TimeToSurvive": 50,
@@ -87,7 +87,7 @@
       "maxFarZoneOcc": 20
     },
     {
-      "Name": "Level03",
+      "name": "Level03",
       "healthBonus": 1.5,
       "damageBonus": 1.5,
       "TimeToSurvive": 60,
@@ -109,9 +109,698 @@
   ],
   "Player": [
     {
-      "Name": "Player",
+      "name": "Player",
       "movementSpeed": 12,
       "maxHealth": 100
+    }
+  ],
+  "Ammunition": [
+    {
+      "name": "Reference",
+      "attackSpeed": "1 p/s",
+      "baseDamage": "100 dp/s",
+      "cooldown": "1 s",
+      "criticalHitChance": 1,
+      "projectileWidth": 1,
+      "range": 25
+    },
+    {
+      "name": "Antique Frag Grenade",
+      "effect": "Dismemberment",
+      "attackSpeed": 0.5,
+      "baseDamage": 0.4,
+      "criticalHitChance": 0.48,
+      "projectileWidth": 0.4,
+      "range": 0.4
+    },
+    {
+      "name": "Caliber .308",
+      "attackSpeed": 0.7,
+      "baseDamage": 1.1,
+      "criticalHitChance": 0.25,
+      "projectileWidth": 0.17,
+      "range": 0.9
+    },
+    {
+      "name": "Caliber .38",
+      "attackSpeed": 1.25,
+      "baseDamage": 0.6,
+      "cooldown": 0.7,
+      "criticalHitChance": 0.4,
+      "projectileWidth": 0.1,
+      "range": 0.25
+    },
+    {
+      "name": "Caliber 5.3",
+      "attackSpeed": 1,
+      "baseDamage": 0.9,
+      "cooldown": 1,
+      "criticalHitChance": 0.18,
+      "projectileWidth": 0.2,
+      "range": 0.67
+    },
+    {
+      "name": "Frag Grenade",
+      "effect": "Area Effect (3 um)",
+      "attackSpeed": 0.4,
+      "baseDamage": 0.9,
+      "cooldown": 1.2,
+      "criticalHitChance": 0.08,
+      "projectileWidth": 0.25,
+      "range": 0.7
+    },
+    {
+      "name": "Gremlin",
+      "effect": "Chaining (4)",
+      "attackSpeed": 0.5,
+      "baseDamage": 0.7,
+      "cooldown": 1.15,
+      "criticalHitChance": 0.1,
+      "projectileWidth": 0.5,
+      "range": 0.5
+    },
+    {
+      "name": "Hot Laser Cell",
+      "effect": "Piercing, Fire (15%, 25%, 10 s, 10 dp/s, 15%)",
+      "attackSpeed": 1.45,
+      "baseDamage": 0.6,
+      "criticalHitChance": 0.05,
+      "projectileWidth": 0.07,
+      "range": 0.45
+    },
+    {
+      "name": "Laser Cell",
+      "effect": "Piercing",
+      "attackSpeed": 1.55,
+      "baseDamage": 0.6,
+      "criticalHitChance": 0.15,
+      "projectileWidth": 0.07,
+      "range": 0.45
+    },
+    {
+      "name": "Nail",
+      "effect": "Piercing",
+      "attackSpeed": 0.6,
+      "baseDamage": 0.65,
+      "criticalHitChance": 0.35,
+      "projectileWidth": 0.05,
+      "range": 0.45
+    },
+    {
+      "name": "Rusty Nail",
+      "effect": "Piercing, Poison (35%, 10 s, 10 dp/s)",
+      "attackSpeed": 0.6,
+      "baseDamage": 0.55,
+      "criticalHitChance": 0.25,
+      "projectileWidth": 0.07,
+      "range": 0.42
+    },
+    {
+      "name": "Sans Plombe 95",
+      "effect": "Fire (25%, 50%, 15 s, 15 dp/s, 10%)",
+      "attackSpeed": 3,
+      "baseDamage": 0.4,
+      "criticalHitChance": 0.03,
+      "projectileWidth": 0.46,
+      "range": 0.3
+    },
+    {
+      "name": "Spiked Basketball",
+      "attackSpeed": 0.6,
+      "baseDamage": 0.5,
+      "criticalHitChance": 0.13,
+      "projectileWidth": 8.2,
+      "range": 0.35
+    }
+  ],
+  "Barrel": [
+    {
+      "name": "Reference",
+      "attackSpeed": "1 p/s",
+      "baseDamage": "100 dp/s",
+      "cooldown": "1 s",
+      "criticalHitChance": 1,
+      "projectileWidth": "1 um",
+      "range": "25 um"
+    },
+    {
+      "name": "Brainified Conical Steel Nickle Barrel",
+      "attackPattern": "Homing",
+      "simultaneousProjectiles": 1,
+      "effect": "Piercing",
+      "attackSpeed": 0.85,
+      "baseDamage": 1.1,
+      "cooldown": 1.4,
+      "criticalHitChance": 0.3,
+      "projectileWidth": 0.1,
+      "range": 1.75
+    },
+    {
+      "name": "Chrome Lined Rifle Barrel",
+      "attackPattern": "Straight Line Burst (0.2)",
+      "simultaneousProjectiles": 1,
+      "numberOfGems": 2,
+      "attackSpeed": 0.45,
+      "baseDamage": 0.8,
+      "cooldown": 1.2,
+      "criticalHitChance": 0.7,
+      "projectileWidth": 0.15,
+      "range": 1.9
+    },
+    {
+      "name": "Electron Polymer Pistol Barrel",
+      "attackPattern": "Straight Line Shot",
+      "simultaneousProjectiles": 1,
+      "numberOfGems": 1,
+      "attackSpeed": 1.3,
+      "baseDamage": 0.75,
+      "projectileWidth": 0.05,
+      "range": 0.6
+    },
+    {
+      "name": "Garden Hose",
+      "attackPattern": "Sinus Shot",
+      "simultaneousProjectiles": 1,
+      "attackSpeed": 0.6,
+      "baseDamage": 0.45,
+      "projectileWidth": 0.1,
+      "range": 0.45
+    },
+    {
+      "name": "Gold Alloyed Titanium Coil",
+      "attackPattern": "Straight Line Shot",
+      "simultaneousProjectiles": 1,
+      "numberOfGems": 1,
+      "attackSpeed": 0.75,
+      "baseDamage": 7.84,
+      "cooldown": 1.3,
+      "criticalHitChance": 0.1,
+      "projectileWidth": 0.1,
+      "range": 1
+    },
+    {
+      "name": "Iron Revolver Barrel",
+      "attackPattern": "Straight Line Shot",
+      "simultaneousProjectiles": 1,
+      "numberOfGems": 1,
+      "attackSpeed": 0.8,
+      "baseDamage": 0.4,
+      "cooldown": 1.2,
+      "criticalHitChance": 0.3,
+      "projectileWidth": 0.25,
+      "range": 0.5
+    },
+    {
+      "name": "Motivating Tube",
+      "attackPattern": "Straight Line Shot Stripe Area (5 um, 2 um)",
+      "simultaneousProjectiles": 1,
+      "baseDamage": 0.3,
+      "projectileWidth": 0.3
+    },
+    {
+      "name": "Neuroplastic Splicer",
+      "attackPattern": "Radial Line Burst (5°)",
+      "simultaneousProjectiles": 3,
+      "baseDamage": 0.26,
+      "projectileWidth": 0.05
+    },
+    {
+      "name": "Neuroplastic Tube",
+      "attackPattern": "Straight Line Shot",
+      "simultaneousProjectiles": 1,
+      "attackSpeed": 0.5,
+      "baseDamage": 0.3,
+      "cooldown": 2,
+      "criticalHitChance": 0.6,
+      "projectileWidth": 0.15,
+      "range": 2
+    },
+    {
+      "name": "Oil Funnel",
+      "attackPattern": "Radial Line Burst (15°)",
+      "simultaneousProjectiles": 3,
+      "baseDamage": 0.5,
+      "criticalHitChance": 0.03,
+      "projectileWidth": 0.15,
+      "range": 0.4
+    },
+    {
+      "name": "Soviet Steel Barrel",
+      "attackPattern": "Straight Line Shot",
+      "simultaneousProjectiles": 1,
+      "attackSpeed": 2,
+      "baseDamage": 0.34,
+      "cooldown": 1.5,
+      "criticalHitChance": 0.13,
+      "projectileWidth": 0.2,
+      "range": 0.8
+    },
+    {
+      "name": "Spout",
+      "attackPattern": "Thrown Circular Area (2 um)",
+      "simultaneousProjectiles": 1,
+      "numberOfGems": 1,
+      "baseDamage": 0.55,
+      "projectileWidth": 1
+    },
+    {
+      "name": "Spud Gun Tube",
+      "attackPattern": "Thrown Circular Area (3 um)",
+      "simultaneousProjectiles": 1,
+      "attackSpeed": 0.5,
+      "baseDamage": 0.4,
+      "cooldown": 1.3,
+      "criticalHitChance": 0.05,
+      "projectileWidth": 0.25,
+      "range": 0.5
+    },
+    {
+      "name": "Stapler",
+      "attackPattern": "Straight Line Burst (0,2 um)",
+      "simultaneousProjectiles": 3,
+      "effect": "Root (3 s)",
+      "baseDamage": 0.3,
+      "cooldown": 0.85,
+      "criticalHitChance": 0.2,
+      "projectileWidth": 0.03,
+      "range": 0.45
+    },
+    {
+      "name": "Wide Long Dispenser",
+      "attackPattern": "Straight Line Burst (0.5 um)",
+      "simultaneousProjectiles": 4,
+      "baseDamage": 0.23,
+      "projectileWidth": 0.1
+    }
+  ],
+  "Grip": [
+    {
+      "name": "Reference",
+      "attackSpeed": "1 p/s",
+      "baseDamage": "100 dp/s",
+      "cooldown": "1 s",
+      "criticalHitChance": 1,
+      "projectileWidth": "1 um",
+      "range": "25 um"
+    },
+    {
+      "name": "30s Double Grip",
+      "numberOfBarrels": 1,
+      "numberOfMagazines": 2,
+      "cooldown": 1.9
+    },
+    {
+      "name": "Alloyed Glass Grip",
+      "numberOfBarrels": 1,
+      "numberOfGems": 1,
+      "numberOfMagazines": 1,
+      "attackSpeed": 1.25,
+      "cooldown": 0.8,
+      "criticalHitChance": 0.13
+    },
+    {
+      "name": "Chestnut Revolver Grip",
+      "numberOfBarrels": 1,
+      "numberOfGems": 1,
+      "numberOfMagazines": 1,
+      "attackSpeed": 1.1,
+      "cooldown": 0.87,
+      "criticalHitChance": 0.1
+    },
+    {
+      "name": "Elastic Hard Rubber Glove",
+      "numberOfBarrels": 1,
+      "numberOfGems": 1,
+      "numberOfMagazines": 1,
+      "attackSpeed": 10.32,
+      "cooldown": 6.98,
+      "criticalHitChance": 0.04
+    },
+    {
+      "name": "Hard Gum Plastic Grip",
+      "numberOfBarrels": 1,
+      "numberOfMagazines": 2,
+      "attackSpeed": 1.3,
+      "cooldown": 0.9,
+      "criticalHitChance": 0.35
+    },
+    {
+      "name": "Heavy Shoulder Supported Rod",
+      "numberOfBarrels": 1,
+      "numberOfGems": 1,
+      "numberOfMagazines": 2,
+      "attackSpeed": 0.7,
+      "cooldown": 1.1,
+      "criticalHitChance": 0.1
+    },
+    {
+      "name": "Hot-Melt Gun Grip",
+      "numberOfBarrels": 1,
+      "numberOfMagazines": 1,
+      "attackSpeed": 1.3,
+      "cooldown": 1.27,
+      "criticalHitChance": 0.05
+    },
+    {
+      "name": "Oak Revolver Grip",
+      "numberOfBarrels": 1,
+      "numberOfGems": 1,
+      "numberOfMagazines": 1,
+      "attackSpeed": 1.1,
+      "cooldown": 1.7,
+      "criticalHitChance": 0.3
+    },
+    {
+      "name": "Physiological Synthetic Grip",
+      "numberOfBarrels": 1,
+      "numberOfMagazines": 1,
+      "attackSpeed": 0.3,
+      "cooldown": 1.3,
+      "criticalHitChance": 0.6
+    },
+    {
+      "name": "Robust Oval Wooden Grip",
+      "numberOfBarrels": 1,
+      "numberOfMagazines": 2,
+      "attackSpeed": 1.7,
+      "cooldown": 2.5,
+      "criticalHitChance": 0.25
+    },
+    {
+      "name": "Shape Adapting Super Grip",
+      "numberOfBarrels": 2,
+      "numberOfMagazines": 1,
+      "attackSpeed": 0.7,
+      "cooldown": 1.59,
+      "criticalHitChance": 0.07
+    },
+    {
+      "name": "Soft Gum Plastic Grip",
+      "numberOfBarrels": 2,
+      "numberOfMagazines": 1,
+      "cooldown": 1
+    },
+    {
+      "name": "Thick Cobalt Finger",
+      "numberOfBarrels": 1,
+      "numberOfMagazines": 2,
+      "cooldown": 1.5
+    }
+  ],
+  "Magazine": [
+    {
+      "name": "Reference",
+      "attackSpeed": "1 p/s",
+      "baseDamage": "100 dp/s",
+      "cooldown": "1 s",
+      "criticalHitChance": 1,
+      "projectileWidth": "1 um",
+      "range": "25 um"
+    },
+    {
+      "name": "Billard Ball Drum",
+      "capacity": 7,
+      "effect": "Stun (2 s)",
+      "numberOfAmmunitionSlots": 2,
+      "attackSpeed": 0.6,
+      "cooldown": 1.4,
+      "projectileWidth": 0.25,
+      "range": 0.45
+    },
+    {
+      "name": "Bolt Storage",
+      "capacity": 9,
+      "effect": "Piercing",
+      "numberOfAmmunitionSlots": 1,
+      "baseDamage": 0.55
+    },
+    {
+      "name": "Cat Basket",
+      "capacity": 6,
+      "numberOfAmmunitionSlots": 4,
+      "attackSpeed": 0.45,
+      "cooldown": 0.9,
+      "projectileWidth": 0.18,
+      "range": 0.35
+    },
+    {
+      "name": "Curved Box",
+      "capacity": 30,
+      "numberOfAmmunitionSlots": 1,
+      "attackSpeed": 1.8,
+      "cooldown": 1.5,
+      "projectileWidth": 0.2
+    },
+    {
+      "name": "Explosive Box",
+      "capacity": 5,
+      "numberOfAmmunitionSlots": 3
+    },
+    {
+      "name": "Internal Small Box",
+      "capacity": 5,
+      "numberOfAmmunitionSlots": 1,
+      "attackSpeed": 1.1,
+      "cooldown": 1.95,
+      "projectileWidth": 0.3
+    },
+    {
+      "name": "Iron Cylinder",
+      "capacity": 8,
+      "numberOfAmmunitionSlots": 1,
+      "attackSpeed": 0.75,
+      "cooldown": 1.3,
+      "projectileWidth": 0.15
+    },
+    {
+      "name": "Medium Energy Cell Block",
+      "capacity": 12,
+      "numberOfAmmunitionSlots": 2,
+      "attackSpeed": 1.4,
+      "baseDamage": 0.6,
+      "cooldown": 1.4,
+      "projectileWidth": 0.1,
+      "range": 0.55
+    },
+    {
+      "name": "Petrol Can",
+      "capacity": 20,
+      "effect": "Fire (25%, 50%, 15 s, 15 dp/s, 10%)",
+      "numberOfAmmunitionSlots": 1,
+      "attackSpeed": 1.1,
+      "cooldown": 1.2,
+      "criticalHitChance": "10 %",
+      "projectileWidth": 0.15,
+      "range": 0.46
+    },
+    {
+      "name": "Pin Block",
+      "capacity": 6,
+      "effect": "Piercing",
+      "numberOfAmmunitionSlots": 1,
+      "attackSpeed": 0.8,
+      "baseDamage": 0.5,
+      "cooldown": 1.6,
+      "projectileWidth": 0.05,
+      "range": 0.45
+    },
+    {
+      "name": "Projectile Encyclopedia",
+      "capacity": 60,
+      "numberOfAmmunitionSlots": 3,
+      "attackSpeed": 0.56,
+      "cooldown": 1.25
+    },
+    {
+      "name": "Submounted Pine Mag",
+      "capacity": 5,
+      "attackSpeed": 0.75,
+      "cooldown": 1.25,
+      "projectileWidth": 0.08,
+      "range": 0.75
+    }
+  ],
+  "Sight": [
+    {
+      "name": "Reference",
+      "attackSpeed": "1 p/s",
+      "baseDamage": "100 dp/s",
+      "cooldown": "1 s",
+      "criticalHitChance": 1,
+      "projectileWidth": "1 um",
+      "range": "25 um"
+    },
+    {
+      "name": "Basic Iron Sights",
+      "attackPattern": "Straight Line Shot",
+      "attackSpeed": 1.1,
+      "criticalHitChance": 0.04,
+      "range": 0.4
+    },
+    {
+      "name": "Blurry Glass Ring Sight",
+      "attackPattern": "Sinus Shot",
+      "criticalHitChance": 0.05
+    },
+    {
+      "name": "Broken Iron Sights",
+      "attackPattern": "Sinus Shot",
+      "criticalHitChance": 0.05
+    },
+    {
+      "name": "Digital Sniper Sight",
+      "attackPattern": "Straight Line Shot",
+      "attackSpeed": 0.4,
+      "criticalHitChance": 0.7,
+      "range": 2
+    },
+    {
+      "name": "Digital Target Lock Telescope",
+      "attackPattern": "Homing",
+      "criticalHitChance": 0.4,
+      "range": 1
+    },
+    {
+      "name": "Geometrical Sight",
+      "attackPattern": "Thrown Circular Area (4 um)",
+      "criticalHitChance": 0.1
+    },
+    {
+      "name": "Leafy Tree Branch",
+      "attackPattern": "Straight Line Shot",
+      "attackSpeed": 0.8,
+      "criticalHitChance": 0.02,
+      "range": 0.4
+    },
+    {
+      "name": "Plastic Pinned Ring Sight",
+      "attackPattern": "Straight Line Shot",
+      "criticalHitChance": 0.15
+    },
+    {
+      "name": "SLR Lens",
+      "attackPattern": "Straight Line Shot",
+      "criticalHitChance": 7.93,
+      "range": 1
+    },
+    {
+      "name": "Sunglasses",
+      "attackPattern": "Straight Line Shot",
+      "attackSpeed": 1.5,
+      "baseDamage": 1.2,
+      "cooldown": 1.5,
+      "criticalHitChance": 0.2,
+      "range": 0.8
+    },
+    {
+      "name": "Quadratic Red Point Sight",
+      "attackPattern": "Straight Line Shot",
+      "attackSpeed": 1.13,
+      "criticalHitChance": 0.22,
+      "range": 1
+    }
+  ],
+  "TriggerMechanism": [
+    {
+      "name": "Reference",
+      "attackSpeed": "1 p/s",
+      "baseDamage": "100 dp/s",
+      "cooldown": "1 s",
+      "criticalHitChance": 1,
+      "projectileWidth": "1 um",
+      "range": "25 um"
+    },
+    {
+      "name": "Adjustable Break Trigger",
+      "attackSpeed": 0.2,
+      "baseDamage": 1,
+      "cooldown": 2,
+      "criticalHitChance": 0.6,
+      "range": 1.2
+    },
+    {
+      "name": "Air Pressurizer",
+      "attackSpeed": 0.7,
+      "baseDamage": 0.47,
+      "cooldown": 1.6,
+      "range": 0.5
+    },
+    {
+      "name": "Ball Dispenser",
+      "numberOfGems": 1,
+      "attackSpeed": 0.4,
+      "range": 0.7
+    },
+    {
+      "name": "Binary Powder Trigger",
+      "attackSpeed": 3,
+      "baseDamage": 0.3,
+      "cooldown": 1.8,
+      "criticalHitChance": 0.12,
+      "range": 0.7
+    },
+    {
+      "name": "Brainifier",
+      "effect": "Damage over Time (20 dp/s, 5 s)",
+      "attackSpeed": 0.65,
+      "range": 1
+    },
+    {
+      "name": "Gas Pressure Grenade Dispenser",
+      "attackSpeed": 0.6,
+      "baseDamage": 0.7,
+      "cooldown": 1,
+      "criticalHitChance": 0.1,
+      "projectileWidth": "10 %",
+      "range": 0.7
+    },
+    {
+      "name": "Iron Backloader",
+      "attackSpeed": 0.8,
+      "baseDamage": 0.7,
+      "cooldown": 1.4,
+      "criticalHitChance": 0.4,
+      "range": 0.9
+    },
+    {
+      "name": "Laser Emitter",
+      "effect": "Piercing",
+      "attackSpeed": 1.5,
+      "baseDamage": 0.6,
+      "cooldown": 1.45,
+      "criticalHitChance": 0.1,
+      "range": 0.6
+    },
+    {
+      "name": "Petrol Pump",
+      "effect": "Fire (25%, 50%, 15 s, 15 dp/s, 10%)",
+      "attackSpeed": 2,
+      "baseDamage": 0.4,
+      "cooldown": 1.35,
+      "criticalHitChance": 0.07,
+      "range": 0.28
+    },
+    {
+      "name": "Slingshot",
+      "attackSpeed": 0.7,
+      "baseDamage": 0.83,
+      "cooldown": 0.3,
+      "criticalHitChance": 0.13,
+      "range": 0.78
+    },
+    {
+      "name": "Sound Powered Drum Trigger",
+      "attackSpeed": 10,
+      "baseDamage": 0.43,
+      "cooldown": 0.87
+    },
+    {
+      "name": "Quick Underlevel Repeater",
+      "attackSpeed": 1.1,
+      "baseDamage": 0.85,
+      "cooldown": 0.95,
+      "criticalHitChance": 0.1,
+      "range": 1
     }
   ]
 }
