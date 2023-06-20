@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -75,11 +76,6 @@ public class NEW_EnemySpawner : MonoBehaviour
     {
         transform.SetPositionAndRotation(PlayerTransform.position, PlayerTransform.rotation); // performance heavy?
 
-        Debug.DrawLine(new Vector3(FarZones[0].center.x + FarZones[0].size.x / 2, FarZones[0].center.y + FarZones[0].size.y / 2, FarZones[0].center.z - FarZones[0].size.z / 2), new Vector3(FarZones[0].center.x - FarZones[0].size.x / 2, FarZones[0].center.y + FarZones[0].size.y / 2, FarZones[0].center.z - FarZones[0].size.z / 2), Color.blue, 10f);
-        Debug.DrawLine(new Vector3(FarZones[1].center.x + FarZones[1].size.x / 2, FarZones[1].center.y + FarZones[1].size.y / 2, FarZones[1].center.z + FarZones[1].size.z / 2), new Vector3(FarZones[1].center.x + FarZones[1].size.x / 2, FarZones[1].center.y + FarZones[1].size.y / 2, FarZones[1].center.z - FarZones[1].size.z / 2), Color.blue, 10f);
-        Debug.DrawLine(new Vector3(FarZones[2].center.x - FarZones[2].size.x / 2, FarZones[2].center.y + FarZones[2].size.y / 2, FarZones[2].center.z + FarZones[2].size.z / 2), new Vector3(FarZones[2].center.x + FarZones[2].size.x / 2, FarZones[2].center.y + FarZones[2].size.y / 2, FarZones[2].center.z + FarZones[2].size.z / 2), Color.blue, 10f);
-        Debug.DrawLine(new Vector3(FarZones[3].center.x - FarZones[3].size.x / 2, FarZones[3].center.y + FarZones[3].size.y / 2, FarZones[3].center.z - FarZones[3].size.z / 2), new Vector3(FarZones[3].center.x - FarZones[3].size.x / 2, FarZones[3].center.y + FarZones[3].size.y / 2, FarZones[3].center.z + FarZones[3].size.z / 2), Color.blue, 10f);
-
         if (_spawnTimer >= _enemySpawnerData._spawnTick)
         {
             int currentEnemiesFromMin = Mathf.RoundToInt((_enemySpawnerData._minEnemyCount - GameManager.Instance._enemyCount));
@@ -151,17 +147,71 @@ public class NEW_EnemySpawner : MonoBehaviour
                 DeterminePossibleBound(spawnBias, zoneNumber, 0);
                 break;
             case SpawnBias.Level: // Spawns the Enemies at the furthest away LevelSpawnPoint
-                float distanceToBounds = 0;              
-                for(int i = 0; i < LevelZone.Count; i++)
+                DetermineRandomSpawnLocation();
+                break;
+        }
+    }
+
+    public class RandomSpawnLocation{
+        public int Number;
+        public float DistanceToSpawnPosition;
+
+        public RandomSpawnLocation (int number, float distanceToSpawnPosition)
+        {
+            Number = number;
+            DistanceToSpawnPosition = distanceToSpawnPosition;
+        }
+    }
+
+    private void DetermineRandomSpawnLocation()
+    {
+        List<RandomSpawnLocation> randomSpawnLocation = new List<RandomSpawnLocation>();
+        int zoneNumber = 0;
+        float distanceToBounds = 0;
+        float distanceToMidZone = _enemySpawnerData._midZoneSize * Mathf.Sqrt(2);
+
+        for (int i = 0; i < LevelZone.Count; i++)
+        {
+            distanceToBounds = Vector3.Distance(new Vector3(LevelZone[i].transform.position.x, PlayerTransform.position.y, LevelZone[i].transform.position.z), PlayerTransform.position);
+
+            if (distanceToBounds > distanceToMidZone)
+            {
+                randomSpawnLocation.Add(new RandomSpawnLocation(i, distanceToBounds));
+            }
+        }
+
+        if (randomSpawnLocation.Count > 0)
+        {
+            int removeNumber = -1;
+            float lowestDistance = Mathf.Infinity;
+            List<int> bestSpawnNumbers = new List<int>();
+
+            zoneNumber = Random.Range(0, LevelZone.Count);
+
+            for (int i = 0; i < Mathf.RoundToInt(Mathf.RoundToInt(randomSpawnLocation.Count * 0.575f)); i++)
+            {
+                for (int j = 0; j < randomSpawnLocation.Count; j++)
                 {
-                    if(distanceToBounds < Vector3.Distance(PlayerTransform.position, LevelZone[i].center))
+                    if (lowestDistance > randomSpawnLocation[j].DistanceToSpawnPosition)
                     {
-                        distanceToBounds = Vector3.Distance(PlayerTransform.position, LevelZone[i].center);
-                        zoneNumber = i;
+                        zoneNumber = randomSpawnLocation[j].Number;
+                        removeNumber = j;
                     }
                 }
-                Bounds = LevelZone[zoneNumber].bounds;
-                break;
+
+                bestSpawnNumbers.Add(zoneNumber);
+                if(removeNumber >= 0)
+                {
+                    randomSpawnLocation.RemoveAt(removeNumber);
+                }
+            }
+
+            if(bestSpawnNumbers.Count > 0)
+            {
+                zoneNumber = bestSpawnNumbers[Random.Range(0, bestSpawnNumbers.Count)];
+            }
+
+            Bounds = LevelZone[zoneNumber].bounds;  
         }
     }
 
@@ -241,7 +291,6 @@ public class NEW_EnemySpawner : MonoBehaviour
                         DeterminePossibleBound(SpawnBias.Far, 0, 0);
                         break;
                     case SpawnBias.Far:
-                        Debug.Log("Spawn Random");
                         SetBounds(SpawnBias.Level, 0);
                         break;
                 }
