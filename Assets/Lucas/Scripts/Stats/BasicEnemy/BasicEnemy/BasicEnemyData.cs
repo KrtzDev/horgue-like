@@ -13,6 +13,7 @@ public class BasicEnemyData : ScriptableObject
     public float _armor;
     public float _elementalResistance;
     public float _technicalResistance;
+    public float _healthDropChance;
 
     [Header("Movement")]
     public float _attackRange;

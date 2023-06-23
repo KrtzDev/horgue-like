@@ -19,8 +19,7 @@ public class HealthComponent : MonoBehaviour
 	public bool IsDead { get; private set; } = false;
 
 	[Header("Enemy Drops")]
-	[Range(0, 100)]
-	public int dropChance;
+	private int _healthDropChance;
 	public GameObject healthDrop;
 	public GameObject coinDrop;
 
@@ -31,8 +30,8 @@ public class HealthComponent : MonoBehaviour
 			Enemy = gameObject.GetComponent<Enemy>();
 			MaxHealth = Enemy.EnemyData._maxHealth;
 			CurrentHealth = MaxHealth;
+			_healthDropChance = (int)(Enemy.EnemyData._healthDropChance * 100);
 		}
-
 
 		IsDead = false;
 	}
@@ -104,7 +103,7 @@ public class HealthComponent : MonoBehaviour
 	private void DropHealthPotion()
 	{
 		int random = UnityEngine.Random.Range(0, 100);
-		if (random <= dropChance)
+		if (random <= _healthDropChance)
 		{
 			Instantiate(healthDrop, _hitParticlePosition.position, Quaternion.identity);
 		}

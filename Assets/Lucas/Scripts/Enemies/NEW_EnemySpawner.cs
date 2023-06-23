@@ -24,6 +24,7 @@ public enum SpawnBias { Close, Mid, Far, Level };
 public class NEW_EnemySpawner : MonoBehaviour
 {
     public GameObject EnemySpawnIndicator;
+    public GameObject EnemyObjectPoolParent;
     private Transform PlayerTransform;
 
     [Header("Settings")]
@@ -68,7 +69,7 @@ public class NEW_EnemySpawner : MonoBehaviour
     {
         for (int i = 0; i < _EnemiesToSpawn.Count; i++)
         {
-            EnemyObjectPools.Add(i, ObjectPool<Enemy>.CreatePool(_EnemiesToSpawn[i].Enemy, _enemySpawnerData._maxEnemyCount,transform.parent));
+            EnemyObjectPools.Add(i, ObjectPool<Enemy>.CreatePool(_EnemiesToSpawn[i].Enemy, _enemySpawnerData._maxEnemyCount, EnemyObjectPoolParent.transform));
         }
     }
 

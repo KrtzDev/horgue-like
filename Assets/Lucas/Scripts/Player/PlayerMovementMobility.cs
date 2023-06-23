@@ -312,12 +312,12 @@ public class PlayerMovementMobility : MonoBehaviour
     {
         _isUsingAbility = false;
 
-        for (int i = 0; i < _enemySpawner.transform.childCount; i++)
+        for (int i = 0; i < _enemySpawner.EnemyObjectPoolParent.transform.childCount; i++)
         {
-            for (int j = 0; j < _enemySpawner.transform.GetChild(i).childCount; j++)
+            for (int j = 0; j < _enemySpawner.EnemyObjectPoolParent.transform.GetChild(i).childCount; j++)
             {
                 // _EnemySpawner.transform.GetChild(i).GetChild(j).GetComponent<EnemyMovement>().PlayerTarget = this.transform;
-                _enemySpawner.transform.GetChild(i).GetChild(j).GetComponent<Enemy>().FollowDecoy = false;
+                _enemySpawner.EnemyObjectPoolParent.transform.GetChild(i).GetChild(j).GetComponent<Enemy>().FollowDecoy = false;
             }
         }
 

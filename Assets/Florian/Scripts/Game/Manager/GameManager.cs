@@ -28,18 +28,22 @@ public class GameManager : Singleton<GameManager>
 	public int _currentScore;
 
 	private NEW_EnemySpawner _enemySpawner;
-	private GameObject _enemyPool;
 	public int _neededEnemyKill;
 	public int _enemyCount;
 	private bool _hasWon;
 	private bool _hasLost;
 
 	public int _currentLevel = 1;
+	private int _lastLevel;
 	public int _currentLevelArray;
 	public int _currentWave = 0;
 
 	private int _numberOfRewards = 3;
 
+
+	[Header("Player")]
+	private GameObject _player;
+	public int _currentPlayerHealth;
 	public bool _playerCanUseAbilities;
 
 	private void Start()
@@ -50,6 +54,7 @@ public class GameManager : Singleton<GameManager>
 
 		_currentScore = 0;
 		_currentLevel = 1;
+		_lastLevel = 0;
 		_currentLevelArray = _currentLevel - 1;
 	}
 
@@ -75,8 +80,10 @@ public class GameManager : Singleton<GameManager>
 		_hasWon = false;
 		_hasLost = false;
 
-		_enemySpawner = GameObject.Find("EnemySpawner").GetComponent<NEW_EnemySpawner>();
+		_enemySpawner = GameObject.FindGameObjectWithTag("EnemySpawner").GetComponent<NEW_EnemySpawner>();
 		_neededEnemyKill = _enemySpawner._enemySpawnerData._maxEnemyCount;
+
+		_player = GameObject.FindGameObjectWithTag("Player");
 
 		if (_currentLevel == 1 && _currentWave == 0)
 		{
@@ -86,6 +93,11 @@ public class GameManager : Singleton<GameManager>
 				weapon.ResetWeaponParts();
 			}
 		}
+
+		if(_lastLevel == _currentLevel)
+        {
+			_player.GetComponent<HealthComponent>().CurrentHealth = _currentPlayerHealth;
+        }
 
 		_currentWave += 1;
 
@@ -157,6 +169,9 @@ public class GameManager : Singleton<GameManager>
 	{
 		Debug.Log("Round won");
 		InputManager.Instance.CharacterInputActions.Disable();
+		_playerCanUseAbilities = false;
+
+		_lastLevel = _currentLevel;
 
 		if (_currentWave >= 3)
 		{
@@ -170,7 +185,7 @@ public class GameManager : Singleton<GameManager>
 			UIManager.Instance.DisplayRewards(rewards);
 
 
-			_currentLevel += 1;
+			_currentLevel += 1;		
 			_currentLevelArray = _currentLevel - 1;
 			_currentWave = 0;
 
@@ -185,22 +200,14 @@ public class GameManager : Singleton<GameManager>
 			UIManager.Instance.ShowWaveEndScreen(LevelStatus.Won);
 		}
 
+		_currentPlayerHealth = _player.GetComponent<HealthComponent>().CurrentHealth;
+
 		EnemyStopFollowing();
 	}
 
 	private void EnemyStopFollowing()
 	{
-		/* for (int i = 0; i < _enemySpawner.transform.childCount; i++)
-		{
-			for (int j = 0; j < _enemySpawner.transform.GetChild(i).childCount; j++)
-			{
-				// _EnemySpawner.transform.GetChild(i).GetChild(j).GetComponent<EnemyMovement>().PlayerTarget = _Decoy.transform;
-				_enemySpawner.transform.GetChild(i).GetChild(j).GetComponent<NavMeshAgent>().enabled = false;
-			}
-		}
-		_enemySpawner.gameObject.SetActive(false);
-		*/
-
+		_enemySpawner.EnemyObjectPoolParent.SetActive(false);
 	}
 
 	private void RoundLost()
@@ -209,6 +216,7 @@ public class GameManager : Singleton<GameManager>
 		InputManager.Instance.CharacterInputActions.Disable();
 		UIManager.Instance.ShowLevelEndScreen(LevelStatus.Lost);
 		UIManager.Instance.WaveEndScreen.gameObject.SetActive(false);
+		_playerCanUseAbilities = false;
 		EnemyStopFollowing();
 	}
 

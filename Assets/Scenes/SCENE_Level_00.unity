@@ -13581,6 +13581,37 @@ Mesh:
     offset: 0
     size: 0
     path: 
+--- !u!1 &1655643683
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1655643684}
+  m_Layer: 0
+  m_Name: EnemyObjectPool
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1655643684
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1655643683}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1680833920
 GameObject:
   m_ObjectHideFlags: 0
@@ -14680,15 +14711,9 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6843213763226438607, guid: b0d5d15041526b8408159035025686a3,
         type: 3}
-      propertyPath: _enemySpawnerData
+      propertyPath: EnemyObjectPoolParent
       value: 
-      objectReference: {fileID: 11400000, guid: 66547b0600cd9b348938adf19e88ab68,
-        type: 2}
-    - target: {fileID: 6843213763226438607, guid: b0d5d15041526b8408159035025686a3,
-        type: 3}
-      propertyPath: LevelZone.Array.size
-      value: 30
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1655643683}
     - target: {fileID: 6843213763226438607, guid: b0d5d15041526b8408159035025686a3,
         type: 3}
       propertyPath: LevelZone.Array.data[0]
@@ -14841,15 +14866,14 @@ PrefabInstance:
       objectReference: {fileID: 220047285}
     - target: {fileID: 6843213763226438607, guid: b0d5d15041526b8408159035025686a3,
         type: 3}
-      propertyPath: _enemySpawnerData.Array.size
-      value: 1
+      propertyPath: _EnemiesToSpawn.Array.size
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6843213763226438607, guid: b0d5d15041526b8408159035025686a3,
         type: 3}
-      propertyPath: _enemySpawnerData.Array.data[0]
-      value: 
-      objectReference: {fileID: 11400000, guid: 66547b0600cd9b348938adf19e88ab68,
-        type: 2}
+      propertyPath: _EnemiesToSpawn.Array.data[1].SpawnChance
+      value: 60
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b0d5d15041526b8408159035025686a3, type: 3}
 --- !u!1 &1837641223

@@ -63,6 +63,7 @@ public class GameDataReader : MonoBehaviour
         public float armor;
         public float elementalResistance;
         public float technicalResistance;
+        public float healthDropChance;
     }
 
     [System.Serializable]
@@ -313,6 +314,7 @@ public class GameDataReader : MonoBehaviour
                 _enemyData[i]._armor = myEnemyList.Enemies[i].armor;
                 _enemyData[i]._elementalResistance = myEnemyList.Enemies[i].elementalResistance;
                 _enemyData[i]._technicalResistance = myEnemyList.Enemies[i].technicalResistance;
+                _enemyData[i]._healthDropChance = myEnemyList.Enemies[i].healthDropChance;
             }
             else
             {
@@ -325,6 +327,7 @@ public class GameDataReader : MonoBehaviour
                 _enemyData[i]._armor = myEnemyList.Enemies[i].armor * _enemyData[0]._armor;
                 _enemyData[i]._elementalResistance = myEnemyList.Enemies[i].elementalResistance * _enemyData[0]._elementalResistance;
                 _enemyData[i]._technicalResistance = myEnemyList.Enemies[i].technicalResistance * _enemyData[0]._technicalResistance;
+                _enemyData[i]._healthDropChance = myEnemyList.Enemies[i].healthDropChance * _enemyData[0]._healthDropChance;
             }
         }
 

@@ -317,33 +317,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EnemySpawnIndicator: {fileID: 8528560608847944058, guid: 79ff0b4c2fe9ebf42a32a42871e8f728,
     type: 3}
+  EnemyObjectPoolParent: {fileID: 0}
+  _enemySpawnerData: {fileID: 11400000, guid: 66547b0600cd9b348938adf19e88ab68, type: 2}
   _enemyLayer:
     serializedVersion: 2
     m_Bits: 128
   _groundLayer:
     serializedVersion: 2
     m_Bits: 512
-  _mapConstraintsLayer:
-    serializedVersion: 2
-    m_Bits: 4096
-  _spawnTick: 3
-  _spawnsPerTick: 6
-  _minEnemyCount: 10
-  _maxEnemyCount: 35
-  _spawnAnimDelay: 1
-  _minSpawnDelay: 0
-  _maxSpawnDelay: 1
   _EnemiesToSpawn:
   - Enemy: {fileID: 2751320019283796165, guid: 2a6539935274eac47890703bacc52741, type: 3}
     SpawnChance: 40
     SpawnBias: 0
   - Enemy: {fileID: 7300998086142530308, guid: d30f34610fd5f8444b39f9f1cebdd5dc, type: 3}
-    SpawnChance: 60
+    SpawnChance: 40
+    SpawnBias: 1
+  - Enemy: {fileID: 7300998086142530308, guid: 2f7dfe7c04c5a34479faeb99aee024e8, type: 3}
+    SpawnChance: 20
     SpawnBias: 2
-  _safeZoneSquareSize: 5
-  _closeZoneSquareSize: 10
-  _midZoneSquareSize: 20
-  _farZoneSquareSize: 30
   SafeZone: {fileID: 6843213763204194101}
   CloseZones:
   - {fileID: 6843213763415749403}
@@ -362,9 +353,35 @@ MonoBehaviour:
   - {fileID: 6843213763325713354}
   LevelZone:
   - {fileID: 0}
-  _maxCloseZoneOcc: 8
-  _maxMidZoneOcc: 15
-  _maxFarZoneOcc: 20
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!1 &6843213763256042514
 GameObject:
   m_ObjectHideFlags: 0
