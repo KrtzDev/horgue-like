@@ -4,17 +4,19 @@ using UnityEngine;
 
 public class CoinDrop : MonoBehaviour
 {
-    [SerializeField]
-    private AudioSource _collectSound;
-
-    private void PlaySound()
+    private void SetDeactive()
     {
-        _collectSound.Play();
-
+        this.gameObject.SetActive(false);
     }
 
-    private void DeleteGameObject()
+    private void Awake()
     {
-        Destroy(transform.parent.gameObject);
+        StartCoroutine(Delete());
+    }
+
+    IEnumerator Delete()
+    {
+        yield return new WaitForSeconds(2);
+        Destroy(transform.gameObject);
     }
 }

@@ -96,10 +96,10 @@ public class PasuKan_ChaseState : StateMachineBehaviour
                 agent.acceleration *= 1.5f;
                 agent.speed *= 1.5f;
 
-                if(enemy.GetComponent<HealthComponent>().CurrentHealth > 0)
+                if(enemy.GetComponent<HealthComponent>()._currentHealth > 0)
                 {
-                    enemy.GetComponent<HealthComponent>().MaxHealth *= 2;
-                    enemy.GetComponent<HealthComponent>().CurrentHealth = enemy.GetComponent<HealthComponent>().MaxHealth;
+                    enemy.GetComponent<HealthComponent>()._maxHealth *= 2;
+                    enemy.GetComponent<HealthComponent>()._currentHealth = enemy.GetComponent<HealthComponent>()._maxHealth;
                 }
             }
             else

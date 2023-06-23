@@ -2,21 +2,20 @@ using UnityEngine;
 using UnityEngine.UI;
 public abstract class UIImageFillAmount : MonoBehaviour
 {
-    [SerializeField]
-    protected Image _ImageToFill;
+    [SerializeField] protected Image _imageToFill;
     protected float _currentValue;
     protected float _maxValue;
 
     public virtual void Awake()
     {
-        if (_ImageToFill ==  null)
+        if (_imageToFill ==  null)
         {
-            _ImageToFill = this.GetComponent<Image>();
+            _imageToFill = this.GetComponent<Image>();
         }
     }
 
     public virtual void FixedUpdate()
     {
-        _ImageToFill.fillAmount = _currentValue / _maxValue;
+        _imageToFill.fillAmount = _currentValue / _maxValue;
     }
 }

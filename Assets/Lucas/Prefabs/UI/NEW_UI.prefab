@@ -1448,7 +1448,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb2553767baa48043a330dbe29c693e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _ImageToFill: {fileID: 0}
+  _imageToFill: {fileID: 0}
 --- !u!1 &1274344089883786201
 GameObject:
   m_ObjectHideFlags: 0
@@ -2146,7 +2146,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb2553767baa48043a330dbe29c693e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _ImageToFill: {fileID: 0}
+  _imageToFill: {fileID: 0}
 --- !u!1 &1274344090419270354
 GameObject:
   m_ObjectHideFlags: 0
@@ -3187,7 +3187,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2799ae5af5afe3b4ea5fbe4960c1760b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _ImageToFill: {fileID: 0}
+  _imageToFill: {fileID: 0}
   _healthText: {fileID: 1274344090862284424}
 --- !u!1 &1274344091111834546
 GameObject:
@@ -3472,11 +3472,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0dbe7da0118ab0d41ba53ca3d7b74fda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _ImageToFill: {fileID: 1274344091143044669}
-  EnemiesKilledText: {fileID: 1274344089812815509}
-  CurrentLevelWave: {fileID: 1274344089289000946}
-  ScoreText: {fileID: 1274344089141624290}
-  LevelTimer: {fileID: 1274344089662601246}
+  _imageToFill: {fileID: 1274344091143044669}
+  _enemiesKilledText: {fileID: 1274344089812815509}
+  _CurrentLevelWave: {fileID: 1274344089289000946}
+  _ScoreText: {fileID: 1274344089141624290}
+  _LevelTimer: {fileID: 1274344089662601246}
 --- !u!1 &4820870826323410495
 GameObject:
   m_ObjectHideFlags: 0

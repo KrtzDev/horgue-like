@@ -21,67 +21,59 @@ public class EnemiesToSpawn
 
 public enum SpawnBias { Close, Mid, Far, Level };
 
-public class NEW_EnemySpawner : MonoBehaviour
+public class EnemySpawner : MonoBehaviour
 {
-    public GameObject EnemySpawnIndicator;
-    private Transform PlayerTransform;
+    public GameObject _enemySpawnIndicator;
+    public GameObject _enemyObjectPoolParent;
+    private Transform _playerTransform;
 
     [Header("Settings")]
-    [SerializeField]
-    public EnemySpawnerData _enemySpawnerData;
-    [SerializeField]
-    private LayerMask _enemyLayer;
-    [SerializeField]
-    private LayerMask _groundLayer;
+    [SerializeField] public EnemySpawnerData _enemySpawnerData;
+    [SerializeField] private LayerMask _enemyLayer;
+    [SerializeField] private LayerMask _groundLayer;
     private float _spawnTimer = 0;
     private bool _canSpawnEnemies = true;
     private float _boxHeight;
 
-    public List<EnemiesToSpawn> _EnemiesToSpawn = new List<EnemiesToSpawn>();
+    public List<EnemiesToSpawn> _enemiesToSpawn = new List<EnemiesToSpawn>();
 
     [Header("Box Colliders")]
-    [SerializeField]
-    private BoxCollider SafeZone;
-    [SerializeField]
-    private List<BoxCollider> CloseZones = new List<BoxCollider>();
-    [SerializeField]
-    private List<BoxCollider> MidZones = new List<BoxCollider>();
-    [SerializeField]
-    private List<BoxCollider> FarZones = new List<BoxCollider>();
-    [SerializeField]
-    private List<BoxCollider> LevelZone = new List<BoxCollider>();
-
+    [SerializeField] private BoxCollider _safeZone;
+    [SerializeField] private List<BoxCollider> _closeZones = new List<BoxCollider>();
+    [SerializeField] private List<BoxCollider> _midZones = new List<BoxCollider>();
+    [SerializeField] private List<BoxCollider> _farZones = new List<BoxCollider>();
+    [SerializeField] private List<BoxCollider> _levelZone = new List<BoxCollider>();
 
     // Object Pooling
-    public Dictionary<int, ObjectPool<Enemy>> EnemyObjectPools = new Dictionary<int, ObjectPool<Enemy>>();
-    private Bounds Bounds;
+    public Dictionary<int, ObjectPool<Enemy>> _enemyObjectPool = new Dictionary<int, ObjectPool<Enemy>>();
+    private Bounds _bounds;
 
     private void Awake()
     {
-        if (PlayerTransform == null)
-            PlayerTransform = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
+        if (_playerTransform == null)
+            _playerTransform = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
 
         SetColliderSizeCenter();
     }
 
     private void Start()
     {
-        for (int i = 0; i < _EnemiesToSpawn.Count; i++)
+        for (int i = 0; i < _enemiesToSpawn.Count; i++)
         {
-            EnemyObjectPools.Add(i, ObjectPool<Enemy>.CreatePool(_EnemiesToSpawn[i].Enemy, _enemySpawnerData._maxEnemyCount,transform.parent));
+            _enemyObjectPool.Add(i, ObjectPool<Enemy>.CreatePool(_enemiesToSpawn[i].Enemy, _enemySpawnerData._maxEnemyCount, _enemyObjectPoolParent.transform));
         }
     }
 
     private void Update()
     {
-        transform.SetPositionAndRotation(PlayerTransform.position, PlayerTransform.rotation); // performance heavy?
+        transform.SetPositionAndRotation(_playerTransform.position, _playerTransform.rotation); // performance heavy?
 
         if (_spawnTimer >= _enemySpawnerData._spawnTick)
         {
             int currentEnemiesFromMin = Mathf.RoundToInt((_enemySpawnerData._minEnemyCount - GameManager.Instance._enemyCount));
             int spawnIndex = 0;
 
-            foreach (EnemiesToSpawn enemy in _EnemiesToSpawn)
+            foreach (EnemiesToSpawn enemy in _enemiesToSpawn)
             {
                 int enemiesToBeSpawned;
                 enemiesToBeSpawned = 0;
@@ -117,7 +109,7 @@ public class NEW_EnemySpawner : MonoBehaviour
             float spawnDelay = Random.Range(_enemySpawnerData._minSpawnDelay, _enemySpawnerData._maxSpawnDelay);
 
             SetBounds(enemies.SpawnBias, zoneNumber);
-            StartCoroutine(DoSpawnEnemy(enemies, spawnIndex, GetRandomPositionInBounds(Bounds), spawnDelay));
+            StartCoroutine(DoSpawnEnemy(enemies, spawnIndex, GetRandomPositionInBounds(_bounds), spawnDelay));
 
             zoneNumber++;
             if (zoneNumber > 3)
@@ -135,15 +127,15 @@ public class NEW_EnemySpawner : MonoBehaviour
         switch (spawnBias) // Add Detection if Zones are full
         {
             case SpawnBias.Close:
-                Bounds = CloseZones[zoneNumber].bounds;
+                _bounds = _closeZones[zoneNumber].bounds;
                 DeterminePossibleBound(spawnBias, zoneNumber, 0);
                 break;
             case SpawnBias.Mid:
-                Bounds = MidZones[zoneNumber].bounds;
+                _bounds = _midZones[zoneNumber].bounds;
                 DeterminePossibleBound(spawnBias, zoneNumber, 0);
                 break;
             case SpawnBias.Far:
-                Bounds = FarZones[zoneNumber].bounds;
+                _bounds = _farZones[zoneNumber].bounds;
                 DeterminePossibleBound(spawnBias, zoneNumber, 0);
                 break;
             case SpawnBias.Level: // Spawns the Enemies at the furthest away LevelSpawnPoint
@@ -170,9 +162,9 @@ public class NEW_EnemySpawner : MonoBehaviour
         float distanceToBounds = 0;
         float distanceToMidZone = _enemySpawnerData._midZoneSize * Mathf.Sqrt(2);
 
-        for (int i = 0; i < LevelZone.Count; i++)
+        for (int i = 0; i < _levelZone.Count; i++)
         {
-            distanceToBounds = Vector3.Distance(new Vector3(LevelZone[i].transform.position.x, PlayerTransform.position.y, LevelZone[i].transform.position.z), PlayerTransform.position);
+            distanceToBounds = Vector3.Distance(new Vector3(_levelZone[i].transform.position.x, _playerTransform.position.y, _levelZone[i].transform.position.z), _playerTransform.position);
 
             if (distanceToBounds > distanceToMidZone)
             {
@@ -186,7 +178,7 @@ public class NEW_EnemySpawner : MonoBehaviour
             float lowestDistance = Mathf.Infinity;
             List<int> bestSpawnNumbers = new List<int>();
 
-            zoneNumber = Random.Range(0, LevelZone.Count);
+            zoneNumber = Random.Range(0, _levelZone.Count);
 
             for (int i = 0; i < Mathf.RoundToInt(Mathf.RoundToInt(randomSpawnLocation.Count * 0.575f)); i++)
             {
@@ -211,7 +203,7 @@ public class NEW_EnemySpawner : MonoBehaviour
                 zoneNumber = bestSpawnNumbers[Random.Range(0, bestSpawnNumbers.Count)];
             }
 
-            Bounds = LevelZone[zoneNumber].bounds;  
+            _bounds = _levelZone[zoneNumber].bounds;  
         }
     }
 
@@ -228,28 +220,28 @@ public class NEW_EnemySpawner : MonoBehaviour
         switch (zoneNumber)
         {
             case 0:
-                max1 = new Vector3(Bounds.center.x - Bounds.size.x / 2, Bounds.center.y + Bounds.size.y / 2, Bounds.center.z + Bounds.size.z / 2);
-                max2 = new Vector3(Bounds.center.x + Bounds.size.x / 2, Bounds.center.y + Bounds.size.y / 2, Bounds.center.z + Bounds.size.z / 2);
-                min1 = new Vector3(Bounds.center.x + Bounds.size.x / 2, Bounds.center.y + Bounds.size.y / 2, Bounds.center.z - Bounds.size.z / 2);
-                min2 = new Vector3(Bounds.center.x - Bounds.size.x / 2, Bounds.center.y + Bounds.size.y / 2, Bounds.center.z - Bounds.size.z / 2);
+                max1 = new Vector3(_bounds.center.x - _bounds.size.x / 2, _bounds.center.y + _bounds.size.y / 2, _bounds.center.z + _bounds.size.z / 2);
+                max2 = new Vector3(_bounds.center.x + _bounds.size.x / 2, _bounds.center.y + _bounds.size.y / 2, _bounds.center.z + _bounds.size.z / 2);
+                min1 = new Vector3(_bounds.center.x + _bounds.size.x / 2, _bounds.center.y + _bounds.size.y / 2, _bounds.center.z - _bounds.size.z / 2);
+                min2 = new Vector3(_bounds.center.x - _bounds.size.x / 2, _bounds.center.y + _bounds.size.y / 2, _bounds.center.z - _bounds.size.z / 2);
                 break;
             case 1:
-                max1 = new Vector3(Bounds.center.x - Bounds.size.x / 2, Bounds.center.y + Bounds.size.y / 2, Bounds.center.z - Bounds.size.z / 2);
-                max2 = new Vector3(Bounds.center.x - Bounds.size.x / 2, Bounds.center.y + Bounds.size.y / 2, Bounds.center.z + Bounds.size.z / 2);
-                min1 = new Vector3(Bounds.center.x + Bounds.size.x / 2, Bounds.center.y + Bounds.size.y / 2, Bounds.center.z + Bounds.size.z / 2);
-                min2 = new Vector3(Bounds.center.x + Bounds.size.x / 2, Bounds.center.y + Bounds.size.y / 2, Bounds.center.z - Bounds.size.z / 2);
+                max1 = new Vector3(_bounds.center.x - _bounds.size.x / 2, _bounds.center.y + _bounds.size.y / 2, _bounds.center.z - _bounds.size.z / 2);
+                max2 = new Vector3(_bounds.center.x - _bounds.size.x / 2, _bounds.center.y + _bounds.size.y / 2, _bounds.center.z + _bounds.size.z / 2);
+                min1 = new Vector3(_bounds.center.x + _bounds.size.x / 2, _bounds.center.y + _bounds.size.y / 2, _bounds.center.z + _bounds.size.z / 2);
+                min2 = new Vector3(_bounds.center.x + _bounds.size.x / 2, _bounds.center.y + _bounds.size.y / 2, _bounds.center.z - _bounds.size.z / 2);
                 break;
             case 2:
-                max1 = new Vector3(Bounds.center.x + Bounds.size.x / 2, Bounds.center.y + Bounds.size.y / 2, Bounds.center.z - Bounds.size.z / 2);
-                max2 = new Vector3(Bounds.center.x - Bounds.size.x / 2, Bounds.center.y + Bounds.size.y / 2, Bounds.center.z - Bounds.size.z / 2);
-                min1 = new Vector3(Bounds.center.x - Bounds.size.x / 2, Bounds.center.y + Bounds.size.y / 2, Bounds.center.z + Bounds.size.z / 2);
-                min2 = new Vector3(Bounds.center.x + Bounds.size.x / 2, Bounds.center.y + Bounds.size.y / 2, Bounds.center.z + Bounds.size.z / 2);
+                max1 = new Vector3(_bounds.center.x + _bounds.size.x / 2, _bounds.center.y + _bounds.size.y / 2, _bounds.center.z - _bounds.size.z / 2);
+                max2 = new Vector3(_bounds.center.x - _bounds.size.x / 2, _bounds.center.y + _bounds.size.y / 2, _bounds.center.z - _bounds.size.z / 2);
+                min1 = new Vector3(_bounds.center.x - _bounds.size.x / 2, _bounds.center.y + _bounds.size.y / 2, _bounds.center.z + _bounds.size.z / 2);
+                min2 = new Vector3(_bounds.center.x + _bounds.size.x / 2, _bounds.center.y + _bounds.size.y / 2, _bounds.center.z + _bounds.size.z / 2);
                 break;
             case 3:
-                max1 = new Vector3(Bounds.center.x + Bounds.size.x / 2, Bounds.center.y + Bounds.size.y / 2, Bounds.center.z + Bounds.size.z / 2);
-                max2 = new Vector3(Bounds.center.x + Bounds.size.x / 2, Bounds.center.y + Bounds.size.y / 2, Bounds.center.z - Bounds.size.z / 2);
-                min1 = new Vector3(Bounds.center.x - Bounds.size.x / 2, Bounds.center.y + Bounds.size.y / 2, Bounds.center.z - Bounds.size.z / 2);
-                min2 = new Vector3(Bounds.center.x - Bounds.size.x / 2, Bounds.center.y + Bounds.size.y / 2, Bounds.center.z + Bounds.size.z / 2);
+                max1 = new Vector3(_bounds.center.x + _bounds.size.x / 2, _bounds.center.y + _bounds.size.y / 2, _bounds.center.z + _bounds.size.z / 2);
+                max2 = new Vector3(_bounds.center.x + _bounds.size.x / 2, _bounds.center.y + _bounds.size.y / 2, _bounds.center.z - _bounds.size.z / 2);
+                min1 = new Vector3(_bounds.center.x - _bounds.size.x / 2, _bounds.center.y + _bounds.size.y / 2, _bounds.center.z - _bounds.size.z / 2);
+                min2 = new Vector3(_bounds.center.x - _bounds.size.x / 2, _bounds.center.y + _bounds.size.y / 2, _bounds.center.z + _bounds.size.z / 2);
                 break;
         }
 
@@ -303,15 +295,15 @@ public class NEW_EnemySpawner : MonoBehaviour
             switch (spawnBias)
             {
                 case SpawnBias.Close:
-                    for (int i = 0; i < CloseZones.Count; i++)
+                    for (int i = 0; i < _closeZones.Count; i++)
                     {
-                        Collider[] enemyHitColliders = Physics.OverlapBox(CloseZones[i].center, CloseZones[i].size / 2, Quaternion.identity, _enemyLayer);
+                        Collider[] enemyHitColliders = Physics.OverlapBox(_closeZones[i].center, _closeZones[i].size / 2, Quaternion.identity, _enemyLayer);
                         _enemyCountInCollider += enemyHitColliders.Length;
                     }
 
                     if(_enemyCountInCollider < _enemySpawnerData._maxCloseZoneOcc)
                     {
-                        Bounds = CloseZones[zoneNumber].bounds;
+                        _bounds = _closeZones[zoneNumber].bounds;
                     }
                     else
                     {
@@ -319,15 +311,15 @@ public class NEW_EnemySpawner : MonoBehaviour
                     }
                     break;
                 case SpawnBias.Mid:
-                    for (int i = 0; i < MidZones.Count; i++)
+                    for (int i = 0; i < _midZones.Count; i++)
                     {
-                        Collider[] enemyHitColliders = Physics.OverlapBox(MidZones[i].center, MidZones[i].size / 2, Quaternion.identity, _enemyLayer);
+                        Collider[] enemyHitColliders = Physics.OverlapBox(_midZones[i].center, _midZones[i].size / 2, Quaternion.identity, _enemyLayer);
                         _enemyCountInCollider += enemyHitColliders.Length;
                     }
 
                     if (_enemyCountInCollider < _enemySpawnerData._maxMidZoneOcc)
                     {
-                        Bounds = MidZones[zoneNumber].bounds;
+                        _bounds = _midZones[zoneNumber].bounds;
                     }
                     else
                     {
@@ -335,15 +327,15 @@ public class NEW_EnemySpawner : MonoBehaviour
                     }
                     break;
                 case SpawnBias.Far:
-                    for (int i = 0; i < FarZones.Count; i++)
+                    for (int i = 0; i < _farZones.Count; i++)
                     {
-                        Collider[] enemyHitColliders = Physics.OverlapBox(FarZones[i].center, FarZones[i].size / 2, Quaternion.identity, _enemyLayer);
+                        Collider[] enemyHitColliders = Physics.OverlapBox(_farZones[i].center, _farZones[i].size / 2, Quaternion.identity, _enemyLayer);
                         _enemyCountInCollider += enemyHitColliders.Length;
                     }
 
                     if (_enemyCountInCollider < _enemySpawnerData._maxFarZoneOcc)
                     {
-                        Bounds = FarZones[zoneNumber].bounds;
+                        _bounds = _farZones[zoneNumber].bounds;
                     }
                     else
                     {
@@ -359,15 +351,15 @@ public class NEW_EnemySpawner : MonoBehaviour
         _canSpawnEnemies = false;
         Vector3 possibleSpawnPosition = Vector3.zero;
 
-        float xValueInBounds = Random.Range(Bounds.min.x, Bounds.max.x);
-        float zValueInBounds = Random.Range(Bounds.min.z, Bounds.max.z);
+        float xValueInBounds = Random.Range(_bounds.min.x, _bounds.max.x);
+        float zValueInBounds = Random.Range(_bounds.min.z, _bounds.max.z);
 
-        float DistanceToPlayer = Vector3.Distance(new Vector3(xValueInBounds, PlayerTransform.position.y, zValueInBounds), PlayerTransform.position);
+        float DistanceToPlayer = Vector3.Distance(new Vector3(xValueInBounds, _playerTransform.position.y, zValueInBounds), _playerTransform.position);
 
         RaycastHit rc_hit;
-        Physics.Raycast(new Vector3(xValueInBounds, Bounds.max.y, zValueInBounds), Vector3.down, out rc_hit, _boxHeight, _groundLayer);
+        Physics.Raycast(new Vector3(xValueInBounds, _bounds.max.y, zValueInBounds), Vector3.down, out rc_hit, _boxHeight, _groundLayer);
 
-        float yValue = Bounds.max.y - rc_hit.distance;
+        float yValue = _bounds.max.y - rc_hit.distance;
         possibleSpawnPosition = new Vector3(xValueInBounds, yValue, zValueInBounds);
 
         NavMeshHit nv_hit;
@@ -389,12 +381,12 @@ public class NEW_EnemySpawner : MonoBehaviour
             NavMeshHit Hit;
             if (NavMesh.SamplePosition(spawnPosition, out Hit, 2f, -1))
             {
-                Instantiate(EnemySpawnIndicator, Hit.position, Quaternion.identity);
+                Instantiate(_enemySpawnIndicator, Hit.position, Quaternion.identity);
             }
 
             yield return new WaitForSeconds(_enemySpawnerData._spawnAnimDelay);
 
-            Enemy poolableObject = EnemyObjectPools[spawnIndex].GetObject();
+            Enemy poolableObject = _enemyObjectPool[spawnIndex].GetObject();
 
             // Determine Position
 
@@ -438,9 +430,9 @@ public class NEW_EnemySpawner : MonoBehaviour
         // Safe Zone
 
         size = new Vector3(_enemySpawnerData._safeZoneSize, _boxHeight, _enemySpawnerData._safeZoneSize);
-        center = PlayerTransform.position + new Vector3(0, 0, 0);
-        SafeZone.size = size;
-        SafeZone.center = center;
+        center = _playerTransform.position + new Vector3(0, 0, 0);
+        _safeZone.size = size;
+        _safeZone.center = center;
 
         // Close Zone
 
@@ -450,24 +442,24 @@ public class NEW_EnemySpawner : MonoBehaviour
         center_y = _enemySpawnerData._safeZoneSize / 2 + (_enemySpawnerData._closeZoneSize - _enemySpawnerData._safeZoneSize) / 4;
 
         size = new Vector3(size_x, _boxHeight, size_y);
-        center = PlayerTransform.position + new Vector3(center_x, 0, center_y);
-        CloseZones[0].size = size;
-        CloseZones[0].center = center;
+        center = _playerTransform.position + new Vector3(center_x, 0, center_y);
+        _closeZones[0].size = size;
+        _closeZones[0].center = center;
 
         size = new Vector3(size_y, _boxHeight, size_x);
-        center = PlayerTransform.position + new Vector3(-center_y, 0, center_x);
-        CloseZones[1].size = size;
-        CloseZones[1].center = center;
+        center = _playerTransform.position + new Vector3(-center_y, 0, center_x);
+        _closeZones[1].size = size;
+        _closeZones[1].center = center;
 
         size = new Vector3(size_x, _boxHeight, size_y);
-        center = PlayerTransform.position + new Vector3(-center_x, 0, -center_y);
-        CloseZones[2].size = size;
-        CloseZones[2].center = center;
+        center = _playerTransform.position + new Vector3(-center_x, 0, -center_y);
+        _closeZones[2].size = size;
+        _closeZones[2].center = center;
 
         size = new Vector3(size_y, _boxHeight, size_x);
-        center = PlayerTransform.position + new Vector3(center_y, 0, -center_x);
-        CloseZones[3].size = size;
-        CloseZones[3].center = center;
+        center = _playerTransform.position + new Vector3(center_y, 0, -center_x);
+        _closeZones[3].size = size;
+        _closeZones[3].center = center;
 
         // Mid Zone
 
@@ -477,24 +469,24 @@ public class NEW_EnemySpawner : MonoBehaviour
         center_y = _enemySpawnerData._closeZoneSize / 2 + (_enemySpawnerData._midZoneSize - _enemySpawnerData._closeZoneSize) / 4;
 
         size = new Vector3(size_x, _boxHeight, size_y);
-        center = PlayerTransform.position + new Vector3(center_x, 0, center_y);
-        MidZones[0].size = size;
-        MidZones[0].center = center;
+        center = _playerTransform.position + new Vector3(center_x, 0, center_y);
+        _midZones[0].size = size;
+        _midZones[0].center = center;
 
         size = new Vector3(size_y, _boxHeight, size_x);
-        center = PlayerTransform.position + new Vector3(-center_y, 0, center_x);
-        MidZones[1].size = size;
-        MidZones[1].center = center;
+        center = _playerTransform.position + new Vector3(-center_y, 0, center_x);
+        _midZones[1].size = size;
+        _midZones[1].center = center;
 
         size = new Vector3(size_x, _boxHeight, size_y);
-        center = PlayerTransform.position + new Vector3(-center_x, 0, -center_y);
-        MidZones[2].size = size;
-        MidZones[2].center = center;
+        center = _playerTransform.position + new Vector3(-center_x, 0, -center_y);
+        _midZones[2].size = size;
+        _midZones[2].center = center;
 
         size = new Vector3(size_y, _boxHeight, size_x);
-        center = PlayerTransform.position + new Vector3(center_y, 0, -center_x);
-        MidZones[3].size = size;
-        MidZones[3].center = center;
+        center = _playerTransform.position + new Vector3(center_y, 0, -center_x);
+        _midZones[3].size = size;
+        _midZones[3].center = center;
 
         // Far Zone
 
@@ -504,23 +496,23 @@ public class NEW_EnemySpawner : MonoBehaviour
         center_y = _enemySpawnerData._midZoneSize / 2 + (_enemySpawnerData._farZoneSize - _enemySpawnerData._midZoneSize) / 4;
 
         size = new Vector3(size_x, _boxHeight, size_y);
-        center = PlayerTransform.position + new Vector3(center_x, 0, center_y);
-        FarZones[0].size = size;
-        FarZones[0].center = center;
+        center = _playerTransform.position + new Vector3(center_x, 0, center_y);
+        _farZones[0].size = size;
+        _farZones[0].center = center;
 
         size = new Vector3(size_y, _boxHeight, size_x);
-        center = PlayerTransform.position + new Vector3(-center_y, 0, center_x);
-        FarZones[1].size = size;
-        FarZones[1].center = center;
+        center = _playerTransform.position + new Vector3(-center_y, 0, center_x);
+        _farZones[1].size = size;
+        _farZones[1].center = center;
 
         size = new Vector3(size_x, _boxHeight, size_y);
-        center = PlayerTransform.position + new Vector3(-center_x, 0, -center_y);
-        FarZones[2].size = size;
-        FarZones[2].center = center;
+        center = _playerTransform.position + new Vector3(-center_x, 0, -center_y);
+        _farZones[2].size = size;
+        _farZones[2].center = center;
 
         size = new Vector3(size_y, _boxHeight, size_x);
-        center = PlayerTransform.position + new Vector3(center_y, 0, -center_x);
-        FarZones[3].size = size;
-        FarZones[3].center = center;
+        center = _playerTransform.position + new Vector3(center_y, 0, -center_x);
+        _farZones[3].size = size;
+        _farZones[3].center = center;
     }
 }

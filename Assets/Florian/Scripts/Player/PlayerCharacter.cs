@@ -21,8 +21,8 @@ public class PlayerCharacter : MonoBehaviour
     private void Awake()
     {
         _healthComponent = this.GetComponent<HealthComponent>();
-        _healthComponent.MaxHealth = _playerData._maxHealth;
-        _healthComponent.CurrentHealth = _healthComponent.MaxHealth;
+        _healthComponent._maxHealth = _playerData._maxHealth;
+        _healthComponent._currentHealth = _healthComponent._maxHealth;
     }
 
     private void Update()

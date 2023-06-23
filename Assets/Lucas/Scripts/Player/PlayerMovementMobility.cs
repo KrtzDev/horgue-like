@@ -5,21 +5,15 @@ using UnityEngine.AI;
 
 public class PlayerMovementMobility : MonoBehaviour
 {
-    [field: SerializeField, Header("Player General Ability")]
-    public float AbilityCDTimer { get; set; }
-    [field: SerializeField]
-    public float CurrentMaxCD { get; set; }
+    [Header("Player General Ability")]
+    public float _abilityCDTimer;
+    public float _currentMaxCD;
 
-    [SerializeField]
-    private bool _isGrounded;
-    [SerializeField]
-    private float _groundCheckValueY;
-    [SerializeField]
-    private Vector3 _groundCheckBox;
-    [SerializeField]
-    private LayerMask _groundLayer;
-    [SerializeField]
-    private LayerMask _enemyLayer;
+    [SerializeField] private bool _isGrounded;
+    [SerializeField] private float _groundCheckValueY;
+    [SerializeField] private Vector3 _groundCheckBox;
+    [SerializeField] private LayerMask _groundLayer;
+    [SerializeField] private LayerMask _enemyLayer;
 
     private PlayerCharacter _character;
     private PlayerMovement _playerMovement;
@@ -29,57 +23,38 @@ public class PlayerMovementMobility : MonoBehaviour
 
     [Header("Which (one) Ability can be used?")]
 
-    [SerializeField]
-    private bool _canUseJumpAbility;
-    [SerializeField]
-    private bool _canUseDashAbility;
-    [SerializeField]
-    private bool _canUseStealthAbility;
-    [SerializeField]
-    private bool _canUseFlickerStrikeAbility;
+    [SerializeField] private bool _canUseJumpAbility;
+    [SerializeField] private bool _canUseDashAbility;
+    [SerializeField] private bool _canUseStealthAbility;
+    [SerializeField] private bool _canUseFlickerStrikeAbility;
 
     [Header("Player Jump Ability")]
-    [SerializeField]
-    private float _jumpCD;
-    [SerializeField] 
-    private float _fallMultiplier = 7;
-    [SerializeField] 
-    private float _jumpVelocityFalloff = 8;
-    [SerializeField] 
-    private float _jumpForce = 15;
+    [SerializeField] private float _jumpCD;
+    [SerializeField] private float _fallMultiplier = 7;
+    [SerializeField] private float _jumpVelocityFalloff = 8;
+    [SerializeField] private float _jumpForce = 15;
 
     private bool _hasJumped;
 
     [Header("Player Dash Ability")]
-    [SerializeField]
-    private GameObject _decoy;
-    [SerializeField]
-    private float _dashCD;
-    [SerializeField]
-    private float _dashForce = 30;
-    [SerializeField]
-    private float _dashTime = 0.25f;
+    [SerializeField] private GameObject _decoy;
+    [SerializeField] private float _dashCD;
+    [SerializeField] private float _dashForce = 30;
+    [SerializeField] private float _dashTime = 0.25f;
 
     [Header("Player Stealth Ability")]
-    [SerializeField]
-    private float _stealthCD;
-    [SerializeField]
-    private float _stealthTime;
-    [SerializeField]
-    private NEW_EnemySpawner _enemySpawner;
-    [SerializeField]
-    private float _movementSpeedMultiplier;
+    [SerializeField] private float _stealthCD;
+    [SerializeField] private float _stealthTime;
+    [SerializeField] private EnemySpawner _enemySpawner;
+    [SerializeField] private float _movementSpeedMultiplier;
 
     private float _stealthMovementSpeed;
     private float _originalMovementSpeed;
 
     [Header("Player Flicker Strike Ability")]
-    [SerializeField]
-    private float _flickerStrikeCD;
-    [SerializeField]
-    private float _flickerStrikeTime;
-    [SerializeField]
-    private float _flickerStrikeRange;
+    [SerializeField] private float _flickerStrikeCD;
+    [SerializeField] private float _flickerStrikeTime;
+    [SerializeField] private float _flickerStrikeRange;
 
     private Enemy _closestEnemy;
     private PlayerSimpleShot _simpleShot;
@@ -88,10 +63,10 @@ public class PlayerMovementMobility : MonoBehaviour
     {
         _inputActions = new PlayerInputMappings();
         _inputActions.Character.MovementAction.performed += UseAbility;
-        _enemySpawner = GameObject.FindGameObjectWithTag("EnemySpawner").GetComponent<NEW_EnemySpawner>();
+        _enemySpawner = GameObject.FindGameObjectWithTag("EnemySpawner").GetComponent<EnemySpawner>();
         _simpleShot = this.GetComponent<PlayerSimpleShot>();
 
-        AbilityCDTimer = -1;
+        _abilityCDTimer = -1;
     }
 
     private void Start()
@@ -156,22 +131,22 @@ public class PlayerMovementMobility : MonoBehaviour
     {
         if (ctx.performed && !_isUsingAbility && GameManager.Instance._playerCanUseAbilities)
         {
-            if (_canUseJumpAbility && AbilityCDTimer <= 0)
+            if (_canUseJumpAbility && _abilityCDTimer <= 0)
             {
                 JumpAbility();
             }
 
-            if (_canUseDashAbility && AbilityCDTimer <= 0)
+            if (_canUseDashAbility && _abilityCDTimer <= 0)
             {
                 DashAbility();
             }
 
-            if (_canUseStealthAbility && AbilityCDTimer <= 0)
+            if (_canUseStealthAbility && _abilityCDTimer <= 0)
             {
                 StealthAbility();
             }
 
-            if (_canUseFlickerStrikeAbility && AbilityCDTimer <= 0)
+            if (_canUseFlickerStrikeAbility && _abilityCDTimer <= 0)
             {
                 FlickerStrikeAbility();
             }
@@ -180,7 +155,7 @@ public class PlayerMovementMobility : MonoBehaviour
 
     private void TrackTimer()
     {
-        if (AbilityCDTimer > 0) AbilityCDTimer -= Time.deltaTime;
+        if (_abilityCDTimer > 0) _abilityCDTimer -= Time.deltaTime;
     }
 
     private void CheckIfGrounded()
@@ -201,8 +176,8 @@ public class PlayerMovementMobility : MonoBehaviour
 
     private void ResetAbilityTimer(float cd)
     {
-        CurrentMaxCD = cd;
-        AbilityCDTimer = cd;
+        _currentMaxCD = cd;
+        _abilityCDTimer = cd;
     }
 
     private void JumpAbility()
@@ -312,12 +287,12 @@ public class PlayerMovementMobility : MonoBehaviour
     {
         _isUsingAbility = false;
 
-        for (int i = 0; i < _enemySpawner.transform.childCount; i++)
+        for (int i = 0; i < _enemySpawner._enemyObjectPoolParent.transform.childCount; i++)
         {
-            for (int j = 0; j < _enemySpawner.transform.GetChild(i).childCount; j++)
+            for (int j = 0; j < _enemySpawner._enemyObjectPoolParent.transform.GetChild(i).childCount; j++)
             {
                 // _EnemySpawner.transform.GetChild(i).GetChild(j).GetComponent<EnemyMovement>().PlayerTarget = this.transform;
-                _enemySpawner.transform.GetChild(i).GetChild(j).GetComponent<Enemy>().FollowDecoy = false;
+                _enemySpawner._enemyObjectPoolParent.transform.GetChild(i).GetChild(j).GetComponent<Enemy>().FollowDecoy = false;
             }
         }
 

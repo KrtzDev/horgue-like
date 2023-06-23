@@ -1982,17 +1982,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe0fc43883faa7c4884164c087e77334, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <MaxHealth>k__BackingField: 100
-  <CurrentHealth>k__BackingField: 0
-  <Animator>k__BackingField: {fileID: 4301312500157032124}
-  <Enemy>k__BackingField: {fileID: 7300998086142530308}
+  _maxHealth: 0
+  _currentHealth: 0
+  _anim: {fileID: 0}
+  _enemy: {fileID: 0}
   _hitParticlePosition: {fileID: 2472108946567798374}
   _hitParticle: {fileID: 6362102834014993675, guid: 5561755790406d148a233f12b01260c5,
     type: 3}
-  dropChance: 5
-  healthDrop: {fileID: 4318080567083893032, guid: 03c15c294a93b874ca9153b08ea682dd,
+  _isDead: 0
+  _healthDrop: {fileID: 4318080567083893032, guid: 03c15c294a93b874ca9153b08ea682dd,
     type: 3}
-  coinDrop: {fileID: 2954434917669188068, guid: bc346ef89f6462d419a727974cda75b8,
+  _coinDrop: {fileID: 2954434917669188068, guid: bc346ef89f6462d419a727974cda75b8,
     type: 3}
 --- !u!114 &8519058135064799330
 MonoBehaviour:
@@ -2006,6 +2006,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f0ed12ae8b7ccd4aa9e40759c23fc18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _statusEffects: []
 --- !u!1 &4301312500149769568
 GameObject:
   m_ObjectHideFlags: 0
