@@ -30,9 +30,10 @@ public class HealthComponent : MonoBehaviour
 		{
 			Enemy = gameObject.GetComponent<Enemy>();
 			MaxHealth = Enemy.EnemyData._maxHealth;
+			CurrentHealth = MaxHealth;
 		}
 
-		CurrentHealth = MaxHealth;
+
 		IsDead = false;
 	}
 

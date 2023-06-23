@@ -16,6 +16,7 @@ public class PasuKan_ChaseState : StateMachineBehaviour
     private float _jumpAttackTimer;
 
     private float oldSpeed;
+    private float oldAcceleration;
     private bool rageMode = false;
 
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
@@ -91,7 +92,9 @@ public class PasuKan_ChaseState : StateMachineBehaviour
                 animator.SetBool("isRageMode", true);
                 rageMode = true;
                 oldSpeed = agent.speed;
-                agent.speed *= 4f;
+                oldAcceleration = agent.acceleration;
+                agent.acceleration *= 1.5f;
+                agent.speed *= 1.5f;
 
                 if(enemy.GetComponent<HealthComponent>().CurrentHealth > 0)
                 {
@@ -114,6 +117,8 @@ public class PasuKan_ChaseState : StateMachineBehaviour
             if (rageMode && agent.speed != oldSpeed)
             {
                 agent.speed = oldSpeed;
+                agent.acceleration = oldAcceleration;
+                _jumpAttackTimer = enemy.EnemyData._jumpAttackCooldown;
                 animator.SetBool("isRageMode", false);
             }
         }

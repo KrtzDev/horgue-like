@@ -29,6 +29,19 @@ public class GameDataReader : MonoBehaviour
     [SerializeField] private List<Sight> _sightData = new List<Sight>();
     [SerializeField] private List<TriggerMechanism> _triggerMechanismData = new List<TriggerMechanism>();
 
+    public PlayerList myPlayerList = new();
+    public EnemyList myEnemyList = new();
+    public LevelList myLevelList = new();
+    // Firearm
+    public AmmunitionList myAmmunitionList = new();
+    public BarrelList myBarrelList = new();
+    public GripList myGripList = new();
+    public MagazineList myMagazineList = new();
+    public SightList mySightList = new();
+    public TriggerMechanismList myTriggerMechanismList = new();
+
+    #region Data Object Classes
+
     [System.Serializable]
     public class Player
     {
@@ -45,7 +58,8 @@ public class GameDataReader : MonoBehaviour
         public float damagePerHit;
         public float attackSpeed;
         public float givenXP;
-        public float moveSpeed;
+        public float maxMoveSpeed;
+        public float acceleration;
         public float armor;
         public float elementalResistance;
         public float technicalResistance;
@@ -165,68 +179,68 @@ public class GameDataReader : MonoBehaviour
         public float range;
     }
 
+    #endregion
+
+    #region Data Object Lists
+
     [System.Serializable]
     public class PlayerList
     {
         public Player[] Player;
     }
-    public PlayerList myPlayerList = new();
 
     [System.Serializable]
     public class EnemyList
     {
         public Enemy[] Enemies;
     }
-    public EnemyList myEnemyList = new();
 
     [System.Serializable]
     public class LevelList
     {
         public Level[] Level;
     }
-    public LevelList myLevelList = new();
+
 
     [System.Serializable]
     public class AmmunitionList
     {
         public AmmunitionDB[] Ammunition;
     }
-    public AmmunitionList myAmmunitionList = new();
+
 
     [System.Serializable]
     public class BarrelList
     {
         public BarrelDB[] Barrel;
     }
-    public BarrelList myBarrelList = new();
+
 
     [System.Serializable]
     public class GripList
     {
         public GripDB[] Grip;
     }
-    public GripList myGripList = new();
 
     [System.Serializable]
     public class MagazineList
     {
         public MagazineDB[] Magazine;
     }
-    public MagazineList myMagazineList = new();
 
     [System.Serializable]
     public class SightList
     {
         public SightDB[] Sight;
     }
-    public SightList mySightList = new();
 
     [System.Serializable]
     public class TriggerMechanismList
     {
         public TriggerMechanismDB[] TriggerMechanism;
     }
-    public TriggerMechanismList myTriggerMechanismList = new();
+
+    #endregion
 
     private void OnEnable()
     {
@@ -294,7 +308,8 @@ public class GameDataReader : MonoBehaviour
                 _enemyData[i]._damagePerHit = (int)myEnemyList.Enemies[0].damagePerHit; //* GameManager.Instance._GameManagerValues[GameManager.Instance._currentLevelArray]._damageBonus);
                 _enemyData[i]._attackSpeed = myEnemyList.Enemies[i].attackSpeed;
                 _enemyData[i]._givenXP = (int)myEnemyList.Enemies[i].givenXP;
-                _enemyData[i]._moveSpeed = myEnemyList.Enemies[i].moveSpeed;
+                _enemyData[i]._maxMoveSpeed = myEnemyList.Enemies[i].maxMoveSpeed;
+                _enemyData[i]._acceleration = myEnemyList.Enemies[i].acceleration;
                 _enemyData[i]._armor = myEnemyList.Enemies[i].armor;
                 _enemyData[i]._elementalResistance = myEnemyList.Enemies[i].elementalResistance;
                 _enemyData[i]._technicalResistance = myEnemyList.Enemies[i].technicalResistance;
@@ -305,7 +320,8 @@ public class GameDataReader : MonoBehaviour
                 _enemyData[i]._damagePerHit = Mathf.RoundToInt(myEnemyList.Enemies[i].damagePerHit * _enemyData[0]._damagePerHit);
                 _enemyData[i]._attackSpeed = myEnemyList.Enemies[i].attackSpeed * _enemyData[0]._attackSpeed;
                 _enemyData[i]._givenXP = Mathf.RoundToInt(myEnemyList.Enemies[i].givenXP * _enemyData[0]._givenXP);
-                _enemyData[i]._moveSpeed = myEnemyList.Enemies[i].moveSpeed * _enemyData[0]._moveSpeed;
+                _enemyData[i]._maxMoveSpeed = myEnemyList.Enemies[i].maxMoveSpeed * _enemyData[0]._maxMoveSpeed;
+                _enemyData[i]._acceleration = myEnemyList.Enemies[i].acceleration * _enemyData[0]._acceleration;
                 _enemyData[i]._armor = myEnemyList.Enemies[i].armor * _enemyData[0]._armor;
                 _enemyData[i]._elementalResistance = myEnemyList.Enemies[i].elementalResistance * _enemyData[0]._elementalResistance;
                 _enemyData[i]._technicalResistance = myEnemyList.Enemies[i].technicalResistance * _enemyData[0]._technicalResistance;

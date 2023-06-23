@@ -5,6 +5,7 @@ public class PlayerMovement : MonoBehaviour
 {
     [field: SerializeField, Header("Movement")]
     public float MovementSpeed { get; set; } = 10f;
+    private PlayerCharacter _playerCharacter;
 
     [SerializeField]
     private AnimationCurve _acceleration;
@@ -26,6 +27,8 @@ public class PlayerMovement : MonoBehaviour
 
     private void Awake()
     {
+        _playerCharacter = this.GetComponent<PlayerCharacter>();
+        MovementSpeed = _playerCharacter._playerData._movementSpeed;
         _inputActions = new PlayerInputMappings();
         if (InputManager.Instance)
         {

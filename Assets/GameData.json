@@ -6,7 +6,8 @@
       "damagePerHit": 10,
       "attackSpeed": 1,
       "givenXP": 1,
-      "moveSpeed": 1,
+      "maxMoveSpeed": 1,
+      "acceleration": 1,
       "armor": 1,
       "elementalResistance": 1,
       "technicalResistance": 1
@@ -14,10 +15,11 @@
     {
       "name": "RangedRobot",
       "maxHealth": 0.35,
-      "damagePerHit": 0.8,
+      "damagePerHit": 1.5,
       "attackSpeed": 1.5,
       "givenXP": 3,
-      "moveSpeed": 7.5,
+      "maxMoveSpeed": 10,
+      "acceleration": 6,
       "armor": 15,
       "elementalResistance": -100,
       "technicalResistance": 0
@@ -25,22 +27,24 @@
     {
       "name": "PasuKan",
       "maxHealth": 0.65,
-      "damagePerHit": 0.8,
+      "damagePerHit": 1.5,
       "attackSpeed": 2.5,
-      "givenXP": 10,
-      "moveSpeed": 9,
+      "givenXP": 5,
+      "maxMoveSpeed": 20,
+      "acceleration": 25,
       "armor": 100,
       "elementalResistance": 50,
       "technicalResistance": -50
     },
     {
       "name": "GIGARangedRobot",
-      "maxHealth": 0.75,
-      "damagePerHit": 1.2,
+      "maxHealth": 1,
+      "damagePerHit": 2,
       "attackSpeed": 2.5,
-      "givenXP": 15,
-      "moveSpeed": 6.5,
-      "armor": 15,
+      "givenXP": 10,
+      "maxMoveSpeed": 30,
+      "acceleration": 10,
+      "armor": 35,
       "elementalResistance": -100,
       "technicalResistance": 0
     }
@@ -110,8 +114,8 @@
   "Player": [
     {
       "name": "Player",
-      "movementSpeed": 12,
-      "maxHealth": 100
+      "movementSpeed": 10,
+      "maxHealth": 250
     }
   ],
   "Ammunition": [

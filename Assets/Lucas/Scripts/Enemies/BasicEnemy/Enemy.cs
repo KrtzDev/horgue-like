@@ -19,6 +19,14 @@ public class Enemy : MonoBehaviour
     public bool FollowDecoy { get; set; }
     [HideInInspector] public Vector3 TargetDirection { get; set; }
 
+
+    public void Awake()
+    {
+        _agent.speed = EnemyData._maxMoveSpeed;
+        _agent.acceleration = EnemyData._acceleration;
+    }
+
+
     public void Start()
     {
         if(_projectile != null)

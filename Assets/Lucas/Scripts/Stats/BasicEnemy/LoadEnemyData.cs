@@ -51,7 +51,7 @@ public class LoadEnemyData : ReadGoogleSheets
                 _basicEnemyData._damagePerHit = (int)(int.Parse(tempEnemyData[2]) * GameManager.Instance._GameManagerValues[GameManager.Instance._currentLevelArray]._damageBonus);
                 _basicEnemyData._attackSpeed = int.Parse(tempEnemyData[3]);
                 _basicEnemyData._givenXP = int.Parse(tempEnemyData[4]);
-                _basicEnemyData._moveSpeed = int.Parse(tempEnemyData[5]);
+                _basicEnemyData._maxMoveSpeed = int.Parse(tempEnemyData[5]);
                 _basicEnemyData._armor = int.Parse(tempEnemyData[6]);
                 _basicEnemyData._elementalResistance = int.Parse(tempEnemyData[7]);
                 _basicEnemyData._technicalResistance = int.Parse(tempEnemyData[8]);
@@ -62,7 +62,7 @@ public class LoadEnemyData : ReadGoogleSheets
                 _rangedRobotData._damagePerHit = (int)(float.Parse(tempEnemyData[2]) * _basicEnemyData._damagePerHit);
                 _rangedRobotData._attackSpeed = float.Parse(tempEnemyData[3]);
                 _rangedRobotData._givenXP = int.Parse(tempEnemyData[4]);
-                _rangedRobotData._moveSpeed = float.Parse(tempEnemyData[5]);
+                _rangedRobotData._maxMoveSpeed = float.Parse(tempEnemyData[5]);
                 _rangedRobotData._armor = int.Parse(tempEnemyData[6]);
                 _rangedRobotData._elementalResistance = int.Parse(tempEnemyData[7]);
                 _rangedRobotData._technicalResistance = int.Parse(tempEnemyData[8]);
@@ -73,7 +73,7 @@ public class LoadEnemyData : ReadGoogleSheets
                 _pasuKanData._damagePerHit = (int)(float.Parse(tempEnemyData[2]) * _basicEnemyData._damagePerHit);
                 _pasuKanData._attackSpeed = float.Parse(tempEnemyData[3]);
                 _pasuKanData._givenXP = int.Parse(tempEnemyData[4]);
-                _pasuKanData._moveSpeed = float.Parse(tempEnemyData[5]);
+                _pasuKanData._maxMoveSpeed = float.Parse(tempEnemyData[5]);
                 _pasuKanData._armor = int.Parse(tempEnemyData[6]);
                 _pasuKanData._elementalResistance = int.Parse(tempEnemyData[7]);
                 _pasuKanData._technicalResistance = int.Parse(tempEnemyData[8]);
@@ -84,7 +84,7 @@ public class LoadEnemyData : ReadGoogleSheets
                 _gigaRangedRobotData._damagePerHit = (int)(float.Parse(tempEnemyData[2]) * _basicEnemyData._damagePerHit);
                 _gigaRangedRobotData._attackSpeed = float.Parse(tempEnemyData[3]);
                 _gigaRangedRobotData._givenXP = int.Parse(tempEnemyData[4]);
-                _gigaRangedRobotData._moveSpeed = float.Parse(tempEnemyData[5]);
+                _gigaRangedRobotData._maxMoveSpeed = float.Parse(tempEnemyData[5]);
                 _gigaRangedRobotData._armor = int.Parse(tempEnemyData[6]);
                 _gigaRangedRobotData._elementalResistance = int.Parse(tempEnemyData[7]);
                 _gigaRangedRobotData._technicalResistance = int.Parse(tempEnemyData[8]);
