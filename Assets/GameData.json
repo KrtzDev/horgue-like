@@ -24,7 +24,7 @@
       "armor": 15,
       "elementalResistance": -100,
       "technicalResistance": 0,
-      "healthDropChance": 1
+      "healthDropChance": 0.05
     },
     {
       "name": "PasuKan",
@@ -58,7 +58,7 @@
       "name": "Level01",
       "healthBonus": 1,
       "damageBonus": 1,
-      "TimeToSurvive": 40,
+      "TimeToSurvive": 3,
       "spawnTick": 3,
       "spawnsPerTick": 6,
       "minEnemyCount": 10,
@@ -78,7 +78,7 @@
       "name": "Level02",
       "healthBonus": 1.25,
       "damageBonus": 1.25,
-      "TimeToSurvive": 50,
+      "TimeToSurvive": 3,
       "spawnTick": 3,
       "spawnsPerTick": 6,
       "minEnemyCount": 10,
@@ -98,7 +98,7 @@
       "name": "Level03",
       "healthBonus": 1.5,
       "damageBonus": 1.5,
-      "TimeToSurvive": 60,
+      "TimeToSurvive": 3,
       "spawnTick": 3,
       "spawnsPerTick": 6,
       "minEnemyCount": 10,

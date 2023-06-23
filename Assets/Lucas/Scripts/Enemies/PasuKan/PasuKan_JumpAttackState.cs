@@ -76,7 +76,7 @@ public class PasuKan_JumpAttackState : StateMachineBehaviour
                 _jumpTime += Time.deltaTime;
                 _jumpFactor += Time.deltaTime * enemy.EnemyData._jumpForce;
 
-                animator.transform.position = Vector3.Lerp(startingPosition, _followPosition, _jumpFactor) + Vector3.up * enemy.EnemyData.HeightCurve.Evaluate(_jumpTime) * enemy.EnemyData._jumpForce;
+                animator.transform.position = Vector3.Lerp(startingPosition, _followPosition, _jumpFactor) + Vector3.up * enemy.EnemyData._heightCurve.Evaluate(_jumpTime) * enemy.EnemyData._jumpForce;
                 animator.transform.rotation = Quaternion.Slerp(animator.transform.rotation, Quaternion.LookRotation(_followPosition - animator.transform.position), _jumpFactor);
                 animator.SetFloat("jumpTime", _jumpTime);
 

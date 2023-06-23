@@ -27,7 +27,7 @@ public class GameManager : Singleton<GameManager>
 
 	public int _currentScore;
 
-	private NEW_EnemySpawner _enemySpawner;
+	private EnemySpawner _enemySpawner;
 	public int _neededEnemyKill;
 	public int _enemyCount;
 	private bool _hasWon;
@@ -80,7 +80,7 @@ public class GameManager : Singleton<GameManager>
 		_hasWon = false;
 		_hasLost = false;
 
-		_enemySpawner = GameObject.FindGameObjectWithTag("EnemySpawner").GetComponent<NEW_EnemySpawner>();
+		_enemySpawner = GameObject.FindGameObjectWithTag("EnemySpawner").GetComponent<EnemySpawner>();
 		_neededEnemyKill = _enemySpawner._enemySpawnerData._maxEnemyCount;
 
 		_player = GameObject.FindGameObjectWithTag("Player");
@@ -96,7 +96,7 @@ public class GameManager : Singleton<GameManager>
 
 		if(_lastLevel == _currentLevel)
         {
-			_player.GetComponent<HealthComponent>().CurrentHealth = _currentPlayerHealth;
+			_player.GetComponent<HealthComponent>()._currentHealth = _currentPlayerHealth;
         }
 
 		_currentWave += 1;
@@ -200,14 +200,14 @@ public class GameManager : Singleton<GameManager>
 			UIManager.Instance.ShowWaveEndScreen(LevelStatus.Won);
 		}
 
-		_currentPlayerHealth = _player.GetComponent<HealthComponent>().CurrentHealth;
+		_currentPlayerHealth = _player.GetComponent<HealthComponent>()._currentHealth;
 
 		EnemyStopFollowing();
 	}
 
 	private void EnemyStopFollowing()
 	{
-		_enemySpawner.EnemyObjectPoolParent.SetActive(false);
+		_enemySpawner._enemyObjectPoolParent.SetActive(false);
 	}
 
 	private void RoundLost()

@@ -5,11 +5,8 @@ using UnityEngine.UI;
 
 public class UIDamageFlash : MonoBehaviour
 {
-    [SerializeField]
-    private Image _image;
-
-    [SerializeField]
-    private Color _color;
+    [SerializeField] private Image _image;
+    [SerializeField] private Color _color;
 
     Coroutine _currentFlashRoutine = null;
 

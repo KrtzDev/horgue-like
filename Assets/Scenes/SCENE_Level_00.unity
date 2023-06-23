@@ -14711,169 +14711,159 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6843213763226438607, guid: b0d5d15041526b8408159035025686a3,
         type: 3}
-      propertyPath: EnemyObjectPoolParent
+      propertyPath: _enemyObjectPoolParent
       value: 
       objectReference: {fileID: 1655643683}
     - target: {fileID: 6843213763226438607, guid: b0d5d15041526b8408159035025686a3,
         type: 3}
-      propertyPath: LevelZone.Array.data[0]
+      propertyPath: _levelZone.Array.data[0]
       value: 
       objectReference: {fileID: 453163698}
     - target: {fileID: 6843213763226438607, guid: b0d5d15041526b8408159035025686a3,
         type: 3}
-      propertyPath: LevelZone.Array.data[1]
+      propertyPath: _levelZone.Array.data[1]
       value: 
       objectReference: {fileID: 1167940327}
     - target: {fileID: 6843213763226438607, guid: b0d5d15041526b8408159035025686a3,
         type: 3}
-      propertyPath: LevelZone.Array.data[2]
+      propertyPath: _levelZone.Array.data[2]
       value: 
       objectReference: {fileID: 90500542}
     - target: {fileID: 6843213763226438607, guid: b0d5d15041526b8408159035025686a3,
         type: 3}
-      propertyPath: LevelZone.Array.data[3]
+      propertyPath: _levelZone.Array.data[3]
       value: 
       objectReference: {fileID: 1306771827}
     - target: {fileID: 6843213763226438607, guid: b0d5d15041526b8408159035025686a3,
         type: 3}
-      propertyPath: LevelZone.Array.data[4]
+      propertyPath: _levelZone.Array.data[4]
       value: 
       objectReference: {fileID: 1578805343}
     - target: {fileID: 6843213763226438607, guid: b0d5d15041526b8408159035025686a3,
         type: 3}
-      propertyPath: LevelZone.Array.data[5]
+      propertyPath: _levelZone.Array.data[5]
       value: 
       objectReference: {fileID: 975931294}
     - target: {fileID: 6843213763226438607, guid: b0d5d15041526b8408159035025686a3,
         type: 3}
-      propertyPath: LevelZone.Array.data[6]
+      propertyPath: _levelZone.Array.data[6]
       value: 
       objectReference: {fileID: 369804909}
     - target: {fileID: 6843213763226438607, guid: b0d5d15041526b8408159035025686a3,
         type: 3}
-      propertyPath: LevelZone.Array.data[7]
+      propertyPath: _levelZone.Array.data[7]
       value: 
       objectReference: {fileID: 903852573}
     - target: {fileID: 6843213763226438607, guid: b0d5d15041526b8408159035025686a3,
         type: 3}
-      propertyPath: LevelZone.Array.data[8]
+      propertyPath: _levelZone.Array.data[8]
       value: 
       objectReference: {fileID: 1036607176}
     - target: {fileID: 6843213763226438607, guid: b0d5d15041526b8408159035025686a3,
         type: 3}
-      propertyPath: LevelZone.Array.data[9]
+      propertyPath: _levelZone.Array.data[9]
       value: 
       objectReference: {fileID: 867812875}
     - target: {fileID: 6843213763226438607, guid: b0d5d15041526b8408159035025686a3,
         type: 3}
-      propertyPath: LevelZone.Array.data[10]
+      propertyPath: _levelZone.Array.data[10]
       value: 
       objectReference: {fileID: 1560157802}
     - target: {fileID: 6843213763226438607, guid: b0d5d15041526b8408159035025686a3,
         type: 3}
-      propertyPath: LevelZone.Array.data[11]
+      propertyPath: _levelZone.Array.data[11]
       value: 
       objectReference: {fileID: 546340049}
     - target: {fileID: 6843213763226438607, guid: b0d5d15041526b8408159035025686a3,
         type: 3}
-      propertyPath: LevelZone.Array.data[12]
+      propertyPath: _levelZone.Array.data[12]
       value: 
       objectReference: {fileID: 1006005507}
     - target: {fileID: 6843213763226438607, guid: b0d5d15041526b8408159035025686a3,
         type: 3}
-      propertyPath: LevelZone.Array.data[13]
+      propertyPath: _levelZone.Array.data[13]
       value: 
       objectReference: {fileID: 507505982}
     - target: {fileID: 6843213763226438607, guid: b0d5d15041526b8408159035025686a3,
         type: 3}
-      propertyPath: LevelZone.Array.data[14]
+      propertyPath: _levelZone.Array.data[14]
       value: 
       objectReference: {fileID: 2071002179}
     - target: {fileID: 6843213763226438607, guid: b0d5d15041526b8408159035025686a3,
         type: 3}
-      propertyPath: LevelZone.Array.data[15]
+      propertyPath: _levelZone.Array.data[15]
       value: 
       objectReference: {fileID: 115586013}
     - target: {fileID: 6843213763226438607, guid: b0d5d15041526b8408159035025686a3,
         type: 3}
-      propertyPath: LevelZone.Array.data[16]
+      propertyPath: _levelZone.Array.data[16]
       value: 
       objectReference: {fileID: 64280327}
     - target: {fileID: 6843213763226438607, guid: b0d5d15041526b8408159035025686a3,
         type: 3}
-      propertyPath: LevelZone.Array.data[17]
+      propertyPath: _levelZone.Array.data[17]
       value: 
       objectReference: {fileID: 882342126}
     - target: {fileID: 6843213763226438607, guid: b0d5d15041526b8408159035025686a3,
         type: 3}
-      propertyPath: LevelZone.Array.data[18]
+      propertyPath: _levelZone.Array.data[18]
       value: 
       objectReference: {fileID: 433032361}
     - target: {fileID: 6843213763226438607, guid: b0d5d15041526b8408159035025686a3,
         type: 3}
-      propertyPath: LevelZone.Array.data[19]
+      propertyPath: _levelZone.Array.data[19]
       value: 
       objectReference: {fileID: 1898027497}
     - target: {fileID: 6843213763226438607, guid: b0d5d15041526b8408159035025686a3,
         type: 3}
-      propertyPath: LevelZone.Array.data[20]
+      propertyPath: _levelZone.Array.data[20]
       value: 
       objectReference: {fileID: 721798900}
     - target: {fileID: 6843213763226438607, guid: b0d5d15041526b8408159035025686a3,
         type: 3}
-      propertyPath: LevelZone.Array.data[21]
+      propertyPath: _levelZone.Array.data[21]
       value: 
       objectReference: {fileID: 1078679892}
     - target: {fileID: 6843213763226438607, guid: b0d5d15041526b8408159035025686a3,
         type: 3}
-      propertyPath: LevelZone.Array.data[22]
+      propertyPath: _levelZone.Array.data[22]
       value: 
       objectReference: {fileID: 769791076}
     - target: {fileID: 6843213763226438607, guid: b0d5d15041526b8408159035025686a3,
         type: 3}
-      propertyPath: LevelZone.Array.data[23]
+      propertyPath: _levelZone.Array.data[23]
       value: 
       objectReference: {fileID: 112055675}
     - target: {fileID: 6843213763226438607, guid: b0d5d15041526b8408159035025686a3,
         type: 3}
-      propertyPath: LevelZone.Array.data[24]
+      propertyPath: _levelZone.Array.data[24]
       value: 
       objectReference: {fileID: 1426680223}
     - target: {fileID: 6843213763226438607, guid: b0d5d15041526b8408159035025686a3,
         type: 3}
-      propertyPath: LevelZone.Array.data[25]
+      propertyPath: _levelZone.Array.data[25]
       value: 
       objectReference: {fileID: 1058843731}
     - target: {fileID: 6843213763226438607, guid: b0d5d15041526b8408159035025686a3,
         type: 3}
-      propertyPath: LevelZone.Array.data[26]
+      propertyPath: _levelZone.Array.data[26]
       value: 
       objectReference: {fileID: 947993378}
     - target: {fileID: 6843213763226438607, guid: b0d5d15041526b8408159035025686a3,
         type: 3}
-      propertyPath: LevelZone.Array.data[27]
+      propertyPath: _levelZone.Array.data[27]
       value: 
       objectReference: {fileID: 450441881}
     - target: {fileID: 6843213763226438607, guid: b0d5d15041526b8408159035025686a3,
         type: 3}
-      propertyPath: LevelZone.Array.data[28]
+      propertyPath: _levelZone.Array.data[28]
       value: 
       objectReference: {fileID: 939425158}
     - target: {fileID: 6843213763226438607, guid: b0d5d15041526b8408159035025686a3,
         type: 3}
-      propertyPath: LevelZone.Array.data[29]
+      propertyPath: _levelZone.Array.data[29]
       value: 
       objectReference: {fileID: 220047285}
-    - target: {fileID: 6843213763226438607, guid: b0d5d15041526b8408159035025686a3,
-        type: 3}
-      propertyPath: _EnemiesToSpawn.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 6843213763226438607, guid: b0d5d15041526b8408159035025686a3,
-        type: 3}
-      propertyPath: _EnemiesToSpawn.Array.data[1].SpawnChance
-      value: 60
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b0d5d15041526b8408159035025686a3, type: 3}
 --- !u!1 &1837641223

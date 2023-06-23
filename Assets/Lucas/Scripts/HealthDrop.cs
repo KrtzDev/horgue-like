@@ -4,10 +4,9 @@ using UnityEngine;
 
 public class HealthDrop : MonoBehaviour
 {
-    public int HealthAmount;
-    public LayerMask _groundLayer;
-    [SerializeField]
-    private AudioSource _collectSound;
+    [SerializeField] private int _healAmount;
+    [SerializeField] private LayerMask _groundLayer;
+    [SerializeField] private AudioSource _collectSound;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -15,10 +14,10 @@ public class HealthDrop : MonoBehaviour
         {
             HealthComponent hp = other.GetComponent<HealthComponent>();
 
-            hp.CurrentHealth += HealthAmount;
-            if(hp.CurrentHealth > hp.MaxHealth)
+            hp._currentHealth += _healAmount;
+            if(hp._currentHealth > hp._maxHealth)
             {
-                hp.CurrentHealth = hp.MaxHealth;
+                hp._currentHealth = hp._maxHealth;
             }
 
             StartCoroutine(DeleteGameObject());

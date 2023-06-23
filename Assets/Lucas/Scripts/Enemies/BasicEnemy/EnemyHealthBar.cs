@@ -26,7 +26,7 @@ public class EnemyHealthBar : MonoBehaviour
 
     private void Update()
     {
-        if (_healthComponent.CurrentHealth <= 0)
+        if (_healthComponent._currentHealth <= 0)
         {
             gameObject.SetActive(false);
         }
@@ -34,12 +34,12 @@ public class EnemyHealthBar : MonoBehaviour
 
     private void HandleHealthChanged(float percent)
     {
-		if (_healthComponent.IsDead)
+		if (_healthComponent._isDead)
 			return;
 
         StartCoroutine(ChangeToPercent(percent));
 
-        if(_healthComponent.CurrentHealth < _healthComponent.MaxHealth && !this.transform.GetChild(1).gameObject.activeInHierarchy)
+        if(_healthComponent._currentHealth < _healthComponent._maxHealth && !this.transform.GetChild(1).gameObject.activeInHierarchy)
         {
             for (int i = 0; i < this.transform.childCount; i++)
             {

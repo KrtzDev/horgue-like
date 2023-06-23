@@ -3,28 +3,28 @@ using UnityEngine.UI;
 
 public class UIImageFillAmountWaveProgress : UIImageFillAmount
 {
-    private NEW_EnemySpawner _EnemySpawner;
+    private EnemySpawner _enemySpawner;
 
-    public Text EnemiesKilledText;
-    public Text CurrentLevelWave;
-    public Text ScoreText;
-    public Text LevelTimer;
+    public Text _enemiesKilledText;
+    public Text _CurrentLevelWave;
+    public Text _ScoreText;
+    public Text _LevelTimer;
 
     private int _enemiesKilled;
     private int _maxEnemiesAmount;
 
     public override void Awake()
     {
-        _EnemySpawner = GameObject.FindGameObjectWithTag("EnemySpawner").GetComponent<NEW_EnemySpawner>();
+        _enemySpawner = GameObject.FindGameObjectWithTag("EnemySpawner").GetComponent<EnemySpawner>();
 
         base.Awake();
     }
 
     public void Start()
     {
-		_maxEnemiesAmount = _EnemySpawner._enemySpawnerData._maxEnemyCount;
+		_maxEnemiesAmount = _enemySpawner._enemySpawnerData._maxEnemyCount;
 
-        CurrentLevelWave.text = "Level: " + GameManager.Instance._currentLevel + " -- Wave: " + GameManager.Instance._currentWave;
+        _CurrentLevelWave.text = "Level: " + GameManager.Instance._currentLevel + " -- Wave: " + GameManager.Instance._currentWave;
 	}
 
     public override void FixedUpdate()
@@ -56,12 +56,12 @@ public class UIImageFillAmountWaveProgress : UIImageFillAmount
             float milliseconds = tempTimer * 1000;
             milliseconds = (milliseconds % 1000);
 
-            LevelTimer.text = string.Format("{0:00}.{1:000}", seconds, milliseconds);
+            _LevelTimer.text = string.Format("{0:00}.{1:000}", seconds, milliseconds);
         }
 
         // EnemiesKilledText.text = _enemiesKilled + " / " + _maxEnemiesAmount;
-        EnemiesKilledText.text = _enemiesKilled.ToString("000");
-        ScoreText.text = GameManager.Instance._currentScore.ToString("000");
+        _enemiesKilledText.text = _enemiesKilled.ToString("000");
+        _ScoreText.text = GameManager.Instance._currentScore.ToString("000");
 
         base.FixedUpdate();
     }

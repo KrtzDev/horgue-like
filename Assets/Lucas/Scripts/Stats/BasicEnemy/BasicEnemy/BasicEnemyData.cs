@@ -26,5 +26,5 @@ public class BasicEnemyData : ScriptableObject
     public float _jumpPrepTime;
     public float _jumpTime;
     public float _jumpForce;
-    public AnimationCurve HeightCurve;
+    public AnimationCurve _heightCurve;
 }

@@ -33,7 +33,6 @@ public class ObjectPool<T> where T : MonoBehaviour
             CreateObject();
         }
 
-
         T instance = _availableObjectsPool[0];
 
         _availableObjectsPool.RemoveAt(0);
