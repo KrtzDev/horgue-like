@@ -1,0 +1,46 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 440041b21ef39184fbb0689fc05748a2, type: 3}
+  m_Name: AoeStun
+  m_EditorClassIdentifier: 
+  triggerChance: 100
+  effectDuration: 0.3
+  tickRate:
+    min: 0
+    max: 0
+  hasInitialExtraDamage: 1
+  initialDamage: 20
+  initialDamageVFX: {fileID: 0}
+  hasDamageOverTime: 0
+  dotDamage: 2
+  dotDuration: 0
+  dotDamageVFX: {fileID: 0}
+  hasSlow: 0
+  slowAmount: 100
+  slowDuration: 0
+  slowVFX: {fileID: 0}
+  hasKnockBack: 1
+  knockBackType: 1
+  knockBackStrength: 3
+  knockBackVFX: {fileID: 0}
+  hasPierce: 0
+  maxPierceAmount: 0
+  canPropagate: 1
+  propagatedEffect: {fileID: 11400000}
+  layersToPropagateTo:
+    serializedVersion: 2
+    m_Bits: 128
+  propagationChance: 100
+  propagationRange: 5
+  maxPropagateToCount: 5
+  consecutivePropagationCount: 1
+  propagationVFX: {fileID: 0}

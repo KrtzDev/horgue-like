@@ -6,21 +6,21 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/SCENE_Init.unity
+    path: Assets/Scenes/Game Scenes/SCENE_Init.unity
     guid: cee73b64acffb3043812056baef2df59
   - enabled: 1
-    path: Assets/Scenes/SCENE_Main_Menu.unity
+    path: Assets/Scenes/Game Scenes/SCENE_Main_Menu.unity
     guid: 6dd9264c898ee1d40a48331813648033
   - enabled: 1
-    path: Assets/Scenes/SCENE_Level_00.unity
+    path: Assets/Scenes/Game Scenes/SCENE_Level_00.unity
     guid: 993e7fc0dd066d54c89c6a0acde31383
   - enabled: 1
-    path: Assets/Scenes/SCENE_Level_01.unity
+    path: Assets/Scenes/Game Scenes/SCENE_Level_01.unity
     guid: a506e3a10d887a44a9121ee0b9cce6ce
   - enabled: 1
-    path: Assets/Scenes/SCENE_Level_02.unity
+    path: Assets/Scenes/Game Scenes/SCENE_Level_02.unity
     guid: ce9ce29c12a36ea4c90644a90ed096d9
   - enabled: 1
-    path: Assets/Scenes/SCENE_Weapon_Crafting.unity
+    path: Assets/Scenes/Game Scenes/SCENE_Weapon_Crafting.unity
     guid: fbbb3b1e874237c42bf7c071f9f12af7
   m_configObjects: {}

@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1840ed087b613334e9bf87d5c6d038cd, type: 3}
+  m_Name: DetectiveRevolver
+  m_EditorClassIdentifier: 
+  _weaponPrefab: {fileID: 3480419835550209389, guid: b1d6eb9be4236bd42b4cc35c06a394f8,
+    type: 3}
+  _weaponSprite: {fileID: 21300000, guid: 542ca056f31bfd04785c98e6ccaf726d, type: 3}
+  _defaultGrip: {fileID: 11400000, guid: 447aef067792b064b87806eed730cd4e, type: 2}
+  _defaultBarrel: {fileID: 11400000, guid: e18b30524c89cd64eaa028eb6e327e03, type: 2}
+  _defaultMagazine: {fileID: 11400000, guid: 13ee628900dcfd145989993ec9dffdb3, type: 2}
+  _defaultAmmunition: {fileID: 11400000, guid: ce027e4cefc323d4c89abb3dc8a8a051, type: 2}
+  _defaultTriggerMechanism: {fileID: 11400000, guid: 91c39c5e52357aa40b95e54bae74ee3d,
+    type: 2}
+  _defaultSight: {fileID: 11400000, guid: d12bab2c89ef4024d8b1cff458e02898, type: 2}
+  _grip: {fileID: 11400000, guid: 447aef067792b064b87806eed730cd4e, type: 2}
+  _barrel: {fileID: 11400000, guid: e18b30524c89cd64eaa028eb6e327e03, type: 2}
+  _magazine: {fileID: 11400000, guid: 13ee628900dcfd145989993ec9dffdb3, type: 2}
+  _ammunition: {fileID: 11400000, guid: ce027e4cefc323d4c89abb3dc8a8a051, type: 2}
+  _triggerMechanism: {fileID: 11400000, guid: 91c39c5e52357aa40b95e54bae74ee3d, type: 2}
+  _sight: {fileID: 11400000, guid: d12bab2c89ef4024d8b1cff458e02898, type: 2}
+  _owningTransform: {fileID: 0}
+  _enemyLayer:
+    serializedVersion: 2
+    m_Bits: 128
+  _groundLayer:
+    serializedVersion: 2
+    m_Bits: 513
