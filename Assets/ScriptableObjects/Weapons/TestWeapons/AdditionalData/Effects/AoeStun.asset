@@ -24,7 +24,7 @@ MonoBehaviour:
   dotDamage: 2
   dotDuration: 0
   dotDamageVFX: {fileID: 0}
-  hasSlow: 0
+  hasSlow: 1
   slowAmount: 100
   slowDuration: 0
   slowVFX: {fileID: 0}

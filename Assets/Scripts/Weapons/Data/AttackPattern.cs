@@ -1,7 +1,8 @@
 using UnityEngine;
 
-public abstract class AttackPattern : ScriptableObject, IAttackInPattern
+public abstract class AttackPattern : ScriptableObject
 {
+	public abstract Pattern GetPattern();
 	public abstract string PatternName();
-    public abstract void AttackInPattern(Projectile projectile);
+	public abstract Projectile[] SpawnProjectiles(WeaponStats weaponStats, ObjectPool<Projectile> projectilePool, Pattern spawnedPattern);
 }

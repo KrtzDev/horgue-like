@@ -12,3 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69cee93de81d78c4c9db100e30c2fbfd, type: 3}
   m_Name: new StraightLineShot
   m_EditorClassIdentifier: 
+  _patternName: Cone
+  _randomSpawnPositions: 1
+  _randomPositionRadiusFromPlayer: 0
+  _pattern: {fileID: 6679049981621152435, guid: 1d5a73a67f154d8488cfb9630bd0e49a,
+    type: 3}
+  _maxSimultaniousProjectiles: 7

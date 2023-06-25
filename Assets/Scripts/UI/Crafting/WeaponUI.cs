@@ -56,27 +56,27 @@ public class WeaponUI : MonoBehaviour
 		{
 			if (newWeaponPart is Grip)
 			{
-				_weapon._grip = newWeaponPart as Grip;
+				_weapon.grip = newWeaponPart as Grip;
 			}
 			else if (newWeaponPart is Barrel)
 			{
-				_weapon._barrel = newWeaponPart as Barrel;
+				_weapon.barrel = newWeaponPart as Barrel;
 			}
 			else if (newWeaponPart is Magazine)
 			{
-				_weapon._magazine = newWeaponPart as Magazine;
+				_weapon.magazine = newWeaponPart as Magazine;
 			}
 			else if (newWeaponPart is Ammunition)
 			{
-				_weapon._ammunition = newWeaponPart as Ammunition;
+				_weapon.ammunition = newWeaponPart as Ammunition;
 			}
 			else if (newWeaponPart is TriggerMechanism)
 			{
-				_weapon._triggerMechanism = newWeaponPart as TriggerMechanism;
+				_weapon.triggerMechanism = newWeaponPart as TriggerMechanism;
 			}
 			else if (newWeaponPart is Sight)
 			{
-				_weapon._sight = newWeaponPart as Sight;
+				_weapon.sight = newWeaponPart as Sight;
 			}
 
 			_weapon.Initialize(_weapon.OwningTransform);
@@ -95,7 +95,7 @@ public class WeaponUI : MonoBehaviour
 
 	private void ShowWeaponBackground()
 	{
-		_weaponImage.sprite = _weapon._weaponSprite;
+		_weaponImage.sprite = _weapon.weaponSprite;
 	}
 
 	private void ShowWeaponParts()
@@ -103,33 +103,33 @@ public class WeaponUI : MonoBehaviour
 		RewardUI rewardUI;
 
 		rewardUI = Instantiate(_rewardUI_prefab, _ammunitionParent.transform);
-		Reward ammo = new Reward(_weapon._ammunition);
+		Reward ammo = new Reward(_weapon.ammunition);
 		rewardUI.Initialize(ammo);
 		rewardUI = Instantiate(_rewardUI_prefab, _barrelParent.transform);
-		Reward barrel = new Reward(_weapon._barrel);
+		Reward barrel = new Reward(_weapon.barrel);
 		rewardUI.Initialize(barrel);
 		rewardUI = Instantiate(_rewardUI_prefab, _gripParent.transform);
-		Reward grip = new Reward(_weapon._grip);
+		Reward grip = new Reward(_weapon.grip);
 		rewardUI.Initialize(grip);
 		rewardUI = Instantiate(_rewardUI_prefab, _magazineParent.transform);
-		Reward mag = new Reward(_weapon._magazine);
+		Reward mag = new Reward(_weapon.magazine);
 		rewardUI.Initialize(mag);
 		rewardUI = Instantiate(_rewardUI_prefab, _sightParent.transform);
-		Reward sight = new Reward(_weapon._sight);
+		Reward sight = new Reward(_weapon.sight);
 		rewardUI.Initialize(sight);
 		rewardUI = Instantiate(_rewardUI_prefab, _triggerParent.transform);
-		Reward trigger = new Reward(_weapon._triggerMechanism);
+		Reward trigger = new Reward(_weapon.triggerMechanism);
 		rewardUI.Initialize(trigger);
 	}
 
 	private void InitializeWeaponSlots()
 	{
-		_ammunitionParent.Initialize(this, _weapon._ammunition);
-		_barrelParent.Initialize(this, _weapon._barrel);
-		_gripParent.Initialize(this, _weapon._grip);
-		_magazineParent.Initialize(this, _weapon._magazine);
-		_sightParent.Initialize(this, _weapon._sight);
-		_triggerParent.Initialize(this, _weapon._triggerMechanism);
+		_ammunitionParent.Initialize(this, _weapon.ammunition);
+		_barrelParent.Initialize(this, _weapon.barrel);
+		_gripParent.Initialize(this, _weapon.grip);
+		_magazineParent.Initialize(this, _weapon.magazine);
+		_sightParent.Initialize(this, _weapon.sight);
+		_triggerParent.Initialize(this, _weapon.triggerMechanism);
 	}
 
 	private void ClearWeaponStats()
