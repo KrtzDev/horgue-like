@@ -83,6 +83,7 @@ public class Weapon : ScriptableObject
 
 		_reloadTime = CalculateWeaponStats(this).cooldown;
 		_projectile = ammunition.projectilePrefab;
+		_capacity = CalculateWeaponStats(this).capacity;
 
 		_projectilePool = ObjectPool<Projectile>.CreatePool(_projectile, 100, null);
 	}
@@ -138,7 +139,6 @@ public class Weapon : ScriptableObject
 
 		_shotDelay = projectile.finalAttackSpeed > 0 ? 1 / projectile.finalAttackSpeed : SLOWEST_POSSIBLE_ATTACKSPEED;
 
-		_capacity = weaponStats.capacity;
 		projectile.attackPattern = weaponStats.attackPattern;
 		projectile.motionPattern = weaponStats.motionPattern;
 		projectile.statusEffect = weaponStats.statusEffect;
@@ -358,15 +358,18 @@ public class Weapon : ScriptableObject
 
 		if (_shotDelay <= 0)
 		{
-			Projectile[] projectiles = weaponStats.attackPattern.SpawnProjectiles(weaponStats, _projectilePool, _currentPatternPrefab);
+			Debug.Log($"{_currentWeaponPrefab.name} has {_capacity} bullets left");
+			Projectile[] projectiles = weaponStats.attackPattern.SpawnProjectiles(_capacity, _projectilePool, _currentPatternPrefab);
 			for (int i = 0; i < projectiles.Length; i++)
 			{
-				ApplyStats(weaponStats, projectiles[i]);
+				Projectile projectile = projectiles[i];
+				ApplyStats(weaponStats, projectile);
 
-				projectiles[i].gameObject.transform.localScale = Vector3.one * projectiles[i].finalProjectileSize;
+				projectile.gameObject.transform.localScale = Vector3.one * projectile.finalProjectileSize;
+				projectile.GetComponent<Rigidbody>().velocity = projectile.transform.forward * 18f;
 
-				projectiles[i].OnHit += CleanUpProjectile;
-				projectiles[i].OnLifeTimeEnd += CleanUpProjectile;
+				projectile.OnHit += CleanUpProjectile;
+				projectile.OnLifeTimeEnd += CleanUpProjectile;
 
 				_capacity--;
 			}
@@ -377,11 +380,7 @@ public class Weapon : ScriptableObject
 		}
 	}
 
-	private void CleanUpProjectile(Projectile projectile)
-	{
-		Debug.Log("CleanUp");
-		_projectilePool.ReturnObjectToPool(projectile);
-	}
+	private void CleanUpProjectile(Projectile projectile) => _projectilePool.ReturnObjectToPool(projectile);
 
 	private bool RotateTowardsEnemy(float range)
 	{

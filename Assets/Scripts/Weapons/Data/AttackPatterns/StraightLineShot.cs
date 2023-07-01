@@ -1,3 +1,4 @@
+using System.ComponentModel;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "new StraightLineShot", menuName = "ModularWeapon/Data/AttackPattern/StraightLineShot")]
@@ -25,24 +26,30 @@ public class StraightLineShot : AttackPattern
 		return _patternName;
 	}
 
-	public override Projectile[] SpawnProjectiles(WeaponStats weaponStats, ObjectPool<Projectile> projectilePool, Pattern spawnedPattern)
+	public override Projectile[] SpawnProjectiles(int capacity, ObjectPool<Projectile> projectilePool, Pattern spawnedPattern)
     {
-		_pattern = spawnedPattern;
+		Transform[] patternTransforms = spawnedPattern.GetTransforms();
+		Vector3[] patternPositions = spawnedPattern.GetPositions();
 
-		Projectile[] spawnedProjectiles = new Projectile[Mathf.Min(_pattern.positions.Length, weaponStats.capacity)];
-
+		Projectile[] spawnedProjectiles = new Projectile[Mathf.Min(_maxSimultaniousProjectiles, capacity)];
 		for (int i = 0; i < spawnedProjectiles.Length; i++)
 		{
 			Projectile spawnedProjectile = projectilePool.GetObject();
-			spawnedProjectile.transform.position = _pattern.positions[i].transform.position;
-			spawnedProjectile.transform.rotation = _pattern.positions[i].rotation;
+			spawnedProjectile.transform.position = patternPositions[i];
+			spawnedProjectile.transform.rotation = patternTransforms[i].rotation;
 
 			spawnedProjectiles[i] = spawnedProjectile;
 		}
 
 		return spawnedProjectiles;
 
-		//projectile.GetComponent<Rigidbody>().velocity = projectile.transform.forward * 18f;
     }
+
+	#if UNITY_EDITOR
+	private void OnValidate()
+	{
+		_maxSimultaniousProjectiles = Mathf.Min(_maxSimultaniousProjectiles, _pattern.GetTransforms().Length);
+	}
+	#endif
 
 }

@@ -237,7 +237,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ee5d0f1e6bf10346a70694b51ed9cc0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  positions:
+  _randomizeAmount: 6
+  _transforms:
   - {fileID: 8886688747651894817}
   - {fileID: 7966574690374475880}
   - {fileID: 4083645474371493312}
