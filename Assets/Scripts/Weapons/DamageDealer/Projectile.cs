@@ -4,7 +4,7 @@ using UnityEngine;
 public class Projectile : DamageDealer
 {
 	public Action<Projectile> OnHit;
-	public event Action<Projectile> OnLifeTimeEnd;
+	public Action<Projectile> OnLifeTimeEnd;
 
 	public float finalBaseDamage;
 	public float finalAttackSpeed;
@@ -22,13 +22,12 @@ public class Projectile : DamageDealer
 	private LayerMask _hitLayerMask;
 
 	public int PierceAmount { get; set; }
-	private float _lifeTime = 10;
+
+	public float LifeTime { get; set; }
 
 	private void Update()
 	{		
-		_lifeTime -= Time.deltaTime;
-		if (_lifeTime <= 0)
-			OnLifeTimeEnd?.Invoke(this);
+		motionPattern.UpdateMotion(this);
 	}
 
 	private void OnTriggerEnter(Collider other)

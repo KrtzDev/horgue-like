@@ -358,7 +358,6 @@ public class Weapon : ScriptableObject
 
 		if (_shotDelay <= 0)
 		{
-			Debug.Log($"{_currentWeaponPrefab.name} has {_capacity} bullets left");
 			Projectile[] projectiles = weaponStats.attackPattern.SpawnProjectiles(_capacity, _projectilePool, _currentPatternPrefab);
 			for (int i = 0; i < projectiles.Length; i++)
 			{
@@ -366,7 +365,9 @@ public class Weapon : ScriptableObject
 				ApplyStats(weaponStats, projectile);
 
 				projectile.gameObject.transform.localScale = Vector3.one * projectile.finalProjectileSize;
-				projectile.GetComponent<Rigidbody>().velocity = projectile.transform.forward * 18f;
+
+				projectile.motionPattern = weaponStats.motionPattern;
+				projectile.motionPattern.BeginMotion(projectile);
 
 				projectile.OnHit += CleanUpProjectile;
 				projectile.OnLifeTimeEnd += CleanUpProjectile;
@@ -380,7 +381,13 @@ public class Weapon : ScriptableObject
 		}
 	}
 
-	private void CleanUpProjectile(Projectile projectile) => _projectilePool.ReturnObjectToPool(projectile);
+	private void CleanUpProjectile(Projectile projectile)
+	{
+		//if (projectile.motionPattern.shouldExplodeOnDeath)
+			//Trigger StatusEffect e.g. Explosion
+
+		_projectilePool.ReturnObjectToPool(projectile);
+	}
 
 	private bool RotateTowardsEnemy(float range)
 	{
