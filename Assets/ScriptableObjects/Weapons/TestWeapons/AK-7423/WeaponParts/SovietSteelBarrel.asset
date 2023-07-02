@@ -15,10 +15,11 @@ MonoBehaviour:
   <WeaponPartUISprite>k__BackingField: {fileID: 21300000, guid: f58bf1761cfa7d147b72bc19c35e8ad5,
     type: 3}
   <WeaponPartPrefab>k__BackingField: {fileID: 0}
+  isSlotted: 0
   baseDamage: 34
   attackSpeed: 3
   cooldown: 1.5
   projectileSize: 0.2
   critChance: 13
   range: 20
-  attackPattern: {fileID: 11400000, guid: 526278176c5d56e4b9357d9dc8b3ed6e, type: 2}
+  attackPattern: {fileID: 11400000, guid: 15fc5c08514c7854081f576530e9b500, type: 2}

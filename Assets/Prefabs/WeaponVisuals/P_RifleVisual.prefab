@@ -248,6 +248,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: P_RifleVisual
       objectReference: {fileID: 0}
+    - target: {fileID: 8226857533788239212, guid: fc7cfcac5028693478d8962153e78d3f,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 1.288
+      objectReference: {fileID: 0}
     - target: {fileID: 9047250594083616499, guid: fc7cfcac5028693478d8962153e78d3f,
         type: 3}
       propertyPath: m_LocalPosition.z

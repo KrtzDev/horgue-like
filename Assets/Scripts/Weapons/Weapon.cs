@@ -10,35 +10,37 @@ public class Weapon : ScriptableObject
 	[SerializeField]
 	private WeaponSkeleton _weaponPrefab;
 	[SerializeField]
-	public Sprite _weaponSprite;
+	public Sprite weaponSprite;
 
 	[Header("DefaultWeaponParts")]
 	[SerializeField]
-	public Grip _defaultGrip;
+	public Grip defaultGrip;
 	[SerializeField]
-	public Barrel _defaultBarrel;
+	public Barrel defaultBarrel;
 	[SerializeField]
-	public Magazine _defaultMagazine;
+	public Magazine defaultMagazine;
 	[SerializeField]
-	public Ammunition _defaultAmmunition;
+	public Ammunition defaultAmmunition;
 	[SerializeField]
-	public TriggerMechanism _defaultTriggerMechanism;
+	public TriggerMechanism defaultTriggerMechanism;
 	[SerializeField]
-	public Sight _defaultSight;
+	public Sight defaultSight;
 
 	[Header("WeaponParts")]
 	[SerializeField]
-	public Grip _grip;
+	public Grip grip;
 	[SerializeField]
-	public Barrel _barrel;
+	public Barrel barrel;
 	[SerializeField]
-	public Magazine _magazine;
+	public Magazine magazine;
 	[SerializeField]
-	public Ammunition _ammunition;
+	public Ammunition ammunition;
 	[SerializeField]
-	public TriggerMechanism _triggerMechanism;
+	public TriggerMechanism triggerMechanism;
 	[SerializeField]
-	public Sight _sight;
+	public Sight sight;
+
+
 
 	[SerializeField]
 	private LayerMask _enemyLayer;
@@ -49,6 +51,7 @@ public class Weapon : ScriptableObject
 	public Transform OwningTransform { get; private set; }
 
 	private WeaponSkeleton _currentWeaponPrefab;
+	private Pattern _currentPatternPrefab;
 	private Transform _weaponTransform;
 
 	private ObjectPool<Projectile> _projectilePool;
@@ -59,14 +62,15 @@ public class Weapon : ScriptableObject
 	private float _reloadTime;
 
 
+
 	public void ResetWeaponParts()
 	{
-		_grip = _defaultGrip;
-		_barrel = _defaultBarrel;
-		_magazine = _defaultMagazine;
-		_ammunition = _defaultAmmunition;
-		_triggerMechanism = _defaultTriggerMechanism;
-		_sight = _defaultSight;
+		grip = defaultGrip;
+		barrel = defaultBarrel;
+		magazine = defaultMagazine;
+		ammunition = defaultAmmunition;
+		triggerMechanism = defaultTriggerMechanism;
+		sight = defaultSight;
 	}
 
 	public void Initialize(Transform owningTransform)
@@ -74,10 +78,12 @@ public class Weapon : ScriptableObject
 		Debug.Log("Inizialized " + _weaponPrefab);
 		OwningTransform = owningTransform;
 		_currentWeaponPrefab = Instantiate(_weaponPrefab, owningTransform);
+		_currentPatternPrefab = Instantiate(barrel.attackPattern.GetPattern(), _currentWeaponPrefab.ProjectileSpawnPosition);
 		_weaponTransform = _currentWeaponPrefab.transform;
 
 		_reloadTime = CalculateWeaponStats(this).cooldown;
-		_projectile = _ammunition.projectilePrefab;
+		_projectile = ammunition.projectilePrefab;
+		_capacity = CalculateWeaponStats(this).capacity;
 
 		_projectilePool = ObjectPool<Projectile>.CreatePool(_projectile, 100, null);
 	}
@@ -93,30 +99,31 @@ public class Weapon : ScriptableObject
 		weaponStats.critChance = CalculateCritChance(weapon);
 		weaponStats.range = CalculatefinalRange(weapon);
 
-		weaponStats.capacity = weapon._magazine.capacity;
-		weaponStats.attackPattern = weapon._barrel.attackPattern;
-		weaponStats.statusEffect = weapon._ammunition.statusEffect;
+		weaponStats.capacity = weapon.magazine.capacity;
+		weaponStats.attackPattern = weapon.barrel.attackPattern;
+		weaponStats.motionPattern = weapon.barrel.motionPattern;
+		weaponStats.statusEffect = weapon.ammunition.statusEffect;
 
 		return weaponStats;
 	}
 
 	public WeaponStats CalculatePotentialStats(WeaponPart hoveredPart)
 	{
-		Grip grip = (hoveredPart is Grip) ? (Grip)hoveredPart : _grip;
-		Barrel barrel = (hoveredPart is Barrel) ? (Barrel)hoveredPart : _barrel;
-		Magazine magazine = (hoveredPart is Magazine) ? (Magazine)hoveredPart : _magazine;
-		Ammunition ammunition = (hoveredPart is Ammunition) ? (Ammunition)hoveredPart : _ammunition;
-		TriggerMechanism triggerMechanism = (hoveredPart is TriggerMechanism) ? (TriggerMechanism)hoveredPart : _triggerMechanism;
-		Sight sight = (hoveredPart is Sight) ? (Sight)hoveredPart : _sight;
+		Grip potentialGrip = (hoveredPart is Grip) ? (Grip)hoveredPart : grip;
+		Barrel potentialBarrel = (hoveredPart is Barrel) ? (Barrel)hoveredPart : barrel;
+		Magazine potentialMagazine = (hoveredPart is Magazine) ? (Magazine)hoveredPart : magazine;
+		Ammunition potentialAmmunition = (hoveredPart is Ammunition) ? (Ammunition)hoveredPart : ammunition;
+		TriggerMechanism potentialTriggerMechanism = (hoveredPart is TriggerMechanism) ? (TriggerMechanism)hoveredPart : triggerMechanism;
+		Sight potentialSight = (hoveredPart is Sight) ? (Sight)hoveredPart : sight;
 
 		Weapon weapon = CreateInstance<Weapon>();
 
-		weapon._grip = grip;
-		weapon._barrel = barrel;
-		weapon._magazine = magazine;
-		weapon._ammunition = ammunition;
-		weapon._triggerMechanism = triggerMechanism;
-		weapon._sight = sight;
+		weapon.grip = potentialGrip;
+		weapon.barrel = potentialBarrel;
+		weapon.magazine = potentialMagazine;
+		weapon.ammunition = potentialAmmunition;
+		weapon.triggerMechanism = potentialTriggerMechanism;
+		weapon.sight = potentialSight;
 
 		return CalculateWeaponStats(weapon);
 	}
@@ -132,11 +139,9 @@ public class Weapon : ScriptableObject
 
 		_shotDelay = projectile.finalAttackSpeed > 0 ? 1 / projectile.finalAttackSpeed : SLOWEST_POSSIBLE_ATTACKSPEED;
 
-		_capacity = weaponStats.capacity;
 		projectile.attackPattern = weaponStats.attackPattern;
+		projectile.motionPattern = weaponStats.motionPattern;
 		projectile.statusEffect = weaponStats.statusEffect;
-
-		projectile.spawnTransform = _currentWeaponPrefab.ProjectileSpawnPosition;
 	}
 
 	private float CalculateDamage(Weapon weapon)
@@ -144,19 +149,19 @@ public class Weapon : ScriptableObject
 		float totalDamage = 0;
 		int partCount = 0;
 
-		if (weapon._triggerMechanism)
+		if (weapon.triggerMechanism)
 		{
-			totalDamage += weapon._triggerMechanism.baseDamage;
+			totalDamage += weapon.triggerMechanism.baseDamage;
 			partCount++;
 		}
-		if (weapon._barrel)
+		if (weapon.barrel)
 		{
-			totalDamage += weapon._barrel.baseDamage;
+			totalDamage += weapon.barrel.baseDamage;
 			partCount++;
 		}
-		if (weapon._ammunition)
+		if (weapon.ammunition)
 		{
-			totalDamage += weapon._ammunition.baseDamage;
+			totalDamage += weapon.ammunition.baseDamage;
 			partCount++;
 		}
 
@@ -168,34 +173,34 @@ public class Weapon : ScriptableObject
 		float totalAttackSpeed = 0;
 		int partCount = 0;
 
-		if (weapon._grip)
+		if (weapon.grip)
 		{
-			totalAttackSpeed += weapon._grip.attackSpeed;
+			totalAttackSpeed += weapon.grip.attackSpeed;
 			partCount++;
 		}
-		if (weapon._barrel)
+		if (weapon.barrel)
 		{
-			totalAttackSpeed += weapon._barrel.attackSpeed;
+			totalAttackSpeed += weapon.barrel.attackSpeed;
 			partCount++;
 		}
-		if (weapon._magazine)
+		if (weapon.magazine)
 		{
-			totalAttackSpeed += weapon._magazine.attackSpeed;
+			totalAttackSpeed += weapon.magazine.attackSpeed;
 			partCount++;
 		}
-		if (weapon._ammunition)
+		if (weapon.ammunition)
 		{
-			totalAttackSpeed += weapon._ammunition.attackSpeed;
+			totalAttackSpeed += weapon.ammunition.attackSpeed;
 			partCount++;
 		}
-		if (weapon._triggerMechanism)
+		if (weapon.triggerMechanism)
 		{
-			totalAttackSpeed += weapon._triggerMechanism.attackSpeed;
+			totalAttackSpeed += weapon.triggerMechanism.attackSpeed;
 			partCount++;
 		}
-		if (weapon._sight)
+		if (weapon.sight)
 		{
-			totalAttackSpeed += weapon._sight.attackSpeed;
+			totalAttackSpeed += weapon.sight.attackSpeed;
 			partCount++;
 		}
 		return partCount > 0 ? totalAttackSpeed / partCount : -1;
@@ -206,29 +211,29 @@ public class Weapon : ScriptableObject
 		float totalCooldown = 0;
 		int partCount = 0;
 
-		if (weapon._grip)
+		if (weapon.grip)
 		{
-			totalCooldown += weapon._grip.cooldown;
+			totalCooldown += weapon.grip.cooldown;
 			partCount++;
 		}
-		if (weapon._barrel)
+		if (weapon.barrel)
 		{
-			totalCooldown += weapon._barrel.cooldown;
+			totalCooldown += weapon.barrel.cooldown;
 			partCount++;
 		}
-		if (weapon._magazine)
+		if (weapon.magazine)
 		{
-			totalCooldown += weapon._magazine.cooldown;
+			totalCooldown += weapon.magazine.cooldown;
 			partCount++;
 		}
-		if (weapon._ammunition)
+		if (weapon.ammunition)
 		{
-			totalCooldown += weapon._ammunition.cooldown;
+			totalCooldown += weapon.ammunition.cooldown;
 			partCount++;
 		}
-		if (weapon._triggerMechanism)
+		if (weapon.triggerMechanism)
 		{
-			totalCooldown += weapon._triggerMechanism.cooldown;
+			totalCooldown += weapon.triggerMechanism.cooldown;
 			partCount++;
 		}
 
@@ -240,19 +245,19 @@ public class Weapon : ScriptableObject
 		float totalProjectileSize = 0;
 		int partCount = 0;
 
-		if (weapon._barrel)
+		if (weapon.barrel)
 		{
-			totalProjectileSize += weapon._barrel.projectileSize;
+			totalProjectileSize += weapon.barrel.projectileSize;
 			partCount++;
 		}
-		if (weapon._magazine)
+		if (weapon.magazine)
 		{
-			totalProjectileSize += weapon._magazine.projectileSize;
+			totalProjectileSize += weapon.magazine.projectileSize;
 			partCount++;
 		}
-		if (weapon._ammunition)
+		if (weapon.ammunition)
 		{
-			totalProjectileSize += weapon._ammunition.projectileSize;
+			totalProjectileSize += weapon.ammunition.projectileSize;
 			partCount++;
 		}
 		return partCount > 0 ? totalProjectileSize / partCount : -1;
@@ -263,29 +268,29 @@ public class Weapon : ScriptableObject
 		float totalCritChance = 0;
 		int partCount = 0;
 
-		if (weapon._grip)
+		if (weapon.grip)
 		{
-			totalCritChance += weapon._grip.critChance;
+			totalCritChance += weapon.grip.critChance;
 			partCount++;
 		}
-		if (weapon._barrel)
+		if (weapon.barrel)
 		{
-			totalCritChance += weapon._barrel.critChance;
+			totalCritChance += weapon.barrel.critChance;
 			partCount++;
 		}
-		if (weapon._ammunition)
+		if (weapon.ammunition)
 		{
-			totalCritChance += weapon._ammunition.critChance;
+			totalCritChance += weapon.ammunition.critChance;
 			partCount++;
 		}
-		if (weapon._triggerMechanism)
+		if (weapon.triggerMechanism)
 		{
-			totalCritChance += weapon._triggerMechanism.critChance;
+			totalCritChance += weapon.triggerMechanism.critChance;
 			partCount++;
 		}
-		if (weapon._sight)
+		if (weapon.sight)
 		{
-			totalCritChance += weapon._sight.critChance;
+			totalCritChance += weapon.sight.critChance;
 			partCount++;
 		}
 		return partCount > 0 ? totalCritChance / partCount : -1;
@@ -296,24 +301,24 @@ public class Weapon : ScriptableObject
 		float totalRange = 0;
 		int partCount = 0;
 
-		if (weapon._barrel)
+		if (weapon.barrel)
 		{
-			totalRange += weapon._barrel.range;
+			totalRange += weapon.barrel.range;
 			partCount++;
 		}
-		if (weapon._ammunition)
+		if (weapon.ammunition)
 		{
-			totalRange += weapon._ammunition.range;
+			totalRange += weapon.ammunition.range;
 			partCount++;
 		}
-		if (weapon._triggerMechanism)
+		if (weapon.triggerMechanism)
 		{
-			totalRange += weapon._triggerMechanism.range;
+			totalRange += weapon.triggerMechanism.range;
 			partCount++;
 		}
-		if (weapon._sight)
+		if (weapon.sight)
 		{
-			totalRange += weapon._sight.range;
+			totalRange += weapon.sight.range;
 			partCount++;
 		}
 		return partCount > 0 ? totalRange / partCount : -1;
@@ -353,20 +358,25 @@ public class Weapon : ScriptableObject
 
 		if (_shotDelay <= 0)
 		{
-			Projectile spawnedProjectile = (Projectile)_projectilePool.GetObject();
-			ApplyStats(weaponStats, spawnedProjectile);
+			Debug.Log($"{_currentWeaponPrefab.name} has {_capacity} bullets left");
+			Projectile[] projectiles = weaponStats.attackPattern.SpawnProjectiles(_capacity, _projectilePool, _currentPatternPrefab);
+			for (int i = 0; i < projectiles.Length; i++)
+			{
+				Projectile projectile = projectiles[i];
+				ApplyStats(weaponStats, projectile);
 
-			_capacity--;
-			_shotDelay = 1 / spawnedProjectile.finalAttackSpeed;
+				projectile.gameObject.transform.localScale = Vector3.one * projectile.finalProjectileSize;
+				projectile.GetComponent<Rigidbody>().velocity = projectile.transform.forward * 18f;
+
+				projectile.OnHit += CleanUpProjectile;
+				projectile.OnLifeTimeEnd += CleanUpProjectile;
+
+				_capacity--;
+			}
+
+			_shotDelay = 1 / weaponStats.attackspeed;
 
 			_currentWeaponPrefab.MuzzleFlash.Play();
-
-			spawnedProjectile.transform.position = spawnedProjectile.spawnTransform.position;
-			spawnedProjectile.transform.rotation = spawnedProjectile.spawnTransform.rotation;
-			spawnedProjectile.attackPattern.AttackInPattern(spawnedProjectile);
-			spawnedProjectile.gameObject.transform.localScale = Vector3.one * spawnedProjectile.finalProjectileSize;
-			spawnedProjectile.OnHit += CleanUpProjectile;
-			spawnedProjectile.OnLifeTimeEnd += CleanUpProjectile;
 		}
 	}
 
@@ -409,7 +419,7 @@ public class Weapon : ScriptableObject
 	{
 		await Task.Delay((int)(_reloadTime * 1000));
 
-		_capacity = _magazine.capacity;
+		_capacity = magazine.capacity;
 		_isReloading = false;
 	}
 }

@@ -12,4 +12,5 @@ public class Barrel : WeaponPart
     public float range;
 
     public AttackPattern attackPattern;
+	public MotionPattern motionPattern;
 }

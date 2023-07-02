@@ -10,5 +10,6 @@
 	public int capacity;
 
 	public AttackPattern attackPattern;
+	public MotionPattern motionPattern;
 	public StatusEffectSO statusEffect;
 }

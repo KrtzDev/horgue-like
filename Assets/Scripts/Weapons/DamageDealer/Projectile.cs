@@ -14,6 +14,7 @@ public class Projectile : DamageDealer
 	public float finalRange;
 
 	public AttackPattern attackPattern;
+	public MotionPattern motionPattern;
 	public StatusEffectSO statusEffect;
 	public Transform spawnTransform;
 

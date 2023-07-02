@@ -1,4 +1,5 @@
 
+using System;
 using UnityEditor;
 using UnityEngine;
 
@@ -34,7 +35,9 @@ public class DrawIfPropertyDrawer : PropertyDrawer
 	{
 		drawIf = attribute as DrawIfAttribute;
 		// Replace propertyname to the value from the parameter
-		string path = property.propertyPath.Contains(".") ? System.IO.Path.ChangeExtension(property.propertyPath, drawIf.comparedPropertyName) : drawIf.comparedPropertyName;
+		string path = property.propertyPath.Contains(".") 
+			? System.IO.Path.ChangeExtension(property.propertyPath, drawIf.comparedPropertyName) 
+			: drawIf.comparedPropertyName;
 
 		comparedField = property.serializedObject.FindProperty(path);
 
@@ -59,10 +62,11 @@ public class DrawIfPropertyDrawer : PropertyDrawer
 
 	public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
 	{
+		drawIf = attribute as DrawIfAttribute;
 		// If the condition is met, simply draw the field.
 		if (ShowMe(property))
 		{
-			EditorGUI.PropertyField(position, property);
+			EditorGUI.PropertyField(position, property, drawIf.IsLabelShown ? label : null, true);
 		} //...check if the disabling type is read only. If it is, draw it disabled
 		else if (drawIf.disablingType == DrawIfAttribute.DisablingType.ReadOnly)
 		{
