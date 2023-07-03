@@ -20,6 +20,8 @@ public class Projectile : DamageDealer
 
 	[SerializeField]
 	private LayerMask _hitLayerMask;
+	[SerializeField]
+	private LayerMask _enemyLayerMask;
 
 	public int PierceAmount { get; set; }
 
@@ -39,7 +41,7 @@ public class Projectile : DamageDealer
 		spawnedVFX.Play();
 
 		Collider[] _hitEnemies = new Collider[statusEffect.maxPropagateToCount];
-		if( Physics.OverlapSphereNonAlloc(transform.position, statusEffect.propagationRange, _hitEnemies, LayerMask.NameToLayer("Enemy")) > 0)
+		if( Physics.OverlapSphereNonAlloc(transform.position, statusEffect.propagationRange, _hitEnemies, _enemyLayerMask) > 0)
 		{
 			for (int i = 0; i < _hitEnemies.Length; i++)
 			{

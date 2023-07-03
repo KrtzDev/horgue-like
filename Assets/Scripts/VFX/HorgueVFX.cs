@@ -20,7 +20,9 @@ public class HorgueVFX : MonoBehaviour
 	private async void DestroyAfterDuration()
 	{
 		await Task.Delay((int)(_longestDuration * 1000f));
-		Destroy(gameObject);
+
+		if(Application.isPlaying)
+			Destroy(gameObject);
 	}
 
 #if UNITY_EDITOR

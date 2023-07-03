@@ -238,14 +238,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _randomizePositions:
-    manipulationMode: 1
-    vector: {x: 1, y: 0, z: 1}
-    radius:
-      min: 3
-      max: 7
-  _randomizeRotations:
-    manipulationMode: 0
+    manipulationMode: 2
     vector: {x: 0, y: 0, z: 0}
+    radius:
+      min: 0
+      max: 0
+  _randomizeRotations:
+    manipulationMode: 1
+    vector: {x: -75, y: 0, z: 0}
     radius:
       min: 0
       max: 0

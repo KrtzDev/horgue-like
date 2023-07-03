@@ -31,8 +31,14 @@ public class Pattern : MonoBehaviour
 					randomY = Random.Range(-_randomizeRotations.vector.y, _randomizeRotations.vector.y);
 					randomZ = Random.Range(-_randomizeRotations.vector.z, _randomizeRotations.vector.z);
 				}
+				else if (_randomizeRotations.manipulationMode == ManipulationMode.Set)
+				{
+					randomX = _randomizeRotations.vector.x;
+					randomY = _randomizeRotations.vector.y;
+					randomZ = _randomizeRotations.vector.z;
+				}
 
-				rotations[i] = Quaternion.Euler(rotations[i].x + randomX, rotations[i].y + randomY, rotations[i].z  + randomZ);
+				rotations[i] = Quaternion.Euler(rotations[i].eulerAngles.x + randomX, rotations[i].eulerAngles.y + randomY, rotations[i].eulerAngles.z  + randomZ);
 			}
 		}
 

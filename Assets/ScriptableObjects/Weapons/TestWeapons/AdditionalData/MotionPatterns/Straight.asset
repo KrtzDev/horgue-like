@@ -13,5 +13,7 @@ MonoBehaviour:
   m_Name: Straight
   m_EditorClassIdentifier: 
   shouldExplodeOnDeath: 1
-  _speed: 1
-  _lifeTime: 0.2
+  shouldSnapToGround: 0
+  hasGravity: 1
+  _speed: 10
+  _lifeTime: 2
