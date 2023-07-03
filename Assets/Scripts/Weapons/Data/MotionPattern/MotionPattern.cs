@@ -4,6 +4,7 @@
 public class MotionPattern : ScriptableObject
 {
 	public bool shouldExplodeOnDeath;
+	public bool shouldSnapToGround;
 
 	[SerializeField] private float _speed;
 	[SerializeField] private float _lifeTime;

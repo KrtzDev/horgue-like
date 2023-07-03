@@ -2,8 +2,9 @@
 
 public class Pattern : MonoBehaviour
 {
-	[SerializeField] private Vector3 _randomizePositions;
-	[SerializeField] private Vector3 _randomizeRotations;
+	[SerializeField] private ManiulationVector _randomizePositions;
+	[SerializeField] private ManiulationVector _randomizeRotations;
+
 	[SerializeField] private Transform[] _transforms;
 
 	public Transform[] GetTransforms()
@@ -18,11 +19,19 @@ public class Pattern : MonoBehaviour
 		{
 			rotations[i] = _transforms[i].rotation;
 
-			if (_randomizeRotations.sqrMagnitude > 0)
+			if (_randomizeRotations.vector.sqrMagnitude > 0 || _randomizeRotations.radius.max > 0)
 			{
-				float randomX = Random.Range(-_randomizeRotations.x, _randomizeRotations.x);
-				float randomY = Random.Range(-_randomizeRotations.y, _randomizeRotations.y);
-				float randomZ = Random.Range(-_randomizeRotations.z, _randomizeRotations.z);
+				float randomX = 0;
+				float randomY = 0;
+				float randomZ = 0;
+
+				if (_randomizeRotations.manipulationMode == ManipulationMode.Randomize)
+				{
+					randomX = Random.Range(-_randomizeRotations.vector.x, _randomizeRotations.vector.x);
+					randomY = Random.Range(-_randomizeRotations.vector.y, _randomizeRotations.vector.y);
+					randomZ = Random.Range(-_randomizeRotations.vector.z, _randomizeRotations.vector.z);
+				}
+
 				rotations[i] = Quaternion.Euler(rotations[i].x + randomX, rotations[i].y + randomY, rotations[i].z  + randomZ);
 			}
 		}
@@ -37,12 +46,27 @@ public class Pattern : MonoBehaviour
 		{
 			positions[i] = _transforms[i].position;
 
-			if (_randomizePositions.sqrMagnitude > 0)
+			if (_randomizePositions.vector.sqrMagnitude > 0 || _randomizePositions.radius.max > 0)
 			{
-				float randomX = Random.Range(-_randomizePositions.x, _randomizePositions.x);
-				float randomY = Random.Range(-_randomizePositions.y, _randomizePositions.y);
-				float randomZ = Random.Range(-_randomizePositions.z, _randomizePositions.z);
-				positions[i] = new Vector3(positions[i].x + randomX, positions[i].y + randomY, positions[i].z  + randomZ);
+				Vector3 randomVector = Vector3.zero;
+
+				if (_randomizePositions.manipulationMode == ManipulationMode.Randomize)
+				{
+					randomVector.x = Random.Range(-_randomizePositions.vector.x, _randomizePositions.vector.x);
+					randomVector.y = Random.Range(-_randomizePositions.vector.y, _randomizePositions.vector.y);
+					randomVector.z = Random.Range(-_randomizePositions.vector.z, _randomizePositions.vector.z);
+				}
+				else if (_randomizePositions.manipulationMode == ManipulationMode.Radius)
+				{
+					Vector3 randomUnitVector = new Vector3(
+							Random.Range(-_randomizePositions.vector.x, _randomizePositions.vector.x),
+							Random.Range(-_randomizePositions.vector.y, _randomizePositions.vector.y),
+							Random.Range(-_randomizePositions.vector.z, _randomizePositions.vector.z)).normalized;
+
+					randomVector = randomUnitVector * Random.Range(_randomizePositions.radius.min, _randomizePositions.radius.max);
+				}
+
+				positions[i] = new Vector3(positions[i].x + randomVector.x, positions[i].y + randomVector.y, positions[i].z  + randomVector.z);
 			}
 		}
 

@@ -383,8 +383,8 @@ public class Weapon : ScriptableObject
 
 	private void CleanUpProjectile(Projectile projectile)
 	{
-		//if (projectile.motionPattern.shouldExplodeOnDeath)
-			//Trigger StatusEffect e.g. Explosion
+		if (projectile.motionPattern.shouldExplodeOnDeath)
+			projectile.DoExplosion();
 
 		_projectilePool.ReturnObjectToPool(projectile);
 	}

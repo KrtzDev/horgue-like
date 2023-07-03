@@ -237,8 +237,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ee5d0f1e6bf10346a70694b51ed9cc0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _randomizePositions: {x: 6, y: 0, z: 6}
-  _randomizeRotations: {x: 0, y: 0, z: 0}
+  _randomizePositions:
+    manipulationMode: 1
+    vector: {x: 1, y: 0, z: 1}
+    radius:
+      min: 3
+      max: 7
+  _randomizeRotations:
+    manipulationMode: 0
+    vector: {x: 0, y: 0, z: 0}
+    radius:
+      min: 0
+      max: 0
   _transforms:
   - {fileID: 8886688747651894817}
   - {fileID: 7966574690374475880}

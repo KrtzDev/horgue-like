@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Straight
   m_EditorClassIdentifier: 
   shouldExplodeOnDeath: 1
-  _speed: 18
-  _lifeTime: 3
+  _speed: 1
+  _lifeTime: 0.2
