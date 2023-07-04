@@ -7,6 +7,7 @@ public class RangedRobot_IdleState : StateMachineBehaviour
 {
     NavMeshAgent agent;
     Enemy enemy;
+    ObstacleAgent _obstacleAgent;
 
     private float followTimer;
 
@@ -15,9 +16,10 @@ public class RangedRobot_IdleState : StateMachineBehaviour
     {
         agent = animator.GetComponent<NavMeshAgent>();
         enemy = animator.GetComponent<Enemy>();
+        _obstacleAgent = animator.GetComponent<ObstacleAgent>();
 
-        if (agent.enabled)
-            agent.SetDestination(agent.transform.position);
+        if (_obstacleAgent.enabled)
+            _obstacleAgent.SetDestination(agent.transform.position);
 
         followTimer = 0;
     }

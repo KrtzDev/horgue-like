@@ -9,6 +9,7 @@ public class RangedRobot_RetreatState : StateMachineBehaviour
     Enemy enemy;
     Transform player;
     Transform decoy;
+    ObstacleAgent _obstacleAgent;
 
     private Vector3 _followPosition;
 
@@ -19,6 +20,7 @@ public class RangedRobot_RetreatState : StateMachineBehaviour
     {
         agent = animator.GetComponent<NavMeshAgent>();
         enemy = animator.GetComponent<Enemy>();
+        _obstacleAgent = animator.GetComponent<ObstacleAgent>();
         player = GameObject.FindGameObjectWithTag("Player").transform;
         decoy = GameObject.FindGameObjectWithTag("Decoy").transform;
 
@@ -41,8 +43,8 @@ public class RangedRobot_RetreatState : StateMachineBehaviour
         Vector3 newPos = animator.transform.position + dirToPlayer;
 
         animator.transform.LookAt(newPos);
-        if (agent.enabled)
-            agent.SetDestination(newPos);
+        if (_obstacleAgent.enabled)
+            _obstacleAgent.SetDestination(newPos);
 
         float distance = Vector3.Distance(animator.transform.position, _followPosition);
 

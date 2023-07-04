@@ -5,36 +5,38 @@ using UnityEngine.AI;
 
 public class RangedRobot_ChaseState : StateMachineBehaviour
 {
-    NavMeshAgent agent;
-    Enemy enemy;
-    Transform player;
-    Transform decoy;
+    NavMeshAgent _agent;
+    ObstacleAgent _obstacleAgent;
+    Enemy _enemy;
+    Transform _player;
+    Transform _decoy;
 
     private Vector3 _followPosition;
 
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        agent = animator.GetComponent<NavMeshAgent>();
-        enemy = animator.GetComponent<Enemy>();
-        player = GameObject.FindGameObjectWithTag("Player").transform;
-        decoy = GameObject.FindGameObjectWithTag("Decoy").transform;
+        _agent = animator.GetComponent<NavMeshAgent>();
+        _enemy = animator.GetComponent<Enemy>();
+        _obstacleAgent = animator.GetComponent<ObstacleAgent>();
+        _player = GameObject.FindGameObjectWithTag("Player").transform;
+        _decoy = GameObject.FindGameObjectWithTag("Decoy").transform;
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        if (!enemy.FollowDecoy)
+        if (!_enemy.FollowDecoy)
         {
-            _followPosition = new Vector3(player.position.x, player.position.y, player.position.z);
-            if (agent.enabled)
-                agent.SetDestination(_followPosition);
+            _followPosition = new Vector3(_player.position.x, _player.position.y, _player.position.z);
+            if (_obstacleAgent.enabled)
+                _obstacleAgent.SetDestination(_followPosition);
         }
         else
         {
-            _followPosition = new Vector3(decoy.position.x, decoy.position.y, decoy.position.z);
-            if (agent.enabled)
-                agent.SetDestination(_followPosition);
+            _followPosition = new Vector3(_decoy.position.x, _decoy.position.y, _decoy.position.z);
+            if (_obstacleAgent.enabled)
+                _obstacleAgent.SetDestination(_followPosition);
         }
 
         float distance = Vector3.Distance(animator.transform.position, _followPosition);
@@ -42,10 +44,10 @@ public class RangedRobot_ChaseState : StateMachineBehaviour
         // CirclePlayer(animator);
 
         RaycastHit hit;
-        Debug.DrawRay(enemy.ProjectilePoint.transform.position, (_followPosition - enemy.ProjectilePoint.transform.position));
-        if (Physics.Raycast(enemy.ProjectilePoint.transform.position, (_followPosition + new Vector3(0, 0.5f, 0) - enemy.ProjectilePoint.transform.position), out hit, distance, enemy.GroundLayer))
+        Debug.DrawRay(_enemy.ProjectilePoint.transform.position, (_followPosition - _enemy.ProjectilePoint.transform.position));
+        if (Physics.Raycast(_enemy.ProjectilePoint.transform.position, (_followPosition + new Vector3(0, 0.5f, 0) - _enemy.ProjectilePoint.transform.position), out hit, distance, _enemy.GroundLayer))
         {
-            if (distance < enemy.EnemyData._retreatRange)
+            if (distance < _enemy.EnemyData._retreatRange)
             {
                 animator.SetBool("isRetreating", true);
                 animator.SetBool("isAttacking", false);
@@ -54,13 +56,13 @@ public class RangedRobot_ChaseState : StateMachineBehaviour
         }
         else
         {
-            if (distance < enemy.EnemyData._attackRange && distance > enemy.EnemyData._retreatRange)
+            if (distance < _enemy.EnemyData._attackRange && distance > _enemy.EnemyData._retreatRange)
             {
                 animator.SetBool("isAttacking", true);
                 animator.SetBool("isChasing", false);
                 animator.SetBool("isRetreating", false);
             }
-            else if (distance < enemy.EnemyData._retreatRange)
+            else if (distance < _enemy.EnemyData._retreatRange)
             {
                 animator.SetBool("isRetreating", true);
                 animator.SetBool("isAttacking", false);
@@ -72,8 +74,8 @@ public class RangedRobot_ChaseState : StateMachineBehaviour
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        if (agent.enabled)
-            agent.SetDestination(agent.transform.position);
+        if (_obstacleAgent.enabled)
+            _obstacleAgent.SetDestination(_agent.transform.position);
     }
 
     // OnStateMove is called right after Animator.OnAnimatorMove()
