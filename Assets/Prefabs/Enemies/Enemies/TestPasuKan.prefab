@@ -1147,8 +1147,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7a5f43bebdf64c47977007bc8605e76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _carvingTime: 0.05
-  _carvingMoveThreshold: 1
+  _carvingTime: 0.25
+  _carvingMoveThreshold: 0.5
 --- !u!114 &7380963665600946134
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1161,7 +1161,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd6eddb0a4ac344459cfa5a81beaf37f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _initialState: 0
+  _initialState: 1
   _config: {fileID: 11400000, guid: a731904ad61d42f42bd4e12c874b3c15, type: 2}
   _navMeshAgent: {fileID: 0}
   _obstacleAgent: {fileID: 0}

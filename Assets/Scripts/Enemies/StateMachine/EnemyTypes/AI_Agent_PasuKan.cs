@@ -21,4 +21,9 @@ public class AI_Agent_PasuKan : AI_Agent
         _stateMachine.RegisterState(new PasuKan_State_Attack());
         _stateMachine.RegisterState(new PasuKan_State_Death());
     }
+
+    public void SetDeactive()
+    {
+        this.gameObject.SetActive(false);
+    }
 }

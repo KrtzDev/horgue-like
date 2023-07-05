@@ -7,15 +7,15 @@ using UnityEngine.AI;
 [System.Serializable]
 public class EnemiesToSpawn
 {
-    public AI_Agent Enemy;
-    public int SpawnChance;
-    public SpawnBias SpawnBias;
+    public AI_Agent _enemy;
+    public int _spawnChance;
+    public SpawnBias _sSpawnBias;
 
     public EnemiesToSpawn (AI_Agent enemy, int spawnChance, SpawnBias spawnBias)
     {
-        Enemy = enemy;
-        SpawnChance = spawnChance;
-        SpawnBias = spawnBias;
+        _enemy = enemy;
+        _spawnChance = spawnChance;
+        _sSpawnBias = spawnBias;
     }
 }
 
@@ -60,7 +60,7 @@ public class EnemySpawner : MonoBehaviour
     {
         for (int i = 0; i < _enemiesToSpawn.Count; i++)
         {
-            _enemyObjectPool.Add(i, ObjectPool<AI_Agent>.CreatePool(_enemiesToSpawn[i].Enemy, _enemySpawnerData._maxEnemyCount, _enemyObjectPoolParent.transform));
+            _enemyObjectPool.Add(i, ObjectPool<AI_Agent>.CreatePool(_enemiesToSpawn[i]._enemy, _enemySpawnerData._maxEnemyCount, _enemyObjectPoolParent.transform));
         }
     }
 
@@ -80,15 +80,15 @@ public class EnemySpawner : MonoBehaviour
 
                 if (GameManager.Instance._enemyCount + _enemySpawnerData._spawnsPerTick > _enemySpawnerData._minEnemyCount)
                 {
-                    enemiesToBeSpawned = Mathf.RoundToInt(_enemySpawnerData._spawnsPerTick * (enemy.SpawnChance * 0.01f) + 0.4f);
+                    enemiesToBeSpawned = Mathf.RoundToInt(_enemySpawnerData._spawnsPerTick * (enemy._spawnChance * 0.01f) + 0.4f);
                 }
                 else if (GameManager.Instance._enemyCount < _enemySpawnerData._minEnemyCount)
                 {
-                    enemiesToBeSpawned = Mathf.RoundToInt(currentEnemiesFromMin * (enemy.SpawnChance * 0.01f) + 0.4f);
+                    enemiesToBeSpawned = Mathf.RoundToInt(currentEnemiesFromMin * (enemy._spawnChance * 0.01f) + 0.4f);
                 }
                 else if (GameManager.Instance._enemyCount < _enemySpawnerData._maxEnemyCount)
                 {
-                    enemiesToBeSpawned = Mathf.RoundToInt(_enemySpawnerData._spawnsPerTick * (enemy.SpawnChance * 0.01f) + 0.4f);
+                    enemiesToBeSpawned = Mathf.RoundToInt(_enemySpawnerData._spawnsPerTick * (enemy._spawnChance * 0.01f) + 0.4f);
                 }
                 SpawnEnemies(enemy, enemiesToBeSpawned, spawnIndex);
                 spawnIndex++;
@@ -106,7 +106,7 @@ public class EnemySpawner : MonoBehaviour
         {
             float spawnDelay = Random.Range(_enemySpawnerData._minSpawnDelay, _enemySpawnerData._maxSpawnDelay);
 
-            SetBounds(enemies.SpawnBias, zoneNumber);
+            SetBounds(enemies._sSpawnBias, zoneNumber);
             StartCoroutine(DoSpawnEnemy(enemies, spawnIndex, GetRandomPositionInBounds(_bounds), spawnDelay));
 
             zoneNumber++;

@@ -11,7 +11,7 @@ public class KnockBack : Effect
 	private bool _wasKnockBacked = false;
 	private float _currentKnockBackTimer = 0;
 
-	public KnockBack(Enemy enemy, Vector3 knockBackDirection)
+	public KnockBack(AI_Agent enemy, Vector3 knockBackDirection)
 	{
 		_enemy = enemy;
 		_knockBackDirection = knockBackDirection;

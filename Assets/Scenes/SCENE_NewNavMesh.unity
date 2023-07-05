@@ -14734,12 +14734,28 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6843213763226438607, guid: b0d5d15041526b8408159035025686a3,
         type: 3}
+      propertyPath: _enemiesToSpawn.Array.data[0]._enemy
+      value: 
+      objectReference: {fileID: 7380963665600946134, guid: 5d7715ca27d2b9745a30c4afff7911fb,
+        type: 3}
+    - target: {fileID: 6843213763226438607, guid: b0d5d15041526b8408159035025686a3,
+        type: 3}
       propertyPath: _enemiesToSpawn.Array.data[0].SpawnBias
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6843213763226438607, guid: b0d5d15041526b8408159035025686a3,
         type: 3}
       propertyPath: _enemiesToSpawn.Array.data[0].SpawnChance
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 6843213763226438607, guid: b0d5d15041526b8408159035025686a3,
+        type: 3}
+      propertyPath: _enemiesToSpawn.Array.data[0]._sSpawnBias
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6843213763226438607, guid: b0d5d15041526b8408159035025686a3,
+        type: 3}
+      propertyPath: _enemiesToSpawn.Array.data[0]._spawnChance
       value: 100
       objectReference: {fileID: 0}
     m_RemovedComponents: []

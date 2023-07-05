@@ -89,8 +89,8 @@ public class HealthComponent : MonoBehaviour
 			gameObject.GetComponent<Rigidbody>().isKinematic = true;
 		if (gameObject.GetComponent<NavMeshAgent>() != null)
 			gameObject.GetComponent<NavMeshAgent>().enabled = false;
-		if (gameObject.GetComponent<Enemy>() != null)
-			gameObject.GetComponent<Enemy>().enabled = false;
+		if (gameObject.GetComponent<AI_Agent>() != null)
+			gameObject.GetComponent<AI_Agent>().enabled = false;
 
 		gameObject.tag = "Untagged";
 	}
