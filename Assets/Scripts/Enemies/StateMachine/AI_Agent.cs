@@ -6,6 +6,7 @@ using UnityEngine.AI;
 // https://www.youtube.com/watch?v=1H9jrKyWKs0&t=34s
 
 [RequireComponent(typeof(NavMeshAgent), typeof(Animator), typeof(EnemyHealthComponent))]
+[DefaultExecutionOrder(1)]
 public class AI_Agent : MonoBehaviour
 {
     [HideInInspector] public AI_StateMachine _stateMachine;
@@ -20,11 +21,19 @@ public class AI_Agent : MonoBehaviour
     public LayerMask _enemyLayer;
     public LayerMask _playerLayer;
 
+    [HideInInspector] public GameObject _player;
     [HideInInspector] public Transform _playerTransform;
     [HideInInspector] public Transform _decoyTransform;
 
     [HideInInspector] public float _attackTimer;
+    [HideInInspector] public float _lookRotationSpeed = 1f;
     [HideInInspector] public bool _followDecoy;
+
+    [Header("Movement Prediction")]
+    public bool _useMovementPrediction;
+    [Range(-1f, 1f)] public float _movementPredictionThreshold = 0f;
+    [Range(0.25f, 2f)] public float _movementPredictionTime = 1f;
+
 
     protected virtual void Start()
     {
@@ -34,7 +43,8 @@ public class AI_Agent : MonoBehaviour
         _obstacleAgent = GetComponent<ObstacleAgent>();
         _animator = GetComponent<Animator>();
         _healthComponent = GetComponent<EnemyHealthComponent>();
-        _playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
+        _player = GameObject.FindGameObjectWithTag("Player");
+        _playerTransform = _player.GetComponent<Transform>();
         _decoyTransform = GameObject.FindGameObjectWithTag("Decoy").transform;
 
         SetEnemyData();

@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using System.Collections.Generic;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -25,9 +26,36 @@ public class PlayerMovement : MonoBehaviour
     private float _timeMoving;
     private float _timeStopping;
 
+    // Record Player Path History for Enemy Movement Prediction
+    [SerializeField] [Range(0.1f, 5f)] private float _historicalPositionDuration = 1f;
+    [SerializeField] [Range(0.001f, 1f)] private float _historicalPositionInterval = 0.1f;
+    private Queue<Vector3> _historicalVelocities;
+    private float _lastPositinTime;
+    private int _maxQueueSize;
+
+    public Vector3 AverageVelocity
+    {
+        get
+        {
+            Vector3 average = Vector3.zero;
+            foreach(Vector3 velocity in _historicalVelocities)
+            {
+                average += velocity;
+            }
+            average.y = 0;
+
+            return average / _historicalVelocities.Count;
+        }
+    }
+
+
     private void Awake()
     {
         _playerCharacter = this.GetComponent<PlayerCharacter>();
+
+        _maxQueueSize = Mathf.CeilToInt(1f / _historicalPositionInterval * _historicalPositionDuration);  // Calculate Queue Size
+        _historicalVelocities = new Queue<Vector3>(_maxQueueSize);
+
         MovementSpeed = _playerCharacter._playerData._movementSpeed;
         _inputActions = new PlayerInputMappings();
         if (InputManager.Instance)
@@ -93,6 +121,17 @@ public class PlayerMovement : MonoBehaviour
         //_character.CharacterRigidbody.AddForce(movement * 3, ForceMode.VelocityChange);
 
         _character.CharacterRigidbody.velocity = new Vector3(movement.x * 50, _character.CharacterRigidbody.velocity.y, movement.z * 50);
+
+        if(_lastPositinTime + _historicalPositionInterval <= Time.time)
+        {
+            if(_historicalVelocities.Count == _maxQueueSize)
+            {
+                _historicalVelocities.Dequeue();
+            }
+
+            _historicalVelocities.Enqueue(this.GetComponent<Rigidbody>().velocity);
+            _lastPositinTime = Time.time;
+        }
     }
 
     private void Move(InputAction.CallbackContext ctx)

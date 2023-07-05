@@ -5,7 +5,11 @@ using UnityEngine.AI;
 
 public class AI_State_ChasePlayer : AI_State
 {
+    protected Coroutine LookCoroutine;
+
     public Vector3 _followPosition;
+    public float _timer;
+    public float _maxTime = 0.1f;
 
     public AI_StateID GetID()
     {

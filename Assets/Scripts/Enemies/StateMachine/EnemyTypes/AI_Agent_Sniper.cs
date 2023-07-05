@@ -7,6 +7,8 @@ public class AI_Agent_Sniper : AI_Agent
     protected override void Start()
     {
         base.Start();
+
+        AI_Manager.Instance.Sniper.Add(this);
     }
 
     protected override void Update()
@@ -22,5 +24,11 @@ public class AI_Agent_Sniper : AI_Agent
         _stateMachine.RegisterState(new Sniper_State_Attack());
         _stateMachine.RegisterState(new AI_State_Death());
         _stateMachine.RegisterState(new AI_State_Damage());
+    }
+
+    public void SetDeactive()
+    {
+        this.gameObject.SetActive(false);
+        AI_Manager.Instance.Sniper.Remove(this);
     }
 }
