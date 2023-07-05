@@ -10,7 +10,8 @@ public enum AI_StateID
     ChasePlayer,
     Retreat,
     Attack,
-    Death
+    Death,
+    Damage
 }
 
 public interface AI_State

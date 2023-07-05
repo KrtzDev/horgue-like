@@ -1836,12 +1836,12 @@ GameObject:
   - component: {fileID: 4301312500157032124}
   - component: {fileID: 4301312500149274901}
   - component: {fileID: 8076142010926168822}
-  - component: {fileID: 7300998086142530308}
-  - component: {fileID: 7238498638767744560}
   - component: {fileID: 4301312500149274905}
   - component: {fileID: 8519058135064799330}
   - component: {fileID: 6725289433927629474}
   - component: {fileID: 1343816912798085684}
+  - component: {fileID: 6427404563501194858}
+  - component: {fileID: 6136618837982686580}
   m_Layer: 7
   m_Name: GIGA_RangedRobot
   m_TagString: Enemy
@@ -1922,58 +1922,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.5, y: 3, z: 1.5}
   m_Center: {x: 0, y: 1, z: 0}
---- !u!114 &7300998086142530308
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4301312500149769534}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1ad244b7fad3c0b41a8272dfe705ac8a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _agent: {fileID: 4301312500149274905}
-  _projectile: {fileID: 8451927325676435795, guid: 519256511bcaca747924245807496f73,
-    type: 3}
-  <ProjectilePoint>k__BackingField: {fileID: 7221469875420454319}
-  _projectileSpeed: 22
-  <GroundLayer>k__BackingField:
-    serializedVersion: 2
-    m_Bits: 512
-  <EnemyLayer>k__BackingField:
-    serializedVersion: 2
-    m_Bits: 128
-  <PlayerLayer>k__BackingField:
-    serializedVersion: 2
-    m_Bits: 64
-  <EnemyData>k__BackingField: {fileID: 11400000, guid: 8dc834b5e34dc44468852d86bbd441ba,
-    type: 2}
---- !u!114 &7238498638767744560
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4301312500149769534}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe0fc43883faa7c4884164c087e77334, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _maxHealth: 0
-  _currentHealth: 0
-  _anim: {fileID: 0}
-  _enemy: {fileID: 0}
-  _hitParticlePosition: {fileID: 2472108946567798374}
-  _hitParticle: {fileID: 6362102834014993675, guid: 5561755790406d148a233f12b01260c5,
-    type: 3}
-  _isDead: 0
-  _healthDrop: {fileID: 4318080567083893032, guid: 03c15c294a93b874ca9153b08ea682dd,
-    type: 3}
-  _coinDrop: {fileID: 2954434917669188068, guid: bc346ef89f6462d419a727974cda75b8,
-    type: 3}
 --- !u!195 &4301312500149274905
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -2039,6 +1987,60 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _carvingTime: 0.05
   _carvingMoveThreshold: 1
+--- !u!114 &6427404563501194858
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4301312500149769534}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aae483b5fc3237b4290efb3d1fcea032, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _maxHealth: 0
+  _currentHealth: 0
+  _isDead: 0
+  _hitParticlePosition: {fileID: 2472108946567798374}
+  _hitParticle: {fileID: 6362102834014993675, guid: 5561755790406d148a233f12b01260c5,
+    type: 3}
+  _healthDrop: {fileID: 4318080567083893032, guid: 03c15c294a93b874ca9153b08ea682dd,
+    type: 3}
+  _coinDrop: {fileID: 2954434917669188068, guid: bc346ef89f6462d419a727974cda75b8,
+    type: 3}
+--- !u!114 &6136618837982686580
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4301312500149769534}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78aad467a1777534695529827036e574, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _initialState: 0
+  _enemyData: {fileID: 11400000, guid: 8dc834b5e34dc44468852d86bbd441ba, type: 2}
+  _config: {fileID: 0}
+  _navMeshAgent: {fileID: 0}
+  _obstacleAgent: {fileID: 0}
+  _animator: {fileID: 0}
+  _healthComponent: {fileID: 0}
+  _groundLayer:
+    serializedVersion: 2
+    m_Bits: 512
+  _enemyLayer:
+    serializedVersion: 2
+    m_Bits: 128
+  _playerLayer:
+    serializedVersion: 2
+    m_Bits: 64
+  _playerTransform: {fileID: 0}
+  _decoyTransform: {fileID: 0}
+  _attackTimer: 0
+  _followDecoy: 0
 --- !u!1 &4301312500149769568
 GameObject:
   m_ObjectHideFlags: 0

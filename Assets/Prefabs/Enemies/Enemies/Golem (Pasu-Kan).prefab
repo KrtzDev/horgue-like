@@ -652,12 +652,12 @@ GameObject:
   - component: {fileID: 716891242282492267}
   - component: {fileID: 2972127539885319338}
   - component: {fileID: 4452630809966156967}
-  - component: {fileID: 2751320019283796166}
   - component: {fileID: 6067780497260314404}
-  - component: {fileID: 2751320019283796165}
   - component: {fileID: 8936747675488740624}
   - component: {fileID: -5234749911296009059}
   - component: {fileID: 3675240321267873404}
+  - component: {fileID: 991303693388303997}
+  - component: {fileID: -2465721901373468555}
   m_Layer: 7
   m_Name: Golem (Pasu-Kan)
   m_TagString: Enemy
@@ -734,30 +734,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
---- !u!114 &2751320019283796166
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 716891242273133261}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe0fc43883faa7c4884164c087e77334, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _maxHealth: 0
-  _currentHealth: 0
-  _anim: {fileID: 0}
-  _enemy: {fileID: 0}
-  _hitParticlePosition: {fileID: 5332456720476653605}
-  _hitParticle: {fileID: 6362102834014993675, guid: 5561755790406d148a233f12b01260c5,
-    type: 3}
-  _isDead: 0
-  _healthDrop: {fileID: 4318080567083893032, guid: 03c15c294a93b874ca9153b08ea682dd,
-    type: 3}
-  _coinDrop: {fileID: 2954434917669188068, guid: bc346ef89f6462d419a727974cda75b8,
-    type: 3}
 --- !u!114 &6067780497260314404
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -771,33 +747,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _statusEffects: []
---- !u!114 &2751320019283796165
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 716891242273133261}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1ad244b7fad3c0b41a8272dfe705ac8a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _agent: {fileID: 8936747675488740624}
-  _projectile: {fileID: 0}
-  <ProjectilePoint>k__BackingField: {fileID: 0}
-  _projectileSpeed: 0
-  <GroundLayer>k__BackingField:
-    serializedVersion: 2
-    m_Bits: 512
-  <EnemyLayer>k__BackingField:
-    serializedVersion: 2
-    m_Bits: 128
-  <PlayerLayer>k__BackingField:
-    serializedVersion: 2
-    m_Bits: 64
-  <EnemyData>k__BackingField: {fileID: 11400000, guid: 1c6784eeb238619469f87bbb4a9877f5,
-    type: 2}
 --- !u!195 &8936747675488740624
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -850,6 +799,60 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _carvingTime: 0.05
   _carvingMoveThreshold: 1
+--- !u!114 &991303693388303997
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 716891242273133261}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aae483b5fc3237b4290efb3d1fcea032, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _maxHealth: 0
+  _currentHealth: 0
+  _isDead: 0
+  _hitParticlePosition: {fileID: 5332456720476653605}
+  _hitParticle: {fileID: 6362102834014993675, guid: 5561755790406d148a233f12b01260c5,
+    type: 3}
+  _healthDrop: {fileID: 4318080567083893032, guid: 03c15c294a93b874ca9153b08ea682dd,
+    type: 3}
+  _coinDrop: {fileID: 2954434917669188068, guid: bc346ef89f6462d419a727974cda75b8,
+    type: 3}
+--- !u!114 &-2465721901373468555
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 716891242273133261}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd6eddb0a4ac344459cfa5a81beaf37f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _initialState: 0
+  _enemyData: {fileID: 11400000, guid: 1c6784eeb238619469f87bbb4a9877f5, type: 2}
+  _config: {fileID: 0}
+  _navMeshAgent: {fileID: 0}
+  _obstacleAgent: {fileID: 0}
+  _animator: {fileID: 0}
+  _healthComponent: {fileID: 0}
+  _groundLayer:
+    serializedVersion: 2
+    m_Bits: 512
+  _enemyLayer:
+    serializedVersion: 2
+    m_Bits: 128
+  _playerLayer:
+    serializedVersion: 2
+    m_Bits: 64
+  _playerTransform: {fileID: 0}
+  _decoyTransform: {fileID: 0}
+  _attackTimer: 0
+  _followDecoy: 0
 --- !u!1 &716891242273133263
 GameObject:
   m_ObjectHideFlags: 0

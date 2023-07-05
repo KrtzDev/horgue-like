@@ -5,17 +5,16 @@ using UnityEngine.AI;
 
 // https://www.youtube.com/watch?v=1H9jrKyWKs0&t=34s
 
-[RequireComponent(typeof(NavMeshAgent), typeof(Animator), typeof(HealthComponent))]
+[RequireComponent(typeof(NavMeshAgent), typeof(Animator), typeof(EnemyHealthComponent))]
 public class AI_Agent : MonoBehaviour
 {
-    public AI_StateMachine _stateMachine;
+    [HideInInspector] public AI_StateMachine _stateMachine;
     public AI_StateID _initialState;
-    public AI_Agent_Config _config;
-    public NavMeshAgent _navMeshAgent;
-    public ObstacleAgent _obstacleAgent;
     public BasicEnemyData _enemyData;
-    public Animator _animator;
-    public HealthComponent _healthComponent;
+    [HideInInspector] public NavMeshAgent _navMeshAgent;
+    [HideInInspector] public ObstacleAgent _obstacleAgent;
+    [HideInInspector] public Animator _animator;
+    [HideInInspector] public EnemyHealthComponent _healthComponent;
 
     public LayerMask _groundLayer;
     public LayerMask _enemyLayer;
@@ -34,7 +33,7 @@ public class AI_Agent : MonoBehaviour
         _navMeshAgent = GetComponent<NavMeshAgent>();
         _obstacleAgent = GetComponent<ObstacleAgent>();
         _animator = GetComponent<Animator>();
-        _healthComponent = GetComponent<HealthComponent>();
+        _healthComponent = GetComponent<EnemyHealthComponent>();
         _playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
         _decoyTransform = GameObject.FindGameObjectWithTag("Decoy").transform;
 
@@ -56,6 +55,7 @@ public class AI_Agent : MonoBehaviour
         _stateMachine.RegisterState(new AI_State_Retreat());
         _stateMachine.RegisterState(new AI_State_Attack());
         _stateMachine.RegisterState(new AI_State_Death());
+        _stateMachine.RegisterState(new AI_State_Damage());
     }
 
     private void SetEnemyData()
@@ -64,4 +64,6 @@ public class AI_Agent : MonoBehaviour
         _navMeshAgent.acceleration = _enemyData._acceleration;
         _attackTimer = _enemyData._attackSpeed;
     }
+
+    private void SetIdleState() => _stateMachine.ChangeState(AI_StateID.Idle);
 }

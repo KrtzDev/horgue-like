@@ -20,6 +20,7 @@ public class AI_Agent_Sniper : AI_Agent
         _stateMachine.RegisterState(new Sniper_State_ChasePlayer());
         _stateMachine.RegisterState(new Sniper_State_Retreat());
         _stateMachine.RegisterState(new Sniper_State_Attack());
-        _stateMachine.RegisterState(new Sniper_State_Death());
+        _stateMachine.RegisterState(new AI_State_Death());
+        _stateMachine.RegisterState(new AI_State_Damage());
     }
 }
