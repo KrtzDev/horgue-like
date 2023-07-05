@@ -7,11 +7,11 @@ using UnityEngine.AI;
 [System.Serializable]
 public class EnemiesToSpawn
 {
-    public Enemy Enemy;
+    public AI_Agent Enemy;
     public int SpawnChance;
     public SpawnBias SpawnBias;
 
-    public EnemiesToSpawn (Enemy enemy, int spawnChance, SpawnBias spawnBias)
+    public EnemiesToSpawn (AI_Agent enemy, int spawnChance, SpawnBias spawnBias)
     {
         Enemy = enemy;
         SpawnChance = spawnChance;
@@ -45,7 +45,7 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] private List<BoxCollider> _levelZone = new List<BoxCollider>();
 
     // Object Pooling
-    public Dictionary<int, ObjectPool<Enemy>> _enemyObjectPool = new Dictionary<int, ObjectPool<Enemy>>();
+    public Dictionary<int, ObjectPool<AI_Agent>> _enemyObjectPool = new Dictionary<int, ObjectPool<AI_Agent>>();
     private Bounds _bounds;
 
     private void Awake()
@@ -60,7 +60,7 @@ public class EnemySpawner : MonoBehaviour
     {
         for (int i = 0; i < _enemiesToSpawn.Count; i++)
         {
-            _enemyObjectPool.Add(i, ObjectPool<Enemy>.CreatePool(_enemiesToSpawn[i].Enemy, _enemySpawnerData._maxEnemyCount, _enemyObjectPoolParent.transform));
+            _enemyObjectPool.Add(i, ObjectPool<AI_Agent>.CreatePool(_enemiesToSpawn[i].Enemy, _enemySpawnerData._maxEnemyCount, _enemyObjectPoolParent.transform));
         }
     }
 
@@ -384,7 +384,7 @@ public class EnemySpawner : MonoBehaviour
 
             yield return new WaitForSeconds(_enemySpawnerData._spawnAnimDelay);
 
-            Enemy poolableObject = _enemyObjectPool[spawnIndex].GetObject();
+            AI_Agent poolableObject = _enemyObjectPool[spawnIndex].GetObject();
 
             // Determine Position
 

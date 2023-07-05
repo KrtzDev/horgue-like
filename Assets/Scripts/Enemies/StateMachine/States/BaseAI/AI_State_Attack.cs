@@ -4,22 +4,23 @@ using UnityEngine;
 
 public class AI_State_Attack : AI_State 
 {
+    public Vector3 _followPosition;
     public AI_StateID GetID()
     {
         return AI_StateID.Attack;
     }
 
-    public void Enter(AI_Agent agent)
+    public virtual void Enter(AI_Agent agent)
     {
 
     }
 
-    public void Update(AI_Agent agent)
+    public virtual void Update(AI_Agent agent)
     {
 
     }
 
-    public void Exit(AI_Agent agent)
+    public virtual void Exit(AI_Agent agent)
     {
 
     }

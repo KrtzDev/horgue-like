@@ -9,18 +9,19 @@ public class AI_State_Death : AI_State
         return AI_StateID.Death;
     }
 
-    void AI_State.Enter(AI_Agent agent)
+    public virtual void Enter(AI_Agent agent)
     {
         
     }
 
-    void AI_State.Update(AI_Agent agent)
+    public virtual void Update(AI_Agent agent)
     {
        
     }
 
-    void AI_State.Exit(AI_Agent agent)
+    public virtual void Exit(AI_Agent agent)
     {
        
     }
+
 }

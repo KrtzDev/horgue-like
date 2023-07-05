@@ -11,7 +11,7 @@ public class HealthComponent : MonoBehaviour
 	[SerializeField] public int _currentHealth;
 
 	public Animator _anim;
-	public Enemy _enemy;
+	public AI_Agent _enemy;
 
 	[SerializeField] private Transform _hitParticlePosition;
 	[SerializeField] private ParticleSystem _hitParticle;
@@ -27,11 +27,11 @@ public class HealthComponent : MonoBehaviour
 	{
 		if (gameObject.CompareTag("Enemy"))
 		{
-			_enemy = gameObject.GetComponent<Enemy>();
+			_enemy = gameObject.GetComponent<AI_Agent>();
 			_anim = gameObject.GetComponent<Animator>();
-			_maxHealth = _enemy.EnemyData._maxHealth;
+			_maxHealth = _enemy._enemyData._maxHealth;
 			_currentHealth = _maxHealth;
-			_healthDropChance = (int)(_enemy.EnemyData._healthDropChance * 100);
+			_healthDropChance = (int)(_enemy._enemyData._healthDropChance * 100);
 		}
 
 		_isDead = false;
@@ -98,7 +98,7 @@ public class HealthComponent : MonoBehaviour
 	private void DropScore()
 	{
 		Instantiate(_coinDrop, _hitParticlePosition.position, Quaternion.identity);
-		GameManager.Instance._currentScore += _enemy.EnemyData._givenXP;
+		GameManager.Instance._currentScore += _enemy._enemyData._givenXP;
 	}
 
 	private void DropHealthPotion()
