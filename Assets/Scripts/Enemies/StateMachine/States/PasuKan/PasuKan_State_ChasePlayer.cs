@@ -7,14 +7,14 @@ public class PasuKan_State_ChasePlayer : AI_State_ChasePlayer
 
     public override void Enter(AI_Agent agent)
     {
-
+        agent._animator.SetBool("isChasing", true);
+        agent._attackTimer = agent._enemyData._attackSpeed;
     }
 
     public override void Update(AI_Agent agent)
     {
         if(!agent._navMeshAgent.enabled)
         {
-            Debug.Log("Hello World");
             return;
         }
 
@@ -66,11 +66,14 @@ public class PasuKan_State_ChasePlayer : AI_State_ChasePlayer
 
             _timer = _maxTime;
         }
+
+        float distance = Vector3.Distance(agent.transform.position, agent._playerTransform.position);
+        CheckForAttack(agent, distance);
     }
 
     public override void Exit(AI_Agent agent)
     {
-
+        agent._animator.SetBool("isChasing", false);
     }
 
     private void SetTarget(AI_Agent agent)
@@ -93,5 +96,21 @@ public class PasuKan_State_ChasePlayer : AI_State_ChasePlayer
         }
 
         LookCoroutine = AI_Manager.Instance.StartCoroutine(AI_Manager.Instance.LookAtTarget(agent, _followPosition, _maxTime));
+    }
+
+    private void CheckForAttack(AI_Agent agent, float distance)
+    {
+        if (distance < agent._enemyData._attackRange && agent._attackTimer < 0)
+        {
+            agent._attackTimer = agent._enemyData._attackSpeed;
+            agent.transform.LookAt(_followPosition);
+            agent._animator.SetTrigger("attack");
+            agent._animator.SetBool("isChasing", false);
+            agent._stateMachine.ChangeState(AI_StateID.Attack);
+        }
+        else
+        {
+            agent._attackTimer -= Time.deltaTime;
+        }
     }
 }

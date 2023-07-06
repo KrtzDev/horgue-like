@@ -65,7 +65,6 @@ public class AI_Agent : MonoBehaviour
         _stateMachine.RegisterState(new AI_State_Retreat());
         _stateMachine.RegisterState(new AI_State_Attack());
         _stateMachine.RegisterState(new AI_State_Death());
-        _stateMachine.RegisterState(new AI_State_Damage());
     }
 
     private void SetEnemyData()
@@ -75,5 +74,5 @@ public class AI_Agent : MonoBehaviour
         _attackTimer = _enemyData._attackSpeed;
     }
 
-    private void SetIdleState() => _stateMachine.ChangeState(AI_StateID.Idle);
+    private void SetState(AI_StateID state) => _stateMachine.ChangeState(state);
 }

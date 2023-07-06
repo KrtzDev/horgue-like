@@ -16,8 +16,8 @@ MonoBehaviour:
   _damagePerHit: 15
   _attackSpeed: 2.5
   _givenXP: 5
-  _maxMoveSpeed: 10
-  _acceleration: 100
+  _maxMoveSpeed: 20
+  _acceleration: 25
   _armor: 100
   _elementalResistance: 50
   _technicalResistance: -50

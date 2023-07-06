@@ -13,6 +13,7 @@ public class EnemyHealthComponent : HealthComponent
     private int _healthDropChance;
     public GameObject _healthDrop;
     public GameObject _coinDrop;
+
     protected override void Awake()
     {
         base.Awake();
@@ -23,9 +24,23 @@ public class EnemyHealthComponent : HealthComponent
         _healthDropChance = (int)(_enemy._enemyData._healthDropChance * 100);
     }
 
-	private void MarkEnemyToTakeDamage()
+    public override void TakeDamage(int damage)
+    {
+        base.TakeDamage(damage);
+
+		if(_currentHealth > 0)
+        {
+			MarkEnemyToTakeDamage();
+        }
+		else if (_currentHealth <= 0)
+        {
+			MarkEnemyToDie();
+        }
+    }
+
+    private void MarkEnemyToTakeDamage()
 	{
-		_enemy._stateMachine.ChangeState(AI_StateID.Damage);
+		_enemy._animator.SetTrigger("damage");
 	}
 
 	private void MarkEnemyToDie()
@@ -40,6 +55,8 @@ public class EnemyHealthComponent : HealthComponent
 			gameObject.GetComponent<UnityEngine.AI.NavMeshAgent>().enabled = false;
 		if (gameObject.GetComponent<AI_Agent>() != null)
 			gameObject.GetComponent<AI_Agent>().enabled = false;
+
+		GameManager.Instance.EnemyDied();
 
 		_enemy._stateMachine.ChangeState(AI_StateID.Death);
 
