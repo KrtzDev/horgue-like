@@ -56,7 +56,7 @@ public class PlayerMovementMobility : MonoBehaviour
     [SerializeField] private float _flickerStrikeTime;
     [SerializeField] private float _flickerStrikeRange;
 
-    private Enemy _closestEnemy;
+    private AI_Agent _closestEnemy;
     private PlayerSimpleShot _simpleShot;
 
     private void Awake()
@@ -269,7 +269,7 @@ public class PlayerMovementMobility : MonoBehaviour
             for (int j = 0; j < _enemySpawner.transform.GetChild(i).childCount; j++)
             {
                 // _EnemySpawner.transform.GetChild(i).GetChild(j).GetComponent<EnemyMovement>().PlayerTarget = _Decoy.transform;
-                _enemySpawner.transform.GetChild(i).GetChild(j).GetComponent<Enemy>().FollowDecoy = true;
+                _enemySpawner.transform.GetChild(i).GetChild(j).GetComponent<AI_Agent>()._followDecoy = true;
             }
         }
 
@@ -292,7 +292,7 @@ public class PlayerMovementMobility : MonoBehaviour
             for (int j = 0; j < _enemySpawner._enemyObjectPoolParent.transform.GetChild(i).childCount; j++)
             {
                 // _EnemySpawner.transform.GetChild(i).GetChild(j).GetComponent<EnemyMovement>().PlayerTarget = this.transform;
-                _enemySpawner._enemyObjectPoolParent.transform.GetChild(i).GetChild(j).GetComponent<Enemy>().FollowDecoy = false;
+                _enemySpawner._enemyObjectPoolParent.transform.GetChild(i).GetChild(j).GetComponent<AI_Agent>()._followDecoy = false;
             }
         }
 
@@ -357,7 +357,7 @@ public class PlayerMovementMobility : MonoBehaviour
                 }
                 else
                 {
-                    _closestEnemy = enemy.GetComponent<Enemy>();
+                    _closestEnemy = enemy.GetComponent<AI_Agent>();
                     currentclosestdistance = distanceToEnemy;
                 }
             }

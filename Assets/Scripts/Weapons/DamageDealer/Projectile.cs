@@ -44,7 +44,7 @@ public class Projectile : DamageDealer
 
 				if (statusEffect != null)
 				{
-					if (health.TryGetComponent(out Enemy enemy))
+					if (health.TryGetComponent(out AI_Agent enemy))
 					{
 						StatusEffect thisStatusEffect = new StatusEffect(statusEffect);
 						thisStatusEffect.ApplyStatusEffect(enemy, this);

@@ -385,7 +385,7 @@ public class Weapon : ScriptableObject
 	private bool RotateTowardsEnemy(float range)
 	{
 		float currentclosestdistance = Mathf.Infinity;
-		Enemy closestEnemy = null;
+		AI_Agent closestEnemy = null;
 
 		Collider[] enemies = Physics.OverlapSphere(_weaponTransform.position, range, _enemyLayer);
 		foreach (Collider enemy in enemies)
@@ -397,7 +397,7 @@ public class Weapon : ScriptableObject
 			Vector3 directionToEnemy = enemy.transform.position + Vector3.up - _weaponTransform.position;
 			if (!Physics.Raycast(_weaponTransform.position, directionToEnemy, distanceToEnemy, _groundLayer))
 			{
-				closestEnemy = enemy.GetComponent<Enemy>();
+				closestEnemy = enemy.GetComponent<AI_Agent>();
 				currentclosestdistance = distanceToEnemy;
 			}
 		}

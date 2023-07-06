@@ -5,7 +5,7 @@ public abstract class Effect
 	public Action<Effect> OnEffectTicked;
 	public Action<Effect> OnEffectEnded;
 
-	protected Enemy _enemy;
+	protected AI_Agent _enemy;
 
 	protected float _statusDuration;
 
