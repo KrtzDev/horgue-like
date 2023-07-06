@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class AI_State_Retreat : AI_State
 {
+    public Vector3 _followPosition;
+    public float _retreatDistance;
+
     public AI_StateID GetID()
     {
         return AI_StateID.Retreat;

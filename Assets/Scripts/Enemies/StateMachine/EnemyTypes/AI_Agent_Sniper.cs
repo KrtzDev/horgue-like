@@ -4,9 +4,17 @@ using UnityEngine;
 
 public class AI_Agent_Sniper : AI_Agent
 {
+    [Header("Projectile")]
+    [SerializeField] private GameObject _projectile;
+    [field: SerializeField] public Transform ProjectilePoint { get; private set; }
+    [SerializeField] private float _projectileSpeed;
+    [HideInInspector] public Vector3 TargetDirection { get; set; }
+
     protected override void Start()
     {
         base.Start();
+
+        _sniper = this.GetComponent<AI_Agent_Sniper>();
 
         AI_Manager.Instance.Sniper.Add(this);
     }
@@ -29,5 +37,16 @@ public class AI_Agent_Sniper : AI_Agent
     {
         this.gameObject.SetActive(false);
         AI_Manager.Instance.Sniper.Remove(this);
+    }
+
+    public void Shoot()
+    {
+        Rigidbody rb = Instantiate(_projectile, ProjectilePoint.position, Quaternion.identity).GetComponent<Rigidbody>();
+        rb.AddForce(TargetDirection * _projectileSpeed, ForceMode.Impulse);
+    }
+
+    public void DoneShooting()
+    {
+        this.GetComponent<Animator>().SetBool("isShooting", false);
     }
 }

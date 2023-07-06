@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class PasuKan_State_ChasePlayer : AI_State_ChasePlayer
 {
-
     public override void Enter(AI_Agent agent)
     {
         agent._animator.SetBool("isChasing", true);
@@ -102,8 +101,6 @@ public class PasuKan_State_ChasePlayer : AI_State_ChasePlayer
     private void CheckForJumpAttack(AI_Agent agent, float distance)
     {
         float random = Random.Range(0f, 100f);
-
-        Debug.Log("Random : " + (random >= agent._enemyData._jumpAttackChance) + "Can Use Skill : " + agent._canUseSkill);
 
         if (random <= agent._enemyData._jumpAttackChance
             && agent._canUseSkill

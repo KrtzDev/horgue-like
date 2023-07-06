@@ -18104,7 +18104,7 @@ PrefabInstance:
         type: 3}
       propertyPath: _enemiesToSpawn.Array.data[0]._enemy
       value: 
-      objectReference: {fileID: -2465721901373468555, guid: 2a6539935274eac47890703bacc52741,
+      objectReference: {fileID: 6519895042856787694, guid: d30f34610fd5f8444b39f9f1cebdd5dc,
         type: 3}
     - target: {fileID: 6843213763226438607, guid: b0d5d15041526b8408159035025686a3,
         type: 3}
@@ -18119,7 +18119,7 @@ PrefabInstance:
     - target: {fileID: 6843213763226438607, guid: b0d5d15041526b8408159035025686a3,
         type: 3}
       propertyPath: _enemiesToSpawn.Array.data[0]._sSpawnBias
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6843213763226438607, guid: b0d5d15041526b8408159035025686a3,
         type: 3}

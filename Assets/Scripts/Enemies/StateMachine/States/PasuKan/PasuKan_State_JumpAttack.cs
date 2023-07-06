@@ -7,7 +7,6 @@ public class PasuKan_State_JumpAttack : AI_State_SpecialAttack
 {
     Vector3 _startingPosition;
     Vector3 _followPosition;
-    float _time = 0;
     float _jumpTime = 0;
     float _jumpPrepTime = 0;
     float _jumpFactor = 0;
