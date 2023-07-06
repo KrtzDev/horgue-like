@@ -2050,9 +2050,10 @@ MonoBehaviour:
   _useMovementPrediction: 0
   _movementPredictionThreshold: 0.2
   _movementPredictionTime: 0.5
-  _projectile: {fileID: 1059061622425744807}
+  _projectile: {fileID: 8451927325676435795, guid: 519256511bcaca747924245807496f73,
+    type: 3}
   <ProjectilePoint>k__BackingField: {fileID: 7221469875420454319}
-  _projectileSpeed: 0
+  _projectileSpeed: 22
 --- !u!1 &4301312500149769568
 GameObject:
   m_ObjectHideFlags: 0

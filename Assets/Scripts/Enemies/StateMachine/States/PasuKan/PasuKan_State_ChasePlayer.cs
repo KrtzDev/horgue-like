@@ -78,11 +78,11 @@ public class PasuKan_State_ChasePlayer : AI_State_ChasePlayer
 
     private void SetTarget(AI_Agent agent)
     {
-        if (agent._obstacleAgent.enabled)
+        if (agent._obstacleAgent.enabled && agent.enabled)
         {
             agent._obstacleAgent.SetDestination(_followPosition);
         }
-        else
+        else if (agent._navMeshAgent.enabled && agent.enabled)
         {
             agent._navMeshAgent.SetDestination(_followPosition);
         }

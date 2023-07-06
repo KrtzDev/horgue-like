@@ -40,13 +40,13 @@ public class RangedRobot_State_Retreat : AI_State_Retreat
 
         agent.transform.LookAt(_retreatPosition);
 
-        if (agent._obstacleAgent.enabled)
+        if (agent._obstacleAgent.enabled && agent.enabled)
         {
-            agent._obstacleAgent.SetDestination(_retreatPosition);
+            agent._obstacleAgent.SetDestination(_followPosition);
         }
-        else
+        else if (agent._navMeshAgent.enabled && agent.enabled)
         {
-            agent._navMeshAgent.SetDestination(_retreatPosition);
+            agent._navMeshAgent.SetDestination(_followPosition);
         }
 
         float distanceToPlayer = Vector3.Distance(agent.transform.position, _followPosition);

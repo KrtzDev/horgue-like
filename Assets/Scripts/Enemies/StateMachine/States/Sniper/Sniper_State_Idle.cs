@@ -10,11 +10,11 @@ public class Sniper_State_Idle : AI_State_Idle
         {
             _followPosition = agent._decoyTransform.position;
 
-            if (agent._obstacleAgent.enabled)
+            if (agent._obstacleAgent.enabled && agent.enabled)
             {
                 agent._obstacleAgent.SetDestination(_followPosition);
             }
-            else
+            else if (agent._navMeshAgent.enabled && agent.enabled)
             {
                 agent._navMeshAgent.SetDestination(_followPosition);
             }
@@ -23,11 +23,11 @@ public class Sniper_State_Idle : AI_State_Idle
         {
             _followPosition = agent._playerTransform.position;
 
-            if (agent._obstacleAgent.enabled)
+            if (agent._obstacleAgent.enabled && agent.enabled)
             {
                 agent._obstacleAgent.SetDestination(_followPosition);
             }
-            else
+            else if (agent._navMeshAgent.enabled && agent.enabled)
             {
                 agent._navMeshAgent.SetDestination(_followPosition);
             }
@@ -43,7 +43,10 @@ public class Sniper_State_Idle : AI_State_Idle
             return;
         }
 
-        agent._navMeshAgent.SetDestination(agent.transform.position);
+        if (agent._navMeshAgent.enabled && agent.enabled)
+        {
+            agent._navMeshAgent.SetDestination(_followPosition);
+        }
 
         if (agent._followDecoy)
         {

@@ -65,7 +65,7 @@ public class AI_Agent : MonoBehaviour
 
     protected virtual void Update()
     {
-        _stateMachine.Update();
+        _stateMachine.Update(GetComponent<AI_Agent>());
     }
 
     protected virtual void RegisterStates()

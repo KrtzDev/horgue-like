@@ -22,8 +22,6 @@ public class AI_Agent_RangedRobot : AI_Agent
     protected override void Update()
     {
         base.Update();
-
-        Debug.Log(_stateMachine._currentState);
     }
 
     protected override void RegisterStates()

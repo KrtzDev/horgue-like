@@ -30,9 +30,12 @@ public class AI_StateMachine
         return _states[index];
     }
 
-    public void Update()
+    public void Update(AI_Agent agent)
     {
-        GetState(_currentState)?.Update(_agent);
+        if(agent.enabled)
+        { 
+            GetState(_currentState)?.Update(_agent);
+        }
     }
 
     public void ChangeState(AI_StateID newstate)
