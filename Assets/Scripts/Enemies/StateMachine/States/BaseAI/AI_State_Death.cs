@@ -11,12 +11,13 @@ public class AI_State_Death : AI_State
 
     public virtual void Enter(AI_Agent agent)
     {
-        agent._animator.SetTrigger("death");
+        agent._animator.enabled = true;
+        agent._animator.SetBool("death", true);
+        agent._animator.SetTrigger("deathTrigger");
     }
 
     public virtual void Update(AI_Agent agent)
     {
-       
     }
 
     public virtual void Exit(AI_Agent agent)

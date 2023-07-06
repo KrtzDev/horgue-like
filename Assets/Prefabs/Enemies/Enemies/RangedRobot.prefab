@@ -1979,6 +1979,7 @@ MonoBehaviour:
   _navMeshAgent: {fileID: 0}
   _obstacleAgent: {fileID: 0}
   _animator: {fileID: 0}
+  _rb: {fileID: 0}
   _healthComponent: {fileID: 0}
   _groundLayer:
     serializedVersion: 2
@@ -1993,7 +1994,9 @@ MonoBehaviour:
   _playerTransform: {fileID: 0}
   _decoyTransform: {fileID: 0}
   _attackTimer: 0
+  _lookRotationSpeed: 1
   _followDecoy: 0
+  _canUseSkill: 1
   _useMovementPrediction: 1
   _movementPredictionThreshold: 0
   _movementPredictionTime: 1

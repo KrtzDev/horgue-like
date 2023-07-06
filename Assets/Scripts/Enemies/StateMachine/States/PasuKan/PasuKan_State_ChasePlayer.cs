@@ -68,6 +68,7 @@ public class PasuKan_State_ChasePlayer : AI_State_ChasePlayer
         }
 
         float distance = Vector3.Distance(agent.transform.position, agent._playerTransform.position);
+        // CheckForJumpAttack(agent, distance);
         CheckForAttack(agent, distance);
     }
 
@@ -96,6 +97,25 @@ public class PasuKan_State_ChasePlayer : AI_State_ChasePlayer
         }
 
         LookCoroutine = AI_Manager.Instance.StartCoroutine(AI_Manager.Instance.LookAtTarget(agent, _followPosition, _maxTime));
+    }
+
+    private void CheckForJumpAttack(AI_Agent agent, float distance)
+    {
+        float random = Random.Range(0f, 100f);
+
+        Debug.Log("Random : " + (random >= agent._enemyData._jumpAttackChance) + "Can Use Skill : " + agent._canUseSkill);
+
+        if (random <= agent._enemyData._jumpAttackChance
+            && agent._canUseSkill
+            && distance >= agent._enemyData._minJumpAttackRange
+            && distance <= agent._enemyData._maxJumpAttackRange
+            && agent._enemyData._jumpTime + agent._enemyData._jumpAttackCooldown < Time.time)
+        {
+            agent._animator.SetBool("isChasing", false);
+            agent._stateMachine.ChangeState(AI_StateID.SpecialAttack);
+            Debug.Log("ACTIVATE JUMP ATTACK");
+            return;
+        }
     }
 
     private void CheckForAttack(AI_Agent agent, float distance)

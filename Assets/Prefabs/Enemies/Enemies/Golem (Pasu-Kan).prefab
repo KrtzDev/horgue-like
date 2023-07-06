@@ -792,6 +792,7 @@ MonoBehaviour:
   _navMeshAgent: {fileID: 0}
   _obstacleAgent: {fileID: 0}
   _animator: {fileID: 0}
+  _rb: {fileID: 0}
   _healthComponent: {fileID: 0}
   _groundLayer:
     serializedVersion: 2
@@ -808,6 +809,7 @@ MonoBehaviour:
   _attackTimer: 0
   _lookRotationSpeed: 0.75
   _followDecoy: 0
+  _canUseSkill: 1
   _useMovementPrediction: 1
   _movementPredictionThreshold: 0.2
   _movementPredictionTime: 0.5

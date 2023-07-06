@@ -28,13 +28,15 @@ public class EnemyHealthComponent : HealthComponent
     {
         base.TakeDamage(damage);
 
-		if(_currentHealth > 0)
+		if (_currentHealth <= 0 && _isDead)
+		{
+			MarkEnemyToDie();
+			return;
+		}
+		
+		if (_currentHealth > 0 && !_isDead)
         {
 			MarkEnemyToTakeDamage();
-        }
-		else if (_currentHealth <= 0)
-        {
-			MarkEnemyToDie();
         }
     }
 
@@ -45,8 +47,6 @@ public class EnemyHealthComponent : HealthComponent
 
 	private void MarkEnemyToDie()
 	{
-		if (gameObject.GetComponent<Animator>() != null)
-			gameObject.GetComponent<Animator>().SetBool("isDying", true);
 		if (gameObject.GetComponent<Collider>() != null)
 			gameObject.GetComponent<Collider>().enabled = false;
 		if (gameObject.GetComponent<Rigidbody>() != null)
@@ -56,11 +56,16 @@ public class EnemyHealthComponent : HealthComponent
 		if (gameObject.GetComponent<AI_Agent>() != null)
 			gameObject.GetComponent<AI_Agent>().enabled = false;
 
+		if(gameObject.GetComponent<Animator>() != null)
+        {
+			gameObject.GetComponent<Animator>().enabled = false;
+        }
+
 		GameManager.Instance.EnemyDied();
 
-		_enemy._stateMachine.ChangeState(AI_StateID.Death);
-
 		gameObject.tag = "Untagged";
+
+		_enemy._stateMachine.ChangeState(AI_StateID.Death);
 	}
 
 	private void DropScore()

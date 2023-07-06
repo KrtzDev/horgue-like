@@ -15,6 +15,7 @@ public class AI_Agent : MonoBehaviour
     [HideInInspector] public NavMeshAgent _navMeshAgent;
     [HideInInspector] public ObstacleAgent _obstacleAgent;
     [HideInInspector] public Animator _animator;
+    [HideInInspector] public Rigidbody _rb;
     [HideInInspector] public EnemyHealthComponent _healthComponent;
 
     public LayerMask _groundLayer;
@@ -28,6 +29,7 @@ public class AI_Agent : MonoBehaviour
     [HideInInspector] public float _attackTimer;
     [HideInInspector] public float _lookRotationSpeed = 1f;
     [HideInInspector] public bool _followDecoy;
+    public bool _canUseSkill;
 
     [Header("Movement Prediction")]
     public bool _useMovementPrediction;
@@ -42,6 +44,7 @@ public class AI_Agent : MonoBehaviour
         _navMeshAgent = GetComponent<NavMeshAgent>();
         _obstacleAgent = GetComponent<ObstacleAgent>();
         _animator = GetComponent<Animator>();
+        _rb = GetComponent<Rigidbody>();
         _healthComponent = GetComponent<EnemyHealthComponent>();
         _player = GameObject.FindGameObjectWithTag("Player");
         _playerTransform = _player.GetComponent<Transform>();
@@ -64,6 +67,7 @@ public class AI_Agent : MonoBehaviour
         _stateMachine.RegisterState(new AI_State_ChasePlayer());
         _stateMachine.RegisterState(new AI_State_Retreat());
         _stateMachine.RegisterState(new AI_State_Attack());
+        _stateMachine.RegisterState(new AI_State_SpecialAttack());
         _stateMachine.RegisterState(new AI_State_Death());
     }
 

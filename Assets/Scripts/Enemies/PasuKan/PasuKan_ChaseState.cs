@@ -48,7 +48,7 @@ public class PasuKan_ChaseState : StateMachineBehaviour
 
         float distance = Vector3.Distance(animator.transform.position, _followPosition);
 
-        RaycastHit hit;
+        // RaycastHit hit;
         // Debug.DrawRay(animator.transform.position + new Vector3(0, 0.5f, 0), ((_followPosition + new Vector3(0, 0.5f, 0))- (animator.transform.position + new Vector3(0, 0.5f, 0))));
         // Debug.DrawRay(animator.transform.position + new Vector3(0, 0.5f, 0), ((new Vector3(_followPosition.x, enemy.transform.position.y, _followPosition.z) + new Vector3(0, 0.5f, 0)) - (animator.transform.position + new Vector3(0, 0.5f, 0))), Color.green);
 
