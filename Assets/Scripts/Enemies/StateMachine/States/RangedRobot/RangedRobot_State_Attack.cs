@@ -7,15 +7,12 @@ public class RangedRobot_State_Attack : AI_State_Attack
     public override void Enter(AI_Agent agent)
     {
         agent._animator.SetBool("isAttacking", true);
+        agent._navMeshAgent.SetDestination(agent.transform.position);
+        agent._navMeshAgent.enabled = false;
     }
 
     public override void Update(AI_Agent agent)
     {
-        if (!agent._navMeshAgent.enabled)
-        {
-            return;
-        }
-
         if (!agent._followDecoy)
         {
             _followPosition = agent._playerTransform.position;
@@ -43,15 +40,13 @@ public class RangedRobot_State_Attack : AI_State_Attack
             if (distance > agent._enemyData._attackRange)
             {
                 agent._animator.SetBool("isAttacking", false);
-                agent._animator.SetBool("isChasing", true);
-                agent._stateMachine.ChangeState(AI_StateID.ChasePlayer);
+                agent._stateMachine.ChangeState(AI_StateID.Idle);
             }
             else if (distance < agent._enemyData._retreatRange)
             {
                 agent._animator.SetBool("isAttacking", false);
                 agent._animator.SetBool("isChasing", false);
-                agent._animator.SetBool("isRetreating", true);
-                agent._stateMachine.ChangeState(AI_StateID.Retreat);
+                agent._stateMachine.ChangeState(AI_StateID.Idle);
             }
         }
     }
@@ -59,5 +54,6 @@ public class RangedRobot_State_Attack : AI_State_Attack
     public override void Exit(AI_Agent agent)
     {
         agent._animator.SetBool("isAttacking", false);
+        agent._navMeshAgent.enabled = true;
     }
 }

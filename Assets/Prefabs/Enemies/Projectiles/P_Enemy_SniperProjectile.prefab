@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 8331073926669857340}
   - component: {fileID: -2540252099999053896}
   m_Layer: 8
-  m_Name: P_Enemy_GIGA_RangedRobotProjectile
+  m_Name: P_Enemy_SniperProjectile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

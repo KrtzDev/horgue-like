@@ -17,53 +17,43 @@ public class RangedRobot_State_ChasePlayer : AI_State_ChasePlayer
             return;
         }
 
-        _timer -= Time.deltaTime;
-
-        if (_timer < 0f)
+        if (!agent._useMovementPrediction)
         {
-            if (agent._navMeshAgent.pathStatus != UnityEngine.AI.NavMeshPathStatus.PathPartial)
+            if (agent._followDecoy)
             {
-                if (!agent._useMovementPrediction)
+                _followPosition = agent._decoyTransform.position;
+                SetTarget(agent);
+            }
+            else
+            {
+                _followPosition = agent._playerTransform.position;
+                SetTarget(agent);
+            }
+        }
+        else
+        {
+            if (agent._followDecoy)
+            {
+                _followPosition = agent._decoyTransform.position;
+                SetTarget(agent);
+            }
+            else
+            {
+                _followPosition = agent._playerTransform.position + (agent._player.GetComponent<PlayerMovement>().AverageVelocity * agent._movementPredictionTime);
+
+                Vector3 directionToTarget = (_followPosition - agent.transform.position).normalized;
+                Vector3 directionToPlayer = (agent._playerTransform.position - agent.transform.position).normalized;
+
+                float dot = Vector3.Dot(directionToPlayer, directionToTarget);
+                if (dot < agent._movementPredictionThreshold)
                 {
-                    if (agent._followDecoy)
-                    {
-                        _followPosition = agent._decoyTransform.position;
-                        SetTarget(agent);
-                    }
-                    else
-                    {
-                        _followPosition = agent._playerTransform.position;
-                        SetTarget(agent);
-                    }
-                }
-                else
-                {
-                    if (agent._followDecoy)
-                    {
-                        _followPosition = agent._decoyTransform.position;
-                        SetTarget(agent);
-                    }
-                    else
-                    {
-                        _followPosition = agent._playerTransform.position + (agent._player.GetComponent<PlayerMovement>().AverageVelocity * agent._movementPredictionTime);
-
-                        Vector3 directionToTarget = (_followPosition - agent.transform.position).normalized;
-                        Vector3 directionToPlayer = (agent._playerTransform.position - agent.transform.position).normalized;
-
-                        float dot = Vector3.Dot(directionToPlayer, directionToTarget);
-                        if (dot < agent._movementPredictionThreshold)
-                        {
-                            _followPosition = agent._playerTransform.position;
-                        }
-
-                        SetTarget(agent);
-                    }
+                    _followPosition = agent._playerTransform.position;
                 }
 
-                StartRotating(agent);
+                SetTarget(agent);
             }
 
-            _timer = _maxTime;
+            StartRotating(agent);
         }
 
         float distance = Vector3.Distance(agent.transform.position, _followPosition);
@@ -108,7 +98,6 @@ public class RangedRobot_State_ChasePlayer : AI_State_ChasePlayer
                 agent._animator.SetBool("isAttacking", false);
                 agent._animator.SetBool("isChasing", false);
                 agent._stateMachine.ChangeState(AI_StateID.Retreat);
-                agent._rb.velocity = Vector3.zero;
             }
         }
         else
@@ -119,7 +108,6 @@ public class RangedRobot_State_ChasePlayer : AI_State_ChasePlayer
                 agent._animator.SetBool("isChasing", false);
                 agent._animator.SetBool("isRetreating", false);
                 agent._stateMachine.ChangeState(AI_StateID.Attack);
-                agent._rb.velocity = Vector3.zero;
             }
             else if (distance < agent._enemyData._retreatRange)
             {
@@ -127,7 +115,6 @@ public class RangedRobot_State_ChasePlayer : AI_State_ChasePlayer
                 agent._animator.SetBool("isAttacking", false);
                 agent._animator.SetBool("isChasing", false);
                 agent._stateMachine.ChangeState(AI_StateID.Retreat);
-                agent._rb.velocity = Vector3.zero;
             }
         }
     }

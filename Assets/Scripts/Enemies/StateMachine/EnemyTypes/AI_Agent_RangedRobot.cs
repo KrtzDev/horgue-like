@@ -50,5 +50,6 @@ public class AI_Agent_RangedRobot : AI_Agent
     public void DoneShooting()
     {
         this.GetComponent<Animator>().SetBool("isShooting", false);
+        _stateMachine.ChangeState(AI_StateID.Idle);
     }
 }
