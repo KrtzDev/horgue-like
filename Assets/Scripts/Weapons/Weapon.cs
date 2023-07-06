@@ -366,6 +366,8 @@ public class Weapon : ScriptableObject
 
 				projectile.gameObject.transform.localScale = Vector3.one * projectile.finalProjectileSize;
 
+				projectile.TargetedEnemy = TargetedEnemy;
+
 				projectile.motionPattern = weaponStats.motionPattern;
 				projectile.motionPattern.BeginMotion(projectile);
 
@@ -389,6 +391,8 @@ public class Weapon : ScriptableObject
 		_projectilePool.ReturnObjectToPool(projectile);
 	}
 
+	private Enemy TargetedEnemy { get; set; }
+
 	private bool RotateTowardsEnemy(float range)
 	{
 		float currentclosestdistance = Mathf.Infinity;
@@ -411,6 +415,7 @@ public class Weapon : ScriptableObject
 
 		if (closestEnemy != null)
 		{
+			TargetedEnemy = closestEnemy;
 			Vector3 direction = (closestEnemy.transform.position + Vector3.up) - _weaponTransform.position;
 			Vector3 rotateTowardsDirection = Vector3.RotateTowards(_weaponTransform.forward, direction, 20 * Time.deltaTime, .0f);
 			_weaponTransform.transform.rotation = Quaternion.LookRotation(rotateTowardsDirection);

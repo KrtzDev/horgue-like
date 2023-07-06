@@ -2,8 +2,8 @@
 
 public class Pattern : MonoBehaviour
 {
-	[SerializeField] private ManiulationVector _randomizePositions;
-	[SerializeField] private ManiulationVector _randomizeRotations;
+	[SerializeField] private ManiulationVector _modifyPositions;
+	[SerializeField] private ManiulationVector _modifyRotations;
 
 	[SerializeField] private Transform[] _transforms;
 
@@ -19,23 +19,23 @@ public class Pattern : MonoBehaviour
 		{
 			rotations[i] = _transforms[i].rotation;
 
-			if (_randomizeRotations.vector.sqrMagnitude > 0 || _randomizeRotations.radius.max > 0)
+			if (_modifyRotations.vector.sqrMagnitude > 0 || _modifyRotations.radius.max > 0)
 			{
 				float randomX = 0;
 				float randomY = 0;
 				float randomZ = 0;
 
-				if (_randomizeRotations.manipulationMode == ManipulationMode.Randomize)
+				if (_modifyRotations.manipulationMode == ManipulationMode.Randomize)
 				{
-					randomX = Random.Range(-_randomizeRotations.vector.x, _randomizeRotations.vector.x);
-					randomY = Random.Range(-_randomizeRotations.vector.y, _randomizeRotations.vector.y);
-					randomZ = Random.Range(-_randomizeRotations.vector.z, _randomizeRotations.vector.z);
+					randomX = Random.Range(-_modifyRotations.vector.x, _modifyRotations.vector.x);
+					randomY = Random.Range(-_modifyRotations.vector.y, _modifyRotations.vector.y);
+					randomZ = Random.Range(-_modifyRotations.vector.z, _modifyRotations.vector.z);
 				}
-				else if (_randomizeRotations.manipulationMode == ManipulationMode.Set)
+				else if (_modifyRotations.manipulationMode == ManipulationMode.Set)
 				{
-					randomX = _randomizeRotations.vector.x;
-					randomY = _randomizeRotations.vector.y;
-					randomZ = _randomizeRotations.vector.z;
+					randomX = _modifyRotations.vector.x;
+					randomY = _modifyRotations.vector.y;
+					randomZ = _modifyRotations.vector.z;
 				}
 
 				rotations[i] = Quaternion.Euler(rotations[i].eulerAngles.x + randomX, rotations[i].eulerAngles.y + randomY, rotations[i].eulerAngles.z  + randomZ);
@@ -52,24 +52,24 @@ public class Pattern : MonoBehaviour
 		{
 			positions[i] = _transforms[i].position;
 
-			if (_randomizePositions.vector.sqrMagnitude > 0 || _randomizePositions.radius.max > 0)
+			if (_modifyPositions.vector.sqrMagnitude > 0 || _modifyPositions.radius.max > 0)
 			{
 				Vector3 randomVector = Vector3.zero;
 
-				if (_randomizePositions.manipulationMode == ManipulationMode.Randomize)
+				if (_modifyPositions.manipulationMode == ManipulationMode.Randomize)
 				{
-					randomVector.x = Random.Range(-_randomizePositions.vector.x, _randomizePositions.vector.x);
-					randomVector.y = Random.Range(-_randomizePositions.vector.y, _randomizePositions.vector.y);
-					randomVector.z = Random.Range(-_randomizePositions.vector.z, _randomizePositions.vector.z);
+					randomVector.x = Random.Range(-_modifyPositions.vector.x, _modifyPositions.vector.x);
+					randomVector.y = Random.Range(-_modifyPositions.vector.y, _modifyPositions.vector.y);
+					randomVector.z = Random.Range(-_modifyPositions.vector.z, _modifyPositions.vector.z);
 				}
-				else if (_randomizePositions.manipulationMode == ManipulationMode.Radius)
+				else if (_modifyPositions.manipulationMode == ManipulationMode.Radius)
 				{
 					Vector3 randomUnitVector = new Vector3(
-							Random.Range(-_randomizePositions.vector.x, _randomizePositions.vector.x),
-							Random.Range(-_randomizePositions.vector.y, _randomizePositions.vector.y),
-							Random.Range(-_randomizePositions.vector.z, _randomizePositions.vector.z)).normalized;
+							Random.Range(-_modifyPositions.vector.x, _modifyPositions.vector.x),
+							Random.Range(-_modifyPositions.vector.y, _modifyPositions.vector.y),
+							Random.Range(-_modifyPositions.vector.z, _modifyPositions.vector.z)).normalized;
 
-					randomVector = randomUnitVector * Random.Range(_randomizePositions.radius.min, _randomizePositions.radius.max);
+					randomVector = randomUnitVector * Random.Range(_modifyPositions.radius.min, _modifyPositions.radius.max);
 				}
 
 				positions[i] = new Vector3(positions[i].x + randomVector.x, positions[i].y + randomVector.y, positions[i].z  + randomVector.z);

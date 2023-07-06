@@ -4,11 +4,17 @@
 public class MotionPattern : ScriptableObject
 {
 	public bool shouldExplodeOnDeath;
-	public bool shouldSnapToGround;
-	public bool hasGravity;
+
+	[SerializeField] private bool _shouldSnapToGround;
+	[SerializeField] private bool _hasGravity;
+	[SerializeField] private bool _isHoming;
+	[SerializeField] private float _homingRadius;
+	[SerializeField] private float _homingStrength;
 
 	[SerializeField] private float _speed;
 	[SerializeField] private float _lifeTime;
+
+	[SerializeField] private LayerMask _enemyLayerMask;
 
 	public void BeginMotion(Projectile projectile)
 	{
@@ -17,18 +23,18 @@ public class MotionPattern : ScriptableObject
 
 		projectile.LifeTime = _lifeTime;
 
-		if (shouldSnapToGround)
+		if (_shouldSnapToGround)
 			SnapToGround(projectile);
 
-		if (hasGravity)
+		if (_hasGravity)
 			projectile.GetComponent<Rigidbody>().useGravity = true;
 
 		projectile.GetComponent<Rigidbody>().velocity = projectile.transform.forward * _speed;
 	}
 
-	private void DisableGravity(Projectile projectile) 
+	private void DisableGravity(Projectile projectile)
 	{
-		if(Application.isPlaying)
+		if (Application.isPlaying)
 			projectile.GetComponent<Rigidbody>().useGravity = false;
 	}
 
@@ -46,5 +52,39 @@ public class MotionPattern : ScriptableObject
 		projectile.LifeTime -= Time.deltaTime;
 		if (projectile.LifeTime <= 0)
 			projectile.OnLifeTimeEnd?.Invoke(projectile);
+
+		CheckHoming(projectile);
+	}
+
+	private void CheckHoming(Projectile projectile)
+	{
+		if (!_isHoming)
+			return;
+
+		if (projectile.TargetedEnemy.isActiveAndEnabled)
+		{
+			Vector3 direction = (projectile.TargetedEnemy.transform.position + Vector3.up) - projectile.transform.position;
+			Vector3 rotateTowardsDirection = Vector3.RotateTowards(projectile.transform.forward, direction, _homingStrength * Time.deltaTime, .0f);
+			projectile.transform.rotation = Quaternion.LookRotation(rotateTowardsDirection);
+			projectile.GetComponent<Rigidbody>().velocity = projectile.transform.forward * projectile.GetComponent<Rigidbody>().velocity.magnitude;
+		}
+		else
+		{
+			float smallestAngle = float.MaxValue;
+
+			Collider[] enemies = Physics.OverlapSphere(projectile.transform.position, _homingRadius, _enemyLayerMask);
+			for (int i = 0; i < enemies.Length; i++)
+			{
+				Vector3 directionToEnemy = (enemies[i].transform.position + Vector3.up) - projectile.transform.position;
+				float angle = Vector3.Angle(directionToEnemy, projectile.transform.forward);
+				if (angle < smallestAngle)
+				{
+					Debug.Log("Ping");
+					smallestAngle = angle;
+					projectile.TargetedEnemy = enemies[i].GetComponent<Enemy>();
+				}
+			}
+		}
+
 	}
 }

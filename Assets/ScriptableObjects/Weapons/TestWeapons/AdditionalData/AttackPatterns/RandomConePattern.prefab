@@ -237,15 +237,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ee5d0f1e6bf10346a70694b51ed9cc0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _randomizePositions:
+  _modifyPositions:
     manipulationMode: 2
     vector: {x: 0, y: 0, z: 0}
     radius:
       min: 0
       max: 0
-  _randomizeRotations:
+  _modifyRotations:
     manipulationMode: 1
-    vector: {x: -75, y: 0, z: 0}
+    vector: {x: 0, y: 0, z: 0}
     radius:
       min: 0
       max: 0

@@ -30,7 +30,7 @@ MonoBehaviour:
   slowDuration: 0
   slowVFX: {fileID: 0}
   hasKnockBack: 1
-  knockBackType: 1
+  knockBackType: 0
   knockBackStrength: 3
   knockBackVFX: {fileID: 0}
   hasPierce: 0

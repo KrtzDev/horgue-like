@@ -23,8 +23,8 @@ public class Projectile : DamageDealer
 	[SerializeField]
 	private LayerMask _enemyLayerMask;
 
+	public Enemy TargetedEnemy { get; set; }
 	public int PierceAmount { get; set; }
-
 	public float LifeTime { get; set; }
 
 	public void Update()
