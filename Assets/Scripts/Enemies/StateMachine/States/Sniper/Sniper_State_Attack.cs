@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Sniper_State_Attack : AI_State_Attack
 {
+    private AI_Agent_Sniper _sniper;
+
     public override void Enter(AI_Agent agent)
     {
         agent._animator.SetBool("isAttacking", true);
@@ -27,7 +29,7 @@ public class Sniper_State_Attack : AI_State_Attack
         if (agent._attackTimer < 0)
         {
             agent._attackTimer = agent._enemyData._attackSpeed;
-            agent._sniper.TargetDirection = (_followPosition - agent.transform.position).normalized;
+            _sniper.TargetDirection = (_followPosition - agent.transform.position).normalized;
             agent._animator.SetTrigger("shoot");
             agent._animator.SetBool("isShooting", true);
         }

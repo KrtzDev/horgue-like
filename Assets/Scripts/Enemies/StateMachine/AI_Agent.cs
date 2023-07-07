@@ -11,10 +11,6 @@ public class AI_Agent : MonoBehaviour
 {
     // Enemy Types
 
-    [HideInInspector] public AI_Agent_PasuKan _pasuKan;
-    [HideInInspector] public AI_Agent_RangedRobot _rangedRobot;
-    [HideInInspector] public AI_Agent_Sniper _sniper;
-
     [HideInInspector] public AI_StateMachine _stateMachine;
     public AI_StateID _initialState;
     public BasicEnemyData _enemyData;

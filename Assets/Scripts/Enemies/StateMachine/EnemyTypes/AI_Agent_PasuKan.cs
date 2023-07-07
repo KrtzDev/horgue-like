@@ -8,8 +8,6 @@ public class AI_Agent_PasuKan : AI_Agent
     {
         base.Start();
 
-        _pasuKan = this.GetComponent<AI_Agent_PasuKan>();
-
         AI_Manager.Instance.PasuKan.Add(this);
     }
 

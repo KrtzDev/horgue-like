@@ -4,8 +4,12 @@ using UnityEngine;
 
 public class Sniper_State_ChasePlayer : AI_State_ChasePlayer
 {
+    private AI_Agent_Sniper _sniper;
+
     public override void Enter(AI_Agent agent)
     {
+        _sniper = agent as AI_Agent_Sniper;
+
         agent._animator.SetBool("isChasing", true);
         agent._attackTimer = agent._enemyData._attackSpeed;
     }
@@ -90,7 +94,7 @@ public class Sniper_State_ChasePlayer : AI_State_ChasePlayer
     private void CheckForBehaviour(AI_Agent agent, float distance)
     {
         RaycastHit hit;
-        if (Physics.Raycast(agent._sniper.ProjectilePoint.transform.position, (_followPosition + new Vector3(0, 0.5f, 0) - agent._sniper.ProjectilePoint.transform.position), out hit, distance, agent._groundLayer))
+        if (Physics.Raycast(_sniper.ProjectilePoint.transform.position, (_followPosition + new Vector3(0, 0.5f, 0) - _sniper.ProjectilePoint.transform.position), out hit, distance, agent._groundLayer))
         {
             if (distance < agent._enemyData._retreatRange)
             {

@@ -14,8 +14,6 @@ public class AI_Agent_RangedRobot : AI_Agent
     {
         base.Start();
 
-        _rangedRobot = this.GetComponent<AI_Agent_RangedRobot>();
-
         AI_Manager.Instance.RangedRobot.Add(this);
     }
 

@@ -14,8 +14,6 @@ public class AI_Agent_Sniper : AI_Agent
     {
         base.Start();
 
-        _sniper = this.GetComponent<AI_Agent_Sniper>();
-
         AI_Manager.Instance.Sniper.Add(this);
     }
 

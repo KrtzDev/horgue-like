@@ -4,8 +4,13 @@ using UnityEngine;
 
 public class RangedRobot_State_Attack : AI_State_Attack
 {
+
+    private AI_Agent_RangedRobot _rangedRobot;
+
     public override void Enter(AI_Agent agent)
     {
+        _rangedRobot = agent as AI_Agent_RangedRobot;
+
         agent._animator.SetBool("isAttacking", true);
         agent._navMeshAgent.SetDestination(agent.transform.position);
         agent._navMeshAgent.enabled = false;
@@ -27,7 +32,7 @@ public class RangedRobot_State_Attack : AI_State_Attack
         if (agent._attackTimer < 0)
         {
             agent._attackTimer = agent._enemyData._attackSpeed;
-            agent._rangedRobot.TargetDirection = (_followPosition - agent.transform.position).normalized;
+            _rangedRobot.TargetDirection = (_followPosition - agent.transform.position).normalized;
             agent._animator.SetTrigger("shoot");
             agent._animator.SetBool("isShooting", true);
         }
