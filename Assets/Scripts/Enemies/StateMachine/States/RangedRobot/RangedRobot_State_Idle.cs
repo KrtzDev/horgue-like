@@ -4,8 +4,12 @@ using UnityEngine;
 
 public class RangedRobot_State_Idle : AI_State_Idle
 {
+    private AI_Agent_RangedRobot _rangedRobot;
+
     public override void Enter(AI_Agent agent)
     {
+        _rangedRobot = agent as AI_Agent_RangedRobot;
+
         _followPosition = agent.transform.position;
 
         if (agent._obstacleAgent.enabled && agent.enabled)
@@ -39,7 +43,7 @@ public class RangedRobot_State_Idle : AI_State_Idle
         float distance = Vector3.Distance(agent.transform.position, _followPosition);
 
         RaycastHit hit;
-        if (Physics.Raycast(agent._rangedRobot.ProjectilePoint.transform.position, (_followPosition + new Vector3(0, 0.5f, 0) - agent._rangedRobot.ProjectilePoint.transform.position), out hit, distance, agent._groundLayer))
+        if (Physics.Raycast(_rangedRobot.ProjectilePoint.transform.position, (_followPosition + new Vector3(0, 0.5f, 0) - _rangedRobot.ProjectilePoint.transform.position), out hit, distance, agent._groundLayer))
         {
             if (distance < agent._enemyData._retreatRange)
             {

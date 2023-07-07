@@ -269,6 +269,7 @@ MonoBehaviour:
   _currentLevel: 1
   _currentLevelArray: 0
   _currentWave: 0
+  _currentPlayerHealth: 0
   _playerCanUseAbilities: 0
 --- !u!1 &1115456804
 GameObject:
