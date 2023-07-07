@@ -28,26 +28,25 @@ public class Projectile : DamageDealer
 	public float LifeTime { get; set; }
 
 	public void Update()
-	{		
+	{
 		motionPattern.UpdateMotion(this);
 	}
 
 	public void DoExplosion()
 	{
-		if (statusEffect.propagationRange < 0)
+		if (motionPattern.explosionRange < 0)
 			return;
 
-		HorgueVFX spawnedVFX = Instantiate(statusEffect.initialDamageVFX, transform.position, Quaternion.identity);
-		spawnedVFX.Play();
+		HorgueVFX spawnedVfx = motionPattern.explosionVfxPool.GetObject();
+		spawnedVfx.transform.position = transform.position;
+		spawnedVfx.Play();
+		spawnedVfx.ReturnToPoolOnFinished(motionPattern.explosionVfxPool);
 
-		Collider[] _hitEnemies = new Collider[statusEffect.maxPropagateToCount];
-		if( Physics.OverlapSphereNonAlloc(transform.position, statusEffect.propagationRange, _hitEnemies, _enemyLayerMask) > 0)
+		Collider[] _hitEnemies = Physics.OverlapSphere(transform.position, motionPattern.explosionRange, _enemyLayerMask);
+		for (int i = 0; i < _hitEnemies.Length; i++)
 		{
-			for (int i = 0; i < _hitEnemies.Length; i++)
-			{
-				if (_hitEnemies[i] != null)
-					DoDamage(_hitEnemies[i]);
-			}
+			if (_hitEnemies[i] != null)
+				DoDamage(_hitEnemies[i]);
 		}
 	}
 

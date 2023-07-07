@@ -10,16 +10,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 462415aed716eae4698083da8941c13b, type: 3}
-  m_Name: Straight
+  m_Name: RandomAreaMotion
   m_EditorClassIdentifier: 
-  shouldExplodeOnDeath: 0
-  _shouldSnapToGround: 0
+  shouldExplodeOnDeath: 1
+  explosionRange: 3
+  explosionVfx: {fileID: 5758294487887650858, guid: f071090d32a11254fa67fed6411beeaa,
+    type: 3}
+  _shouldSnapToGround: 1
   _hasGravity: 0
-  _isHoming: 1
-  _homingRadius: 25
-  _homingStrength: 2
-  _speed: 10
-  _lifeTime: 5
+  _isHoming: 0
+  _homingRadius: 0
+  _homingStrength: 0
+  _isSineWave: 0
+  _speed: 0
+  _lifeTime: 0
   _enemyLayerMask:
     serializedVersion: 2
     m_Bits: 128

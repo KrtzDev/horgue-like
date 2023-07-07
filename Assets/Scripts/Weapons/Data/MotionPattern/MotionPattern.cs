@@ -4,13 +4,25 @@
 public class MotionPattern : ScriptableObject
 {
 	public bool shouldExplodeOnDeath;
+	[DrawIf(nameof(shouldExplodeOnDeath),true)]
+	public float explosionRange;
+	[DrawIf(nameof(shouldExplodeOnDeath),true)]
+	public HorgueVFX explosionVfx;
+	[HideInInspector] public ObjectPool<HorgueVFX> explosionVfxPool;
 
 	[SerializeField] private bool _shouldSnapToGround;
+
 	[SerializeField] private bool _hasGravity;
+
 	[SerializeField] private bool _isHoming;
+	[DrawIf(nameof(_isHoming), true)]
 	[SerializeField] private float _homingRadius;
+	[DrawIf(nameof(_isHoming), true)]
 	[SerializeField] private float _homingStrength;
 
+	[SerializeField] private bool _isSineWave;
+
+	[Header("General")]
 	[SerializeField] private float _speed;
 	[SerializeField] private float _lifeTime;
 
@@ -79,7 +91,6 @@ public class MotionPattern : ScriptableObject
 				float angle = Vector3.Angle(directionToEnemy, projectile.transform.forward);
 				if (angle < smallestAngle)
 				{
-					Debug.Log("Ping");
 					smallestAngle = angle;
 					projectile.TargetedEnemy = enemies[i].GetComponent<Enemy>();
 				}

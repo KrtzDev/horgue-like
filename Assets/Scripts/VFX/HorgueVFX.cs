@@ -1,9 +1,12 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using UnityEngine;
 
-[System.Serializable]
+[Serializable]
 public class HorgueVFX : MonoBehaviour
 {
+	public event Action OnFinished;
+
 	[SerializeField] private ParticleSystem[] _particleSystems;
 
 	[SerializeField] private float _longestDuration;
@@ -14,15 +17,14 @@ public class HorgueVFX : MonoBehaviour
 		{
 			_particleSystems[i].Play();
 		}
-		DestroyAfterDuration();
 	}
 
-	private async void DestroyAfterDuration()
+	public async void ReturnToPoolOnFinished(ObjectPool<HorgueVFX> vfxPool)
 	{
 		await Task.Delay((int)(_longestDuration * 1000f));
 
-		if(Application.isPlaying)
-			Destroy(gameObject);
+		if (Application.isPlaying)
+			vfxPool.ReturnObjectToPool(this);
 	}
 
 #if UNITY_EDITOR

@@ -55,6 +55,7 @@ public class Weapon : ScriptableObject
 	private Transform _weaponTransform;
 
 	private ObjectPool<Projectile> _projectilePool;
+	private ObjectPool<HorgueVFX> _vfxPool;
 
 	private float _shotDelay;
 	private int _capacity;
@@ -86,6 +87,9 @@ public class Weapon : ScriptableObject
 		_capacity = CalculateWeaponStats(this).capacity;
 
 		_projectilePool = ObjectPool<Projectile>.CreatePool(_projectile, 100, null);
+
+		if(barrel.motionPattern != null && barrel.motionPattern.explosionVfx != null)
+		_vfxPool = ObjectPool<HorgueVFX>.CreatePool(barrel.motionPattern.explosionVfx, 25, null);
 	}
 
 	public WeaponStats CalculateWeaponStats(Weapon weapon)
@@ -369,6 +373,7 @@ public class Weapon : ScriptableObject
 				projectile.TargetedEnemy = TargetedEnemy;
 
 				projectile.motionPattern = weaponStats.motionPattern;
+				projectile.motionPattern.explosionVfxPool = _vfxPool;
 				projectile.motionPattern.BeginMotion(projectile);
 
 				projectile.OnHit += CleanUpProjectile;
