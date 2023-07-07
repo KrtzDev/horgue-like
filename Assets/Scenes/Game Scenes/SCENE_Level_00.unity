@@ -8694,6 +8694,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1382852200032817076, guid: 62d6286d223d00e49ba8ca796795cc73,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2136897129495592176, guid: 62d6286d223d00e49ba8ca796795cc73,
         type: 3}
       propertyPath: near clip plane
@@ -14521,6 +14526,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: EnemySpawner
+      objectReference: {fileID: 0}
+    - target: {fileID: 6843213763226438600, guid: b0d5d15041526b8408159035025686a3,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6843213763226438606, guid: b0d5d15041526b8408159035025686a3,
         type: 3}

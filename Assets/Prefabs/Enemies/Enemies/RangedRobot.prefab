@@ -2046,7 +2046,7 @@ MonoBehaviour:
   _lookRotationSpeed: 1
   _followDecoy: 0
   _canUseSkill: 1
-  _useMovementPrediction: 1
+  _useMovementPrediction: 0
   _movementPredictionThreshold: 0.2
   _movementPredictionTime: 0.5
   _projectile: {fileID: 8451927325676435795, guid: 519256511bcaca747924245807496f73,

@@ -37,15 +37,24 @@ public class Sniper_State_Retreat : AI_State_Retreat
             return;
         }
 
+        if (agent._followDecoy)
+        {
+            _followPosition = agent._decoyTransform.position;
+        }
+        else
+        {
+            _followPosition = agent._playerTransform.position;
+        }
+
         agent.transform.LookAt(_retreatPosition);
 
         if (agent._obstacleAgent.enabled && agent.enabled)
         {
-            agent._obstacleAgent.SetDestination(_followPosition);
+            agent._obstacleAgent.SetDestination(_retreatPosition);
         }
         else if (agent._navMeshAgent.enabled && agent.enabled)
         {
-            agent._navMeshAgent.SetDestination(_followPosition);
+            agent._navMeshAgent.SetDestination(_retreatPosition);
         }
 
         float distanceToPlayer = Vector3.Distance(agent.transform.position, _followPosition);
