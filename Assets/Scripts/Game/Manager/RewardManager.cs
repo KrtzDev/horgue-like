@@ -9,11 +9,11 @@ public class RewardManager : Singleton<RewardManager>
 	public List<Reward> drawnRewards = new List<Reward>();
 
 	[SerializeField]
-	private List<WeaponPart> _WeaponPartRewards = new List<WeaponPart>();
+	private List<WeaponPart> _weaponPartRewards = new List<WeaponPart>();
 
 	public Reward GetRandomReward()
 	{
-		Reward drawnReward = new Reward(_WeaponPartRewards[Random.Range(0, _WeaponPartRewards.Count - 1)]);
+		Reward drawnReward = new Reward(_weaponPartRewards[Random.Range(0, _weaponPartRewards.Count - 1)]);
 		drawnRewards.Add(drawnReward);
 		return drawnReward;
 	}
@@ -40,7 +40,7 @@ public class RewardManager : Singleton<RewardManager>
 					SceneManager.GetActiveScene().name == "SCENE_Level_00" ||
 					SceneManager.GetActiveScene().name == "SCENE_Level_00")
 		{
-			equippedWeapons = GameObject.Find("P_PlayerCharacter 1").GetComponent<WeaponHolster>().weapons;
+			equippedWeapons = GameObject.FindObjectOfType<PlayerCharacter>().GetComponent<WeaponHolster>().weapons;
 		}
 
 		ClearRewards();

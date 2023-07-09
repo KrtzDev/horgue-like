@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -51,34 +52,33 @@ public class PlayerMovement : MonoBehaviour
 
     private void Awake()
     {
-        _playerCharacter = this.GetComponent<PlayerCharacter>();
+        _playerCharacter = GetComponent<PlayerCharacter>();
 
         _maxQueueSize = Mathf.CeilToInt(1f / _historicalPositionInterval * _historicalPositionDuration);  // Calculate Queue Size
         _historicalVelocities = new Queue<Vector3>(_maxQueueSize);
 
         MovementSpeed = _playerCharacter._playerData._movementSpeed;
-        _inputActions = new PlayerInputMappings();
-        if (InputManager.Instance)
-        {
-            InputManager.Instance.CharacterInputActions = _inputActions;
-        }
-        _inputActions.Character.Movement.performed += Move;
-        _inputActions.Character.Movement.canceled += StopMove;
+		_inputActions = InputManager.Instance?.CharacterInputActions;
     }
+
+	private void Start()
+	{
+        _character = GetComponent<PlayerCharacter>();
+	}
 
     private void OnEnable()
     {
-        _inputActions.Enable();
-    }
+		if (_inputActions == null)
+			return;
+        _inputActions.Character.Movement.performed += Move;
+        _inputActions.Character.Movement.canceled += StopMove;
 
-    private void Start()
-    {
-        _character = GetComponent<PlayerCharacter>();
+        _inputActions.Enable();
     }
 
     private void OnDisable()
     {
-        _inputActions.Disable();
+        _inputActions?.Disable();
     }
 
     private void FixedUpdate()
@@ -115,10 +115,6 @@ public class PlayerMovement : MonoBehaviour
             float decceleration = _decceleration.Evaluate(_timeStopping);
             movement = LastDirection * MovementSpeed * decceleration * Time.fixedDeltaTime;
         }
-
-        //_character.CharacterRigidbody.MovePosition(transform.position + movement);
-
-        //_character.CharacterRigidbody.AddForce(movement * 3, ForceMode.VelocityChange);
 
         _character.CharacterRigidbody.velocity = new Vector3(movement.x * 50, _character.CharacterRigidbody.velocity.y, movement.z * 50);
 

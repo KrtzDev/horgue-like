@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class WeaponHolster : MonoBehaviour
 {
@@ -10,6 +11,9 @@ public class WeaponHolster : MonoBehaviour
 
 	private void Start()
 	{
+		if (GameManager.Instance == null)
+			return;
+
 		PlayerCharacter playerCharacter = GetComponent<PlayerCharacter>();
 		for (int i = 0; i < playerCharacter.WeaponSpawnTransform.childCount; ++i)
 		{
@@ -28,10 +32,40 @@ public class WeaponHolster : MonoBehaviour
 				Debug.LogError("No Free WeaponSpawnSlot found");
 			}
 		}
+
+		InputManager.Instance.CharacterInputActions.Character.Shoot.performed += ShootWeapons;
+		InputManager.Instance.CharacterInputActions.Character.Shoot.canceled += ShootWeapons;
 	}
+
+	private void OnDisable()
+	{
+		if (GameManager.Instance == null)
+			return;
+
+		InputManager.Instance.CharacterInputActions.Character.Shoot.performed -= ShootWeapons;
+		InputManager.Instance.CharacterInputActions.Character.Shoot.canceled -= ShootWeapons;
+	}
+
+	private void ShootWeapons(InputAction.CallbackContext obj)
+	{
+		_shouldShoot = obj.ReadValue<float>() > 0;
+	}
+
+	private bool _shouldShoot = false;
 
 	private void Update()
 	{
+		if (GameManager.Instance == null)
+			return;
+
+		if (GameManager.Instance.weaponControll == WeaponControllKind.AllManual)
+		{
+			if(_shouldShoot)
+				TryShootAllWeapons();
+
+			return;
+		}
+
 		TryShootAllWeapons();
 	}
 
