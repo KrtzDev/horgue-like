@@ -10,28 +10,28 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 440041b21ef39184fbb0689fc05748a2, type: 3}
-  m_Name: AoeStun
+  m_Name: ShockDamage
   m_EditorClassIdentifier: 
-  triggerChance: 100
-  effectDuration: 0.3
+  _statusName: Shock
+  triggerChance: 75
+  effectDuration: 3
   tickRate:
     min: 0
     max: 0
   hasInitialExtraDamage: 1
-  initialDamage: 20
-  initialDamageVFX: {fileID: 5758294487887650858, guid: f071090d32a11254fa67fed6411beeaa,
-    type: 3}
+  initialDamage: 10
+  initialDamageVFX: {fileID: 0}
   hasDamageOverTime: 0
-  dotDamage: 2
+  dotDamage: 0
   dotDuration: 0
   dotDamageVFX: {fileID: 0}
-  hasSlow: 0
-  slowAmount: 100
-  slowDuration: 0
+  hasSlow: 1
+  slowAmount: 30
+  slowDuration: 3
   slowVFX: {fileID: 0}
-  hasKnockBack: 1
+  hasKnockBack: 0
   knockBackType: 0
-  knockBackStrength: 3
+  knockBackStrength: 0
   knockBackVFX: {fileID: 0}
   hasPierce: 0
   maxPierceAmount: 0
@@ -40,8 +40,8 @@ MonoBehaviour:
   layersToPropagateTo:
     serializedVersion: 2
     m_Bits: 128
-  propagationChance: 100
-  propagationRange: 5
-  maxPropagateToCount: 5
-  consecutivePropagationCount: 1
+  propagationChance: 75
+  propagationRange: 3
+  maxPropagateToCount: 8
+  consecutivePropagationCount: 3
   propagationVFX: {fileID: 0}

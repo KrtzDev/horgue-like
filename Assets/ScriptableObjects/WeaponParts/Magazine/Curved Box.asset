@@ -15,9 +15,9 @@ MonoBehaviour:
   <WeaponPartUISprite>k__BackingField: {fileID: 21300000, guid: 7e39db67f4eb23a4eb546143f71520fd,
     type: 3}
   <WeaponPartPrefab>k__BackingField: {fileID: 0}
-  isSlotted: 0
-  attackSpeed: 0
-  cooldown: 0
-  projectileSize: 0
-  capacity: 0
+  isSlotted: 1
+  attackSpeed: 1.8
+  cooldown: 1.5
+  projectileSize: 0.2
+  capacity: 30
   maxAmmoSlots: 0

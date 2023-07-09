@@ -23,4 +23,4 @@ MonoBehaviour:
   projectileSize: 0
   critChance: 0
   range: 0
-  statusEffect: {fileID: 0}
+  statusEffect: {fileID: 11400000, guid: 83c0a7cd6e898ff46be9c0a23c96fbb4, type: 2}

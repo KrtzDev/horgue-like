@@ -15,4 +15,4 @@ MonoBehaviour:
   _patternName: StraightLineBurst
   _pattern: {fileID: 6679049981621152435, guid: 85ac6f6ee2eb76a4b9f6a934ec8ca755,
     type: 3}
-  _maxSimultaniousProjectiles: 7
+  _maxSimultaniousProjectiles: 5

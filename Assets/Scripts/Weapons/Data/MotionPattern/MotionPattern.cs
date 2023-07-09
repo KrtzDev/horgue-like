@@ -22,7 +22,9 @@ public class MotionPattern : ScriptableObject
 	[SerializeField] private float _homingStrength;
 
 	[SerializeField] private bool _manipulateTrajectory;
+	[DrawIf(nameof(_manipulateTrajectory), true)]
 	[SerializeField] private Vector3 _manipulationDirection;
+	[DrawIf(nameof(_manipulateTrajectory), true)]
 	[SerializeField] private float _manipulationAmount;
 
 	[SerializeField] private bool _followPlayer;

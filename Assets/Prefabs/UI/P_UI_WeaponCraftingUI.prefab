@@ -519,6 +519,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9b15a00bdecf9f488a6c11e12fd1ed1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  weaponUIs: []
   _weaponUI_prefab: {fileID: 1962177940731528389, guid: 23a1fa366d433554da7a22538a0d1266,
     type: 3}
   _weaponUIParent: {fileID: 168318252518593756}
@@ -741,8 +742,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 100, y: -50}
-  m_SizeDelta: {x: 1719.9, y: 830}
+  m_AnchoredPosition: {x: 100, y: -25}
+  m_SizeDelta: {x: 1719.9, y: 880}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1105844712242160896
 MonoBehaviour:

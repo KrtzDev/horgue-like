@@ -19,5 +19,5 @@ MonoBehaviour:
   attackSpeed: 0
   cooldown: 0
   projectileSize: 0
-  capacity: 0
+  capacity: 9
   maxAmmoSlots: 0

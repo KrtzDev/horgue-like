@@ -356,9 +356,9 @@ public class GameDataReader : MonoBehaviour
 
         for (int i = 0; i < _LevelData.Count; i++)
         {
-            _LevelData[i]._healthBonus = myLevelList.Level[0].healthBonus;
-            _LevelData[i]._damageBonus = myLevelList.Level[0].damageBonus;
-            _LevelData[i]._timeToSurvive = myLevelList.Level[0].TimeToSurvive;
+            _LevelData[i]._healthBonus = myLevelList.Level[i].healthBonus;
+            _LevelData[i]._damageBonus = myLevelList.Level[i].damageBonus;
+            _LevelData[i]._timeToSurvive = myLevelList.Level[i].TimeToSurvive;
         }
 
         yield return null;

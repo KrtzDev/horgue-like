@@ -22,4 +22,5 @@ MonoBehaviour:
   projectileSize: 0
   critChance: 0
   range: 0
-  attackPattern: {fileID: 0}
+  attackPattern: {fileID: 11400000, guid: bc63ae3c8d096294c97e3a514c4ce95f, type: 2}
+  motionPattern: {fileID: 11400000, guid: 57b45e573fde50b44b4f172a75c5232e, type: 2}
