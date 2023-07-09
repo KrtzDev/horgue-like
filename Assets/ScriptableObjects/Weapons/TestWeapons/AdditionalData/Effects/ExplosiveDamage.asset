@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 440041b21ef39184fbb0689fc05748a2, type: 3}
   m_Name: ExplosiveDamage
   m_EditorClassIdentifier: 
+  _statusName: Explosive
   triggerChance: 100
   effectDuration: 0
   tickRate:

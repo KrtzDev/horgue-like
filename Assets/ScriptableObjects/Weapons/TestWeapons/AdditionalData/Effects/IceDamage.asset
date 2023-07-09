@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 440041b21ef39184fbb0689fc05748a2, type: 3}
   m_Name: IceDamage
   m_EditorClassIdentifier: 
+  _statusName: Ice
   triggerChance: 75
   effectDuration: 3
   tickRate:

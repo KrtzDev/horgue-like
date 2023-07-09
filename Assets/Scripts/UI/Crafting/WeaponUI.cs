@@ -1,6 +1,5 @@
 ﻿using TMPro;
 using UnityEngine;
-using UnityEngine.ProBuilder.MeshOperations;
 using UnityEngine.UI;
 
 public class WeaponUI : MonoBehaviour
@@ -148,24 +147,29 @@ public class WeaponUI : MonoBehaviour
 	{
 		ClearWeaponStats();
 
-		if (!colorStats) 
-		{ 
-		StatUI currenStat = Instantiate(_statUI_prefab, _weaponStatsParent);
-		currenStat.Initialize("Damage: ", weaponStats.damage.ToString("0.00"));
-		currenStat = Instantiate(_statUI_prefab, _weaponStatsParent);
-		currenStat.Initialize("Attack Speed: ", weaponStats.attackspeed.ToString("0.00"));
-		currenStat = Instantiate(_statUI_prefab, _weaponStatsParent);
-		currenStat.Initialize("Reload Time: ", weaponStats.cooldown.ToString("0.00"));
-		currenStat = Instantiate(_statUI_prefab, _weaponStatsParent);
-		currenStat.Initialize("Projectile Size: ", weaponStats.projectileSize.ToString("0.00"));
-		currenStat = Instantiate(_statUI_prefab, _weaponStatsParent);
-		currenStat.Initialize("Crit Chance: ", weaponStats.critChance.ToString("0.00"));
-		currenStat = Instantiate(_statUI_prefab, _weaponStatsParent);
-		currenStat.Initialize("Range: ", weaponStats.range.ToString("0.00"));
-		currenStat = Instantiate(_statUI_prefab, _weaponStatsParent);
-		currenStat.Initialize("Capacity: ", weaponStats.capacity.ToString("0.00"));
-		currenStat = Instantiate(_statUI_prefab, _weaponStatsParent);
-		currenStat.Initialize("Projectile trajectory: ", weaponStats.attackPattern.PatternName().ToString());
+		if (!colorStats)
+		{
+			StatUI currenStat = Instantiate(_statUI_prefab, _weaponStatsParent);
+			currenStat.Initialize("Damage: ", weaponStats.damage.ToString("0.00"));
+			currenStat = Instantiate(_statUI_prefab, _weaponStatsParent);
+			currenStat.Initialize("Attack Speed: ", weaponStats.attackspeed.ToString("0.00"));
+			currenStat = Instantiate(_statUI_prefab, _weaponStatsParent);
+			currenStat.Initialize("Reload Time: ", weaponStats.cooldown.ToString("0.00"));
+			currenStat = Instantiate(_statUI_prefab, _weaponStatsParent);
+			currenStat.Initialize("Projectile Size: ", weaponStats.projectileSize.ToString("0.00"));
+			currenStat = Instantiate(_statUI_prefab, _weaponStatsParent);
+			currenStat.Initialize("Crit Chance: ", weaponStats.critChance.ToString("0.00"));
+			currenStat = Instantiate(_statUI_prefab, _weaponStatsParent);
+			currenStat.Initialize("Range: ", weaponStats.range.ToString("0.00"));
+			currenStat = Instantiate(_statUI_prefab, _weaponStatsParent);
+			currenStat.Initialize("Capacity: ", weaponStats.capacity.ToString("0.00"));
+			currenStat = Instantiate(_statUI_prefab, _weaponStatsParent);
+			currenStat.Initialize("Projectile Trajectory: ", weaponStats.attackPattern.PatternName().ToString());
+			if (weaponStats.statusEffect != null)
+			{
+				currenStat = Instantiate(_statUI_prefab, _weaponStatsParent);
+				currenStat.Initialize("Impact Effect: ", weaponStats.statusEffect.StatusName().ToString());
+			}
 		}
 		else if (_previousWeaponStats != null && colorStats)
 		{
@@ -219,7 +223,13 @@ public class WeaponUI : MonoBehaviour
 				currenStat.statBackground.color = currenStat.negativeColor;
 
 			currenStat = Instantiate(_statUI_prefab, _weaponStatsParent);
-			currenStat.Initialize("Projectile trajectory: ", weaponStats.attackPattern.PatternName().ToString());
+			currenStat.Initialize("Projectile Trajectory: ", weaponStats.attackPattern.PatternName().ToString());
+
+			if (weaponStats.statusEffect != null)
+			{
+				currenStat = Instantiate(_statUI_prefab, _weaponStatsParent);
+				currenStat.Initialize("Impact Effect: ", weaponStats.statusEffect.StatusName().ToString());
+			}
 		}
 		else
 		{
@@ -238,7 +248,12 @@ public class WeaponUI : MonoBehaviour
 			currenStat = Instantiate(_statUI_prefab, _weaponStatsParent);
 			currenStat.Initialize("Capacity: ", weaponStats.capacity.ToString("0.00"));
 			currenStat = Instantiate(_statUI_prefab, _weaponStatsParent);
-			currenStat.Initialize("Projectile trajectory: ", weaponStats.attackPattern.PatternName().ToString());
+			currenStat.Initialize("Projectile Trajectory: ", weaponStats.attackPattern.PatternName().ToString());
+			if (weaponStats.statusEffect != null)
+			{
+				currenStat = Instantiate(_statUI_prefab, _weaponStatsParent);
+				currenStat.Initialize("Impact Effect: ", weaponStats.statusEffect.StatusName().ToString());
+			}
 		}
 
 		_previousWeaponStats = weaponStats;

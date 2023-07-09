@@ -5,6 +5,8 @@ using UnityEngine;
 [Serializable]
 public class StatusEffectSO : ScriptableObject
 {
+	[SerializeField] private string _statusName;
+
 	[Header("General")]
 	public float triggerChance;
 	public float effectDuration;
@@ -66,4 +68,9 @@ public class StatusEffectSO : ScriptableObject
 	public int consecutivePropagationCount;
 	[DrawIf(nameof(canPropagate), true)]
 	public HorgueVFX propagationVFX;
+
+	public string StatusName()
+	{
+		return _statusName;
+	}
 }
