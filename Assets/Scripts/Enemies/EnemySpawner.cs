@@ -393,7 +393,7 @@ public class EnemySpawner : MonoBehaviour
                 Animator anim = poolableObject.GetComponent<Animator>();
                 NavMeshAgent agent = poolableObject.GetComponent<NavMeshAgent>();
 
-                if (NavMesh.SamplePosition(spawnPosition, out Hit, 2f, -1))
+                if (NavMesh.SamplePosition(spawnPosition, out Hit, 2f, NavMesh.AllAreas))
                 {
                     agent.Warp(Hit.position);
                     agent.enabled = true;

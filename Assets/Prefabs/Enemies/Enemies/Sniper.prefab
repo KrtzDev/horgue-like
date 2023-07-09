@@ -2007,7 +2007,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 48
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!114 &66392676063013717
 MonoBehaviour:
@@ -2021,9 +2021,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84b0fc3c7cbd47640a4188e84fa06466, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _pasuKan: {fileID: 0}
-  _rangedRobot: {fileID: 0}
-  _sniper: {fileID: 0}
   _initialState: 1
   _enemyData: {fileID: 11400000, guid: 8dc834b5e34dc44468852d86bbd441ba, type: 2}
   _navMeshAgent: {fileID: 0}

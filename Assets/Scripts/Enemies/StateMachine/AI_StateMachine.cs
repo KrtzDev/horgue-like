@@ -18,7 +18,6 @@ public class AI_StateMachine
     public void RegisterState(AI_State state)
     {
         int index = (int)state.GetID();
-		Debug.Log(state);
         _states[index] = state;
 
     }

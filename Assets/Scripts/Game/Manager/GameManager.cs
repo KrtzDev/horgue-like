@@ -29,6 +29,7 @@ public class GameManager : Singleton<GameManager>
 	private EnemySpawner _enemySpawner;
 	public int _neededEnemyKill;
 	public int _enemyCount;
+	public int _enemiesKilled;
 	private bool _hasWon;
 	private bool _hasLost;
 
@@ -79,6 +80,7 @@ public class GameManager : Singleton<GameManager>
 
 		_enemySpawner = GameObject.FindGameObjectWithTag("EnemySpawner").GetComponent<EnemySpawner>();
 		_neededEnemyKill = _enemySpawner._enemySpawnerData._maxEnemyCount;
+		_enemiesKilled = 0;
 
 		player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerCharacter>();
 
@@ -132,6 +134,7 @@ public class GameManager : Singleton<GameManager>
 	{
 		_neededEnemyKill--;
 		_enemyCount--;
+		_enemiesKilled++;
 
 		// alle Gegner getötet
 
