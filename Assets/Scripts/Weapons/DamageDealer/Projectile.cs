@@ -23,7 +23,7 @@ public class Projectile : DamageDealer
 	[SerializeField]
 	private LayerMask _enemyLayerMask;
 
-	public Enemy TargetedEnemy { get; set; }
+	public AI_Agent TargetedEnemy { get; set; }
 	public int PierceAmount { get; set; }
 	public float LifeTime { get; set; }
 
@@ -66,7 +66,7 @@ public class Projectile : DamageDealer
 
 			if (statusEffect != null)
 			{
-				if (health.TryGetComponent(out Enemy enemy))
+				if (health.TryGetComponent(out AI_Agent enemy))
 				{
 					StatusEffect thisStatusEffect = new StatusEffect(statusEffect);
 					thisStatusEffect.ApplyStatusEffect(enemy, this);

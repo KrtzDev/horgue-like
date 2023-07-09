@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 // https://www.youtube.com/watch?v=1H9jrKyWKs0&t=34s
@@ -20,6 +18,7 @@ public class AI_StateMachine
     public void RegisterState(AI_State state)
     {
         int index = (int)state.GetID();
+		Debug.Log(state);
         _states[index] = state;
 
     }

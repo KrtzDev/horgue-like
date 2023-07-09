@@ -396,7 +396,7 @@ public class Weapon : ScriptableObject
 		_projectilePool.ReturnObjectToPool(projectile);
 	}
 
-	private Enemy TargetedEnemy { get; set; }
+	private AI_Agent TargetedEnemy { get; set; }
 
 	private bool RotateTowardsEnemy(float range)
 	{

@@ -41,8 +41,8 @@ public class AI_Agent : MonoBehaviour
 
     protected virtual void Start()
     {
-        _stateMachine = new AI_StateMachine(this);
-        _stateMachine.ChangeState(_initialState);
+        // Register States
+
         _navMeshAgent = GetComponent<NavMeshAgent>();
         _obstacleAgent = GetComponent<ObstacleAgent>();
         _animator = GetComponent<Animator>();
@@ -54,8 +54,9 @@ public class AI_Agent : MonoBehaviour
 
         SetEnemyData();
 
-        // Register States
+        _stateMachine = new AI_StateMachine(this);
         RegisterStates();
+        _stateMachine.ChangeState(_initialState);
     }
 
     protected virtual void Update()

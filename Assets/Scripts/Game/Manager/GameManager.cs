@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI;
 using UnityEngine.SceneManagement;
 
 public class GameManager : Singleton<GameManager>
@@ -81,7 +80,7 @@ public class GameManager : Singleton<GameManager>
 		_enemySpawner = GameObject.FindGameObjectWithTag("EnemySpawner").GetComponent<EnemySpawner>();
 		_neededEnemyKill = _enemySpawner._enemySpawnerData._maxEnemyCount;
 
-		_player = GameObject.FindGameObjectWithTag("Player");
+		player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerCharacter>();
 
 		if (_currentLevel == 1 && _currentWave == 0)
 		{
@@ -94,7 +93,7 @@ public class GameManager : Singleton<GameManager>
 
 		if(_lastLevel == _currentLevel)
         {
-			_player.GetComponent<HealthComponent>()._currentHealth = _currentPlayerHealth;
+			player.GetComponent<HealthComponent>()._currentHealth = _currentPlayerHealth;
         }
 
 		_currentWave += 1;
@@ -198,7 +197,7 @@ public class GameManager : Singleton<GameManager>
 			UIManager.Instance.ShowWaveEndScreen(LevelStatus.Won);
 		}
 
-		_currentPlayerHealth = _player.GetComponent<HealthComponent>()._currentHealth;
+		_currentPlayerHealth = player.GetComponent<HealthComponent>()._currentHealth;
 
 		EnemyStopFollowing();
 	}
