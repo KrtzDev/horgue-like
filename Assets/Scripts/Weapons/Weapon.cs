@@ -1,5 +1,8 @@
+using System;
 using System.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.TextCore.Text;
 
 [CreateAssetMenu(fileName = "new Weapon", menuName = "ModularWeapon/Weapon")]
 public class Weapon : ScriptableObject
@@ -64,6 +67,8 @@ public class Weapon : ScriptableObject
 
 
 
+	private Camera _camera;
+
 	public void ResetWeaponParts()
 	{
 		grip = defaultGrip;
@@ -90,6 +95,34 @@ public class Weapon : ScriptableObject
 
 		if(barrel.motionPattern.explosionVfx != null)
 			_vfxPool = ObjectPool<HorgueVFX>.CreatePool(barrel.motionPattern.explosionVfx, 25, null);
+
+		_camera = Camera.main;
+	}
+
+	internal void UpdateAimDirection()
+	{
+		Vector2 input = InputManager.Instance.CharacterInputActions.Character.Aim.ReadValue<Vector2>();
+		AimWeapon(input);
+	}
+
+	private void AimWeapon(Vector2 input)
+	{
+		if (GameManager.Instance.weaponControll == WeaponControllKind.AllAuto)
+			return;
+
+		Vector3 direction = new Vector3(input.x,0,input.y);
+
+		Vector3 cameraForward = _camera.transform.forward;
+		Vector3 cameraRight = _camera.transform.right;
+
+		cameraForward.y = 0;
+		cameraRight.y = 0;
+
+		cameraForward = cameraForward.normalized;
+		cameraRight = cameraRight.normalized;
+
+		Vector3 relativeMoveDirection = direction.z * cameraForward + direction.x * cameraRight;
+		_weaponTransform.transform.rotation = Quaternion.LookRotation(relativeMoveDirection);
 	}
 
 	public WeaponStats CalculateWeaponStats(Weapon weapon)
@@ -330,6 +363,8 @@ public class Weapon : ScriptableObject
 
 	public void TryShoot()
 	{
+		_shotDelay -= Time.deltaTime;
+
 		if (CanShoot())
 			Shoot();
 	}
@@ -355,10 +390,11 @@ public class Weapon : ScriptableObject
 		if (weaponStats.attackspeed == 0)
 			return;
 
-		if (!RotateTowardsEnemy(weaponStats.range))
-			return;
-
-		_shotDelay -= Time.deltaTime;
+		if(GameManager.Instance?.weaponControll == WeaponControllKind.AllAuto)
+		{
+			if (!RotateTowardsEnemy(weaponStats.range))
+				return;
+		}
 
 		if (_shotDelay <= 0)
 		{

@@ -12,6 +12,8 @@ public class GameManager : Singleton<GameManager>
 		KillSpecificEnemy
 	}
 
+	public WeaponControllKind weaponControll = WeaponControllKind.AllAuto;
+
 	[SerializeField]
 	private GameObject _gameDataReader;
 

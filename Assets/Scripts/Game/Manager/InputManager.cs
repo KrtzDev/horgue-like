@@ -1,14 +1,21 @@
+using UnityEngine;
+
 public class InputManager : Singleton<InputManager>
 {
-    public PlayerInputMappings CharacterInputActions { get; set; }
+	[SerializeField] private PlayerInputMappings _inputActions;
 
-    public void DisableCharacterInputs()
-    {
-        CharacterInputActions?.Disable();
-    }
+	public PlayerInputMappings CharacterInputActions
+	{
+		get
+		{
+			if (_inputActions == null)
+				_inputActions = new PlayerInputMappings();
 
-    public void EnableCharacterInputs()
-    {
-        CharacterInputActions?.Enable();
-    }
+			return _inputActions;
+		}
+	}
+
+	public void DisableCharacterInputs() => CharacterInputActions?.Disable();
+
+	public void EnableCharacterInputs() => CharacterInputActions?.Enable();
 }
