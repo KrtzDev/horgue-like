@@ -2,6 +2,7 @@ using System;
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 using UnityEngine.TextCore.Text;
 
 [CreateAssetMenu(fileName = "new Weapon", menuName = "ModularWeapon/Weapon")]
@@ -91,7 +92,8 @@ public class Weapon : ScriptableObject
 		_projectile = ammunition.projectilePrefab;
 		_capacity = CalculateWeaponStats(this).capacity;
 
-		_projectilePool = ObjectPool<Projectile>.CreatePool(_projectile, 100, null);
+		if (SceneManager.GetActiveScene().name != "SCENE_Weapon_Crafting")
+			_projectilePool = ObjectPool<Projectile>.CreatePool(_projectile, 100, null);
 
 		if(barrel.motionPattern.explosionVfx != null)
 			_vfxPool = ObjectPool<HorgueVFX>.CreatePool(barrel.motionPattern.explosionVfx, 25, null);

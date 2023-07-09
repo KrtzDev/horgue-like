@@ -78,6 +78,7 @@ public class EnemySpawner : MonoBehaviour
                 int enemiesToBeSpawned;
                 enemiesToBeSpawned = 0;
 
+
                 if (GameManager.Instance._enemyCount + _enemySpawnerData._spawnsPerTick > _enemySpawnerData._minEnemyCount)
                 {
                     enemiesToBeSpawned = Mathf.RoundToInt(_enemySpawnerData._spawnsPerTick * (enemy._spawnChance * 0.01f) + 0.4f);

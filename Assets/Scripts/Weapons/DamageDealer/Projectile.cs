@@ -73,6 +73,10 @@ public class Projectile : DamageDealer
 					thisStatusEffect.OnHitEnemy.Invoke(this);
 				}
 			}
+			else
+			{
+				OnHit.Invoke(this);
+			}
 			return true;
 		}
 		return false;

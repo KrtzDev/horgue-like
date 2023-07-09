@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 647643645869131076}
   - component: {fileID: 7863185452094259022}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: AudioSource
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -137,7 +137,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8315001480785179779}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: HealthDropParent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -168,6 +168,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8315001480785179779}
     m_Modifications:
+    - target: {fileID: -8700617353114198275, guid: d5d97ab765419c1428a127a47ceda946,
+        type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: d5d97ab765419c1428a127a47ceda946,
         type: 3}
       propertyPath: m_RootOrder
@@ -223,6 +228,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 90
       objectReference: {fileID: 0}
+    - target: {fileID: -8391222552659086748, guid: d5d97ab765419c1428a127a47ceda946,
+        type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: -4683669308469848369, guid: d5d97ab765419c1428a127a47ceda946,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -238,10 +248,30 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 7085077702e686e40b7ad2d9659a3cbd, type: 2}
+    - target: {fileID: -516098083770646512, guid: d5d97ab765419c1428a127a47ceda946,
+        type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 65702495048144492, guid: d5d97ab765419c1428a127a47ceda946,
+        type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: d5d97ab765419c1428a127a47ceda946,
         type: 3}
       propertyPath: m_Name
       value: firstaid
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d5d97ab765419c1428a127a47ceda946,
+        type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8416272007918961125, guid: d5d97ab765419c1428a127a47ceda946,
+        type: 3}
+      propertyPath: m_Layer
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d5d97ab765419c1428a127a47ceda946, type: 3}
@@ -257,23 +287,19 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 6233865106583188166}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &142143167073650170
-MonoBehaviour:
+--- !u!135 &1501234164915999357
+SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6503842832122040215}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: daf22dfccc1dc3844b781469bd9bef5d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _healAmount: 20
-  _groundLayer:
-    serializedVersion: 2
-    m_Bits: 528
-  _collectSound: {fileID: 7863185452094259022}
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!95 &2742270276226605991
 Animator:
   serializedVersion: 4
@@ -294,16 +320,20 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!135 &1501234164915999357
-SphereCollider:
+--- !u!114 &142143167073650170
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6503842832122040215}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
   m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: daf22dfccc1dc3844b781469bd9bef5d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _healAmount: 20
+  _groundLayer:
+    serializedVersion: 2
+    m_Bits: 528
+  _collectSound: {fileID: 7863185452094259022}

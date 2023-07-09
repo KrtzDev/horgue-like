@@ -256,6 +256,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: faab6ec51635667428680f73973bcae7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  weaponControll: 0
   _gameDataReader: {fileID: 1497091692}
   _GameManagerValues:
   - {fileID: 11400000, guid: d87aa26dde7df3e469ed4ce81cab15d7, type: 2}
@@ -266,6 +267,7 @@ MonoBehaviour:
   _currentScore: 0
   _neededEnemyKill: 0
   _enemyCount: 0
+  _enemiesKilled: 0
   _currentLevel: 1
   _currentLevelArray: 0
   _currentWave: 0
@@ -317,7 +319,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   equippedWeapons: []
-  _WeaponPartRewards:
+  _weaponPartRewards:
   - {fileID: 11400000, guid: b1c2d414a1341f348bcf9b8b6fe73077, type: 2}
   - {fileID: 11400000, guid: 1dfe9618dd4cde245a63e8ed2ec4c446, type: 2}
   - {fileID: 11400000, guid: d318b6dc77db78d459aba6e49955b5da, type: 2}

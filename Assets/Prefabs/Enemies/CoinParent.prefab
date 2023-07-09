@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2954434917669188069}
   - component: {fileID: 2954434917669188070}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: CoinParent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -143,7 +143,7 @@ GameObject:
   - component: {fileID: 2954434917807214887}
   - component: {fileID: 1367601388646292138}
   - component: {fileID: 1410679782536014878}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Coin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -264,3 +264,4 @@ MonoBehaviour:
   _animator: {fileID: 2954434917807214887}
   _collectSound: {fileID: 2954434917669188070}
   _destroy: {fileID: 2954434917669188068}
+  _givenScore: 0

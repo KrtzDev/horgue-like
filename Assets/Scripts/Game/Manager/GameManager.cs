@@ -80,6 +80,7 @@ public class GameManager : Singleton<GameManager>
 		_hasWon = false;
 		_hasLost = false;
 
+		_enemyCount = 0;
 		_enemySpawner = GameObject.FindGameObjectWithTag("EnemySpawner").GetComponent<EnemySpawner>();
 		_neededEnemyKill = _enemySpawner._enemySpawnerData._maxEnemyCount;
 		_enemiesKilled = 0;

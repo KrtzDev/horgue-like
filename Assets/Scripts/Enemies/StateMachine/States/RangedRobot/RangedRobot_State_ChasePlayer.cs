@@ -77,7 +77,7 @@ public class RangedRobot_State_ChasePlayer : AI_State_ChasePlayer
         {
             agent._navMeshAgent.SetDestination(_followPosition);
 			if (agent._navMeshAgent.pathStatus == UnityEngine.AI.NavMeshPathStatus.PathInvalid)
-				agent._stateMachine.ChangeState(AI_StateID.Death);
+				agent.GetComponent<HealthComponent>().TakeDamage(int.MaxValue);
         }
     }
 
