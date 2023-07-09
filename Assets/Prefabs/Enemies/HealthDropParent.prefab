@@ -111,7 +111,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: daf22dfccc1dc3844b781469bd9bef5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HealthAmount: 10
+  _healAmount: 20
   _groundLayer:
     serializedVersion: 2
     m_Bits: 528
