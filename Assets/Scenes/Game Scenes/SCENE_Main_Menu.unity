@@ -968,9 +968,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 987efe411eda5d34e86f8da7a65fac45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _levelButtonPrefab: {fileID: 4330701847414213821, guid: 2efd43f3e345c594099508b3add5e873,
-    type: 3}
-  _levelButtonParent: {fileID: 1936234653}
 --- !u!1 &1533920917
 GameObject:
   m_ObjectHideFlags: 0

@@ -88,8 +88,8 @@ public class Weapon : ScriptableObject
 
 		_projectilePool = ObjectPool<Projectile>.CreatePool(_projectile, 100, null);
 
-		if(barrel.motionPattern != null && barrel.motionPattern.explosionVfx != null)
-		_vfxPool = ObjectPool<HorgueVFX>.CreatePool(barrel.motionPattern.explosionVfx, 25, null);
+		if(barrel.motionPattern.explosionVfx != null)
+			_vfxPool = ObjectPool<HorgueVFX>.CreatePool(barrel.motionPattern.explosionVfx, 25, null);
 	}
 
 	public WeaponStats CalculateWeaponStats(Weapon weapon)

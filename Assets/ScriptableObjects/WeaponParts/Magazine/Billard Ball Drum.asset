@@ -16,8 +16,8 @@ MonoBehaviour:
     type: 3}
   <WeaponPartPrefab>k__BackingField: {fileID: 0}
   isSlotted: 0
-  attackSpeed: 0
-  cooldown: 0
-  projectileSize: 0
-  capacity: 0
+  attackSpeed: 0.6
+  cooldown: 1.4
+  projectileSize: 0.25
+  capacity: 7
   maxAmmoSlots: 0
