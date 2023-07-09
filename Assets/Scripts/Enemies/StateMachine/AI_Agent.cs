@@ -38,7 +38,6 @@ public class AI_Agent : MonoBehaviour
     [Range(-1f, 1f)] public float _movementPredictionThreshold = 0f;
     [Range(0.25f, 2f)] public float _movementPredictionTime = 1f;
 
-
     protected virtual void Start()
     {
         // Register States
