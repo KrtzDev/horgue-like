@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 [CreateAssetMenu(fileName = "new MotionPattern", menuName = "ModularWeapon/Data/MotionPattern")]
 public class MotionPattern : ScriptableObject
@@ -20,13 +21,19 @@ public class MotionPattern : ScriptableObject
 	[DrawIf(nameof(_isHoming), true)]
 	[SerializeField] private float _homingStrength;
 
-	[SerializeField] private bool _isSineWave;
+	[SerializeField] private bool _manipulateTrajectory;
+	[SerializeField] private Vector3 _manipulationDirection;
+	[SerializeField] private float _manipulationAmount;
+
+	[SerializeField] private bool _followPlayer;
 
 	[Header("General")]
 	[SerializeField] private float _speed;
 	[SerializeField] private float _lifeTime;
 
 	[SerializeField] private LayerMask _enemyLayerMask;
+
+	private Vector3 _lastPlayerPos;
 
 	public void BeginMotion(Projectile projectile)
 	{
@@ -42,6 +49,8 @@ public class MotionPattern : ScriptableObject
 			projectile.GetComponent<Rigidbody>().useGravity = true;
 
 		projectile.GetComponent<Rigidbody>().velocity = projectile.transform.forward * _speed;
+
+		_lastPlayerPos = GameManager.Instance.player.transform.position;
 	}
 
 	private void DisableGravity(Projectile projectile)
@@ -54,9 +63,7 @@ public class MotionPattern : ScriptableObject
 	{
 		RaycastHit hit;
 		if (Physics.Raycast(projectile.transform.position, Vector3.down, out hit, 1000))
-		{
-			projectile.transform.position = hit.point + Vector3.up * (projectile.finalProjectileSize +.1f);
-		}
+			projectile.transform.position = hit.point + Vector3.up * (projectile.finalProjectileSize + .1f);
 	}
 
 	public void UpdateMotion(Projectile projectile)
@@ -66,6 +73,8 @@ public class MotionPattern : ScriptableObject
 			projectile.OnLifeTimeEnd?.Invoke(projectile);
 
 		CheckHoming(projectile);
+		ManipulateTrajectory(projectile);
+		FollowPlayer(projectile);
 	}
 
 	private void CheckHoming(Projectile projectile)
@@ -96,6 +105,30 @@ public class MotionPattern : ScriptableObject
 				}
 			}
 		}
+	}
 
+	private void ManipulateTrajectory(Projectile projectile)
+	{
+		if (!_manipulateTrajectory)
+			return;
+
+		Quaternion rotation = Quaternion.AngleAxis(_manipulationAmount * Time.deltaTime, _manipulationDirection);
+		Vector3 rotateTowardsDirection = Vector3.RotateTowards(projectile.transform.forward, rotation * projectile.transform.forward, _manipulationAmount * Time.deltaTime, .0f);
+		projectile.transform.rotation = Quaternion.LookRotation(rotateTowardsDirection);
+		projectile.GetComponent<Rigidbody>().velocity = projectile.transform.forward * projectile.GetComponent<Rigidbody>().velocity.magnitude;
+	}
+
+	private void FollowPlayer(Projectile projectile)
+	{
+		if (!_followPlayer)
+			return;
+
+		Vector3 playerMoveDelta = GameManager.Instance.player.transform.position - _lastPlayerPos;
+		projectile.transform.position += playerMoveDelta + (projectile.GetComponent<Rigidbody>().velocity * Time.deltaTime);
+	}
+
+	public void LateUpdateMotion(Projectile projectile)
+	{
+		_lastPlayerPos = GameManager.Instance.player.transform.position;
 	}
 }

@@ -21,7 +21,10 @@ MonoBehaviour:
   _isHoming: 0
   _homingRadius: 25
   _homingStrength: 2
-  _isSineWave: 0
+  _manipulateTrajectory: 1
+  _manipulationDirection: {x: 0, y: 1, z: 0}
+  _manipulationAmount: 360
+  _followPlayer: 1
   _speed: 18
   _lifeTime: 5
   _enemyLayerMask:

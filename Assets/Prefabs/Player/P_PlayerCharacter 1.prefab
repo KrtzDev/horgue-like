@@ -404,16 +404,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe0fc43883faa7c4884164c087e77334, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <MaxHealth>k__BackingField: 100
-  <CurrentHealth>k__BackingField: 0
-  <Animator>k__BackingField: {fileID: 0}
-  <Enemy>k__BackingField: {fileID: 0}
+  _maxHealth: 0
+  _currentHealth: 0
+  _anim: {fileID: 0}
+  _enemy: {fileID: 0}
   _hitParticlePosition: {fileID: 7336742999931250485}
   _hitParticle: {fileID: 6362102834014993675, guid: 5561755790406d148a233f12b01260c5,
     type: 3}
-  dropChance: 0
-  healthDrop: {fileID: 0}
-  coinDrop: {fileID: 0}
+  _isDead: 0
+  _healthDrop: {fileID: 0}
+  _coinDrop: {fileID: 0}
 --- !u!114 &6670527696543464466
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -426,8 +426,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d77f2c814ba0d2439230330d48d587e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <AbilityCDTimer>k__BackingField: 0
-  <CurrentMaxCD>k__BackingField: 0
+  _abilityCDTimer: 0
+  _currentMaxCD: 0
   _isGrounded: 0
   _groundCheckValueY: 0.1
   _groundCheckBox: {x: 0.25, y: 0.2, z: 0.25}
@@ -878,7 +878,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6334284312697312608}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.185, z: 0}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:

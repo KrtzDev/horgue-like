@@ -32,6 +32,11 @@ public class Projectile : DamageDealer
 		motionPattern.UpdateMotion(this);
 	}
 
+	public void LateUpdate()
+	{
+		motionPattern.LateUpdateMotion(this);
+	}
+
 	public void DoExplosion()
 	{
 		if (motionPattern.explosionRange < 0)
