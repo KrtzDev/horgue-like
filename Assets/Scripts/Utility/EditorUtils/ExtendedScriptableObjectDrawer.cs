@@ -2,6 +2,7 @@
 // Released under the MIT Licence as held at https://opensource.org/licenses/MIT
 // GitHub-link: https://gist.github.com/tomkail/ba4136e6aa990f4dc94e0d39ec6a058c
 
+#if UNITY_EDITOR
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -332,3 +333,4 @@ public class ExtendedScriptableObjectDrawer : PropertyDrawer
 		return false;
 	}
 }
+#endif

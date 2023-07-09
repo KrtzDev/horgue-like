@@ -4,19 +4,19 @@
 // Public domain, do with whatever you like, commercial or not
 // This comes with no warranty, use at your own risk!
 
-using UnityEngine;
-using UnityEditor;
 using System.Collections.Generic;
+using UnityEditor;
+using UnityEngine;
 using UnityEngine.Networking;
 
 public class UpdateTuningData : MonoBehaviour
 {
-    public void Start()
-    {
+	public void Start()
+	{
 		GetTuningDataGame();
-    }
+	}
 
-    public class ExportError
+	public class ExportError
 	{
 		public string status;
 		public string error;
@@ -33,10 +33,8 @@ public class UpdateTuningData : MonoBehaviour
 
 	public void GetTuningDataGame()
 	{
-		Debug.Log(EditorPrefs.GetBool(SettingName));
-
-		if (!EditorPrefs.GetBool(SettingName))
-        {
+		if (true)
+		{
 			s_DataUpdateQueue.Clear();
 			// ADD ALL SPREADSHEETS YOU WANT DO RETRIEVE CONFIG DATA FROM
 			// FIRST PART IS LOCAL FILE NAME TO CACHE (IN ASSETS FOLDER), SECOND IS SPREADSHEET KEY
@@ -46,7 +44,7 @@ public class UpdateTuningData : MonoBehaviour
 			SendNextRequestGame();
 		}
 		else
-        {
+		{
 			Debug.Log("Game Data set Active");
 			GameDataReader.SetActive(true);
 		}
@@ -68,101 +66,103 @@ public class UpdateTuningData : MonoBehaviour
 
 	private void Update()
 	{
-		if(!EditorPrefs.GetBool(SettingName))
-        {
-			if (!dataRetrieved)
+		if (!dataRetrieved)
+		{
+			while (!www.isDone)
+				return;
+
+			bool error = false;
+			string errorMessage = "";
+			// General error with transport?
+			if (www.result == UnityWebRequest.Result.ConnectionError)
 			{
-				while (!www.isDone)
-					return;
+				error = true;
+				errorMessage = "Error updating data from sheet '" + s_DataUpdateQueue[0][1] + "' : " + www.error;
 
-				bool error = false;
-				string errorMessage = "";
-				// General error with transport?
-				if (www.result == UnityWebRequest.Result.ConnectionError)
+				dataRetrieved = true;
+				GameDataReader.SetActive(true);
+			}
+			else
+			{
+				// Detect error with data
+				try
 				{
-					error = true;
-					errorMessage = "Error updating data from sheet '" + s_DataUpdateQueue[0][1] + "' : " + www.error;
-
-					dataRetrieved = true;
-					GameDataReader.SetActive(true);
-				}
-				else
-				{
-					// Detect error with data
-					try
+					ExportError jsonError = JsonUtility.FromJson<ExportError>(www.downloadHandler.text);
+					if (jsonError != null && jsonError.error != null)
 					{
-						ExportError jsonError = JsonUtility.FromJson<ExportError>(www.downloadHandler.text);
-						if (jsonError != null && jsonError.error != null)
-						{
-							error = true;
-							errorMessage = "Error updating data from sheet '" + jsonError.error + "'";
+						error = true;
+						errorMessage = "Error updating data from sheet '" + jsonError.error + "'";
 
-							dataRetrieved = true;
-							GameDataReader.SetActive(true);
-						}
-					}
-					catch
-					{
-						// This is all good, means data is not an error packet 
-					}
-				}
-
-				if (error)
-				{
-					Debug.LogError(errorMessage);
-					EditorApplication.update -= Update;
-
-					dataRetrieved = true;
-					GameDataReader.SetActive(true);
-				}
-				else
-				{
-					Debug.Log("Data successfully received from sheet '" + s_DataUpdateQueue[0][1] + "'");
-					string writePath = "Assets/" + s_DataUpdateQueue[0][0];
-					System.IO.File.WriteAllText(writePath, www.downloadHandler.text);
-					s_DataUpdateQueue.RemoveAt(0);
-					if (s_DataUpdateQueue.Count == 0)
-					{
-						// Queue complete
 						dataRetrieved = true;
 						GameDataReader.SetActive(true);
-						EditorApplication.update -= Update;
-						AssetDatabase.Refresh();
-						www = null;
 					}
-					else
-					{
-						SendNextRequestGame();
-					}
+				}
+				catch
+				{
+					// This is all good, means data is not an error packet 
+				}
+			}
+
+			if (error)
+			{
+				Debug.LogError(errorMessage);
+				//EditorApplication.update -= Update;
+
+				dataRetrieved = true;
+				GameDataReader.SetActive(true);
+			}
+			else
+			{
+				Debug.Log("Data successfully received from sheet '" + s_DataUpdateQueue[0][1] + "'");
+				#if UNITY_EDITOR
+					string writePath = "Assets/" + s_DataUpdateQueue[0][0];
+				#else
+					string writePath = s_DataUpdateQueue[0][0];
+				#endif
+
+				System.IO.File.WriteAllText(writePath, www.downloadHandler.text);
+				s_DataUpdateQueue.RemoveAt(0);
+				if (s_DataUpdateQueue.Count == 0)
+				{
+					// Queue complete
+					dataRetrieved = true;
+					GameDataReader.SetActive(true);
+					//EditorApplication.update -= Update;
+					//AssetDatabase.Refresh();
+					www = null;
+				}
+				else
+				{
+					SendNextRequestGame();
 				}
 			}
 		}
-
 	}
 
+#if UNITY_EDITOR
 	private const string MenuName = "Debug Mode/Offline Mode";
 	private const string SettingName = "Active";
 
 	public static bool IsEnabled
-    {
-		get { return EditorPrefs.GetBool(SettingName, true);  }
+	{
+		get { return EditorPrefs.GetBool(SettingName, true); }
 		set { EditorPrefs.SetBool(SettingName, value); }
-    }
+	}
 
 	[MenuItem(MenuName)]
 	private static void ToggleAction()
-    {
+	{
 		IsEnabled = !IsEnabled;
 		Debug.Log("Debug Mode is now: " + IsEnabled);
-    }
+	}
 
 	[MenuItem(MenuName, true)]
 	private static bool ToggleActionValidate()
-    {
+	{
 		Menu.SetChecked(MenuName, IsEnabled);
 		return true;
-    }
-
+	}
+#endif
 
 	/*
 
