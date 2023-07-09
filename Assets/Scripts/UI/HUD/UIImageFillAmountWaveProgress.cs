@@ -35,7 +35,7 @@ public class UIImageFillAmountWaveProgress : UIImageFillAmount
 			_maxValue = Mathf.Abs(GameManager.Instance._currentTimeToSurvive);
 
 		// maxValue Update falls es im Level verändert wird
-		_enemiesKilled = (int)(_maxEnemiesAmount - Mathf.Abs(GameManager.Instance._neededEnemyKill));
+		_enemiesKilled = (GameManager.Instance._enemiesKilled);
 
         // _currentValue = _EnemySpawner.EnemiesThatHaveSpawned;
 
