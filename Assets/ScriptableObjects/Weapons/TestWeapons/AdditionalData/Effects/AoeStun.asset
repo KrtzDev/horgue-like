@@ -19,17 +19,18 @@ MonoBehaviour:
     max: 0
   hasInitialExtraDamage: 1
   initialDamage: 20
-  initialDamageVFX: {fileID: 0}
+  initialDamageVFX: {fileID: 5758294487887650858, guid: f071090d32a11254fa67fed6411beeaa,
+    type: 3}
   hasDamageOverTime: 0
   dotDamage: 2
   dotDuration: 0
   dotDamageVFX: {fileID: 0}
-  hasSlow: 1
+  hasSlow: 0
   slowAmount: 100
   slowDuration: 0
   slowVFX: {fileID: 0}
   hasKnockBack: 1
-  knockBackType: 1
+  knockBackType: 0
   knockBackStrength: 3
   knockBackVFX: {fileID: 0}
   hasPierce: 0

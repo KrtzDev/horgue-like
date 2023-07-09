@@ -42,7 +42,7 @@ public class GameManager : Singleton<GameManager>
 
 
 	[Header("Player")]
-	private GameObject _player;
+	public PlayerCharacter player;
 	public int _currentPlayerHealth;
 	public bool _playerCanUseAbilities;
 

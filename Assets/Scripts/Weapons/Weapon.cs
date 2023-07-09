@@ -55,6 +55,7 @@ public class Weapon : ScriptableObject
 	private Transform _weaponTransform;
 
 	private ObjectPool<Projectile> _projectilePool;
+	private ObjectPool<HorgueVFX> _vfxPool;
 
 	private float _shotDelay;
 	private int _capacity;
@@ -86,6 +87,9 @@ public class Weapon : ScriptableObject
 		_capacity = CalculateWeaponStats(this).capacity;
 
 		_projectilePool = ObjectPool<Projectile>.CreatePool(_projectile, 100, null);
+
+		if(barrel.motionPattern != null && barrel.motionPattern.explosionVfx != null)
+		_vfxPool = ObjectPool<HorgueVFX>.CreatePool(barrel.motionPattern.explosionVfx, 25, null);
 	}
 
 	public WeaponStats CalculateWeaponStats(Weapon weapon)
@@ -358,7 +362,6 @@ public class Weapon : ScriptableObject
 
 		if (_shotDelay <= 0)
 		{
-			Debug.Log($"{_currentWeaponPrefab.name} has {_capacity} bullets left");
 			Projectile[] projectiles = weaponStats.attackPattern.SpawnProjectiles(_capacity, _projectilePool, _currentPatternPrefab);
 			for (int i = 0; i < projectiles.Length; i++)
 			{
@@ -366,7 +369,12 @@ public class Weapon : ScriptableObject
 				ApplyStats(weaponStats, projectile);
 
 				projectile.gameObject.transform.localScale = Vector3.one * projectile.finalProjectileSize;
-				projectile.GetComponent<Rigidbody>().velocity = projectile.transform.forward * 18f;
+
+				projectile.TargetedEnemy = TargetedEnemy;
+
+				projectile.motionPattern = weaponStats.motionPattern;
+				projectile.motionPattern.explosionVfxPool = _vfxPool;
+				projectile.motionPattern.BeginMotion(projectile);
 
 				projectile.OnHit += CleanUpProjectile;
 				projectile.OnLifeTimeEnd += CleanUpProjectile;
@@ -380,7 +388,15 @@ public class Weapon : ScriptableObject
 		}
 	}
 
-	private void CleanUpProjectile(Projectile projectile) => _projectilePool.ReturnObjectToPool(projectile);
+	private void CleanUpProjectile(Projectile projectile)
+	{
+		if (projectile.motionPattern.shouldExplodeOnDeath)
+			projectile.DoExplosion();
+
+		_projectilePool.ReturnObjectToPool(projectile);
+	}
+
+	private Enemy TargetedEnemy { get; set; }
 
 	private bool RotateTowardsEnemy(float range)
 	{
@@ -404,6 +420,7 @@ public class Weapon : ScriptableObject
 
 		if (closestEnemy != null)
 		{
+			TargetedEnemy = closestEnemy;
 			Vector3 direction = (closestEnemy.transform.position + Vector3.up) - _weaponTransform.position;
 			Vector3 rotateTowardsDirection = Vector3.RotateTowards(_weaponTransform.forward, direction, 20 * Time.deltaTime, .0f);
 			_weaponTransform.transform.rotation = Quaternion.LookRotation(rotateTowardsDirection);
