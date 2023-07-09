@@ -62,6 +62,15 @@ public partial class @PlayerInputMappings : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SwitchMode"",
+                    ""type"": ""Button"",
+                    ""id"": ""52ae357c-399d-4f49-ab16-c0b2db1fdd2c"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -328,6 +337,39 @@ public partial class @PlayerInputMappings : IInputActionCollection2, IDisposable
                     ""action"": ""Shoot"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""1D Axis"",
+                    ""id"": ""1dcd6989-de36-43dc-ada8-a1b010459a2f"",
+                    ""path"": ""1DAxis"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SwitchMode"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""negative"",
+                    ""id"": ""2a33f5a6-5992-40bb-9ef3-f9544d99a6ee"",
+                    ""path"": ""<Gamepad>/dpad/left"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SwitchMode"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""positive"",
+                    ""id"": ""41a4a9f2-761f-4e0a-8d53-c7350456d1ae"",
+                    ""path"": ""<Gamepad>/dpad/right"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SwitchMode"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
                 }
             ]
         },
@@ -878,6 +920,7 @@ public partial class @PlayerInputMappings : IInputActionCollection2, IDisposable
         m_Character_MovementAction = m_Character.FindAction("Movement Action", throwIfNotFound: true);
         m_Character_Aim = m_Character.FindAction("Aim", throwIfNotFound: true);
         m_Character_Shoot = m_Character.FindAction("Shoot", throwIfNotFound: true);
+        m_Character_SwitchMode = m_Character.FindAction("SwitchMode", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -953,6 +996,7 @@ public partial class @PlayerInputMappings : IInputActionCollection2, IDisposable
     private readonly InputAction m_Character_MovementAction;
     private readonly InputAction m_Character_Aim;
     private readonly InputAction m_Character_Shoot;
+    private readonly InputAction m_Character_SwitchMode;
     public struct CharacterActions
     {
         private @PlayerInputMappings m_Wrapper;
@@ -961,6 +1005,7 @@ public partial class @PlayerInputMappings : IInputActionCollection2, IDisposable
         public InputAction @MovementAction => m_Wrapper.m_Character_MovementAction;
         public InputAction @Aim => m_Wrapper.m_Character_Aim;
         public InputAction @Shoot => m_Wrapper.m_Character_Shoot;
+        public InputAction @SwitchMode => m_Wrapper.m_Character_SwitchMode;
         public InputActionMap Get() { return m_Wrapper.m_Character; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -982,6 +1027,9 @@ public partial class @PlayerInputMappings : IInputActionCollection2, IDisposable
                 @Shoot.started -= m_Wrapper.m_CharacterActionsCallbackInterface.OnShoot;
                 @Shoot.performed -= m_Wrapper.m_CharacterActionsCallbackInterface.OnShoot;
                 @Shoot.canceled -= m_Wrapper.m_CharacterActionsCallbackInterface.OnShoot;
+                @SwitchMode.started -= m_Wrapper.m_CharacterActionsCallbackInterface.OnSwitchMode;
+                @SwitchMode.performed -= m_Wrapper.m_CharacterActionsCallbackInterface.OnSwitchMode;
+                @SwitchMode.canceled -= m_Wrapper.m_CharacterActionsCallbackInterface.OnSwitchMode;
             }
             m_Wrapper.m_CharacterActionsCallbackInterface = instance;
             if (instance != null)
@@ -998,6 +1046,9 @@ public partial class @PlayerInputMappings : IInputActionCollection2, IDisposable
                 @Shoot.started += instance.OnShoot;
                 @Shoot.performed += instance.OnShoot;
                 @Shoot.canceled += instance.OnShoot;
+                @SwitchMode.started += instance.OnSwitchMode;
+                @SwitchMode.performed += instance.OnSwitchMode;
+                @SwitchMode.canceled += instance.OnSwitchMode;
             }
         }
     }
@@ -1122,6 +1173,7 @@ public partial class @PlayerInputMappings : IInputActionCollection2, IDisposable
         void OnMovementAction(InputAction.CallbackContext context);
         void OnAim(InputAction.CallbackContext context);
         void OnShoot(InputAction.CallbackContext context);
+        void OnSwitchMode(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {

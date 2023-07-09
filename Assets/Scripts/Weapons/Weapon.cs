@@ -96,25 +96,20 @@ public class Weapon : ScriptableObject
 		if(barrel.motionPattern.explosionVfx != null)
 			_vfxPool = ObjectPool<HorgueVFX>.CreatePool(barrel.motionPattern.explosionVfx, 25, null);
 
-		InputManager.Instance.CharacterInputActions.Character.Aim.performed += AimWeapon;
-
 		_camera = Camera.main;
 	}
 
-	private void OnDisable()
+	internal void UpdateAimDirection()
 	{
-		if (GameManager.Instance == null)
-			return;
-
-		InputManager.Instance.CharacterInputActions.Character.Aim.performed -= AimWeapon;
+		Vector2 input = InputManager.Instance.CharacterInputActions.Character.Aim.ReadValue<Vector2>();
+		AimWeapon(input);
 	}
 
-	private void AimWeapon(InputAction.CallbackContext obj)
+	private void AimWeapon(Vector2 input)
 	{
 		if (GameManager.Instance.weaponControll == WeaponControllKind.AllAuto)
 			return;
 
-		Vector2 input = obj.ReadValue<Vector2>();
 		Vector3 direction = new Vector3(input.x,0,input.y);
 
 		Vector3 cameraForward = _camera.transform.forward;
@@ -395,7 +390,7 @@ public class Weapon : ScriptableObject
 		if (weaponStats.attackspeed == 0)
 			return;
 
-		if(GameManager.Instance?.weaponControll == WeaponControllKind.AllAuto || GameManager.Instance?.weaponControll == WeaponControllKind.AutoShootManualAim)
+		if(GameManager.Instance?.weaponControll == WeaponControllKind.AllAuto)
 		{
 			if (!RotateTowardsEnemy(weaponStats.range))
 				return;

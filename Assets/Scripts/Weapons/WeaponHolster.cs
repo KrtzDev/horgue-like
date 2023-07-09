@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -33,8 +34,16 @@ public class WeaponHolster : MonoBehaviour
 			}
 		}
 
+		InputManager.Instance.CharacterInputActions.Character.SwitchMode.performed += SwitchWeaponControllMode;
+
 		InputManager.Instance.CharacterInputActions.Character.Shoot.performed += ShootWeapons;
 		InputManager.Instance.CharacterInputActions.Character.Shoot.canceled += ShootWeapons;
+	}
+
+	private void SwitchWeaponControllMode(InputAction.CallbackContext ctx)
+	{
+		GameManager.Instance.weaponControll = (WeaponControllKind)(((int)GameManager.Instance.weaponControll + 1) % 3);
+		Debug.Log(GameManager.Instance.weaponControll);
 	}
 
 	private void OnDisable()
@@ -42,13 +51,15 @@ public class WeaponHolster : MonoBehaviour
 		if (GameManager.Instance == null)
 			return;
 
+		InputManager.Instance.CharacterInputActions.Character.SwitchMode.performed -= SwitchWeaponControllMode;
+
 		InputManager.Instance.CharacterInputActions.Character.Shoot.performed -= ShootWeapons;
 		InputManager.Instance.CharacterInputActions.Character.Shoot.canceled -= ShootWeapons;
 	}
 
-	private void ShootWeapons(InputAction.CallbackContext obj)
+	private void ShootWeapons(InputAction.CallbackContext ctx)
 	{
-		_shouldShoot = obj.ReadValue<float>() > 0;
+		_shouldShoot = ctx.ReadValue<float>() > 0;
 	}
 
 	private bool _shouldShoot = false;
@@ -64,6 +75,13 @@ public class WeaponHolster : MonoBehaviour
 				TryShootAllWeapons();
 
 			return;
+		}
+		if (GameManager.Instance.weaponControll == WeaponControllKind.AllManual || GameManager.Instance.weaponControll == WeaponControllKind.AutoShootManualAim)
+		{
+			foreach (Weapon weapon in weapons)
+			{
+				weapon.UpdateAimDirection();
+			}
 		}
 
 		TryShootAllWeapons();
