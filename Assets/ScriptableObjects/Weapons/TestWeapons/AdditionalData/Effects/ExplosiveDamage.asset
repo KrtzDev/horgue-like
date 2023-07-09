@@ -45,4 +45,5 @@ MonoBehaviour:
   propagationRange: 5
   maxPropagateToCount: 25
   consecutivePropagationCount: 1
-  propagationVFX: {fileID: 0}
+  propagationVFX: {fileID: 5758294487887650858, guid: f071090d32a11254fa67fed6411beeaa,
+    type: 3}
