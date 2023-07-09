@@ -4,19 +4,28 @@ using UnityEngine;
 
 public class CoinDrop : MonoBehaviour
 {
-    private void SetDeactive()
+    [SerializeField] private Animator _animator;
+    [SerializeField] private AudioSource _collectSound;
+    [SerializeField] GameObject _destroy;
+    public int _givenScore;
+
+    private void OnTriggerEnter(Collider other)
     {
-        this.gameObject.SetActive(false);
+        if (other.CompareTag("Player"))
+        {
+            StartPickUpAnimation();
+        }
     }
 
-    private void Awake()
+    private void StartPickUpAnimation()
     {
-        StartCoroutine(Delete());
+        _collectSound.Play();
+        _animator.SetBool("pickup", true);
+        GameManager.Instance._currentScore += _givenScore;
     }
 
-    IEnumerator Delete()
+    public void Delete()
     {
-        yield return new WaitForSeconds(2);
-        Destroy(transform.gameObject);
+        Destroy(_destroy);
     }
 }
