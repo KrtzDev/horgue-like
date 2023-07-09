@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 462415aed716eae4698083da8941c13b, type: 3}
-  m_Name: StraightMotion
+  m_Name: OrbitMotion
   m_EditorClassIdentifier: 
   shouldExplodeOnDeath: 0
   explosionRange: 3
@@ -21,10 +21,10 @@ MonoBehaviour:
   _isHoming: 0
   _homingRadius: 25
   _homingStrength: 2
-  _manipulateTrajectory: 0
-  _manipulationDirection: {x: 0, y: 0, z: 0}
-  _manipulationAmount: 0
-  _followPlayer: 0
+  _manipulateTrajectory: 1
+  _manipulationDirection: {x: 0, y: 1, z: 0}
+  _manipulationAmount: 360
+  _followPlayer: 1
   _speed: 18
   _lifeTime: 5
   _enemyLayerMask:

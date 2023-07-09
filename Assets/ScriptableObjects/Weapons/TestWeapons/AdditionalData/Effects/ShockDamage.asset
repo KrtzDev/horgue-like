@@ -10,23 +10,23 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 440041b21ef39184fbb0689fc05748a2, type: 3}
-  m_Name: FireDamage
+  m_Name: ShockDamage
   m_EditorClassIdentifier: 
-  triggerChance: 20
-  effectDuration: 6
+  triggerChance: 75
+  effectDuration: 3
   tickRate:
-    min: 1
-    max: 3
+    min: 0
+    max: 0
   hasInitialExtraDamage: 1
   initialDamage: 10
   initialDamageVFX: {fileID: 0}
-  hasDamageOverTime: 1
-  dotDamage: 3
-  dotDuration: 6
+  hasDamageOverTime: 0
+  dotDamage: 0
+  dotDuration: 0
   dotDamageVFX: {fileID: 0}
-  hasSlow: 0
-  slowAmount: 0
-  slowDuration: 0
+  hasSlow: 1
+  slowAmount: 30
+  slowDuration: 3
   slowVFX: {fileID: 0}
   hasKnockBack: 0
   knockBackType: 0
@@ -39,8 +39,8 @@ MonoBehaviour:
   layersToPropagateTo:
     serializedVersion: 2
     m_Bits: 128
-  propagationChance: 50
+  propagationChance: 75
   propagationRange: 3
-  maxPropagateToCount: 5
+  maxPropagateToCount: 8
   consecutivePropagationCount: 3
   propagationVFX: {fileID: 0}

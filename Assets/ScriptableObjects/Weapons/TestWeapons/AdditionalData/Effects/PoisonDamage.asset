@@ -10,38 +10,37 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 440041b21ef39184fbb0689fc05748a2, type: 3}
-  m_Name: AoeStun
+  m_Name: PoisonDamage
   m_EditorClassIdentifier: 
-  triggerChance: 100
-  effectDuration: 0.3
+  triggerChance: 60
+  effectDuration: 8
   tickRate:
-    min: 0
-    max: 0
-  hasInitialExtraDamage: 1
-  initialDamage: 20
-  initialDamageVFX: {fileID: 5758294487887650858, guid: f071090d32a11254fa67fed6411beeaa,
-    type: 3}
-  hasDamageOverTime: 0
-  dotDamage: 2
-  dotDuration: 0
+    min: 1
+    max: 3
+  hasInitialExtraDamage: 0
+  initialDamage: 0
+  initialDamageVFX: {fileID: 0}
+  hasDamageOverTime: 1
+  dotDamage: 8
+  dotDuration: 8
   dotDamageVFX: {fileID: 0}
   hasSlow: 0
-  slowAmount: 100
+  slowAmount: 0
   slowDuration: 0
   slowVFX: {fileID: 0}
-  hasKnockBack: 1
+  hasKnockBack: 0
   knockBackType: 0
-  knockBackStrength: 3
+  knockBackStrength: 0
   knockBackVFX: {fileID: 0}
   hasPierce: 0
   maxPierceAmount: 0
-  canPropagate: 1
-  propagatedEffect: {fileID: 11400000}
+  canPropagate: 0
+  propagatedEffect: {fileID: 0}
   layersToPropagateTo:
     serializedVersion: 2
-    m_Bits: 128
-  propagationChance: 100
-  propagationRange: 5
-  maxPropagateToCount: 5
-  consecutivePropagationCount: 1
+    m_Bits: 0
+  propagationChance: 0
+  propagationRange: 0
+  maxPropagateToCount: 0
+  consecutivePropagationCount: 0
   propagationVFX: {fileID: 0}

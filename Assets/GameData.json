@@ -58,7 +58,7 @@
       "name": "Level01",
       "healthBonus": 1,
       "damageBonus": 1,
-      "TimeToSurvive": 40,
+      "TimeToSurvive": 4,
       "spawnTick": 3,
       "spawnsPerTick": 6,
       "minEnemyCount": 10,
@@ -122,6 +122,7 @@
       "maxHealth": 250
     }
   ],
+  "Firearm": [],
   "Ammunition": [
     {
       "name": "Reference",

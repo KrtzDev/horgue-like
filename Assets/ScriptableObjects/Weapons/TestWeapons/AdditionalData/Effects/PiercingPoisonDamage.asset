@@ -10,19 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 440041b21ef39184fbb0689fc05748a2, type: 3}
-  m_Name: FireDamage
+  m_Name: PiercingPoisonDamage
   m_EditorClassIdentifier: 
-  triggerChance: 20
-  effectDuration: 6
+  triggerChance: 60
+  effectDuration: 8
   tickRate:
     min: 1
     max: 3
-  hasInitialExtraDamage: 1
-  initialDamage: 10
+  hasInitialExtraDamage: 0
+  initialDamage: 0
   initialDamageVFX: {fileID: 0}
   hasDamageOverTime: 1
-  dotDamage: 3
-  dotDuration: 6
+  dotDamage: 8
+  dotDuration: 8
   dotDamageVFX: {fileID: 0}
   hasSlow: 0
   slowAmount: 0
@@ -32,15 +32,15 @@ MonoBehaviour:
   knockBackType: 0
   knockBackStrength: 0
   knockBackVFX: {fileID: 0}
-  hasPierce: 0
-  maxPierceAmount: 0
-  canPropagate: 1
-  propagatedEffect: {fileID: 11400000}
+  hasPierce: 1
+  maxPierceAmount: 3
+  canPropagate: 0
+  propagatedEffect: {fileID: 0}
   layersToPropagateTo:
     serializedVersion: 2
-    m_Bits: 128
-  propagationChance: 50
-  propagationRange: 3
-  maxPropagateToCount: 5
-  consecutivePropagationCount: 3
+    m_Bits: 0
+  propagationChance: 0
+  propagationRange: 0
+  maxPropagateToCount: 0
+  consecutivePropagationCount: 0
   propagationVFX: {fileID: 0}

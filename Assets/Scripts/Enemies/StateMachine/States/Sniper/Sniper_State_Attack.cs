@@ -8,6 +8,8 @@ public class Sniper_State_Attack : AI_State_Attack
 
     public override void Enter(AI_Agent agent)
     {
+		_sniper = agent as AI_Agent_Sniper;
+
         agent._animator.SetBool("isAttacking", true);
         agent._navMeshAgent.SetDestination(agent.transform.position);
         agent._navMeshAgent.enabled = false;
