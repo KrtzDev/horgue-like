@@ -24,19 +24,23 @@ public class HealthComponent : MonoBehaviour
 		float currentHealthPct = (float)_currentHealth / _maxHealth;
 		OnHealthPercentChanged?.Invoke(currentHealthPct);
 
-		if(_currentHealth <= 0 && !_isDead)
-        {
-			OnDeath?.Invoke();
-			_isDead = true;
-		}
-
 		if (gameObject.CompareTag("Player"))
 		{
 			GameObject.FindGameObjectWithTag("UI")?.GetComponentInChildren<UIDamageFlash>().DamageFlash(0.25f, .5f);
 
 			if (_currentHealth <= 0 && !_isDead)
 			{
+				Debug.Log("GotDamage");
 				GameManager.Instance.PlayerDied();
+				_isDead = true;
+			}
+		}
+		else
+		{
+			if(_currentHealth <= 0 && !_isDead)
+			{
+				OnDeath?.Invoke();
+				_isDead = true;
 			}
 		}
 	}
