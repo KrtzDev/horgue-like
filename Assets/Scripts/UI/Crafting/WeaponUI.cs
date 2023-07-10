@@ -189,9 +189,9 @@ public class WeaponUI : MonoBehaviour
 
 			currenStat = Instantiate(_statUI_prefab, _weaponStatsParent);
 			currenStat.Initialize("Reload Time: ", weaponStats.cooldown.ToString("0.00"));
-			if (weaponStats.cooldown > _previousWeaponStats.cooldown)
+			if (weaponStats.cooldown < _previousWeaponStats.cooldown)
 				currenStat.statBackground.color = currenStat.positiveColor;
-			else if (weaponStats.cooldown < _previousWeaponStats.cooldown)
+			else if (weaponStats.cooldown > _previousWeaponStats.cooldown)
 				currenStat.statBackground.color = currenStat.negativeColor;
 
 			currenStat = Instantiate(_statUI_prefab, _weaponStatsParent);

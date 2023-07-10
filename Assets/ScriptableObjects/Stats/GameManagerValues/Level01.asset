@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: baa60f6733109644dab2b7084c4a7896, type: 3}
   m_Name: Level01
   m_EditorClassIdentifier: 
-  _healthBonus: 0
-  _damageBonus: 0
+  _healthBonus: 1
+  _damageBonus: 1
+  _timeToSurvive: 5

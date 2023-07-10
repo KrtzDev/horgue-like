@@ -11,7 +11,6 @@ public class Sniper_State_ChasePlayer : AI_State_ChasePlayer
         _sniper = agent as AI_Agent_Sniper;
 
         agent._animator.SetBool("isChasing", true);
-        agent._attackTimer = agent._enemyData._attackSpeed;
     }
 
     public override void Update(AI_Agent agent)
@@ -26,12 +25,12 @@ public class Sniper_State_ChasePlayer : AI_State_ChasePlayer
             if (agent._followDecoy)
             {
                 _followPosition = agent._decoyTransform.position;
-                SetTarget(agent);
+                agent.SetTarget(agent, _followPosition);
             }
             else
             {
                 _followPosition = agent._playerTransform.position;
-                SetTarget(agent);
+                agent.SetTarget(agent, _followPosition);
             }
         }
         else
@@ -39,7 +38,7 @@ public class Sniper_State_ChasePlayer : AI_State_ChasePlayer
             if (agent._followDecoy)
             {
                 _followPosition = agent._decoyTransform.position;
-                SetTarget(agent);
+                agent.SetTarget(agent, _followPosition);
             }
             else
             {
@@ -54,7 +53,7 @@ public class Sniper_State_ChasePlayer : AI_State_ChasePlayer
                     _followPosition = agent._playerTransform.position;
                 }
 
-                SetTarget(agent);
+                agent.SetTarget(agent, _followPosition);
             }
 
             StartRotating(agent);
@@ -67,18 +66,6 @@ public class Sniper_State_ChasePlayer : AI_State_ChasePlayer
     public override void Exit(AI_Agent agent)
     {
         agent._animator.SetBool("isChasing", false);
-    }
-
-    private void SetTarget(AI_Agent agent)
-    {
-        if (agent._obstacleAgent.enabled && agent.enabled)
-        {
-            agent._obstacleAgent.SetDestination(_followPosition);
-        }
-        else if (agent._navMeshAgent.enabled && agent.enabled)
-        {
-            agent._navMeshAgent.SetDestination(_followPosition);
-        }
     }
 
     private void StartRotating(AI_Agent agent)

@@ -57,11 +57,6 @@ public class EnemyHealthComponent : HealthComponent
 		if (gameObject.GetComponent<AI_Agent>() != null)
 			gameObject.GetComponent<AI_Agent>().enabled = false;
 
-		if(gameObject.GetComponent<Animator>() != null)
-        {
-			gameObject.GetComponent<Animator>().enabled = false;
-        }
-
 		GameManager.Instance.EnemyDied();
 
 		gameObject.tag = "Untagged";

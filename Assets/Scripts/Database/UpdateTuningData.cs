@@ -28,7 +28,7 @@ public class UpdateTuningData : MonoBehaviour
 	private static List<string[]> s_DataUpdateQueue = new List<string[]>();
 	static UnityWebRequest www;
 
-	public GameObject GameDataReader;
+	public GameDataReader GameDataReader;
 	public bool dataRetrieved = false;
 
 	public void GetTuningDataGame()
@@ -46,7 +46,7 @@ public class UpdateTuningData : MonoBehaviour
 		else
 		{
 			Debug.Log("Game Data set Active");
-			GameDataReader.SetActive(true);
+			GameDataReader.gameObject.SetActive(true);
 		}
 	}
 
@@ -80,7 +80,7 @@ public class UpdateTuningData : MonoBehaviour
 				errorMessage = "Error updating data from sheet '" + s_DataUpdateQueue[0][1] + "' : " + www.error;
 
 				dataRetrieved = true;
-				GameDataReader.SetActive(true);
+				GameDataReader.gameObject.SetActive(true);
 			}
 			else
 			{
@@ -94,7 +94,7 @@ public class UpdateTuningData : MonoBehaviour
 						errorMessage = "Error updating data from sheet '" + jsonError.error + "'";
 
 						dataRetrieved = true;
-						GameDataReader.SetActive(true);
+						GameDataReader.gameObject.SetActive(true);
 					}
 				}
 				catch
@@ -109,7 +109,7 @@ public class UpdateTuningData : MonoBehaviour
 				//EditorApplication.update -= Update;
 
 				dataRetrieved = true;
-				GameDataReader.SetActive(true);
+				GameDataReader.gameObject.SetActive(true);
 			}
 			else
 			{
@@ -126,7 +126,10 @@ public class UpdateTuningData : MonoBehaviour
 				{
 					// Queue complete
 					dataRetrieved = true;
-					GameDataReader.SetActive(true);
+					TextAsset data = new TextAsset(www.downloadHandler.text);
+					data.name = "GameData1";
+					GameDataReader.gameData = data;
+					GameDataReader.gameObject.SetActive(true);
 					//EditorApplication.update -= Update;
 					//AssetDatabase.Refresh();
 					www = null;
