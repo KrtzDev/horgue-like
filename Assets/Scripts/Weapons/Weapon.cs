@@ -101,7 +101,7 @@ public class Weapon : ScriptableObject
 		_camera = Camera.main;
 	}
 
-	internal void UpdateAimDirection()
+	public void UpdateAimDirection()
 	{
 		Vector2 input = InputManager.Instance.CharacterInputActions.Character.Aim.ReadValue<Vector2>();
 		AimWeapon(input);
