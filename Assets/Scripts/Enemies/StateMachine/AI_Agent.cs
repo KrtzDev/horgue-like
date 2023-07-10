@@ -77,8 +77,26 @@ public class AI_Agent : MonoBehaviour
     {
         _navMeshAgent.speed = _enemyData._maxMoveSpeed;
         _navMeshAgent.acceleration = _enemyData._acceleration;
-        _attackTimer = _enemyData._attackSpeed;
+        _attackTimer = 0f;
     }
 
     private void SetState(AI_StateID state) => _stateMachine.ChangeState(state);
+
+    public void SetTarget(AI_Agent agent, Vector3 followPosition)
+    {
+        if (agent._obstacleAgent.enabled && agent.enabled)
+        {
+            agent._obstacleAgent.SetDestination(followPosition);
+        }
+        else if (agent._navMeshAgent.enabled && agent.enabled)
+        {
+            if (agent._navMeshAgent.pathStatus == UnityEngine.AI.NavMeshPathStatus.PathInvalid)
+            {
+                GameManager.Instance.EnemyDied();
+                agent.gameObject.SetActive(false);
+                return;
+            }
+            agent._navMeshAgent.SetDestination(followPosition);
+        }
+    }
 }

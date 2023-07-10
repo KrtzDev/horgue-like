@@ -12,14 +12,7 @@ public class RangedRobot_State_Idle : AI_State_Idle
 
         _followPosition = agent.transform.position;
 
-        if (agent._obstacleAgent.enabled && agent.enabled)
-        {
-            agent._obstacleAgent.SetDestination(_followPosition);
-        }
-        else if (agent._navMeshAgent.enabled && agent.enabled)
-        {
-            agent._navMeshAgent.SetDestination(_followPosition);
-        }
+        agent.SetTarget(agent, _followPosition);
 
         _followTimer = 0;
     }
