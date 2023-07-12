@@ -25,7 +25,8 @@ public class EnemySpawner : MonoBehaviour
 {
     public GameObject _enemySpawnIndicator;
     public GameObject _enemyObjectPoolParent;
-    private Transform _playerTransform;
+    private GameObject _player;
+    [SerializeField] private GameObject _boxZoneParent;
 
     [Header("Settings")]
     [SerializeField] public EnemySpawnerData _enemySpawnerData;
@@ -50,8 +51,8 @@ public class EnemySpawner : MonoBehaviour
 
     private void Awake()
     {
-        if (_playerTransform == null)
-            _playerTransform = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
+        if (_player == null)
+            _player = GameObject.FindGameObjectWithTag("Player");
 
         SetColliderSizeCenter();
     }
@@ -66,34 +67,40 @@ public class EnemySpawner : MonoBehaviour
 
     private void Update()
     {
-        transform.SetPositionAndRotation(_playerTransform.position, _playerTransform.rotation); // performance heavy?
+        _boxZoneParent.transform.SetPositionAndRotation(_player.transform.position, _player.transform.rotation); // performance heavy?
 
         if (_spawnTimer >= _enemySpawnerData._spawnTick)
         {
-            int currentEnemiesFromMin = Mathf.RoundToInt((_enemySpawnerData._minEnemyCount - GameManager.Instance._enemyCount));
             int spawnIndex = 0;
 
             foreach (EnemiesToSpawn enemy in _enemiesToSpawn)
             {
+                int currentEnemiesFromMin = _enemySpawnerData._minEnemyCount;
+
+                if(GameManager.Instance._enemyCount >= 0)
+                {
+                    currentEnemiesFromMin = _enemySpawnerData._minEnemyCount - GameManager.Instance._enemyCount;
+                }
+
                 int enemiesToBeSpawned;
                 enemiesToBeSpawned = 0;
 
-
-                if (GameManager.Instance._enemyCount + _enemySpawnerData._spawnsPerTick > _enemySpawnerData._minEnemyCount)
+                if (GameManager.Instance._enemyCount >= _enemySpawnerData._maxEnemyCount) // else if expected enemies < maxEnemy Count
                 {
-                    enemiesToBeSpawned = Mathf.RoundToInt(_enemySpawnerData._spawnsPerTick * (enemy._spawnChance * 0.01f) + 0.4f);
+                    enemiesToBeSpawned = 0; // spawn nothing
                 }
-                else if (GameManager.Instance._enemyCount < _enemySpawnerData._minEnemyCount)
+                else if (GameManager.Instance._enemyCount + (_enemySpawnerData._spawnsPerTick * (enemy._spawnChance * 0.01f) + 0.4f) >= _enemySpawnerData._minEnemyCount) // if expected enemy count > minEnemyCount
                 {
-                    enemiesToBeSpawned = Mathf.RoundToInt(currentEnemiesFromMin * (enemy._spawnChance * 0.01f) + 0.4f);
+                    enemiesToBeSpawned = Mathf.RoundToInt(_enemySpawnerData._spawnsPerTick * (enemy._spawnChance * 0.01f) + 0.4f); // spawn normal Tick
                 }
-                else if (GameManager.Instance._enemyCount < _enemySpawnerData._maxEnemyCount)
+                else if (GameManager.Instance._enemyCount + (_enemySpawnerData._spawnsPerTick * (enemy._spawnChance * 0.01f) + 0.4f) < _enemySpawnerData._minEnemyCount) // else if expected enemy count < minEnemyCount
                 {
-                    enemiesToBeSpawned = Mathf.RoundToInt(_enemySpawnerData._spawnsPerTick * (enemy._spawnChance * 0.01f) + 0.4f);
+                    enemiesToBeSpawned = Mathf.RoundToInt(currentEnemiesFromMin * (enemy._spawnChance * 0.01f) + 0.4f); // spawn until min amount is achieved
                 }
                 SpawnEnemies(enemy, enemiesToBeSpawned, spawnIndex);
                 spawnIndex++;
             }
+            // Debug.Log("Current Enemy Count: " + GameManager.Instance._enemyCount + " | Time " + Time.time);
             _spawnTimer = 0;
         }
         _spawnTimer += Time.deltaTime;
@@ -114,10 +121,9 @@ public class EnemySpawner : MonoBehaviour
             if (zoneNumber > 3)
                 zoneNumber = 0;
 
-            GameManager.Instance._enemyCount++;
             if (GameManager.Instance._enemyCount >= _enemySpawnerData._maxEnemyCount)
             {
-                break;
+                i = enemiesToBeSpawned;
             }
         }
     }
@@ -163,7 +169,7 @@ public class EnemySpawner : MonoBehaviour
 
         for (int i = 0; i < _levelZone.Count; i++)
         {
-            distanceToBounds = Vector3.Distance(new Vector3(_levelZone[i].transform.position.x, _playerTransform.position.y, _levelZone[i].transform.position.z), _playerTransform.position);
+            distanceToBounds = Vector3.Distance(new Vector3(_levelZone[i].transform.position.x, _player.transform.position.y, _levelZone[i].transform.position.z), _player.transform.position);
 
             if (distanceToBounds > distanceToMidZone)
             {
@@ -353,7 +359,7 @@ public class EnemySpawner : MonoBehaviour
         float xValueInBounds = Random.Range(_bounds.min.x, _bounds.max.x);
         float zValueInBounds = Random.Range(_bounds.min.z, _bounds.max.z);
 
-        float DistanceToPlayer = Vector3.Distance(new Vector3(xValueInBounds, _playerTransform.position.y, zValueInBounds), _playerTransform.position);
+        float DistanceToPlayer = Vector3.Distance(new Vector3(xValueInBounds, _player.transform.position.y, zValueInBounds), _player.transform.position);
 
         RaycastHit rc_hit;
         Physics.Raycast(new Vector3(xValueInBounds, _bounds.max.y, zValueInBounds), Vector3.down, out rc_hit, _boxHeight, _groundLayer);
@@ -378,7 +384,7 @@ public class EnemySpawner : MonoBehaviour
             yield return new WaitForSeconds(spawnDelay);
 
             NavMeshHit Hit;
-            if (NavMesh.SamplePosition(spawnPosition, out Hit, 2f, -1))
+            if (NavMesh.SamplePosition(spawnPosition, out Hit, 2f, NavMesh.AllAreas))
             {
                 Instantiate(_enemySpawnIndicator, Hit.position, Quaternion.identity);
             }
@@ -386,8 +392,6 @@ public class EnemySpawner : MonoBehaviour
             yield return new WaitForSeconds(_enemySpawnerData._spawnAnimDelay);
 
             AI_Agent poolableObject = _enemyObjectPool[spawnIndex].GetObject();
-
-            // Determine Position
 
             if (poolableObject != null)
             {
@@ -399,6 +403,8 @@ public class EnemySpawner : MonoBehaviour
                     agent.Warp(Hit.position);
                     agent.enabled = true;
                     anim.SetBool("isChasing", true);
+
+                    GameManager.Instance._enemyCount++;
                 }
                 else
                 {
@@ -429,7 +435,7 @@ public class EnemySpawner : MonoBehaviour
         // Safe Zone
 
         size = new Vector3(_enemySpawnerData._safeZoneSize, _boxHeight, _enemySpawnerData._safeZoneSize);
-        center = _playerTransform.position + new Vector3(0, 0, 0);
+        center = _player.transform.position + new Vector3(0, 0, 0);
         _safeZone.size = size;
         _safeZone.center = center;
 
@@ -441,22 +447,22 @@ public class EnemySpawner : MonoBehaviour
         center_y = _enemySpawnerData._safeZoneSize / 2 + (_enemySpawnerData._closeZoneSize - _enemySpawnerData._safeZoneSize) / 4;
 
         size = new Vector3(size_x, _boxHeight, size_y);
-        center = _playerTransform.position + new Vector3(center_x, 0, center_y);
+        center = _player.transform.position + new Vector3(center_x, 0, center_y);
         _closeZones[0].size = size;
         _closeZones[0].center = center;
 
         size = new Vector3(size_y, _boxHeight, size_x);
-        center = _playerTransform.position + new Vector3(-center_y, 0, center_x);
+        center = _player.transform.position + new Vector3(-center_y, 0, center_x);
         _closeZones[1].size = size;
         _closeZones[1].center = center;
 
         size = new Vector3(size_x, _boxHeight, size_y);
-        center = _playerTransform.position + new Vector3(-center_x, 0, -center_y);
+        center = _player.transform.position + new Vector3(-center_x, 0, -center_y);
         _closeZones[2].size = size;
         _closeZones[2].center = center;
 
         size = new Vector3(size_y, _boxHeight, size_x);
-        center = _playerTransform.position + new Vector3(center_y, 0, -center_x);
+        center = _player.transform.position + new Vector3(center_y, 0, -center_x);
         _closeZones[3].size = size;
         _closeZones[3].center = center;
 
@@ -468,22 +474,22 @@ public class EnemySpawner : MonoBehaviour
         center_y = _enemySpawnerData._closeZoneSize / 2 + (_enemySpawnerData._midZoneSize - _enemySpawnerData._closeZoneSize) / 4;
 
         size = new Vector3(size_x, _boxHeight, size_y);
-        center = _playerTransform.position + new Vector3(center_x, 0, center_y);
+        center = _player.transform.position + new Vector3(center_x, 0, center_y);
         _midZones[0].size = size;
         _midZones[0].center = center;
 
         size = new Vector3(size_y, _boxHeight, size_x);
-        center = _playerTransform.position + new Vector3(-center_y, 0, center_x);
+        center = _player.transform.position + new Vector3(-center_y, 0, center_x);
         _midZones[1].size = size;
         _midZones[1].center = center;
 
         size = new Vector3(size_x, _boxHeight, size_y);
-        center = _playerTransform.position + new Vector3(-center_x, 0, -center_y);
+        center = _player.transform.position + new Vector3(-center_x, 0, -center_y);
         _midZones[2].size = size;
         _midZones[2].center = center;
 
         size = new Vector3(size_y, _boxHeight, size_x);
-        center = _playerTransform.position + new Vector3(center_y, 0, -center_x);
+        center = _player.transform.position + new Vector3(center_y, 0, -center_x);
         _midZones[3].size = size;
         _midZones[3].center = center;
 
@@ -495,22 +501,22 @@ public class EnemySpawner : MonoBehaviour
         center_y = _enemySpawnerData._midZoneSize / 2 + (_enemySpawnerData._farZoneSize - _enemySpawnerData._midZoneSize) / 4;
 
         size = new Vector3(size_x, _boxHeight, size_y);
-        center = _playerTransform.position + new Vector3(center_x, 0, center_y);
+        center = _player.transform.position + new Vector3(center_x, 0, center_y);
         _farZones[0].size = size;
         _farZones[0].center = center;
 
         size = new Vector3(size_y, _boxHeight, size_x);
-        center = _playerTransform.position + new Vector3(-center_y, 0, center_x);
+        center = _player.transform.position + new Vector3(-center_y, 0, center_x);
         _farZones[1].size = size;
         _farZones[1].center = center;
 
         size = new Vector3(size_x, _boxHeight, size_y);
-        center = _playerTransform.position + new Vector3(-center_x, 0, -center_y);
+        center = _player.transform.position + new Vector3(-center_x, 0, -center_y);
         _farZones[2].size = size;
         _farZones[2].center = center;
 
         size = new Vector3(size_y, _boxHeight, size_x);
-        center = _playerTransform.position + new Vector3(center_y, 0, -center_x);
+        center = _player.transform.position + new Vector3(center_y, 0, -center_x);
         _farZones[3].size = size;
         _farZones[3].center = center;
     }

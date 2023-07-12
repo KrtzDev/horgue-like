@@ -318,6 +318,7 @@ MonoBehaviour:
   _enemySpawnIndicator: {fileID: 8528560608847944058, guid: 79ff0b4c2fe9ebf42a32a42871e8f728,
     type: 3}
   _enemyObjectPoolParent: {fileID: 0}
+  _boxZoneParent: {fileID: 6843213764235295911}
   _enemySpawnerData: {fileID: 11400000, guid: 66547b0600cd9b348938adf19e88ab68, type: 2}
   _enemyLayer:
     serializedVersion: 2
@@ -326,12 +327,14 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 512
   _enemiesToSpawn:
-  - Enemy: {fileID: 2751320019283796165, guid: 2a6539935274eac47890703bacc52741, type: 3}
-    SpawnChance: 45
-    SpawnBias: 0
-  - Enemy: {fileID: 7300998086142530308, guid: d30f34610fd5f8444b39f9f1cebdd5dc, type: 3}
-    SpawnChance: 55
-    SpawnBias: 2
+  - _enemy: {fileID: -2465721901373468555, guid: 2a6539935274eac47890703bacc52741,
+      type: 3}
+    _spawnChance: 60
+    _sSpawnBias: 0
+  - _enemy: {fileID: 6519895042856787694, guid: d30f34610fd5f8444b39f9f1cebdd5dc,
+      type: 3}
+    _spawnChance: 40
+    _sSpawnBias: 2
   _safeZone: {fileID: 6843213763204194101}
   _closeZones:
   - {fileID: 6843213763415749403}
