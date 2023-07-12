@@ -28,7 +28,7 @@ public class EnemyHealthComponent : HealthComponent
     {
         base.TakeDamage(damage);
 
-		if (_currentHealth <= 0 && _isDead)
+		if (_currentHealth <= 0 && !_isDead)
 		{
 			MarkEnemyToDie();
 			return;
@@ -57,9 +57,11 @@ public class EnemyHealthComponent : HealthComponent
 		if (gameObject.GetComponent<AI_Agent>() != null)
 			gameObject.GetComponent<AI_Agent>().enabled = false;
 
-		GameManager.Instance.EnemyDied();
-
 		gameObject.tag = "Untagged";
+
+		_isDead = true;
+
+		GameManager.Instance.EnemyDied();
 
 		_enemy._stateMachine.ChangeState(AI_StateID.Death);
 	}

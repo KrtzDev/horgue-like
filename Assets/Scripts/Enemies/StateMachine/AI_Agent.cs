@@ -90,13 +90,16 @@ public class AI_Agent : MonoBehaviour
         }
         else if (agent._navMeshAgent.enabled && agent.enabled)
         {
-            if (agent._navMeshAgent.pathStatus == UnityEngine.AI.NavMeshPathStatus.PathInvalid)
+            if (agent._navMeshAgent.pathStatus == NavMeshPathStatus.PathInvalid)
             {
                 GameManager.Instance.EnemyDied();
                 agent.gameObject.SetActive(false);
                 return;
             }
-            agent._navMeshAgent.SetDestination(followPosition);
+            else
+            {
+                agent._navMeshAgent.SetDestination(followPosition);
+            }
         }
     }
 }
