@@ -24,6 +24,7 @@ public class UIManager : Singleton<UIManager>
 	private GameObject _gameUI_prefab;
 	[SerializeField]
 	private RewardUI _rewardUI_prefab;
+	[SerializeField] private ChooseAbility _chooseAbility_prefab;
 
 	private void Start()
 	{
