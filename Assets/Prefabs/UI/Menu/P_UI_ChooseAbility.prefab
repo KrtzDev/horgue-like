@@ -139,6 +139,42 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!1 &897387658368379104
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7264492885890636471}
+  m_Layer: 5
+  m_Name: UI_Ability_Icon
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &7264492885890636471
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 897387658368379104}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.33, y: 0.33, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6725698580850891483}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -905, y: 380}
+  m_SizeDelta: {x: 250, y: 250}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &909711283172164184
 GameObject:
   m_ObjectHideFlags: 0
@@ -151,7 +187,7 @@ GameObject:
   - component: {fileID: 4034200903756119676}
   - component: {fileID: 9123129393623011489}
   m_Layer: 0
-  m_Name: Text (TMP)
+  m_Name: AbilityName
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -175,7 +211,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 175}
+  m_AnchoredPosition: {x: 0, y: 160}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4034200903756119676
@@ -460,7 +496,7 @@ Transform:
   - {fileID: 2531556436502268520}
   - {fileID: 4581977933859041636}
   m_Father: {fileID: 6725698580850891483}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4277839961164500012
 GameObject:
@@ -497,7 +533,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -395}
+  m_AnchoredPosition: {x: 0, y: -410}
   m_SizeDelta: {x: 1920, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6401783170814036986
@@ -528,7 +564,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Confirm your ability by pressing X
+  m_text: Confirm your ability by pressing [BUTTON]
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 0f3d382656866b3499614ff08317bebc, type: 2}
   m_sharedMaterial: {fileID: -3516413941482744816, guid: 0f3d382656866b3499614ff08317bebc,
@@ -610,7 +646,7 @@ GameObject:
   - component: {fileID: 5382477004170673568}
   - component: {fileID: 2552880277059047723}
   m_Layer: 0
-  m_Name: Text (TMP)
+  m_Name: AbilityName
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -634,7 +670,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 175}
+  m_AnchoredPosition: {x: 0, y: 160}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5382477004170673568
@@ -870,7 +906,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.06666667, g: 0.050980397, b: 0.050980397, a: 0.6}
+  m_Color: {r: 0.06666667, g: 0.050980397, b: 0.050980397, a: 0.7882353}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1051,6 +1087,7 @@ GameObject:
   - component: {fileID: 7778514042184231260}
   - component: {fileID: 1131747746628738086}
   - component: {fileID: 3459433429604000437}
+  - component: {fileID: 871084909}
   m_Layer: 0
   m_Name: Ability3
   m_TagString: Untagged
@@ -1077,7 +1114,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 400, y: -200}
+  m_AnchoredPosition: {x: 400, y: -250}
   m_SizeDelta: {x: 250, y: 250}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7778514042184231260
@@ -1131,12 +1168,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 4
     m_WrapAround: 0
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
-    m_SelectOnLeft: {fileID: 0}
-    m_SelectOnRight: {fileID: 0}
+    m_SelectOnLeft: {fileID: 5782582219936827672}
+    m_SelectOnRight: {fileID: 7581764458853597658}
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 0.62352943, g: 0.61960787, b: 0.61960787, a: 1}
@@ -1161,7 +1198,43 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1131747746628738086}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 871084909}
+        m_TargetAssemblyTypeName: AbilitySeletionHandler, Assembly-CSharp
+        m_MethodName: AbilitySelected
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &871084909
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6122735374442304270}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 79ff419a212514b428d049fd15f81876, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _verticalMoveAmount: 30
+  _moveSelectionTime: 0.1
+  _moveActivationTime: 0.5
+  _moveActivationWaitTime: 0.25
+  _moveToUI_Time: 5
+  _moveToUI_WaitTime: 0.25
+  _scaleAmount: 1.1
+  _endPosUI: {fileID: 897387658368379104}
+  _abilityText: {fileID: 4396132118001883669}
+  _selectionMarker: {fileID: 5579393771192285474}
+  _startPos: {x: 0, y: 0, z: 0}
+  _startScale: {x: 0, y: 0, z: 0}
 --- !u!1 &6191621344437281528
 GameObject:
   m_ObjectHideFlags: 0
@@ -1171,6 +1244,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8009675873679890424}
+  - component: {fileID: 2204007982702818371}
   m_Layer: 0
   m_Name: Abilities
   m_TagString: Untagged
@@ -1194,8 +1268,27 @@ Transform:
   - {fileID: 2688601243941766794}
   - {fileID: 3604054652427434702}
   m_Father: {fileID: 6725698580850891483}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2204007982702818371
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6191621344437281528}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c4b79fb6d2bf474c823d9a3bd70a179, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _titleText: {fileID: 5416355534863166284}
+  _explanationText: {fileID: 7354134467047515638}
+  _submitText: {fileID: 4417664270109833059}
+  Cards:
+  - {fileID: 7243615750225268482}
+  - {fileID: 7287103015862589965}
+  - {fileID: 6122735374442304270}
 --- !u!1 &6614940772560601928
 GameObject:
   m_ObjectHideFlags: 0
@@ -1229,6 +1322,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5270070543079352791}
+  - {fileID: 7264492885890636471}
   - {fileID: 5573428994670278970}
   - {fileID: 8009675873679890424}
   m_Father: {fileID: 0}
@@ -1400,6 +1494,7 @@ GameObject:
   - component: {fileID: 7513814168839233080}
   - component: {fileID: 4572593424512573946}
   - component: {fileID: 7581764458853597658}
+  - component: {fileID: 1258543703}
   m_Layer: 0
   m_Name: Ability1
   m_TagString: Untagged
@@ -1426,7 +1521,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -400, y: -200}
+  m_AnchoredPosition: {x: -400, y: -250}
   m_SizeDelta: {x: 250, y: 250}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7513814168839233080
@@ -1480,12 +1575,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 4
     m_WrapAround: 0
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
-    m_SelectOnLeft: {fileID: 0}
-    m_SelectOnRight: {fileID: 0}
+    m_SelectOnLeft: {fileID: 3459433429604000437}
+    m_SelectOnRight: {fileID: 5782582219936827672}
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 0.62352943, g: 0.61960787, b: 0.61960787, a: 1}
@@ -1510,7 +1605,43 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 4572593424512573946}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1258543703}
+        m_TargetAssemblyTypeName: AbilitySeletionHandler, Assembly-CSharp
+        m_MethodName: AbilitySelected
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &1258543703
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7243615750225268482}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 79ff419a212514b428d049fd15f81876, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _verticalMoveAmount: 30
+  _moveSelectionTime: 0.1
+  _moveActivationTime: 0.5
+  _moveActivationWaitTime: 0.25
+  _moveToUI_Time: 5
+  _moveToUI_WaitTime: 0.25
+  _scaleAmount: 1.1
+  _endPosUI: {fileID: 897387658368379104}
+  _abilityText: {fileID: 7759682218675832163}
+  _selectionMarker: {fileID: 5847413291829988129}
+  _startPos: {x: 0, y: 0, z: 0}
+  _startScale: {x: 0, y: 0, z: 0}
 --- !u!1 &7287103015862589965
 GameObject:
   m_ObjectHideFlags: 0
@@ -1523,6 +1654,7 @@ GameObject:
   - component: {fileID: 5006907331097549728}
   - component: {fileID: 5075213706468261736}
   - component: {fileID: 5782582219936827672}
+  - component: {fileID: 2080361812}
   m_Layer: 0
   m_Name: Ability2
   m_TagString: Untagged
@@ -1549,7 +1681,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -200}
+  m_AnchoredPosition: {x: 0, y: -250}
   m_SizeDelta: {x: 250, y: 250}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5006907331097549728
@@ -1603,12 +1735,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 4
     m_WrapAround: 0
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
-    m_SelectOnLeft: {fileID: 0}
-    m_SelectOnRight: {fileID: 0}
+    m_SelectOnLeft: {fileID: 7581764458853597658}
+    m_SelectOnRight: {fileID: 3459433429604000437}
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 0.62352943, g: 0.61960787, b: 0.61960787, a: 1}
@@ -1633,7 +1765,43 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 5075213706468261736}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2080361812}
+        m_TargetAssemblyTypeName: AbilitySeletionHandler, Assembly-CSharp
+        m_MethodName: AbilitySelected
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &2080361812
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7287103015862589965}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 79ff419a212514b428d049fd15f81876, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _verticalMoveAmount: 30
+  _moveSelectionTime: 0.1
+  _moveActivationTime: 0.5
+  _moveActivationWaitTime: 0.25
+  _moveToUI_Time: 5
+  _moveToUI_WaitTime: 0.25
+  _scaleAmount: 1.1
+  _endPosUI: {fileID: 897387658368379104}
+  _abilityText: {fileID: 909711283172164184}
+  _selectionMarker: {fileID: 1123790176093277223}
+  _startPos: {x: 0, y: 0, z: 0}
+  _startScale: {x: 0, y: 0, z: 0}
 --- !u!1 &7759682218675832163
 GameObject:
   m_ObjectHideFlags: 0
@@ -1646,7 +1814,7 @@ GameObject:
   - component: {fileID: 1006330640472769826}
   - component: {fileID: 9113782718374255450}
   m_Layer: 0
-  m_Name: Text (TMP)
+  m_Name: AbilityName
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1670,7 +1838,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 175}
+  m_AnchoredPosition: {x: 0, y: 160}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1006330640472769826
