@@ -1050,8 +1050,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Sprite: {fileID: 0}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -1360,14 +1360,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79ff419a212514b428d049fd15f81876, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _verticalMoveAmount: 30
-  _moveSelectionTime: 0.1
-  _moveActivationTime: 0.5
-  _moveActivationWaitTime: 0.25
-  _moveToUI_Time: 5
-  _moveToUI_WaitTime: 0.25
-  _scaleAmount: 1.1
-  _endPosUI: {fileID: 897387658368379104}
   _abilityText: {fileID: 4396132118001883669}
   _selectionMarker: {fileID: 5579393771192285474}
   _startPos: {x: 0, y: 0, z: 0}
@@ -1427,6 +1419,17 @@ MonoBehaviour:
   - {fileID: 7243615750225268482}
   - {fileID: 7287103015862589965}
   - {fileID: 6122735374442304270}
+  _countDown: 3
+  _verticalMoveAmount: 30
+  _moveSelectionTime: 0.1
+  _moveActivationTime: 0.5
+  _moveActivationWaitTime: 0.25
+  _moveToUI_Time: 10
+  _moveToUI_WaitTime: 0.25
+  _scaleAmount: 1.1
+  _textScale: {x: 0.5, y: 0.5, z: 0.5}
+  _endPosUI: {fileID: 897387658368379104}
+  _background: {fileID: 5270070543079352788}
 --- !u!1 &6614940772560601928
 GameObject:
   m_ObjectHideFlags: 0
@@ -1768,14 +1771,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79ff419a212514b428d049fd15f81876, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _verticalMoveAmount: 30
-  _moveSelectionTime: 0.1
-  _moveActivationTime: 0.5
-  _moveActivationWaitTime: 0.25
-  _moveToUI_Time: 5
-  _moveToUI_WaitTime: 0.25
-  _scaleAmount: 1.1
-  _endPosUI: {fileID: 897387658368379104}
   _abilityText: {fileID: 7759682218675832163}
   _selectionMarker: {fileID: 5847413291829988129}
   _startPos: {x: 0, y: 0, z: 0}
@@ -1928,14 +1923,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79ff419a212514b428d049fd15f81876, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _verticalMoveAmount: 30
-  _moveSelectionTime: 0.1
-  _moveActivationTime: 0.5
-  _moveActivationWaitTime: 0.25
-  _moveToUI_Time: 5
-  _moveToUI_WaitTime: 0.25
-  _scaleAmount: 1.1
-  _endPosUI: {fileID: 897387658368379104}
   _abilityText: {fileID: 909711283172164184}
   _selectionMarker: {fileID: 1123790176093277223}
   _startPos: {x: 0, y: 0, z: 0}

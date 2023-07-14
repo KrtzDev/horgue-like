@@ -7,19 +7,9 @@ using TMPro;
 
 public class AbilitySeletionHandler : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, ISelectHandler, IDeselectHandler
 {
-    [SerializeField] private float _verticalMoveAmount = 30f;
-    [SerializeField] private float _moveSelectionTime = 0.1f;
-    [SerializeField] private float _moveActivationTime = 0.5f;
-    [SerializeField] private float _moveActivationWaitTime = 0.25f;
-    [SerializeField] private float _moveToUI_Time = 1f;
-    [SerializeField] private float _moveToUI_WaitTime = 0.25f;
-    [Range(0f, 2f), SerializeField] private float _scaleAmount = 1.1f;
-    [SerializeField] private Vector3 _textScale = new Vector3(0.5f, 0.5f, 0.5f);
-
-    [Header("References")]
-    [SerializeField] private GameObject _endPosUI;
     [SerializeField] private GameObject _abilityText;
     [SerializeField] private GameObject _selectionMarker;
+
     private bool _abilitySelected = false;
 
     [HideInInspector] public Vector3 _startPos;
@@ -50,14 +40,14 @@ public class AbilitySeletionHandler : MonoBehaviour, IPointerEnterHandler, IPoin
             _abilityText.GetComponent<TextMeshProUGUI>().color = gameObject.GetComponent<Button>().colors.normalColor;
         }  
 
-        while (elapsedTime < _moveSelectionTime)
+        while (elapsedTime < AbilitySelectionManager.instance._moveSelectionTime)
         {
-            elapsedTime += Time.deltaTime;
+            elapsedTime += Time.unscaledDeltaTime;
 
             if (startingAnimation)
             {
-                endPosition = _startPos + new Vector3(0f, _verticalMoveAmount, 0f);
-                endScale = _startScale * _scaleAmount;
+                endPosition = _startPos + new Vector3(0f, AbilitySelectionManager.instance._verticalMoveAmount, 0f);
+                endScale = _startScale * AbilitySelectionManager.instance._scaleAmount;
             }
             else
             {
@@ -65,8 +55,8 @@ public class AbilitySeletionHandler : MonoBehaviour, IPointerEnterHandler, IPoin
                 endScale = _startScale;
             }
 
-            Vector3 lerpedPos = Vector3.Lerp(transform.position, endPosition, (elapsedTime / _moveSelectionTime));
-            Vector3 lerpedScale = Vector3.Lerp(transform.localScale, endScale, (elapsedTime / _moveSelectionTime));
+            Vector3 lerpedPos = Vector3.Lerp(transform.position, endPosition, (elapsedTime / AbilitySelectionManager.instance._moveSelectionTime));
+            Vector3 lerpedScale = Vector3.Lerp(transform.localScale, endScale, (elapsedTime / AbilitySelectionManager.instance._moveSelectionTime));
 
             transform.position = lerpedPos;
             transform.localScale = lerpedScale;
@@ -79,7 +69,7 @@ public class AbilitySeletionHandler : MonoBehaviour, IPointerEnterHandler, IPoin
     {
         _selectionMarker.SetActive(false);
 
-        yield return new WaitForSeconds(_moveActivationWaitTime);
+        yield return new WaitForSecondsRealtime(AbilitySelectionManager.instance._moveActivationWaitTime);
 
         Vector3 averageAbilityPosition = Vector3.zero;
 
@@ -91,7 +81,7 @@ public class AbilitySeletionHandler : MonoBehaviour, IPointerEnterHandler, IPoin
         }
 
         averageAbilityPosition /= AbilitySelectionManager.instance.Abilities.Length;
-        averageAbilityPosition += new Vector3(0f, _verticalMoveAmount, 0f);
+        averageAbilityPosition += new Vector3(0f, AbilitySelectionManager.instance._verticalMoveAmount, 0f);
 
         /*
         if(AbilitySelectionManager.instance.Abilities.Length % 2 != 0)
@@ -107,11 +97,11 @@ public class AbilitySeletionHandler : MonoBehaviour, IPointerEnterHandler, IPoin
         }
         */
 
-        while (elapsedTime < _moveActivationTime)
+        while (elapsedTime < AbilitySelectionManager.instance._moveActivationTime)
         {
-            elapsedTime += Time.deltaTime;
+            elapsedTime += Time.unscaledDeltaTime;
 
-            Vector3 lerpedPos = Vector3.Lerp(transform.position, averageAbilityPosition, (elapsedTime / _moveActivationTime));
+            Vector3 lerpedPos = Vector3.Lerp(transform.position, averageAbilityPosition, (elapsedTime / AbilitySelectionManager.instance._moveActivationTime));
 
             transform.position = lerpedPos;
 
@@ -123,20 +113,20 @@ public class AbilitySeletionHandler : MonoBehaviour, IPointerEnterHandler, IPoin
 
     IEnumerator MoveAbilityToUI()
     {
-        yield return new WaitForSeconds(_moveToUI_WaitTime);
+        yield return new WaitForSecondsRealtime(AbilitySelectionManager.instance._moveToUI_WaitTime);
 
         _abilityText.SetActive(false);
 
         float elapsedTime = 0f;
 
-        StartCoroutine(StartLevel(3, AbilitySelectionManager.instance._countdownText.rectTransform.localScale));
+        StartCoroutine(StartLevel(AbilitySelectionManager.instance._countDown, AbilitySelectionManager.instance._countdownText.rectTransform.localScale));
 
-        while (elapsedTime < _moveToUI_Time)
+        while (elapsedTime < AbilitySelectionManager.instance._moveToUI_Time)
         {
-            elapsedTime += Time.deltaTime;
+            elapsedTime += Time.unscaledDeltaTime;
 
-            Vector3 lerpedPos = Vector3.Lerp(transform.position, _endPosUI.transform.position, (elapsedTime / _moveToUI_Time));
-            Vector3 lerpedScale = Vector3.Lerp(transform.localScale, _endPosUI.transform.localScale, (elapsedTime / _moveToUI_Time));
+            Vector3 lerpedPos = Vector3.Lerp(transform.position, AbilitySelectionManager.instance._endPosUI.transform.position, (elapsedTime / AbilitySelectionManager.instance._moveToUI_Time));
+            Vector3 lerpedScale = Vector3.Lerp(transform.localScale, AbilitySelectionManager.instance._endPosUI.transform.localScale, (elapsedTime / AbilitySelectionManager.instance._moveToUI_Time));
 
             transform.position = lerpedPos;
             transform.localScale = lerpedScale;
@@ -147,21 +137,25 @@ public class AbilitySeletionHandler : MonoBehaviour, IPointerEnterHandler, IPoin
 
     IEnumerator StartLevel(int countdown, Vector3 textStartScale)
     {
-        Vector3 endScale = _textScale;
+        Vector3 endScale = AbilitySelectionManager.instance._textScale;
         float elapsedTime = 0f;
 
         AbilitySelectionManager.instance._titleText.text = "Level Begins in";
         AbilitySelectionManager.instance._countdownText.rectTransform.localScale = textStartScale;
 
+        if(countdown == AbilitySelectionManager.instance._countDown)
+        {
+            StartCoroutine(FadeBackground());
+        }
+
         if (countdown <= 0)
         {
+            Time.timeScale = 1;
             AbilitySelectionManager.instance._countdownText.text =  "GO!!!!";
-
-            // Start Level
 
             while (elapsedTime < 1)
             {
-                elapsedTime += Time.deltaTime;
+                elapsedTime += Time.unscaledDeltaTime;
 
                 Vector3 lerpedScale = Vector3.Lerp(AbilitySelectionManager.instance._countdownText.rectTransform.localScale, endScale, (elapsedTime / 1));
                 AbilitySelectionManager.instance._countdownText.rectTransform.localScale = lerpedScale;
@@ -178,7 +172,7 @@ public class AbilitySeletionHandler : MonoBehaviour, IPointerEnterHandler, IPoin
 
             while (elapsedTime < countdown + 1)
             {
-                elapsedTime += Time.deltaTime;
+                elapsedTime += Time.unscaledDeltaTime;
 
                 if (elapsedTime >= 1)
                 {
@@ -191,6 +185,24 @@ public class AbilitySeletionHandler : MonoBehaviour, IPointerEnterHandler, IPoin
 
                 yield return null;
             }
+        }
+    }
+
+    private IEnumerator FadeBackground()
+    {
+        Color color = AbilitySelectionManager.instance._background.GetComponent<Image>().color;
+        float alpha = color.a;
+
+        float elapsedTime = 0f;
+
+        while (elapsedTime < AbilitySelectionManager.instance._countDown)
+        {
+            elapsedTime += Time.unscaledDeltaTime;
+
+            Color newColor = new Color(color.r, color.g, color.b, Mathf.Lerp(alpha, 0, elapsedTime / AbilitySelectionManager.instance._countDown));
+            AbilitySelectionManager.instance._background.GetComponent<Image>().color = newColor;
+
+            yield return null;
         }
     }
 
@@ -225,9 +237,7 @@ public class AbilitySeletionHandler : MonoBehaviour, IPointerEnterHandler, IPoin
                 }
             }
         }
-
     }
-
     public void OnDeselect(BaseEventData eventData)
     {
         if (!_abilitySelected)

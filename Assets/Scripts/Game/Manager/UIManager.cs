@@ -10,6 +10,7 @@ public class UIManager : Singleton<UIManager>
 	public PauseMenu PauseMenu { get; private set; }
 	public CraftingMenu CraftingMenu { get; private set; }
 	public GameObject GameUI { get; private set; }
+	public ChooseAbility ChooseAbility { get; private set; }
 
 
 	[SerializeField]
@@ -90,6 +91,13 @@ public class UIManager : Singleton<UIManager>
 		Endscreen.gameObject.SetActive(false);
 		WaveEndScreen = Instantiate(_waveEndScreenUI_prefab);
 		WaveEndScreen.gameObject.SetActive(false);
+
+		if(GameManager.Instance._currentWave == 0)
+        {
+			ChooseAbility = Instantiate(_chooseAbility_prefab);
+			ChooseAbility.gameObject.SetActive(true);
+        }
+
 		GameUI = Instantiate(_gameUI_prefab);
 		GameUI.gameObject.SetActive(true);
 	}
