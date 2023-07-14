@@ -187,7 +187,6 @@ public class GameManager : Singleton<GameManager>
 			UIManager.Instance.ShowLevelEndScreen(LevelStatus.Won);
 			UIManager.Instance.DisplayRewards(rewards);
 
-
 			_currentLevel += 1;		
 			_currentLevelArray = _currentLevel - 1;
 			_currentWave = 0;

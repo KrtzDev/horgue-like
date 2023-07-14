@@ -4,16 +4,20 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using TMPro;
 
-public class AbilitySelectionManager: MonoBehaviour
+public class ChooseAbility: MonoBehaviour
 {
-    public static AbilitySelectionManager instance;
+    [field: SerializeField] public RectTransform AbilityParent { get; private set; }
+
+    [SerializeField] public List<Ability> _abilities = new List<Ability>();
+    public List<Ability> _drawnAbilities = new List<Ability>();
+    [SerializeField] private AbilityUI _abilityUI_prefab;
+
+    public static ChooseAbility instance;
 
     public TextMeshProUGUI _titleText;
     public TextMeshProUGUI _countdownText;
     public TextMeshProUGUI _explanationText;
     public TextMeshProUGUI _submitText;
-
-    public GameObject[] Abilities;
 
     public int _countDown;
     public float _verticalMoveAmount = 30f;
@@ -25,20 +29,40 @@ public class AbilitySelectionManager: MonoBehaviour
     [Range(0f, 2f)] public float _scaleAmount = 1.1f;
     public Vector3 _textScale = new Vector3(0.5f, 0.5f, 0.5f);
 
+    public int _abilitiesToDisplay;
+
     public GameObject _endPosUI; // make script and attach to ui button thingy, then use get typeof script or something
     public GameObject _background;
 
     public GameObject LastSelected { get; set; }
     public int LastSelectedIndex { get; set; }
 
+    public Ability GetRandomAbility()
+    {
+        Ability drawnAbility = _abilities[Random.Range(0, _abilities.Count - 1)];
+        _drawnAbilities.Add(drawnAbility);
+        return drawnAbility;
+    }
+
+    /*
+    public void PopulateAbilityUI(List<Ability> abilities)
+    {
+        foreach (Ability ability in abilities)
+        {
+            AbilityUI abilityUI = Instantiate(_abilityUI_prefab, AbilityParent);
+            abilityUI.Initialize(ability);
+        }
+    }
+    */
+
     private void Awake()
     {
         if (instance == null)
         {
             instance = this;
+            Time.timeScale = 0;
         }
     }
-
     private void OnEnable()
     {
         StartCoroutine(SetSelectedCardAfterOneFrame());
@@ -47,6 +71,6 @@ public class AbilitySelectionManager: MonoBehaviour
     private IEnumerator SetSelectedCardAfterOneFrame()
     {
         yield return null;
-        EventSystem.current.SetSelectedGameObject(Abilities[0]);
+        EventSystem.current.SetSelectedGameObject(AbilityParent.transform.GetChild(0).gameObject);
     }
 }
