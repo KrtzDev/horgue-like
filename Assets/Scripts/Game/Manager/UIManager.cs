@@ -102,7 +102,10 @@ public class UIManager : Singleton<UIManager>
 		WaveEndScreen = Instantiate(_waveEndScreenUI_prefab);
 		WaveEndScreen.gameObject.SetActive(false);
 
-		if(GameManager.Instance._currentWave == 0)
+		GameUI = Instantiate(_gameUI_prefab);
+		GameUI.gameObject.SetActive(true);
+
+		if (GameManager.Instance._currentWave == 0)
         {
 			ChooseAbility = Instantiate(_chooseAbility_prefab);
 			ChooseAbility.gameObject.SetActive(true);
@@ -114,8 +117,5 @@ public class UIManager : Singleton<UIManager>
 			}
 			DisplayAbilities(abilities);
 		}
-
-		GameUI = Instantiate(_gameUI_prefab);
-		GameUI.gameObject.SetActive(true);
 	}
 }

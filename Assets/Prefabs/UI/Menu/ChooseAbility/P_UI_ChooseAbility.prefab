@@ -275,42 +275,6 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
---- !u!1 &897387658368379104
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 7264492885890636471}
-  m_Layer: 5
-  m_Name: UI_Ability_Icon
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &7264492885890636471
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 897387658368379104}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.33, y: 0.33, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 6725698580850891483}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -905, y: 380}
-  m_SizeDelta: {x: 250, y: 250}
-  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &3692505907083231598
 GameObject:
   m_ObjectHideFlags: 0
@@ -321,6 +285,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8897131458537020177}
   - component: {fileID: 7649125157013728214}
+  - component: {fileID: 5835841810549863997}
   m_Layer: 5
   m_Name: AbilityParent
   m_TagString: Untagged
@@ -341,12 +306,12 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6725698580850891483}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
+  m_AnchoredPosition: {x: 0, y: -225}
+  m_SizeDelta: {x: 1920, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7649125157013728214
 CanvasRenderer:
@@ -356,6 +321,32 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3692505907083231598}
   m_CullTransparentMesh: 1
+--- !u!114 &5835841810549863997
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3692505907083231598}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30649d3a9faa99c48a7b1166b86bf2a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Padding:
+    m_Left: 300
+    m_Right: 300
+    m_Top: 0
+    m_Bottom: 0
+  m_ChildAlignment: 4
+  m_Spacing: 0
+  m_ChildForceExpandWidth: 1
+  m_ChildForceExpandHeight: 1
+  m_ChildControlWidth: 0
+  m_ChildControlHeight: 0
+  m_ChildScaleWidth: 0
+  m_ChildScaleHeight: 0
+  m_ReverseArrangement: 0
 --- !u!1 &3797053118627374014
 GameObject:
   m_ObjectHideFlags: 0
@@ -389,7 +380,7 @@ Transform:
   - {fileID: 4581977933859041636}
   - {fileID: 5943910691213196678}
   m_Father: {fileID: 6725698580850891483}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4277839961164500012
 GameObject:
@@ -636,7 +627,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5270070543079352791}
-  - {fileID: 7264492885890636471}
   - {fileID: 5573428994670278970}
   - {fileID: 8897131458537020177}
   m_Father: {fileID: 0}
@@ -725,6 +715,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 3977836e99d7bb54d855642c6f7fdbc2, type: 2}
   - {fileID: 11400000, guid: 3977836e99d7bb54d855642c6f7fdbc2, type: 2}
   - {fileID: 11400000, guid: 3977836e99d7bb54d855642c6f7fdbc2, type: 2}
+  - {fileID: 11400000, guid: 3977836e99d7bb54d855642c6f7fdbc2, type: 2}
+  - {fileID: 11400000, guid: 3977836e99d7bb54d855642c6f7fdbc2, type: 2}
   _drawnAbilities: []
   _abilityUI_prefab: {fileID: 925541605706483504, guid: dd5d90f9ae1662b4e839a9f9f4171693,
     type: 3}
@@ -738,11 +730,11 @@ MonoBehaviour:
   _moveActivationTime: 0.5
   _moveActivationWaitTime: 0.25
   _moveToUI_Time: 10
-  _moveToUI_WaitTime: 0.25
+  _moveToUI_WaitTime: 0.5
   _scaleAmount: 1.1
   _textScale: {x: 0.5, y: 0.5, z: 0.5}
-  _abilitiesToDisplay: 3
-  _endPosUI: {fileID: 897387658368379104}
+  _abilitiesToDisplay: 5
+  _abilityCoolDownToReplace: {fileID: 0}
   _background: {fileID: 5270070543079352788}
 --- !u!1 &8330356475336696749
 GameObject:

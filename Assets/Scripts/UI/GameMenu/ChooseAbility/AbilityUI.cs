@@ -8,6 +8,7 @@ using TMPro;
 public class AbilityUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, ISelectHandler, IDeselectHandler
 {
     [SerializeField] private Image _abilityIcon;
+    [SerializeField] private Image _abilityBackground;
     [SerializeField] private GameObject _abilityNameText;
     [SerializeField] private GameObject _selectionMarker;
 
@@ -20,6 +21,7 @@ public class AbilityUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
     [HideInInspector] public Vector3 _startScale;
 
     private bool _abilitySelected = false;
+    private bool _firstSelection = true;
 
     public void Initialize(Ability ability)
     {
@@ -28,13 +30,10 @@ public class AbilityUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
         _abilityIcon.sprite = ability._icon;
         _rectTransform = GetComponent<RectTransform>();
         _parent = transform.parent.GetComponent<RectTransform>();
-        _startPos = _rectTransform.localPosition;
     }
 
     private void Start()
     {
-        _startPos = transform.position;
-        _startScale = transform.localScale;
         _abilityNameText.GetComponent<TextMeshProUGUI>().color = gameObject.GetComponentInChildren<Button>().colors.normalColor;
     }
 
@@ -47,6 +46,14 @@ public class AbilityUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
 
         if (startingAnimation)
         {
+            if(_firstSelection)
+            {
+                _firstSelection = false;
+                _startPos = _rectTransform.position;
+                _startScale = _rectTransform.localScale;
+                ChooseAbility.instance._abilityCoolDownToReplace = FindObjectOfType<AbilityCooldownToReplace>().gameObject;
+            }
+
             _selectionMarker.SetActive(true);
             _abilityNameText.GetComponent<TextMeshProUGUI>().color = gameObject.GetComponentInChildren<Button>().colors.selectedColor;
         }
@@ -71,11 +78,11 @@ public class AbilityUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
                 endScale = _startScale;
             }
 
-            Vector3 lerpedPos = Vector3.Lerp(transform.position, endPosition, (elapsedTime / ChooseAbility.instance._moveSelectionTime));
-            Vector3 lerpedScale = Vector3.Lerp(transform.localScale, endScale, (elapsedTime / ChooseAbility.instance._moveSelectionTime));
+            Vector3 lerpedPos = Vector3.Lerp(_rectTransform.position, endPosition, (elapsedTime / ChooseAbility.instance._moveSelectionTime));
+            Vector3 lerpedScale = Vector3.Lerp(_rectTransform.localScale, endScale, (elapsedTime / ChooseAbility.instance._moveSelectionTime));
 
-            transform.position = lerpedPos;
-            transform.localScale = lerpedScale;
+            _rectTransform.position = lerpedPos;
+            _rectTransform.localScale = lerpedScale;
 
             yield return null;    
         }
@@ -83,43 +90,29 @@ public class AbilityUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
 
     IEnumerator MoveAbilityOnActivation()
     {
+        ChooseAbility.instance.AbilityParent.GetComponent<LayoutGroup>().enabled = false;
+
         _selectionMarker.SetActive(false);
+
+        for (int i = 0; i < ChooseAbility.instance.AbilityParent.childCount; i++)
+        {
+            if (ChooseAbility.instance.AbilityParent.GetChild(i).gameObject != gameObject)
+            {
+                ChooseAbility.instance.AbilityParent.GetChild(i).gameObject.SetActive(false);
+            }
+        }
 
         yield return new WaitForSecondsRealtime(ChooseAbility.instance._moveActivationWaitTime);
 
-        Vector3 averageAbilityPosition = Vector3.zero;
-
-        float elapsedTime = 0f;
-
-        for (int i = 0; i < ChooseAbility.instance._drawnAbilities.Count; i++)
-        {
-            averageAbilityPosition += ChooseAbility.instance._drawnAbilities[i]._startPos;
-        }
-
-        averageAbilityPosition /= ChooseAbility.instance._drawnAbilities.Count;
-        averageAbilityPosition += new Vector3(0f, ChooseAbility.instance._verticalMoveAmount, 0f);
-
-        /*
-        if(AbilitySelectionManager.instance.Abilities.Length % 2 != 0)
-        {
-            int middleNumber = Mathf.RoundToInt((AbilitySelectionManager.instance.Abilities.Length / 2) - 0.1f);
-
-            if (AbilitySelectionManager.instance.Abilities[middleNumber] == gameObject)
-            {
-                Debug.Log("yield break");
-                StartCoroutine(MoveAbilityToUI());
-                yield break;
-            }
-        }
-        */
+        float elapsedTime = 0f;    
 
         while (elapsedTime < ChooseAbility.instance._moveActivationTime)
         {
             elapsedTime += Time.unscaledDeltaTime;
 
-            Vector3 lerpedPos = Vector3.Lerp(transform.position, averageAbilityPosition, (elapsedTime / ChooseAbility.instance._moveActivationTime));
+            Vector3 lerpedPos = Vector3.Lerp(_rectTransform.position, ChooseAbility.instance.AbilityParent.position, (elapsedTime / ChooseAbility.instance._moveActivationTime));
 
-            transform.position = lerpedPos;
+            _rectTransform.position = lerpedPos;
 
             yield return null;
         }
@@ -132,6 +125,7 @@ public class AbilityUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
         yield return new WaitForSecondsRealtime(ChooseAbility.instance._moveToUI_WaitTime);
 
         _abilityNameText.SetActive(false);
+        _abilityBackground.enabled = false;
 
         float elapsedTime = 0f;
 
@@ -141,14 +135,16 @@ public class AbilityUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
         {
             elapsedTime += Time.unscaledDeltaTime;
 
-            Vector3 lerpedPos = Vector3.Lerp(transform.position, ChooseAbility.instance._endPosUI.transform.position, (elapsedTime / ChooseAbility.instance._moveToUI_Time));
-            Vector3 lerpedScale = Vector3.Lerp(transform.localScale, ChooseAbility.instance._endPosUI.transform.localScale, (elapsedTime / ChooseAbility.instance._moveToUI_Time));
+            Vector3 lerpedPos = Vector3.Lerp(_abilityIcon.transform.position, ChooseAbility.instance._abilityCoolDownToReplace.transform.position, (elapsedTime / ChooseAbility.instance._moveToUI_Time));
+            Vector3 lerpedScale = Vector3.Lerp(_abilityIcon.transform.localScale, ChooseAbility.instance._abilityCoolDownToReplace.transform.localScale, (elapsedTime / ChooseAbility.instance._moveToUI_Time));
 
-            transform.position = lerpedPos;
-            transform.localScale = lerpedScale;
+            _abilityIcon.transform.position = lerpedPos;
+            _abilityIcon.transform.localScale = lerpedScale;
 
             yield return null;
         }
+
+        ChooseAbility.instance._abilityCoolDownToReplace.GetComponent<Image>().sprite = _ability._icon; // HELP
     }
 
     IEnumerator StartLevel(int countdown, Vector3 textStartScale)
@@ -179,8 +175,7 @@ public class AbilityUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
                 yield return null;
             }
 
-            ChooseAbility.instance._countdownText.text = "";
-            ChooseAbility.instance._titleText.text = "";
+            ChooseAbility.instance.gameObject.SetActive(false);
         }
         else
         {
@@ -268,27 +263,7 @@ public class AbilityUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
         ChooseAbility.instance._titleText.text = "Ability was selected";
         ChooseAbility.instance._explanationText.text = "";
         ChooseAbility.instance._submitText.text = "";
-        // add text animation, fade-in, fade-out
-
-        // select Ability for Game purposes
-
-        // disable the other Ability Game Objects
-
-        for (int i = 0; i < ChooseAbility.instance._drawnAbilities.Count; i++)
-        {
-            if (ChooseAbility.instance._drawnAbilities[i] != gameObject)
-            {
-                // ChooseAbility.instance._drawnAbilities[i].SetActive(false);
-            }
-        }
-
-        // move Ability Game Object into the Middle while being highlighted
 
         StartCoroutine(MoveAbilityOnActivation());
-
-        // move Ability to Icon Corner and re-size it
-
-        // start Level Countdown
-
     }
 }

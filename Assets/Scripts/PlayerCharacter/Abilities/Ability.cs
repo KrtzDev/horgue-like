@@ -8,5 +8,4 @@ public class Ability : ScriptableObject
 {
     public string _name;
     public Sprite _icon;
-    public Vector3 _startPos;
 }

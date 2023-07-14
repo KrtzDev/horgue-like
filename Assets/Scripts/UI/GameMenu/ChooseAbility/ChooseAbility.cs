@@ -31,7 +31,7 @@ public class ChooseAbility: MonoBehaviour
 
     public int _abilitiesToDisplay;
 
-    public GameObject _endPosUI; // make script and attach to ui button thingy, then use get typeof script or something
+    public GameObject _abilityCoolDownToReplace; // make script and attach to ui button thingy, then use get typeof script or something
     public GameObject _background;
 
     public GameObject LastSelected { get; set; }
