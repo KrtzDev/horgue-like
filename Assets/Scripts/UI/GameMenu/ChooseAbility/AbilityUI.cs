@@ -51,7 +51,6 @@ public class AbilityUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
                 _firstSelection = false;
                 _startPos = _rectTransform.position;
                 _startScale = _rectTransform.localScale;
-                ChooseAbility.instance._abilityCoolDownToReplace = FindObjectOfType<AbilityCooldownToReplace>().gameObject;
             }
 
             _selectionMarker.SetActive(true);
@@ -129,6 +128,8 @@ public class AbilityUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
 
         float elapsedTime = 0f;
 
+        ChooseAbility.instance._abilityCoolDownToReplace = FindObjectOfType<AbilityCooldownToReplace>().gameObject;
+
         StartCoroutine(StartLevel(ChooseAbility.instance._countDown, ChooseAbility.instance._countdownText.rectTransform.localScale));
 
         while (elapsedTime < ChooseAbility.instance._moveToUI_Time)
@@ -144,7 +145,6 @@ public class AbilityUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
             yield return null;
         }
 
-        ChooseAbility.instance._abilityCoolDownToReplace.GetComponent<Image>().sprite = _ability._icon; // HELP
     }
 
     IEnumerator StartLevel(int countdown, Vector3 textStartScale)
@@ -164,6 +164,8 @@ public class AbilityUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
         {
             Time.timeScale = 1;
             ChooseAbility.instance._countdownText.text =  "GO!!!!";
+
+            ChooseAbility.instance._abilityCoolDownToReplace.GetComponent<Image>().sprite = _ability._icon;
 
             while (elapsedTime < 1)
             {
