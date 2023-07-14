@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using TMPro;
 
 public class AbilitySeletionHandler : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, ISelectHandler, IDeselectHandler
 {
@@ -13,6 +14,7 @@ public class AbilitySeletionHandler : MonoBehaviour, IPointerEnterHandler, IPoin
     [SerializeField] private float _moveToUI_Time = 1f;
     [SerializeField] private float _moveToUI_WaitTime = 0.25f;
     [Range(0f, 2f), SerializeField] private float _scaleAmount = 1.1f;
+    [SerializeField] private Vector3 _textScale = new Vector3(0.5f, 0.5f, 0.5f);
 
     [Header("References")]
     [SerializeField] private GameObject _endPosUI;
@@ -27,6 +29,7 @@ public class AbilitySeletionHandler : MonoBehaviour, IPointerEnterHandler, IPoin
     {
         _startPos = transform.position;
         _startScale = transform.localScale;
+        _abilityText.GetComponent<TextMeshProUGUI>().color = gameObject.GetComponent<Button>().colors.normalColor;
     }
 
     IEnumerator MoveAbilityOnSelection(bool startingAnimation)
@@ -39,10 +42,12 @@ public class AbilitySeletionHandler : MonoBehaviour, IPointerEnterHandler, IPoin
         if (startingAnimation)
         {
             _selectionMarker.SetActive(true);
+            _abilityText.GetComponent<TextMeshProUGUI>().color = gameObject.GetComponent<Button>().colors.selectedColor;
         }
         else
         {
             _selectionMarker.SetActive(false);
+            _abilityText.GetComponent<TextMeshProUGUI>().color = gameObject.GetComponent<Button>().colors.normalColor;
         }  
 
         while (elapsedTime < _moveSelectionTime)
@@ -72,31 +77,35 @@ public class AbilitySeletionHandler : MonoBehaviour, IPointerEnterHandler, IPoin
 
     IEnumerator MoveAbilityOnActivation()
     {
+        _selectionMarker.SetActive(false);
+
         yield return new WaitForSeconds(_moveActivationWaitTime);
 
         Vector3 averageAbilityPosition = Vector3.zero;
 
         float elapsedTime = 0f;
 
-        for (int i = 0; i < AbilitySelectionManager.instance.Cards.Length; i++)
+        for (int i = 0; i < AbilitySelectionManager.instance.Abilities.Length; i++)
         {
-            averageAbilityPosition += AbilitySelectionManager.instance.Cards[i].GetComponent<AbilitySeletionHandler>()._startPos;
+            averageAbilityPosition += AbilitySelectionManager.instance.Abilities[i].GetComponent<AbilitySeletionHandler>()._startPos;
         }
 
-        averageAbilityPosition /= AbilitySelectionManager.instance.Cards.Length;
+        averageAbilityPosition /= AbilitySelectionManager.instance.Abilities.Length;
         averageAbilityPosition += new Vector3(0f, _verticalMoveAmount, 0f);
 
-        if(AbilitySelectionManager.instance.Cards.Length % 2 != 0)
+        /*
+        if(AbilitySelectionManager.instance.Abilities.Length % 2 != 0)
         {
-            int middleNumber = Mathf.RoundToInt((AbilitySelectionManager.instance.Cards.Length / 2) - 0.1f);
+            int middleNumber = Mathf.RoundToInt((AbilitySelectionManager.instance.Abilities.Length / 2) - 0.1f);
 
-            if (AbilitySelectionManager.instance.Cards[middleNumber] == gameObject)
+            if (AbilitySelectionManager.instance.Abilities[middleNumber] == gameObject)
             {
                 Debug.Log("yield break");
                 StartCoroutine(MoveAbilityToUI());
                 yield break;
             }
         }
+        */
 
         while (elapsedTime < _moveActivationTime)
         {
@@ -120,6 +129,8 @@ public class AbilitySeletionHandler : MonoBehaviour, IPointerEnterHandler, IPoin
 
         float elapsedTime = 0f;
 
+        StartCoroutine(StartLevel(3, AbilitySelectionManager.instance._countdownText.rectTransform.localScale));
+
         while (elapsedTime < _moveToUI_Time)
         {
             elapsedTime += Time.deltaTime;
@@ -131,6 +142,55 @@ public class AbilitySeletionHandler : MonoBehaviour, IPointerEnterHandler, IPoin
             transform.localScale = lerpedScale;
 
             yield return null;
+        }
+    }
+
+    IEnumerator StartLevel(int countdown, Vector3 textStartScale)
+    {
+        Vector3 endScale = _textScale;
+        float elapsedTime = 0f;
+
+        AbilitySelectionManager.instance._titleText.text = "Level Begins in";
+        AbilitySelectionManager.instance._countdownText.rectTransform.localScale = textStartScale;
+
+        if (countdown <= 0)
+        {
+            AbilitySelectionManager.instance._countdownText.text =  "GO!!!!";
+
+            // Start Level
+
+            while (elapsedTime < 1)
+            {
+                elapsedTime += Time.deltaTime;
+
+                Vector3 lerpedScale = Vector3.Lerp(AbilitySelectionManager.instance._countdownText.rectTransform.localScale, endScale, (elapsedTime / 1));
+                AbilitySelectionManager.instance._countdownText.rectTransform.localScale = lerpedScale;
+
+                yield return null;
+            }
+
+            AbilitySelectionManager.instance._countdownText.text = "";
+            AbilitySelectionManager.instance._titleText.text = "";
+        }
+        else
+        {
+            AbilitySelectionManager.instance._countdownText.text = "" + countdown;
+
+            while (elapsedTime < countdown + 1)
+            {
+                elapsedTime += Time.deltaTime;
+
+                if (elapsedTime >= 1)
+                {
+                    StartCoroutine(StartLevel(countdown - 1, textStartScale));
+                    yield break;
+                }
+
+                Vector3 lerpedScale = Vector3.Lerp(AbilitySelectionManager.instance._countdownText.rectTransform.localScale, endScale, (elapsedTime / 1));
+                AbilitySelectionManager.instance._countdownText.rectTransform.localScale = lerpedScale;
+
+                yield return null;
+            }
         }
     }
 
@@ -156,9 +216,9 @@ public class AbilitySeletionHandler : MonoBehaviour, IPointerEnterHandler, IPoin
 
             AbilitySelectionManager.instance.LastSelected = gameObject;
 
-            for (int i = 0; i < AbilitySelectionManager.instance.Cards.Length; i++)
+            for (int i = 0; i < AbilitySelectionManager.instance.Abilities.Length; i++)
             {
-                if(AbilitySelectionManager.instance.Cards[i] == gameObject)
+                if(AbilitySelectionManager.instance.Abilities[i] == gameObject)
                 {
                     AbilitySelectionManager.instance.LastSelectedIndex = i;
                     return;
@@ -188,11 +248,11 @@ public class AbilitySeletionHandler : MonoBehaviour, IPointerEnterHandler, IPoin
 
         // disable the other Ability Game Objects
 
-        for (int i = 0; i < AbilitySelectionManager.instance.Cards.Length; i++)
+        for (int i = 0; i < AbilitySelectionManager.instance.Abilities.Length; i++)
         {
-            if (AbilitySelectionManager.instance.Cards[i] != gameObject)
+            if (AbilitySelectionManager.instance.Abilities[i] != gameObject)
             {
-                AbilitySelectionManager.instance.Cards[i].SetActive(false);
+                AbilitySelectionManager.instance.Abilities[i].SetActive(false);
             }
         }
 
@@ -201,8 +261,6 @@ public class AbilitySeletionHandler : MonoBehaviour, IPointerEnterHandler, IPoin
         StartCoroutine(MoveAbilityOnActivation());
 
         // move Ability to Icon Corner and re-size it
-
-
 
         // start Level Countdown
 
