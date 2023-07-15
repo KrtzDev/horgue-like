@@ -28,7 +28,7 @@ public class PlayerSimpleShot : MonoBehaviour
         if (_currentAttackDelay <= 0 && CanShoot)
         {
             float currentclosestdistance = Mathf.Infinity;
-            AI_Agent closestEnemy = null;
+            AI_Agent_Enemy closestEnemy = null;
 
             // Debug.Log(transform.position);
             // Debug.Log(_range);
@@ -42,7 +42,7 @@ public class PlayerSimpleShot : MonoBehaviour
                 {
                     if (!Physics.Raycast(transform.position, (enemy.transform.position - transform.position), distanceToEnemy, _groundLayer))
                     {
-                        closestEnemy = enemy.GetComponent<AI_Agent>();
+                        closestEnemy = enemy.GetComponent<AI_Agent_Enemy>();
                         currentclosestdistance = distanceToEnemy;
                     }
                 }
@@ -56,7 +56,7 @@ public class PlayerSimpleShot : MonoBehaviour
         }
     }
 
-    private void ShootAt(AI_Agent enemy)
+    private void ShootAt(AI_Agent_Enemy enemy)
     {
         Vector3 direction = enemy.transform.position - transform.position;
         EnemyProjectile newProjectile = Instantiate(_enemyProjectile_Prefab, transform.position + Vector3.up + new Vector3(direction.x, 0, direction.z).normalized, Quaternion.identity);

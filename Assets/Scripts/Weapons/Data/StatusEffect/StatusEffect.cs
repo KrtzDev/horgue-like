@@ -52,7 +52,7 @@ public class StatusEffect
 	[SerializeField] private int _consecutivePropagationCount;
 	[SerializeField] private HorgueVFX _propagationVFX;
 
-	private AI_Agent _enemy;
+	private AI_Agent_Enemy _enemy;
 	private Projectile _projectile;
 
 	private List<Effect> _effects = new List<Effect>();
@@ -61,7 +61,7 @@ public class StatusEffect
 	private float _currentTickTimer;
 	float _delta = 0;
 
-	public List<AI_Agent> propagatedToEnemies = new List<AI_Agent>();
+	public List<AI_Agent_Enemy> propagatedToEnemies = new List<AI_Agent_Enemy>();
 	private int _timesPropagated = 0;
 
 	public StatusEffect(StatusEffectSO statusEffectSO)
@@ -104,7 +104,7 @@ public class StatusEffect
 		_propagationVFX = statusEffectSO.propagationVFX;
 	}
 
-	public void ApplyStatusEffect(AI_Agent enemy, Projectile projectile)
+	public void ApplyStatusEffect(AI_Agent_Enemy enemy, Projectile projectile)
 	{
 		OnHitEnemy += OnEnemyHit;
 
@@ -251,7 +251,7 @@ public class StatusEffect
 
 		for (int i = 0; i < enemies.Length; i++)
 		{
-			AI_Agent enemy = enemies[i].GetComponent<AI_Agent>();
+			AI_Agent_Enemy enemy = enemies[i].GetComponent<AI_Agent_Enemy>();
 			if (enemy == _enemy || propagatedToEnemies.Contains(enemy))
 				continue;
 

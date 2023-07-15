@@ -103,7 +103,7 @@ public class MotionPattern : ScriptableObject
 				if (angle < smallestAngle)
 				{
 					smallestAngle = angle;
-					projectile.TargetedEnemy = enemies[i].GetComponent<AI_Agent>();
+					projectile.TargetedEnemy = enemies[i].GetComponent<AI_Agent_Enemy>();
 				}
 			}
 		}

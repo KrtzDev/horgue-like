@@ -7,7 +7,7 @@ public class EnemyHealthComponent : HealthComponent
     [SerializeField] private Transform _hitParticlePosition;
     [SerializeField] private ParticleSystem _hitParticle;
 
-	private AI_Agent _enemy;
+	private AI_Agent_Enemy _enemy;
 
     [Header("Enemy Drops")]
     private int _healthDropChance;
@@ -18,7 +18,7 @@ public class EnemyHealthComponent : HealthComponent
     {
         base.Awake();
 
-        _enemy = gameObject.GetComponent<AI_Agent>();
+        _enemy = gameObject.GetComponent<AI_Agent_Enemy>();
         _maxHealth = _enemy._enemyData._maxHealth;
         _currentHealth = _maxHealth;
         _healthDropChance = (int)(_enemy._enemyData._healthDropChance * 100);
@@ -54,8 +54,8 @@ public class EnemyHealthComponent : HealthComponent
 			gameObject.GetComponent<Rigidbody>().isKinematic = true;
 		if (gameObject.GetComponent<UnityEngine.AI.NavMeshAgent>() != null)
 			gameObject.GetComponent<UnityEngine.AI.NavMeshAgent>().enabled = false;
-		if (gameObject.GetComponent<AI_Agent>() != null)
-			gameObject.GetComponent<AI_Agent>().enabled = false;
+		if (gameObject.GetComponent<AI_Agent_Enemy>() != null)
+			gameObject.GetComponent<AI_Agent_Enemy>().enabled = false;
 
 		gameObject.tag = "Untagged";
 

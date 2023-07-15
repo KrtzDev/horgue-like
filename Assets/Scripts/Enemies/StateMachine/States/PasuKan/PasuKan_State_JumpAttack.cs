@@ -11,7 +11,7 @@ public class PasuKan_State_JumpAttack : AI_State_SpecialAttack
     float _jumpPrepTime = 0;
     float _jumpFactor = 0;
 
-    public override void Enter(AI_Agent agent)
+    public override void Enter(AI_Agent_Enemy agent)
     {
         agent._navMeshAgent.enabled = false;
         agent._rb.velocity = new Vector3(0, agent._rb.velocity.y, 0);
@@ -22,7 +22,7 @@ public class PasuKan_State_JumpAttack : AI_State_SpecialAttack
         agent._animator.SetFloat("jumpTime", -1f);
     }
 
-    public override void Update(AI_Agent agent)
+    public override void Update(AI_Agent_Enemy agent)
     {
         if(_jumpPrepTime <= agent._enemyData._jumpPrepTime)
         {
@@ -74,7 +74,7 @@ public class PasuKan_State_JumpAttack : AI_State_SpecialAttack
         */
     }
 
-    public override void Exit(AI_Agent agent)
+    public override void Exit(AI_Agent_Enemy agent)
     {
         agent._navMeshAgent.enabled = true;
         if(NavMesh.SamplePosition(agent.transform.position, out NavMeshHit hit, 1f, agent._navMeshAgent.areaMask))

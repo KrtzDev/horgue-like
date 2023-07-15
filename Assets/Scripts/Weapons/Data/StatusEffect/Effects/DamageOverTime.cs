@@ -5,7 +5,7 @@
 
 	private HealthComponent _enemyhealth;
 
-	public DamageOverTime(AI_Agent enemy, float dotDamage, float statusDuration)
+	public DamageOverTime(AI_Agent_Enemy enemy, float dotDamage, float statusDuration)
 	{
 		_enemy = enemy;
 		_dotDamage = dotDamage;

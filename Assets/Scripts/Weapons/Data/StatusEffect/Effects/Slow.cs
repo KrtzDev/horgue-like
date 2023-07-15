@@ -10,7 +10,7 @@ public class Slow : Effect
 
 	private bool _shouldSlow = true;
 
-	public Slow(AI_Agent enemy, float slowAmount, float statusDuration)
+	public Slow(AI_Agent_Enemy enemy, float slowAmount, float statusDuration)
 	{
 		_enemy = enemy;
 		_slowAmount = slowAmount;

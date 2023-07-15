@@ -3,22 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-// https://www.youtube.com/watch?v=1H9jrKyWKs0&t=34s
-
-[RequireComponent(typeof(NavMeshAgent), typeof(Animator), typeof(EnemyHealthComponent))]
-[DefaultExecutionOrder(1)]
 public class AI_Agent : MonoBehaviour
 {
-    // Enemy Types
-
     [HideInInspector] public AI_StateMachine _stateMachine;
     public AI_StateID _initialState;
-    public BasicEnemyData _enemyData;
     [HideInInspector] public NavMeshAgent _navMeshAgent;
     [HideInInspector] public ObstacleAgent _obstacleAgent;
     [HideInInspector] public Animator _animator;
     [HideInInspector] public Rigidbody _rb;
-    [HideInInspector] public EnemyHealthComponent _healthComponent;
 
     public LayerMask _groundLayer;
     public LayerMask _enemyLayer;
@@ -40,27 +32,7 @@ public class AI_Agent : MonoBehaviour
 
     protected virtual void Start()
     {
-        // Register States
 
-        _navMeshAgent = GetComponent<NavMeshAgent>();
-        _obstacleAgent = GetComponent<ObstacleAgent>();
-        _animator = GetComponent<Animator>();
-        _rb = GetComponent<Rigidbody>();
-        _healthComponent = GetComponent<EnemyHealthComponent>();
-        _player = GameObject.FindGameObjectWithTag("Player");
-        _playerTransform = _player.GetComponent<Transform>();
-        _decoyTransform = GameObject.FindGameObjectWithTag("Decoy").transform;
-
-        SetEnemyData();
-
-        _stateMachine = new AI_StateMachine(this);
-        RegisterStates();
-        _stateMachine.ChangeState(_initialState);
-    }
-
-    protected virtual void Update()
-    {
-        _stateMachine.Update(GetComponent<AI_Agent>());
     }
 
     protected virtual void RegisterStates()
@@ -73,14 +45,7 @@ public class AI_Agent : MonoBehaviour
         _stateMachine.RegisterState(new AI_State_Death());
     }
 
-    private void SetEnemyData()
-    {
-        _navMeshAgent.speed = _enemyData._maxMoveSpeed;
-        _navMeshAgent.acceleration = _enemyData._acceleration;
-        _attackTimer = 0f;
-    }
-
-    private void SetState(AI_StateID state) => _stateMachine.ChangeState(state);
+    protected void SetState(AI_StateID state) => _stateMachine.ChangeState(state);
 
     public void SetTarget(AI_Agent agent, Vector3 followPosition)
     {

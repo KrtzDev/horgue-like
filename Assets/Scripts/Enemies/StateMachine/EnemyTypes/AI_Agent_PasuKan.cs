@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AI_Agent_PasuKan : AI_Agent
+public class AI_Agent_PasuKan : AI_Agent_Enemy
 {
     protected override void Start()
     {

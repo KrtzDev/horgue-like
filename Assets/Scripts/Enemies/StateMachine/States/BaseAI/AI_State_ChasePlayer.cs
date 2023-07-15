@@ -16,16 +16,16 @@ public class AI_State_ChasePlayer : AI_State
         return AI_StateID.ChasePlayer;
     }
 
-    public virtual void Enter(AI_Agent agent)
+    public virtual void Enter(AI_Agent_Enemy agent)
     {
     }
 
-    public virtual void Update(AI_Agent agent)
+    public virtual void Update(AI_Agent_Enemy agent)
     {
 
     }
 
-    public virtual void Exit(AI_Agent agent)
+    public virtual void Exit(AI_Agent_Enemy agent)
     {
         
     }

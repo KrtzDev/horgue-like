@@ -7,11 +7,11 @@ using UnityEngine.AI;
 [System.Serializable]
 public class EnemiesToSpawn
 {
-    public AI_Agent _enemy;
+    public AI_Agent_Enemy _enemy;
     public int _spawnChance;
     public SpawnBias _sSpawnBias;
 
-    public EnemiesToSpawn (AI_Agent enemy, int spawnChance, SpawnBias spawnBias)
+    public EnemiesToSpawn (AI_Agent_Enemy enemy, int spawnChance, SpawnBias spawnBias)
     {
         _enemy = enemy;
         _spawnChance = spawnChance;
@@ -46,7 +46,7 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] private List<BoxCollider> _levelZone = new List<BoxCollider>();
 
     // Object Pooling
-    public Dictionary<int, ObjectPool<AI_Agent>> _enemyObjectPool = new Dictionary<int, ObjectPool<AI_Agent>>();
+    public Dictionary<int, ObjectPool<AI_Agent_Enemy>> _enemyObjectPool = new Dictionary<int, ObjectPool<AI_Agent_Enemy>>();
     private Bounds _bounds;
 
     private void Awake()
@@ -61,7 +61,7 @@ public class EnemySpawner : MonoBehaviour
     {
         for (int i = 0; i < _enemiesToSpawn.Count; i++)
         {
-            _enemyObjectPool.Add(i, ObjectPool<AI_Agent>.CreatePool(_enemiesToSpawn[i]._enemy, _enemySpawnerData._maxEnemyCount, _enemyObjectPoolParent.transform));
+            _enemyObjectPool.Add(i, ObjectPool<AI_Agent_Enemy>.CreatePool(_enemiesToSpawn[i]._enemy, _enemySpawnerData._maxEnemyCount, _enemyObjectPoolParent.transform));
         }
     }
 
@@ -391,7 +391,7 @@ public class EnemySpawner : MonoBehaviour
 
             yield return new WaitForSeconds(_enemySpawnerData._spawnAnimDelay);
 
-            AI_Agent poolableObject = _enemyObjectPool[spawnIndex].GetObject();
+            AI_Agent_Enemy poolableObject = _enemyObjectPool[spawnIndex].GetObject();
 
             if (poolableObject != null)
             {

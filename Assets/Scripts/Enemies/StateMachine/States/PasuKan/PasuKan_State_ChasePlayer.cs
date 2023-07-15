@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class PasuKan_State_ChasePlayer : AI_State_ChasePlayer
 {
-    public override void Enter(AI_Agent agent)
+    public override void Enter(AI_Agent_Enemy agent)
     {
         agent._animator.SetBool("isChasing", true);
     }
 
-    public override void Update(AI_Agent agent)
+    public override void Update(AI_Agent_Enemy agent)
     {
         if(!agent._navMeshAgent.enabled)
         {
@@ -70,12 +70,12 @@ public class PasuKan_State_ChasePlayer : AI_State_ChasePlayer
         CheckForAttack(agent, distance);
     }
 
-    public override void Exit(AI_Agent agent)
+    public override void Exit(AI_Agent_Enemy agent)
     {
         agent._animator.SetBool("isChasing", false);
     }
 
-    private void StartRotating(AI_Agent agent)
+    private void StartRotating(AI_Agent_Enemy agent)
     {
         if (LookCoroutine != null)
         {
@@ -85,7 +85,7 @@ public class PasuKan_State_ChasePlayer : AI_State_ChasePlayer
         LookCoroutine = AI_Manager.Instance.StartCoroutine(AI_Manager.Instance.LookAtTarget(agent, _followPosition, _maxTime));
     }
 
-    private void CheckForJumpAttack(AI_Agent agent, float distance)
+    private void CheckForJumpAttack(AI_Agent_Enemy agent, float distance)
     {
         float random = Random.Range(0f, 100f);
 
@@ -102,7 +102,7 @@ public class PasuKan_State_ChasePlayer : AI_State_ChasePlayer
         }
     }
 
-    private void CheckForAttack(AI_Agent agent, float distance)
+    private void CheckForAttack(AI_Agent_Enemy agent, float distance)
     {
         if (distance < agent._enemyData._attackRange && agent._attackTimer < 0)
         {

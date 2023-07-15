@@ -5,7 +5,7 @@ using UnityEngine.AI;
 
 public class Sniper_State_Retreat : AI_State_Retreat
 {
-    public override void Enter(AI_Agent agent)
+    public override void Enter(AI_Agent_Enemy agent)
     {
         agent._animator.SetBool("isRetreating", true);
         agent._navMeshAgent.SetDestination(agent.transform.position);
@@ -30,7 +30,7 @@ public class Sniper_State_Retreat : AI_State_Retreat
 
     }
 
-    public override void Update(AI_Agent agent)
+    public override void Update(AI_Agent_Enemy agent)
     {
         if (!agent._navMeshAgent.enabled)
         {
@@ -69,7 +69,7 @@ public class Sniper_State_Retreat : AI_State_Retreat
         }
     }
 
-    public override void Exit(AI_Agent agent)
+    public override void Exit(AI_Agent_Enemy agent)
     {
         agent._animator.SetBool("isRetreating", false);
     }

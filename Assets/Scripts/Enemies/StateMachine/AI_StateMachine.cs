@@ -5,10 +5,10 @@ using UnityEngine;
 public class AI_StateMachine
 {
     public AI_State[] _states;
-    public AI_Agent _agent;
+    public AI_Agent_Enemy _agent;
     public AI_StateID _currentState;
 
-    public AI_StateMachine(AI_Agent agent)
+    public AI_StateMachine(AI_Agent_Enemy agent)
     {
         this._agent = agent;
         int numStates = System.Enum.GetNames(typeof(AI_StateID)).Length;
@@ -28,7 +28,7 @@ public class AI_StateMachine
         return _states[index];
     }
 
-    public void Update(AI_Agent agent)
+    public void Update(AI_Agent_Enemy agent)
     {
         if(agent.enabled)
         { 

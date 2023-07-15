@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AI_Agent_Sniper : AI_Agent
+public class AI_Agent_Sniper : AI_Agent_Enemy
 {
     [Header("Projectile")]
     [SerializeField] private GameObject _projectile;

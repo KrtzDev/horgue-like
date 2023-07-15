@@ -4,7 +4,7 @@
 
 	private HealthComponent _enemyHealth;
 
-	public DamageOnce(AI_Agent enemy, float additionalDamage)
+	public DamageOnce(AI_Agent_Enemy enemy, float additionalDamage)
 	{
 		_enemy = enemy;
 		_additionalDamage = additionalDamage;

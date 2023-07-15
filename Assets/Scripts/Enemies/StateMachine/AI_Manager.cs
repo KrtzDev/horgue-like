@@ -18,9 +18,9 @@ public class AI_Manager : MonoBehaviour
         }
     }
 
-    public List<AI_Agent> PasuKan = new List<AI_Agent>();
-    public List<AI_Agent> RangedRobot = new List<AI_Agent>();
-    public List<AI_Agent> Sniper = new List<AI_Agent>();
+    public List<AI_Agent_Enemy> PasuKan = new List<AI_Agent_Enemy>();
+    public List<AI_Agent_Enemy> RangedRobot = new List<AI_Agent_Enemy>();
+    public List<AI_Agent_Enemy> Sniper = new List<AI_Agent_Enemy>();
 
     private void Awake()
     {
@@ -33,7 +33,7 @@ public class AI_Manager : MonoBehaviour
         Destroy(gameObject);
     }
 
-    public void MakeAgentCircleTarget(List<AI_Agent> EnemyType, Transform target, float radiusAroundTarget)
+    public void MakeAgentCircleTarget(List<AI_Agent_Enemy> EnemyType, Transform target, float radiusAroundTarget)
     {
         for (int i = 0; i < EnemyType.Count; i++)
         {
@@ -44,7 +44,7 @@ public class AI_Manager : MonoBehaviour
         }
     }
 
-    public IEnumerator LookAtTarget(AI_Agent agent, Vector3 followPosition, float maxTime)
+    public IEnumerator LookAtTarget(AI_Agent_Enemy agent, Vector3 followPosition, float maxTime)
     {
         Quaternion lookRotation = Quaternion.LookRotation(followPosition - agent.transform.position);
 

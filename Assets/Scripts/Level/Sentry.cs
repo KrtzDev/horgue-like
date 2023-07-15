@@ -89,7 +89,7 @@ public class Sentry : MonoBehaviour
     private void RotateTowardsEnemy()
     {
         float currentclosestdistance = Mathf.Infinity;
-        AI_Agent closestEnemy = null;
+        AI_Agent_Enemy closestEnemy = null;
 
         Collider[] enemies = Physics.OverlapSphere(_projectilePoint.position, _range, _enemyLayer);
         foreach (Collider enemy in enemies)
@@ -101,7 +101,7 @@ public class Sentry : MonoBehaviour
             Vector3 directionToEnemy = enemy.transform.position + Vector3.up - _projectilePoint.position;
             if (!Physics.Raycast(_projectilePoint.position, directionToEnemy, distanceToEnemy, _groundLayer))
             {
-                closestEnemy = enemy.GetComponent<AI_Agent>();
+                closestEnemy = enemy.GetComponent<AI_Agent_Enemy>();
                 currentclosestdistance = distanceToEnemy;
             }
         }

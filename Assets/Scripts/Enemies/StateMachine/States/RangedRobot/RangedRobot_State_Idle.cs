@@ -6,7 +6,7 @@ public class RangedRobot_State_Idle : AI_State_Idle
 {
     private AI_Agent_RangedRobot _rangedRobot;
 
-    public override void Enter(AI_Agent agent)
+    public override void Enter(AI_Agent_Enemy agent)
     {
         _rangedRobot = agent as AI_Agent_RangedRobot;
 
@@ -17,7 +17,7 @@ public class RangedRobot_State_Idle : AI_State_Idle
         _followTimer = 0;
     }
 
-    public override void Update(AI_Agent agent)
+    public override void Update(AI_Agent_Enemy agent)
     {
         if (!agent._navMeshAgent.enabled)
         {
@@ -73,7 +73,7 @@ public class RangedRobot_State_Idle : AI_State_Idle
         }
     }
 
-    public override void Exit(AI_Agent agent)
+    public override void Exit(AI_Agent_Enemy agent)
     {
 
     }

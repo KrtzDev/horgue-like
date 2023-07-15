@@ -19,7 +19,7 @@ public class PasuKanMeleeDamage : MonoBehaviour
             {
                 if(!didDamage)
                 {
-                    other.GetComponent<HealthComponent>().TakeDamage(gameObject.GetComponentInParent<AI_Agent>()._enemyData._damagePerHit);
+                    other.GetComponent<HealthComponent>().TakeDamage(gameObject.GetComponentInParent<AI_Agent_Enemy>()._enemyData._damagePerHit);
                     didDamage = true;
                 }
             }

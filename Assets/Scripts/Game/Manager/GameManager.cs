@@ -132,7 +132,7 @@ public class GameManager : Singleton<GameManager>
 
 	private void Update()
 	{
-		if (SceneManager.GetActiveScene().name == "SCENE_Main_Menu" || SceneManager.GetActiveScene().name == "SCENE_Init" || SceneManager.GetActiveScene().name == "SCENE_Test") return;
+		if (SceneManager.GetActiveScene().name == "SCENE_Main_Menu" || SceneManager.GetActiveScene().name == "SCENE_Init" || SceneManager.GetActiveScene().name.StartsWith("SCENE_Test")) return;
 
 		// Zeit abgelaufen
 

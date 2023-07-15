@@ -7,7 +7,7 @@ public class RangedRobot_State_Attack : AI_State_Attack
 
     private AI_Agent_RangedRobot _rangedRobot;
 
-    public override void Enter(AI_Agent agent)
+    public override void Enter(AI_Agent_Enemy agent)
     {
         _rangedRobot = agent as AI_Agent_RangedRobot;
 
@@ -16,7 +16,7 @@ public class RangedRobot_State_Attack : AI_State_Attack
         agent._navMeshAgent.enabled = false;
     }
 
-    public override void Update(AI_Agent agent)
+    public override void Update(AI_Agent_Enemy agent)
     {
         if (!agent._followDecoy)
         {
@@ -56,7 +56,7 @@ public class RangedRobot_State_Attack : AI_State_Attack
         }
     }
 
-    public override void Exit(AI_Agent agent)
+    public override void Exit(AI_Agent_Enemy agent)
     {
         agent._animator.SetBool("isAttacking", false);
         agent._navMeshAgent.enabled = true;
