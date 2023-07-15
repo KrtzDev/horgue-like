@@ -23,10 +23,10 @@ public class PlayerMovementMobility : MonoBehaviour
 
     [Header("Which (one) Ability can be used?")]
 
-    [SerializeField] private bool _canUseJumpAbility;
-    [SerializeField] private bool _canUseDashAbility;
-    [SerializeField] private bool _canUseStealthAbility;
-    [SerializeField] private bool _canUseFlickerStrikeAbility;
+    public bool _canUseJumpAbility;
+    public bool _canUseDashAbility;
+    public bool _canUseStealthAbility;
+    public bool _canUseFlickerStrikeAbility;
 
     [Header("Player Jump Ability")]
     [SerializeField] private float _jumpCD;
@@ -269,7 +269,7 @@ public class PlayerMovementMobility : MonoBehaviour
             for (int j = 0; j < _enemySpawner.transform.GetChild(i).childCount; j++)
             {
                 // _EnemySpawner.transform.GetChild(i).GetChild(j).GetComponent<EnemyMovement>().PlayerTarget = _Decoy.transform;
-                _enemySpawner.transform.GetChild(i).GetChild(j).GetComponent<AI_Agent>()._followDecoy = true;
+                _enemySpawner._enemyObjectPoolParent.transform.GetChild(i).GetChild(j).GetComponent<AI_Agent>()._followDecoy = true;
             }
         }
 

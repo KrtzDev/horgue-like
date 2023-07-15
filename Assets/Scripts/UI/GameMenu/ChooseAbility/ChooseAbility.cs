@@ -9,6 +9,7 @@ public class ChooseAbility: MonoBehaviour
     [field: SerializeField] public RectTransform AbilityParent { get; private set; }
 
     [SerializeField] public List<Ability> _abilities = new List<Ability>();
+    private List<Ability> _tempAbilities = new List<Ability>();
     public List<Ability> _drawnAbilities = new List<Ability>();
     [SerializeField] private AbilityUI _abilityUI_prefab;
 
@@ -39,8 +40,9 @@ public class ChooseAbility: MonoBehaviour
 
     public Ability GetRandomAbility()
     {
-        Ability drawnAbility = _abilities[Random.Range(0, _abilities.Count - 1)];
+        Ability drawnAbility = _tempAbilities[Random.Range(0, _tempAbilities.Count - 1)];
         _drawnAbilities.Add(drawnAbility);
+        _tempAbilities.Remove(drawnAbility);
         return drawnAbility;
     }
 
@@ -61,6 +63,8 @@ public class ChooseAbility: MonoBehaviour
         {
             instance = this;
             Time.timeScale = 0;
+
+            _tempAbilities = _abilities;
         }
     }
     private void OnEnable()

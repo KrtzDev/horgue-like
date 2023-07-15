@@ -713,6 +713,8 @@ MonoBehaviour:
   <AbilityParent>k__BackingField: {fileID: 8897131458537020177}
   _abilities:
   - {fileID: 11400000, guid: 3977836e99d7bb54d855642c6f7fdbc2, type: 2}
+  - {fileID: 11400000, guid: facef1241ec4f5c44a8eba53a95ff2e0, type: 2}
+  - {fileID: 11400000, guid: 922a765d48297564382ca977b487b933, type: 2}
   _drawnAbilities: []
   _abilityUI_prefab: {fileID: 925541605706483504, guid: dd5d90f9ae1662b4e839a9f9f4171693,
     type: 3}

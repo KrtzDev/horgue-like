@@ -165,7 +165,10 @@ public class AbilityUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
             Time.timeScale = 1;
             ChooseAbility.instance._countdownText.text =  "GO!!!!";
 
+            GameManager.Instance._currentAbility = _ability;
+            
             ChooseAbility.instance._abilityCoolDownToReplace.GetComponent<Image>().sprite = _ability._icon;
+            GameManager.Instance.EnableAbilityUsage(_ability);
 
             while (elapsedTime < 1)
             {
