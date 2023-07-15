@@ -539,9 +539,20 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8721330641953635283, guid: 578780241b2c5d54086e4a2080d153ce,
         type: 3}
-      propertyPath: _gameUI_prefab
+      propertyPath: _abilityUI_prefab
       value: 
-      objectReference: {fileID: 1274344090816168882, guid: 604223aa0afca004ab28de54417ead49,
+      objectReference: {fileID: 925541605706483504, guid: dd5d90f9ae1662b4e839a9f9f4171693,
+        type: 3}
+    - target: {fileID: 8721330641953635283, guid: 578780241b2c5d54086e4a2080d153ce,
+        type: 3}
+      propertyPath: _abilitiesInDisplay
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8721330641953635283, guid: 578780241b2c5d54086e4a2080d153ce,
+        type: 3}
+      propertyPath: _chooseAbility_prefab
+      value: 
+      objectReference: {fileID: 6720952648814312727, guid: f1e63370183512544a15ca8fd7bdcad9,
         type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 578780241b2c5d54086e4a2080d153ce, type: 3}

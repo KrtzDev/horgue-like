@@ -52,7 +52,9 @@ MonoBehaviour:
     type: 3}
   _craftingMenuUI_prefab: {fileID: 7751430925920149868, guid: 3ec3ed2a8dfa4954d8684a2c16f7aeaf,
     type: 3}
-  _gameUI_prefab: {fileID: 1274344090816168882, guid: 2ea18690c85b8b246a41a54ecd8fded5,
+  _gameUI_prefab: {fileID: 1274344090816168882, guid: 604223aa0afca004ab28de54417ead49,
     type: 3}
   _rewardUI_prefab: {fileID: 8270753814037413858, guid: 97021b92a4866c844ae8f8c8d345523b,
+    type: 3}
+  _chooseAbility_prefab: {fileID: 8283149742485629005, guid: f1e63370183512544a15ca8fd7bdcad9,
     type: 3}

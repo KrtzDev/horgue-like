@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameManager : Singleton<GameManager>
 {
@@ -47,6 +48,7 @@ public class GameManager : Singleton<GameManager>
 	public PlayerCharacter player;
 	public int _currentPlayerHealth;
 	public bool _playerCanUseAbilities;
+	public Ability _currentAbility;
 
 	private void Start()
 	{
@@ -96,6 +98,18 @@ public class GameManager : Singleton<GameManager>
 			}
 		}
 
+		if(_currentWave == 0)
+        {
+			_currentAbility = null;
+        }
+
+		if(_currentAbility != null)
+        {
+			AbilityCooldownToReplace abilityCoolDownToReplace = FindObjectOfType<AbilityCooldownToReplace>();
+			abilityCoolDownToReplace.GetComponent<Image>().sprite = _currentAbility._icon;
+			EnableAbilityUsage(_currentAbility);
+		}
+
 		if(_lastLevel == _currentLevel)
         {
 			player.GetComponent<HealthComponent>()._currentHealth = _currentPlayerHealth;
@@ -118,7 +132,7 @@ public class GameManager : Singleton<GameManager>
 
 	private void Update()
 	{
-		if (SceneManager.GetActiveScene().name == "SCENE_Main_Menu" || SceneManager.GetActiveScene().name == "SCENE_Init") return;
+		if (SceneManager.GetActiveScene().name == "SCENE_Main_Menu" || SceneManager.GetActiveScene().name == "SCENE_Init" || SceneManager.GetActiveScene().name == "SCENE_Test") return;
 
 		// Zeit abgelaufen
 
@@ -168,6 +182,39 @@ public class GameManager : Singleton<GameManager>
 		RoundLost();
 	}
 
+	public void EnableAbilityUsage(Ability ability)
+    {
+		PlayerMovementMobility playerMobility = FindObjectOfType<PlayerMovementMobility>();
+
+		switch (ability._name)
+        {
+			case "Jump":
+				playerMobility._canUseJumpAbility = true;
+				playerMobility._canUseDashAbility = false;
+				playerMobility._canUseStealthAbility = false;
+				playerMobility._canUseFlickerStrikeAbility = false;
+				break;
+			case "Dash":
+				playerMobility._canUseJumpAbility = false;
+				playerMobility._canUseDashAbility = true;
+				playerMobility._canUseStealthAbility = false;
+				playerMobility._canUseFlickerStrikeAbility = false;
+				break;
+			case "Decoy":
+				playerMobility._canUseJumpAbility = false;
+				playerMobility._canUseDashAbility = false;
+				playerMobility._canUseStealthAbility = true;
+				playerMobility._canUseFlickerStrikeAbility = false;
+				break;
+			case "FlickerStrike":
+				playerMobility._canUseJumpAbility = false;
+				playerMobility._canUseDashAbility = false;
+				playerMobility._canUseStealthAbility = false;
+				playerMobility._canUseFlickerStrikeAbility = true;
+				break;
+        }
+	}
+
 	private void RoundWon()
 	{
 		Debug.Log("Round won");
@@ -186,7 +233,6 @@ public class GameManager : Singleton<GameManager>
 
 			UIManager.Instance.ShowLevelEndScreen(LevelStatus.Won);
 			UIManager.Instance.DisplayRewards(rewards);
-
 
 			_currentLevel += 1;		
 			_currentLevelArray = _currentLevel - 1;

@@ -10,6 +10,7 @@ public class UIManager : Singleton<UIManager>
 	public PauseMenu PauseMenu { get; private set; }
 	public CraftingMenu CraftingMenu { get; private set; }
 	public GameObject GameUI { get; private set; }
+	public ChooseAbility ChooseAbility { get; private set; }
 
 
 	[SerializeField]
@@ -24,6 +25,8 @@ public class UIManager : Singleton<UIManager>
 	private GameObject _gameUI_prefab;
 	[SerializeField]
 	private RewardUI _rewardUI_prefab;
+	[SerializeField] private ChooseAbility _chooseAbility_prefab;
+	[SerializeField] private AbilityUI _abilityUI_prefab;
 
 	private void Start()
 	{
@@ -71,6 +74,15 @@ public class UIManager : Singleton<UIManager>
 		}
 	}
 
+	public void DisplayAbilities(List<Ability> abilities)
+    {
+		foreach (Ability ability in abilities)
+        {
+			AbilityUI newAbility = Instantiate(_abilityUI_prefab, ChooseAbility.AbilityParent);
+			newAbility.Initialize(ability);
+        }
+    }
+
 	private void OnCompletedSceneLoad()
 	{
 		if (SceneManager.GetActiveScene().name == "SCENE_Main_Menu")
@@ -89,7 +101,21 @@ public class UIManager : Singleton<UIManager>
 		Endscreen.gameObject.SetActive(false);
 		WaveEndScreen = Instantiate(_waveEndScreenUI_prefab);
 		WaveEndScreen.gameObject.SetActive(false);
+
 		GameUI = Instantiate(_gameUI_prefab);
 		GameUI.gameObject.SetActive(true);
+
+		if (GameManager.Instance._currentWave == 0)
+        {
+			ChooseAbility = Instantiate(_chooseAbility_prefab);
+			ChooseAbility.gameObject.SetActive(true);
+
+			List<Ability> abilities = new List<Ability>();
+			for (int i = 0; i < ChooseAbility.instance._abilitiesToDisplay; i++)
+			{
+				abilities.Add(ChooseAbility.instance.GetRandomAbility());
+			}
+			DisplayAbilities(abilities);
+		}
 	}
 }
