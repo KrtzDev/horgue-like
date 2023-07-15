@@ -4,14 +4,16 @@ public class RangedRobot_State_ChasePlayer : AI_State_ChasePlayer
 {
     private AI_Agent_RangedRobot _rangedRobot;
 
-    public override void Enter(AI_Agent_Enemy agent)
+    public override void Enter(AI_Agent agent)
     {
+        base.Enter(agent);
+
         _rangedRobot = agent as AI_Agent_RangedRobot;
 
         agent._animator.SetBool("isChasing", true);
     }
 
-    public override void Update(AI_Agent_Enemy agent)
+    public override void Update(AI_Agent agent)
     {
         if (!agent._navMeshAgent.enabled)
         {
@@ -61,12 +63,12 @@ public class RangedRobot_State_ChasePlayer : AI_State_ChasePlayer
         CheckForBehaviour(agent, distance);
     }
 
-    public override void Exit(AI_Agent_Enemy agent)
+    public override void Exit(AI_Agent agent)
     {
         agent._animator.SetBool("isChasing", false);
     }
 
-    private void StartRotating(AI_Agent_Enemy agent)
+    private void StartRotating(AI_Agent agent)
     {
         if (LookCoroutine != null)
         {
@@ -76,12 +78,12 @@ public class RangedRobot_State_ChasePlayer : AI_State_ChasePlayer
         LookCoroutine = AI_Manager.Instance.StartCoroutine(AI_Manager.Instance.LookAtTarget(agent, _followPosition, _maxTime));
     }
 
-    private void CheckForBehaviour(AI_Agent_Enemy agent, float distance)
+    private void CheckForBehaviour(AI_Agent agent, float distance)
     {
         RaycastHit hit;
         if (Physics.Raycast(_rangedRobot.ProjectilePoint.transform.position, (_followPosition + new Vector3(0, 0.5f, 0) - _rangedRobot.ProjectilePoint.transform.position), out hit, distance, agent._groundLayer))
         {
-            if (distance < agent._enemyData._retreatRange)
+            if (distance < _enemy._enemyData._retreatRange)
             {
                 agent._animator.SetBool("isRetreating", true);
                 agent._animator.SetBool("isAttacking", false);
@@ -91,14 +93,14 @@ public class RangedRobot_State_ChasePlayer : AI_State_ChasePlayer
         }
         else
         {
-            if (distance < agent._enemyData._attackRange && distance > agent._enemyData._retreatRange)
+            if (distance < _enemy._enemyData._attackRange && distance > _enemy._enemyData._retreatRange)
             {
                 agent._animator.SetBool("isAttacking", true);
                 agent._animator.SetBool("isChasing", false);
                 agent._animator.SetBool("isRetreating", false);
                 agent._stateMachine.ChangeState(AI_StateID.Attack);
             }
-            else if (distance < agent._enemyData._retreatRange)
+            else if (distance < _enemy._enemyData._retreatRange)
             {
                 agent._animator.SetBool("isRetreating", true);
                 agent._animator.SetBool("isAttacking", false);

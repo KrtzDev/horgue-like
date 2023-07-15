@@ -4,12 +4,14 @@ using UnityEngine;
 
 public class PasuKan_State_ChasePlayer : AI_State_ChasePlayer
 {
-    public override void Enter(AI_Agent_Enemy agent)
+    public override void Enter(AI_Agent agent)
     {
+        base.Enter(agent);
+
         agent._animator.SetBool("isChasing", true);
     }
 
-    public override void Update(AI_Agent_Enemy agent)
+    public override void Update(AI_Agent agent)
     {
         if(!agent._navMeshAgent.enabled)
         {
@@ -66,16 +68,16 @@ public class PasuKan_State_ChasePlayer : AI_State_ChasePlayer
         }
 
         float distance = Vector3.Distance(agent.transform.position, agent._playerTransform.position);
-        // CheckForJumpAttack(agent, distance);
-        CheckForAttack(agent, distance);
+        // CheckForJumpAttack(_enemy, distance);
+        CheckForAttack(_enemy, distance);
     }
 
-    public override void Exit(AI_Agent_Enemy agent)
+    public override void Exit(AI_Agent agent)
     {
         agent._animator.SetBool("isChasing", false);
     }
 
-    private void StartRotating(AI_Agent_Enemy agent)
+    private void StartRotating(AI_Agent agent)
     {
         if (LookCoroutine != null)
         {

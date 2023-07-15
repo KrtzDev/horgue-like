@@ -14,6 +14,8 @@ public class AI_Agent_Enemy : AI_Agent
 
     protected override void Start()
     {
+        base.Start();
+
         // Register States
 
         _navMeshAgent = GetComponent<NavMeshAgent>();

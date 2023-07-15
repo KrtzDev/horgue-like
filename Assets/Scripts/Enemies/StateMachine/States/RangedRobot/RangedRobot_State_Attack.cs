@@ -7,8 +7,10 @@ public class RangedRobot_State_Attack : AI_State_Attack
 
     private AI_Agent_RangedRobot _rangedRobot;
 
-    public override void Enter(AI_Agent_Enemy agent)
+    public override void Enter(AI_Agent agent)
     {
+        base.Enter(agent);
+
         _rangedRobot = agent as AI_Agent_RangedRobot;
 
         agent._animator.SetBool("isAttacking", true);
@@ -16,7 +18,7 @@ public class RangedRobot_State_Attack : AI_State_Attack
         agent._navMeshAgent.enabled = false;
     }
 
-    public override void Update(AI_Agent_Enemy agent)
+    public override void Update(AI_Agent agent)
     {
         if (!agent._followDecoy)
         {
@@ -31,7 +33,7 @@ public class RangedRobot_State_Attack : AI_State_Attack
 
         if (agent._attackTimer < 0)
         {
-            agent._attackTimer = agent._enemyData._attackSpeed;
+            agent._attackTimer = _enemy._enemyData._attackSpeed;
             _rangedRobot.TargetDirection = (_followPosition - agent.transform.position).normalized;
             agent._animator.SetTrigger("shoot");
             agent._animator.SetBool("isShooting", true);
@@ -42,12 +44,12 @@ public class RangedRobot_State_Attack : AI_State_Attack
 
             float distance = Vector3.Distance(agent._animator.transform.position, _followPosition);
 
-            if (distance > agent._enemyData._attackRange)
+            if (distance > _enemy._enemyData._attackRange)
             {
                 agent._animator.SetBool("isAttacking", false);
                 agent._stateMachine.ChangeState(AI_StateID.Idle);
             }
-            else if (distance < agent._enemyData._retreatRange)
+            else if (distance < _enemy._enemyData._retreatRange)
             {
                 agent._animator.SetBool("isAttacking", false);
                 agent._animator.SetBool("isChasing", false);
@@ -56,7 +58,7 @@ public class RangedRobot_State_Attack : AI_State_Attack
         }
     }
 
-    public override void Exit(AI_Agent_Enemy agent)
+    public override void Exit(AI_Agent agent)
     {
         agent._animator.SetBool("isAttacking", false);
         agent._navMeshAgent.enabled = true;

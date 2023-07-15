@@ -7,8 +7,6 @@ public class AI_Agent_Rikayon : AI_Agent_Enemy
     protected override void Start()
     {
         base.Start();
-
-        AI_Manager.Instance.PasuKan.Add(this);
     }
 
     protected override void Update()
@@ -18,12 +16,15 @@ public class AI_Agent_Rikayon : AI_Agent_Enemy
 
     protected override void RegisterStates()
     {
+        _stateMachine.RegisterState(new Rikayon_State_ChasePlayer());
+        _stateMachine.RegisterState(new Rikayon_State_Attack());
+        _stateMachine.RegisterState(new Rikayon_State_Retreat());
+        _stateMachine.RegisterState(new Rikayon_State_Idle());
         _stateMachine.RegisterState(new AI_State_Death());
     }
 
     public void SetDeactive()
     {
         this.gameObject.SetActive(false);
-        AI_Manager.Instance.PasuKan.Remove(this);
     }
 }

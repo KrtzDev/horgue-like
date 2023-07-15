@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Rikayon_State_Retreat : MonoBehaviour
+public class Rikayon_State_Retreat : AI_State_Retreat
 {
     // Start is called before the first frame update
     void Start()
