@@ -4,11 +4,15 @@ using UnityEngine;
 
 public class Rikayon_State_ChasePlayer : AI_State_ChasePlayer
 {
+    AI_Agent_Rikayon _rikayon;
+
     public override void Enter(AI_Agent agent)
     {
         base.Enter(agent);
 
         agent._animator.SetBool("isChasing", true);
+
+        _rikayon = agent as AI_Agent_Rikayon;
     }
 
     public override void Update(AI_Agent agent)
@@ -68,7 +72,7 @@ public class Rikayon_State_ChasePlayer : AI_State_ChasePlayer
         }
 
         float distance = Vector3.Distance(agent.transform.position, agent._playerTransform.position);
-        // CheckForAttack(_enemy, distance);
+        CheckForAttack(_enemy, distance);
     }
 
     public override void Exit(AI_Agent agent)
@@ -93,7 +97,10 @@ public class Rikayon_State_ChasePlayer : AI_State_ChasePlayer
             agent._attackTimer = agent._enemyData._attackSpeed;
             _followPosition = agent._playerTransform.position;
             agent.transform.LookAt(_followPosition);
-            agent._animator.SetTrigger("attack");
+            int random = Random.Range(1, _rikayon._numberOfAttacks + 1);
+            _rikayon._currentAttackNumber = random;
+            agent._animator.SetTrigger("attack" + random);
+            agent._animator.SetBool("isAttacking", true);
             agent._animator.SetBool("isChasing", false);
             agent._stateMachine.ChangeState(AI_StateID.Attack);
         }

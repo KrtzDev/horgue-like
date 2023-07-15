@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _maxHealth: 1000
   _damagePerHit: 25
-  _attackSpeed: 1
+  _attackSpeed: 5
   _givenXP: 100
   _maxMoveSpeed: 8
   _acceleration: 15

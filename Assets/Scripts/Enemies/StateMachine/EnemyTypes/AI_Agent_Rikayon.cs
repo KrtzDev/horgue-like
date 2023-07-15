@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class AI_Agent_Rikayon : AI_Agent_Enemy
 {
+    public int _numberOfAttacks;
+    [HideInInspector] public int _currentAttackNumber;
+
     protected override void Start()
     {
         base.Start();
