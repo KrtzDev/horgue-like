@@ -4,20 +4,25 @@ using UnityEngine;
 
 public class TrapSpikes : MonoBehaviour
 {
-    private Animator _spikes;
+    private Animator _animator;
 
-    [SerializeField]
-    private bool _isTriggered;
+    [SerializeField] private int _spikeDamage;
 
-    [SerializeField]
-    private bool _isAutomated;
-    [SerializeField]
-    private float _cooldown;
+    [SerializeField] private bool _isTriggered;
+
+    [SerializeField] private bool _isAutomated;
+    [SerializeField] private float _cooldown;
+    
     private float _timing;
+
+    private Spikes _spikes;
 
     private void Start()
     {
-        _spikes = GetComponent<Animator>();
+        _animator = GetComponent<Animator>();
+        _spikes = GetComponentInChildren<Spikes>();
+
+        _spikes._trapDamage = _spikeDamage;
     }
 
     private void Update()
@@ -27,7 +32,7 @@ public class TrapSpikes : MonoBehaviour
 
         if (Time.time > _timing + _cooldown)
         {
-            _spikes.SetTrigger("Triggered");
+            _animator.SetTrigger("Triggered");
             _timing = Time.time;
         }
     }
@@ -39,7 +44,7 @@ public class TrapSpikes : MonoBehaviour
 
         if (!_isTriggered)
         {
-            _spikes.SetTrigger("Triggered");
+            _animator.SetTrigger("Triggered");
             _isTriggered = true;
         }
     }
