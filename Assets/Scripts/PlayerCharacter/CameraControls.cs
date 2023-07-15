@@ -6,18 +6,15 @@ using UnityEngine.InputSystem;
 
 public class CameraControls : MonoBehaviour
 {
-    [SerializeField]
-    private List<Vector3> _cameraPresets;
-
-    private int _presetIndex = 0;
+    [SerializeField] private int _rotation = 90;
 
     private CinemachineVirtualCamera _cm;
-    private CinemachineTransposer _tr;
+    private CinemachineOrbitalTransposer _tr;
 
     private void Start()
     {
         _cm = GetComponent<CinemachineVirtualCamera>();
-        _tr = _cm.GetCinemachineComponent<CinemachineTransposer>();
+        _tr = _cm.GetCinemachineComponent<CinemachineOrbitalTransposer>();
     }
 
 
@@ -27,23 +24,15 @@ public class CameraControls : MonoBehaviour
 
         if (keyboard.qKey.wasPressedThisFrame)
         {
-            _presetIndex -= 1;
+            _tr.m_XAxis.Value -= _rotation;
         }
-
-        if (keyboard.eKey.wasPressedThisFrame)
+        else if (keyboard.eKey.wasPressedThisFrame)
         {
-            _presetIndex += 1;
+            _tr.m_XAxis.Value += _rotation;
         }
-
-        if (_presetIndex < 0)
+        else if (keyboard.rKey.wasPressedThisFrame)
         {
-            _presetIndex = _cameraPresets.Count - 1;
+            _tr.m_XAxis.Value = 0.0f;
         }
-        else if (_presetIndex >= _cameraPresets.Count)
-        {
-            _presetIndex = 0;
-        }
-
-        _tr.m_FollowOffset = _cameraPresets[_presetIndex];
     }
 }

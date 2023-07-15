@@ -2,8 +2,7 @@ using UnityEngine;
 
 public class Spikes : MonoBehaviour
 {
-    [SerializeField]
-    private int _trapDamage = 10;
+    public int _trapDamage;
 
     private void OnTriggerEnter(Collider other)
     {
