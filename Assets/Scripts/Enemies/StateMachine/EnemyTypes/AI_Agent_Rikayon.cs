@@ -5,7 +5,7 @@ using UnityEngine;
 public class AI_Agent_Rikayon : AI_Agent_Enemy
 {
     public int _numberOfAttacks;
-    [HideInInspector] public int _currentAttackNumber;
+    public int _numberOfIntimidations;
 
     protected override void Start()
     {

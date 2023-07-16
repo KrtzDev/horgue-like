@@ -27,16 +27,6 @@ public class Rikayon_State_ChasePlayer : AI_State_ChasePlayer
         float distance = Vector3.Distance(agent.transform.position, agent._playerTransform.position);
         CheckForAttack(_enemy, distance);
 
-        if(distance < _enemy._enemyData._attackRange)
-        {
-            _followPosition = agent.transform.position;
-            agent.SetTarget(agent, _followPosition);
-            agent._animator.SetBool("isIdle", true);
-            agent._animator.SetBool("isChasing", false);
-            agent._stateMachine.ChangeState(AI_StateID.Attack);
-            return;
-        }
-
         if (_timer < 0f)
         {
             if (agent._navMeshAgent.pathStatus != UnityEngine.AI.NavMeshPathStatus.PathPartial)
@@ -107,12 +97,29 @@ public class Rikayon_State_ChasePlayer : AI_State_ChasePlayer
             agent._attackTimer = _enemy._enemyData._attackSpeed;
             _followPosition = agent._playerTransform.position;
             agent.transform.LookAt(_followPosition);
+
             int random = Random.Range(1, _rikayon._numberOfAttacks + 1);
-            _rikayon._currentAttackNumber = random;
-            agent._animator.SetTrigger("attack" + random);
+            agent._animator.SetFloat("attackNumber", random);
+
+            random = Random.Range(1, _rikayon._numberOfIntimidations + 1);
+            agent._animator.SetFloat("intimidateNumber", random);
+
             agent._animator.SetBool("isAttacking", true);
-            agent._animator.SetBool("isChasing", false);
             agent._stateMachine.ChangeState(AI_StateID.Attack);
+
+            return;
+        }
+        else if (distance < _enemy._enemyData._attackRange && agent._attackTimer > 0)
+        {
+            _followPosition = agent.transform.position;
+            agent.SetTarget(agent, _followPosition);
+
+            int random = Random.Range(1, _rikayon._numberOfIntimidations + 1);
+            agent._animator.SetFloat("intimidateNumber", random);
+
+            agent._animator.SetBool("isIntimidating", true);
+            agent._stateMachine.ChangeState(AI_StateID.Idle);
+            return;
         }
         else
         {

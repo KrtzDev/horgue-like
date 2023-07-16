@@ -19,20 +19,19 @@ public class Rikayon_State_Attack : AI_State_Attack
 
     public override void Update(AI_Agent agent)
     {
-        if (agent._animator.GetCurrentAnimatorStateInfo(0).IsName("Attack" + _rikayon._currentAttackNumber) || agent._animator.GetCurrentAnimatorStateInfo(0).IsName("IntimidateBeforeIdle"))
+        if (agent._animator.GetCurrentAnimatorStateInfo(0).IsName("Attack") || agent._animator.GetCurrentAnimatorStateInfo(0).IsName("Intimidate"))
         {
 
         }
         else
         {
-            agent._animator.SetBool("isAttacking", false);
-            agent._animator.SetBool("isIdle", true);
+            agent._animator.SetBool("isIntimidating", false);
             agent._stateMachine.ChangeState(AI_StateID.Idle);
         }
     }
 
     public override void Exit(AI_Agent agent)
     {
-
+        agent._animator.SetBool("isAttacking", false);
     }
 }

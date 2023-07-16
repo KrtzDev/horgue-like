@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class EnemyHealthComponent : HealthComponent
 {
+	[SerializeField] private bool _isBossEnemy;
     [SerializeField] private Transform _hitParticlePosition;
     [SerializeField] private ParticleSystem _hitParticle;
 
@@ -34,7 +35,7 @@ public class EnemyHealthComponent : HealthComponent
 			return;
 		}
 		
-		if (_currentHealth > 0 && !_isDead)
+		if (_currentHealth > 0 && !_isDead && !_isBossEnemy)
         {
 			MarkEnemyToTakeDamage();
         }
@@ -52,7 +53,7 @@ public class EnemyHealthComponent : HealthComponent
 			gameObject.GetComponent<Collider>().enabled = false;
 		if (gameObject.GetComponent<Rigidbody>() != null)
 			gameObject.GetComponent<Rigidbody>().isKinematic = true;
-		if (gameObject.GetComponent<UnityEngine.AI.NavMeshAgent>() != null)
+		if (gameObject.GetComponent<UnityEngine.AI.NavMeshAgent>() != null && !_isBossEnemy)
 			gameObject.GetComponent<UnityEngine.AI.NavMeshAgent>().enabled = false;
 		if (gameObject.GetComponent<AI_Agent_Enemy>() != null)
 			gameObject.GetComponent<AI_Agent_Enemy>().enabled = false;
