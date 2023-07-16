@@ -30,4 +30,25 @@ public class AI_Agent_Rikayon : AI_Agent_Enemy
     {
         this.gameObject.SetActive(false);
     }
+
+    public override void CheckForBossStage()
+    {
+        if(_healthComponent._currentHealth <= _healthComponent._maxHealth / 2 && _currentBossStage == 0)
+        {
+            _animator.SetTrigger("bossStage1");
+            _currentBossStage = 1;
+            _healthComponent._canTakeDamage = false;
+            
+            gameObject.GetComponent <AI_Agent_Rikayon> ().enabled = false;
+        }
+
+        if (_healthComponent._currentHealth <= _healthComponent._maxHealth / 4 && _currentBossStage == 1)
+        {
+            _animator.SetTrigger("bossStage2");
+            _currentBossStage = 2;
+            _healthComponent._canTakeDamage = false;
+            _healthComponent._maxHealth /= 2;
+            gameObject.GetComponent<AI_Agent_Rikayon>().enabled = false;
+        }
+    }
 }

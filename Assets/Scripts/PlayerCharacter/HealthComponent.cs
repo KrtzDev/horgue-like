@@ -7,22 +7,26 @@ public class HealthComponent : MonoBehaviour
 	public event Action<float> OnHealthPercentChanged;
 	public event Action OnDeath;
 
-	[SerializeField] public int _maxHealth;
-	[SerializeField] public int _currentHealth;
+	public int _maxHealth;
+	public int _currentHealth;
+	public bool _canTakeDamage;
 
 	public bool _isDead = false;
 
 	protected virtual void Awake()
 	{
+		_canTakeDamage = true;
 		_isDead = false;
 	}
 
 	public virtual void TakeDamage(int damage)
 	{
-		_currentHealth -= damage;
-
-		float currentHealthPct = (float)_currentHealth / _maxHealth;
-		OnHealthPercentChanged?.Invoke(currentHealthPct);
+		if(_canTakeDamage)
+        {
+			_currentHealth -= damage;
+			float currentHealthPct = (float)_currentHealth / _maxHealth;
+			OnHealthPercentChanged?.Invoke(currentHealthPct);
+		}
 
 		if (gameObject.CompareTag("Player"))
 		{

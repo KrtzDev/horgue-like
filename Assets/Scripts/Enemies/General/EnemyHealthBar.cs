@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -13,38 +14,37 @@ public class EnemyHealthBar : MonoBehaviour
         _healthComponent = this.GetComponentInParent<HealthComponent>();
         _healthComponent.OnHealthPercentChanged += HandleHealthChanged;
 
-        for (int i = 0; i < this.transform.childCount; i++)
+        for (int i = 0; i < transform.childCount; i++)
         {
-            this.transform.GetChild(i).gameObject.SetActive(false);
+            transform.GetChild(i).gameObject.SetActive(false);
         }
     }
+
     private void LateUpdate()
     {
         transform.LookAt(transform.position + Camera.main.transform.rotation * Vector3.back, Camera.main.transform.rotation * Vector3.down);
         transform.Rotate(0, 180, 0);
     }
 
-    private void Update()
-    {
-        if (_healthComponent._currentHealth <= 0)
-        {
-            gameObject.SetActive(false);
-        }
-    }
-
-    private void HandleHealthChanged(float percent)
+    public void HandleHealthChanged(float percent)
     {
 		if (_healthComponent._isDead)
 			return;
 
         StartCoroutine(ChangeToPercent(percent));
 
-        if(_healthComponent._currentHealth < _healthComponent._maxHealth && !this.transform.GetChild(1).gameObject.activeInHierarchy)
+        if(_healthComponent._currentHealth < _healthComponent._maxHealth)
         {
-            for (int i = 0; i < this.transform.childCount; i++)
+            for (int i = 0; i < transform.childCount; i++)
             {
-                this.transform.GetChild(i).gameObject.SetActive(true);
+                transform.GetChild(i).gameObject.SetActive(true);
             }
+        }
+        
+        if (_healthComponent._currentHealth <= 0)
+        {
+            enabled = false;
+            gameObject.SetActive(false);
         }
     }
 

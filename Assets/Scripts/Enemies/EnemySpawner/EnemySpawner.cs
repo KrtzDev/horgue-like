@@ -77,7 +77,7 @@ public class EnemySpawner : MonoBehaviour
             {
                 int currentEnemiesFromMin = _enemySpawnerData._minEnemyCount;
 
-                if(GameManager.Instance._enemyCount >= 0)
+                if(GameManager.Instance._enemyCount > 0)
                 {
                     currentEnemiesFromMin = _enemySpawnerData._minEnemyCount - GameManager.Instance._enemyCount;
                 }
