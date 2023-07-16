@@ -264,12 +264,15 @@ public class PlayerMovementMobility : MonoBehaviour
         _stealthMovementSpeed = _originalMovementSpeed * _movementSpeedMultiplier;
         _playerMovement.MovementSpeed = _stealthMovementSpeed;
 
-        for (int i = 0; i < _enemySpawner.transform.childCount; i++)
+        if(_enemySpawner._enemyObjectPoolParent.transform.childCount != 0)
         {
-            for (int j = 0; j < _enemySpawner.transform.GetChild(i).childCount; j++)
+            for (int i = 0; i < _enemySpawner._enemyObjectPoolParent.transform.childCount; i++)
             {
-                // _EnemySpawner.transform.GetChild(i).GetChild(j).GetComponent<EnemyMovement>().PlayerTarget = _Decoy.transform;
-                _enemySpawner._enemyObjectPoolParent.transform.GetChild(i).GetChild(j).GetComponent<AI_Agent_Enemy>()._followDecoy = true;
+                for (int j = 0; j < _enemySpawner._enemyObjectPoolParent.transform.GetChild(i).childCount; j++)
+                {
+                    // _EnemySpawner.transform.GetChild(i).GetChild(j).GetComponent<EnemyMovement>().PlayerTarget = _Decoy.transform;
+                    _enemySpawner._enemyObjectPoolParent.transform.GetChild(i).GetChild(j).GetComponent<AI_Agent_Enemy>()._followDecoy = true;
+                }
             }
         }
 
