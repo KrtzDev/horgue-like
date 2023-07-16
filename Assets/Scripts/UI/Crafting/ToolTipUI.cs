@@ -39,7 +39,7 @@ public class ToolTipUI : MonoBehaviour
 			currentStat = Instantiate(_statUI_prefab, _statParent);
 			currentStat.Initialize("Range: ", barrel.range.ToString());
 			currentStat = Instantiate(_statUI_prefab, _statParent);
-			currentStat.Initialize("Projectile trajectory: ", barrel.attackPattern.PatternName().ToString());
+			currentStat.Initialize("Projectile trajectory: ", barrel.attackPattern.PatternName());
 		}
 		else if (weaponPartData is Magazine)
 		{
@@ -68,6 +68,11 @@ public class ToolTipUI : MonoBehaviour
 			currentStat.Initialize("Crit Chance: ", ammunition.critChance.ToString());
 			currentStat = Instantiate(_statUI_prefab, _statParent);
 			currentStat.Initialize("Range: ", ammunition.range.ToString());
+			if(ammunition.statusEffect != null)
+			{
+				currentStat = Instantiate(_statUI_prefab, _statParent);
+				currentStat.Initialize("Impact Effect", ammunition.statusEffect.StatusName());
+			}
 		}
 		else if (weaponPartData is TriggerMechanism)
 		{

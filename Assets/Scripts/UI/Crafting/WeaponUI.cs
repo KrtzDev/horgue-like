@@ -164,12 +164,12 @@ public class WeaponUI : MonoBehaviour
 			currenStat = Instantiate(_statUI_prefab, _weaponStatsParent);
 			currenStat.Initialize("Capacity: ", weaponStats.capacity.ToString("0.00"));
 			currenStat = Instantiate(_statUI_prefab, _weaponStatsParent);
-			currenStat.Initialize("Projectile Trajectory: ", weaponStats.attackPattern.PatternName().ToString());
+			currenStat.Initialize("Projectile Trajectory: ", weaponStats.attackPattern.PatternName());
+			currenStat = Instantiate(_statUI_prefab, _weaponStatsParent);
 			if (weaponStats.statusEffect != null)
-			{
-				currenStat = Instantiate(_statUI_prefab, _weaponStatsParent);
-				currenStat.Initialize("Impact Effect: ", weaponStats.statusEffect.StatusName().ToString());
-			}
+				currenStat.Initialize("Impact Effect: ", weaponStats.statusEffect.StatusName());
+			else
+				currenStat.Initialize("Impact Effect: ", "None");
 		}
 		else if (_previousWeaponStats != null && colorStats)
 		{
@@ -223,13 +223,13 @@ public class WeaponUI : MonoBehaviour
 				currenStat.statBackground.color = currenStat.negativeColor;
 
 			currenStat = Instantiate(_statUI_prefab, _weaponStatsParent);
-			currenStat.Initialize("Projectile Trajectory: ", weaponStats.attackPattern.PatternName().ToString());
+			currenStat.Initialize("Projectile Trajectory: ", weaponStats.attackPattern.PatternName());
 
+			currenStat = Instantiate(_statUI_prefab, _weaponStatsParent);
 			if (weaponStats.statusEffect != null)
-			{
-				currenStat = Instantiate(_statUI_prefab, _weaponStatsParent);
-				currenStat.Initialize("Impact Effect: ", weaponStats.statusEffect.StatusName().ToString());
-			}
+				currenStat.Initialize("Impact Effect: ", weaponStats.statusEffect.StatusName());
+			else
+				currenStat.Initialize("Impact Effect: ", "None");
 		}
 		else
 		{
@@ -249,11 +249,11 @@ public class WeaponUI : MonoBehaviour
 			currenStat.Initialize("Capacity: ", weaponStats.capacity.ToString("0.00"));
 			currenStat = Instantiate(_statUI_prefab, _weaponStatsParent);
 			currenStat.Initialize("Projectile Trajectory: ", weaponStats.attackPattern.PatternName().ToString());
+			currenStat = Instantiate(_statUI_prefab, _weaponStatsParent);
 			if (weaponStats.statusEffect != null)
-			{
-				currenStat = Instantiate(_statUI_prefab, _weaponStatsParent);
 				currenStat.Initialize("Impact Effect: ", weaponStats.statusEffect.StatusName().ToString());
-			}
+			else
+				currenStat.Initialize("Impact Effect: ", "None");
 		}
 
 		_previousWeaponStats = weaponStats;
