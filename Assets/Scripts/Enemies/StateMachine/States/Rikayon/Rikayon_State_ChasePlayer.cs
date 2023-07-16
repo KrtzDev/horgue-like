@@ -24,6 +24,19 @@ public class Rikayon_State_ChasePlayer : AI_State_ChasePlayer
 
         _timer -= Time.deltaTime;
 
+        float distance = Vector3.Distance(agent.transform.position, agent._playerTransform.position);
+        CheckForAttack(_enemy, distance);
+
+        if(distance < _enemy._enemyData._attackRange)
+        {
+            _followPosition = agent.transform.position;
+            agent.SetTarget(agent, _followPosition);
+            agent._animator.SetBool("isIdle", true);
+            agent._animator.SetBool("isChasing", false);
+            agent._stateMachine.ChangeState(AI_StateID.Attack);
+            return;
+        }
+
         if (_timer < 0f)
         {
             if (agent._navMeshAgent.pathStatus != UnityEngine.AI.NavMeshPathStatus.PathPartial)
@@ -70,9 +83,6 @@ public class Rikayon_State_ChasePlayer : AI_State_ChasePlayer
 
             _timer = _maxTime;
         }
-
-        float distance = Vector3.Distance(agent.transform.position, agent._playerTransform.position);
-        CheckForAttack(_enemy, distance);
     }
 
     public override void Exit(AI_Agent agent)
@@ -90,11 +100,11 @@ public class Rikayon_State_ChasePlayer : AI_State_ChasePlayer
         LookCoroutine = AI_Manager.Instance.StartCoroutine(AI_Manager.Instance.LookAtTarget(agent, _followPosition, _maxTime));
     }
 
-    private void CheckForAttack(AI_Agent_Enemy agent, float distance)
+    private void CheckForAttack(AI_Agent agent, float distance)
     {
-        if (distance < agent._enemyData._attackRange && agent._attackTimer < 0)
+        if (distance < _enemy._enemyData._attackRange && agent._attackTimer < 0)
         {
-            agent._attackTimer = agent._enemyData._attackSpeed;
+            agent._attackTimer = _enemy._enemyData._attackSpeed;
             _followPosition = agent._playerTransform.position;
             agent.transform.LookAt(_followPosition);
             int random = Random.Range(1, _rikayon._numberOfAttacks + 1);

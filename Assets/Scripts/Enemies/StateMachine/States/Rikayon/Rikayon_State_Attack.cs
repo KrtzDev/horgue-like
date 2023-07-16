@@ -11,19 +11,23 @@ public class Rikayon_State_Attack : AI_State_Attack
         base.Enter(agent);
 
         _rikayon = agent as AI_Agent_Rikayon;
+
+        _followPosition = agent.transform.position;
+
+        agent.SetTarget(agent, _followPosition);
     }
 
     public override void Update(AI_Agent agent)
     {
-        if (agent._animator.GetCurrentAnimatorStateInfo(0).IsName("Attack" + _rikayon._currentAttackNumber))
+        if (agent._animator.GetCurrentAnimatorStateInfo(0).IsName("Attack" + _rikayon._currentAttackNumber) || agent._animator.GetCurrentAnimatorStateInfo(0).IsName("IntimidateBeforeIdle"))
         {
 
         }
         else
         {
             agent._animator.SetBool("isAttacking", false);
-            agent._animator.SetBool("isChasing", true);
-            agent._stateMachine.ChangeState(AI_StateID.ChasePlayer);
+            agent._animator.SetBool("isIdle", true);
+            agent._stateMachine.ChangeState(AI_StateID.Idle);
         }
     }
 

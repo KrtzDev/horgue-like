@@ -15,8 +15,6 @@ public class RangedRobot_State_Idle : AI_State_Idle
         _followPosition = agent.transform.position;
 
         agent.SetTarget(agent, _followPosition);
-
-        _followTimer = 0;
     }
 
     public override void Update(AI_Agent agent)
@@ -64,14 +62,6 @@ public class RangedRobot_State_Idle : AI_State_Idle
                 agent._animator.SetBool("isChasing", false);
                 agent._stateMachine.ChangeState(AI_StateID.Retreat);
             }
-        }
-
-        _followTimer += Time.deltaTime;
-
-        if (_followTimer >= _enemy._enemyData._followTime)
-        {
-            agent._animator.SetBool("isChasing", true);
-            agent._stateMachine.ChangeState(AI_StateID.ChasePlayer);
         }
     }
 

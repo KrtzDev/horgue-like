@@ -5,7 +5,6 @@ using UnityEngine;
 public class AI_State_Idle : AI_State
 {
     public Vector3 _followPosition;
-    public float _followTimer;
 
     public AI_Agent_Enemy _enemy;
 
