@@ -4368,6 +4368,7 @@ Transform:
   - {fileID: 5794489086867466104}
   - {fileID: 5794938625125766756}
   - {fileID: 5797261709182472796}
+  - {fileID: 6932071819929543486}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -4476,6 +4477,24 @@ MonoBehaviour:
   _currentBossStage: 0
   _numberOfAttacks: 5
   _numberOfIntimidations: 3
+  _specialAttackSpawnPosition: {fileID: 6932071819929543486}
+  _sprayAttack_prefab: {fileID: 6054152865423660124, guid: 39ea3660cd09a9548a9664042503d98e,
+    type: 3}
+  _spitAttack_prefab: {fileID: 2431302338451663198, guid: 173a47ebaaeda6942a5755c60ca509ac,
+    type: 3}
+  _spitForceMinX: -3
+  _spitForceMaxX: 3
+  _spitForceMinY: 12.5
+  _spitForceMaxY: 22.5
+  _spitForceMinZ: -3
+  _spitForceMaxZ: 3
+  _spikeAttackInner_prefab: {fileID: 6982214405592628148, guid: 3c739bca7c192e443b22e923f33e7997,
+    type: 3}
+  _spikeAttackMid_prefab: {fileID: 6982214405592628148, guid: 38fb7ce11fb2df94b9eef1ce37d2b1bd,
+    type: 3}
+  _spikeAttackOuter_prefab: {fileID: 6982214405592628148, guid: a0da86d47b3a7254a96b4ed21b0c4e15,
+    type: 3}
+  _spikeDestructionWaitTime: 1
 --- !u!208 &1028229596
 NavMeshObstacle:
   m_ObjectHideFlags: 0
@@ -5088,3 +5107,34 @@ MonoBehaviour:
   m_FillOrigin: 1
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!1 &8297512927815590382
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6932071819929543486}
+  m_Layer: 0
+  m_Name: SpecialAttackSpawn
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6932071819929543486
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8297512927815590382}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5794526363542072584}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
