@@ -5,11 +5,12 @@ using UnityEngine.AI;
 
 public class PasuKan_State_Attack : AI_State_Attack
 {
-    public override void Enter(AI_Agent_Enemy agent)
+    public override void Enter(AI_Agent agent)
     {
+        base.Enter(agent);
     }
 
-    public override void Update(AI_Agent_Enemy agent)
+    public override void Update(AI_Agent agent)
     {
         if(agent._animator.GetCurrentAnimatorStateInfo(0).IsName("Attack"))
         {
@@ -22,7 +23,7 @@ public class PasuKan_State_Attack : AI_State_Attack
         }
     }
 
-    public override void Exit(AI_Agent_Enemy agent)
+    public override void Exit(AI_Agent agent)
     {
 
     }

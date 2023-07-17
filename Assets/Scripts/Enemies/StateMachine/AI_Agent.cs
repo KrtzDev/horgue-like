@@ -16,8 +16,8 @@ public class AI_Agent : MonoBehaviour
     public LayerMask _enemyLayer;
     public LayerMask _playerLayer;
 
-    [HideInInspector] public GameObject _player;
-    [HideInInspector] public Transform _playerTransform;
+    public GameObject _player;
+    public Transform _playerTransform;
     [HideInInspector] public Transform _decoyTransform;
 
     [HideInInspector] public float _attackTimer;

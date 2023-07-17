@@ -5,11 +5,13 @@ using UnityEngine.AI;
 
 public class Sniper_State_Retreat : AI_State_Retreat
 {
-    public override void Enter(AI_Agent_Enemy agent)
+    public override void Enter(AI_Agent agent)
     {
+        base.Enter(agent);
+
         agent._animator.SetBool("isRetreating", true);
         agent._navMeshAgent.SetDestination(agent.transform.position);
-        _retreatDistance = Random.Range(agent._enemyData._retreatRange + 1, agent._enemyData._attackRange - 1);
+        _retreatDistance = Random.Range(_enemy._enemyData._retreatRange + 1, _enemy._enemyData._attackRange - 1);
 
         if (agent._followDecoy)
         {
@@ -23,14 +25,14 @@ public class Sniper_State_Retreat : AI_State_Retreat
         Vector3 dirToPlayer = agent.transform.position - _followPosition;
         _retreatPosition = agent.transform.position + dirToPlayer;
 
-        if (NavMesh.SamplePosition(_retreatPosition, out NavMeshHit hit, 1f, agent._navMeshAgent.areaMask))
+        if (NavMesh.SamplePosition(_retreatPosition, out NavMeshHit hit, 1f, _enemy._navMeshAgent.areaMask))
         {
             _retreatPosition = hit.position;
         }
 
     }
 
-    public override void Update(AI_Agent_Enemy agent)
+    public override void Update(AI_Agent agent)
     {
         if (!agent._navMeshAgent.enabled)
         {
@@ -69,7 +71,7 @@ public class Sniper_State_Retreat : AI_State_Retreat
         }
     }
 
-    public override void Exit(AI_Agent_Enemy agent)
+    public override void Exit(AI_Agent agent)
     {
         agent._animator.SetBool("isRetreating", false);
     }

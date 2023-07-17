@@ -44,7 +44,7 @@ public class AI_Manager : MonoBehaviour
         }
     }
 
-    public IEnumerator LookAtTarget(AI_Agent_Enemy agent, Vector3 followPosition, float maxTime)
+    public IEnumerator LookAtTarget(AI_Agent agent, Vector3 followPosition, float maxTime)
     {
         Quaternion lookRotation = Quaternion.LookRotation(followPosition - agent.transform.position);
 

@@ -10,10 +10,14 @@ using UnityEngine.AI;
 public class AI_Agent_Enemy : AI_Agent
 {
     public BasicEnemyData _enemyData;
+    public bool _isBossEnemy;
     [HideInInspector] public EnemyHealthComponent _healthComponent;
+    [HideInInspector] public int _currentBossStage = 0;
 
     protected override void Start()
     {
+        base.Start();
+
         // Register States
 
         _navMeshAgent = GetComponent<NavMeshAgent>();
@@ -42,5 +46,16 @@ public class AI_Agent_Enemy : AI_Agent
         _navMeshAgent.speed = _enemyData._maxMoveSpeed;
         _navMeshAgent.acceleration = _enemyData._acceleration;
         _attackTimer = 0f;
+    }
+
+    public virtual void CheckForBossStage()
+    {
+
+    }
+
+    private void BringToMaxHealth()
+    {
+        _healthComponent._currentHealth = _healthComponent._maxHealth;
+        _healthComponent._enemyHealthBar.HandleHealthChanged(1);
     }
 }

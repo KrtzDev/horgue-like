@@ -17,8 +17,8 @@ public enum AI_StateID
 public interface AI_State
 {
     AI_StateID GetID();
-    void Enter(AI_Agent_Enemy agent);
-    void Update(AI_Agent_Enemy agent);
-    void Exit(AI_Agent_Enemy agent);
+    void Enter(AI_Agent agent);
+    void Update(AI_Agent agent);
+    void Exit(AI_Agent agent);
 }
 

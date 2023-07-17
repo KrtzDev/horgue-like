@@ -767,10 +767,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _maxHealth: 0
   _currentHealth: 0
+  _canTakeDamage: 0
   _isDead: 0
   _hitParticlePosition: {fileID: 5332456720476653605}
   _hitParticle: {fileID: 6362102834014993675, guid: 5561755790406d148a233f12b01260c5,
     type: 3}
+  _enemyHealthBar: {fileID: 0}
   _healthDrop: {fileID: 4318080567083893032, guid: 03c15c294a93b874ca9153b08ea682dd,
     type: 3}
   _coinDrop: {fileID: 2954434917669188068, guid: bc346ef89f6462d419a727974cda75b8,
@@ -788,12 +790,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _initialState: 1
-  _enemyData: {fileID: 11400000, guid: 1c6784eeb238619469f87bbb4a9877f5, type: 2}
   _navMeshAgent: {fileID: 0}
   _obstacleAgent: {fileID: 0}
   _animator: {fileID: 0}
   _rb: {fileID: 0}
-  _healthComponent: {fileID: 0}
   _groundLayer:
     serializedVersion: 2
     m_Bits: 512
@@ -813,6 +813,10 @@ MonoBehaviour:
   _useMovementPrediction: 1
   _movementPredictionThreshold: 0.2
   _movementPredictionTime: 0.5
+  _enemyData: {fileID: 11400000, guid: 1c6784eeb238619469f87bbb4a9877f5, type: 2}
+  _isBossEnemy: 0
+  _healthComponent: {fileID: 0}
+  _currentBossStage: 0
 --- !u!208 &2605579634162773324
 NavMeshObstacle:
   m_ObjectHideFlags: 0
@@ -957,7 +961,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10911, guid: 0000000000000000f000000000000000, type: 0}
+  m_Sprite: {fileID: 21300000, guid: c61150dbadb94584bb40fbd9f5011ae3, type: 3}
   m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1064,7 +1068,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10911, guid: 0000000000000000f000000000000000, type: 0}
+  m_Sprite: {fileID: 21300000, guid: c61150dbadb94584bb40fbd9f5011ae3, type: 3}
   m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1
