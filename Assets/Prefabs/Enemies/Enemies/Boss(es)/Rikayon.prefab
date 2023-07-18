@@ -117,6 +117,64 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _healthBar: {fileID: 2992325114324225325}
   _updateSpeedPerSeconds: 0.15
+--- !u!1 &2116466866864780775
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7109051650865746779}
+  - component: {fileID: 6613505330727993126}
+  - component: {fileID: 7042951088307907710}
+  m_Layer: 0
+  m_Name: MeleeAttackHitBox
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &7109051650865746779
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2116466866864780775}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.49999997, y: 0.49999997, z: 0.49999997}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5794526363542072584}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6613505330727993126
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2116466866864780775}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d4b8e9a83cc44b4cabe11a9fdb32f29, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!65 &7042951088307907710
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2116466866864780775}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &5690445297559679354
 GameObject:
   m_ObjectHideFlags: 0
@@ -4369,6 +4427,7 @@ Transform:
   - {fileID: 5794938625125766756}
   - {fileID: 5797261709182472796}
   - {fileID: 6932071819929543486}
+  - {fileID: 7109051650865746779}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -4488,11 +4547,18 @@ MonoBehaviour:
   _spitForceMaxY: 22.5
   _spitForceMinZ: -3
   _spitForceMaxZ: 3
+  _spikePreviewTime: 0.25
   _spikeAttackInner_prefab: {fileID: 6982214405592628148, guid: 3c739bca7c192e443b22e923f33e7997,
     type: 3}
   _spikeAttackMid_prefab: {fileID: 6982214405592628148, guid: 38fb7ce11fb2df94b9eef1ce37d2b1bd,
     type: 3}
   _spikeAttackOuter_prefab: {fileID: 6982214405592628148, guid: a0da86d47b3a7254a96b4ed21b0c4e15,
+    type: 3}
+  _spikePreviewInner_prefab: {fileID: 6982214405592628148, guid: e483f6573ad258a458d1c05854ee6e86,
+    type: 3}
+  _spikePreviewMid_prefab: {fileID: 6982214405592628148, guid: 3a7063f151b96b145833a5746d594260,
+    type: 3}
+  _spikePreviewOuter_prefab: {fileID: 6982214405592628148, guid: 3f85f4ea0d832ae4abf1a6da9c20d773,
     type: 3}
   _spikeDestructionWaitTime: 1
 --- !u!208 &1028229596

@@ -25,12 +25,14 @@ public class AI_Agent_Rikayon : AI_Agent_Enemy
     private Vector3 _spitForce;
 
     [Header("Spike Attack")]
+    [SerializeField] private float _spikePreviewTime;
     public GameObject _spikeAttackInner_prefab;
     public GameObject _spikeAttackMid_prefab;
     public GameObject _spikeAttackOuter_prefab;
+    public GameObject _spikePreviewInner_prefab;
+    public GameObject _spikePreviewMid_prefab;
+    public GameObject _spikePreviewOuter_prefab;
     private int _spikeAttackNumber = 0;
-    [SerializeField] private float _spikeDestructionWaitTime;
-
 
     protected override void Start()
     {
@@ -107,33 +109,70 @@ public class AI_Agent_Rikayon : AI_Agent_Enemy
         // Move Spikes slowly outwards
         // Make Spikes dissapear after x Seconds
 
+        switch (_spikeAttackNumber)
+        {
+            case 0:
+                StartCoroutine(SpawnSpike());
+                break;
+            case 1:
+                StartCoroutine(SpawnSpike());
+                break;
+            case 2:
+                StartCoroutine(SpawnSpike());
+                break;
+            case 3:
+                StartCoroutine(SpawnSpike());
+                break;
+        }
+    }
+
+    private IEnumerator SpawnSpike()
+    {
         GameObject spikes;
+        GameObject spikePreview;
 
         switch (_spikeAttackNumber)
         {
             case 0:
+                spikePreview = Instantiate(_spikePreviewInner_prefab, _specialAttackSpawnPosition.position, Quaternion.identity, _specialAttackSpawnPosition);
+                yield return new WaitForSeconds(_spikePreviewTime);
+                DestroySpawnPositionChilds();
                 spikes = Instantiate(_spikeAttackInner_prefab, _specialAttackSpawnPosition.position, Quaternion.identity, _specialAttackSpawnPosition);
                 _spikeAttackNumber = 1;
                 break;
             case 1:
+                DestroySpawnPositionChilds();
+                spikePreview = Instantiate(_spikePreviewMid_prefab, _specialAttackSpawnPosition.position, Quaternion.identity, _specialAttackSpawnPosition);
+                yield return new WaitForSeconds(_spikePreviewTime);
+                DestroySpawnPositionChilds();
                 spikes = Instantiate(_spikeAttackMid_prefab, _specialAttackSpawnPosition.position, Quaternion.identity, _specialAttackSpawnPosition);
                 _spikeAttackNumber = 2;
                 break;
             case 2:
+                DestroySpawnPositionChilds();
+                spikePreview = Instantiate(_spikePreviewOuter_prefab, _specialAttackSpawnPosition.position, Quaternion.identity, _specialAttackSpawnPosition);
+                yield return new WaitForSeconds(_spikePreviewTime);
+                DestroySpawnPositionChilds();
                 spikes = Instantiate(_spikeAttackOuter_prefab, _specialAttackSpawnPosition.position, Quaternion.identity, _specialAttackSpawnPosition);
                 _spikeAttackNumber = 3;
                 break;
             case 3:
                 _spikeAttackNumber = 0;
-                StartCoroutine(DestroySpawnPositionChilds(_spikeDestructionWaitTime)); // de-parent Spikes when Spike Script is setup / handle destruction in Spike Script
+                StartCoroutine(DestroySpawnPositionChilds(0)); // de-parent Spikes when Spike Script is setup / handle destruction in Spike Script
                 break;
         }
+
+        yield return null;
     }
 
     private IEnumerator DestroySpawnPositionChilds(float time)
     {
         yield return new WaitForSeconds(time);
+        DestroySpawnPositionChilds();
+    }
 
+    private void DestroySpawnPositionChilds()
+    {
         for (int i = 0; i < _specialAttackSpawnPosition.childCount; i++)
         {
             Destroy(_specialAttackSpawnPosition.GetChild(i).gameObject);
