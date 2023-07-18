@@ -10,27 +10,43 @@ public class Rikayon_Spray : MonoBehaviour
     [SerializeField] private float _damageTime;
     [SerializeField] private int _damagePerTick;
 
-    private void OnParticleCollision(GameObject other)
+    GameObject _player;
+    ParticleSystem ps;
+
+    private void OnParticleTrigger()
     {
-        if (other.gameObject.CompareTag("Player") && _damageTimer < 0)
+        List<ParticleSystem.Particle> insideList = new List<ParticleSystem.Particle>();
+        int numInside = ps.GetTriggerParticles(ParticleSystemTriggerEventType.Inside, insideList);
+
+        Debug.Log(numInside);
+
+        if (numInside > 0)
         {
-            switch (_rikayon._currentBossStage)
+            if (_damageTimer < 0)
             {
-                case 0:
-                    other.GetComponent<HealthComponent>().TakeDamage(_damagePerTick);
-                    _damageTimer = _damageTime;
-                    break;
-                case 1:
-                    break;
-                case 2:
-                    break;
+                switch (_rikayon._currentBossStage)
+                {
+                    case 0:
+                        ps.trigger.GetCollider(0).GetComponentInParent<HealthComponent>().TakeDamage(_damagePerTick);
+                        _damageTimer = _damageTime;
+                        break;
+                    case 1:
+                        break;
+                    case 2:
+                        break;
+                }
             }
         }
+
+        ps.SetTriggerParticles(ParticleSystemTriggerEventType.Inside, insideList);
     }
 
     private void Start()
     {
         _rikayon = GameObject.FindObjectOfType<AI_Agent_Rikayon>();
+        ps = GetComponent<ParticleSystem>();
+        _player = GameObject.FindWithTag("Player");
+        ps.trigger.AddCollider(_player.GetComponentInChildren<BoxCollider>());
         _damageTimer = 0;
     }
 
