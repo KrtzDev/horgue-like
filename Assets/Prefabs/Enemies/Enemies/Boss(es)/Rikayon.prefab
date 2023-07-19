@@ -4511,6 +4511,7 @@ MonoBehaviour:
   _obstacleAgent: {fileID: 0}
   _animator: {fileID: 0}
   _rb: {fileID: 0}
+  _originalAnimationSpeed: 0
   _groundLayer:
     serializedVersion: 2
     m_Bits: 512
@@ -4533,10 +4534,14 @@ MonoBehaviour:
   _enemyData: {fileID: 11400000, guid: 82118306e108d9743814036562f61341, type: 2}
   _isBossEnemy: 1
   _healthComponent: {fileID: 0}
+  _bossStageAnimationMultiplier: {x: 0, y: 0}
+  _bossStageMovementMultiplier: {x: 0, y: 0}
   _currentBossStage: 0
   _numberOfAttacks: 5
   _numberOfIntimidations: 3
   _specialAttackSpawnPosition: {fileID: 6932071819929543486}
+  _bossStageSpeedMultiplier_Spray: {x: 0, y: 0, z: 0}
+  _bossStageAngle_Spray: {x: 0, y: 0, z: 0}
   _sprayAttack_prefab: {fileID: 6054152865423660124, guid: 39ea3660cd09a9548a9664042503d98e,
     type: 3}
   _spitAttack_prefab: {fileID: 2431302338451663198, guid: 173a47ebaaeda6942a5755c60ca509ac,
@@ -4548,6 +4553,7 @@ MonoBehaviour:
   _spitForceMinZ: -3
   _spitForceMaxZ: 3
   _spikePreviewTime: 0.25
+  _bossStageScaleMultiplier_Spikes: {x: 0, y: 0, z: 0}
   _spikeAttackInner_prefab: {fileID: 6982214405592628148, guid: 3c739bca7c192e443b22e923f33e7997,
     type: 3}
   _spikeAttackMid_prefab: {fileID: 6982214405592628148, guid: 38fb7ce11fb2df94b9eef1ce37d2b1bd,
@@ -4560,7 +4566,6 @@ MonoBehaviour:
     type: 3}
   _spikePreviewOuter_prefab: {fileID: 6982214405592628148, guid: 3f85f4ea0d832ae4abf1a6da9c20d773,
     type: 3}
-  _spikeDestructionWaitTime: 1
 --- !u!208 &1028229596
 NavMeshObstacle:
   m_ObjectHideFlags: 0

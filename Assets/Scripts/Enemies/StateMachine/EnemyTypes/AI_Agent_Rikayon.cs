@@ -4,6 +4,12 @@ using UnityEngine;
 
 public class AI_Agent_Rikayon : AI_Agent_Enemy
 {
+    [Header("Boss")]
+    public Vector2 _bossStageAnimationMultiplier;
+    public Vector2 _bossStageMovementMultiplier;
+    [HideInInspector] public int _currentBossStage = 0;
+    [HideInInspector] public Vector3Int _lastAbilities = new Vector3Int(0, 0, 0);
+
     public int _numberOfAttacks;
     public int _numberOfIntimidations;
 
@@ -11,6 +17,8 @@ public class AI_Agent_Rikayon : AI_Agent_Enemy
     public Transform _specialAttackSpawnPosition;
 
     [Header("Spray Attack")]
+    [SerializeField] private Vector3 _bossStageSpeedMultiplier_Spray;
+    [SerializeField] private Vector3Int _bossStageAngle_Spray;
     public GameObject _sprayAttack_prefab;
     private bool _sprayAttackActive;
 
@@ -26,6 +34,7 @@ public class AI_Agent_Rikayon : AI_Agent_Enemy
 
     [Header("Spike Attack")]
     [SerializeField] private float _spikePreviewTime;
+    [SerializeField] private Vector3 _bossStageScaleMultiplier_Spikes;
     public GameObject _spikeAttackInner_prefab;
     public GameObject _spikeAttackMid_prefab;
     public GameObject _spikeAttackOuter_prefab;
@@ -37,6 +46,8 @@ public class AI_Agent_Rikayon : AI_Agent_Enemy
     protected override void Start()
     {
         base.Start();
+
+        _originalAnimationSpeed = _animator.speed;
     }
 
     protected override void Update()
@@ -60,21 +71,36 @@ public class AI_Agent_Rikayon : AI_Agent_Enemy
 
     public override void CheckForBossStage()
     {
-        if(_healthComponent._currentHealth <= _healthComponent._maxHealth / 2 && _currentBossStage == 0)
+
+        if (_healthComponent._currentHealth <= _healthComponent._maxHealth / 2 && _currentBossStage == 0)
         {
+            _animator.speed = _originalAnimationSpeed;
+
             _animator.SetTrigger("bossStage1");
             _currentBossStage = 1;
             _healthComponent._canTakeDamage = false;
-            
+
+            _navMeshAgent.speed *= _bossStageMovementMultiplier.x;
+            _navMeshAgent.acceleration *= _bossStageMovementMultiplier.x;
+
             gameObject.GetComponent <AI_Agent_Rikayon> ().enabled = false;
         }
 
         if (_healthComponent._currentHealth <= _healthComponent._maxHealth / 4 && _currentBossStage == 1)
         {
+            _animator.speed = _originalAnimationSpeed;
+
             _animator.SetTrigger("bossStage2");
             _currentBossStage = 2;
             _healthComponent._canTakeDamage = false;
             _healthComponent._maxHealth /= 2;
+
+            _navMeshAgent.speed /= _bossStageMovementMultiplier.x;
+            _navMeshAgent.acceleration /= _bossStageMovementMultiplier.x;
+
+            _navMeshAgent.speed *= _bossStageMovementMultiplier.y;
+            _navMeshAgent.acceleration *= _bossStageMovementMultiplier.y;
+
             gameObject.GetComponent<AI_Agent_Rikayon>().enabled = false;
         }
     }
@@ -84,20 +110,43 @@ public class AI_Agent_Rikayon : AI_Agent_Enemy
         // Spray attack in cone shape infront of Rikayon
         // Intimidate 1
 
+        switch(_currentBossStage)
+        {
+            case 0:
+                SprayAttackAbility(_bossStageSpeedMultiplier_Spray.x, _bossStageAngle_Spray.x);
+                break;
+            case 1:
+                SprayAttackAbility(_bossStageSpeedMultiplier_Spray.y, _bossStageAngle_Spray.x);
+                break;
+            case 2:
+                SprayAttackAbility(_bossStageSpeedMultiplier_Spray.z, _bossStageAngle_Spray.x);
+                break;
+        }
+    }
+
+    private void SprayAttackAbility(float currentSpeedMultiplier, int currentAngle)
+    {
         if (!_sprayAttackActive)
         {
             _sprayAttackActive = true;
 
             GameObject sprayAttack;
+            ParticleSystem ps;
             sprayAttack = Instantiate(_sprayAttack_prefab, _specialAttackSpawnPosition);
+            ps = sprayAttack.GetComponent<ParticleSystem>();
+            ps.Stop();
+            var main = ps.main;
+            main.startSpeedMultiplier *= currentSpeedMultiplier;
+            var shape = ps.shape;
+            shape.angle = currentAngle;
+            ps.Play();
         }
         else
         {
             _sprayAttackActive = false;
 
-            StartCoroutine(DestroySpawnPositionChilds(0));
+            StartCoroutine(DestroySpawnPositionChilds_IEnumerator(0));
         }
-
     }
 
     public void RadialSpikeAttack()
@@ -112,66 +161,89 @@ public class AI_Agent_Rikayon : AI_Agent_Enemy
         switch (_spikeAttackNumber)
         {
             case 0:
-                StartCoroutine(SpawnSpike());
+                SpawnSpike();
                 break;
             case 1:
-                StartCoroutine(SpawnSpike());
+                SpawnSpike();
                 break;
             case 2:
-                StartCoroutine(SpawnSpike());
+                SpawnSpike();
                 break;
             case 3:
-                StartCoroutine(SpawnSpike());
+                SpawnSpike();
                 break;
         }
     }
 
-    private IEnumerator SpawnSpike()
+    private void SpawnSpike()
     {
-        GameObject spikes;
+        switch (_currentBossStage)
+        {
+            case 0:
+                StartCoroutine(SpawnSpike(_bossStageScaleMultiplier_Spikes.x));
+                break;
+            case 1:
+                StartCoroutine(SpawnSpike(_bossStageScaleMultiplier_Spikes.y));
+                break;
+            case 2:
+                StartCoroutine(SpawnSpike(_bossStageScaleMultiplier_Spikes.z));
+                break;
+        }
+    }
+
+    private IEnumerator SpawnSpike(float currentMultiplier)
+    {
         GameObject spikePreview;
+        GameObject spikes;
 
         switch (_spikeAttackNumber)
         {
             case 0:
+
                 spikePreview = Instantiate(_spikePreviewInner_prefab, _specialAttackSpawnPosition.position, Quaternion.identity, _specialAttackSpawnPosition);
+                spikePreview.transform.localScale = new Vector3(spikePreview.transform.localScale.x * currentMultiplier, spikePreview.transform.localScale.y, spikePreview.transform.localScale.z * currentMultiplier);
                 yield return new WaitForSeconds(_spikePreviewTime);
                 DestroySpawnPositionChilds();
                 spikes = Instantiate(_spikeAttackInner_prefab, _specialAttackSpawnPosition.position, Quaternion.identity, _specialAttackSpawnPosition);
+                spikes.transform.localScale = new Vector3(spikes.transform.localScale.x * currentMultiplier, spikes.transform.localScale.y, spikes.transform.localScale.z * currentMultiplier);
                 _spikeAttackNumber = 1;
                 break;
             case 1:
                 DestroySpawnPositionChilds();
                 spikePreview = Instantiate(_spikePreviewMid_prefab, _specialAttackSpawnPosition.position, Quaternion.identity, _specialAttackSpawnPosition);
+                spikePreview.transform.localScale = new Vector3(spikePreview.transform.localScale.x * currentMultiplier, spikePreview.transform.localScale.y, spikePreview.transform.localScale.z * currentMultiplier);
                 yield return new WaitForSeconds(_spikePreviewTime);
                 DestroySpawnPositionChilds();
                 spikes = Instantiate(_spikeAttackMid_prefab, _specialAttackSpawnPosition.position, Quaternion.identity, _specialAttackSpawnPosition);
+                spikes.transform.localScale = new Vector3(spikes.transform.localScale.x * currentMultiplier, spikes.transform.localScale.y, spikes.transform.localScale.z * currentMultiplier);
                 _spikeAttackNumber = 2;
                 break;
             case 2:
                 DestroySpawnPositionChilds();
                 spikePreview = Instantiate(_spikePreviewOuter_prefab, _specialAttackSpawnPosition.position, Quaternion.identity, _specialAttackSpawnPosition);
+                spikePreview.transform.localScale = new Vector3(spikePreview.transform.localScale.x * currentMultiplier, spikePreview.transform.localScale.y, spikePreview.transform.localScale.z * currentMultiplier);
                 yield return new WaitForSeconds(_spikePreviewTime);
                 DestroySpawnPositionChilds();
                 spikes = Instantiate(_spikeAttackOuter_prefab, _specialAttackSpawnPosition.position, Quaternion.identity, _specialAttackSpawnPosition);
+                spikes.transform.localScale = new Vector3(spikes.transform.localScale.x * currentMultiplier, spikes.transform.localScale.y, spikes.transform.localScale.z * currentMultiplier);
                 _spikeAttackNumber = 3;
                 break;
             case 3:
                 _spikeAttackNumber = 0;
-                StartCoroutine(DestroySpawnPositionChilds(0)); // de-parent Spikes when Spike Script is setup / handle destruction in Spike Script
+                StartCoroutine(DestroySpawnPositionChilds_IEnumerator(0)); // de-parent Spikes when Spike Script is setup / handle destruction in Spike Script
                 break;
         }
 
         yield return null;
     }
 
-    private IEnumerator DestroySpawnPositionChilds(float time)
+    private IEnumerator DestroySpawnPositionChilds_IEnumerator(float time)
     {
         yield return new WaitForSeconds(time);
         DestroySpawnPositionChilds();
     }
 
-    private void DestroySpawnPositionChilds()
+    public void DestroySpawnPositionChilds()
     {
         for (int i = 0; i < _specialAttackSpawnPosition.childCount; i++)
         {
@@ -184,10 +256,32 @@ public class AI_Agent_Rikayon : AI_Agent_Enemy
         // Spits semi-lingering toxic waste into the air which falls onto the ground (near the player and on the NavMesh) and stays for a while
         // Intimidate 3
 
+        switch (_currentBossStage)
+        {
+            case 0:
+                StartCoroutine(SpawnSpitAttack(0));
+                break;
+            case 1:
+                StartCoroutine(SpawnSpitAttack(0));
+                StartCoroutine(SpawnSpitAttack(0.5f));
+                break;
+            case 2:
+                StartCoroutine(SpawnSpitAttack(0));
+                StartCoroutine(SpawnSpitAttack(0.5f));
+                StartCoroutine(SpawnSpitAttack(1));
+                break;
+        }
+    }
+
+    private IEnumerator SpawnSpitAttack(float time)
+    {
+        yield return new WaitForSeconds(time);
+
+        GameObject spitAttack;
+
         _spitForce = new Vector3(Random.Range(_spitForceMinX, _spitForceMaxX), Random.Range(_spitForceMinY, _spitForceMaxY), Random.Range(_spitForceMinZ, _spitForceMaxZ));
 
-        GameObject spit;
-        spit = Instantiate(_spitAttack_prefab, _specialAttackSpawnPosition.position, Quaternion.identity);
-        spit.GetComponent<Rigidbody>().AddForce(_spitForce, ForceMode.Impulse);
+        spitAttack = Instantiate(_spitAttack_prefab, _specialAttackSpawnPosition.position, Quaternion.identity);
+        spitAttack.GetComponent<Rigidbody>().AddForce(_spitForce, ForceMode.Impulse);
     }
 }

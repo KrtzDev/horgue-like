@@ -6,6 +6,7 @@ public class Rikayon_Spike : MonoBehaviour
 {
     private AI_Agent_Rikayon _rikayon;
 
+    [SerializeField] private Vector2 _bossStageDamageMultiplier;
     [SerializeField] private int _damageOnTrigger;
 
     private void OnTriggerEnter(Collider other)
@@ -18,8 +19,10 @@ public class Rikayon_Spike : MonoBehaviour
                     other.GetComponent<HealthComponent>().TakeDamage(_damageOnTrigger);
                     break;
                 case 1:
+                    other.GetComponent<HealthComponent>().TakeDamage((int)(_damageOnTrigger * _bossStageDamageMultiplier.x));
                     break;
                 case 2:
+                    other.GetComponent<HealthComponent>().TakeDamage((int)(_damageOnTrigger * _bossStageDamageMultiplier.y));
                     break;
             }
         }

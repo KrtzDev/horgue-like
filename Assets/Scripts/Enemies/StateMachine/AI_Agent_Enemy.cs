@@ -12,7 +12,6 @@ public class AI_Agent_Enemy : AI_Agent
     public BasicEnemyData _enemyData;
     public bool _isBossEnemy;
     [HideInInspector] public EnemyHealthComponent _healthComponent;
-    [HideInInspector] public int _currentBossStage = 0;
 
     protected override void Start()
     {

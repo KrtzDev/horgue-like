@@ -609,7 +609,7 @@ ParticleSystem:
     gravityModifier:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 0.2
+      scalar: 0.3
       minScalar: 0.1
       maxCurve:
         serializedVersion: 2
@@ -3796,9 +3796,9 @@ ParticleSystem:
   TriggerModule:
     enabled: 1
     serializedVersion: 2
-    inside: 2
+    inside: 0
     outside: 0
-    enter: 0
+    enter: 2
     exit: 0
     colliderQueryMode: 0
     radiusScale: 1
@@ -4827,4 +4827,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _damageTime: 0.15
+  _bossStageDamageMultiplier: {x: 1.5, y: 2}
   _damagePerTick: 2

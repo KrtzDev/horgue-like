@@ -11,6 +11,7 @@ public class AI_Agent : MonoBehaviour
     [HideInInspector] public ObstacleAgent _obstacleAgent;
     [HideInInspector] public Animator _animator;
     [HideInInspector] public Rigidbody _rb;
+    [HideInInspector] public float _originalAnimationSpeed;
 
     public LayerMask _groundLayer;
     public LayerMask _enemyLayer;

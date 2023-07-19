@@ -8,6 +8,7 @@ public class Rikayon_Spray : MonoBehaviour
 
     private float _damageTimer;
     [SerializeField] private float _damageTime;
+    [SerializeField] private Vector2 _bossStageDamageMultiplier;
     [SerializeField] private int _damagePerTick;
 
     GameObject _player;
@@ -15,30 +16,32 @@ public class Rikayon_Spray : MonoBehaviour
 
     private void OnParticleTrigger()
     {
-        List<ParticleSystem.Particle> insideList = new List<ParticleSystem.Particle>();
-        int numInside = ps.GetTriggerParticles(ParticleSystemTriggerEventType.Inside, insideList);
+        List<ParticleSystem.Particle> enterList = new List<ParticleSystem.Particle>();
+        int numEnter = ps.GetTriggerParticles(ParticleSystemTriggerEventType.Enter, enterList);
 
-        Debug.Log(numInside);
-
-        if (numInside > 0)
+        if (numEnter > 0)
         {
             if (_damageTimer < 0)
             {
                 switch (_rikayon._currentBossStage)
                 {
                     case 0:
-                        ps.trigger.GetCollider(0).GetComponentInParent<HealthComponent>().TakeDamage(_damagePerTick);
+                        ps.trigger.GetCollider(0).GetComponent<HealthComponent>().TakeDamage(_damagePerTick);
                         _damageTimer = _damageTime;
                         break;
                     case 1:
+                        ps.trigger.GetCollider(0).GetComponent<HealthComponent>().TakeDamage((int)(_damagePerTick * _bossStageDamageMultiplier.x));
+                        _damageTimer = _damageTime;
                         break;
                     case 2:
+                        ps.trigger.GetCollider(0).GetComponent<HealthComponent>().TakeDamage((int)(_damagePerTick * _bossStageDamageMultiplier.y));
+                        _damageTimer = _damageTime;
                         break;
                 }
             }
         }
 
-        ps.SetTriggerParticles(ParticleSystemTriggerEventType.Inside, insideList);
+        ps.SetTriggerParticles(ParticleSystemTriggerEventType.Enter, enterList);
     }
 
     private void Start()
@@ -46,7 +49,7 @@ public class Rikayon_Spray : MonoBehaviour
         _rikayon = GameObject.FindObjectOfType<AI_Agent_Rikayon>();
         ps = GetComponent<ParticleSystem>();
         _player = GameObject.FindWithTag("Player");
-        ps.trigger.AddCollider(_player.GetComponentInChildren<BoxCollider>());
+        ps.trigger.AddCollider(_player.GetComponent<BoxCollider>());
         _damageTimer = 0;
     }
 

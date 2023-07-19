@@ -17,16 +17,21 @@ public class Rikayon_Spit : MonoBehaviour
     {
         if(other.CompareTag("Ground"))
         {
+            GameObject toxicSpit;
+
             switch (_rikayon._currentBossStage)
             {
                 case 0:
-                    GameObject toxicSpit;
-                    toxicSpit = Instantiate(_toxicSpit_Prefab, new Vector3(transform.position.x, other.transform.position.y + other.GetComponent<Renderer>().bounds.max.y, transform.position.z), Quaternion.identity);
+                    toxicSpit = Instantiate(_toxicSpit_Prefab, new Vector3(transform.position.x, other.transform.position.y + other.GetComponent<Renderer>().bounds.max.y + 0.5f, transform.position.z), Quaternion.identity);
                     Destroy(gameObject);
                     break;
                 case 1:
+                    toxicSpit = Instantiate(_toxicSpit_Prefab, new Vector3(transform.position.x, other.transform.position.y + other.GetComponent<Renderer>().bounds.max.y + 0.5f, transform.position.z), Quaternion.identity);
+                    Destroy(gameObject);
                     break;
                 case 2:
+                    toxicSpit = Instantiate(_toxicSpit_Prefab, new Vector3(transform.position.x, other.transform.position.y + other.GetComponent<Renderer>().bounds.max.y + 0.5f, transform.position.z), Quaternion.identity);
+                    Destroy(gameObject);
                     break;
             }
         }
