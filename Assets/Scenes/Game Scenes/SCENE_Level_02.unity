@@ -18683,6 +18683,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6843213763226438607, guid: b0d5d15041526b8408159035025686a3,
         type: 3}
+      propertyPath: _enemySpawnerData
+      value: 
+      objectReference: {fileID: 11400000, guid: 1de1f6f20ca28814d80004febe7eed3a,
+        type: 2}
+    - target: {fileID: 6843213763226438607, guid: b0d5d15041526b8408159035025686a3,
+        type: 3}
       propertyPath: EnemyObjectPoolParent
       value: 
       objectReference: {fileID: 877116318}
@@ -37804,7 +37810,7 @@ PrefabInstance:
     - target: {fileID: 2136897129691636549, guid: 62d6286d223d00e49ba8ca796795cc73,
         type: 3}
       propertyPath: m_Name
-      value: P_PlayerCharacter 1
+      value: P_PlayerCharacter
       objectReference: {fileID: 0}
     - target: {fileID: 2136897129691636550, guid: 62d6286d223d00e49ba8ca796795cc73,
         type: 3}

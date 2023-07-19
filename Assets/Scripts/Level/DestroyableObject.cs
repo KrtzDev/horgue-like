@@ -2,12 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DestroyableCrate : MonoBehaviour
+public class DestroyableObject : MonoBehaviour
 {
     private Animator _animator;
     private Collider _collider;
     [SerializeField] private bool _isTriggered;
     private bool _destroyed;
+
+    [SerializeField] private bool dropsLoot;
 
     [SerializeField] private GameObject _loot;
     [SerializeField] private Transform _lootSpawn;
@@ -22,10 +24,12 @@ public class DestroyableCrate : MonoBehaviour
 
     private void Update()
     {
+        /*
         if (_isTriggered && !_destroyed)
         {
-            DestroyCrate();
+            DestroyObject();
         }
+        */
     }
 
     private void SpawnLoot()
@@ -38,23 +42,25 @@ public class DestroyableCrate : MonoBehaviour
         Instantiate(_loot, _pos, _rot);
     }
 
-    private void DestroyCrate()
+    public void DestroyObject()
     {
         _destroyed = true;
         _collider.enabled = false;
         _animator.SetTrigger("Destroy");
-        SpawnLoot();
 
-        StartCoroutine(DespawnCrate());
+        if (dropsLoot)
+            SpawnLoot();
+
+        StartCoroutine(DespawnObject());
     }
 
-    private IEnumerator DespawnCrate()
+    private IEnumerator DespawnObject()
     {
         yield return new WaitForSeconds(_despawnTimer);
-        DeactivateCrate();
+        DeactivateObject();
     }
 
-    private void DeactivateCrate()
+    private void DeactivateObject()
     {
         gameObject.SetActive(false);
     }

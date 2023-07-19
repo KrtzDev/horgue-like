@@ -13,10 +13,10 @@ GameObject:
   - component: {fileID: 7611507614348127393}
   - component: {fileID: -4007479725491826198}
   - component: {fileID: 6064448851983090240}
-  - component: {fileID: 8331073926669857340}
   - component: {fileID: 7732120427448389330}
+  - component: {fileID: 5337382940037100652}
   m_Layer: 8
-  m_Name: P_Enemy_SentryProjectile
+  m_Name: P_SentryProjectile_AttackPlayer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -117,22 +117,6 @@ CapsuleCollider:
   m_Height: 1
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &8331073926669857340
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8451927325676435795}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 53d6c35050922494a8c8a94720523859, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hitLayerMask:
-    serializedVersion: 2
-    m_Bits: 576
-  baseDamage: 8
 --- !u!96 &7732120427448389330
 TrailRenderer:
   serializedVersion: 2
@@ -241,3 +225,19 @@ TrailRenderer:
   m_MinVertexDistance: 0.1
   m_Autodestruct: 0
   m_Emitting: 1
+--- !u!114 &5337382940037100652
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8451927325676435795}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 406766c3a3625544d8d3b60b65362cb1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hitLayerMask:
+    serializedVersion: 2
+    m_Bits: 4672
+  baseDamage: 15

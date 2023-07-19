@@ -2,10 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum SentryStatus
-{
-    Ally, Enemy, Off
-}
 public class Sentry : MonoBehaviour
 {
     [SerializeField] private SentryStatus _sentryStatus;
@@ -36,6 +32,7 @@ public class Sentry : MonoBehaviour
 
     private void Update()
     {
+        /*
         switch (_sentryStatus)
         {
             case SentryStatus.Ally:
@@ -65,7 +62,7 @@ public class Sentry : MonoBehaviour
 
                 break;
         }
-
+        */
     }
 
     public void SwitchSentryStatus(SentryStatus _newStatus)
