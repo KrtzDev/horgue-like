@@ -92,38 +92,18 @@ public class Rikayon_State_ChasePlayer : AI_State_ChasePlayer
 
     private void CheckForAttack(AI_Agent agent, float distance)
     {
-        if (distance < _enemy._enemyData._attackRange && agent._attackTimer < 0)
+        if (agent._attackTimer > 0)
+            agent._attackTimer -= Time.deltaTime;
+
+        if (distance < _enemy._enemyData._attackRange && agent._attackTimer <= 0)
         {
             agent._attackTimer = _enemy._enemyData._attackSpeed;
             _followPosition = agent._playerTransform.position;
             agent.transform.LookAt(_followPosition);
 
-            int random = Random.Range(1, _rikayon._numberOfAttacks + 1);
-            agent._animator.SetFloat("attackNumber", random);
-
-            random = Random.Range(1, _rikayon._numberOfIntimidations + 1);
-            agent._animator.SetFloat("intimidateNumber", random);
-
-            agent._animator.SetBool("isAttacking", true);
             agent._stateMachine.ChangeState(AI_StateID.Attack);
 
             return;
-        }
-        else if (distance < _enemy._enemyData._attackRange && agent._attackTimer > 0)
-        {
-            _followPosition = agent.transform.position;
-            agent.SetTarget(agent, _followPosition);
-
-            int random = Random.Range(1, _rikayon._numberOfIntimidations + 1);
-            agent._animator.SetFloat("intimidateNumber", random);
-
-            agent._animator.SetBool("isIntimidating", true);
-            agent._stateMachine.ChangeState(AI_StateID.Idle);
-            return;
-        }
-        else
-        {
-            agent._attackTimer -= Time.deltaTime;
         }
     }
 }

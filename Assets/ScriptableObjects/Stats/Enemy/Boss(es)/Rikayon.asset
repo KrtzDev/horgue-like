@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e53ff1b8ade7b5340af8b4e886fb2c85, type: 3}
   m_Name: Rikayon
   m_EditorClassIdentifier: 
-  _maxHealth: 5000
+  _maxHealth: 10000
   _damagePerHit: 25
-  _attackSpeed: 2
+  _attackSpeed: 1
   _givenXP: 100
   _maxMoveSpeed: 12
   _acceleration: 20
@@ -22,7 +22,7 @@ MonoBehaviour:
   _elementalResistance: 100
   _technicalResistance: 100
   _healthDropChance: 0
-  _attackRange: 6
+  _attackRange: 6.5
   _retreatRange: 0
   _maxJumpAttackRange: 0
   _minJumpAttackRange: 0
