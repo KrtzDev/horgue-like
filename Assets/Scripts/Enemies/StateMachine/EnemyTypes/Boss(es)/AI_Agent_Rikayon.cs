@@ -11,10 +11,14 @@ public class AI_Agent_Rikayon : AI_Agent_Enemy
     [HideInInspector] public Vector3Int _lastAbilities = new Vector3Int(0, 0, 0);
 
     public int _numberOfAttacks;
-    public int _numberOfIntimidations;
+    public int _numberOfSpecialAttacks;
 
     [Header("Special Attacks")]
     public Transform _specialAttackSpawnPosition;
+    public Transform _testTransform;
+    public int _baseSpecialAttackProbability;
+    public float _specialAttackProbablityModifier;
+    [HideInInspector] public int _currentSpecialAttackProbablity;
 
     [Header("Spray Attack")]
     [SerializeField] private Vector3 _bossStageSpeedMultiplier_Spray;
@@ -43,22 +47,32 @@ public class AI_Agent_Rikayon : AI_Agent_Enemy
     public GameObject _spikePreviewOuter_prefab;
     private int _spikeAttackNumber = 0;
 
+    [Header("Player Damage On Touch")]
+    [SerializeField] private int _damageOnTouch;
+    [SerializeField] private float _damageTime;
+    private float _damageTimer = 0;
+
     protected override void Start()
     {
         base.Start();
 
         _originalAnimationSpeed = _animator.speed;
+        _currentSpecialAttackProbablity = _baseSpecialAttackProbability;
     }
 
     protected override void Update()
     {
         base.Update();
+
+        if(_damageTime > 0)
+            _damageTimer -= Time.deltaTime;
     }
 
     protected override void RegisterStates()
     {
         _stateMachine.RegisterState(new Rikayon_State_ChasePlayer());
         _stateMachine.RegisterState(new Rikayon_State_Attack());
+        _stateMachine.RegisterState(new Rikayon_State_SpecialAttack());
         _stateMachine.RegisterState(new Rikayon_State_Retreat());
         _stateMachine.RegisterState(new Rikayon_State_Idle());
         _stateMachine.RegisterState(new AI_State_Death());
@@ -72,8 +86,10 @@ public class AI_Agent_Rikayon : AI_Agent_Enemy
     public override void CheckForBossStage()
     {
 
-        if (_healthComponent._currentHealth <= _healthComponent._maxHealth / 2 && _currentBossStage == 0)
+        if (_healthComponent._currentHealth <= _healthComponent._maxHealth / 2.5 && _currentBossStage == 0)
         {
+            transform.LookAt(_playerTransform);
+
             _animator.speed = _originalAnimationSpeed;
 
             _animator.SetTrigger("bossStage1");
@@ -86,14 +102,15 @@ public class AI_Agent_Rikayon : AI_Agent_Enemy
             gameObject.GetComponent <AI_Agent_Rikayon> ().enabled = false;
         }
 
-        if (_healthComponent._currentHealth <= _healthComponent._maxHealth / 4 && _currentBossStage == 1)
+        if (_healthComponent._currentHealth <= _healthComponent._maxHealth / 4.5 && _currentBossStage == 1)
         {
+            transform.LookAt(_playerTransform);
+
             _animator.speed = _originalAnimationSpeed;
 
             _animator.SetTrigger("bossStage2");
             _currentBossStage = 2;
             _healthComponent._canTakeDamage = false;
-            _healthComponent._maxHealth /= 2;
 
             _navMeshAgent.speed /= _bossStageMovementMultiplier.x;
             _navMeshAgent.acceleration /= _bossStageMovementMultiplier.x;
@@ -132,7 +149,7 @@ public class AI_Agent_Rikayon : AI_Agent_Enemy
 
             GameObject sprayAttack;
             ParticleSystem ps;
-            sprayAttack = Instantiate(_sprayAttack_prefab, _specialAttackSpawnPosition);
+            sprayAttack = Instantiate(_sprayAttack_prefab, _testTransform);
             ps = sprayAttack.GetComponent<ParticleSystem>();
             ps.Stop();
             var main = ps.main;
@@ -198,6 +215,7 @@ public class AI_Agent_Rikayon : AI_Agent_Enemy
         switch (_spikeAttackNumber)
         {
             case 0:
+                DestroySpawnPositionChilds();
                 spikePreview = Instantiate(_spikePreviewInner_prefab, _specialAttackSpawnPosition.position, Quaternion.identity, _specialAttackSpawnPosition.transform);
                 spikePreview.transform.localScale = new Vector3(spikePreview.transform.localScale.x * currentMultiplier, spikePreview.transform.localScale.y, spikePreview.transform.localScale.z * currentMultiplier);
                 yield return new WaitForSeconds(_spikePreviewTime);
@@ -281,5 +299,14 @@ public class AI_Agent_Rikayon : AI_Agent_Enemy
 
         spitAttack = Instantiate(_spitAttack_prefab, _specialAttackSpawnPosition.position, Quaternion.identity);
         spitAttack.GetComponent<Rigidbody>().AddForce(_spitForce, ForceMode.Impulse);
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if(other.gameObject.CompareTag("Player") && _damageTimer <= 0)
+        {
+            other.GetComponent<HealthComponent>().TakeDamage(_damageOnTouch);
+            _damageTimer = _damageTime;
+        }
     }
 }

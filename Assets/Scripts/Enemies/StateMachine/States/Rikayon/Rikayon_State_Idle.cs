@@ -24,37 +24,57 @@ public class Rikayon_State_Idle : AI_State_Idle
             return;
         }
 
-        agent._attackTimer -= Time.deltaTime;
+        if (agent._attackTimer > 0)
+            agent._attackTimer -= Time.deltaTime;
 
-        if (agent._animator.GetCurrentAnimatorStateInfo(0).IsName("Intimidate"))
+        if (agent._followDecoy)
         {
-
+            _followPosition = agent._decoyTransform.position;
         }
         else
         {
-            if (agent._followDecoy)
-            {
-                _followPosition = agent._decoyTransform.position;
-            }
-            else
-            {
-                _followPosition = agent._playerTransform.position;
-            }
+            _followPosition = agent._playerTransform.position;
+        }
 
-            float distance = Vector3.Distance(agent.transform.position, _followPosition);
+        float distance = Vector3.Distance(agent.transform.position, _followPosition);
 
-            if (distance > _enemy._enemyData._attackRange + 1 || agent._attackTimer < 0)
+        _timer -= Time.deltaTime;
+
+        if (_timer < 0f)
+        {
+            StartRotating(agent);
+
+            if (distance > _enemy._enemyData._attackRange)
             {
-                agent._animator.SetBool("isChasing", true);
-                agent._animator.SetBool("isIntimidating", false);
                 agent._stateMachine.ChangeState(AI_StateID.ChasePlayer);
                 return;
             }
+            else if (distance > _enemy._enemyData._attackRange && agent._attackTimer <= 0)
+            {
+                agent._stateMachine.ChangeState(AI_StateID.Attack);
+                return;
+            }
+            else
+            {
+                agent._stateMachine.ChangeState(AI_StateID.SpecialAttack);
+                return;
+            }
+
+            _timer = _maxTime;
         }
     }
 
     public override void Exit(AI_Agent agent)
     {
 
+    }
+    private void StartRotating(AI_Agent agent)
+    {
+        if (LookCoroutine != null)
+        {
+            AI_Manager.Instance.StopCoroutine(LookCoroutine);
+        }
+
+        LookCoroutine = AI_Manager.Instance.StartCoroutine(AI_Manager.Instance.LookAtTarget(agent, _followPosition, _maxTime));
     }
 }

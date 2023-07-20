@@ -31,7 +31,7 @@ public class RangedRobot_State_Attack : AI_State_Attack
 
         agent.transform.LookAt(_followPosition);
 
-        if (agent._attackTimer < 0)
+        if (agent._attackTimer <= 0)
         {
             agent._attackTimer = _enemy._enemyData._attackSpeed;
             _rangedRobot.TargetDirection = (_followPosition - agent.transform.position).normalized;

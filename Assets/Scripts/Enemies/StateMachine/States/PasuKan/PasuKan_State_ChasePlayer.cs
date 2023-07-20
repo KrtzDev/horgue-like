@@ -106,7 +106,7 @@ public class PasuKan_State_ChasePlayer : AI_State_ChasePlayer
 
     private void CheckForAttack(AI_Agent agent, float distance)
     {
-        if (distance < _enemy._enemyData._attackRange && agent._attackTimer < 0)
+        if (distance < _enemy._enemyData._attackRange && agent._attackTimer <= 0)
         {
             agent._attackTimer = _enemy._enemyData._attackSpeed;
             _followPosition = agent._playerTransform.position;

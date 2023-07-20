@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.Linq;
 
 public class UIManager : Singleton<UIManager>
 {
@@ -111,10 +112,12 @@ public class UIManager : Singleton<UIManager>
 			ChooseAbility.gameObject.SetActive(true);
 
 			List<Ability> abilities = new List<Ability>();
+
 			for (int i = 0; i < ChooseAbility.instance._abilitiesToDisplay; i++)
 			{
 				abilities.Add(ChooseAbility.instance.GetRandomAbility());
 			}
+
 			DisplayAbilities(abilities);
 		}
 	}
