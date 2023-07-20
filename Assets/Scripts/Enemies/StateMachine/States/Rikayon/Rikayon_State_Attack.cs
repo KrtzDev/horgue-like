@@ -42,11 +42,6 @@ public class Rikayon_State_Attack : AI_State_Attack
                     agent._animator.speed = _rikayon._bossStageAnimationMultiplier.y;
                     break;
             }
-
-            if (agent._animator.GetFloat("intimidateNumber") == 1)
-            {
-                StartRotating(agent); // can't get Rikayon to rotate ... 
-            }
         }
         else
         {
@@ -55,26 +50,6 @@ public class Rikayon_State_Attack : AI_State_Attack
             agent._stateMachine.ChangeState(AI_StateID.Idle);
         }
     }
-
-    private void StartRotating(AI_Agent agent)
-    {
-        if (LookCoroutine != null)
-        {
-            AI_Manager.Instance.StopCoroutine(LookCoroutine);
-        }
-
-        if (agent._followDecoy)
-        {
-            _followPosition = agent._decoyTransform.position;
-        }
-        else
-        {
-            _followPosition = agent._playerTransform.position;
-        }
-
-        LookCoroutine = AI_Manager.Instance.StartCoroutine(AI_Manager.Instance.LookAtTarget(agent, _followPosition, _maxTime));
-    }
-
 
     public override void Exit(AI_Agent agent)
     {

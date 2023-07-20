@@ -720,8 +720,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5791693563512677488}
   m_LocalRotation: {x: -0.7071067, y: 0.7071068, z: -0.00000004750303, w: 0.00000004750302}
-  m_LocalPosition: {x: -0, y: 0, z: 0}
-  m_LocalScale: {x: 0.1308108, y: 0.1308108, z: 0.1308108}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.13081077, y: 0.13081077, z: 0.13081077}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5794526363542072584}
@@ -2950,8 +2950,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5792511593912579256}
   m_LocalRotation: {x: -0.7071067, y: 5.302452e-33, z: 5.3024508e-33, w: 0.7071068}
-  m_LocalPosition: {x: -0, y: 0, z: 0}
-  m_LocalScale: {x: 100, y: 100, z: 100}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 99.99999, y: 99.999985, z: 99.999985}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5794756396886151804}
@@ -2971,7 +2971,7 @@ Transform:
   - {fileID: 5794464897083750882}
   m_Father: {fileID: 5794526363542072584}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: -89.98021, y: 8.592991e-31, z: 0}
+  m_LocalEulerAnglesHint: {x: -89.98021, y: 2.0676848e-30, z: 0}
 --- !u!1 &5792512756524764742
 GameObject:
   m_ObjectHideFlags: 0
@@ -4137,9 +4137,9 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5792732486625663260}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.99999994, y: 0.99999994, z: 0.99999994}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5794526363542072584}
@@ -4537,6 +4537,7 @@ MonoBehaviour:
   _bossStageAnimationMultiplier: {x: 0, y: 0}
   _bossStageMovementMultiplier: {x: 0, y: 0}
   _currentBossStage: 0
+  _lastAbilities: {x: 0, y: 0, z: 0}
   _numberOfAttacks: 5
   _numberOfIntimidations: 3
   _specialAttackSpawnPosition: {fileID: 6932071819929543486}
@@ -5201,9 +5202,9 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8297512927815590382}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.9999999, y: 0.9999999, z: 0.9999999}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5794526363542072584}

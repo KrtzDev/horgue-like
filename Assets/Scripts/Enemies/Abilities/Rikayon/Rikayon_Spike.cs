@@ -9,9 +9,11 @@ public class Rikayon_Spike : MonoBehaviour
     [SerializeField] private Vector2 _bossStageDamageMultiplier;
     [SerializeField] private int _damageOnTrigger;
 
+    private bool _hasDamaged;
+
     private void OnTriggerEnter(Collider other)
     {
-        if(other.CompareTag("Player"))
+        if(other.CompareTag("Player") && !_hasDamaged)
         {
             switch (_rikayon._currentBossStage)
             {
@@ -25,11 +27,14 @@ public class Rikayon_Spike : MonoBehaviour
                     other.GetComponent<HealthComponent>().TakeDamage((int)(_damageOnTrigger * _bossStageDamageMultiplier.y));
                     break;
             }
+
+            _hasDamaged = true;
         }
     }
 
     private void Start()
     {
         _rikayon = GameObject.FindObjectOfType<AI_Agent_Rikayon>();
+        _hasDamaged = false;
     }
 }

@@ -70,7 +70,6 @@ public class Rikayon_ToxicSpit : MonoBehaviour
 
     private void Update()
     {
-
         if (_damageTimer >= 0)
             _damageTimer -= Time.deltaTime;
 

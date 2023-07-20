@@ -46,8 +46,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8915e1716a593547bb825b89dbbd1b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _bossStageLifeTimeMultiplier: {x: 1.5, y: 2}
-  _lifeTime: 15
+  _bossStageLifeTimeMultiplier: {x: 1.25, y: 1.5}
+  _lifeTime: 10
   _bossStageDamageMultiplier: {x: 1.25, y: 1.5}
   _damageTime: 0.25
   _damagePerTick: 3
@@ -134,7 +134,7 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 5
+      scalar: 10000
       minScalar: 5
       maxCurve:
         serializedVersion: 2
