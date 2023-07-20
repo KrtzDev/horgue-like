@@ -438,7 +438,7 @@ MonoBehaviour:
   _canUseDashAbility: 0
   _canUseStealthAbility: 0
   _canUseFlickerStrikeAbility: 0
-  _jumpCD: 0.75
+  _jumpCD: 0.275
   _fallMultiplier: 10
   _jumpVelocityFalloff: 11
   _jumpForce: 20
