@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -72,10 +71,7 @@ public class WeaponHolster : MonoBehaviour
 		if (GameManager.Instance.weaponControll == WeaponControllKind.AllManual || GameManager.Instance.weaponControll == WeaponControllKind.AutoShootManualAim)
 		{
 			foreach (Weapon weapon in weapons)
-			{
-				Debug.Log("Aim");
 				weapon.UpdateAimDirection();
-			}
 		}
 		if (GameManager.Instance.weaponControll == WeaponControllKind.AllManual)
 		{
@@ -105,8 +101,6 @@ public class WeaponHolster : MonoBehaviour
 	private void TryShootAllWeapons()
 	{
 		foreach (Weapon weapon in weapons)
-		{
 			weapon.TryShoot();
-		}
 	}
 }

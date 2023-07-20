@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1840ed087b613334e9bf87d5c6d038cd, type: 3}
   m_Name: AK-7423
   m_EditorClassIdentifier: 
-  _weaponPrefab: {fileID: 4852173439239307193, guid: 534ea9bec0f3ace4cb13174feb65375c,
+  _weaponSkeleton: {fileID: 4852173439239307193, guid: 534ea9bec0f3ace4cb13174feb65375c,
     type: 3}
   weaponSprite: {fileID: 0}
   defaultGrip: {fileID: 11400000, guid: 0276b4dcb70fffb41b116150bb36184b, type: 2}

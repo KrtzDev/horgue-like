@@ -1,9 +1,6 @@
-using System;
 using System.Threading.Tasks;
 using UnityEngine;
-using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
-using UnityEngine.TextCore.Text;
 
 [CreateAssetMenu(fileName = "new Weapon", menuName = "ModularWeapon/Weapon")]
 public class Weapon : ScriptableObject
@@ -12,7 +9,7 @@ public class Weapon : ScriptableObject
 
 	[Header("Visuals")]
 	[SerializeField]
-	private WeaponSkeleton _weaponPrefab;
+	private WeaponSkeleton _weaponSkeleton;
 	[SerializeField]
 	public Sprite weaponSprite;
 
@@ -82,9 +79,9 @@ public class Weapon : ScriptableObject
 
 	public void Initialize(Transform owningTransform)
 	{
-		Debug.Log("Inizialized " + _weaponPrefab);
+		Debug.Log("Inizialized " + _weaponSkeleton);
 		OwningTransform = owningTransform;
-		_currentWeaponPrefab = Instantiate(_weaponPrefab, owningTransform);
+		_currentWeaponPrefab = Instantiate(_weaponSkeleton, owningTransform);
 		_currentPatternPrefab = Instantiate(barrel.attackPattern.GetPattern(), _currentWeaponPrefab.ProjectileSpawnPosition);
 		_weaponTransform = _currentWeaponPrefab.transform;
 
@@ -131,12 +128,12 @@ public class Weapon : ScriptableObject
 	{
 		WeaponStats weaponStats = new WeaponStats();
 
-		weaponStats.damage = CalculateDamage(weapon);
-		weaponStats.attackspeed = CalculateAttackSpeed(weapon);
-		weaponStats.cooldown = CalculateCooldown(weapon);
-		weaponStats.projectileSize = CalculateProjectileSize(weapon);
-		weaponStats.critChance = CalculateCritChance(weapon);
-		weaponStats.range = CalculatefinalRange(weapon);
+		weaponStats.damage = CalculateDamage(weapon, GameManager.Instance.damageCalcKind);
+		weaponStats.attackspeed = CalculateAttackSpeed(weapon, GameManager.Instance.damageCalcKind);
+		weaponStats.cooldown = CalculateCooldown(weapon, GameManager.Instance.damageCalcKind);
+		weaponStats.projectileSize = CalculateProjectileSize(weapon, GameManager.Instance.damageCalcKind);
+		weaponStats.critChance = CalculateCritChance(weapon, GameManager.Instance.damageCalcKind);
+		weaponStats.range = CalculatefinalRange(weapon, GameManager.Instance.damageCalcKind);
 
 		weaponStats.capacity = weapon.magazine.capacity;
 		weaponStats.attackPattern = weapon.barrel.attackPattern;
@@ -183,7 +180,7 @@ public class Weapon : ScriptableObject
 		projectile.statusEffect = weaponStats.statusEffect;
 	}
 
-	private float CalculateDamage(Weapon weapon)
+	private float CalculateDamage(Weapon weapon, DamageCalcKind damageCalcKind)
 	{
 		float totalDamage = 0;
 		int partCount = 0;
@@ -204,10 +201,13 @@ public class Weapon : ScriptableObject
 			partCount++;
 		}
 
-		return partCount > 0 ? totalDamage / partCount : -1;
+		if (partCount < 0)
+			return -1;
+
+		return damageCalcKind == DamageCalcKind.Mean ? totalDamage / partCount : totalDamage;
 	}
 
-	private float CalculateAttackSpeed(Weapon weapon)
+	private float CalculateAttackSpeed(Weapon weapon, DamageCalcKind damageCalcKind)
 	{
 		float totalAttackSpeed = 0;
 		int partCount = 0;
@@ -242,10 +242,14 @@ public class Weapon : ScriptableObject
 			totalAttackSpeed += weapon.sight.attackSpeed;
 			partCount++;
 		}
-		return partCount > 0 ? totalAttackSpeed / partCount : -1;
+
+		if (partCount < 0)
+			return -1;
+
+		return damageCalcKind == DamageCalcKind.Mean ? totalAttackSpeed / partCount : totalAttackSpeed;
 	}
 
-	private float CalculateCooldown(Weapon weapon)
+	private float CalculateCooldown(Weapon weapon, DamageCalcKind damageCalcKind)
 	{
 		float totalCooldown = 0;
 		int partCount = 0;
@@ -276,10 +280,13 @@ public class Weapon : ScriptableObject
 			partCount++;
 		}
 
-		return partCount > 0 ? totalCooldown / partCount : -1;
+		if (partCount < 0)
+			return -1;
+
+		return damageCalcKind == DamageCalcKind.Mean ? totalCooldown / partCount : totalCooldown;
 	}
 
-	private float CalculateProjectileSize(Weapon weapon)
+	private float CalculateProjectileSize(Weapon weapon, DamageCalcKind damageCalcKind)
 	{
 		float totalProjectileSize = 0;
 		int partCount = 0;
@@ -299,10 +306,14 @@ public class Weapon : ScriptableObject
 			totalProjectileSize += weapon.ammunition.projectileSize;
 			partCount++;
 		}
-		return partCount > 0 ? totalProjectileSize / partCount : -1;
+
+		if (partCount < 0)
+			return -1;
+
+		return damageCalcKind == DamageCalcKind.Mean ? totalProjectileSize / partCount : totalProjectileSize;
 	}
 
-	private float CalculateCritChance(Weapon weapon)
+	private float CalculateCritChance(Weapon weapon, DamageCalcKind damageCalcKind)
 	{
 		float totalCritChance = 0;
 		int partCount = 0;
@@ -332,10 +343,14 @@ public class Weapon : ScriptableObject
 			totalCritChance += weapon.sight.critChance;
 			partCount++;
 		}
-		return partCount > 0 ? totalCritChance / partCount : -1;
+
+		if (partCount < 0)
+			return -1;
+
+		return damageCalcKind == DamageCalcKind.Mean ? totalCritChance / partCount : totalCritChance;
 	}
 
-	private float CalculatefinalRange(Weapon weapon)
+	private float CalculatefinalRange(Weapon weapon, DamageCalcKind damageCalcKind)
 	{
 		float totalRange = 0;
 		int partCount = 0;
@@ -360,7 +375,11 @@ public class Weapon : ScriptableObject
 			totalRange += weapon.sight.range;
 			partCount++;
 		}
-		return partCount > 0 ? totalRange / partCount : -1;
+
+		if (partCount < 0)
+			return -1;
+
+		return damageCalcKind == DamageCalcKind.Mean ? totalRange / partCount : totalRange;
 	}
 
 	public void TryShoot()

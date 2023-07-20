@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4af7ccadcc50f3647844d078b6976b0b, type: 3}
+  m_Name: FireArm
+  m_EditorClassIdentifier: 
+  baseDamage: 5
+  attackSpeed: 0.7
+  coolDown: 2
+  projectileSize: 0.07
+  critChance: 2
+  range: 15

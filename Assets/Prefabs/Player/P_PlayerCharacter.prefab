@@ -408,6 +408,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _maxHealth: 0
   _currentHealth: 0
+  _canTakeDamage: 0
   _isDead: 0
 --- !u!114 &6670527696543464466
 MonoBehaviour:

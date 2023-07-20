@@ -15,6 +15,8 @@ public class GameManager : Singleton<GameManager>
 
 	public WeaponControllKind weaponControll = WeaponControllKind.AllAuto;
 
+	public DamageCalcKind damageCalcKind = DamageCalcKind.Mean;
+
 	[SerializeField]
 	private GameObject _gameDataReader;
 
