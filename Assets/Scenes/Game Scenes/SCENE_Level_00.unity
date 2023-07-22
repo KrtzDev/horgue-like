@@ -9748,7 +9748,7 @@ PrefabInstance:
     - target: {fileID: 1382852200032817076, guid: 62d6286d223d00e49ba8ca796795cc73,
         type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2136897129495592176, guid: 62d6286d223d00e49ba8ca796795cc73,
         type: 3}
@@ -9783,7 +9783,7 @@ PrefabInstance:
     - target: {fileID: 2136897129691636550, guid: 62d6286d223d00e49ba8ca796795cc73,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 2136897129691636550, guid: 62d6286d223d00e49ba8ca796795cc73,
         type: 3}
@@ -9793,7 +9793,7 @@ PrefabInstance:
     - target: {fileID: 2136897129691636550, guid: 62d6286d223d00e49ba8ca796795cc73,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 2136897129691636550, guid: 62d6286d223d00e49ba8ca796795cc73,
         type: 3}
@@ -16493,6 +16493,16 @@ PrefabInstance:
       propertyPath: _levelZone.Array.data[29]
       value: 
       objectReference: {fileID: 220047285}
+    - target: {fileID: 6843213763226438607, guid: b0d5d15041526b8408159035025686a3,
+        type: 3}
+      propertyPath: _enemiesToSpawn.Array.data[0]._spawnChance
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 6843213763226438607, guid: b0d5d15041526b8408159035025686a3,
+        type: 3}
+      propertyPath: _enemiesToSpawn.Array.data[1]._spawnChance
+      value: 40
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b0d5d15041526b8408159035025686a3, type: 3}
 --- !u!1 &1837641223

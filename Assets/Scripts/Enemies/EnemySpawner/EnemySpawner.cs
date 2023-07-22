@@ -52,9 +52,11 @@ public class EnemySpawner : MonoBehaviour
     private void Awake()
     {
         if (_player == null)
-            _player = GameObject.FindGameObjectWithTag("Player");
+            _player = GameObject.FindGameObjectWithTag("Player"); 
 
         SetColliderSizeCenter();
+
+        _boxZoneParent.transform.parent = _player.transform;
     }
 
     private void Start()
@@ -67,8 +69,6 @@ public class EnemySpawner : MonoBehaviour
 
     private void Update()
     {
-        _boxZoneParent.transform.SetPositionAndRotation(_player.transform.position, _player.transform.rotation); // performance heavy?
-
         if (_spawnTimer >= _enemySpawnerData._spawnTick)
         {
             int spawnIndex = 0;
@@ -435,7 +435,7 @@ public class EnemySpawner : MonoBehaviour
         // Safe Zone
 
         size = new Vector3(_enemySpawnerData._safeZoneSize, _boxHeight, _enemySpawnerData._safeZoneSize);
-        center = _player.transform.position + new Vector3(0, 0, 0);
+        center = _player.transform.position;
         _safeZone.size = size;
         _safeZone.center = center;
 

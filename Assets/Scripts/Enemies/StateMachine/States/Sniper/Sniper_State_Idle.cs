@@ -55,12 +55,12 @@ public class Sniper_State_Idle : AI_State_Idle
                 agent._animator.SetBool("isRetreating", false);
                 agent._stateMachine.ChangeState(AI_StateID.Attack);
             }
-            else if (distance < _enemy._enemyData._retreatRange)
+            else if (distance > _enemy._enemyData._attackRange)
             {
-                agent._animator.SetBool("isRetreating", true);
+                agent._animator.SetBool("isRetreating", false);
                 agent._animator.SetBool("isAttacking", false);
-                agent._animator.SetBool("isChasing", false);
-                agent._stateMachine.ChangeState(AI_StateID.Retreat);
+                agent._animator.SetBool("isChasing", true);
+                agent._stateMachine.ChangeState(AI_StateID.ChasePlayer);
             }
         }
     }

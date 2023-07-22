@@ -48,17 +48,6 @@ public class Sniper_State_Retreat : AI_State_Retreat
             _followPosition = agent._playerTransform.position;
         }
 
-        agent.transform.LookAt(_retreatPosition);
-
-        if (agent._obstacleAgent.enabled && agent.enabled)
-        {
-            agent._obstacleAgent.SetDestination(_retreatPosition);
-        }
-        else if (agent._navMeshAgent.enabled && agent.enabled)
-        {
-            agent._navMeshAgent.SetDestination(_retreatPosition);
-        }
-
         float distanceToPlayer = Vector3.Distance(agent.transform.position, _followPosition);
 
         if (distanceToPlayer > _retreatDistance)
@@ -68,6 +57,33 @@ public class Sniper_State_Retreat : AI_State_Retreat
             agent._animator.SetBool("isChasing", true);
             agent._navMeshAgent.SetDestination(agent.transform.position);
             agent._stateMachine.ChangeState(AI_StateID.Idle);
+        }
+        else
+        {
+            if (agent._obstacleAgent.enabled && agent.enabled)
+            {
+                Vector3 dirToPlayer = agent.transform.position - _followPosition;
+                _retreatPosition = agent.transform.position + dirToPlayer;
+
+                if (NavMesh.SamplePosition(_retreatPosition, out NavMeshHit hit, 1f, agent._navMeshAgent.areaMask))
+                {
+                    _retreatPosition = hit.position;
+                }
+
+                agent._obstacleAgent.SetDestination(_retreatPosition);
+            }
+            else if (agent._navMeshAgent.enabled && agent.enabled)
+            {
+                Vector3 dirToPlayer = agent.transform.position - _followPosition;
+                _retreatPosition = agent.transform.position + dirToPlayer;
+
+                if (NavMesh.SamplePosition(_retreatPosition, out NavMeshHit hit, 1f, agent._navMeshAgent.areaMask))
+                {
+                    _retreatPosition = hit.position;
+                }
+
+                agent._navMeshAgent.SetDestination(_retreatPosition);
+            }
         }
     }
 
