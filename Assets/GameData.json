@@ -58,7 +58,7 @@
       "name": "Level01",
       "healthBonus": 1,
       "damageBonus": 1,
-      "TimeToSurvive": 40,
+      "TimeToSurvive": 2,
       "spawnTick": 3,
       "spawnsPerTick": 6,
       "minEnemyCount": 10,

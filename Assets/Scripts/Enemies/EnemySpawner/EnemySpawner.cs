@@ -43,7 +43,7 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] private List<BoxCollider> _closeZones = new List<BoxCollider>();
     [SerializeField] private List<BoxCollider> _midZones = new List<BoxCollider>();
     [SerializeField] private List<BoxCollider> _farZones = new List<BoxCollider>();
-    [SerializeField] private List<BoxCollider> _levelZone = new List<BoxCollider>();
+    public List<BoxCollider> _levelZone = new List<BoxCollider>();
 
     // Object Pooling
     public Dictionary<int, ObjectPool<AI_Agent_Enemy>> _enemyObjectPool = new Dictionary<int, ObjectPool<AI_Agent_Enemy>>();
