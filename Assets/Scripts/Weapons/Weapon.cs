@@ -51,7 +51,7 @@ public class Weapon : ScriptableObject
 	private Projectile _projectile;
 	public Transform OwningTransform { get; private set; }
 
-	private WeaponSkeleton _currentWeaponPrefab;
+	private WeaponSkeleton _currentWeaponSkeleton;
 	private Pattern _currentPatternPrefab;
 	private Transform _weaponTransform;
 
@@ -81,9 +81,9 @@ public class Weapon : ScriptableObject
 	{
 		Debug.Log("Inizialized " + _weaponSkeleton);
 		OwningTransform = owningTransform;
-		_currentWeaponPrefab = Instantiate(_weaponSkeleton, owningTransform);
-		_currentPatternPrefab = Instantiate(barrel.attackPattern.GetPattern(), _currentWeaponPrefab.ProjectileSpawnPosition);
-		_weaponTransform = _currentWeaponPrefab.transform;
+		_currentWeaponSkeleton = Instantiate(_weaponSkeleton, owningTransform);
+		_currentPatternPrefab = Instantiate(barrel.attackPattern.GetPattern(), _currentWeaponSkeleton.ProjectileSpawnPosition);
+		_weaponTransform = _currentWeaponSkeleton.transform;
 
 		_reloadTime = CalculateWeaponStats(this).cooldown;
 		_projectile = ammunition.projectilePrefab;
@@ -203,8 +203,9 @@ public class Weapon : ScriptableObject
 
 		if (partCount < 0)
 			return -1;
-
-		return damageCalcKind == DamageCalcKind.Mean ? totalDamage / partCount : totalDamage;
+		
+		float partsDamage = damageCalcKind == DamageCalcKind.Mean ? totalDamage / partCount : totalDamage;
+		return _currentWeaponSkeleton.skeletonBaseStats.baseDamage * partsDamage;
 	}
 
 	private float CalculateAttackSpeed(Weapon weapon, DamageCalcKind damageCalcKind)
@@ -246,7 +247,8 @@ public class Weapon : ScriptableObject
 		if (partCount < 0)
 			return -1;
 
-		return damageCalcKind == DamageCalcKind.Mean ? totalAttackSpeed / partCount : totalAttackSpeed;
+		float partsAttackSpeed = damageCalcKind == DamageCalcKind.Mean ? totalAttackSpeed / partCount : totalAttackSpeed;
+		return _currentWeaponSkeleton.skeletonBaseStats.attackSpeed * partsAttackSpeed;
 	}
 
 	private float CalculateCooldown(Weapon weapon, DamageCalcKind damageCalcKind)
@@ -283,7 +285,8 @@ public class Weapon : ScriptableObject
 		if (partCount < 0)
 			return -1;
 
-		return damageCalcKind == DamageCalcKind.Mean ? totalCooldown / partCount : totalCooldown;
+		float partsCooldown = damageCalcKind == DamageCalcKind.Mean ? totalCooldown / partCount : totalCooldown;
+		return _currentWeaponSkeleton.skeletonBaseStats.coolDown * partsCooldown;
 	}
 
 	private float CalculateProjectileSize(Weapon weapon, DamageCalcKind damageCalcKind)
@@ -310,7 +313,8 @@ public class Weapon : ScriptableObject
 		if (partCount < 0)
 			return -1;
 
-		return damageCalcKind == DamageCalcKind.Mean ? totalProjectileSize / partCount : totalProjectileSize;
+		float partsProjectileSize = damageCalcKind == DamageCalcKind.Mean ? totalProjectileSize / partCount : totalProjectileSize;
+		return _currentWeaponSkeleton.skeletonBaseStats.projectileSize * partsProjectileSize;
 	}
 
 	private float CalculateCritChance(Weapon weapon, DamageCalcKind damageCalcKind)
@@ -347,7 +351,8 @@ public class Weapon : ScriptableObject
 		if (partCount < 0)
 			return -1;
 
-		return damageCalcKind == DamageCalcKind.Mean ? totalCritChance / partCount : totalCritChance;
+		float partsCritChance = damageCalcKind == DamageCalcKind.Mean ? totalCritChance / partCount : totalCritChance;
+		return _currentWeaponSkeleton.skeletonBaseStats.critChance * partsCritChance;
 	}
 
 	private float CalculatefinalRange(Weapon weapon, DamageCalcKind damageCalcKind)
@@ -379,7 +384,8 @@ public class Weapon : ScriptableObject
 		if (partCount < 0)
 			return -1;
 
-		return damageCalcKind == DamageCalcKind.Mean ? totalRange / partCount : totalRange;
+		float partsRange = damageCalcKind == DamageCalcKind.Mean ? totalRange / partCount : totalRange;
+		return _currentWeaponSkeleton.skeletonBaseStats.range * partsRange;
 	}
 
 	public void TryShoot()
@@ -441,7 +447,7 @@ public class Weapon : ScriptableObject
 
 			_shotDelay = 1 / weaponStats.attackspeed;
 
-			_currentWeaponPrefab.MuzzleFlash.Play();
+			_currentWeaponSkeleton.MuzzleFlash.Play();
 		}
 	}
 
