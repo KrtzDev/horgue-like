@@ -35440,7 +35440,12 @@ PrefabInstance:
         type: 3}
       propertyPath: _testTransform
       value: 
-      objectReference: {fileID: 1353392387}
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083644708803088136, guid: 4e7afdf31c20ebf419ea38bf1d358719,
+        type: 3}
+      propertyPath: _numberOfSpecialAttacks
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 5792744366562842766, guid: 4e7afdf31c20ebf419ea38bf1d358719,
         type: 3}
       propertyPath: m_Name
@@ -35503,12 +35508,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4e7afdf31c20ebf419ea38bf1d358719, type: 3}
---- !u!4 &1353392387 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 268378040693063688, guid: 4e7afdf31c20ebf419ea38bf1d358719,
-    type: 3}
-  m_PrefabInstance: {fileID: 1353392386}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1368431879
 GameObject:
   m_ObjectHideFlags: 0
@@ -38247,7 +38246,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh29246
+  m_Name: pb_Mesh30968
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2

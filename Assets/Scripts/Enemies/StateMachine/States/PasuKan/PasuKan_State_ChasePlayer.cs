@@ -60,8 +60,6 @@ public class PasuKan_State_ChasePlayer : AI_State_ChasePlayer
                         agent.SetTarget(agent, _followPosition);
                     }
                 }
-
-                StartRotating(agent);
             }
 
             _timer = _maxTime;

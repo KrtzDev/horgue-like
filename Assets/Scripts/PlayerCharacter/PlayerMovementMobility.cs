@@ -12,7 +12,7 @@ public class PlayerMovementMobility : MonoBehaviour
     [SerializeField] private bool _isGrounded;
     [SerializeField] private float _groundCheckValueY;
     [SerializeField] private Vector3 _groundCheckBox;
-    [SerializeField] private LayerMask _groundLayer;
+    public LayerMask _groundLayer;
     [SerializeField] private LayerMask _enemyLayer;
 
     private PlayerCharacter _character;

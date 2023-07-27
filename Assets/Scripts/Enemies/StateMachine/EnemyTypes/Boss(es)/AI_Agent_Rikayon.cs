@@ -15,7 +15,6 @@ public class AI_Agent_Rikayon : AI_Agent_Enemy
 
     [Header("Special Attacks")]
     public Transform _specialAttackSpawnPosition;
-    public Transform _testTransform;
     public int _baseSpecialAttackProbability;
     public float _specialAttackProbablityModifier;
     [HideInInspector] public int _currentSpecialAttackProbablity;
@@ -133,10 +132,10 @@ public class AI_Agent_Rikayon : AI_Agent_Enemy
                 SprayAttackAbility(_bossStageSpeedMultiplier_Spray.x, _bossStageAngle_Spray.x);
                 break;
             case 1:
-                SprayAttackAbility(_bossStageSpeedMultiplier_Spray.y, _bossStageAngle_Spray.x);
+                SprayAttackAbility(_bossStageSpeedMultiplier_Spray.y, _bossStageAngle_Spray.y);
                 break;
             case 2:
-                SprayAttackAbility(_bossStageSpeedMultiplier_Spray.z, _bossStageAngle_Spray.x);
+                SprayAttackAbility(_bossStageSpeedMultiplier_Spray.z, _bossStageAngle_Spray.z);
                 break;
         }
     }
@@ -149,7 +148,7 @@ public class AI_Agent_Rikayon : AI_Agent_Enemy
 
             GameObject sprayAttack;
             ParticleSystem ps;
-            sprayAttack = Instantiate(_sprayAttack_prefab, _testTransform);
+            sprayAttack = Instantiate(_sprayAttack_prefab, _specialAttackSpawnPosition);
             ps = sprayAttack.GetComponent<ParticleSystem>();
             ps.Stop();
             var main = ps.main;

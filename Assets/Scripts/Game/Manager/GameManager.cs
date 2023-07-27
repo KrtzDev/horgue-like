@@ -45,7 +45,7 @@ public class GameManager : Singleton<GameManager>
 
 
 	[Header("Player")]
-	public PlayerCharacter player;
+	public GameObject _player;
 	public int _currentPlayerHealth;
 	public bool _playerCanUseAbilities;
 	public Ability _currentAbility;
@@ -87,7 +87,9 @@ public class GameManager : Singleton<GameManager>
 		_neededEnemyKill = _enemySpawner._enemySpawnerData._maxEnemyCount;
 		_enemiesKilled = 0;
 
-		player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerCharacter>();
+		_player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerCharacter>().gameObject;
+		MovePlayerToRandomPos(DetermineRandomSpawnLocation());
+
 
 		if (_currentLevel == 1 && _currentWave == 0)
 		{
@@ -112,12 +114,11 @@ public class GameManager : Singleton<GameManager>
 
 		if(_lastLevel == _currentLevel)
         {
-			player.GetComponent<HealthComponent>()._currentHealth = _currentPlayerHealth;
+			_player.GetComponent<HealthComponent>()._currentHealth = _currentPlayerHealth;
         }
 
 		_currentWave += 1;
 
-		// if (_currentLevel >= 2)
 		if (_currentLevel >= 0)
 		{
 			_playerCanUseAbilities = true;
@@ -249,7 +250,7 @@ public class GameManager : Singleton<GameManager>
 			UIManager.Instance.ShowWaveEndScreen(LevelStatus.Won);
 		}
 
-		_currentPlayerHealth = player.GetComponent<HealthComponent>()._currentHealth;
+		_currentPlayerHealth = _player.GetComponent<HealthComponent>()._currentHealth;
 
 		EnemyStopFollowing();
 	}
@@ -273,5 +274,29 @@ public class GameManager : Singleton<GameManager>
     {
 		_gameDataReader.SetActive(true);
 		yield return null;
+	}
+
+	private void MovePlayerToRandomPos(Vector3 spawnPos)
+    {
+		_player.transform.position = spawnPos;
+	}
+
+	private Vector3 DetermineRandomSpawnLocation()
+	{
+		Vector3 spawnPos = Vector3.zero;
+
+		if (_enemySpawner._levelZone.Count > 0)
+		{
+			int zoneNumber = Random.Range(0, _enemySpawner._levelZone.Count);
+			spawnPos = _enemySpawner._levelZone[zoneNumber].transform.position;
+		}
+
+		RaycastHit hit;
+		if(Physics.Raycast(spawnPos, Vector3.down, out hit, Mathf.Infinity, _player.GetComponent<PlayerMovementMobility>()._groundLayer))
+		{
+			spawnPos = new Vector3(spawnPos.x, spawnPos.y - hit.distance, spawnPos.z);
+        }
+
+		return spawnPos;
 	}
 }
