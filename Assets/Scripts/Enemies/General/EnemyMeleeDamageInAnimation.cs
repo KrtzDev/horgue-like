@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PasuKanMeleeDamage : MonoBehaviour
+public class EnemyMeleeDamageInAnimation : MonoBehaviour
 {
     private bool didDamage = false;
 

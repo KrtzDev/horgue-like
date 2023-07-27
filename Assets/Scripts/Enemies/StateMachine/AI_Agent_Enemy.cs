@@ -12,7 +12,6 @@ public class AI_Agent_Enemy : AI_Agent
     public BasicEnemyData _enemyData;
     public bool _isBossEnemy;
     [HideInInspector] public EnemyHealthComponent _healthComponent;
-    [HideInInspector] public int _currentBossStage = 0;
 
     protected override void Start()
     {
@@ -41,7 +40,7 @@ public class AI_Agent_Enemy : AI_Agent
         _stateMachine.Update(GetComponent<AI_Agent_Enemy>());
     }
 
-    private void SetEnemyData()
+    protected virtual void SetEnemyData()
     {
         _navMeshAgent.speed = _enemyData._maxMoveSpeed;
         _navMeshAgent.acceleration = _enemyData._acceleration;
@@ -53,9 +52,13 @@ public class AI_Agent_Enemy : AI_Agent
 
     }
 
-    private void BringToMaxHealth()
+    private void SetHealthToPercentOfMax(float percent)
     {
-        _healthComponent._currentHealth = _healthComponent._maxHealth;
-        _healthComponent._enemyHealthBar.HandleHealthChanged(1);
+        _healthComponent._currentHealth = (int)(_healthComponent._maxHealth * percent);
+        if(_healthComponent._currentHealth > _healthComponent._maxHealth)
+        {
+            _healthComponent._currentHealth = _healthComponent._maxHealth;
+        }
+        _healthComponent._enemyHealthBar.HandleHealthChanged(percent);
     }
 }

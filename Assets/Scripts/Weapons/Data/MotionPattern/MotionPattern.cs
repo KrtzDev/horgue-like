@@ -52,7 +52,7 @@ public class MotionPattern : ScriptableObject
 
 		projectile.GetComponent<Rigidbody>().velocity = projectile.transform.forward * _speed;
 
-		_lastPlayerPos = GameManager.Instance.player.transform.position;
+		_lastPlayerPos = GameManager.Instance._player.transform.position;
 	}
 
 	private void DisableGravity(Projectile projectile)
@@ -125,12 +125,12 @@ public class MotionPattern : ScriptableObject
 		if (!_followPlayer)
 			return;
 
-		Vector3 playerMoveDelta = GameManager.Instance.player.transform.position - _lastPlayerPos;
+		Vector3 playerMoveDelta = GameManager.Instance._player.transform.position - _lastPlayerPos;
 		projectile.transform.position += playerMoveDelta + (projectile.GetComponent<Rigidbody>().velocity * Time.deltaTime);
 	}
 
 	public void LateUpdateMotion(Projectile projectile)
 	{
-		_lastPlayerPos = GameManager.Instance.player.transform.position;
+		_lastPlayerPos = GameManager.Instance._player.transform.position;
 	}
 }

@@ -14,7 +14,6 @@ public class PasuKan_State_Attack : AI_State_Attack
     {
         if(agent._animator.GetCurrentAnimatorStateInfo(0).IsName("Attack"))
         {
-            
         }
         else
         {

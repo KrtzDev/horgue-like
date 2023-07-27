@@ -9,7 +9,7 @@ public class AI_State_ChasePlayer : AI_State
 
     public Vector3 _followPosition;
     public float _timer;
-    public float _maxTime = 0.1f;
+    public float _maxTime = 0.0f;
 
     public AI_Agent_Enemy _enemy;
 

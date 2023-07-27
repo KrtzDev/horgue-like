@@ -22,6 +22,13 @@ public class AI_Agent_Sniper : AI_Agent_Enemy
         base.Update();
     }
 
+    protected override void SetEnemyData()
+    {
+        base.SetEnemyData();
+
+        _projectile.GetComponent<EnemyProjectile>().baseDamage = _enemyData._damagePerHit;
+    }
+
     protected override void RegisterStates()
     {
         _stateMachine.RegisterState(new Sniper_State_Idle());

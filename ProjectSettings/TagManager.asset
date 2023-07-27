@@ -10,6 +10,7 @@ TagManager:
   - UI
   - Wasser
   - EnemyPool
+  - Ground
   layers:
   - Default
   - TransparentFX
