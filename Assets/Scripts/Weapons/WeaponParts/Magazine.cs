@@ -3,10 +3,13 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "new Magazine", menuName = "ModularWeapon/WeaponParts/Magazine")]
 public class Magazine : WeaponPart
 {
-    [Header("Stats")]
+	[Header("Stats")]
+	public float baseDamage;
     public float attackSpeed;
     public float cooldown;
     public float projectileSize;
+	public float critChance;
+	public float range;
 
     public int capacity;
 
