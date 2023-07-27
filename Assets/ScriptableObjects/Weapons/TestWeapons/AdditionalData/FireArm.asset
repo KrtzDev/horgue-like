@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   baseDamage: 5
   attackSpeed: 0.7
-  coolDown: 2
-  projectileSize: 0.07
+  cooldown: 2
+  projectileSize: 1
   critChance: 2
   range: 15

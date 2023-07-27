@@ -257,7 +257,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponControll: 0
-  damageCalcKind: 1
+  damageCalcKind: 0
   _gameDataReader: {fileID: 1497091692}
   _GameManagerValues:
   - {fileID: 11400000, guid: d87aa26dde7df3e469ed4ce81cab15d7, type: 2}

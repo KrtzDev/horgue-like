@@ -5,7 +5,8 @@ using UnityEngine.SceneManagement;
 [CreateAssetMenu(fileName = "new Weapon", menuName = "ModularWeapon/Weapon")]
 public class Weapon : ScriptableObject
 {
-	private const float SLOWEST_POSSIBLE_ATTACKSPEED = 10;
+	[SerializeField]
+	private WeaponStats _weaponStats;
 
 	[Header("Visuals")]
 	[SerializeField]
@@ -92,7 +93,7 @@ public class Weapon : ScriptableObject
 		if (SceneManager.GetActiveScene().name != "SCENE_Weapon_Crafting")
 			_projectilePool = ObjectPool<Projectile>.CreatePool(_projectile, 100, null);
 
-		if(barrel.motionPattern.explosionVfx != null)
+		if (barrel.motionPattern.explosionVfx != null)
 			_vfxPool = ObjectPool<HorgueVFX>.CreatePool(barrel.motionPattern.explosionVfx, 25, null);
 
 		_camera = Camera.main;
@@ -109,7 +110,7 @@ public class Weapon : ScriptableObject
 		if (GameManager.Instance.weaponControll == WeaponControllKind.AllAuto)
 			return;
 
-		Vector3 direction = new Vector3(input.x,0,input.y);
+		Vector3 direction = new Vector3(input.x, 0, input.y);
 
 		Vector3 cameraForward = _camera.transform.forward;
 		Vector3 cameraRight = _camera.transform.right;
@@ -139,6 +140,8 @@ public class Weapon : ScriptableObject
 		weaponStats.attackPattern = weapon.barrel.attackPattern;
 		weaponStats.motionPattern = weapon.barrel.motionPattern;
 		weaponStats.statusEffect = weapon.ammunition.statusEffect;
+
+		_weaponStats = weaponStats;
 
 		return weaponStats;
 	}
@@ -173,7 +176,7 @@ public class Weapon : ScriptableObject
 		projectile.finalCritChance = weaponStats.critChance;
 		projectile.finalRange = weaponStats.range;
 
-		_shotDelay = projectile.finalAttackSpeed > 0 ? 1 / projectile.finalAttackSpeed : SLOWEST_POSSIBLE_ATTACKSPEED;
+		_shotDelay = 1 / projectile.finalAttackSpeed;
 
 		projectile.attackPattern = weaponStats.attackPattern;
 		projectile.motionPattern = weaponStats.motionPattern;
@@ -184,10 +187,9 @@ public class Weapon : ScriptableObject
 	{
 		float totalDamage = 0;
 		int partCount = 0;
-
-		if (weapon.triggerMechanism)
+		if (weapon.grip)
 		{
-			totalDamage += weapon.triggerMechanism.baseDamage;
+			totalDamage += weapon.grip.baseDamage;
 			partCount++;
 		}
 		if (weapon.barrel)
@@ -195,17 +197,32 @@ public class Weapon : ScriptableObject
 			totalDamage += weapon.barrel.baseDamage;
 			partCount++;
 		}
+		if (weapon.magazine)
+		{
+			totalDamage += weapon.magazine.baseDamage;
+			partCount++;
+		}
 		if (weapon.ammunition)
 		{
 			totalDamage += weapon.ammunition.baseDamage;
 			partCount++;
 		}
+		if (weapon.triggerMechanism)
+		{
+			totalDamage += weapon.triggerMechanism.baseDamage;
+			partCount++;
+		}
+		if (weapon.sight)
+		{
+			totalDamage += weapon.sight.baseDamage;
+			partCount++;
+		}
 
-		if (partCount < 0)
-			return -1;
-		
+		if (partCount <= 0 || totalDamage <= 0)
+			return _currentWeaponSkeleton.skeletonBaseStats.baseDamage;
+
 		float partsDamage = damageCalcKind == DamageCalcKind.Mean ? totalDamage / partCount : totalDamage;
-		return _currentWeaponSkeleton.skeletonBaseStats.baseDamage * partsDamage;
+		return _currentWeaponSkeleton.skeletonBaseStats.baseDamage + (_currentWeaponSkeleton.skeletonBaseStats.baseDamage * partsDamage * .1f);
 	}
 
 	private float CalculateAttackSpeed(Weapon weapon, DamageCalcKind damageCalcKind)
@@ -244,11 +261,11 @@ public class Weapon : ScriptableObject
 			partCount++;
 		}
 
-		if (partCount < 0)
-			return -1;
+		if (partCount <= 0 || totalAttackSpeed <= 0)
+			return _currentWeaponSkeleton.skeletonBaseStats.attackSpeed;
 
 		float partsAttackSpeed = damageCalcKind == DamageCalcKind.Mean ? totalAttackSpeed / partCount : totalAttackSpeed;
-		return _currentWeaponSkeleton.skeletonBaseStats.attackSpeed * partsAttackSpeed;
+		return _currentWeaponSkeleton.skeletonBaseStats.attackSpeed + (_currentWeaponSkeleton.skeletonBaseStats.attackSpeed * partsAttackSpeed);
 	}
 
 	private float CalculateCooldown(Weapon weapon, DamageCalcKind damageCalcKind)
@@ -281,12 +298,17 @@ public class Weapon : ScriptableObject
 			totalCooldown += weapon.triggerMechanism.cooldown;
 			partCount++;
 		}
+		if (weapon.sight)
+		{
+			totalCooldown += weapon.sight.cooldown;
+			partCount++;
+		}
 
-		if (partCount < 0)
-			return -1;
+		if (partCount <= 0 || totalCooldown <= 0)
+			return _currentWeaponSkeleton.skeletonBaseStats.cooldown;
 
 		float partsCooldown = damageCalcKind == DamageCalcKind.Mean ? totalCooldown / partCount : totalCooldown;
-		return _currentWeaponSkeleton.skeletonBaseStats.coolDown * partsCooldown;
+		return _currentWeaponSkeleton.skeletonBaseStats.cooldown + (_currentWeaponSkeleton.skeletonBaseStats.cooldown * partsCooldown);
 	}
 
 	private float CalculateProjectileSize(Weapon weapon, DamageCalcKind damageCalcKind)
@@ -294,6 +316,11 @@ public class Weapon : ScriptableObject
 		float totalProjectileSize = 0;
 		int partCount = 0;
 
+		if (weapon.grip)
+		{
+			totalProjectileSize += weapon.grip.projectileSize;
+			partCount++;
+		}
 		if (weapon.barrel)
 		{
 			totalProjectileSize += weapon.barrel.projectileSize;
@@ -309,12 +336,22 @@ public class Weapon : ScriptableObject
 			totalProjectileSize += weapon.ammunition.projectileSize;
 			partCount++;
 		}
+		if (weapon.triggerMechanism)
+		{
+			totalProjectileSize += weapon.triggerMechanism.projectileSize;
+			partCount++;
+		}
+		if (weapon.sight)
+		{
+			totalProjectileSize += weapon.sight.projectileSize;
+			partCount++;
+		}
 
-		if (partCount < 0)
-			return -1;
+		if (partCount <= 0 || totalProjectileSize <= 0)
+			return _currentWeaponSkeleton.skeletonBaseStats.projectileSize;
 
 		float partsProjectileSize = damageCalcKind == DamageCalcKind.Mean ? totalProjectileSize / partCount : totalProjectileSize;
-		return _currentWeaponSkeleton.skeletonBaseStats.projectileSize * partsProjectileSize;
+		return _currentWeaponSkeleton.skeletonBaseStats.projectileSize +(_currentWeaponSkeleton.skeletonBaseStats.projectileSize * partsProjectileSize);
 	}
 
 	private float CalculateCritChance(Weapon weapon, DamageCalcKind damageCalcKind)
@@ -330,6 +367,11 @@ public class Weapon : ScriptableObject
 		if (weapon.barrel)
 		{
 			totalCritChance += weapon.barrel.critChance;
+			partCount++;
+		}
+		if (weapon.magazine)
+		{
+			totalCritChance += weapon.magazine.critChance;
 			partCount++;
 		}
 		if (weapon.ammunition)
@@ -348,11 +390,11 @@ public class Weapon : ScriptableObject
 			partCount++;
 		}
 
-		if (partCount < 0)
-			return -1;
+		if (partCount <= 0 || totalCritChance <= 0)
+			return _currentWeaponSkeleton.skeletonBaseStats.critChance;
 
 		float partsCritChance = damageCalcKind == DamageCalcKind.Mean ? totalCritChance / partCount : totalCritChance;
-		return _currentWeaponSkeleton.skeletonBaseStats.critChance * partsCritChance;
+		return _currentWeaponSkeleton.skeletonBaseStats.critChance +(_currentWeaponSkeleton.skeletonBaseStats.critChance * partsCritChance);
 	}
 
 	private float CalculatefinalRange(Weapon weapon, DamageCalcKind damageCalcKind)
@@ -360,9 +402,19 @@ public class Weapon : ScriptableObject
 		float totalRange = 0;
 		int partCount = 0;
 
+		if (weapon.grip)
+		{
+			totalRange += weapon.grip.range;
+			partCount++;
+		}
 		if (weapon.barrel)
 		{
 			totalRange += weapon.barrel.range;
+			partCount++;
+		}
+		if (weapon.magazine)
+		{
+			totalRange += weapon.magazine.range;
 			partCount++;
 		}
 		if (weapon.ammunition)
@@ -381,11 +433,11 @@ public class Weapon : ScriptableObject
 			partCount++;
 		}
 
-		if (partCount < 0)
-			return -1;
+		if (partCount <= 0 || totalRange <= 0)
+			return _currentWeaponSkeleton.skeletonBaseStats.range;
 
 		float partsRange = damageCalcKind == DamageCalcKind.Mean ? totalRange / partCount : totalRange;
-		return _currentWeaponSkeleton.skeletonBaseStats.range * partsRange;
+		return _currentWeaponSkeleton.skeletonBaseStats.range + (_currentWeaponSkeleton.skeletonBaseStats.range * partsRange * .1f);
 	}
 
 	public void TryShoot()
@@ -417,7 +469,7 @@ public class Weapon : ScriptableObject
 		if (weaponStats.attackspeed == 0)
 			return;
 
-		if(GameManager.Instance?.weaponControll == WeaponControllKind.AllAuto)
+		if (GameManager.Instance?.weaponControll == WeaponControllKind.AllAuto)
 		{
 			if (!RotateTowardsEnemy(weaponStats.range))
 				return;

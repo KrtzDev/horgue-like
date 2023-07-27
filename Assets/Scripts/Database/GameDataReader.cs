@@ -429,16 +429,22 @@ public class GameDataReader : MonoBehaviour
         {
             if (i == 0)
             {
+				_gripData[i].baseDamage = myGripList.Grip[i].baseDamage;
                 _gripData[i].attackSpeed = myGripList.Grip[i].attackSpeed;
                 _gripData[i].cooldown = myGripList.Grip[i].cooldown;
+                _gripData[i].projectileSize = myGripList.Grip[i].projectileWidth;
                 _gripData[i].critChance = myGripList.Grip[i].criticalHitChance;
+				_gripData[i].range = myGripList.Grip[i].range;
             }
             else
             {
-                _gripData[i].attackSpeed = myGripList.Grip[i].attackSpeed * myGripList.Grip[0].attackSpeed;
+				_gripData[i].baseDamage = myGripList.Grip[i].baseDamage * myGripList.Grip[0].baseDamage;
+				_gripData[i].attackSpeed = myGripList.Grip[i].attackSpeed * myGripList.Grip[0].attackSpeed;
                 _gripData[i].cooldown = myGripList.Grip[i].cooldown * myGripList.Grip[0].cooldown;
-                _gripData[i].critChance = myGripList.Grip[i].criticalHitChance * myGripList.Grip[0].criticalHitChance;
-            }
+				_gripData[i].projectileSize = myGripList.Grip[i].projectileWidth * myGripList.Grip[0].projectileWidth;
+				_gripData[i].critChance = myGripList.Grip[i].criticalHitChance * myGripList.Grip[0].criticalHitChance;
+				_gripData[i].range = myGripList.Grip[i].range * myGripList.Grip[0].range;
+			}
         }
     }
     private void GetMagazineData()
@@ -447,15 +453,21 @@ public class GameDataReader : MonoBehaviour
         {
             if (i == 0)
             {
+                _magazineData[i].baseDamage = myMagazineList.Magazine[i].baseDamage;
                 _magazineData[i].attackSpeed = myMagazineList.Magazine[i].attackSpeed;
                 _magazineData[i].cooldown = myMagazineList.Magazine[i].cooldown;
                 _magazineData[i].projectileSize = myMagazineList.Magazine[i].projectileWidth;
+                _magazineData[i].critChance = myMagazineList.Magazine[i].criticalHitChance;
+                _magazineData[i].range = myMagazineList.Magazine[i].range;
             }
             else
             {
+                _magazineData[i].baseDamage = myMagazineList.Magazine[i].baseDamage * myMagazineList.Magazine[0].baseDamage;
                 _magazineData[i].attackSpeed = myMagazineList.Magazine[i].attackSpeed * myMagazineList.Magazine[0].attackSpeed;
                 _magazineData[i].cooldown = myMagazineList.Magazine[i].cooldown * myMagazineList.Magazine[0].cooldown;
                 _magazineData[i].projectileSize = myMagazineList.Magazine[i].projectileWidth * myMagazineList.Magazine[0].projectileWidth;
+                _magazineData[i].critChance = myMagazineList.Magazine[i].criticalHitChance * myMagazineList.Magazine[0].criticalHitChance;
+                _magazineData[i].range = myMagazineList.Magazine[i].range * myMagazineList.Magazine[0].range;
             }
         }
     }
@@ -465,13 +477,19 @@ public class GameDataReader : MonoBehaviour
         {
             if (i == 0)
             {
+                _sightData[i].baseDamage = mySightList.Sight[i].baseDamage;
                 _sightData[i].attackSpeed = mySightList.Sight[i].attackSpeed;
+                _sightData[i].cooldown = mySightList.Sight[i].cooldown;
+                _sightData[i].projectileSize = mySightList.Sight[i].projectileWidth;
                 _sightData[i].critChance = mySightList.Sight[i].criticalHitChance;
                 _sightData[i].range = mySightList.Sight[i].range;
             }
             else
             {
+                _sightData[i].baseDamage = mySightList.Sight[i].baseDamage * mySightList.Sight[0].baseDamage;
                 _sightData[i].attackSpeed = mySightList.Sight[i].attackSpeed * mySightList.Sight[0].attackSpeed;
+                _sightData[i].cooldown = mySightList.Sight[i].cooldown * mySightList.Sight[0].cooldown;
+                _sightData[i].projectileSize = mySightList.Sight[i].projectileWidth * mySightList.Sight[0].projectileWidth;
                 _sightData[i].critChance = mySightList.Sight[i].criticalHitChance * mySightList.Sight[0].criticalHitChance;
                 _sightData[i].range = mySightList.Sight[i].range * mySightList.Sight[0].range;
             }
