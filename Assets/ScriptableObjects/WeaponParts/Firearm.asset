@@ -10,11 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4af7ccadcc50f3647844d078b6976b0b, type: 3}
-  m_Name: FireArm
+  m_Name: Firearm
   m_EditorClassIdentifier: 
   baseDamage: 5
-  attackSpeed: 0.7
+  attackSpeed: 0
   cooldown: 2
   projectileSize: 1
   critChance: 2
+  critDamage: 2
   range: 15

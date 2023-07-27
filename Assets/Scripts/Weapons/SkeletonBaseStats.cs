@@ -8,5 +8,6 @@ public class SkeletonBaseStats : ScriptableObject
 	public float cooldown;
 	public float projectileSize;
 	public float critChance;
+	public float critDamage;
 	public float range;
 }
