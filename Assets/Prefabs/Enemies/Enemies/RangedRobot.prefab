@@ -99,13 +99,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1059061622425744807}
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1744.7, y: 364.65, z: 1534.1}
-  m_LocalScale: {x: 0.015, y: 0.015, z: 0.015}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.25, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 4301312500149274960}
-  m_RootOrder: 0
+  m_Father: {fileID: 4301312500149274910}
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4301312500149769408
 GameObject:
@@ -1869,6 +1869,7 @@ Transform:
   - {fileID: 4301312500149275002}
   - {fileID: 4301312500149274984}
   - {fileID: 866945960097510711}
+  - {fileID: 7221469875420454319}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1918,7 +1919,7 @@ NavMeshAgent:
   m_Speed: 7.5
   m_Acceleration: 8
   avoidancePriority: 50
-  m_AngularSpeed: 120
+  m_AngularSpeed: 360
   m_StoppingDistance: 1
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
@@ -2027,6 +2028,7 @@ MonoBehaviour:
   _obstacleAgent: {fileID: 0}
   _animator: {fileID: 0}
   _rb: {fileID: 0}
+  _originalAnimationSpeed: 0
   _groundLayer:
     serializedVersion: 2
     m_Bits: 512
@@ -2049,8 +2051,7 @@ MonoBehaviour:
   _enemyData: {fileID: 11400000, guid: fdf791b2749b7224699643a8d5477270, type: 2}
   _isBossEnemy: 0
   _healthComponent: {fileID: 0}
-  _currentBossStage: 0
-  _projectile: {fileID: 8451927325676435795, guid: 519256511bcaca747924245807496f73,
+  _projectile: {fileID: 8451927325676435795, guid: 4746290bed9561b4590c43ddb406e723,
     type: 3}
   <ProjectilePoint>k__BackingField: {fileID: 7221469875420454319}
   _projectileSpeed: 18
@@ -2566,8 +2567,7 @@ Transform:
   m_LocalPosition: {x: -25.8, y: -3.61, z: -20.53}
   m_LocalScale: {x: 0.015, y: 0.015, z: 0.015}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 7221469875420454319}
+  m_Children: []
   m_Father: {fileID: 4301312500149274910}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

@@ -40,7 +40,7 @@ public class AI_Agent_Enemy : AI_Agent
         _stateMachine.Update(GetComponent<AI_Agent_Enemy>());
     }
 
-    private void SetEnemyData()
+    protected virtual void SetEnemyData()
     {
         _navMeshAgent.speed = _enemyData._maxMoveSpeed;
         _navMeshAgent.acceleration = _enemyData._acceleration;

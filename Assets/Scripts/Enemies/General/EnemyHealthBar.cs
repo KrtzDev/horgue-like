@@ -41,11 +41,12 @@ public class EnemyHealthBar : MonoBehaviour
             }
         }
         
-        if (_healthComponent._currentHealth <= 0)
+        /* if (_healthComponent._currentHealth <= 0)
         {
             enabled = false;
             gameObject.SetActive(false);
         }
+        */
     }
 
     private IEnumerator ChangeToPercent(float percent)

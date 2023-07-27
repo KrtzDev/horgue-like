@@ -57,8 +57,6 @@ public class Sniper_State_ChasePlayer : AI_State_ChasePlayer
 
                 agent.SetTarget(agent, _followPosition);
             }
-
-            StartRotating(agent);
         }
 
         float distance = Vector3.Distance(agent.transform.position, _followPosition);
@@ -87,27 +85,18 @@ public class Sniper_State_ChasePlayer : AI_State_ChasePlayer
         {
             if (distance < _enemy._enemyData._retreatRange)
             {
-                agent._animator.SetBool("isRetreating", true);
-                agent._animator.SetBool("isAttacking", false);
-                agent._animator.SetBool("isChasing", false);
                 agent._stateMachine.ChangeState(AI_StateID.Retreat);
             }
         }
         else
         {
-            if (distance < _enemy._enemyData._attackRange && distance > _enemy._enemyData._retreatRange)
+            if (distance <= _enemy._enemyData._retreatRange)
             {
-                agent._animator.SetBool("isAttacking", true);
-                agent._animator.SetBool("isChasing", false);
-                agent._animator.SetBool("isRetreating", false);
-                agent._stateMachine.ChangeState(AI_StateID.Attack);
-            }
-            else if (distance < _enemy._enemyData._retreatRange)
-            {
-                agent._animator.SetBool("isRetreating", true);
-                agent._animator.SetBool("isAttacking", false);
-                agent._animator.SetBool("isChasing", false);
                 agent._stateMachine.ChangeState(AI_StateID.Retreat);
+            }
+            else if (distance < _enemy._enemyData._attackRange)
+            {
+                agent._stateMachine.ChangeState(AI_StateID.Attack);
             }
         }
     }

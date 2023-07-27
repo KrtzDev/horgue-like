@@ -22,6 +22,13 @@ public class AI_Agent_RangedRobot : AI_Agent_Enemy
         base.Update();
     }
 
+    protected override void SetEnemyData()
+    {
+        base.SetEnemyData();
+
+        _projectile.GetComponent<EnemyProjectile>().baseDamage = _enemyData._damagePerHit;
+    }
+
     protected override void RegisterStates()
     {
         _stateMachine.RegisterState(new RangedRobot_State_Idle());
@@ -46,6 +53,7 @@ public class AI_Agent_RangedRobot : AI_Agent_Enemy
     public void DoneShooting()
     {
         this.GetComponent<Animator>().SetBool("isShooting", false);
+        this.GetComponent<Animator>().SetBool("isAttacking", false);
         _stateMachine.ChangeState(AI_StateID.Idle);
     }
 }
