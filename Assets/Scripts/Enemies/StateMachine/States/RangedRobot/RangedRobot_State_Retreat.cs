@@ -47,26 +47,38 @@ public class RangedRobot_State_Retreat : AI_State_Retreat
             _followPosition = agent._playerTransform.position;
         }
 
-        agent.transform.LookAt(_retreatPosition);
-
-        if (agent._obstacleAgent.enabled && agent.enabled)
-        {
-            agent._obstacleAgent.SetDestination(_retreatPosition);
-        }
-        else if (agent._navMeshAgent.enabled && agent.enabled)
-        {
-            agent._navMeshAgent.SetDestination(_retreatPosition);
-        }
-
         float distanceToPlayer = Vector3.Distance(agent.transform.position, _followPosition);
 
-        if (distanceToPlayer > _retreatDistance)
+        if (distanceToPlayer > _retreatDistance && distanceToPlayer < _enemy._enemyData._attackRange)
         {
-            agent._animator.SetBool("isRetreating", false);
-            agent._animator.SetBool("isAttacking", false);
-            agent._animator.SetBool("isChasing", true);
-            agent._navMeshAgent.SetDestination(agent.transform.position);
-            agent._stateMachine.ChangeState(AI_StateID.Idle);
+            agent._stateMachine.ChangeState(AI_StateID.ChasePlayer);
+        }
+        else
+        {
+            if (agent._obstacleAgent.enabled && agent.enabled)
+            {
+                Vector3 dirToPlayer = agent.transform.position - _followPosition;
+                _retreatPosition = agent.transform.position + dirToPlayer;
+
+                if (NavMesh.SamplePosition(_retreatPosition, out NavMeshHit hit, 1f, agent._navMeshAgent.areaMask))
+                {
+                    _retreatPosition = hit.position;
+                }
+
+                agent._obstacleAgent.SetDestination(_retreatPosition);
+            }
+            else if (agent._navMeshAgent.enabled && agent.enabled)
+            {
+                Vector3 dirToPlayer = agent.transform.position - _followPosition;
+                _retreatPosition = agent.transform.position + dirToPlayer;
+
+                if (NavMesh.SamplePosition(_retreatPosition, out NavMeshHit hit, 1f, agent._navMeshAgent.areaMask))
+                {
+                    _retreatPosition = hit.position;
+                }
+
+                agent._navMeshAgent.SetDestination(_retreatPosition);
+            }
         }
     }
 

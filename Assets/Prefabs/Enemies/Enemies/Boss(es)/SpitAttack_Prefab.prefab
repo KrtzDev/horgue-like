@@ -12,6 +12,8 @@ GameObject:
   - component: {fileID: 5032372525414405122}
   - component: {fileID: 8327683711738719501}
   - component: {fileID: 2468973437132849271}
+  - component: {fileID: 2946167368778281796}
+  - component: {fileID: 431336401897322406}
   m_Layer: 0
   m_Name: SpitAttack_Prefab
   m_TagString: Untagged
@@ -100,3 +102,31 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!136 &2946167368778281796
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2431302338451663198}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 0.5
+  m_Height: 1
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &431336401897322406
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2431302338451663198}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3b477eaf39f8f74d8dcdc4d8c2a7344, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _toxicSpit_Prefab: {fileID: 6982214405592628148, guid: 042094de7ea4b3b4e8e1e33cf841e1b3,
+    type: 3}

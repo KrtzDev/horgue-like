@@ -6,6 +6,11 @@ public class AI_State_Idle : AI_State
 {
     public Vector3 _followPosition;
 
+    protected Coroutine LookCoroutine;
+
+    public float _timer;
+    public float _maxTime = 0.25f;
+
     public AI_Agent_Enemy _enemy;
 
     public AI_StateID GetID()
