@@ -60,6 +60,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 66547b0600cd9b348938adf19e88ab68, type: 2}
   - {fileID: 11400000, guid: bf53881ad9e341c4ba6211a4e7fabc6c, type: 2}
   - {fileID: 11400000, guid: 1de1f6f20ca28814d80004febe7eed3a, type: 2}
+  _firearmData:
+  - {fileID: 11400000, guid: b1abd324ef219c34cbacd1fccb8cb801, type: 2}
   _ammunitionData:
   - {fileID: 11400000, guid: 3f0db3dcd64af8444a71824f7ad32f49, type: 2}
   - {fileID: 11400000, guid: b1c2d414a1341f348bcf9b8b6fe73077, type: 2}
@@ -153,6 +155,8 @@ MonoBehaviour:
     Enemies: []
   myLevelList:
     Level: []
+  myFirearmList:
+    Firearm: []
   myAmmunitionList:
     Ammunition: []
   myBarrelList:
