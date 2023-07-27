@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using UnityEngine.AI;
 
 public class GameManager : Singleton<GameManager>
 {
@@ -291,6 +292,12 @@ public class GameManager : Singleton<GameManager>
 		{
 			int zoneNumber = Random.Range(0, _enemySpawner._levelZone.Count);
 			spawnPos = _enemySpawner._levelZone[zoneNumber].transform.position;
+		}
+
+		NavMeshHit nv_hit;
+		if (NavMesh.SamplePosition(spawnPos, out nv_hit, Mathf.Infinity, NavMesh.AllAreas))
+		{
+			spawnPos = nv_hit.position;
 		}
 
 		RaycastHit hit;

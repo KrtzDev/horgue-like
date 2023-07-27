@@ -9,13 +9,13 @@ public class EnemiesToSpawn
 {
     public AI_Agent_Enemy _enemy;
     public int _spawnChance;
-    public SpawnBias _sSpawnBias;
+    public SpawnBias _spawnBias;
 
     public EnemiesToSpawn (AI_Agent_Enemy enemy, int spawnChance, SpawnBias spawnBias)
     {
         _enemy = enemy;
         _spawnChance = spawnChance;
-        _sSpawnBias = spawnBias;
+        _spawnBias = spawnBias;
     }
 }
 
@@ -114,8 +114,8 @@ public class EnemySpawner : MonoBehaviour
         {
             float spawnDelay = Random.Range(_enemySpawnerData._minSpawnDelay, _enemySpawnerData._maxSpawnDelay);
 
-            SetBounds(enemies._sSpawnBias, zoneNumber);
-            StartCoroutine(DoSpawnEnemy(enemies, spawnIndex, GetRandomPositionInBounds(_bounds), spawnDelay));
+            SetBounds(enemies._spawnBias, zoneNumber);
+            StartCoroutine(DoSpawnEnemy(enemies, spawnIndex, GetRandomPositionInBounds(_bounds, enemies._enemy), spawnDelay));
 
             zoneNumber++;
             if (zoneNumber > 3)
@@ -351,7 +351,7 @@ public class EnemySpawner : MonoBehaviour
         }
     }
 
-    private Vector3 GetRandomPositionInBounds(Bounds bounds)
+    private Vector3 GetRandomPositionInBounds(Bounds bounds, AI_Agent_Enemy enemy)
     {
         _canSpawnEnemies = false;
         Vector3 possibleSpawnPosition = Vector3.zero;
@@ -368,7 +368,10 @@ public class EnemySpawner : MonoBehaviour
         possibleSpawnPosition = new Vector3(xValueInBounds, yValue, zValueInBounds);
 
         NavMeshHit nv_hit;
-        if (NavMesh.SamplePosition(possibleSpawnPosition, out nv_hit, 1.0f, NavMesh.AllAreas))
+        NavMeshQueryFilter enemy_nvq = new NavMeshQueryFilter();
+        enemy_nvq.agentTypeID = enemy._navMeshAgent.agentTypeID;
+
+        if (NavMesh.SamplePosition(possibleSpawnPosition, out nv_hit, 1.0f, enemy_nvq))
         {
             possibleSpawnPosition = nv_hit.position;
             _canSpawnEnemies = true;
@@ -383,10 +386,18 @@ public class EnemySpawner : MonoBehaviour
         {
             yield return new WaitForSeconds(spawnDelay);
 
+            NavMeshQueryFilter enemy_nvq = new NavMeshQueryFilter();
+            enemy_nvq.agentTypeID = enemies._enemy._navMeshAgent.agentTypeID;
+
             NavMeshHit Hit;
-            if (NavMesh.SamplePosition(spawnPosition, out Hit, 2f, NavMesh.AllAreas))
+            if (NavMesh.SamplePosition(spawnPosition, out Hit, 2f, enemy_nvq))
             {
                 Instantiate(_enemySpawnIndicator, Hit.position, Quaternion.identity);
+            }
+            else
+            {
+                Debug.LogError($"Unable to place NavMeshAgent on NavMesh. Tried to use {spawnPosition}");
+                yield return null;
             }
 
             yield return new WaitForSeconds(_enemySpawnerData._spawnAnimDelay);
@@ -398,18 +409,11 @@ public class EnemySpawner : MonoBehaviour
                 Animator anim = poolableObject.GetComponent<Animator>();
                 NavMeshAgent agent = poolableObject.GetComponent<NavMeshAgent>();
 
-                if (NavMesh.SamplePosition(spawnPosition, out Hit, 2f, NavMesh.AllAreas))
-                {
-                    agent.Warp(Hit.position);
-                    agent.enabled = true;
-                    anim.SetBool("isChasing", true);
+                agent.Warp(Hit.position);
+                agent.enabled = true;
+                anim.SetBool("isChasing", true);
 
-                    GameManager.Instance._enemyCount++;
-                }
-                else
-                {
-                    Debug.LogError($"Unable to place NavMeshAgent on NavMesh. Tried to use {spawnPosition}");
-                }
+                GameManager.Instance._enemyCount++;
             }
             else
             {
