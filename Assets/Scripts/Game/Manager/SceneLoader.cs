@@ -5,11 +5,12 @@ using UnityEngine.SceneManagement;
 
 public class SceneLoader : Singleton<SceneLoader>
 {
-	private const string SCENE_PATH = "Assets/Scenes/Game Scenes/";
+	private const string scenePath = "Assets/Scenes/Game Scenes/";
 
     public Action CompletedSceneLoad;
 
     public SceneFader SceneFader { get; private set; }
+
     [SerializeField]
     private SceneFader _sceneFaderUI_prefab;
 
@@ -24,7 +25,7 @@ public class SceneLoader : Singleton<SceneLoader>
 
     public void LoadScene(string sceneToLoad)
     {
-        _sceneToLoad = SceneUtility.GetBuildIndexByScenePath(SCENE_PATH + sceneToLoad + ".unity");
+        _sceneToLoad = SceneUtility.GetBuildIndexByScenePath(scenePath + sceneToLoad + ".unity");
         _currentScene = SceneManager.GetActiveScene();
 
         InputManager.Instance.DisableCharacterInputs();

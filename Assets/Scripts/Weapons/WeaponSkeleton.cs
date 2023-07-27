@@ -2,8 +2,6 @@ using UnityEngine;
 
 public class WeaponSkeleton : MonoBehaviour
 {
-	public Transform ProjectileSpawnPosition;
-	public ParticleSystem MuzzleFlash;
-
-	public SkeletonBaseStats skeletonBaseStats;
+    public Transform ProjectileSpawnPosition;
+    public ParticleSystem MuzzleFlash;
 }

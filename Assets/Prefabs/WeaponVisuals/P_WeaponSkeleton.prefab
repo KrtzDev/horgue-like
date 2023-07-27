@@ -114,7 +114,7 @@ Transform:
   - {fileID: 3155281397926773362}
   - {fileID: 9047250594083616499}
   m_Father: {fileID: 4372090028141597004}
-  m_RootOrder: 0
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4372090028141597006
 GameObject:
@@ -145,9 +145,9 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 2191582825225544774}
   - {fileID: 8226857533788239212}
   - {fileID: 3642782213852597667}
+  - {fileID: 2191582825225544774}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -165,7 +165,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ProjectileSpawnPosition: {fileID: 8226857533788239212}
   MuzzleFlash: {fileID: 3664190355862128922}
-  skeletonBaseStats: {fileID: 11400000, guid: b1abd324ef219c34cbacd1fccb8cb801, type: 2}
 --- !u!1 &5093554149664118702
 GameObject:
   m_ObjectHideFlags: 0
@@ -195,7 +194,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4372090028141597004}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6722250866933505903
 GameObject:
@@ -315,7 +314,7 @@ PrefabInstance:
     - target: {fileID: 8462697753094086670, guid: 3a1e6fb9c51147c48b8804f991cbb85a,
         type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8462697753094086670, guid: 3a1e6fb9c51147c48b8804f991cbb85a,
         type: 3}

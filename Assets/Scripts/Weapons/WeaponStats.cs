@@ -1,5 +1,4 @@
-﻿[System.Serializable]
-public class WeaponStats
+﻿public class WeaponStats
 {
 	public float damage;
 	public float attackspeed;

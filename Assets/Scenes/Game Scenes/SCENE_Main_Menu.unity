@@ -1592,6 +1592,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameDataReader
       objectReference: {fileID: 0}
+    - target: {fileID: 4283075153130197046, guid: 3acfade8d5b4ace4fadbef615fdbfcc4,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4283075153130197051, guid: 3acfade8d5b4ace4fadbef615fdbfcc4,
         type: 3}
       propertyPath: startButton

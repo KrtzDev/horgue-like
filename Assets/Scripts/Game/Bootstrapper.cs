@@ -2,58 +2,58 @@ using System.Collections.Generic;
 using System.Linq;
 #if UNITY_EDITOR
 using UnityEditor;
-using UnityEditor.SceneManagement;
 #endif
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-[InitializeOnLoad]
 public class Bootstrapper
 {
-	private const string INIT_SCENE_PATH = "Assets/Scenes/Game Scenes/SCENE_Init.unity";
-	private const string INIT_SCENE_NAME = "SCENE_Init";
+    private const string INIT_SCENE_NAME = "SCENE_Init";
 
-	private static List<string> _activeEditorScenes = new List<string>();
+    private static List<string> activeEditorScenes = new List<string>();
+#if UNITY_EDITOR 
 
-#if UNITY_EDITOR
-	static Bootstrapper()
-	{
-		if (!EditorApplication.isPlayingOrWillChangePlaymode)
-			EditorSceneManager.playModeStartScene = AssetDatabase.LoadAssetAtPath<SceneAsset>(INIT_SCENE_PATH);
+    [InitializeOnEnterPlayMode]
+    private static void OnEnterPlayMode()
+    {
+        EditorApplication.playModeStateChanged += OnPlayModeStateChanged;
+    }
 
-		EditorApplication.playModeStateChanged += OnPlayModeStateChanged;
+    private static void OnPlayModeStateChanged(PlayModeStateChange state)
+    {
+        for (int i = 0; i < SceneManager.sceneCount; i++)
+        {
+            if(SceneManager.GetSceneAt(i).name != INIT_SCENE_NAME)
+                activeEditorScenes.Add(SceneManager.GetSceneAt(i).name);
+        }
 
-		_activeEditorScenes.Clear();
-		for (int i = 0; i < SceneManager.sceneCount; i++)
-		{
-			if (SceneManager.GetSceneAt(i).name != INIT_SCENE_NAME)
-				_activeEditorScenes.Add(SceneManager.GetSceneAt(i).name);
-		}
-	}
+        if (state == PlayModeStateChange.EnteredPlayMode)
+        {
+            SceneManager.LoadSceneAsync(INIT_SCENE_NAME).completed += LoadGameplayScene;
+        }
+    }
 
-	private static void OnPlayModeStateChanged(PlayModeStateChange state)
-	{
-		if (state == PlayModeStateChange.EnteredPlayMode)
-			LoadGameplayScene();
-	}
+    private static void LoadGameplayScene(AsyncOperation asyncOperation)
+    {
+        if (activeEditorScenes.Count > 0)
+        {
+            foreach (var scene in activeEditorScenes)
+            {
+                SceneManager.LoadSceneAsync(scene, LoadSceneMode.Additive).completed += SetGameplaySceneActive;
+            }
+        }
+    }
 
-	private static void LoadGameplayScene()
-	{
-		foreach (var scene in _activeEditorScenes)
-			SceneManager.LoadSceneAsync(scene, LoadSceneMode.Additive).completed += SetGameplaySceneActive;
-	}
+    private static void SetGameplaySceneActive(AsyncOperation asyncOperation)
+    {
+        SceneManager.SetActiveScene(SceneManager.GetSceneByName(activeEditorScenes.Last()));
+        SceneLoader.Instance.CompletedSceneLoad.Invoke();
+    }
 
-	private static void SetGameplaySceneActive(AsyncOperation asyncOperation)
-	{
-		SceneManager.SetActiveScene(SceneManager.GetSceneByName(_activeEditorScenes.Last()));
-		SceneLoader.Instance.CompletedSceneLoad.Invoke();
-	}
-
-	~Bootstrapper()
-	{
-		EditorApplication.playModeStateChanged -= OnPlayModeStateChanged;
-	}
-
+    ~Bootstrapper()
+    {
+        EditorApplication.playModeStateChanged -= OnPlayModeStateChanged;
+    }
 #else
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
     private static void LoadMainMenuScene()

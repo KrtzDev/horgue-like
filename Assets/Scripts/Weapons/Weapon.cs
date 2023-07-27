@@ -1,16 +1,18 @@
+using System;
 using System.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
+using UnityEngine.TextCore.Text;
 
 [CreateAssetMenu(fileName = "new Weapon", menuName = "ModularWeapon/Weapon")]
 public class Weapon : ScriptableObject
 {
-	[SerializeField]
-	private WeaponStats _weaponStats;
+	private const float SLOWEST_POSSIBLE_ATTACKSPEED = 10;
 
 	[Header("Visuals")]
 	[SerializeField]
-	private WeaponSkeleton _weaponSkeleton;
+	private WeaponSkeleton _weaponPrefab;
 	[SerializeField]
 	public Sprite weaponSprite;
 
@@ -52,7 +54,7 @@ public class Weapon : ScriptableObject
 	private Projectile _projectile;
 	public Transform OwningTransform { get; private set; }
 
-	private WeaponSkeleton _currentWeaponSkeleton;
+	private WeaponSkeleton _currentWeaponPrefab;
 	private Pattern _currentPatternPrefab;
 	private Transform _weaponTransform;
 
@@ -80,11 +82,11 @@ public class Weapon : ScriptableObject
 
 	public void Initialize(Transform owningTransform)
 	{
-		Debug.Log("Inizialized " + _weaponSkeleton);
+		Debug.Log("Inizialized " + _weaponPrefab);
 		OwningTransform = owningTransform;
-		_currentWeaponSkeleton = Instantiate(_weaponSkeleton, owningTransform);
-		_currentPatternPrefab = Instantiate(barrel.attackPattern.GetPattern(), _currentWeaponSkeleton.ProjectileSpawnPosition);
-		_weaponTransform = _currentWeaponSkeleton.transform;
+		_currentWeaponPrefab = Instantiate(_weaponPrefab, owningTransform);
+		_currentPatternPrefab = Instantiate(barrel.attackPattern.GetPattern(), _currentWeaponPrefab.ProjectileSpawnPosition);
+		_weaponTransform = _currentWeaponPrefab.transform;
 
 		_reloadTime = CalculateWeaponStats(this).cooldown;
 		_projectile = ammunition.projectilePrefab;
@@ -93,7 +95,7 @@ public class Weapon : ScriptableObject
 		if (SceneManager.GetActiveScene().name != "SCENE_Weapon_Crafting")
 			_projectilePool = ObjectPool<Projectile>.CreatePool(_projectile, 100, null);
 
-		if (barrel.motionPattern.explosionVfx != null)
+		if(barrel.motionPattern.explosionVfx != null)
 			_vfxPool = ObjectPool<HorgueVFX>.CreatePool(barrel.motionPattern.explosionVfx, 25, null);
 
 		_camera = Camera.main;
@@ -110,7 +112,7 @@ public class Weapon : ScriptableObject
 		if (GameManager.Instance.weaponControll == WeaponControllKind.AllAuto)
 			return;
 
-		Vector3 direction = new Vector3(input.x, 0, input.y);
+		Vector3 direction = new Vector3(input.x,0,input.y);
 
 		Vector3 cameraForward = _camera.transform.forward;
 		Vector3 cameraRight = _camera.transform.right;
@@ -129,19 +131,17 @@ public class Weapon : ScriptableObject
 	{
 		WeaponStats weaponStats = new WeaponStats();
 
-		weaponStats.damage = CalculateDamage(weapon, GameManager.Instance.damageCalcKind);
-		weaponStats.attackspeed = CalculateAttackSpeed(weapon, GameManager.Instance.damageCalcKind);
-		weaponStats.cooldown = CalculateCooldown(weapon, GameManager.Instance.damageCalcKind);
-		weaponStats.projectileSize = CalculateProjectileSize(weapon, GameManager.Instance.damageCalcKind);
-		weaponStats.critChance = CalculateCritChance(weapon, GameManager.Instance.damageCalcKind);
-		weaponStats.range = CalculatefinalRange(weapon, GameManager.Instance.damageCalcKind);
+		weaponStats.damage = CalculateDamage(weapon);
+		weaponStats.attackspeed = CalculateAttackSpeed(weapon);
+		weaponStats.cooldown = CalculateCooldown(weapon);
+		weaponStats.projectileSize = CalculateProjectileSize(weapon);
+		weaponStats.critChance = CalculateCritChance(weapon);
+		weaponStats.range = CalculatefinalRange(weapon);
 
 		weaponStats.capacity = weapon.magazine.capacity;
 		weaponStats.attackPattern = weapon.barrel.attackPattern;
 		weaponStats.motionPattern = weapon.barrel.motionPattern;
 		weaponStats.statusEffect = weapon.ammunition.statusEffect;
-
-		_weaponStats = weaponStats;
 
 		return weaponStats;
 	}
@@ -176,20 +176,21 @@ public class Weapon : ScriptableObject
 		projectile.finalCritChance = weaponStats.critChance;
 		projectile.finalRange = weaponStats.range;
 
-		_shotDelay = 1 / projectile.finalAttackSpeed;
+		_shotDelay = projectile.finalAttackSpeed > 0 ? 1 / projectile.finalAttackSpeed : SLOWEST_POSSIBLE_ATTACKSPEED;
 
 		projectile.attackPattern = weaponStats.attackPattern;
 		projectile.motionPattern = weaponStats.motionPattern;
 		projectile.statusEffect = weaponStats.statusEffect;
 	}
 
-	private float CalculateDamage(Weapon weapon, DamageCalcKind damageCalcKind)
+	private float CalculateDamage(Weapon weapon)
 	{
 		float totalDamage = 0;
 		int partCount = 0;
-		if (weapon.grip)
+
+		if (weapon.triggerMechanism)
 		{
-			totalDamage += weapon.grip.baseDamage;
+			totalDamage += weapon.triggerMechanism.baseDamage;
 			partCount++;
 		}
 		if (weapon.barrel)
@@ -197,35 +198,16 @@ public class Weapon : ScriptableObject
 			totalDamage += weapon.barrel.baseDamage;
 			partCount++;
 		}
-		if (weapon.magazine)
-		{
-			totalDamage += weapon.magazine.baseDamage;
-			partCount++;
-		}
 		if (weapon.ammunition)
 		{
 			totalDamage += weapon.ammunition.baseDamage;
 			partCount++;
 		}
-		if (weapon.triggerMechanism)
-		{
-			totalDamage += weapon.triggerMechanism.baseDamage;
-			partCount++;
-		}
-		if (weapon.sight)
-		{
-			totalDamage += weapon.sight.baseDamage;
-			partCount++;
-		}
 
-		if (partCount <= 0 || totalDamage <= 0)
-			return _currentWeaponSkeleton.skeletonBaseStats.baseDamage;
-
-		float partsDamage = damageCalcKind == DamageCalcKind.Mean ? totalDamage / partCount : totalDamage;
-		return _currentWeaponSkeleton.skeletonBaseStats.baseDamage + (_currentWeaponSkeleton.skeletonBaseStats.baseDamage * partsDamage * .1f);
+		return partCount > 0 ? totalDamage / partCount : -1;
 	}
 
-	private float CalculateAttackSpeed(Weapon weapon, DamageCalcKind damageCalcKind)
+	private float CalculateAttackSpeed(Weapon weapon)
 	{
 		float totalAttackSpeed = 0;
 		int partCount = 0;
@@ -260,15 +242,10 @@ public class Weapon : ScriptableObject
 			totalAttackSpeed += weapon.sight.attackSpeed;
 			partCount++;
 		}
-
-		if (partCount <= 0 || totalAttackSpeed <= 0)
-			return _currentWeaponSkeleton.skeletonBaseStats.attackSpeed;
-
-		float partsAttackSpeed = damageCalcKind == DamageCalcKind.Mean ? totalAttackSpeed / partCount : totalAttackSpeed;
-		return _currentWeaponSkeleton.skeletonBaseStats.attackSpeed + (_currentWeaponSkeleton.skeletonBaseStats.attackSpeed * partsAttackSpeed);
+		return partCount > 0 ? totalAttackSpeed / partCount : -1;
 	}
 
-	private float CalculateCooldown(Weapon weapon, DamageCalcKind damageCalcKind)
+	private float CalculateCooldown(Weapon weapon)
 	{
 		float totalCooldown = 0;
 		int partCount = 0;
@@ -298,29 +275,15 @@ public class Weapon : ScriptableObject
 			totalCooldown += weapon.triggerMechanism.cooldown;
 			partCount++;
 		}
-		if (weapon.sight)
-		{
-			totalCooldown += weapon.sight.cooldown;
-			partCount++;
-		}
 
-		if (partCount <= 0 || totalCooldown <= 0)
-			return _currentWeaponSkeleton.skeletonBaseStats.cooldown;
-
-		float partsCooldown = damageCalcKind == DamageCalcKind.Mean ? totalCooldown / partCount : totalCooldown;
-		return _currentWeaponSkeleton.skeletonBaseStats.cooldown + (_currentWeaponSkeleton.skeletonBaseStats.cooldown * partsCooldown);
+		return partCount > 0 ? totalCooldown / partCount : -1;
 	}
 
-	private float CalculateProjectileSize(Weapon weapon, DamageCalcKind damageCalcKind)
+	private float CalculateProjectileSize(Weapon weapon)
 	{
 		float totalProjectileSize = 0;
 		int partCount = 0;
 
-		if (weapon.grip)
-		{
-			totalProjectileSize += weapon.grip.projectileSize;
-			partCount++;
-		}
 		if (weapon.barrel)
 		{
 			totalProjectileSize += weapon.barrel.projectileSize;
@@ -336,25 +299,10 @@ public class Weapon : ScriptableObject
 			totalProjectileSize += weapon.ammunition.projectileSize;
 			partCount++;
 		}
-		if (weapon.triggerMechanism)
-		{
-			totalProjectileSize += weapon.triggerMechanism.projectileSize;
-			partCount++;
-		}
-		if (weapon.sight)
-		{
-			totalProjectileSize += weapon.sight.projectileSize;
-			partCount++;
-		}
-
-		if (partCount <= 0 || totalProjectileSize <= 0)
-			return _currentWeaponSkeleton.skeletonBaseStats.projectileSize;
-
-		float partsProjectileSize = damageCalcKind == DamageCalcKind.Mean ? totalProjectileSize / partCount : totalProjectileSize;
-		return _currentWeaponSkeleton.skeletonBaseStats.projectileSize +(_currentWeaponSkeleton.skeletonBaseStats.projectileSize * partsProjectileSize);
+		return partCount > 0 ? totalProjectileSize / partCount : -1;
 	}
 
-	private float CalculateCritChance(Weapon weapon, DamageCalcKind damageCalcKind)
+	private float CalculateCritChance(Weapon weapon)
 	{
 		float totalCritChance = 0;
 		int partCount = 0;
@@ -367,11 +315,6 @@ public class Weapon : ScriptableObject
 		if (weapon.barrel)
 		{
 			totalCritChance += weapon.barrel.critChance;
-			partCount++;
-		}
-		if (weapon.magazine)
-		{
-			totalCritChance += weapon.magazine.critChance;
 			partCount++;
 		}
 		if (weapon.ammunition)
@@ -389,32 +332,17 @@ public class Weapon : ScriptableObject
 			totalCritChance += weapon.sight.critChance;
 			partCount++;
 		}
-
-		if (partCount <= 0 || totalCritChance <= 0)
-			return _currentWeaponSkeleton.skeletonBaseStats.critChance;
-
-		float partsCritChance = damageCalcKind == DamageCalcKind.Mean ? totalCritChance / partCount : totalCritChance;
-		return _currentWeaponSkeleton.skeletonBaseStats.critChance +(_currentWeaponSkeleton.skeletonBaseStats.critChance * partsCritChance);
+		return partCount > 0 ? totalCritChance / partCount : -1;
 	}
 
-	private float CalculatefinalRange(Weapon weapon, DamageCalcKind damageCalcKind)
+	private float CalculatefinalRange(Weapon weapon)
 	{
 		float totalRange = 0;
 		int partCount = 0;
 
-		if (weapon.grip)
-		{
-			totalRange += weapon.grip.range;
-			partCount++;
-		}
 		if (weapon.barrel)
 		{
 			totalRange += weapon.barrel.range;
-			partCount++;
-		}
-		if (weapon.magazine)
-		{
-			totalRange += weapon.magazine.range;
 			partCount++;
 		}
 		if (weapon.ammunition)
@@ -432,12 +360,7 @@ public class Weapon : ScriptableObject
 			totalRange += weapon.sight.range;
 			partCount++;
 		}
-
-		if (partCount <= 0 || totalRange <= 0)
-			return _currentWeaponSkeleton.skeletonBaseStats.range;
-
-		float partsRange = damageCalcKind == DamageCalcKind.Mean ? totalRange / partCount : totalRange;
-		return _currentWeaponSkeleton.skeletonBaseStats.range + (_currentWeaponSkeleton.skeletonBaseStats.range * partsRange * .1f);
+		return partCount > 0 ? totalRange / partCount : -1;
 	}
 
 	public void TryShoot()
@@ -469,7 +392,7 @@ public class Weapon : ScriptableObject
 		if (weaponStats.attackspeed == 0)
 			return;
 
-		if (GameManager.Instance?.weaponControll == WeaponControllKind.AllAuto)
+		if(GameManager.Instance?.weaponControll == WeaponControllKind.AllAuto)
 		{
 			if (!RotateTowardsEnemy(weaponStats.range))
 				return;
@@ -499,7 +422,7 @@ public class Weapon : ScriptableObject
 
 			_shotDelay = 1 / weaponStats.attackspeed;
 
-			_currentWeaponSkeleton.MuzzleFlash.Play();
+			_currentWeaponPrefab.MuzzleFlash.Play();
 		}
 	}
 

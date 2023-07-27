@@ -12,33 +12,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1840ed087b613334e9bf87d5c6d038cd, type: 3}
   m_Name: AK-7423
   m_EditorClassIdentifier: 
-  _weaponStats:
-    damage: 550
-    attackspeed: 1.715
-    cooldown: 2.5
-    projectileSize: 0.14
-    critChance: 1.1
-    range: 393.75
-    capacity: 30
-    attackPattern: {fileID: 11400000, guid: cb578d9958690974390a1eba6fa458d1, type: 2}
-    motionPattern: {fileID: 11400000, guid: 9aa305ff9050739458fbff74de9180b1, type: 2}
-    statusEffect: {fileID: 0}
-  _weaponSkeleton: {fileID: 4852173439239307193, guid: 534ea9bec0f3ace4cb13174feb65375c,
+  _weaponPrefab: {fileID: 4852173439239307193, guid: 534ea9bec0f3ace4cb13174feb65375c,
     type: 3}
   weaponSprite: {fileID: 0}
-  defaultGrip: {fileID: 11400000, guid: b98793dca6bcd854bbc17cd226a39a18, type: 2}
-  defaultBarrel: {fileID: 11400000, guid: 8a83f155cd04e2344b0ef2b3bc798cfa, type: 2}
-  defaultMagazine: {fileID: 11400000, guid: fca930e11b1b96c44aa54114ff5a2047, type: 2}
-  defaultAmmunition: {fileID: 11400000, guid: ea2bbfd102458f54285f13dfed5ab3f1, type: 2}
-  defaultTriggerMechanism: {fileID: 11400000, guid: 7c0c2ba72f6ce2f4f84ab9ffb0e27d6a,
+  defaultGrip: {fileID: 11400000, guid: 0276b4dcb70fffb41b116150bb36184b, type: 2}
+  defaultBarrel: {fileID: 11400000, guid: 515593ea7be837b42a2b624475df7156, type: 2}
+  defaultMagazine: {fileID: 11400000, guid: 656a4e1564f625e479b4f25ced411e93, type: 2}
+  defaultAmmunition: {fileID: 11400000, guid: f5a77338c7e17fc45a1deac92addcff1, type: 2}
+  defaultTriggerMechanism: {fileID: 11400000, guid: 0f7624e58b0f3704dbc533de49e53d62,
     type: 2}
-  defaultSight: {fileID: 11400000, guid: 349d596668c422e4aa979fc1117f8724, type: 2}
-  grip: {fileID: 11400000, guid: b98793dca6bcd854bbc17cd226a39a18, type: 2}
-  barrel: {fileID: 11400000, guid: 8a83f155cd04e2344b0ef2b3bc798cfa, type: 2}
-  magazine: {fileID: 11400000, guid: fca930e11b1b96c44aa54114ff5a2047, type: 2}
-  ammunition: {fileID: 11400000, guid: ea2bbfd102458f54285f13dfed5ab3f1, type: 2}
-  triggerMechanism: {fileID: 11400000, guid: 7c0c2ba72f6ce2f4f84ab9ffb0e27d6a, type: 2}
-  sight: {fileID: 11400000, guid: 349d596668c422e4aa979fc1117f8724, type: 2}
+  defaultSight: {fileID: 11400000, guid: 612593ce1e077ac4cac55bf8ff35000b, type: 2}
+  grip: {fileID: 11400000, guid: 0276b4dcb70fffb41b116150bb36184b, type: 2}
+  barrel: {fileID: 11400000, guid: 515593ea7be837b42a2b624475df7156, type: 2}
+  magazine: {fileID: 11400000, guid: 656a4e1564f625e479b4f25ced411e93, type: 2}
+  ammunition: {fileID: 11400000, guid: f5a77338c7e17fc45a1deac92addcff1, type: 2}
+  triggerMechanism: {fileID: 11400000, guid: 0f7624e58b0f3704dbc533de49e53d62, type: 2}
+  sight: {fileID: 11400000, guid: 612593ce1e077ac4cac55bf8ff35000b, type: 2}
   _enemyLayer:
     serializedVersion: 2
     m_Bits: 128
