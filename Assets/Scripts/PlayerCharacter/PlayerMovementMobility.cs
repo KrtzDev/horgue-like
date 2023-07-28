@@ -12,6 +12,7 @@ public class PlayerMovementMobility : MonoBehaviour
     [SerializeField] private bool _isGrounded;
     [SerializeField] private float _groundCheckValueY;
     [SerializeField] private Vector3 _groundCheckBox;
+    public LayerMask _walkLayer;
     public LayerMask _groundLayer;
     [SerializeField] private LayerMask _enemyLayer;
 
@@ -160,7 +161,7 @@ public class PlayerMovementMobility : MonoBehaviour
 
     private void CheckIfGrounded()
     {
-        Collider[] hitColliders = (Physics.OverlapBox(this.transform.position + new Vector3(0, _groundCheckValueY, 0), _groundCheckBox, Quaternion.identity, _groundLayer));
+        Collider[] hitColliders = (Physics.OverlapBox(this.transform.position + new Vector3(0, _groundCheckValueY, 0), _groundCheckBox, Quaternion.identity, _walkLayer));
 
         if(hitColliders.Length > 0)
         {
@@ -355,7 +356,7 @@ public class PlayerMovementMobility : MonoBehaviour
             if (distanceToEnemy < currentclosestdistance)
             {
                 RaycastHit hit;
-                if (Physics.Raycast(transform.position, (enemy.transform.position - transform.position), out hit, distanceToEnemy, _groundLayer))
+                if (Physics.Raycast(transform.position, (enemy.transform.position - transform.position), out hit, distanceToEnemy, _walkLayer))
                 {
                 }
                 else
