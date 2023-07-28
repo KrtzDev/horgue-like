@@ -62,11 +62,12 @@ public class ChooseAbility: MonoBehaviour
         if (instance == null)
         {
             instance = this;
-            Time.timeScale = 0;
 
-            _tempAbilities = _abilities;
+			Time.timeScale = 0;
+			_tempAbilities = _abilities;
         }
     }
+
     private void OnEnable()
     {
         StartCoroutine(SetSelectedCardAfterOneFrame());
