@@ -369,9 +369,16 @@ public class EnemySpawner : MonoBehaviour
 
         NavMeshHit nv_hit;
         NavMeshQueryFilter enemy_nvq = new NavMeshQueryFilter();
-        enemy_nvq.agentTypeID = enemy._navMeshAgent.agentTypeID;
 
-        if (NavMesh.SamplePosition(possibleSpawnPosition, out nv_hit, 1.0f, enemy_nvq))
+        if (enemy._navMeshAgent == null)
+        {
+            enemy._navMeshAgent = enemy.GetComponent<NavMeshAgent>();
+        }
+
+        enemy_nvq.agentTypeID = enemy._navMeshAgent.agentTypeID;
+        enemy_nvq.areaMask = NavMesh.AllAreas;
+
+        if (NavMesh.SamplePosition(possibleSpawnPosition, out nv_hit, 2f, enemy_nvq))
         {
             possibleSpawnPosition = nv_hit.position;
             _canSpawnEnemies = true;
@@ -387,7 +394,13 @@ public class EnemySpawner : MonoBehaviour
             yield return new WaitForSeconds(spawnDelay);
 
             NavMeshQueryFilter enemy_nvq = new NavMeshQueryFilter();
+            if(enemies._enemy._navMeshAgent == null)
+            {
+                enemies._enemy._navMeshAgent = enemies._enemy.GetComponent<NavMeshAgent>();
+            }
+            
             enemy_nvq.agentTypeID = enemies._enemy._navMeshAgent.agentTypeID;
+            enemy_nvq.areaMask = NavMesh.AllAreas;
 
             NavMeshHit Hit;
             if (NavMesh.SamplePosition(spawnPosition, out Hit, 2f, enemy_nvq))
