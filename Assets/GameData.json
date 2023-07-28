@@ -125,22 +125,22 @@
   "Firearm": [
     {
       "name": "Firearm",
-      "attackSpeed": "0,7 p/s",
+      "attackSpeed": 0.7,
       "baseDamage": 5,
       "cooldown": 2,
       "criticalHitChance": 2,
       "criticalHitDamage": 2,
-      "projectileWidth": "1 um",
-      "range": "15 um"
+      "projectileWidth": 0.3,
+      "range": 15
     }
   ],
   "Ammunition": [
     {
       "name": "Reference",
       "numberOfGems": 1,
-      "attackSpeed": "1 p/s",
-      "baseDamage": "100 dpb",
-      "cooldown": "1 s",
+      "attackSpeed": 1,
+      "baseDamage": 100,
+      "cooldown": 1,
       "criticalHitChance": 1,
       "projectileWidth": 1,
       "range": 25
@@ -279,12 +279,12 @@
       "name": "Reference",
       "simultaneousProjectiles": 1,
       "numberOfGems": 1,
-      "attackSpeed": "1 p/s",
-      "baseDamage": "100 dpb",
-      "cooldown": "1 s",
+      "attackSpeed": 1,
+      "baseDamage": 100,
+      "cooldown": 1,
       "criticalHitChance": 1,
-      "projectileWidth": "1 um",
-      "range": "25 um"
+      "projectileWidth": 1,
+      "range": 25
     },
     {
       "name": "Brainified Conical Steel Nickle Barrel",
@@ -475,12 +475,12 @@
       "numberOfBarrels": 1,
       "numberOfGems": 1,
       "numberOfMagazines": 1,
-      "attackSpeed": "1 p/s",
-      "baseDamage": "100 dpb",
-      "cooldown": "1 s",
+      "attackSpeed": 1,
+      "baseDamage": 100,
+      "cooldown": 1,
       "criticalHitChance": 1,
-      "projectileWidth": "1 um",
-      "range": "25 um"
+      "projectileWidth": 1,
+      "range": 25
     },
     {
       "name": "30s Double Grip",
@@ -644,12 +644,12 @@
       "name": "Reference",
       "numberOfAmmunitionSlots": 1,
       "numberOfGems": 1,
-      "attackSpeed": "1 p/s",
-      "baseDamage": "100 dpb",
-      "cooldown": "1 s",
+      "attackSpeed": 1,
+      "baseDamage": 100,
+      "cooldown": 1,
       "criticalHitChance": 1,
-      "projectileWidth": "1 um",
-      "range": "25 um"
+      "projectileWidth": 1,
+      "range": 25
     },
     {
       "name": "Billard Ball Drum",
@@ -804,12 +804,12 @@
     {
       "name": "Reference",
       "numberOfGems": 1,
-      "attackSpeed": "1 p/s",
-      "baseDamage": "100 dpb",
-      "cooldown": "1 s",
+      "attackSpeed": 1,
+      "baseDamage": 100,
+      "cooldown": 1,
       "criticalHitChance": 1,
-      "projectileWidth": "1 um",
-      "range": "25 um"
+      "projectileWidth": 1,
+      "range": 25
     },
     {
       "name": "Basic Iron Sights",
@@ -937,12 +937,12 @@
     {
       "name": "Reference",
       "numberOfGems": 1,
-      "attackSpeed": "1 p/s",
-      "baseDamage": "100 dpb",
-      "cooldown": "1 s",
+      "attackSpeed": 1,
+      "baseDamage": 100,
+      "cooldown": 1,
       "criticalHitChance": 1,
-      "projectileWidth": "1 um",
-      "range": "25 um"
+      "projectileWidth": 1,
+      "range": 25
     },
     {
       "name": "Adjustable Break Trigger",

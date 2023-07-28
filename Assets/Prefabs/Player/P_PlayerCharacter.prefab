@@ -428,9 +428,12 @@ MonoBehaviour:
   _isGrounded: 0
   _groundCheckValueY: 0.1
   _groundCheckBox: {x: 0.25, y: 0.2, z: 0.25}
-  _groundLayer:
+  _walkLayer:
     serializedVersion: 2
     m_Bits: 528
+  _groundLayer:
+    serializedVersion: 2
+    m_Bits: 512
   _enemyLayer:
     serializedVersion: 2
     m_Bits: 128
