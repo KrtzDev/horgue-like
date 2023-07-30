@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class PlayerCharacter : MonoBehaviour
 {
@@ -48,7 +49,7 @@ public class PlayerCharacter : MonoBehaviour
 
     private void PauseGame(InputAction.CallbackContext ctx)
     {
-        if (ctx.performed && !GameManager.Instance._gameIsPaused)
+        if (ctx.performed && !GameManager.Instance._gameIsPaused && SceneManager.GetActiveScene().name.StartsWith("SCENE_Level"))
         {
             UIManager.Instance.PauseMenu.gameObject.SetActive(true);
             GameManager.Instance._gameIsPaused = true;

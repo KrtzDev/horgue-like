@@ -2,7 +2,12 @@ using UnityEngine;
 
 public class MainMenu : MonoBehaviour
 {
-	public void StartGame()
+    private void Start()
+    {
+		Time.timeScale = 1;
+	}
+
+    public void StartGame()
 	{
 		SceneLoader.Instance.LoadScene(2);
 	}

@@ -8,6 +8,7 @@ public class GameDataReader : MonoBehaviour
 {
     public TextAsset gameData;
     public Button startButton;
+    public bool _dataRetrieved = false;
     private bool _hasLoadedData = false;
 
     [Header("PLAYER DATA")]
@@ -272,7 +273,7 @@ public class GameDataReader : MonoBehaviour
             GetListFromJSON();
 
             startButton = GameObject.Find("StartButton").GetComponent<Button>();
-            StartCoroutine(EnableButton(2));
+            StartCoroutine(EnableButton(0));
 
             _hasLoadedData = true;
         }

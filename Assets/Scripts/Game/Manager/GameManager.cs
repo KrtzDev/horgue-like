@@ -79,8 +79,6 @@ public class GameManager : Singleton<GameManager>
 			_currentLevel = 1;
 			_currentWave = 0;
 
-			_gameDataReader.GetGameData();
-
 			return;
 		}
 

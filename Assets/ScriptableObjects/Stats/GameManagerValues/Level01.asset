@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _healthBonus: 1
   _damageBonus: 1
-  _timeToSurvive: 5
+  _timeToSurvive: 40
