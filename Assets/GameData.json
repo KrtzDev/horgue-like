@@ -71,7 +71,7 @@
       "name": "Level1",
       "healthBonus": 1,
       "damageBonus": 1,
-      "TimeToSurvive": 1,
+      "TimeToSurvive": 60,
       "spawnTick": 3,
       "spawnsPerTick": 6,
       "minEnemyCount": 10,
@@ -85,14 +85,13 @@
       "farZoneSize": 30,
       "maxCloseZoneOcc": 8,
       "maxMidZoneOcc": 15,
-      "maxFarZoneOcc": 20,
-      "": 60
+      "maxFarZoneOcc": 20
     },
     {
       "name": "Level1.5",
       "healthBonus": 1.1,
       "damageBonus": 1.1,
-      "TimeToSurvive": 1,
+      "TimeToSurvive": 65,
       "spawnTick": 3,
       "spawnsPerTick": 6,
       "minEnemyCount": 10,
@@ -106,14 +105,13 @@
       "farZoneSize": 30,
       "maxCloseZoneOcc": 8,
       "maxMidZoneOcc": 15,
-      "maxFarZoneOcc": 20,
-      "": 65
+      "maxFarZoneOcc": 20
     },
     {
       "name": "Level2",
       "healthBonus": 1.2,
       "damageBonus": 1.2,
-      "TimeToSurvive": 1,
+      "TimeToSurvive": 70,
       "spawnTick": 3,
       "spawnsPerTick": 6,
       "minEnemyCount": 10,
@@ -127,14 +125,13 @@
       "farZoneSize": 30,
       "maxCloseZoneOcc": 8,
       "maxMidZoneOcc": 15,
-      "maxFarZoneOcc": 20,
-      "": 70
+      "maxFarZoneOcc": 20
     },
     {
       "name": "Level2.5",
       "healthBonus": 1.3,
       "damageBonus": 1.3,
-      "TimeToSurvive": 1,
+      "TimeToSurvive": 75,
       "spawnTick": 3,
       "spawnsPerTick": 6,
       "minEnemyCount": 10,
@@ -148,14 +145,13 @@
       "farZoneSize": 30,
       "maxCloseZoneOcc": 8,
       "maxMidZoneOcc": 15,
-      "maxFarZoneOcc": 20,
-      "": 75
+      "maxFarZoneOcc": 20
     },
     {
       "name": "Level3",
       "healthBonus": 1.4,
       "damageBonus": 1.4,
-      "TimeToSurvive": 1,
+      "TimeToSurvive": 80,
       "spawnTick": 3,
       "spawnsPerTick": 6,
       "minEnemyCount": 10,
@@ -169,14 +165,13 @@
       "farZoneSize": 30,
       "maxCloseZoneOcc": 8,
       "maxMidZoneOcc": 15,
-      "maxFarZoneOcc": 20,
-      "": 80
+      "maxFarZoneOcc": 20
     },
     {
       "name": "Level3.5",
       "healthBonus": 1.5,
       "damageBonus": 1.5,
-      "TimeToSurvive": 1,
+      "TimeToSurvive": 85,
       "spawnTick": 3,
       "spawnsPerTick": 6,
       "minEnemyCount": 10,
@@ -190,14 +185,13 @@
       "farZoneSize": 30,
       "maxCloseZoneOcc": 8,
       "maxMidZoneOcc": 15,
-      "maxFarZoneOcc": 20,
-      "": 85
+      "maxFarZoneOcc": 20
     },
     {
       "name": "Level4",
       "healthBonus": 1.6,
       "damageBonus": 1.6,
-      "TimeToSurvive": 1,
+      "TimeToSurvive": 90,
       "spawnTick": 3,
       "spawnsPerTick": 6,
       "minEnemyCount": 10,
@@ -211,14 +205,13 @@
       "farZoneSize": 30,
       "maxCloseZoneOcc": 8,
       "maxMidZoneOcc": 15,
-      "maxFarZoneOcc": 20,
-      "": 90
+      "maxFarZoneOcc": 20
     },
     {
       "name": "Level4.5",
       "healthBonus": 1.7,
       "damageBonus": 1.7,
-      "TimeToSurvive": 1,
+      "TimeToSurvive": 90,
       "spawnTick": 3,
       "spawnsPerTick": 6,
       "minEnemyCount": 10,
@@ -232,8 +225,7 @@
       "farZoneSize": 30,
       "maxCloseZoneOcc": 8,
       "maxMidZoneOcc": 15,
-      "maxFarZoneOcc": 20,
-      "": 90
+      "maxFarZoneOcc": 20
     },
     {
       "name": "LevelBoss",

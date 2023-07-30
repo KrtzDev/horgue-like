@@ -90,6 +90,7 @@ public class GameManager : Singleton<GameManager>
 
 		}
 
+		_gameDataReader.GetGameData();
 		_gameDataReader.SetGameData();
 
 		_currentTimeToSurvive = _GameManagerValues[_currentLevelArray]._timeToSurvive;

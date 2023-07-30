@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using TMPro;
 
 public class GameDataReader : MonoBehaviour
@@ -272,8 +273,13 @@ public class GameDataReader : MonoBehaviour
         {
             GetListFromJSON();
 
-            startButton = GameObject.Find("StartButton").GetComponent<Button>();
-            StartCoroutine(EnableButton(0));
+            if (SceneManager.GetActiveScene().name == "SCENE_Main_Menu")
+            {
+                startButton = GameObject.Find("StartButton").GetComponent<Button>();
+                StartCoroutine(EnableButton(0));
+
+                return;
+            }
 
             _hasLoadedData = true;
         }

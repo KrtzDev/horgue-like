@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e53ff1b8ade7b5340af8b4e886fb2c85, type: 3}
+  m_Name: Drone
+  m_EditorClassIdentifier: 
+  _maxHealth: 60
+  _damagePerHit: 100
+  _attackSpeed: 1.5
+  _givenXP: 3
+  _maxMoveSpeed: 5
+  _acceleration: 6
+  _armor: 1
+  _elementalResistance: 1
+  _technicalResistance: 1
+  _healthDropChance: 0
+  _attackRange: 0
+  _retreatRange: 0
+  _maxJumpAttackRange: 0
+  _minJumpAttackRange: 0
+  _jumpAttackChance: 0
+  _jumpAttackCooldown: 0
+  _jumpPrepTime: 0
+  _jumpTime: 0
+  _jumpForce: 0
+  _heightCurve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
