@@ -68,6 +68,11 @@ public class EnemyHealthComponent : HealthComponent
 
 		_isDead = true;
 
+		if(_enemy._isBossEnemy)
+        {
+			GameManager.Instance._newGamePlus = true;
+        }
+
 		GameManager.Instance.EnemyDied();
 
 		_enemy._stateMachine.ChangeState(AI_StateID.Death);

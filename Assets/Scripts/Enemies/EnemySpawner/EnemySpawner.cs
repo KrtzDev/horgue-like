@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.AI;
 
 [System.Serializable]
@@ -26,6 +27,7 @@ public class EnemySpawner : MonoBehaviour
     public GameObject _enemySpawnIndicator;
     public GameObject _enemyObjectPoolParent;
     private GameObject _player;
+    private bool _spawnedBoss = false;
     [SerializeField] private GameObject _boxZoneParent;
 
     [Header("Settings")]
@@ -65,10 +67,22 @@ public class EnemySpawner : MonoBehaviour
         {
             _enemyObjectPool.Add(i, ObjectPool<AI_Agent_Enemy>.CreatePool(_enemiesToSpawn[i]._enemy, _enemySpawnerData._maxEnemyCount, _enemyObjectPoolParent.transform));
         }
+
+        _spawnedBoss = false;
     }
 
     private void Update()
     {
+        if (SceneManager.GetActiveScene().name.Contains("Boss"))
+        {
+            if(!_spawnedBoss)
+            {
+                SpawnEnemies(_enemiesToSpawn[0], 1, 0);
+                _spawnedBoss = true;
+            }
+            return;
+        }
+
         if (_spawnTimer >= _enemySpawnerData._spawnTick)
         {
             int spawnIndex = 0;
@@ -108,6 +122,7 @@ public class EnemySpawner : MonoBehaviour
 
     private void SpawnEnemies(EnemiesToSpawn enemies, int enemiesToBeSpawned, int spawnIndex) // GameManager.Instance._enemyCount has to be subtracted on Enemy Death in Enemy Script
     {
+
         int zoneNumber = Random.Range(0,3);
 
         for (int i = 0; i < enemiesToBeSpawned; i++)

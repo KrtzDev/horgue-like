@@ -24,7 +24,7 @@ public class UIImageFillAmountWaveProgress : UIImageFillAmount
     {
 		_maxEnemiesAmount = _enemySpawner._enemySpawnerData._maxEnemyCount;
 
-        _CurrentLevelWave.text = "Level: " + GameManager.Instance._currentLevel + " -- Wave: " + GameManager.Instance._currentWave;
+        _CurrentLevelWave.text = "Level: " + GameManager.Instance._currentLevel;
 	}
 
     public override void FixedUpdate()

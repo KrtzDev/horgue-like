@@ -332,8 +332,8 @@ public class GameDataReader : MonoBehaviour
         {
             if (i == 0)
             {
-                _enemyData[i]._maxHealth = (int)myEnemyList.Enemies[0].maxHealth; //* GameManager.Instance._GameManagerValues[GameManager.Instance._currentLevelArray]._healthBonus);
-                _enemyData[i]._damagePerHit = (int)myEnemyList.Enemies[0].damagePerHit; //* GameManager.Instance._GameManagerValues[GameManager.Instance._currentLevelArray]._damageBonus);
+                _enemyData[i]._maxHealth = (int)(myEnemyList.Enemies[0].maxHealth * GameManager.Instance._GameManagerValues[GameManager.Instance._currentLevelArray]._healthBonus);
+                _enemyData[i]._damagePerHit = (int)(myEnemyList.Enemies[0].damagePerHit * GameManager.Instance._GameManagerValues[GameManager.Instance._currentLevelArray]._damageBonus);
                 _enemyData[i]._attackSpeed = myEnemyList.Enemies[i].attackSpeed;
                 _enemyData[i]._givenXP = (int)myEnemyList.Enemies[i].givenXP;
                 _enemyData[i]._maxMoveSpeed = myEnemyList.Enemies[i].maxMoveSpeed;
@@ -362,7 +362,6 @@ public class GameDataReader : MonoBehaviour
     }
     private IEnumerator SetLevelData()
     {
-
         for (int i = 0; i < _enemySpawnerData.Count; i++)
         {
             _enemySpawnerData[i]._spawnTick = myLevelList.Level[i].spawnTick;
