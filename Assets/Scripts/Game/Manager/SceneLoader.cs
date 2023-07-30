@@ -44,7 +44,7 @@ public class SceneLoader : Singleton<SceneLoader>
 
     private IEnumerator FadeOut()
     {
-        WaitForSeconds waitTime = new WaitForSeconds(_sceneFader.FadeOut());
+        WaitForSecondsRealtime waitTime = new WaitForSecondsRealtime(_sceneFader.FadeOut());
         yield return waitTime;
         UnloadScene();
     }
@@ -72,7 +72,7 @@ public class SceneLoader : Singleton<SceneLoader>
 
     private IEnumerator FadeIn()
     {
-        WaitForSeconds waitTime = new WaitForSeconds(_sceneFader.FadeIn());
+        WaitForSecondsRealtime waitTime = new WaitForSecondsRealtime(_sceneFader.FadeIn());
         yield return waitTime;
     }
 }

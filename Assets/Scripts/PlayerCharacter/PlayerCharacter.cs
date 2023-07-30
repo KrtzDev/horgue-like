@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerCharacter : MonoBehaviour
 {
@@ -11,6 +12,7 @@ public class PlayerCharacter : MonoBehaviour
     [SerializeField]
     public PlayerData _playerData;
     private HealthComponent _healthComponent;
+    private PlayerInputMappings _inputActions;
 
     public Rigidbody CharacterRigidbody { get => _characterRigidbody; set => _characterRigidbody = value; }
     public Camera Camera { get => _camera; set => _camera = value; }
@@ -23,6 +25,9 @@ public class PlayerCharacter : MonoBehaviour
         _healthComponent = this.GetComponent<HealthComponent>();
         _healthComponent._maxHealth = _playerData._maxHealth;
         _healthComponent._currentHealth = _healthComponent._maxHealth;
+
+        _inputActions = InputManager.Instance?.CharacterInputActions;
+        _inputActions.Character.Pause.performed += PauseGame;
     }
 
     private void Update()
@@ -39,5 +44,15 @@ public class PlayerCharacter : MonoBehaviour
             _waterDamageTimer = 0.5f;
         }
 
+    }
+
+    private void PauseGame(InputAction.CallbackContext ctx)
+    {
+        if (ctx.performed && !GameManager.Instance._gameIsPaused)
+        {
+            UIManager.Instance.PauseMenu.gameObject.SetActive(true);
+            GameManager.Instance._gameIsPaused = true;
+            Time.timeScale = 0;
+        }
     }
 }

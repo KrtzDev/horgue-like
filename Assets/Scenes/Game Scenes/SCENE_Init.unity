@@ -272,7 +272,8 @@ MonoBehaviour:
   _currentLevel: 1
   _currentLevelArray: 0
   _currentWave: 0
-  player: {fileID: 0}
+  _gameIsPaused: 0
+  _player: {fileID: 0}
   _currentPlayerHealth: 0
   _playerCanUseAbilities: 0
   _currentAbility: {fileID: 0}
@@ -464,14 +465,25 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameDataReader
       objectReference: {fileID: 0}
+    - target: {fileID: 4283075153130197046, guid: 3acfade8d5b4ace4fadbef615fdbfcc4,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3acfade8d5b4ace4fadbef615fdbfcc4, type: 3}
---- !u!1 &1497091692 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4283075153130197046, guid: 3acfade8d5b4ace4fadbef615fdbfcc4,
+--- !u!114 &1497091692 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4283075153130197051, guid: 3acfade8d5b4ace4fadbef615fdbfcc4,
     type: 3}
   m_PrefabInstance: {fileID: 1497091691}
   m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ddecafd0c01b0be4ca60d143f3968237, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1776022109
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -539,23 +551,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8721330641953635283, guid: 578780241b2c5d54086e4a2080d153ce,
-        type: 3}
-      propertyPath: _abilityUI_prefab
-      value: 
-      objectReference: {fileID: 925541605706483504, guid: dd5d90f9ae1662b4e839a9f9f4171693,
-        type: 3}
-    - target: {fileID: 8721330641953635283, guid: 578780241b2c5d54086e4a2080d153ce,
-        type: 3}
-      propertyPath: _abilitiesInDisplay
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 8721330641953635283, guid: 578780241b2c5d54086e4a2080d153ce,
-        type: 3}
-      propertyPath: _chooseAbility_prefab
-      value: 
-      objectReference: {fileID: 6720952648814312727, guid: f1e63370183512544a15ca8fd7bdcad9,
-        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 578780241b2c5d54086e4a2080d153ce, type: 3}
 --- !u!4 &1776022110 stripped

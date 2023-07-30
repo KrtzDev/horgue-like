@@ -71,6 +71,15 @@ public partial class @PlayerInputMappings : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Pause"",
+                    ""type"": ""Button"",
+                    ""id"": ""617ec7a2-4f3c-4216-bc6c-c5fe245061e8"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -370,6 +379,28 @@ public partial class @PlayerInputMappings : IInputActionCollection2, IDisposable
                     ""action"": ""SwitchMode"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ecf6e69c-8497-4287-9074-f07a44478f33"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""cd55752f-bf50-4802-865c-980a037ceeee"",
+                    ""path"": ""<Gamepad>/buttonNorth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -921,6 +952,7 @@ public partial class @PlayerInputMappings : IInputActionCollection2, IDisposable
         m_Character_Aim = m_Character.FindAction("Aim", throwIfNotFound: true);
         m_Character_Shoot = m_Character.FindAction("Shoot", throwIfNotFound: true);
         m_Character_SwitchMode = m_Character.FindAction("SwitchMode", throwIfNotFound: true);
+        m_Character_Pause = m_Character.FindAction("Pause", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -997,6 +1029,7 @@ public partial class @PlayerInputMappings : IInputActionCollection2, IDisposable
     private readonly InputAction m_Character_Aim;
     private readonly InputAction m_Character_Shoot;
     private readonly InputAction m_Character_SwitchMode;
+    private readonly InputAction m_Character_Pause;
     public struct CharacterActions
     {
         private @PlayerInputMappings m_Wrapper;
@@ -1006,6 +1039,7 @@ public partial class @PlayerInputMappings : IInputActionCollection2, IDisposable
         public InputAction @Aim => m_Wrapper.m_Character_Aim;
         public InputAction @Shoot => m_Wrapper.m_Character_Shoot;
         public InputAction @SwitchMode => m_Wrapper.m_Character_SwitchMode;
+        public InputAction @Pause => m_Wrapper.m_Character_Pause;
         public InputActionMap Get() { return m_Wrapper.m_Character; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1030,6 +1064,9 @@ public partial class @PlayerInputMappings : IInputActionCollection2, IDisposable
                 @SwitchMode.started -= m_Wrapper.m_CharacterActionsCallbackInterface.OnSwitchMode;
                 @SwitchMode.performed -= m_Wrapper.m_CharacterActionsCallbackInterface.OnSwitchMode;
                 @SwitchMode.canceled -= m_Wrapper.m_CharacterActionsCallbackInterface.OnSwitchMode;
+                @Pause.started -= m_Wrapper.m_CharacterActionsCallbackInterface.OnPause;
+                @Pause.performed -= m_Wrapper.m_CharacterActionsCallbackInterface.OnPause;
+                @Pause.canceled -= m_Wrapper.m_CharacterActionsCallbackInterface.OnPause;
             }
             m_Wrapper.m_CharacterActionsCallbackInterface = instance;
             if (instance != null)
@@ -1049,6 +1086,9 @@ public partial class @PlayerInputMappings : IInputActionCollection2, IDisposable
                 @SwitchMode.started += instance.OnSwitchMode;
                 @SwitchMode.performed += instance.OnSwitchMode;
                 @SwitchMode.canceled += instance.OnSwitchMode;
+                @Pause.started += instance.OnPause;
+                @Pause.performed += instance.OnPause;
+                @Pause.canceled += instance.OnPause;
             }
         }
     }
@@ -1174,6 +1214,7 @@ public partial class @PlayerInputMappings : IInputActionCollection2, IDisposable
         void OnAim(InputAction.CallbackContext context);
         void OnShoot(InputAction.CallbackContext context);
         void OnSwitchMode(InputAction.CallbackContext context);
+        void OnPause(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {

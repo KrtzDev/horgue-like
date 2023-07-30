@@ -19,7 +19,7 @@ public class GameManager : Singleton<GameManager>
 	public DamageCalcKind damageCalcKind = DamageCalcKind.Mean;
 
 	[SerializeField]
-	private GameObject _gameDataReader;
+	private GameDataReader _gameDataReader;
 
 	public List<GameManagerValues> _GameManagerValues = new List<GameManagerValues>();
 
@@ -46,6 +46,8 @@ public class GameManager : Singleton<GameManager>
 
 	private int _numberOfRewards = 6;
 
+	public bool _gameIsPaused;
+
 
 	[Header("Player")]
 	public GameObject _player;
@@ -55,19 +57,17 @@ public class GameManager : Singleton<GameManager>
 
 	private void Start()
 	{
-		StartCoroutine(GetGameData());
-
 		SceneLoader.Instance.CompletedSceneLoad += OnCompletedSceneLoad;
 
 		_currentScore = 0;
 		_currentLevel = 1;
 		_lastLevel = 0;
 		_currentLevelArray = _currentLevel - 1;
+		_gameIsPaused = false;
 	}
 
 	private void OnCompletedSceneLoad()
 	{
-		_currentTimeToSurvive = _GameManagerValues[_currentLevelArray]._timeToSurvive;
 
 		if (SceneManager.GetActiveScene().name == "SCENE_Weapon_Crafting")
 		{
@@ -79,8 +79,14 @@ public class GameManager : Singleton<GameManager>
 			_currentLevel = 1;
 			_currentWave = 0;
 
+			_gameDataReader.GetGameData();
+
 			return;
 		}
+
+		_gameDataReader.SetGameData();
+
+		_currentTimeToSurvive = _GameManagerValues[_currentLevelArray]._timeToSurvive;
 
 		_hasWon = false;
 		_hasLost = false;
@@ -271,12 +277,6 @@ public class GameManager : Singleton<GameManager>
 		UIManager.Instance.WaveEndScreen.gameObject.SetActive(false);
 		_playerCanUseAbilities = false;
 		EnemyStopFollowing();
-	}
-
-	IEnumerator GetGameData()
-    {
-		_gameDataReader.SetActive(true);
-		yield return null;
 	}
 
 	private void MovePlayerToRandomPos(Vector3 spawnPos)
