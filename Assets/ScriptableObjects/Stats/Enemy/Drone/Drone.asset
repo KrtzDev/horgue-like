@@ -22,7 +22,7 @@ MonoBehaviour:
   _elementalResistance: 25
   _technicalResistance: 25
   _healthDropChance: 0
-  _attackRange: 20
+  _attackRange: 8
   _retreatRange: 0
   _maxJumpAttackRange: 0
   _minJumpAttackRange: 0

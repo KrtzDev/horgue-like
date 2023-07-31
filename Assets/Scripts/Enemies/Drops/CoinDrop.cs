@@ -19,6 +19,7 @@ public class CoinDrop : MonoBehaviour
 
     private void StartPickUpAnimation()
     {
+        gameObject.transform.parent.gameObject.GetComponent<Collider>().enabled = false;
         _collectSound.Play();
         _animator.SetBool("pickup", true);
         GameManager.Instance._currentScore += _givenScore;

@@ -57,7 +57,14 @@ public class AI_Agent_Drone : AI_Agent_Enemy
     public void DoneShooting()
     {
         this.GetComponent<Animator>().SetBool("isShooting", false);
-        this.GetComponent<Animator>().SetBool("isAttacking", false);
         _stateMachine.ChangeState(AI_StateID.Idle);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (_animator.GetCurrentAnimatorStateInfo(0).IsName("Death") && other.CompareTag("Ground"))
+        {
+            SetDeactive();
+        }
     }
 }

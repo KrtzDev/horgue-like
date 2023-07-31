@@ -27,11 +27,13 @@ public class Drone_State_ChasePlayer : AI_State_ChasePlayer
             if (agent._followDecoy)
             {
                 _followPosition = agent._decoyTransform.position;
+                _followPosition = new Vector3(_followPosition.x, agent.transform.position.y, _followPosition.z);
                 agent.SetTarget(agent, _followPosition);
             }
             else
             {
                 _followPosition = agent._playerTransform.position;
+                _followPosition = new Vector3(_followPosition.x, agent.transform.position.y, _followPosition.z);
                 agent.SetTarget(agent, _followPosition);
             }
         }
@@ -40,6 +42,7 @@ public class Drone_State_ChasePlayer : AI_State_ChasePlayer
             if (agent._followDecoy)
             {
                 _followPosition = agent._decoyTransform.position;
+                _followPosition = new Vector3(_followPosition.x, agent.transform.position.y, _followPosition.z);
                 agent.SetTarget(agent, _followPosition);
             }
             else
@@ -55,6 +58,7 @@ public class Drone_State_ChasePlayer : AI_State_ChasePlayer
                     _followPosition = agent._playerTransform.position;
                 }
 
+                _followPosition = new Vector3(_followPosition.x, agent.transform.position.y, _followPosition.z);
                 agent.SetTarget(agent, _followPosition);
             }
         }
@@ -81,16 +85,14 @@ public class Drone_State_ChasePlayer : AI_State_ChasePlayer
     private void CheckForBehaviour(AI_Agent agent, float distance)
     {
         RaycastHit hit;
-        if (Physics.Raycast(_drone.ProjectilePoint.transform.position, (_followPosition + new Vector3(0, 0.5f, 0) - _drone.ProjectilePoint.transform.position), out hit, distance, agent._groundLayer))
-        {
-
-        }
-        else
+        if (!Physics.Raycast(_drone.ProjectilePoint.transform.position, (_followPosition + new Vector3(0, 0.5f, 0) - _drone.ProjectilePoint.transform.position), out hit, distance, agent._groundLayer))
         {
             if (distance < _enemy._enemyData._attackRange)
             {
                 agent._stateMachine.ChangeState(AI_StateID.Attack);
             }
         }
+
+        agent._attackTimer -= Time.deltaTime;
     }
 }

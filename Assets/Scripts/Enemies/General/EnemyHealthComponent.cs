@@ -87,10 +87,12 @@ public class EnemyHealthComponent : HealthComponent
 
 	private void DropHealthPotion()
 	{
-		int random = UnityEngine.Random.Range(0, 100);
-		if (random <= _healthDropChance)
+		int random = Random.Range(0, 100);
+		if (random < _healthDropChance)
 		{
-			Instantiate(_healthDrop, _hitParticlePosition.position, Quaternion.identity);
+			Vector3 spawnPos = _hitParticlePosition.position;
+
+			Instantiate(_healthDrop, spawnPos, Quaternion.identity);
 		}
 	}
 
