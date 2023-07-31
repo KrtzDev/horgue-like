@@ -16,7 +16,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &4283075153130197044
 Transform:
   m_ObjectHideFlags: 0
@@ -46,19 +46,34 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameData: {fileID: 4900000, guid: 6737e0fb3d32c924faf3a980ddfa5cac, type: 3}
   startButton: {fileID: 0}
+  _dataRetrieved: 0
   _playerData: {fileID: 11400000, guid: f1f5e7d0dc811114fbdc1e3cee110906, type: 2}
   _enemyData:
   - {fileID: 11400000, guid: 97ce18f7045fdd943aeeee81c418c5cc, type: 2}
   - {fileID: 11400000, guid: fdf791b2749b7224699643a8d5477270, type: 2}
   - {fileID: 11400000, guid: 1c6784eeb238619469f87bbb4a9877f5, type: 2}
   - {fileID: 11400000, guid: 8dc834b5e34dc44468852d86bbd441ba, type: 2}
+  - {fileID: 11400000, guid: 82118306e108d9743814036562f61341, type: 2}
+  - {fileID: 11400000, guid: eee9c19ae006f9f4dacc1942c4c5316d, type: 2}
   _LevelData:
   - {fileID: 11400000, guid: d87aa26dde7df3e469ed4ce81cab15d7, type: 2}
+  - {fileID: 11400000, guid: 20a93495e13578a4abab49b8fd960b7f, type: 2}
   - {fileID: 11400000, guid: 15ce0c668d7fd6d46a6d3167086a31de, type: 2}
+  - {fileID: 11400000, guid: 97a31eb4a4737304f8048720d9ee9724, type: 2}
   - {fileID: 11400000, guid: ffb617e12eaa10942a1210052869048e, type: 2}
+  - {fileID: 11400000, guid: ae55e267d2f8a334ab446fe86af05276, type: 2}
+  - {fileID: 11400000, guid: f9e653bc1fb51d840b4c5d9fb544d24e, type: 2}
+  - {fileID: 11400000, guid: c597f4632ab921c4e9bbb208b92470f5, type: 2}
+  - {fileID: 11400000, guid: eb4ba3d1298ffa34cb66b97dbdac0ae8, type: 2}
   _enemySpawnerData:
+  - {fileID: 11400000, guid: b61728d096d80df45baa1ef8526d58ed, type: 2}
+  - {fileID: 11400000, guid: 5a95116ec7ad03d439c523841b5cf5b4, type: 2}
   - {fileID: 11400000, guid: 66547b0600cd9b348938adf19e88ab68, type: 2}
+  - {fileID: 11400000, guid: 0930f0f07c80b1445ae5bf6b9b4d6f97, type: 2}
+  - {fileID: 11400000, guid: 14bef83bfa09adf45b0d8a6b7ad9ca7b, type: 2}
   - {fileID: 11400000, guid: bf53881ad9e341c4ba6211a4e7fabc6c, type: 2}
+  - {fileID: 11400000, guid: 13e4e87bbee05684c803ee8265c4eefe, type: 2}
+  - {fileID: 11400000, guid: d0e3587d7f1e81b46bed0a82e7760c99, type: 2}
   - {fileID: 11400000, guid: 1de1f6f20ca28814d80004febe7eed3a, type: 2}
   _firearmData:
   - {fileID: 11400000, guid: b1abd324ef219c34cbacd1fccb8cb801, type: 2}

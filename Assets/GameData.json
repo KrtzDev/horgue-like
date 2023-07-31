@@ -64,6 +64,19 @@
       "elementalResistance": 100,
       "technicalResistance": 100,
       "healthDropChance": 0
+    },
+    {
+      "name": "Drone",
+      "maxHealth": 0.25,
+      "damagePerHit": 0.5,
+      "attackSpeed": 1,
+      "givenXP": 3,
+      "maxMoveSpeed": 6,
+      "acceleration": 7,
+      "armor": 10,
+      "elementalResistance": 25,
+      "technicalResistance": 25,
+      "healthDropChance": 0
     }
   ],
   "Level": [
