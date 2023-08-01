@@ -4,6 +4,12 @@ using UnityEngine;
 
 public class AI_Agent_Drone : AI_Agent_Enemy
 {
+    [Header("Height Control")]
+    [SerializeField] private GameObject _droneHeightGO;
+    [SerializeField] private float _minHeightAboveGround;
+    [SerializeField] private float _maxHeightAboveGround;
+    private SphereCollider _detectionCollider;
+
     [Header("Projectile")]
     [SerializeField] private GameObject _projectile;
     [field: SerializeField] public Transform ProjectilePoint { get; private set; }
@@ -17,6 +23,8 @@ public class AI_Agent_Drone : AI_Agent_Enemy
         base.Start();
 
         AI_Manager.Instance.Drone.Add(this);
+
+        _detectionCollider = GetComponent<SphereCollider>();
     }
 
     protected override void Update()
