@@ -15,6 +15,7 @@ public class Drone_State_Attack : AI_State_Attack
         _drone = agent as AI_Agent_Drone;
 
         agent._navMeshAgent.SetDestination(agent.transform.position);
+        agent.transform.LookAt(_followPosition);
     }
 
     public override void Update(AI_Agent agent)
@@ -32,17 +33,13 @@ public class Drone_State_Attack : AI_State_Attack
         {
             agent._attackTimer = _enemy._enemyData._attackSpeed;
 
-            _drone.TargetDirection = (_followPosition + new Vector3(0, 0.5f, 0) - agent.transform.position).normalized;
+            _drone.DetermineTargetPosition(_drone, _followPosition);
             agent._animator.SetTrigger("shoot");
             agent._animator.SetBool("isShooting", true);
             return;
         }
 
-        if (agent._animator.GetCurrentAnimatorStateInfo(0).IsName("Shoot"))
-        {
-            agent.transform.LookAt(_followPosition);
-        }
-        else
+        if (!agent._animator.GetCurrentAnimatorStateInfo(0).IsName("Shoot"))
         {
             agent._stateMachine.ChangeState(AI_StateID.Idle);
         }

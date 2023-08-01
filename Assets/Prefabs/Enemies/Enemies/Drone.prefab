@@ -123,7 +123,7 @@ GameObject:
   - component: {fileID: 1321783246504690371}
   - component: {fileID: -8206567866904145494}
   - component: {fileID: 5569908930664924729}
-  - component: {fileID: 6188086793767641102}
+  - component: {fileID: 8053456999097485888}
   m_Layer: 7
   m_Name: Drone
   m_TagString: Enemy
@@ -221,7 +221,7 @@ MonoBehaviour:
   _hitParticlePosition: {fileID: 866945960097510711}
   _hitParticle: {fileID: 6362102834014993675, guid: 5561755790406d148a233f12b01260c5,
     type: 3}
-  _enemyHealthBar: {fileID: 0}
+  _enemyHealthBar: {fileID: 4229567935497880085}
   _healthDrop: {fileID: 4318080567083893032, guid: 03c15c294a93b874ca9153b08ea682dd,
     type: 3}
   _coinDrop: {fileID: 2954434917669188068, guid: bc346ef89f6462d419a727974cda75b8,
@@ -299,14 +299,13 @@ MonoBehaviour:
   _droneHeightGO: {fileID: 7849680882743904828}
   _minHeightAboveGround: 2
   _maxHeightAboveGround: 4
-  _detectionRadius: 0
   _projectile: {fileID: 8451927325676435795, guid: 4bec9d9f0c92f494c94c263aeedc7155,
     type: 3}
   <ProjectilePoint>k__BackingField: {fileID: 7226367071918131747}
   <ProjectilePoint1>k__BackingField: {fileID: 7221469875420454319}
   <ProjectilePoint2>k__BackingField: {fileID: 8845039329623619392}
   _projectileSpeed: 20
---- !u!135 &6188086793767641102
+--- !u!135 &8053456999097485888
 SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
