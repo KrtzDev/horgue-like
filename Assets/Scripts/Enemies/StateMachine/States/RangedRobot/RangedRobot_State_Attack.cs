@@ -21,25 +21,25 @@ public class RangedRobot_State_Attack : AI_State_Attack
     {
         if (!agent._followDecoy)
         {
-            _followPosition = agent._playerTransform.position;
+            _rangedRobot._followPosition = agent._playerTransform.position;
         }
         else
         {
-            _followPosition = agent._decoyTransform.position;
+            _rangedRobot._followPosition = agent._decoyTransform.position;
         }
 
-        Vector3 _lookPosition = new Vector3(_followPosition.x, agent.transform.position.y, _followPosition.z);
+        Vector3 _lookPosition = new Vector3(_rangedRobot._followPosition.x, agent.transform.position.y, _rangedRobot._followPosition.z);
         agent.transform.LookAt(_lookPosition);
 
-        float distance = Vector3.Distance(agent.transform.position, _followPosition);
+        float distance = Vector3.Distance(agent.transform.position, _rangedRobot._followPosition);
 
         RaycastHit hit;
-        if(!Physics.Raycast(_rangedRobot.ProjectilePoint.transform.position, (_followPosition + new Vector3(0, 0.5f, 0) - _rangedRobot.ProjectilePoint.transform.position), out hit, distance, agent._groundLayer))
+        if(!Physics.Raycast(_rangedRobot.ProjectilePoint.transform.position, (_rangedRobot._followPosition + new Vector3(0, 0.5f, 0) - _rangedRobot.ProjectilePoint.transform.position), out hit, distance, agent._groundLayer))
         {
             if (agent._attackTimer <= 0)
             {
                 agent._attackTimer = _enemy._enemyData._attackSpeed;
-                _rangedRobot.TargetDirection = (_followPosition - agent.transform.position).normalized;
+                _rangedRobot.TargetDirection = (_rangedRobot._followPosition - agent.transform.position).normalized;
                 agent._animator.SetTrigger("shoot");
                 agent._animator.SetBool("isShooting", true);
                 return;

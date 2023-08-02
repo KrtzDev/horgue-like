@@ -10,6 +10,7 @@ using UnityEngine.AI;
 public class AI_Agent_Enemy : AI_Agent
 {
     public BasicEnemyData _enemyData;
+    public Vector3 _followPosition;
     public bool _isBossEnemy;
     [HideInInspector] public EnemyHealthComponent _healthComponent;
 

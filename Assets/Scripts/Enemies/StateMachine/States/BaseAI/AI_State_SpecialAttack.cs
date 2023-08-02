@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class AI_State_SpecialAttack : AI_State
 {
-    public Vector3 _followPosition;
     AI_StateID AI_State.GetID()
     {
         return AI_StateID.SpecialAttack;

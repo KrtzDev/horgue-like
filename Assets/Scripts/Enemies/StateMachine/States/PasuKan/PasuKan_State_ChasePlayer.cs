@@ -4,9 +4,13 @@ using UnityEngine;
 
 public class PasuKan_State_ChasePlayer : AI_State_ChasePlayer
 {
+    private AI_Agent_PasuKan _pasuKan;
+
     public override void Enter(AI_Agent agent)
     {
         base.Enter(agent);
+
+        _pasuKan = agent as AI_Agent_PasuKan;
 
         agent._animator.SetBool("isChasing", true);
     }
@@ -28,36 +32,36 @@ public class PasuKan_State_ChasePlayer : AI_State_ChasePlayer
                 {
                     if (agent._followDecoy)
                     {
-                        _followPosition = agent._decoyTransform.position;
-                        agent.SetTarget(agent, _followPosition);
+                        _pasuKan._followPosition = agent._decoyTransform.position;
+                        agent.SetTarget(agent, _pasuKan._followPosition);
                     }
                     else
                     {
-                        _followPosition = agent._playerTransform.position;
-                        agent.SetTarget(agent, _followPosition);
+                        _pasuKan._followPosition = agent._playerTransform.position;
+                        agent.SetTarget(agent, _pasuKan._followPosition);
                     }
                 }
                 else
                 {
                     if (agent._followDecoy)
                     {
-                        _followPosition = agent._decoyTransform.position;
-                        agent.SetTarget(agent, _followPosition);
+                        _pasuKan._followPosition = agent._decoyTransform.position;
+                        agent.SetTarget(agent, _pasuKan._followPosition);
                     }
                     else
                     {
-                        _followPosition = agent._playerTransform.position + (agent._player.GetComponent<PlayerMovement>().AverageVelocity * agent._movementPredictionTime);
+                        _pasuKan._followPosition = agent._playerTransform.position + (agent._player.GetComponent<PlayerMovement>().AverageVelocity * agent._movementPredictionTime);
 
-                        Vector3 directionToTarget = (_followPosition - agent.transform.position).normalized;
+                        Vector3 directionToTarget = (_pasuKan._followPosition - agent.transform.position).normalized;
                         Vector3 directionToPlayer = (agent._playerTransform.position - agent.transform.position).normalized;
 
                         float dot = Vector3.Dot(directionToPlayer, directionToTarget);
                         if(dot < agent._movementPredictionThreshold)
                         {
-                            _followPosition = agent._playerTransform.position;
+                            _pasuKan._followPosition = agent._playerTransform.position;
                         }
 
-                        agent.SetTarget(agent, _followPosition);
+                        agent.SetTarget(agent, _pasuKan._followPosition);
                     }
                 }
             }
@@ -82,7 +86,7 @@ public class PasuKan_State_ChasePlayer : AI_State_ChasePlayer
             AI_Manager.Instance.StopCoroutine(LookCoroutine);
         }
 
-        LookCoroutine = AI_Manager.Instance.StartCoroutine(AI_Manager.Instance.LookAtTarget(agent, _followPosition, _maxTime));
+        LookCoroutine = AI_Manager.Instance.StartCoroutine(AI_Manager.Instance.LookAtTarget(agent, _pasuKan._followPosition, _maxTime));
     }
 
     private void CheckForJumpAttack(AI_Agent agent, float distance)
@@ -107,8 +111,8 @@ public class PasuKan_State_ChasePlayer : AI_State_ChasePlayer
         if (distance < _enemy._enemyData._attackRange && agent._attackTimer <= 0)
         {
             agent._attackTimer = _enemy._enemyData._attackSpeed;
-            _followPosition = agent._playerTransform.position;
-            agent.transform.LookAt(_followPosition);
+            _pasuKan._followPosition = agent._playerTransform.position;
+            agent.transform.LookAt(_pasuKan._followPosition);
             agent._animator.SetTrigger("attack");
             agent._animator.SetBool("isChasing", false);
             agent._stateMachine.ChangeState(AI_StateID.Attack);

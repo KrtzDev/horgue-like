@@ -12,9 +12,9 @@ public class Rikayon_State_Attack : AI_State_Attack
 
         _rikayon = agent as AI_Agent_Rikayon;
 
-        _followPosition = agent.transform.position;
+        _rikayon._followPosition = agent.transform.position;
 
-        agent.SetTarget(agent, _followPosition);
+        agent.SetTarget(agent, _rikayon._followPosition);
 
         int random = Random.Range(1, _rikayon._numberOfAttacks + 1);
         agent._animator.SetFloat("attackNumber", random);

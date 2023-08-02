@@ -14,9 +14,9 @@ public class Drone_State_Idle : AI_State_Idle
 
         _drone = agent as AI_Agent_Drone;
 
-        _followPosition = agent.transform.position;
+        _drone._followPosition = agent.transform.position;
 
-        agent.SetTarget(agent, _followPosition);
+        agent.SetTarget(agent, _drone._followPosition);
     }
 
     public override void Update(AI_Agent agent)
@@ -28,21 +28,21 @@ public class Drone_State_Idle : AI_State_Idle
 
         if (agent._followDecoy)
         {
-            _followPosition = agent._decoyTransform.position;
+            _drone._followPosition = agent._decoyTransform.position;
         }
         else
         {
-            _followPosition = agent._playerTransform.position;
+            _drone._followPosition = agent._playerTransform.position;
         }
 
-        float distance = Vector3.Distance(agent.transform.position, _followPosition);
+        float distance = Vector3.Distance(agent.transform.position + _drone._heightGO.transform.position, _drone._followPosition);
 
         // agent.transform.LookAt(_followPosition);
 
         agent._attackTimer -= Time.deltaTime;
 
         RaycastHit hit;
-        if (!Physics.Raycast(_drone.ProjectilePoint.transform.position, (_followPosition + new Vector3(0, 0.5f, 0) - _drone.ProjectilePoint.transform.position), out hit, distance, agent._groundLayer))
+        if (!Physics.Raycast(_drone.ProjectilePoint.transform.position, (_drone._followPosition + new Vector3(0, 0.5f, 0) - _drone.ProjectilePoint.transform.position), out hit, distance, agent._groundLayer))
         {
             if (distance >= _enemy._enemyData._attackRange)
             {

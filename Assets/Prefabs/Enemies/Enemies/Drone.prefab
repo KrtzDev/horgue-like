@@ -107,6 +107,51 @@ Transform:
   m_Father: {fileID: 5892438164866981244}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &3846559238150558393
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4707297010670550622}
+  - component: {fileID: 4495684188355701170}
+  m_Layer: 7
+  m_Name: DetectionGO
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4707297010670550622
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3846559238150558393}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.85, z: 1.25}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3646984111326413681}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &4495684188355701170
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3846559238150558393}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.5, y: 4, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &4301312500149769534
 GameObject:
   m_ObjectHideFlags: 0
@@ -294,9 +339,11 @@ MonoBehaviour:
   _movementPredictionThreshold: 0
   _movementPredictionTime: 1
   _enemyData: {fileID: 11400000, guid: eee9c19ae006f9f4dacc1942c4c5316d, type: 2}
+  _followPosition: {x: 0, y: 0, z: 0}
   _isBossEnemy: 0
   _healthComponent: {fileID: 0}
   _heightGO: {fileID: 7849680882743904828}
+  _detectionGO: {fileID: 3846559238150558393}
   _minHeightAboveGround: 1.5
   _maxHeightAboveGround: 3
   _projectile: {fileID: 8451927325676435795, guid: 4bec9d9f0c92f494c94c263aeedc7155,
@@ -384,7 +431,7 @@ Transform:
   - {fileID: 8845039329623619392}
   - {fileID: 7070134581093866705}
   m_Father: {fileID: 3646984111326413681}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7849680882743904828
 GameObject:
@@ -395,7 +442,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3646984111326413681}
-  - component: {fileID: 6479787536440884066}
   m_Layer: 7
   m_Name: DroneHeightParent
   m_TagString: Untagged
@@ -415,23 +461,11 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 4707297010670550622}
   - {fileID: 5892438164866981244}
   m_Father: {fileID: 4301312500149274910}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &6479787536440884066
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7849680882743904828}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 2, y: 2, z: 2}
-  m_Center: {x: 0, y: 0.25, z: 0}
 --- !u!1 &7951023635235977901
 GameObject:
   m_ObjectHideFlags: 0

@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class AI_State_Idle : AI_State
 {
-    public Vector3 _followPosition;
-
     protected Coroutine LookCoroutine;
 
     public float _timer;
