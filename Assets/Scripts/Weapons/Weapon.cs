@@ -64,8 +64,6 @@ public class Weapon : ScriptableObject
 	private bool _isReloading;
 	private float _reloadTime;
 
-
-
 	private Camera _camera;
 
 	public void ResetWeaponParts()
@@ -521,11 +519,31 @@ public class Weapon : ScriptableObject
 		Collider[] enemies = Physics.OverlapSphere(_weaponTransform.position, range, _enemyLayer);
 		foreach (Collider enemy in enemies)
 		{
-			float distanceToEnemy = Vector3.Distance(_weaponTransform.position, enemy.transform.position);
+			float distanceToEnemy;
+
+			if (enemy.GetComponent<AI_Agent_Enemy>()._heightGO == null)
+            {
+				distanceToEnemy = Vector3.Distance(_weaponTransform.position, enemy.transform.position);
+            }
+			else
+            {
+				distanceToEnemy = Vector3.Distance(_weaponTransform.position, enemy.transform.position + enemy.GetComponent<AI_Agent_Enemy>()._heightGO.transform.localPosition);
+			}
+
 			if (distanceToEnemy > currentclosestdistance)
 				continue;
 
-			Vector3 directionToEnemy = enemy.transform.position + Vector3.up - _weaponTransform.position;
+			Vector3 directionToEnemy;
+
+			if (enemy.GetComponent<AI_Agent_Enemy>()._heightGO == null)
+			{
+				directionToEnemy = enemy.transform.position + Vector3.up - _weaponTransform.position;
+			}
+			else
+			{
+				directionToEnemy = enemy.transform.position + enemy.GetComponent<AI_Agent_Enemy>()._heightGO.transform.localPosition + Vector3.up - _weaponTransform.position;
+			}
+
 			if (!Physics.Raycast(_weaponTransform.position, directionToEnemy, distanceToEnemy, _groundLayer))
 			{
 				closestEnemy = enemy.GetComponent<AI_Agent_Enemy>();
@@ -535,13 +553,27 @@ public class Weapon : ScriptableObject
 
 		if (closestEnemy != null)
 		{
-			TargetedEnemy = closestEnemy;
-			Vector3 direction = (closestEnemy.transform.position + Vector3.up) - _weaponTransform.position;
-			Vector3 rotateTowardsDirection = Vector3.RotateTowards(_weaponTransform.forward, direction, 20 * Time.deltaTime, .0f);
-			_weaponTransform.transform.rotation = Quaternion.LookRotation(rotateTowardsDirection);
-			if ((_weaponTransform.forward - direction.normalized).magnitude <= .1f)
+			if (closestEnemy._heightGO == null)
 			{
-				return true;
+				TargetedEnemy = closestEnemy;
+				Vector3 direction = (closestEnemy.transform.position + Vector3.up) - _weaponTransform.position;
+				Vector3 rotateTowardsDirection = Vector3.RotateTowards(_weaponTransform.forward, direction, 20 * Time.deltaTime, .0f);
+				_weaponTransform.transform.rotation = Quaternion.LookRotation(rotateTowardsDirection);
+				if ((_weaponTransform.forward - direction.normalized).magnitude <= .1f)
+				{
+					return true;
+				}
+			}
+			else
+			{
+				TargetedEnemy = closestEnemy;
+				Vector3 direction = (closestEnemy.transform.position + closestEnemy._heightGO.transform.localPosition + Vector3.up) - _weaponTransform.position;
+				Vector3 rotateTowardsDirection = Vector3.RotateTowards(_weaponTransform.forward, direction, 20 * Time.deltaTime, .0f);
+				_weaponTransform.transform.rotation = Quaternion.LookRotation(rotateTowardsDirection);
+				if ((_weaponTransform.forward - direction.normalized).magnitude <= .1f)
+				{
+					return true;
+				}
 			}
 		}
 		return false;

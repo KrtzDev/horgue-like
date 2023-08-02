@@ -132,7 +132,7 @@ MonoBehaviour:
   hitLayerMask:
     serializedVersion: 2
     m_Bits: 576
-  baseDamage: 8
+  baseDamage: 0
 --- !u!96 &7732120427448389330
 TrailRenderer:
   serializedVersion: 2

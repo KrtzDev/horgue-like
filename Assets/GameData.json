@@ -68,7 +68,7 @@
     {
       "name": "Drone",
       "maxHealth": 0.25,
-      "damagePerHit": 0.5,
+      "damagePerHit": 0,
       "attackSpeed": 1,
       "givenXP": 3,
       "maxMoveSpeed": 6,
@@ -271,13 +271,13 @@
   "Firearm": [
     {
       "name": "Firearm",
-      "attackSpeed": 0.7,
-      "baseDamage": 5,
+      "attackSpeed": 1,
+      "baseDamage": 35,
       "cooldown": 2,
-      "criticalHitChance": 2,
-      "criticalHitDamage": 2,
-      "projectileWidth": 0.3,
-      "range": 15
+      "criticalHitChance": 10,
+      "criticalHitDamage": 0,
+      "projectileWidth": 0.1,
+      "range": 13
     }
   ],
   "Ammunition": [

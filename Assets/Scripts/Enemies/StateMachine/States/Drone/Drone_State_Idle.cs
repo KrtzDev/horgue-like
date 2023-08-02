@@ -37,7 +37,7 @@ public class Drone_State_Idle : AI_State_Idle
 
         float distance = Vector3.Distance(agent.transform.position, _followPosition);
 
-        agent.transform.LookAt(_followPosition);
+        // agent.transform.LookAt(_followPosition);
 
         agent._attackTimer -= Time.deltaTime;
 

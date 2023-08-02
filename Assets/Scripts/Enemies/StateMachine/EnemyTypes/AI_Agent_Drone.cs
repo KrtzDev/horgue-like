@@ -4,12 +4,11 @@ using UnityEngine;
 
 public class AI_Agent_Drone : AI_Agent_Enemy
 {
-    [Header("Height Control")]
-    [SerializeField] private GameObject _droneHeightGO;
     [SerializeField] private float _minHeightAboveGround;
     [SerializeField] private float _maxHeightAboveGround;
     private AnimationCurve _heightAboveGround;
-    private SphereCollider _detectionCollider;
+    private SphereCollider _hitCollider;
+    private BoxCollider _detectionCollider;
     private Vector3 _baseColliderCenter;
 
     [Header("Projectile")]
@@ -26,8 +25,9 @@ public class AI_Agent_Drone : AI_Agent_Enemy
 
         AI_Manager.Instance.Drone.Add(this);
 
-        _detectionCollider = GetComponent<SphereCollider>();
-        _baseColliderCenter = _detectionCollider.center;
+        _detectionCollider = GetComponentInChildren<BoxCollider>();
+        _hitCollider = GetComponent<SphereCollider>();
+        _baseColliderCenter = _hitCollider.center;
 
         _heightAboveGround = new AnimationCurve(new Keyframe(0, _minHeightAboveGround), new Keyframe(1, _maxHeightAboveGround));
         _heightAboveGround.preWrapMode = WrapMode.PingPong;
@@ -62,9 +62,9 @@ public class AI_Agent_Drone : AI_Agent_Enemy
         AI_Manager.Instance.RangedRobot.Remove(this);
     }
 
-    public void DetermineTargetPosition(AI_Agent_Drone drone, Vector3 followPosition)
+    public void DetermineTargetPosition(Vector3 followPosition)
     {
-        TargetDirection = (followPosition + new Vector3(0, 0.5f, 0) - drone.transform.position - new Vector3(0, drone._droneHeightGO.transform.position.y, 0)).normalized;
+        TargetDirection = (followPosition + new Vector3(0, 0.5f, 0) - transform.position - new Vector3(0, _heightGO.transform.position.y, 0)).normalized;
     }
 
     public void Shoot()
@@ -94,18 +94,21 @@ public class AI_Agent_Drone : AI_Agent_Enemy
     {
         // check how much above ground
 
-        RaycastHit hit;
-        Vector3 heightPos = new Vector3(transform.position.x, _droneHeightGO.transform.position.y + transform.position.y, transform.position.z);
-
-        if (Physics.Raycast(heightPos, Vector3.down, out hit, Mathf.Infinity, _player.GetComponent<PlayerMovementMobility>()._groundLayer))
+        if(_navMeshAgent.enabled)
         {
-            if(hit.distance < _minHeightAboveGround || hit.distance > _maxHeightAboveGround)
+            RaycastHit hit;
+            Vector3 heightPos = new(transform.position.x, _heightGO.transform.position.y + transform.position.y, transform.position.z);
+
+            if (Physics.Raycast(heightPos, Vector3.down, out hit, Mathf.Infinity, _player.GetComponent<PlayerMovementMobility>()._groundLayer))
             {
-                float random = Random.Range(0.0f, 1.0f);
-                float yPos = hit.point.y +  _heightAboveGround.Evaluate(random);
-                heightPos = new Vector3(_droneHeightGO.transform.position.x, yPos, _droneHeightGO.transform.position.z);
-                _droneHeightGO.transform.position = heightPos;
-                _detectionCollider.center = _baseColliderCenter + heightPos;
+                if (hit.distance < _minHeightAboveGround || hit.distance > _maxHeightAboveGround)
+                {
+                    float random = Random.Range(0.0f, 1.0f);
+                    float yPos = hit.point.y + _heightAboveGround.Evaluate(random);
+                    heightPos = new Vector3(0, yPos, 0);
+                    _heightGO.transform.localPosition = heightPos;
+                    _hitCollider.center = _baseColliderCenter + heightPos;
+                }
             }
         }
     }

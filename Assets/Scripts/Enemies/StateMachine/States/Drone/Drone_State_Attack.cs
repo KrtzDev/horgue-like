@@ -6,7 +6,6 @@ public class Drone_State_Attack : AI_State_Attack
 {
 
     private AI_Agent_Drone _drone;
-    private bool _hasShot;
 
     public override void Enter(AI_Agent agent)
     {
@@ -33,7 +32,7 @@ public class Drone_State_Attack : AI_State_Attack
         {
             agent._attackTimer = _enemy._enemyData._attackSpeed;
 
-            _drone.DetermineTargetPosition(_drone, _followPosition);
+            _drone.DetermineTargetPosition(_followPosition);
             agent._animator.SetTrigger("shoot");
             agent._animator.SetBool("isShooting", true);
             return;

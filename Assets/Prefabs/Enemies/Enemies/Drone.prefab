@@ -296,15 +296,15 @@ MonoBehaviour:
   _enemyData: {fileID: 11400000, guid: eee9c19ae006f9f4dacc1942c4c5316d, type: 2}
   _isBossEnemy: 0
   _healthComponent: {fileID: 0}
-  _droneHeightGO: {fileID: 7849680882743904828}
-  _minHeightAboveGround: 2
-  _maxHeightAboveGround: 4
+  _heightGO: {fileID: 7849680882743904828}
+  _minHeightAboveGround: 1.5
+  _maxHeightAboveGround: 3
   _projectile: {fileID: 8451927325676435795, guid: 4bec9d9f0c92f494c94c263aeedc7155,
     type: 3}
   <ProjectilePoint>k__BackingField: {fileID: 7226367071918131747}
   <ProjectilePoint1>k__BackingField: {fileID: 7221469875420454319}
   <ProjectilePoint2>k__BackingField: {fileID: 8845039329623619392}
-  _projectileSpeed: 20
+  _projectileSpeed: 17
 --- !u!135 &8053456999097485888
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -395,6 +395,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3646984111326413681}
+  - component: {fileID: 6479787536440884066}
   m_Layer: 7
   m_Name: DroneHeightParent
   m_TagString: Untagged
@@ -418,6 +419,19 @@ Transform:
   m_Father: {fileID: 4301312500149274910}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &6479787536440884066
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7849680882743904828}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2, y: 2, z: 2}
+  m_Center: {x: 0, y: 0.25, z: 0}
 --- !u!1 &7951023635235977901
 GameObject:
   m_ObjectHideFlags: 0

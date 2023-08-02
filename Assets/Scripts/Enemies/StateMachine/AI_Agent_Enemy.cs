@@ -13,6 +13,9 @@ public class AI_Agent_Enemy : AI_Agent
     public bool _isBossEnemy;
     [HideInInspector] public EnemyHealthComponent _healthComponent;
 
+    [Header("Height Control")]
+    public GameObject _heightGO;
+
     protected override void Start()
     {
         base.Start();
