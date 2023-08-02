@@ -6,9 +6,11 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(Image), typeof(Button))]
-public class UIButton : MonoBehaviour, ISelectHandler
+public class WeaponTab : MonoBehaviour, ISelectHandler
 {
-	public event Action OnButtonSelect;
+	public event Action<Weapon> OnWeaponTabSelect;
+
+	public Weapon AssociatedWeapon { get; set; }
 
 	[field: SerializeField]
 	public Image Image { get; private set; }
@@ -26,7 +28,7 @@ public class UIButton : MonoBehaviour, ISelectHandler
 
 	public void RemoveListener(UnityAction action) => Button.onClick.RemoveListener(action);
 
-	public void OnSelect(BaseEventData eventData) => OnButtonSelect.Invoke();
+	public void OnSelect(BaseEventData eventData) => OnWeaponTabSelect.Invoke(AssociatedWeapon);
 
 
 
