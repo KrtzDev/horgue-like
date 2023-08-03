@@ -453,6 +453,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "Triggers",
+                    "type": "Value",
+                    "id": "8bf4b784-1995-49da-a683-a3bfc7cf864c",
+                    "expectedControlType": "Axis",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
                 }
             ],
             "bindings": [
@@ -891,7 +900,7 @@
                     "path": "<Gamepad>/leftShoulder",
                     "interactions": "",
                     "processors": "",
-                    "groups": "ControllScheme",
+                    "groups": "",
                     "action": "ShoulderButtons",
                     "isComposite": false,
                     "isPartOfComposite": true
@@ -902,8 +911,41 @@
                     "path": "<Gamepad>/rightShoulder",
                     "interactions": "",
                     "processors": "",
-                    "groups": "ControllScheme",
+                    "groups": "",
                     "action": "ShoulderButtons",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "Triggers",
+                    "id": "6b1d5ab2-9797-4e50-b7ad-f4004853e25e",
+                    "path": "1DAxis",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Triggers",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "negative",
+                    "id": "a479fd74-54b1-41e8-9f38-dc61908ec42e",
+                    "path": "<Gamepad>/leftTrigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Triggers",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "positive",
+                    "id": "75ef8f16-b836-4bdd-a37e-b70822920fa9",
+                    "path": "<Gamepad>/rightTrigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Triggers",
                     "isComposite": false,
                     "isPartOfComposite": true
                 }

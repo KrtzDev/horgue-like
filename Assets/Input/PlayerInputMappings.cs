@@ -475,6 +475,15 @@ public partial class @PlayerInputMappings : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Triggers"",
+                    ""type"": ""Value"",
+                    ""id"": ""8bf4b784-1995-49da-a683-a3bfc7cf864c"",
+                    ""expectedControlType"": ""Axis"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -913,7 +922,7 @@ public partial class @PlayerInputMappings : IInputActionCollection2, IDisposable
                     ""path"": ""<Gamepad>/leftShoulder"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""ControllScheme"",
+                    ""groups"": """",
                     ""action"": ""ShoulderButtons"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -924,8 +933,41 @@ public partial class @PlayerInputMappings : IInputActionCollection2, IDisposable
                     ""path"": ""<Gamepad>/rightShoulder"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""ControllScheme"",
+                    ""groups"": """",
                     ""action"": ""ShoulderButtons"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""Triggers"",
+                    ""id"": ""6b1d5ab2-9797-4e50-b7ad-f4004853e25e"",
+                    ""path"": ""1DAxis"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Triggers"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""negative"",
+                    ""id"": ""a479fd74-54b1-41e8-9f38-dc61908ec42e"",
+                    ""path"": ""<Gamepad>/leftTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Triggers"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""positive"",
+                    ""id"": ""75ef8f16-b836-4bdd-a37e-b70822920fa9"",
+                    ""path"": ""<Gamepad>/rightTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Triggers"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 }
@@ -976,6 +1018,7 @@ public partial class @PlayerInputMappings : IInputActionCollection2, IDisposable
         m_UI_TrackedDevicePosition = m_UI.FindAction("TrackedDevicePosition", throwIfNotFound: true);
         m_UI_TrackedDeviceOrientation = m_UI.FindAction("TrackedDeviceOrientation", throwIfNotFound: true);
         m_UI_ShoulderButtons = m_UI.FindAction("ShoulderButtons", throwIfNotFound: true);
+        m_UI_Triggers = m_UI.FindAction("Triggers", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -1111,6 +1154,7 @@ public partial class @PlayerInputMappings : IInputActionCollection2, IDisposable
     private readonly InputAction m_UI_TrackedDevicePosition;
     private readonly InputAction m_UI_TrackedDeviceOrientation;
     private readonly InputAction m_UI_ShoulderButtons;
+    private readonly InputAction m_UI_Triggers;
     public struct UIActions
     {
         private @PlayerInputMappings m_Wrapper;
@@ -1126,6 +1170,7 @@ public partial class @PlayerInputMappings : IInputActionCollection2, IDisposable
         public InputAction @TrackedDevicePosition => m_Wrapper.m_UI_TrackedDevicePosition;
         public InputAction @TrackedDeviceOrientation => m_Wrapper.m_UI_TrackedDeviceOrientation;
         public InputAction @ShoulderButtons => m_Wrapper.m_UI_ShoulderButtons;
+        public InputAction @Triggers => m_Wrapper.m_UI_Triggers;
         public InputActionMap Get() { return m_Wrapper.m_UI; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1168,6 +1213,9 @@ public partial class @PlayerInputMappings : IInputActionCollection2, IDisposable
                 @ShoulderButtons.started -= m_Wrapper.m_UIActionsCallbackInterface.OnShoulderButtons;
                 @ShoulderButtons.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnShoulderButtons;
                 @ShoulderButtons.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnShoulderButtons;
+                @Triggers.started -= m_Wrapper.m_UIActionsCallbackInterface.OnTriggers;
+                @Triggers.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnTriggers;
+                @Triggers.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnTriggers;
             }
             m_Wrapper.m_UIActionsCallbackInterface = instance;
             if (instance != null)
@@ -1205,6 +1253,9 @@ public partial class @PlayerInputMappings : IInputActionCollection2, IDisposable
                 @ShoulderButtons.started += instance.OnShoulderButtons;
                 @ShoulderButtons.performed += instance.OnShoulderButtons;
                 @ShoulderButtons.canceled += instance.OnShoulderButtons;
+                @Triggers.started += instance.OnTriggers;
+                @Triggers.performed += instance.OnTriggers;
+                @Triggers.canceled += instance.OnTriggers;
             }
         }
     }
@@ -1239,5 +1290,6 @@ public partial class @PlayerInputMappings : IInputActionCollection2, IDisposable
         void OnTrackedDevicePosition(InputAction.CallbackContext context);
         void OnTrackedDeviceOrientation(InputAction.CallbackContext context);
         void OnShoulderButtons(InputAction.CallbackContext context);
+        void OnTriggers(InputAction.CallbackContext context);
     }
 }

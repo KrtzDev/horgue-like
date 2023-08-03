@@ -8,7 +8,7 @@ public class HolsterTabs : MonoBehaviour
 {
 	public event Action<Weapon> OnSelectWeapon;
 
-	public List<WeaponTab> WeaponTabs { get; private set; } = new List<WeaponTab>();
+	private List<WeaponTab> _weaponTabs = new List<WeaponTab>();
 
 	[SerializeField]
 	private Image _left;
@@ -22,9 +22,10 @@ public class HolsterTabs : MonoBehaviour
 
 	private int _currentSelectedTab;
 
-	private void Awake()
+	private void OnEnable()
 	{
 		InputManager.Instance.CharacterInputActions.UI.ShoulderButtons.started += NavigateTabs;
+		InputManager.Instance.CharacterInputActions.UI.Triggers.started += KeepTabSelected;
 	}
 
 	private void Start()
@@ -32,7 +33,6 @@ public class HolsterTabs : MonoBehaviour
 		DestroyOldTabs();
 		CreateWeaponTabs();
 	}
-
 
 	private void DestroyOldTabs()
 	{
@@ -50,24 +50,42 @@ public class HolsterTabs : MonoBehaviour
 			weaponTab.AssociatedWeapon = weapon;
 			weaponTab.ButtonText.text = weapon.name;
 
-			weaponTab.Addlistener(() => SelectWeapon(weapon));
+			weaponTab.Addlistener(() => SelectWeaponMouse(weapon));
 			weaponTab.OnWeaponTabSelect += SelectWeapon;
 
-			WeaponTabs.Add(weaponTab);
+			_weaponTabs.Add(weaponTab);
 		}
 
 		_currentSelectedTab = 0;
-		WeaponTabs[_currentSelectedTab].Select();
+		_weaponTabs[_currentSelectedTab].Select();
+		_weaponTabs[_currentSelectedTab].KeepFocus();
 	}
 
 	private void NavigateTabs(InputAction.CallbackContext ctx)
 	{
 		int navInput = Mathf.CeilToInt(ctx.ReadValue<float>());
 
+		_weaponTabs[_currentSelectedTab].ResetColors();
+
 		_currentSelectedTab += navInput;
-		_currentSelectedTab = Mathf.Clamp(_currentSelectedTab, 0, WeaponTabs.Count -1);
-		WeaponTabs[_currentSelectedTab].Select();
+		_currentSelectedTab = Mathf.Clamp(_currentSelectedTab, 0, _weaponTabs.Count -1);
+		_weaponTabs[_currentSelectedTab].Select();
+		_weaponTabs[_currentSelectedTab].KeepFocus();
+	}
+
+	private void KeepTabSelected(InputAction.CallbackContext obj)
+	{
+		_weaponTabs[_currentSelectedTab].KeepFocus();
 	}
 
 	private void SelectWeapon(Weapon weapon) => OnSelectWeapon.Invoke(weapon);
+
+	private void SelectWeaponMouse(Weapon weapon)
+	{
+		_weaponTabs[_currentSelectedTab].ResetColors();
+		_currentSelectedTab = _weaponTabs.FindIndex(e => e.AssociatedWeapon == weapon);
+		_weaponTabs[_currentSelectedTab].KeepFocus();
+
+		OnSelectWeapon.Invoke(weapon);
+	}
 }
