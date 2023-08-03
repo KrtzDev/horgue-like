@@ -12,9 +12,9 @@ public class RangedRobot_State_Idle : AI_State_Idle
 
         _rangedRobot = agent as AI_Agent_RangedRobot;
 
-        _followPosition = agent.transform.position;
+        _rangedRobot._followPosition = agent.transform.position;
 
-        agent.SetTarget(agent, _followPosition);
+        agent.SetTarget(agent, _rangedRobot._followPosition);
     }
 
     public override void Update(AI_Agent agent)
@@ -26,17 +26,17 @@ public class RangedRobot_State_Idle : AI_State_Idle
 
         if (agent._followDecoy)
         {
-            _followPosition = agent._decoyTransform.position;
+            _rangedRobot._followPosition = agent._decoyTransform.position;
         }
         else
         {
-            _followPosition = agent._playerTransform.position;
+            _rangedRobot._followPosition = agent._playerTransform.position;
         }
 
-        float distance = Vector3.Distance(agent.transform.position, _followPosition);
+        float distance = Vector3.Distance(agent.transform.position, _rangedRobot._followPosition);
 
         RaycastHit hit;
-        if (Physics.Raycast(_rangedRobot.ProjectilePoint.transform.position, (_followPosition + new Vector3(0, 0.5f, 0) - _rangedRobot.ProjectilePoint.transform.position), out hit, distance, agent._groundLayer))
+        if (Physics.Raycast(_rangedRobot.ProjectilePoint.transform.position, (_rangedRobot._followPosition + new Vector3(0, 0.5f, 0) - _rangedRobot.ProjectilePoint.transform.position), out hit, distance, agent._groundLayer))
         {
             if (distance <= _enemy._enemyData._retreatRange)
             {

@@ -21,6 +21,7 @@ public class AI_Manager : MonoBehaviour
     public List<AI_Agent_Enemy> PasuKan = new List<AI_Agent_Enemy>();
     public List<AI_Agent_Enemy> RangedRobot = new List<AI_Agent_Enemy>();
     public List<AI_Agent_Enemy> Sniper = new List<AI_Agent_Enemy>();
+    public List<AI_Agent_Enemy> Drone = new List<AI_Agent_Enemy>();
 
     private void Awake()
     {

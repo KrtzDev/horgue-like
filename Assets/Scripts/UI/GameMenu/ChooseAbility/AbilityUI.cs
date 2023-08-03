@@ -14,7 +14,6 @@ public class AbilityUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
 
     private Ability _ability;
 
-    private RectTransform _parent;
     private RectTransform _rectTransform;
 
     [HideInInspector] public Vector3 _startPos;
@@ -29,7 +28,6 @@ public class AbilityUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
         _abilityNameText.GetComponent<TextMeshProUGUI>().text = _ability.name;
         _abilityIcon.sprite = ability._icon;
         _rectTransform = GetComponent<RectTransform>();
-        _parent = transform.parent.GetComponent<RectTransform>();
     }
 
     private void Start()
@@ -162,7 +160,11 @@ public class AbilityUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
 
         if (countdown <= 0)
         {
-            Time.timeScale = 1;
+            if (!GameManager.Instance._gameIsPaused)
+            {
+                Time.timeScale = 1;
+            }
+
             ChooseAbility.instance._countdownText.text =  "GO!!!!";
 
             GameManager.Instance._currentAbility = _ability;
@@ -170,7 +172,7 @@ public class AbilityUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
             ChooseAbility.instance._abilityCoolDownToReplace.GetComponent<Image>().sprite = _ability._icon;
             GameManager.Instance.EnableAbilityUsage(_ability);
 
-            while (elapsedTime < 1)
+            while (elapsedTime < 0.5f)
             {
                 elapsedTime += Time.unscaledDeltaTime;
 
@@ -262,13 +264,16 @@ public class AbilityUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
 
     public void AbilitySelected()
     {
-        _abilitySelected = true;
+        if(!GameManager.Instance._gameIsPaused)
+        {
+            _abilitySelected = true;
 
-        // change Text
-        ChooseAbility.instance._titleText.text = "Ability was selected";
-        ChooseAbility.instance._explanationText.text = "";
-        ChooseAbility.instance._submitText.text = "";
+            // change Text
+            ChooseAbility.instance._titleText.text = "Ability was selected";
+            ChooseAbility.instance._explanationText.text = "";
+            ChooseAbility.instance._submitText.text = "";
 
-        StartCoroutine(MoveAbilityOnActivation());
+            StartCoroutine(MoveAbilityOnActivation());
+        }
     }
 }

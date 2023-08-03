@@ -35,36 +35,36 @@ public class Rikayon_State_ChasePlayer : AI_State_ChasePlayer
                 {
                     if (agent._followDecoy)
                     {
-                        _followPosition = agent._decoyTransform.position;
-                        agent.SetTarget(agent, _followPosition);
+                        _rikayon._followPosition = agent._decoyTransform.position;
+                        agent.SetTarget(agent, _rikayon._followPosition);
                     }
                     else
                     {
-                        _followPosition = agent._playerTransform.position;
-                        agent.SetTarget(agent, _followPosition);
+                        _rikayon._followPosition = agent._playerTransform.position;
+                        agent.SetTarget(agent, _rikayon._followPosition);
                     }
                 }
                 else
                 {
                     if (agent._followDecoy)
                     {
-                        _followPosition = agent._decoyTransform.position;
-                        agent.SetTarget(agent, _followPosition);
+                        _rikayon._followPosition = agent._decoyTransform.position;
+                        agent.SetTarget(agent, _rikayon._followPosition);
                     }
                     else
                     {
-                        _followPosition = agent._playerTransform.position + (agent._player.GetComponent<PlayerMovement>().AverageVelocity * agent._movementPredictionTime);
+                        _rikayon._followPosition = agent._playerTransform.position + (agent._player.GetComponent<PlayerMovement>().AverageVelocity * agent._movementPredictionTime);
 
-                        Vector3 directionToTarget = (_followPosition - agent.transform.position).normalized;
+                        Vector3 directionToTarget = (_rikayon._followPosition - agent.transform.position).normalized;
                         Vector3 directionToPlayer = (agent._playerTransform.position - agent.transform.position).normalized;
 
                         float dot = Vector3.Dot(directionToPlayer, directionToTarget);
                         if (dot < agent._movementPredictionThreshold)
                         {
-                            _followPosition = agent._playerTransform.position;
+                            _rikayon._followPosition = agent._playerTransform.position;
                         }
 
-                        agent.SetTarget(agent, _followPosition);
+                        agent.SetTarget(agent, _rikayon._followPosition);
                     }
                 }
 
@@ -87,7 +87,7 @@ public class Rikayon_State_ChasePlayer : AI_State_ChasePlayer
             AI_Manager.Instance.StopCoroutine(LookCoroutine);
         }
 
-        LookCoroutine = AI_Manager.Instance.StartCoroutine(AI_Manager.Instance.LookAtTarget(agent, _followPosition, _maxTime));
+        LookCoroutine = AI_Manager.Instance.StartCoroutine(AI_Manager.Instance.LookAtTarget(agent, _rikayon._followPosition, _maxTime));
     }
 
     private void CheckForAttack(AI_Agent agent, float distance)
@@ -98,8 +98,8 @@ public class Rikayon_State_ChasePlayer : AI_State_ChasePlayer
         if (distance < _enemy._enemyData._attackRange && agent._attackTimer <= 0)
         {
             agent._attackTimer = _enemy._enemyData._attackSpeed;
-            _followPosition = agent._playerTransform.position;
-            agent.transform.LookAt(_followPosition);
+            _rikayon._followPosition = agent._playerTransform.position;
+            agent.transform.LookAt(_rikayon._followPosition);
 
             agent._stateMachine.ChangeState(AI_StateID.Attack);
 

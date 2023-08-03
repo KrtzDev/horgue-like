@@ -2,12 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using TMPro;
 
 public class GameDataReader : MonoBehaviour
 {
     public TextAsset gameData;
     public Button startButton;
+    public bool _dataRetrieved = false;
+    private bool _hasLoadedData = false;
 
     [Header("PLAYER DATA")]
     [SerializeField] private PlayerData _playerData;
@@ -264,12 +267,38 @@ public class GameDataReader : MonoBehaviour
 
     #endregion
 
-    private void OnEnable()
+    public void GetGameData()
     {
-        StartCoroutine(GetListsFromJSON());
+        if(!_hasLoadedData)
+        {
+            GetListFromJSON();
+
+            if (SceneManager.GetActiveScene().name == "SCENE_Main_Menu")
+            {
+                startButton = GameObject.Find("StartButton").GetComponent<Button>();
+                StartCoroutine(EnableButton(0));
+
+                return;
+            }
+
+            _hasLoadedData = true;
+        }
+        else
+        {
+            startButton = GameObject.Find("StartButton").GetComponent<Button>();
+            StartCoroutine(EnableButton(0));
+        }
     }
 
-    private IEnumerator GetListsFromJSON()
+    public void SetGameData()
+    {
+        StartCoroutine(SetPlayerData());
+        StartCoroutine(SetEnemyData());
+        StartCoroutine(SetLevelData());
+        StartCoroutine(SetFireArmData());
+    }
+
+    private void GetListFromJSON()
     {
         myPlayerList = JsonUtility.FromJson<PlayerList>(gameData.text);
         myEnemyList = JsonUtility.FromJson<EnemyList>(gameData.text);
@@ -282,53 +311,35 @@ public class GameDataReader : MonoBehaviour
         mySightList = JsonUtility.FromJson<SightList>(gameData.text);
         myTriggerMechanismList = JsonUtility.FromJson<TriggerMechanismList>(gameData.text);
 
-        yield return null;
-
-        StartCoroutine(GetData());
+        SetGameData();
     }
 
-    private IEnumerator GetData()
+    private IEnumerator EnableButton(float time)
     {
-        StartCoroutine(GetPlayerData());
-        StartCoroutine(GetEnemyData());
-        StartCoroutine(GetLevelData());
-        StartCoroutine(GetFireArmData());
+        yield return new WaitForSecondsRealtime(time); // Wait until everything is set
 
-        yield return null;
-
-        Debug.Log("DONE DATA");
-
-        if(startButton != null)
-        {
-            StartCoroutine(EnableButton());
-        }
-    }
-
-    private IEnumerator EnableButton()
-    {
         startButton.GetComponent<Button>().interactable = true;
         startButton.GetComponentInChildren<TextMeshProUGUI>().text = "START";
 
-        yield return null;
 
         Debug.Log("DONE BUTTON");
     }
 
-    private IEnumerator GetPlayerData()
+    private IEnumerator SetPlayerData()
     {
         _playerData._movementSpeed = myPlayerList.Player[0].movementSpeed;
         _playerData._maxHealth = Mathf.RoundToInt(myPlayerList.Player[0].maxHealth);
 
         yield return null;
     }
-    private IEnumerator GetEnemyData()
+    private IEnumerator SetEnemyData()
     {
         for (int i = 0; i < _enemyData.Count; i++)
         {
             if (i == 0)
             {
-                _enemyData[i]._maxHealth = (int)myEnemyList.Enemies[0].maxHealth; //* GameManager.Instance._GameManagerValues[GameManager.Instance._currentLevelArray]._healthBonus);
-                _enemyData[i]._damagePerHit = (int)myEnemyList.Enemies[0].damagePerHit; //* GameManager.Instance._GameManagerValues[GameManager.Instance._currentLevelArray]._damageBonus);
+                _enemyData[i]._maxHealth = (int)(myEnemyList.Enemies[0].maxHealth * GameManager.Instance._GameManagerValues[GameManager.Instance._currentLevelArray]._healthBonus);
+                _enemyData[i]._damagePerHit = (int)(myEnemyList.Enemies[0].damagePerHit * GameManager.Instance._GameManagerValues[GameManager.Instance._currentLevelArray]._damageBonus);
                 _enemyData[i]._attackSpeed = myEnemyList.Enemies[i].attackSpeed;
                 _enemyData[i]._givenXP = (int)myEnemyList.Enemies[i].givenXP;
                 _enemyData[i]._maxMoveSpeed = myEnemyList.Enemies[i].maxMoveSpeed;
@@ -355,9 +366,8 @@ public class GameDataReader : MonoBehaviour
 
         yield return null;
     }
-    private IEnumerator GetLevelData()
+    private IEnumerator SetLevelData()
     {
-
         for (int i = 0; i < _enemySpawnerData.Count; i++)
         {
             _enemySpawnerData[i]._spawnTick = myLevelList.Level[i].spawnTick;
@@ -385,20 +395,20 @@ public class GameDataReader : MonoBehaviour
 
         yield return null;
     }
-    private IEnumerator GetFireArmData()
+    private IEnumerator SetFireArmData()
     {
-        GetFireArmSkeletonData();
-        GetAmmunitionData();
-        GetBarrelData();
-        GetGripData();
-        GetMagazineData();
-        GetSightData();
-        GetTriggerMechanismData();
+        SetFireArmSkeletonData();
+        SetAmmunitionData();
+        SetBarrelData();
+        SetGripData();
+        SetMagazineData();
+        SetSightData();
+        SetTriggerMechanismData();
 
         yield return null;
     }
 
-    private void GetFireArmSkeletonData()
+    private void SetFireArmSkeletonData()
     {
         for (int i = 0; i < _firearmData.Count; i++)
         {
@@ -412,7 +422,7 @@ public class GameDataReader : MonoBehaviour
         }
     }
 
-    private void GetAmmunitionData()
+    private void SetAmmunitionData()
     {
         for (int i = 0; i < _ammunitionData.Count; i++)
         {
@@ -436,7 +446,7 @@ public class GameDataReader : MonoBehaviour
             }
         }
     }
-    private void GetBarrelData()
+    private void SetBarrelData()
     {
         for (int i = 0; i < _barrelData.Count; i++)
         {
@@ -460,7 +470,7 @@ public class GameDataReader : MonoBehaviour
             }
         }
     }
-    private void GetGripData()
+    private void SetGripData()
     {
         for (int i = 0; i < _gripData.Count; i++)
         {
@@ -484,7 +494,7 @@ public class GameDataReader : MonoBehaviour
 			}
         }
     }
-    private void GetMagazineData()
+    private void SetMagazineData()
     {
         for (int i = 0; i < _magazineData.Count; i++)
         {
@@ -508,7 +518,7 @@ public class GameDataReader : MonoBehaviour
             }
         }
     }
-    private void GetSightData()
+    private void SetSightData()
     {
         for (int i = 0; i < _sightData.Count; i++)
         {
@@ -532,7 +542,7 @@ public class GameDataReader : MonoBehaviour
             }
         }
     }
-    private void GetTriggerMechanismData()
+    private void SetTriggerMechanismData()
     {
         for (int i = 0; i < _triggerMechanismData.Count; i++)
         {

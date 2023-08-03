@@ -19,7 +19,7 @@ public class GameManager : Singleton<GameManager>
 	public DamageCalcKind damageCalcKind = DamageCalcKind.Mean;
 
 	[SerializeField]
-	private GameObject _gameDataReader;
+	private GameDataReader _gameDataReader;
 
 	public List<GameManagerValues> _GameManagerValues = new List<GameManagerValues>();
 
@@ -42,10 +42,11 @@ public class GameManager : Singleton<GameManager>
 	public int _currentLevel = 1;
 	private int _lastLevel;
 	public int _currentLevelArray;
-	public int _currentWave = 0;
 
 	private int _numberOfRewards = 6;
 
+	public bool _gameIsPaused;
+	public bool _newGamePlus;
 
 	[Header("Player")]
 	public GameObject _player;
@@ -55,19 +56,17 @@ public class GameManager : Singleton<GameManager>
 
 	private void Start()
 	{
-		StartCoroutine(GetGameData());
-
 		SceneLoader.Instance.CompletedSceneLoad += OnCompletedSceneLoad;
 
 		_currentScore = 0;
 		_currentLevel = 1;
 		_lastLevel = 0;
 		_currentLevelArray = _currentLevel - 1;
+		_gameIsPaused = false;
 	}
 
 	private void OnCompletedSceneLoad()
 	{
-		_currentTimeToSurvive = _GameManagerValues[_currentLevelArray]._timeToSurvive;
 
 		if (SceneManager.GetActiveScene().name == "SCENE_Weapon_Crafting")
 		{
@@ -77,10 +76,24 @@ public class GameManager : Singleton<GameManager>
 		if (SceneManager.GetActiveScene().name == "SCENE_Main_Menu")
 		{
 			_currentLevel = 1;
-			_currentWave = 0;
 
 			return;
 		}
+
+		if(SceneManager.GetActiveScene().name.Contains("Boss"))
+        {
+			_winningCondition = WinningCondition.KillSpecificEnemy;
+		}
+		else
+        {
+			_winningCondition = WinningCondition.SurviveForTime;
+
+		}
+
+		_gameDataReader.GetGameData();
+		_gameDataReader.SetGameData();
+
+		_currentTimeToSurvive = _GameManagerValues[_currentLevelArray]._timeToSurvive;
 
 		_hasWon = false;
 		_hasLost = false;
@@ -94,7 +107,7 @@ public class GameManager : Singleton<GameManager>
 		MovePlayerToRandomPos(DetermineRandomSpawnLocation());
 
 
-		if (_currentLevel == 1 && _currentWave == 0)
+		if (_currentLevel == 1)
 		{
 			WeaponHolster weaponHolster = FindObjectOfType<WeaponHolster>();
 			foreach (var weapon in weaponHolster.weapons)
@@ -103,12 +116,9 @@ public class GameManager : Singleton<GameManager>
 			}
 		}
 
-		if(_currentWave == 0)
-        {
-			_currentAbility = null;
-        }
+		_currentAbility = null;
 
-		if(_currentAbility != null)
+		if (_currentAbility != null)
         {
 			AbilityCooldownToReplace abilityCoolDownToReplace = FindObjectOfType<AbilityCooldownToReplace>();
 			abilityCoolDownToReplace.GetComponent<Image>().sprite = _currentAbility._icon;
@@ -119,8 +129,6 @@ public class GameManager : Singleton<GameManager>
         {
 			_player.GetComponent<HealthComponent>()._currentHealth = _currentPlayerHealth;
         }
-
-		_currentWave += 1;
 
 		if (_currentLevel >= 0)
 		{
@@ -169,11 +177,6 @@ public class GameManager : Singleton<GameManager>
 
 		if (!_hasWon && _neededEnemyKill == 0 && _winningCondition == WinningCondition.KillSpecificEnemy)
 		{
-			// _enemySpawner.SpawnRandomEnemy();
-		}
-		if (!_hasWon && _neededEnemyKill == -1 && _winningCondition == WinningCondition.KillSpecificEnemy)
-		{
-
 			_hasWon = true;
 			RoundWon();
 		}
@@ -227,31 +230,19 @@ public class GameManager : Singleton<GameManager>
 
 		_lastLevel = _currentLevel;
 
-		if (_currentWave >= 3)
+		List<Reward> rewards = new List<Reward>();
+		for (int i = 0; i < _numberOfRewards; i++)
 		{
-			List<Reward> rewards = new List<Reward>();
-			for (int i = 0; i < _numberOfRewards; i++)
-			{
-				rewards.Add(RewardManager.Instance.GetRandomReward());
-			}
-
-			UIManager.Instance.ShowLevelEndScreen(LevelStatus.Won);
-			UIManager.Instance.DisplayRewards(rewards);
-
-			_currentLevel += 1;		
-			_currentLevelArray = _currentLevel - 1;
-			_currentWave = 0;
-
-			if (_currentLevel > 3)
-			{
-				_currentLevel = 1;
-				_currentLevelArray = _currentLevel - 1;
-			}
+			rewards.Add(RewardManager.Instance.GetRandomReward());
 		}
-		else
-		{
-			UIManager.Instance.ShowWaveEndScreen(LevelStatus.Won);
-		}
+
+		UIManager.Instance.ShowLevelEndScreen(LevelStatus.Won);
+		UIManager.Instance.DisplayRewards(rewards);
+
+		_currentLevel += 1;
+		_currentLevelArray = _currentLevel - 1;
+
+		// UIManager.Instance.ShowWaveEndScreen(LevelStatus.Won);
 
 		_currentPlayerHealth = _player.GetComponent<HealthComponent>()._currentHealth;
 
@@ -271,12 +262,6 @@ public class GameManager : Singleton<GameManager>
 		UIManager.Instance.WaveEndScreen.gameObject.SetActive(false);
 		_playerCanUseAbilities = false;
 		EnemyStopFollowing();
-	}
-
-	IEnumerator GetGameData()
-    {
-		_gameDataReader.SetActive(true);
-		yield return null;
 	}
 
 	private void MovePlayerToRandomPos(Vector3 spawnPos)

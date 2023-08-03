@@ -68,6 +68,11 @@ public class EnemyHealthComponent : HealthComponent
 
 		_isDead = true;
 
+		if(_enemy._isBossEnemy)
+        {
+			GameManager.Instance._newGamePlus = true;
+        }
+
 		GameManager.Instance.EnemyDied();
 
 		_enemy._stateMachine.ChangeState(AI_StateID.Death);
@@ -82,10 +87,12 @@ public class EnemyHealthComponent : HealthComponent
 
 	private void DropHealthPotion()
 	{
-		int random = UnityEngine.Random.Range(0, 100);
-		if (random <= _healthDropChance)
+		int random = Random.Range(0, 100);
+		if (random < _healthDropChance)
 		{
-			Instantiate(_healthDrop, _hitParticlePosition.position, Quaternion.identity);
+			Vector3 spawnPos = _hitParticlePosition.position;
+
+			Instantiate(_healthDrop, spawnPos, Quaternion.identity);
 		}
 	}
 

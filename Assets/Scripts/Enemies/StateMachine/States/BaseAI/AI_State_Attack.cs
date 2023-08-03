@@ -6,7 +6,6 @@ public class AI_State_Attack : AI_State
 {
     protected Coroutine LookCoroutine;
 
-    public Vector3 _followPosition;
     public AI_Agent_Enemy _enemy;
     public float _maxTime = 0.1f;
 

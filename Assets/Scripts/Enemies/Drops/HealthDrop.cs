@@ -5,7 +5,6 @@ using UnityEngine;
 public class HealthDrop : MonoBehaviour
 {
     [SerializeField] private int _healAmount;
-    [SerializeField] private LayerMask _groundLayer;
     [SerializeField] private AudioSource _collectSound;
 
     private void OnTriggerEnter(Collider other)

@@ -261,8 +261,14 @@ MonoBehaviour:
   _gameDataReader: {fileID: 1497091692}
   _GameManagerValues:
   - {fileID: 11400000, guid: d87aa26dde7df3e469ed4ce81cab15d7, type: 2}
+  - {fileID: 11400000, guid: 20a93495e13578a4abab49b8fd960b7f, type: 2}
   - {fileID: 11400000, guid: 15ce0c668d7fd6d46a6d3167086a31de, type: 2}
+  - {fileID: 11400000, guid: 97a31eb4a4737304f8048720d9ee9724, type: 2}
   - {fileID: 11400000, guid: ffb617e12eaa10942a1210052869048e, type: 2}
+  - {fileID: 11400000, guid: ae55e267d2f8a334ab446fe86af05276, type: 2}
+  - {fileID: 11400000, guid: f9e653bc1fb51d840b4c5d9fb544d24e, type: 2}
+  - {fileID: 11400000, guid: c597f4632ab921c4e9bbb208b92470f5, type: 2}
+  - {fileID: 11400000, guid: eb4ba3d1298ffa34cb66b97dbdac0ae8, type: 2}
   _winningCondition: 1
   _currentTimeToSurvive: 0
   _currentScore: 0
@@ -271,8 +277,9 @@ MonoBehaviour:
   _enemiesKilled: 0
   _currentLevel: 1
   _currentLevelArray: 0
-  _currentWave: 0
-  player: {fileID: 0}
+  _gameIsPaused: 0
+  _newGamePlus: 0
+  _player: {fileID: 0}
   _currentPlayerHealth: 0
   _playerCanUseAbilities: 0
   _currentAbility: {fileID: 0}
@@ -466,12 +473,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3acfade8d5b4ace4fadbef615fdbfcc4, type: 3}
---- !u!1 &1497091692 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4283075153130197046, guid: 3acfade8d5b4ace4fadbef615fdbfcc4,
+--- !u!114 &1497091692 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4283075153130197051, guid: 3acfade8d5b4ace4fadbef615fdbfcc4,
     type: 3}
   m_PrefabInstance: {fileID: 1497091691}
   m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ddecafd0c01b0be4ca60d143f3968237, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1776022109
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -539,23 +552,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8721330641953635283, guid: 578780241b2c5d54086e4a2080d153ce,
-        type: 3}
-      propertyPath: _abilityUI_prefab
-      value: 
-      objectReference: {fileID: 925541605706483504, guid: dd5d90f9ae1662b4e839a9f9f4171693,
-        type: 3}
-    - target: {fileID: 8721330641953635283, guid: 578780241b2c5d54086e4a2080d153ce,
-        type: 3}
-      propertyPath: _abilitiesInDisplay
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 8721330641953635283, guid: 578780241b2c5d54086e4a2080d153ce,
-        type: 3}
-      propertyPath: _chooseAbility_prefab
-      value: 
-      objectReference: {fileID: 6720952648814312727, guid: f1e63370183512544a15ca8fd7bdcad9,
-        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 578780241b2c5d54086e4a2080d153ce, type: 3}
 --- !u!4 &1776022110 stripped

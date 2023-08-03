@@ -13,7 +13,17 @@ public class UpdateTuningData : MonoBehaviour
 {
 	public void Start()
 	{
-		GetTuningDataGame();
+		GameDataReader = FindObjectOfType<GameDataReader>();
+		
+		if(!GameDataReader._dataRetrieved)
+        {
+			GetTuningDataGame();
+        }
+		else
+        {
+			GameDataReader.GetGameData();
+		}
+			
 	}
 
 	public class ExportError
@@ -29,7 +39,6 @@ public class UpdateTuningData : MonoBehaviour
 	static UnityWebRequest www;
 
 	public GameDataReader GameDataReader;
-	public bool dataRetrieved = false;
 
 	public void GetTuningDataGame()
 	{
@@ -46,7 +55,7 @@ public class UpdateTuningData : MonoBehaviour
 		else
 		{
 			Debug.Log("Game Data set Active");
-			GameDataReader.gameObject.SetActive(true);
+			GameDataReader.GetGameData();
 		}
 	}
 
@@ -66,7 +75,7 @@ public class UpdateTuningData : MonoBehaviour
 
 	private void Update()
 	{
-		if (!dataRetrieved)
+		if (!GameDataReader._dataRetrieved)
 		{
 			while (!www.isDone)
 				return;
@@ -79,8 +88,8 @@ public class UpdateTuningData : MonoBehaviour
 				error = true;
 				errorMessage = "Error updating data from sheet '" + s_DataUpdateQueue[0][1] + "' : " + www.error;
 
-				dataRetrieved = true;
-				GameDataReader.gameObject.SetActive(true);
+				GameDataReader._dataRetrieved = true;
+				GameDataReader.GetGameData();
 			}
 			else
 			{
@@ -93,8 +102,8 @@ public class UpdateTuningData : MonoBehaviour
 						error = true;
 						errorMessage = "Error updating data from sheet '" + jsonError.error + "'";
 
-						dataRetrieved = true;
-						GameDataReader.gameObject.SetActive(true);
+						GameDataReader._dataRetrieved = true;
+						GameDataReader.GetGameData();
 					}
 				}
 				catch
@@ -108,8 +117,8 @@ public class UpdateTuningData : MonoBehaviour
 				Debug.LogError(errorMessage);
 				//EditorApplication.update -= Update;
 
-				dataRetrieved = true;
-				GameDataReader.gameObject.SetActive(true);
+				GameDataReader._dataRetrieved = true;
+				GameDataReader.GetGameData();
 			}
 			else
 			{
@@ -125,11 +134,11 @@ public class UpdateTuningData : MonoBehaviour
 				if (s_DataUpdateQueue.Count == 0)
 				{
 					// Queue complete
-					dataRetrieved = true;
+					GameDataReader._dataRetrieved = true;
 					TextAsset data = new TextAsset(www.downloadHandler.text);
 					data.name = "GameData1";
 					GameDataReader.gameData = data;
-					GameDataReader.gameObject.SetActive(true);
+					GameDataReader.GetGameData();
 					//EditorApplication.update -= Update;
 					//AssetDatabase.Refresh();
 					www = null;

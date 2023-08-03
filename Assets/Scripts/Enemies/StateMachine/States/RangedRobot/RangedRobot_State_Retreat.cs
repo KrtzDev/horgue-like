@@ -5,9 +5,13 @@ using UnityEngine.AI;
 
 public class RangedRobot_State_Retreat : AI_State_Retreat
 {
+    private AI_Agent_RangedRobot _rangedRobot;
+
     public override void Enter(AI_Agent agent)
     {
         base.Enter(agent);
+
+        _rangedRobot = agent as AI_Agent_RangedRobot;
 
         agent._animator.SetBool("isRetreating", true);
         agent._navMeshAgent.SetDestination(agent.transform.position);
@@ -15,14 +19,14 @@ public class RangedRobot_State_Retreat : AI_State_Retreat
 
         if (agent._followDecoy)
         {
-            _followPosition = agent._decoyTransform.position;
+            _rangedRobot._followPosition = agent._decoyTransform.position;
         }
         else
         {
-            _followPosition = agent._playerTransform.position;
+            _rangedRobot._followPosition = agent._playerTransform.position;
         }
 
-        Vector3 dirToPlayer = agent.transform.position - _followPosition;
+        Vector3 dirToPlayer = agent.transform.position - _rangedRobot._followPosition;
         _retreatPosition = agent.transform.position + dirToPlayer;
 
         if (NavMesh.SamplePosition(_retreatPosition, out NavMeshHit hit, 1f, agent._navMeshAgent.areaMask))
@@ -40,14 +44,14 @@ public class RangedRobot_State_Retreat : AI_State_Retreat
 
         if (agent._followDecoy)
         {
-            _followPosition = agent._decoyTransform.position;
+            _rangedRobot._followPosition = agent._decoyTransform.position;
         }
         else
         {
-            _followPosition = agent._playerTransform.position;
+            _rangedRobot._followPosition = agent._playerTransform.position;
         }
 
-        float distanceToPlayer = Vector3.Distance(agent.transform.position, _followPosition);
+        float distanceToPlayer = Vector3.Distance(agent.transform.position, _rangedRobot._followPosition);
 
         if (distanceToPlayer > _retreatDistance && distanceToPlayer < _enemy._enemyData._attackRange)
         {
@@ -57,7 +61,7 @@ public class RangedRobot_State_Retreat : AI_State_Retreat
         {
             if (agent._obstacleAgent.enabled && agent.enabled)
             {
-                Vector3 dirToPlayer = agent.transform.position - _followPosition;
+                Vector3 dirToPlayer = agent.transform.position - _rangedRobot._followPosition;
                 _retreatPosition = agent.transform.position + dirToPlayer;
 
                 if (NavMesh.SamplePosition(_retreatPosition, out NavMeshHit hit, 1f, agent._navMeshAgent.areaMask))
@@ -69,7 +73,7 @@ public class RangedRobot_State_Retreat : AI_State_Retreat
             }
             else if (agent._navMeshAgent.enabled && agent.enabled)
             {
-                Vector3 dirToPlayer = agent.transform.position - _followPosition;
+                Vector3 dirToPlayer = agent.transform.position - _rangedRobot._followPosition;
                 _retreatPosition = agent.transform.position + dirToPlayer;
 
                 if (NavMesh.SamplePosition(_retreatPosition, out NavMeshHit hit, 1f, agent._navMeshAgent.areaMask))

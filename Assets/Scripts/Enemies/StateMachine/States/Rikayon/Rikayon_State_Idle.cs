@@ -12,9 +12,9 @@ public class Rikayon_State_Idle : AI_State_Idle
 
         _rikayon = agent as AI_Agent_Rikayon;
 
-        _followPosition = agent.transform.position;
+        _rikayon._followPosition = agent.transform.position;
 
-        agent.SetTarget(agent, _followPosition);
+        agent.SetTarget(agent, _rikayon._followPosition);
     }
 
     public override void Update(AI_Agent agent)
@@ -29,14 +29,14 @@ public class Rikayon_State_Idle : AI_State_Idle
 
         if (agent._followDecoy)
         {
-            _followPosition = agent._decoyTransform.position;
+            _rikayon._followPosition = agent._decoyTransform.position;
         }
         else
         {
-            _followPosition = agent._playerTransform.position;
+            _rikayon._followPosition = agent._playerTransform.position;
         }
 
-        float distance = Vector3.Distance(agent.transform.position, _followPosition);
+        float distance = Vector3.Distance(agent.transform.position, _rikayon._followPosition);
 
         _timer -= Time.deltaTime;
 
@@ -75,6 +75,6 @@ public class Rikayon_State_Idle : AI_State_Idle
             AI_Manager.Instance.StopCoroutine(LookCoroutine);
         }
 
-        LookCoroutine = AI_Manager.Instance.StartCoroutine(AI_Manager.Instance.LookAtTarget(agent, _followPosition, _maxTime));
+        LookCoroutine = AI_Manager.Instance.StartCoroutine(AI_Manager.Instance.LookAtTarget(agent, _rikayon._followPosition, _maxTime));
     }
 }

@@ -12,12 +12,12 @@ public class Rikayon_State_SpecialAttack : AI_State_SpecialAttack
 
         _rikayon = agent as AI_Agent_Rikayon;
 
-        _followPosition = agent._playerTransform.position;
-        agent.transform.LookAt(_followPosition);
+        _rikayon._followPosition = agent._playerTransform.position;
+        agent.transform.LookAt(_rikayon._followPosition);
 
-        _followPosition = agent.transform.position;
+        _rikayon._followPosition = agent.transform.position;
 
-        agent.SetTarget(agent, _followPosition);
+        agent.SetTarget(agent, _rikayon._followPosition);
 
         _rikayon._currentSpecialAttackProbablity = _rikayon._baseSpecialAttackProbability;
 

@@ -96,18 +96,18 @@ public class UIManager : Singleton<UIManager>
 			return;
 		}
 
-		PauseMenu = Instantiate(_pauseMenuUI_prefab);
-		PauseMenu.gameObject.SetActive(false);
-		Endscreen = Instantiate(_endScreenUI_prefab);
-		Endscreen.gameObject.SetActive(false);
-		WaveEndScreen = Instantiate(_waveEndScreenUI_prefab);
-		WaveEndScreen.gameObject.SetActive(false);
+		if(SceneManager.GetActiveScene().name.StartsWith("SCENE_Level"))
+		{
+			PauseMenu = Instantiate(_pauseMenuUI_prefab);
+			PauseMenu.gameObject.SetActive(false);
+			Endscreen = Instantiate(_endScreenUI_prefab);
+			Endscreen.gameObject.SetActive(false);
+			WaveEndScreen = Instantiate(_waveEndScreenUI_prefab);
+			WaveEndScreen.gameObject.SetActive(false);
 
-		GameUI = Instantiate(_gameUI_prefab);
-		GameUI.gameObject.SetActive(true);
+			GameUI = Instantiate(_gameUI_prefab);
+			GameUI.gameObject.SetActive(true);
 
-		if (GameManager.Instance._currentWave == 0)
-        {
 			ChooseAbility = Instantiate(_chooseAbility_prefab);
 			ChooseAbility.gameObject.SetActive(true);
 
