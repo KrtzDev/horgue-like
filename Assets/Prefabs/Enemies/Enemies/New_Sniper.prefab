@@ -108,7 +108,7 @@ MonoBehaviour:
   _hitParticlePosition: {fileID: 570442342513492923}
   _hitParticle: {fileID: 6362102834014993675, guid: 5561755790406d148a233f12b01260c5,
     type: 3}
-  _enemyHealthBar: {fileID: 0}
+  _enemyHealthBar: {fileID: 2240081305676881864}
   _healthDrop: {fileID: 4318080567083893032, guid: 03c15c294a93b874ca9153b08ea682dd,
     type: 3}
   _coinDrop: {fileID: 2954434917669188068, guid: bc346ef89f6462d419a727974cda75b8,

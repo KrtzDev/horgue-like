@@ -5119,7 +5119,7 @@ MonoBehaviour:
   _isDead: 0
   _hitParticlePosition: {fileID: 0}
   _hitParticle: {fileID: 0}
-  _enemyHealthBar: {fileID: 0}
+  _enemyHealthBar: {fileID: 6710443782141549611}
   _healthDrop: {fileID: 0}
   _coinDrop: {fileID: 0}
 --- !u!208 &6394530487507546563

@@ -54,7 +54,7 @@
     },
     {
       "name": "Rikayon",
-      "maxHealth": 10,
+      "maxHealth": 100,
       "damagePerHit": 2.5,
       "attackSpeed": 1,
       "givenXP": 150,

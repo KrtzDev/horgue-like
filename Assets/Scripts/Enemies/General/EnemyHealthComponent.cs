@@ -30,6 +30,9 @@ public class EnemyHealthComponent : HealthComponent
     {
         base.TakeDamage(damage);
 
+		ParticleSystem hitParticle = _hitParticle;
+		Instantiate(hitParticle, _hitParticlePosition.position, Quaternion.identity);
+
 		if (_currentHealth <= 0 && !_isDead && _canTakeDamage)
 		{
 			MarkEnemyToDie();
