@@ -5,7 +5,7 @@ using UnityEngine.AI;
 
 // https://www.youtube.com/watch?v=1H9jrKyWKs0&t=34s
 
-[RequireComponent(typeof(NavMeshAgent), typeof(Animator), typeof(EnemyHealthComponent))]
+[RequireComponent(typeof(NavMeshAgent), typeof(EnemyHealthComponent))]
 [DefaultExecutionOrder(1)]
 public class AI_Agent_Enemy : AI_Agent
 {
@@ -26,7 +26,7 @@ public class AI_Agent_Enemy : AI_Agent
 
         _navMeshAgent = GetComponent<NavMeshAgent>();
         _obstacleAgent = GetComponent<ObstacleAgent>();
-        _animator = GetComponent<Animator>();
+        _animator = GetComponentInChildren<Animator>();
         _rb = GetComponent<Rigidbody>();
         _healthComponent = GetComponent<EnemyHealthComponent>();
         _player = GameObject.FindGameObjectWithTag("Player");
@@ -52,6 +52,11 @@ public class AI_Agent_Enemy : AI_Agent
         _attackTimer = 0f;
     }
 
+    public virtual void SetDeactive()
+    {
+        this.gameObject.SetActive(false);
+    }
+
     public virtual void CheckForBossStage()
     {
 
@@ -65,5 +70,13 @@ public class AI_Agent_Enemy : AI_Agent
             _healthComponent._currentHealth = _healthComponent._maxHealth;
         }
         _healthComponent._enemyHealthBar.HandleHealthChanged(percent);
+    }
+
+    public virtual void Shoot()
+    {
+    }
+
+    public virtual void DoneShooting()
+    {
     }
 }

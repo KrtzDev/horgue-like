@@ -24,9 +24,9 @@ public class AI_Agent_PasuKan : AI_Agent_Enemy
         _stateMachine.RegisterState(new AI_State_Death());
     }
 
-    public void SetDeactive()
+    public override void SetDeactive()
     {
-        this.gameObject.SetActive(false);
+        base.SetDeactive();
         AI_Manager.Instance.PasuKan.Remove(this);
     }
 }

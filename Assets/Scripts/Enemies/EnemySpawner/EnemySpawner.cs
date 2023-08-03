@@ -434,7 +434,7 @@ public class EnemySpawner : MonoBehaviour
 
             if (poolableObject != null)
             {
-                Animator anim = poolableObject.GetComponent<Animator>();
+                Animator anim = poolableObject.GetComponentInChildren<Animator>();
                 NavMeshAgent agent = poolableObject.GetComponent<NavMeshAgent>();
 
                 agent.Warp(Hit.position);

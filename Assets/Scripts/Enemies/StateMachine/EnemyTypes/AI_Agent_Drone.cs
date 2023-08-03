@@ -70,10 +70,10 @@ public class AI_Agent_Drone : AI_Agent_Enemy
         _stateMachine.RegisterState(new AI_State_Death());
     }
 
-    public void SetDeactive()
+    public override void SetDeactive()
     {
-        this.gameObject.SetActive(false);
-        AI_Manager.Instance.RangedRobot.Remove(this);
+        base.SetDeactive();
+        AI_Manager.Instance.Drone.Remove(this);
     }
 
     public void DetermineTargetPosition(Vector3 followPosition)
@@ -81,7 +81,7 @@ public class AI_Agent_Drone : AI_Agent_Enemy
         TargetDirection = (followPosition + new Vector3(0, 0.5f, 0) - transform.position - new Vector3(0, _heightGO.transform.position.y, 0)).normalized;
     }
 
-    public void Shoot()
+    public override void Shoot()
     {
         Rigidbody rb1 = Instantiate(_projectile, ProjectilePoint1.position, Quaternion.identity).GetComponent<Rigidbody>();
         rb1.AddForce(TargetDirection * _projectileSpeed, ForceMode.Impulse);
@@ -90,9 +90,9 @@ public class AI_Agent_Drone : AI_Agent_Enemy
         rb2.AddForce(TargetDirection * _projectileSpeed, ForceMode.Impulse);
     }
 
-    public void DoneShooting()
+    public override void DoneShooting()
     {
-        this.GetComponent<Animator>().SetBool("isShooting", false);
+        _animator.SetBool("isShooting", false);
         _stateMachine.ChangeState(AI_StateID.Idle);
     }
 

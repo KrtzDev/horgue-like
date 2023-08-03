@@ -78,14 +78,14 @@ public class EnemyHealthComponent : HealthComponent
 		_enemy._stateMachine.ChangeState(AI_StateID.Death);
 	}
 
-	private void DropScore()
+	public void DropScore()
 	{
 		GameObject newCoin;
 		newCoin = Instantiate(_coinDrop, _hitParticlePosition.position, Quaternion.identity);
 		newCoin.GetComponentInChildren<CoinDrop>()._givenScore =_enemy._enemyData._givenXP;
 	}
 
-	private void DropHealthPotion()
+	public void DropHealthPotion()
 	{
 		int random = Random.Range(0, 100);
 		if (random < _healthDropChance)

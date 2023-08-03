@@ -38,20 +38,22 @@ public class AI_Agent_Sniper : AI_Agent_Enemy
         _stateMachine.RegisterState(new AI_State_Death());
     }
 
-    public void SetDeactive()
+    public override void SetDeactive()
     {
-        this.gameObject.SetActive(false);
+        base.SetDeactive();
         AI_Manager.Instance.Sniper.Remove(this);
     }
 
-    public void Shoot()
+    public override void Shoot()
     {
         Rigidbody rb = Instantiate(_projectile, ProjectilePoint.position, Quaternion.identity).GetComponent<Rigidbody>();
         rb.AddForce(TargetDirection * _projectileSpeed, ForceMode.Impulse);
     }
 
-    public void DoneShooting()
+    public override void DoneShooting()
     {
-        this.GetComponent<Animator>().SetBool("isShooting", false);
+        _animator.SetBool("isShooting", false);
+        _animator.SetBool("isAttacking", false);
+        _stateMachine.ChangeState(AI_StateID.Idle);
     }
 }
