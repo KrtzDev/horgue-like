@@ -10,6 +10,10 @@ public class AI_Agent_Drone : AI_Agent_Enemy
     private AnimationCurve _heightAboveGround;
     private SphereCollider _hitCollider;
     private Vector3 _baseColliderCenter;
+    [SerializeField] private float _yMoveMultiplier;
+    private bool _startHeightReached;
+    private Vector3 _rayCastPosOnLerp;
+    private Vector3 _finalPosOnLerp;
 
 
     [Header("Projectile")]
@@ -32,13 +36,22 @@ public class AI_Agent_Drone : AI_Agent_Enemy
         _heightAboveGround = new AnimationCurve(new Keyframe(0, _minHeightAboveGround), new Keyframe(1, _maxHeightAboveGround));
         _heightAboveGround.preWrapMode = WrapMode.PingPong;
         _heightAboveGround.postWrapMode = WrapMode.PingPong;
+
+        _startHeightReached = false;
     }
 
     protected override void Update()
     {
         base.Update();
 
-        CheckHeight();
+        if(!_startHeightReached)
+        {
+            SetStartHeight();
+        }
+        else
+        {
+            CheckHeight();
+        }
     }
 
     protected override void SetEnemyData()
@@ -96,80 +109,67 @@ public class AI_Agent_Drone : AI_Agent_Enemy
         {
             RaycastHit hit;
 
-            Vector3 heightPosOwnPosition = new(transform.position.x, _heightGO.transform.position.y + transform.position.y, transform.position.z);
+            // if something is infront of you, get onto it
 
-            // Determine Position you move to
-
-            if(Physics.BoxCast(_detectionGO.transform.position, _detectionGO.GetComponent<BoxCollider>().size / 2, Vector3.down, out hit, transform.rotation, Mathf.Infinity, _player.GetComponent<PlayerMovementMobility>()._groundLayer))
+            if(Physics.BoxCast(_detectionGO.transform.position, _detectionGO.GetComponent<BoxCollider>().size / 2, Vector3.down, out hit, transform.rotation, _maxHeightAboveGround, _player.GetComponent<PlayerMovementMobility>()._groundLayer))
             {
                 Debug.DrawLine(_detectionGO.transform.position, hit.point, Color.green);
 
-                if (hit.distance < _minHeightAboveGround || hit.distance > _maxHeightAboveGround)
+                if (hit.distance < (_minHeightAboveGround + (_detectionGO.transform.position.y - transform.position.y - _heightGO.transform.position.y)) || hit.distance > (_maxHeightAboveGround + (_detectionGO.transform.position.y - transform.position.y - _heightGO.transform.position.y)))
                 {
                     float random = Random.Range(0.0f, 1.0f);
                     float yPos = hit.point.y + _heightAboveGround.Evaluate(random);
-                    heightPosOwnPosition = new Vector3(0, yPos, 0);
-
-                    // Lerp
-
-                    _heightGO.transform.localPosition = heightPosOwnPosition;
-                    _hitCollider.center = _baseColliderCenter + heightPosOwnPosition;
+                    _finalPosOnLerp = new Vector3(0, yPos, 0);
                 }
             }
-            else
+            else // check how much you get from the ground
             {
-                if (Physics.Raycast(heightPosOwnPosition, Vector3.down, out hit, Mathf.Infinity, _player.GetComponent<PlayerMovementMobility>()._groundLayer))
+                _rayCastPosOnLerp = new(transform.position.x, _heightGO.transform.position.y + transform.position.y, transform.position.z);
+
+                if (Physics.Raycast(_rayCastPosOnLerp, Vector3.down, out hit, Mathf.Infinity, _player.GetComponent<PlayerMovementMobility>()._groundLayer))
                 {
+                    Debug.DrawLine(_rayCastPosOnLerp, hit.point, Color.red);
+
                     if (hit.distance < _minHeightAboveGround || hit.distance > _maxHeightAboveGround)
                     {
                         float random = Random.Range(0.0f, 1.0f);
                         float yPos = hit.point.y + _heightAboveGround.Evaluate(random);
-                        heightPosOwnPosition = new Vector3(0, yPos, 0);
+                        _finalPosOnLerp = new Vector3(0, yPos, 0);
 
                         // Lerp
-
-                        _heightGO.transform.localPosition = heightPosOwnPosition;
-                        _hitCollider.center = _baseColliderCenter + heightPosOwnPosition;
                     }
                 }
             }
 
-            /*
-            if (Physics.BoxCast(_detectionGO.transform.position, _detectionGO.GetComponent<BoxCollider>().size / 2, Vector3.down, out hit, Quaternion.identity, Mathf.Infinity, _player.GetComponent<PlayerMovementMobility>()._groundLayer))
+            _heightGO.transform.localPosition = Vector3.Lerp(_heightGO.transform.localPosition, _finalPosOnLerp, Time.deltaTime * _yMoveMultiplier);
+            _hitCollider.center = Vector3.Lerp(_hitCollider.center, _baseColliderCenter + _finalPosOnLerp, Time.deltaTime * _yMoveMultiplier);
+        }
+    }
+
+    private void SetStartHeight()
+    {
+        Vector3 heightPosOwnPosition = new(transform.position.x, _heightGO.transform.position.y + transform.position.y, transform.position.z);
+        RaycastHit hit;
+
+        if (Physics.Raycast(heightPosOwnPosition, Vector3.down, out hit, Mathf.Infinity, _player.GetComponent<PlayerMovementMobility>()._groundLayer))
+        {
+            Debug.DrawLine(heightPosOwnPosition, hit.point, Color.red);
+
+            if (hit.distance < _minHeightAboveGround || hit.distance > _maxHeightAboveGround)
             {
-                Debug.Log("Wall detected");
+                float random = Random.Range(0.0f, 1.0f);
+                float yPos = hit.point.y + _heightAboveGround.Evaluate(random);
+                heightPosOwnPosition = new Vector3(0, yPos, 0);
 
-                Debug.DrawLine(_detectionGO.transform.position, hit.point, Color.green);
+                // Lerp
 
-                float hitDistance = _detectionGO.transform.position.y - hit.point.y;
-
-                if (hitDistance < _minHeightAboveGround || hitDistance > _maxHeightAboveGround)
-                {
-                    float random = Random.Range(0.0f, 1.0f);
-                    float yPos = hit.point.y + _heightAboveGround.Evaluate(random);
-
-                    // Lerp
-
-                    _heightGO.transform.localPosition = new Vector3(0, yPos, 0);
-                    _hitCollider.center = _baseColliderCenter + new Vector3(0, yPos, 0);
-                }
-            }*/
-
-            /* if (Physics.Raycast(heightPosOwnPosition, Vector3.down, out hit, Mathf.Infinity, _player.GetComponent<PlayerMovementMobility>()._groundLayer))
-            {
-                if (hit.distance < _minHeightAboveGround || hit.distance > _maxHeightAboveGround)
-                {
-                    float random = Random.Range(0.0f, 1.0f);
-                    float yPos = hit.point.y + _heightAboveGround.Evaluate(random);
-                    heightPosOwnPosition = new Vector3(0, yPos, 0);
-
-                    // Lerp
-
-                    _heightGO.transform.localPosition = heightPosOwnPosition;
-                    _hitCollider.center = _baseColliderCenter + heightPosOwnPosition;
-                }
+                _heightGO.transform.localPosition = Vector3.Lerp(_heightGO.transform.localPosition, heightPosOwnPosition, Time.deltaTime * _yMoveMultiplier);
+                _hitCollider.center = Vector3.Lerp(_hitCollider.center, _baseColliderCenter + heightPosOwnPosition, Time.deltaTime * _yMoveMultiplier);
             }
-            */
+            else
+            {
+                _startHeightReached = true;
+            }
         }
     }
 

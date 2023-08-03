@@ -521,7 +521,7 @@ public class Weapon : ScriptableObject
 		{
 			float distanceToEnemy;
 
-			if (enemy.GetComponent<AI_Agent_Enemy>()._heightGO == null)
+			if (!enemy.GetComponent<AI_Agent_Enemy>()._useHeightControl)
             {
 				distanceToEnemy = Vector3.Distance(_weaponTransform.position, enemy.transform.position);
             }
@@ -535,7 +535,7 @@ public class Weapon : ScriptableObject
 
 			Vector3 directionToEnemy;
 
-			if (enemy.GetComponent<AI_Agent_Enemy>()._heightGO == null)
+			if (!enemy.GetComponent<AI_Agent_Enemy>()._useHeightControl)
 			{
 				directionToEnemy = enemy.transform.position + Vector3.up - _weaponTransform.position;
 			}
@@ -553,7 +553,7 @@ public class Weapon : ScriptableObject
 
 		if (closestEnemy != null)
 		{
-			if (closestEnemy._heightGO == null)
+			if (!closestEnemy._useHeightControl)
 			{
 				TargetedEnemy = closestEnemy;
 				Vector3 direction = (closestEnemy.transform.position + Vector3.up) - _weaponTransform.position;

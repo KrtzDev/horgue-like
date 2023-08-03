@@ -88,7 +88,7 @@ public class MotionPattern : ScriptableObject
 		{
 			Vector3 direction;
 
-			if (projectile.TargetedEnemy._heightGO == null)
+			if (!projectile.TargetedEnemy._useHeightControl)
             {
 				direction = (projectile.TargetedEnemy.transform.position + Vector3.up) - projectile.transform.position;
 			}

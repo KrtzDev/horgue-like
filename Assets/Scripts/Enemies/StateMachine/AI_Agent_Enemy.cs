@@ -15,6 +15,7 @@ public class AI_Agent_Enemy : AI_Agent
     [HideInInspector] public EnemyHealthComponent _healthComponent;
 
     [Header("Height Control")]
+    public bool _useHeightControl;
     public GameObject _heightGO;
 
     protected override void Start()
