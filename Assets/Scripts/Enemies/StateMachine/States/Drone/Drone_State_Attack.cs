@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Drone_State_Attack : AI_State_Attack
 {
-
     private AI_Agent_Drone _drone;
 
     public override void Enter(AI_Agent agent)
@@ -13,8 +12,7 @@ public class Drone_State_Attack : AI_State_Attack
 
         _drone = agent as AI_Agent_Drone;
 
-        agent._navMeshAgent.SetDestination(agent.transform.position);
-        agent.transform.LookAt(_drone._followPosition);
+        agent.transform.LookAt(_drone._followPosition + new Vector3(0, 0.5f, 0));
     }
 
     public override void Update(AI_Agent agent)

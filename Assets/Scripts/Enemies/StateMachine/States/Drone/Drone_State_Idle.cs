@@ -10,22 +10,11 @@ public class Drone_State_Idle : AI_State_Idle
     {
         base.Enter(agent);
 
-        agent._animator.SetBool("isShooting", false);
-
         _drone = agent as AI_Agent_Drone;
-
-        _drone._followPosition = agent.transform.position;
-
-        agent.SetTarget(agent, _drone._followPosition);
     }
 
     public override void Update(AI_Agent agent)
     {
-        if (!agent._navMeshAgent.enabled)
-        {
-            return;
-        }
-
         if (agent._followDecoy)
         {
             _drone._followPosition = agent._decoyTransform.position;
@@ -35,14 +24,13 @@ public class Drone_State_Idle : AI_State_Idle
             _drone._followPosition = agent._playerTransform.position;
         }
 
-        float distance = Vector3.Distance(agent.transform.position + _drone._heightGO.transform.position, _drone._followPosition);
+        float distance = Vector3.Distance(_drone.ProjectilePoint.transform.position, _drone._followPosition + new Vector3(0, 0.5f, 0));
 
         // agent.transform.LookAt(_followPosition);
 
         agent._attackTimer -= Time.deltaTime;
 
-        RaycastHit hit;
-        if (!Physics.Raycast(_drone.ProjectilePoint.transform.position, (_drone._followPosition + new Vector3(0, 0.5f, 0) - _drone.ProjectilePoint.transform.position), out hit, distance, agent._groundLayer))
+        if (!Physics.Raycast(_drone.ProjectilePoint.transform.position, (_drone._followPosition + new Vector3(0, 0.5f, 0) - _drone.ProjectilePoint.transform.position).normalized, distance, agent._groundLayer))
         {
             if (distance >= _enemy._enemyData._attackRange)
             {
@@ -51,6 +39,13 @@ public class Drone_State_Idle : AI_State_Idle
             else if (distance < _enemy._enemyData._attackRange && _enemy._attackTimer <= 0)
             {
                 agent._stateMachine.ChangeState(AI_StateID.Attack);
+            }
+        }
+        else
+        {
+            if (distance >= _enemy._enemyData._attackRange)
+            {
+                agent._stateMachine.ChangeState(AI_StateID.ChasePlayer);
             }
         }
     }

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Drone
   m_EditorClassIdentifier: 
   _maxHealth: 38
-  _damagePerHit: 5
+  _damagePerHit: 0
   _attackSpeed: 1
   _givenXP: 3
   _maxMoveSpeed: 6

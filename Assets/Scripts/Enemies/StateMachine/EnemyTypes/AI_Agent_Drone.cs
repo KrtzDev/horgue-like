@@ -38,6 +38,7 @@ public class AI_Agent_Drone : AI_Agent_Enemy
         _heightAboveGround.postWrapMode = WrapMode.PingPong;
 
         _startHeightReached = false;
+        _navMeshAgent.stoppingDistance = _enemyData._attackRange;
     }
 
     protected override void Update()

@@ -17,6 +17,10 @@ public class Drone_State_ChasePlayer : AI_State_ChasePlayer
 
     public override void Update(AI_Agent agent)
     {
+        float distance = Vector3.Distance(_drone.ProjectilePoint.transform.position, _drone._followPosition + new Vector3(0, 0.5f, 0));
+        Debug.DrawLine(_drone.ProjectilePoint.transform.position, _drone._followPosition + new Vector3(0, 0.5f, 0), Color.yellow);
+        CheckForBehaviour(agent, distance);
+
         if (!agent._navMeshAgent.enabled)
         {
             return;
@@ -27,14 +31,12 @@ public class Drone_State_ChasePlayer : AI_State_ChasePlayer
             if (agent._followDecoy)
             {
                 _drone._followPosition = agent._decoyTransform.position;
-                _drone._followPosition = new Vector3(_drone._followPosition.x, agent.transform.position.y, _drone._followPosition.z);
-                agent.SetTarget(agent, _drone._followPosition);
+                agent.SetTarget(agent, new Vector3(_drone._followPosition.x, agent.transform.position.y, _drone._followPosition.z));
             }
             else
             {
                 _drone._followPosition = agent._playerTransform.position;
-                _drone._followPosition = new Vector3(_drone._followPosition.x, agent.transform.position.y, _drone._followPosition.z);
-                agent.SetTarget(agent, _drone._followPosition);
+                agent.SetTarget(agent, new Vector3(_drone._followPosition.x, agent.transform.position.y, _drone._followPosition.z));
             }
         }
         else
@@ -42,8 +44,7 @@ public class Drone_State_ChasePlayer : AI_State_ChasePlayer
             if (agent._followDecoy)
             {
                 _drone._followPosition = agent._decoyTransform.position;
-                _drone._followPosition = new Vector3(_drone._followPosition.x, agent.transform.position.y, _drone._followPosition.z);
-                agent.SetTarget(agent, _drone._followPosition);
+                agent.SetTarget(agent, new Vector3(_drone._followPosition.x, agent.transform.position.y, _drone._followPosition.z));
             }
             else
             {
@@ -58,13 +59,9 @@ public class Drone_State_ChasePlayer : AI_State_ChasePlayer
                     _drone._followPosition = agent._playerTransform.position;
                 }
 
-                _drone._followPosition = new Vector3(_drone._followPosition.x, agent.transform.position.y, _drone._followPosition.z);
-                agent.SetTarget(agent, _drone._followPosition);
+                agent.SetTarget(agent, new Vector3(_drone._followPosition.x, agent.transform.position.y, _drone._followPosition.z));
             }
         }
-
-        float distance = Vector3.Distance(agent.transform.position + _drone._heightGO.transform.position, _drone._followPosition);
-        CheckForBehaviour(agent, distance);
     }
 
     public override void Exit(AI_Agent agent)
@@ -84,15 +81,18 @@ public class Drone_State_ChasePlayer : AI_State_ChasePlayer
 
     private void CheckForBehaviour(AI_Agent agent, float distance)
     {
-        RaycastHit hit;
-        if (!Physics.Raycast(_drone.ProjectilePoint.transform.position, (_drone._followPosition + new Vector3(0, 0.5f, 0) - _drone.ProjectilePoint.transform.position), out hit, distance, agent._groundLayer))
+        agent._attackTimer -= Time.deltaTime;
+
+        if (!Physics.Raycast(_drone.ProjectilePoint.transform.position, (_drone._followPosition + new Vector3(0, 0.5f, 0) - _drone.ProjectilePoint.transform.position).normalized, distance, agent._groundLayer))
         {
-            if (distance < _enemy._enemyData._attackRange)
+            if (distance <= _enemy._enemyData._attackRange)
             {
-                agent._stateMachine.ChangeState(AI_StateID.Attack);
+                if(agent._attackTimer <= 0)
+                {
+                    agent._stateMachine.ChangeState(AI_StateID.Attack);
+                    return;
+                }
             }
         }
-
-        agent._attackTimer -= Time.deltaTime;
     }
 }
