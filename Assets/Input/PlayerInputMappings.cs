@@ -484,6 +484,33 @@ public partial class @PlayerInputMappings : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""FaceButtonWest"",
+                    ""type"": ""Button"",
+                    ""id"": ""3e18c4ca-ff99-43ad-9318-e3331e632918"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""FaceButtonSouth"",
+                    ""type"": ""Button"",
+                    ""id"": ""dc16c229-0c8d-4cd9-9c79-5e306465c348"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""FaceButtonNorth"",
+                    ""type"": ""Button"",
+                    ""id"": ""44b99845-51c1-4521-b90f-7c795c2c1d24"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -970,6 +997,39 @@ public partial class @PlayerInputMappings : IInputActionCollection2, IDisposable
                     ""action"": ""Triggers"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0cc82e2a-fc6b-41b9-acd5-5d86357c5878"",
+                    ""path"": ""<Gamepad>/buttonWest"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""FaceButtonWest"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""172aa254-9ed8-4227-b8ba-36390161fb64"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""FaceButtonSouth"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""007b860d-5dc2-4ea3-be3b-681280070705"",
+                    ""path"": ""<Gamepad>/buttonNorth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""FaceButtonNorth"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -1019,6 +1079,9 @@ public partial class @PlayerInputMappings : IInputActionCollection2, IDisposable
         m_UI_TrackedDeviceOrientation = m_UI.FindAction("TrackedDeviceOrientation", throwIfNotFound: true);
         m_UI_ShoulderButtons = m_UI.FindAction("ShoulderButtons", throwIfNotFound: true);
         m_UI_Triggers = m_UI.FindAction("Triggers", throwIfNotFound: true);
+        m_UI_FaceButtonWest = m_UI.FindAction("FaceButtonWest", throwIfNotFound: true);
+        m_UI_FaceButtonSouth = m_UI.FindAction("FaceButtonSouth", throwIfNotFound: true);
+        m_UI_FaceButtonNorth = m_UI.FindAction("FaceButtonNorth", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -1155,6 +1218,9 @@ public partial class @PlayerInputMappings : IInputActionCollection2, IDisposable
     private readonly InputAction m_UI_TrackedDeviceOrientation;
     private readonly InputAction m_UI_ShoulderButtons;
     private readonly InputAction m_UI_Triggers;
+    private readonly InputAction m_UI_FaceButtonWest;
+    private readonly InputAction m_UI_FaceButtonSouth;
+    private readonly InputAction m_UI_FaceButtonNorth;
     public struct UIActions
     {
         private @PlayerInputMappings m_Wrapper;
@@ -1171,6 +1237,9 @@ public partial class @PlayerInputMappings : IInputActionCollection2, IDisposable
         public InputAction @TrackedDeviceOrientation => m_Wrapper.m_UI_TrackedDeviceOrientation;
         public InputAction @ShoulderButtons => m_Wrapper.m_UI_ShoulderButtons;
         public InputAction @Triggers => m_Wrapper.m_UI_Triggers;
+        public InputAction @FaceButtonWest => m_Wrapper.m_UI_FaceButtonWest;
+        public InputAction @FaceButtonSouth => m_Wrapper.m_UI_FaceButtonSouth;
+        public InputAction @FaceButtonNorth => m_Wrapper.m_UI_FaceButtonNorth;
         public InputActionMap Get() { return m_Wrapper.m_UI; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1216,6 +1285,15 @@ public partial class @PlayerInputMappings : IInputActionCollection2, IDisposable
                 @Triggers.started -= m_Wrapper.m_UIActionsCallbackInterface.OnTriggers;
                 @Triggers.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnTriggers;
                 @Triggers.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnTriggers;
+                @FaceButtonWest.started -= m_Wrapper.m_UIActionsCallbackInterface.OnFaceButtonWest;
+                @FaceButtonWest.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnFaceButtonWest;
+                @FaceButtonWest.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnFaceButtonWest;
+                @FaceButtonSouth.started -= m_Wrapper.m_UIActionsCallbackInterface.OnFaceButtonSouth;
+                @FaceButtonSouth.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnFaceButtonSouth;
+                @FaceButtonSouth.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnFaceButtonSouth;
+                @FaceButtonNorth.started -= m_Wrapper.m_UIActionsCallbackInterface.OnFaceButtonNorth;
+                @FaceButtonNorth.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnFaceButtonNorth;
+                @FaceButtonNorth.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnFaceButtonNorth;
             }
             m_Wrapper.m_UIActionsCallbackInterface = instance;
             if (instance != null)
@@ -1256,6 +1334,15 @@ public partial class @PlayerInputMappings : IInputActionCollection2, IDisposable
                 @Triggers.started += instance.OnTriggers;
                 @Triggers.performed += instance.OnTriggers;
                 @Triggers.canceled += instance.OnTriggers;
+                @FaceButtonWest.started += instance.OnFaceButtonWest;
+                @FaceButtonWest.performed += instance.OnFaceButtonWest;
+                @FaceButtonWest.canceled += instance.OnFaceButtonWest;
+                @FaceButtonSouth.started += instance.OnFaceButtonSouth;
+                @FaceButtonSouth.performed += instance.OnFaceButtonSouth;
+                @FaceButtonSouth.canceled += instance.OnFaceButtonSouth;
+                @FaceButtonNorth.started += instance.OnFaceButtonNorth;
+                @FaceButtonNorth.performed += instance.OnFaceButtonNorth;
+                @FaceButtonNorth.canceled += instance.OnFaceButtonNorth;
             }
         }
     }
@@ -1291,5 +1378,8 @@ public partial class @PlayerInputMappings : IInputActionCollection2, IDisposable
         void OnTrackedDeviceOrientation(InputAction.CallbackContext context);
         void OnShoulderButtons(InputAction.CallbackContext context);
         void OnTriggers(InputAction.CallbackContext context);
+        void OnFaceButtonWest(InputAction.CallbackContext context);
+        void OnFaceButtonSouth(InputAction.CallbackContext context);
+        void OnFaceButtonNorth(InputAction.CallbackContext context);
     }
 }

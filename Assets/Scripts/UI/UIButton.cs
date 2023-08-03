@@ -6,10 +6,12 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(Image), typeof(Button))]
-public abstract class UIButton : MonoBehaviour, ISelectHandler, IDeselectHandler
+public abstract class UIButton : MonoBehaviour, ISelectHandler, IDeselectHandler, IPointerDownHandler, IPointerUpHandler
 {
 	public event Action OnButtonSelect;
 	public event Action OnButtonDeselect;
+	public event Action OnButtonDown;
+	public event Action OnButtonUp;
 	public event Action OnButtonKeepFocus;
 
 	[field: SerializeField]
@@ -50,6 +52,14 @@ public abstract class UIButton : MonoBehaviour, ISelectHandler, IDeselectHandler
 
 	public virtual void OnDeselect(BaseEventData eventData) => OnButtonDeselect?.Invoke();
 
+	public void OnPointerDown(PointerEventData eventData)
+	{
+		Debug.Log("PointerDown");
+		OnButtonDown?.Invoke();
+	}
+
+	public void OnPointerUp(PointerEventData eventData) => OnButtonUp?.Invoke();
+
 
 
 	public void KeepFocus()
@@ -69,5 +79,5 @@ public abstract class UIButton : MonoBehaviour, ISelectHandler, IDeselectHandler
 		if (!Button) Button = GetComponent<Button>();
 		if (!ButtonText) ButtonText = GetComponentInChildren<TMP_Text>();
 	}
-	#endif
+#endif
 }

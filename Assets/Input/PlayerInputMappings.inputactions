@@ -462,6 +462,33 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "FaceButtonWest",
+                    "type": "Button",
+                    "id": "3e18c4ca-ff99-43ad-9318-e3331e632918",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "FaceButtonSouth",
+                    "type": "Button",
+                    "id": "dc16c229-0c8d-4cd9-9c79-5e306465c348",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "FaceButtonNorth",
+                    "type": "Button",
+                    "id": "44b99845-51c1-4521-b90f-7c795c2c1d24",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -948,6 +975,39 @@
                     "action": "Triggers",
                     "isComposite": false,
                     "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "0cc82e2a-fc6b-41b9-acd5-5d86357c5878",
+                    "path": "<Gamepad>/buttonWest",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "FaceButtonWest",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "172aa254-9ed8-4227-b8ba-36390161fb64",
+                    "path": "<Gamepad>/buttonSouth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "FaceButtonSouth",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "007b860d-5dc2-4ea3-be3b-681280070705",
+                    "path": "<Gamepad>/buttonNorth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "FaceButtonNorth",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         }

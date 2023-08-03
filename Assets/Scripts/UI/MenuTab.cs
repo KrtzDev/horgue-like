@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 public class MenuTab : UIButton
@@ -8,25 +7,24 @@ public class MenuTab : UIButton
 
 	private void OnEnable()
 	{
-		OnButtonSelect += () => FocusMenu(AssociatedMenu);
-		OnButtonKeepFocus += () => KeepFocus(AssociatedMenu);
-	}
-
-	private void KeepFocus(GameObject menu)
-	{
-		AssociatedMenu.SetActive(true);
+		OnButtonSelect += FocusMenu;
+		OnButtonKeepFocus += KeepMenuFocus;
 	}
 
 	private void OnDisable()
 	{
-		OnButtonSelect -= () => FocusMenu(AssociatedMenu);
-		OnButtonKeepFocus -= () => KeepFocus(AssociatedMenu);
+		OnButtonSelect -= FocusMenu;
+		OnButtonKeepFocus -= KeepMenuFocus;
 	}
 
-	private void FocusMenu(GameObject menu)
+	private void KeepMenuFocus()
 	{
-		Debug.Log("Opened Menu:" + menu.name);
-		menu.SetActive(true);
+		AssociatedMenu.SetActive(true);
+	}
+
+	private void FocusMenu()
+	{
+		AssociatedMenu.SetActive(true);
 	}
 
 	public void UnFocusMenu()
