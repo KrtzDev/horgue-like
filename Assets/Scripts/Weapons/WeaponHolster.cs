@@ -9,7 +9,7 @@ public class WeaponHolster : MonoBehaviour
 
 	private List<WeaponSpawnSlot> _weaponSpawnSlots = new List<WeaponSpawnSlot>();
 
-	private void Start()
+	private void Awake()
 	{
 		if (GameManager.Instance == null)
 			return;

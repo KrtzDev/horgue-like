@@ -410,12 +410,12 @@ public partial class @PlayerInputMappings : IInputActionCollection2, IDisposable
             ""actions"": [
                 {
                     ""name"": ""Navigate"",
-                    ""type"": ""PassThrough"",
+                    ""type"": ""Value"",
                     ""id"": ""29cba1fd-d896-461b-bb34-43eecbbdcb82"",
                     ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
                     ""interactions"": """",
-                    ""initialStateCheck"": false
+                    ""initialStateCheck"": true
                 },
                 {
                     ""name"": ""Submit"",
@@ -494,6 +494,51 @@ public partial class @PlayerInputMappings : IInputActionCollection2, IDisposable
                     ""type"": ""PassThrough"",
                     ""id"": ""e10fcfdd-4cb7-4b61-a422-038d23e92d76"",
                     ""expectedControlType"": ""Quaternion"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ShoulderButtons"",
+                    ""type"": ""Value"",
+                    ""id"": ""9ce5fd2a-18a5-4615-bf2e-3a8cf99c03a4"",
+                    ""expectedControlType"": ""Axis"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Triggers"",
+                    ""type"": ""Value"",
+                    ""id"": ""8bf4b784-1995-49da-a683-a3bfc7cf864c"",
+                    ""expectedControlType"": ""Axis"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""FaceButtonWest"",
+                    ""type"": ""Button"",
+                    ""id"": ""3e18c4ca-ff99-43ad-9318-e3331e632918"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""FaceButtonSouth"",
+                    ""type"": ""Button"",
+                    ""id"": ""dc16c229-0c8d-4cd9-9c79-5e306465c348"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""FaceButtonNorth"",
+                    ""type"": ""Button"",
+                    ""id"": ""44b99845-51c1-4521-b90f-7c795c2c1d24"",
+                    ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
@@ -682,7 +727,7 @@ public partial class @PlayerInputMappings : IInputActionCollection2, IDisposable
                     ""path"": ""<Keyboard>/w"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Keyboard&Mouse"",
+                    ""groups"": """",
                     ""action"": ""Navigate"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -693,7 +738,7 @@ public partial class @PlayerInputMappings : IInputActionCollection2, IDisposable
                     ""path"": ""<Keyboard>/upArrow"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Keyboard&Mouse"",
+                    ""groups"": """",
                     ""action"": ""Navigate"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -704,7 +749,7 @@ public partial class @PlayerInputMappings : IInputActionCollection2, IDisposable
                     ""path"": ""<Keyboard>/s"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Keyboard&Mouse"",
+                    ""groups"": """",
                     ""action"": ""Navigate"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -715,7 +760,7 @@ public partial class @PlayerInputMappings : IInputActionCollection2, IDisposable
                     ""path"": ""<Keyboard>/downArrow"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Keyboard&Mouse"",
+                    ""groups"": """",
                     ""action"": ""Navigate"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -726,7 +771,7 @@ public partial class @PlayerInputMappings : IInputActionCollection2, IDisposable
                     ""path"": ""<Keyboard>/a"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Keyboard&Mouse"",
+                    ""groups"": """",
                     ""action"": ""Navigate"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -737,7 +782,7 @@ public partial class @PlayerInputMappings : IInputActionCollection2, IDisposable
                     ""path"": ""<Keyboard>/leftArrow"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Keyboard&Mouse"",
+                    ""groups"": """",
                     ""action"": ""Navigate"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -748,7 +793,7 @@ public partial class @PlayerInputMappings : IInputActionCollection2, IDisposable
                     ""path"": ""<Keyboard>/d"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Keyboard&Mouse"",
+                    ""groups"": """",
                     ""action"": ""Navigate"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -759,7 +804,7 @@ public partial class @PlayerInputMappings : IInputActionCollection2, IDisposable
                     ""path"": ""<Keyboard>/rightArrow"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Keyboard&Mouse"",
+                    ""groups"": """",
                     ""action"": ""Navigate"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -770,7 +815,7 @@ public partial class @PlayerInputMappings : IInputActionCollection2, IDisposable
                     ""path"": ""*/{Submit}"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Keyboard&Mouse;Gamepad;Touch;Joystick;XR"",
+                    ""groups"": ""Gamepad;Touch;Joystick;XR"",
                     ""action"": ""Submit"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -781,7 +826,7 @@ public partial class @PlayerInputMappings : IInputActionCollection2, IDisposable
                     ""path"": ""*/{Cancel}"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Keyboard&Mouse;Gamepad;Touch;Joystick;XR"",
+                    ""groups"": ""Gamepad;Touch;Joystick;XR"",
                     ""action"": ""Cancel"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -792,7 +837,7 @@ public partial class @PlayerInputMappings : IInputActionCollection2, IDisposable
                     ""path"": ""<Mouse>/position"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Keyboard&Mouse"",
+                    ""groups"": """",
                     ""action"": ""Point"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -803,7 +848,7 @@ public partial class @PlayerInputMappings : IInputActionCollection2, IDisposable
                     ""path"": ""<Pen>/position"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Keyboard&Mouse"",
+                    ""groups"": """",
                     ""action"": ""Point"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -814,7 +859,7 @@ public partial class @PlayerInputMappings : IInputActionCollection2, IDisposable
                     ""path"": ""<Touchscreen>/touch*/position"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Touch"",
+                    ""groups"": ""Touch;ControllScheme"",
                     ""action"": ""Point"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -825,7 +870,7 @@ public partial class @PlayerInputMappings : IInputActionCollection2, IDisposable
                     ""path"": ""<Mouse>/leftButton"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": "";Keyboard&Mouse"",
+                    ""groups"": """",
                     ""action"": ""Click"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -836,7 +881,7 @@ public partial class @PlayerInputMappings : IInputActionCollection2, IDisposable
                     ""path"": ""<Pen>/tip"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": "";Keyboard&Mouse"",
+                    ""groups"": """",
                     ""action"": ""Click"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -847,7 +892,7 @@ public partial class @PlayerInputMappings : IInputActionCollection2, IDisposable
                     ""path"": ""<Touchscreen>/touch*/press"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Touch"",
+                    ""groups"": ""Touch;ControllScheme"",
                     ""action"": ""Click"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -858,7 +903,7 @@ public partial class @PlayerInputMappings : IInputActionCollection2, IDisposable
                     ""path"": ""<XRController>/trigger"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""XR"",
+                    ""groups"": ""XR;ControllScheme"",
                     ""action"": ""Click"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -869,7 +914,7 @@ public partial class @PlayerInputMappings : IInputActionCollection2, IDisposable
                     ""path"": ""<Mouse>/scroll"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": "";Keyboard&Mouse"",
+                    ""groups"": """",
                     ""action"": ""ScrollWheel"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -880,7 +925,7 @@ public partial class @PlayerInputMappings : IInputActionCollection2, IDisposable
                     ""path"": ""<Mouse>/middleButton"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": "";Keyboard&Mouse"",
+                    ""groups"": """",
                     ""action"": ""MiddleClick"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -891,7 +936,7 @@ public partial class @PlayerInputMappings : IInputActionCollection2, IDisposable
                     ""path"": ""<Mouse>/rightButton"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": "";Keyboard&Mouse"",
+                    ""groups"": """",
                     ""action"": ""RightClick"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -915,6 +960,105 @@ public partial class @PlayerInputMappings : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": ""XR"",
                     ""action"": ""TrackedDeviceOrientation"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""ShoulderButtons"",
+                    ""id"": ""66451edb-2862-4964-a721-ee95f61c869e"",
+                    ""path"": ""1DAxis"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ShoulderButtons"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""negative"",
+                    ""id"": ""1766ce06-7901-4d28-8ed4-22db564a643e"",
+                    ""path"": ""<Gamepad>/leftShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ShoulderButtons"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""positive"",
+                    ""id"": ""5c7594f6-d1e3-4187-b8ec-641ce3fd2566"",
+                    ""path"": ""<Gamepad>/rightShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ShoulderButtons"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""Triggers"",
+                    ""id"": ""6b1d5ab2-9797-4e50-b7ad-f4004853e25e"",
+                    ""path"": ""1DAxis"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Triggers"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""negative"",
+                    ""id"": ""a479fd74-54b1-41e8-9f38-dc61908ec42e"",
+                    ""path"": ""<Gamepad>/leftTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Triggers"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""positive"",
+                    ""id"": ""75ef8f16-b836-4bdd-a37e-b70822920fa9"",
+                    ""path"": ""<Gamepad>/rightTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Triggers"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0cc82e2a-fc6b-41b9-acd5-5d86357c5878"",
+                    ""path"": ""<Gamepad>/buttonWest"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""FaceButtonWest"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""172aa254-9ed8-4227-b8ba-36390161fb64"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""FaceButtonSouth"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""007b860d-5dc2-4ea3-be3b-681280070705"",
+                    ""path"": ""<Gamepad>/buttonNorth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""FaceButtonNorth"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -965,6 +1109,11 @@ public partial class @PlayerInputMappings : IInputActionCollection2, IDisposable
         m_UI_RightClick = m_UI.FindAction("RightClick", throwIfNotFound: true);
         m_UI_TrackedDevicePosition = m_UI.FindAction("TrackedDevicePosition", throwIfNotFound: true);
         m_UI_TrackedDeviceOrientation = m_UI.FindAction("TrackedDeviceOrientation", throwIfNotFound: true);
+        m_UI_ShoulderButtons = m_UI.FindAction("ShoulderButtons", throwIfNotFound: true);
+        m_UI_Triggers = m_UI.FindAction("Triggers", throwIfNotFound: true);
+        m_UI_FaceButtonWest = m_UI.FindAction("FaceButtonWest", throwIfNotFound: true);
+        m_UI_FaceButtonSouth = m_UI.FindAction("FaceButtonSouth", throwIfNotFound: true);
+        m_UI_FaceButtonNorth = m_UI.FindAction("FaceButtonNorth", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -1107,6 +1256,11 @@ public partial class @PlayerInputMappings : IInputActionCollection2, IDisposable
     private readonly InputAction m_UI_RightClick;
     private readonly InputAction m_UI_TrackedDevicePosition;
     private readonly InputAction m_UI_TrackedDeviceOrientation;
+    private readonly InputAction m_UI_ShoulderButtons;
+    private readonly InputAction m_UI_Triggers;
+    private readonly InputAction m_UI_FaceButtonWest;
+    private readonly InputAction m_UI_FaceButtonSouth;
+    private readonly InputAction m_UI_FaceButtonNorth;
     public struct UIActions
     {
         private @PlayerInputMappings m_Wrapper;
@@ -1121,6 +1275,11 @@ public partial class @PlayerInputMappings : IInputActionCollection2, IDisposable
         public InputAction @RightClick => m_Wrapper.m_UI_RightClick;
         public InputAction @TrackedDevicePosition => m_Wrapper.m_UI_TrackedDevicePosition;
         public InputAction @TrackedDeviceOrientation => m_Wrapper.m_UI_TrackedDeviceOrientation;
+        public InputAction @ShoulderButtons => m_Wrapper.m_UI_ShoulderButtons;
+        public InputAction @Triggers => m_Wrapper.m_UI_Triggers;
+        public InputAction @FaceButtonWest => m_Wrapper.m_UI_FaceButtonWest;
+        public InputAction @FaceButtonSouth => m_Wrapper.m_UI_FaceButtonSouth;
+        public InputAction @FaceButtonNorth => m_Wrapper.m_UI_FaceButtonNorth;
         public InputActionMap Get() { return m_Wrapper.m_UI; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1160,6 +1319,21 @@ public partial class @PlayerInputMappings : IInputActionCollection2, IDisposable
                 @TrackedDeviceOrientation.started -= m_Wrapper.m_UIActionsCallbackInterface.OnTrackedDeviceOrientation;
                 @TrackedDeviceOrientation.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnTrackedDeviceOrientation;
                 @TrackedDeviceOrientation.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnTrackedDeviceOrientation;
+                @ShoulderButtons.started -= m_Wrapper.m_UIActionsCallbackInterface.OnShoulderButtons;
+                @ShoulderButtons.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnShoulderButtons;
+                @ShoulderButtons.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnShoulderButtons;
+                @Triggers.started -= m_Wrapper.m_UIActionsCallbackInterface.OnTriggers;
+                @Triggers.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnTriggers;
+                @Triggers.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnTriggers;
+                @FaceButtonWest.started -= m_Wrapper.m_UIActionsCallbackInterface.OnFaceButtonWest;
+                @FaceButtonWest.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnFaceButtonWest;
+                @FaceButtonWest.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnFaceButtonWest;
+                @FaceButtonSouth.started -= m_Wrapper.m_UIActionsCallbackInterface.OnFaceButtonSouth;
+                @FaceButtonSouth.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnFaceButtonSouth;
+                @FaceButtonSouth.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnFaceButtonSouth;
+                @FaceButtonNorth.started -= m_Wrapper.m_UIActionsCallbackInterface.OnFaceButtonNorth;
+                @FaceButtonNorth.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnFaceButtonNorth;
+                @FaceButtonNorth.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnFaceButtonNorth;
             }
             m_Wrapper.m_UIActionsCallbackInterface = instance;
             if (instance != null)
@@ -1194,6 +1368,21 @@ public partial class @PlayerInputMappings : IInputActionCollection2, IDisposable
                 @TrackedDeviceOrientation.started += instance.OnTrackedDeviceOrientation;
                 @TrackedDeviceOrientation.performed += instance.OnTrackedDeviceOrientation;
                 @TrackedDeviceOrientation.canceled += instance.OnTrackedDeviceOrientation;
+                @ShoulderButtons.started += instance.OnShoulderButtons;
+                @ShoulderButtons.performed += instance.OnShoulderButtons;
+                @ShoulderButtons.canceled += instance.OnShoulderButtons;
+                @Triggers.started += instance.OnTriggers;
+                @Triggers.performed += instance.OnTriggers;
+                @Triggers.canceled += instance.OnTriggers;
+                @FaceButtonWest.started += instance.OnFaceButtonWest;
+                @FaceButtonWest.performed += instance.OnFaceButtonWest;
+                @FaceButtonWest.canceled += instance.OnFaceButtonWest;
+                @FaceButtonSouth.started += instance.OnFaceButtonSouth;
+                @FaceButtonSouth.performed += instance.OnFaceButtonSouth;
+                @FaceButtonSouth.canceled += instance.OnFaceButtonSouth;
+                @FaceButtonNorth.started += instance.OnFaceButtonNorth;
+                @FaceButtonNorth.performed += instance.OnFaceButtonNorth;
+                @FaceButtonNorth.canceled += instance.OnFaceButtonNorth;
             }
         }
     }
@@ -1228,5 +1417,10 @@ public partial class @PlayerInputMappings : IInputActionCollection2, IDisposable
         void OnRightClick(InputAction.CallbackContext context);
         void OnTrackedDevicePosition(InputAction.CallbackContext context);
         void OnTrackedDeviceOrientation(InputAction.CallbackContext context);
+        void OnShoulderButtons(InputAction.CallbackContext context);
+        void OnTriggers(InputAction.CallbackContext context);
+        void OnFaceButtonWest(InputAction.CallbackContext context);
+        void OnFaceButtonSouth(InputAction.CallbackContext context);
+        void OnFaceButtonNorth(InputAction.CallbackContext context);
     }
 }
