@@ -24,6 +24,22 @@ public class EnemyProjectile : MonoBehaviour
                 }
                 Destroy(gameObject);
             }
+            else if (other.CompareTag("DestroyableObject"))
+            {
+                if (other.GetComponent<DestroyableObject>() != null)
+                {
+                    other.GetComponent<DestroyableObject>().DestroyObject();
+                }
+                Destroy(gameObject);
+            }
+            else if (other.CompareTag("ExplosiveObject"))
+            {
+                if (other.GetComponent<ExplosiveObject>() != null)
+                {
+                    other.GetComponent<ExplosiveObject>().TriggerExplosive();
+                }
+                Destroy(gameObject);
+            }
             else
             {
                 Destroy(gameObject);

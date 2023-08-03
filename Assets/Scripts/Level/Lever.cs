@@ -1,15 +1,16 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Lever : MonoBehaviour
 {
-    [SerializeField] private Animator _animator;
+    private Animator _animator;
     
     [SerializeField] private bool _switchA;
     [SerializeField] private bool _switchB;
 
-    [SerializeField] private GameObject _connectedObject;
+    [SerializeField] private AI_Agent_Sentry _connectedSentry;
 
     private bool playerInRange;
 
@@ -32,6 +33,20 @@ public class Lever : MonoBehaviour
         _switchB = !_switchB;
 
         _animator.SetBool("isSwitchA", _switchA);
+
+        SwitchOutcome();
+    }
+
+    private void SwitchOutcome()
+    {
+        if (_switchA && !_switchB)
+        {
+            _connectedSentry.SwitchSentryStatus(SentryStatus.Ally);
+        }
+        else if (!_switchA && _switchB)
+        {
+            _connectedSentry.SwitchSentryStatus(SentryStatus.Enemy);
+        }
     }
 
     private void OnTriggerEnter(Collider other)

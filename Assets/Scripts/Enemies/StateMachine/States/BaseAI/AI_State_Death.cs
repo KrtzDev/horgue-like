@@ -9,12 +9,8 @@ public class AI_State_Death : AI_State
         return AI_StateID.Death;
     }
 
-    public AI_Agent_Enemy _enemy;
-
     public virtual void Enter(AI_Agent agent)
     {
-        _enemy = agent as AI_Agent_Enemy;
-
         agent._animator.enabled = true;
         agent._animator.SetBool("death", true);
         agent._animator.SetTrigger("deathTrigger");
