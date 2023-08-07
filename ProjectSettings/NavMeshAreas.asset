@@ -129,8 +129,8 @@ NavMeshProjectSettings:
     agentTypeID: -629701670
     agentRadius: 3.5
     agentHeight: 5.5
-    agentSlope: 60
-    agentClimb: 3
+    agentSlope: 45
+    agentClimb: 2
     ledgeDropHeight: 0
     maxJumpAcrossDistance: 0
     minRegionArea: 2
@@ -164,6 +164,6 @@ NavMeshProjectSettings:
   m_SettingNames:
   - Standard
   - Sniper
-  - Ranged Robot & Pasu Kan
+  - Basic Enemy
   - Rikayon
   - Drone
