@@ -132,6 +132,7 @@ public class Weapon : ScriptableObject
 		weaponStats.cooldown = CalculateCooldown(weapon, GameManager.Instance.damageCalcKind);
 		weaponStats.projectileSize = CalculateProjectileSize(weapon, GameManager.Instance.damageCalcKind);
 		weaponStats.critChance = CalculateCritChance(weapon, GameManager.Instance.damageCalcKind);
+		weaponStats.critDamage = CalculateCritDamage(weapon, GameManager.Instance.damageCalcKind);
 		weaponStats.range = CalculatefinalRange(weapon, GameManager.Instance.damageCalcKind);
 
 		weaponStats.capacity = weapon.magazine.capacity;
@@ -172,6 +173,7 @@ public class Weapon : ScriptableObject
 		projectile.finalCooldown = weaponStats.cooldown;
 		projectile.finalProjectileSize = weaponStats.projectileSize;
 		projectile.finalCritChance = weaponStats.critChance;
+		projectile.finalCritDamage = weaponStats.critDamage;
 		projectile.finalRange = weaponStats.range;
 
 		_shotDelay = 1 / projectile.finalAttackSpeed;
@@ -393,6 +395,49 @@ public class Weapon : ScriptableObject
 
 		float partsCritChance = damageCalcKind == DamageCalcKind.Mean ? totalCritChance / partCount : totalCritChance;
 		return _currentWeaponSkeleton.skeletonBaseStats.critChance +(_currentWeaponSkeleton.skeletonBaseStats.critChance * partsCritChance);
+	}
+
+	private float CalculateCritDamage(Weapon weapon, DamageCalcKind damageCalcKind)
+	{
+		float totalCritDamage = 0;
+		int partCount = 0;
+
+		if (weapon.grip)
+		{
+			totalCritDamage += weapon.grip.critDamage;
+			partCount++;
+		}
+		if (weapon.barrel)
+		{
+			totalCritDamage += weapon.barrel.critDamage;
+			partCount++;
+		}
+		if (weapon.magazine)
+		{
+			totalCritDamage += weapon.magazine.critDamage;
+			partCount++;
+		}
+		if (weapon.ammunition)
+		{
+			totalCritDamage += weapon.ammunition.critDamage;
+			partCount++;
+		}
+		if (weapon.triggerMechanism)
+		{
+			totalCritDamage += weapon.triggerMechanism.critDamage;
+			partCount++;
+		}
+		if (weapon.sight)
+		{
+			totalCritDamage += weapon.sight.critDamage;
+			partCount++;
+		}
+
+		if (partCount <= 0 || totalCritDamage <= 0)
+			return _currentWeaponSkeleton.skeletonBaseStats.critDamage;
+
+		float partsCritDamage = damageCalcKind == DamageCalcKind.Mean ? totalCritDamage / partCount : totalCritDamage;
+		return _currentWeaponSkeleton.skeletonBaseStats.critDamage + (_currentWeaponSkeleton.skeletonBaseStats.critChance * partsCritDamage);
 	}
 
 	private float CalculatefinalRange(Weapon weapon, DamageCalcKind damageCalcKind)

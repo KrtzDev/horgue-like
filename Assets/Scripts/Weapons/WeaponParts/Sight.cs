@@ -9,5 +9,6 @@ public class Sight : WeaponPart
 	public float cooldown;
 	public float projectileSize;
     public float critChance;
-    public float range;
+	public float critDamage;
+	public float range;
 }

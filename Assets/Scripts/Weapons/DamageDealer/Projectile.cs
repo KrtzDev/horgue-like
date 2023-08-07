@@ -11,6 +11,7 @@ public class Projectile : DamageDealer
 	public float finalCooldown;
 	public float finalProjectileSize;
 	public float finalCritChance;
+	public float finalCritDamage;
 	public float finalRange;
 
 	public AttackPattern attackPattern;
@@ -59,8 +60,8 @@ public class Projectile : DamageDealer
 	{
 		if (collider.TryGetComponent(out HealthComponent health))
 		{
-			if (finalCritChance > UnityEngine.Random.Range(0, 100))
-				finalBaseDamage *= 2;
+			if (finalCritChance > UnityEngine.Random.Range(0, 100)) // Can crit?
+				finalBaseDamage *= finalCritDamage; // Apply Crit Damage
 
 			health.TakeDamage((int)finalBaseDamage);
 
