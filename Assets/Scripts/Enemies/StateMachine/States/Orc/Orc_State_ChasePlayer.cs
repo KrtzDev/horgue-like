@@ -93,11 +93,14 @@ public class Orc_State_ChasePlayer : AI_State_ChasePlayer
         if (distance < _enemy._enemyData._attackRange && agent._attackTimer <= 0)
         {
             agent._attackTimer = _enemy._enemyData._attackSpeed;
-            _orc._followPosition = agent._playerTransform.position;
             agent.transform.LookAt(_orc._followPosition);
             agent._animator.SetTrigger("attack");
             agent._animator.SetBool("isChasing", false);
             agent._stateMachine.ChangeState(AI_StateID.Attack);
+        }
+        else if (distance < _enemy._enemyData._attackRange)
+        {
+            agent._stateMachine.ChangeState(AI_StateID.Idle);
         }
         else
         {

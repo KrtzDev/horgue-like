@@ -18,6 +18,7 @@ public class AI_Agent_PasuKan : AI_Agent_Enemy
 
     protected override void RegisterStates()
     {
+        _stateMachine.RegisterState(new PasuKan_State_Idle());
         _stateMachine.RegisterState(new PasuKan_State_ChasePlayer());
         _stateMachine.RegisterState(new PasuKan_State_Attack());
         _stateMachine.RegisterState(new PasuKan_State_JumpAttack());

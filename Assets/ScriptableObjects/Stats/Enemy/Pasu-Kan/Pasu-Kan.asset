@@ -13,18 +13,17 @@ MonoBehaviour:
   m_Name: Pasu-Kan
   m_EditorClassIdentifier: 
   _maxHealth: 98
-  _damagePerHit: 15
+  _damagePerHit: 10
   _attackSpeed: 2.5
   _givenXP: 5
-  _maxMoveSpeed: 20
-  _acceleration: 25
+  _maxMoveSpeed: 11
+  _acceleration: 12
   _armor: 100
   _elementalResistance: 50
   _technicalResistance: -50
   _healthDropChance: 0.05
-  _attackRange: 3
+  _attackRange: 2
   _retreatRange: 0
-  _followTime: 0
   _maxJumpAttackRange: 14
   _minJumpAttackRange: 8
   _jumpAttackChance: 33

@@ -27002,7 +27002,7 @@ PrefabInstance:
     - target: {fileID: 6843213763226438607, guid: b0d5d15041526b8408159035025686a3,
         type: 3}
       propertyPath: _enemiesToSpawn.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6843213763226438607, guid: b0d5d15041526b8408159035025686a3,
         type: 3}
@@ -27014,7 +27014,7 @@ PrefabInstance:
         type: 3}
       propertyPath: _enemiesToSpawn.Array.data[1]._enemy
       value: 
-      objectReference: {fileID: 5569908930664924729, guid: 7b6be744927c742458e087e221b6fe70,
+      objectReference: {fileID: 4210139121116063852, guid: f3714111eb679aa43894d89dc3984b02,
         type: 3}
     - target: {fileID: 6843213763226438607, guid: b0d5d15041526b8408159035025686a3,
         type: 3}
@@ -27034,7 +27034,7 @@ PrefabInstance:
     - target: {fileID: 6843213763226438607, guid: b0d5d15041526b8408159035025686a3,
         type: 3}
       propertyPath: _enemiesToSpawn.Array.data[1]._spawnChance
-      value: 100
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b0d5d15041526b8408159035025686a3, type: 3}

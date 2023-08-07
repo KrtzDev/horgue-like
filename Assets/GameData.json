@@ -272,6 +272,26 @@
       "maxCloseZoneOcc": 8,
       "maxMidZoneOcc": 15,
       "maxFarZoneOcc": 20
+    },
+    {
+      "name": "LevelNewGamePlus",
+      "healthBonus": 2,
+      "damageBonus": 2,
+      "TimeToSurvive": 90,
+      "spawnTick": 3,
+      "spawnsPerTick": 8,
+      "minEnemyCount": 15,
+      "maxEnemyCount": 40,
+      "spawnAnimDelay": 1,
+      "minSpawnDelay": 0,
+      "maxSpawnDelay": 1,
+      "safeZoneSize": 5,
+      "closeZoneSize": 10,
+      "midZoneSize": 20,
+      "farZoneSize": 30,
+      "maxCloseZoneOcc": 8,
+      "maxMidZoneOcc": 15,
+      "maxFarZoneOcc": 20
     }
   ],
   "Player": [
