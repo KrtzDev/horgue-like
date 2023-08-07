@@ -86,9 +86,9 @@
       "damageBonus": 1,
       "TimeToSurvive": 60,
       "spawnTick": 3,
-      "spawnsPerTick": 6,
-      "minEnemyCount": 10,
-      "maxEnemyCount": 35,
+      "spawnsPerTick": 8,
+      "minEnemyCount": 15,
+      "maxEnemyCount": 40,
       "spawnAnimDelay": 1,
       "minSpawnDelay": 0,
       "maxSpawnDelay": 1,
@@ -106,9 +106,9 @@
       "damageBonus": 1.1,
       "TimeToSurvive": 65,
       "spawnTick": 3,
-      "spawnsPerTick": 6,
-      "minEnemyCount": 10,
-      "maxEnemyCount": 35,
+      "spawnsPerTick": 8,
+      "minEnemyCount": 15,
+      "maxEnemyCount": 40,
       "spawnAnimDelay": 1,
       "minSpawnDelay": 0,
       "maxSpawnDelay": 1,
@@ -126,9 +126,9 @@
       "damageBonus": 1.2,
       "TimeToSurvive": 70,
       "spawnTick": 3,
-      "spawnsPerTick": 6,
-      "minEnemyCount": 10,
-      "maxEnemyCount": 35,
+      "spawnsPerTick": 8,
+      "minEnemyCount": 15,
+      "maxEnemyCount": 40,
       "spawnAnimDelay": 1,
       "minSpawnDelay": 0,
       "maxSpawnDelay": 1,
@@ -146,9 +146,9 @@
       "damageBonus": 1.3,
       "TimeToSurvive": 75,
       "spawnTick": 3,
-      "spawnsPerTick": 6,
-      "minEnemyCount": 10,
-      "maxEnemyCount": 35,
+      "spawnsPerTick": 8,
+      "minEnemyCount": 15,
+      "maxEnemyCount": 40,
       "spawnAnimDelay": 1,
       "minSpawnDelay": 0,
       "maxSpawnDelay": 1,
@@ -166,9 +166,9 @@
       "damageBonus": 1.4,
       "TimeToSurvive": 80,
       "spawnTick": 3,
-      "spawnsPerTick": 6,
-      "minEnemyCount": 10,
-      "maxEnemyCount": 35,
+      "spawnsPerTick": 8,
+      "minEnemyCount": 15,
+      "maxEnemyCount": 40,
       "spawnAnimDelay": 1,
       "minSpawnDelay": 0,
       "maxSpawnDelay": 1,
@@ -186,9 +186,9 @@
       "damageBonus": 1.5,
       "TimeToSurvive": 85,
       "spawnTick": 3,
-      "spawnsPerTick": 6,
-      "minEnemyCount": 10,
-      "maxEnemyCount": 35,
+      "spawnsPerTick": 8,
+      "minEnemyCount": 15,
+      "maxEnemyCount": 40,
       "spawnAnimDelay": 1,
       "minSpawnDelay": 0,
       "maxSpawnDelay": 1,
@@ -206,9 +206,9 @@
       "damageBonus": 1.6,
       "TimeToSurvive": 90,
       "spawnTick": 3,
-      "spawnsPerTick": 6,
-      "minEnemyCount": 10,
-      "maxEnemyCount": 35,
+      "spawnsPerTick": 8,
+      "minEnemyCount": 15,
+      "maxEnemyCount": 40,
       "spawnAnimDelay": 1,
       "minSpawnDelay": 0,
       "maxSpawnDelay": 1,
@@ -226,9 +226,9 @@
       "damageBonus": 1.7,
       "TimeToSurvive": 90,
       "spawnTick": 3,
-      "spawnsPerTick": 6,
-      "minEnemyCount": 10,
-      "maxEnemyCount": 35,
+      "spawnsPerTick": 8,
+      "minEnemyCount": 15,
+      "maxEnemyCount": 40,
       "spawnAnimDelay": 1,
       "minSpawnDelay": 0,
       "maxSpawnDelay": 1,
@@ -275,7 +275,7 @@
       "baseDamage": 35,
       "cooldown": 2,
       "criticalHitChance": 10,
-      "criticalHitDamage": 0,
+      "criticalHitDamage": 1.5,
       "projectileWidth": 0.1,
       "range": 13
     }
@@ -285,11 +285,12 @@
       "name": "Reference",
       "numberOfGems": 1,
       "attackSpeed": 1,
-      "baseDamage": 100,
-      "cooldown": 1,
-      "criticalHitChance": 1,
-      "projectileWidth": 1,
-      "range": 25
+      "baseDamage": 35,
+      "cooldown": 2,
+      "criticalHitChance": 10,
+      "criticalHitDamage": 1.5,
+      "projectileWidth": 0.1,
+      "range": 13
     },
     {
       "name": "Antique Frag Grenade",
@@ -299,6 +300,7 @@
       "baseDamage": 0.95,
       "cooldown": 0.5,
       "criticalHitChance": 0,
+      "criticalHitDamage": 0.1,
       "projectileWidth": 0.6,
       "range": -0.35
     },
@@ -309,6 +311,7 @@
       "baseDamage": 0.2,
       "cooldown": 0,
       "criticalHitChance": 0.25,
+      "criticalHitDamage": 0,
       "projectileWidth": -0.1,
       "range": 0.15
     },
@@ -319,6 +322,7 @@
       "baseDamage": 0.35,
       "cooldown": 0.25,
       "criticalHitChance": 0.3,
+      "criticalHitDamage": 0,
       "projectileWidth": -0.1,
       "range": 0.2
     },
@@ -329,6 +333,7 @@
       "baseDamage": 0.45,
       "cooldown": 0.35,
       "criticalHitChance": 0.2,
+      "criticalHitDamage": 0,
       "projectileWidth": 0,
       "range": 0.35
     },
@@ -340,6 +345,7 @@
       "baseDamage": 1.1,
       "cooldown": 1.2,
       "criticalHitChance": 0,
+      "criticalHitDamage": 0,
       "projectileWidth": 0.5,
       "range": -0.4
     },
@@ -351,6 +357,7 @@
       "baseDamage": 0.7,
       "cooldown": 0.6,
       "criticalHitChance": 0,
+      "criticalHitDamage": 0,
       "projectileWidth": 0.4,
       "range": 0.4
     },
@@ -362,6 +369,7 @@
       "baseDamage": 0.9,
       "cooldown": 0.45,
       "criticalHitChance": 0.15,
+      "criticalHitDamage": 0,
       "projectileWidth": -0.6,
       "range": 0.6
     },
@@ -373,6 +381,7 @@
       "baseDamage": 0.8,
       "cooldown": 0.25,
       "criticalHitChance": 0.15,
+      "criticalHitDamage": 0,
       "projectileWidth": -0.6,
       "range": 0.75
     },
@@ -384,6 +393,7 @@
       "baseDamage": 0.35,
       "cooldown": -0.2,
       "criticalHitChance": 0.15,
+      "criticalHitDamage": 0,
       "projectileWidth": -0.4,
       "range": 0.25
     },
@@ -395,6 +405,7 @@
       "baseDamage": 1.1,
       "cooldown": 0,
       "criticalHitChance": 0.5,
+      "criticalHitDamage": 0,
       "projectileWidth": -0.8,
       "range": 1.5
     },
@@ -406,6 +417,7 @@
       "baseDamage": 0.75,
       "cooldown": -0.5,
       "criticalHitChance": 0,
+      "criticalHitDamage": 0,
       "projectileWidth": 0.15,
       "range": -0.15
     },
@@ -416,6 +428,7 @@
       "baseDamage": 0.85,
       "cooldown": 0.3,
       "criticalHitChance": 0,
+      "criticalHitDamage": 0,
       "projectileWidth": 0.75,
       "range": -0.45
     }
@@ -426,11 +439,12 @@
       "simultaneousProjectiles": 1,
       "numberOfGems": 1,
       "attackSpeed": 1,
-      "baseDamage": 100,
-      "cooldown": 1,
-      "criticalHitChance": 1,
-      "projectileWidth": 1,
-      "range": 25
+      "baseDamage": 35,
+      "cooldown": 2,
+      "criticalHitChance": 10,
+      "criticalHitDamage": 1.5,
+      "projectileWidth": 0.1,
+      "range": 13
     },
     {
       "name": "Brainified Conical Steel Nickle Barrel",
@@ -442,6 +456,7 @@
       "baseDamage": 0.2,
       "cooldown": 0.4,
       "criticalHitChance": 0.15,
+      "criticalHitDamage": 0,
       "projectileWidth": 0.1,
       "range": 0.25
     },
@@ -454,6 +469,7 @@
       "baseDamage": 0.35,
       "cooldown": 0.6,
       "criticalHitChance": 0.2,
+      "criticalHitDamage": 0,
       "projectileWidth": 0,
       "range": 0.3
     },
@@ -466,6 +482,7 @@
       "baseDamage": 0.4,
       "cooldown": -0.2,
       "criticalHitChance": 0,
+      "criticalHitDamage": 0,
       "projectileWidth": 0.1,
       "range": -0.4
     },
@@ -478,6 +495,7 @@
       "baseDamage": 0.6,
       "cooldown": 0,
       "criticalHitChance": 0,
+      "criticalHitDamage": 0,
       "projectileWidth": 0,
       "range": 0.45
     },
@@ -490,6 +508,7 @@
       "baseDamage": 0.7,
       "cooldown": 0.8,
       "criticalHitChance": 0.1,
+      "criticalHitDamage": 0,
       "projectileWidth": 0,
       "range": 0.5
     },
@@ -502,6 +521,7 @@
       "baseDamage": 0.9,
       "cooldown": 0.15,
       "criticalHitChance": 0.3,
+      "criticalHitDamage": 0,
       "projectileWidth": 0.4,
       "range": 0.7
     },
@@ -514,6 +534,7 @@
       "baseDamage": 0.4,
       "cooldown": 0,
       "criticalHitChance": 0.75,
+      "criticalHitDamage": 0,
       "projectileWidth": 0.3,
       "range": 0.15
     },
@@ -526,6 +547,7 @@
       "baseDamage": 0.7,
       "cooldown": 0.4,
       "criticalHitChance": 0.8,
+      "criticalHitDamage": 0,
       "projectileWidth": 0.05,
       "range": -0.5
     },
@@ -538,6 +560,7 @@
       "baseDamage": 0.2,
       "cooldown": -0.1,
       "criticalHitChance": 0,
+      "criticalHitDamage": 0,
       "projectileWidth": 0,
       "range": -0.2
     },
@@ -550,6 +573,7 @@
       "baseDamage": -0.1,
       "cooldown": 0.15,
       "criticalHitChance": 0.1,
+      "criticalHitDamage": 0,
       "projectileWidth": 0,
       "range": 0.3
     },
@@ -562,6 +586,7 @@
       "baseDamage": 0.15,
       "cooldown": 0.05,
       "criticalHitChance": 0.1,
+      "criticalHitDamage": 0,
       "projectileWidth": 0,
       "range": 0.2
     },
@@ -574,6 +599,7 @@
       "baseDamage": 0,
       "cooldown": -0.05,
       "criticalHitChance": 0,
+      "criticalHitDamage": 0,
       "projectileWidth": 0,
       "range": 0
     },
@@ -586,6 +612,7 @@
       "baseDamage": 0.4,
       "cooldown": 1.3,
       "criticalHitChance": 0.05,
+      "criticalHitDamage": 0,
       "projectileWidth": 0.25,
       "range": 0.5
     },
@@ -599,6 +626,7 @@
       "baseDamage": 0.05,
       "cooldown": -0.1,
       "criticalHitChance": -0.1,
+      "criticalHitDamage": 0,
       "projectileWidth": 0,
       "range": -0.15
     },
@@ -611,6 +639,7 @@
       "baseDamage": 0.35,
       "cooldown": 0.2,
       "criticalHitChance": 0.35,
+      "criticalHitDamage": 0,
       "projectileWidth": 0.6,
       "range": -0.25
     }
@@ -622,11 +651,12 @@
       "numberOfGems": 1,
       "numberOfMagazines": 1,
       "attackSpeed": 1,
-      "baseDamage": 100,
-      "cooldown": 1,
-      "criticalHitChance": 1,
-      "projectileWidth": 1,
-      "range": 25
+      "baseDamage": 35,
+      "cooldown": 2,
+      "criticalHitChance": 10,
+      "criticalHitDamage": 1.5,
+      "projectileWidth": 0.1,
+      "range": 13
     },
     {
       "name": "30s Double Grip",
@@ -637,6 +667,7 @@
       "baseDamage": 0,
       "cooldown": -0.2,
       "criticalHitChance": 0.15,
+      "criticalHitDamage": 0,
       "projectileWidth": 0,
       "range": 0
     },
@@ -649,6 +680,7 @@
       "baseDamage": 0,
       "cooldown": 0.15,
       "criticalHitChance": 0.1,
+      "criticalHitDamage": 0,
       "projectileWidth": 0,
       "range": 0
     },
@@ -661,6 +693,7 @@
       "baseDamage": 0,
       "cooldown": 0.15,
       "criticalHitChance": 0.35,
+      "criticalHitDamage": 0,
       "projectileWidth": 0,
       "range": 0
     },
@@ -673,6 +706,7 @@
       "baseDamage": 0.3,
       "cooldown": 0.2,
       "criticalHitChance": 0.1,
+      "criticalHitDamage": 0,
       "projectileWidth": 0,
       "range": 0
     },
@@ -685,6 +719,7 @@
       "baseDamage": 0,
       "cooldown": -0.2,
       "criticalHitChance": 0.35,
+      "criticalHitDamage": 0,
       "projectileWidth": 0,
       "range": 0
     },
@@ -697,6 +732,7 @@
       "baseDamage": 0,
       "cooldown": -0.6,
       "criticalHitChance": -0.1,
+      "criticalHitDamage": 0,
       "projectileWidth": 0,
       "range": 0
     },
@@ -709,6 +745,7 @@
       "baseDamage": 0,
       "cooldown": -0.8,
       "criticalHitChance": -0.15,
+      "criticalHitDamage": 0,
       "projectileWidth": 0,
       "range": 0
     },
@@ -721,6 +758,7 @@
       "baseDamage": 0,
       "cooldown": -0.15,
       "criticalHitChance": 0.5,
+      "criticalHitDamage": 0,
       "projectileWidth": 0,
       "range": 0
     },
@@ -733,6 +771,7 @@
       "baseDamage": 0.2,
       "cooldown": -0.5,
       "criticalHitChance": 0.6,
+      "criticalHitDamage": 0,
       "projectileWidth": 0,
       "range": 0
     },
@@ -745,6 +784,7 @@
       "baseDamage": 0.1,
       "cooldown": 0.15,
       "criticalHitChance": -0.1,
+      "criticalHitDamage": 0,
       "projectileWidth": 0,
       "range": 0.2
     },
@@ -757,6 +797,7 @@
       "baseDamage": 0,
       "cooldown": -0.7,
       "criticalHitChance": 0.35,
+      "criticalHitDamage": 0,
       "projectileWidth": 0,
       "range": 0
     },
@@ -769,6 +810,7 @@
       "baseDamage": -0.1,
       "cooldown": -0.15,
       "criticalHitChance": 0.1,
+      "criticalHitDamage": 0,
       "projectileWidth": 0,
       "range": -0.2
     },
@@ -781,6 +823,7 @@
       "baseDamage": 0,
       "cooldown": -0.35,
       "criticalHitChance": 0.4,
+      "criticalHitDamage": 0,
       "projectileWidth": 0,
       "range": 0
     }
@@ -791,11 +834,12 @@
       "numberOfAmmunitionSlots": 1,
       "numberOfGems": 1,
       "attackSpeed": 1,
-      "baseDamage": 100,
-      "cooldown": 1,
-      "criticalHitChance": 1,
-      "projectileWidth": 1,
-      "range": 25
+      "baseDamage": 35,
+      "cooldown": 2,
+      "criticalHitChance": 10,
+      "criticalHitDamage": 1.5,
+      "projectileWidth": 0.1,
+      "range": 13
     },
     {
       "name": "Billard Ball Drum",
@@ -807,6 +851,7 @@
       "baseDamage": -0.15,
       "cooldown": -0.25,
       "criticalHitChance": 0,
+      "criticalHitDamage": 0,
       "projectileWidth": 0.25,
       "range": 0.2
     },
@@ -820,6 +865,7 @@
       "baseDamage": 0.15,
       "cooldown": 0,
       "criticalHitChance": 0,
+      "criticalHitDamage": 0,
       "projectileWidth": 0,
       "range": 0
     },
@@ -832,6 +878,7 @@
       "baseDamage": 0,
       "cooldown": -0.4,
       "criticalHitChance": 0,
+      "criticalHitDamage": 0,
       "projectileWidth": 0.2,
       "range": 0.4
     },
@@ -844,6 +891,7 @@
       "baseDamage": 0,
       "cooldown": -0.5,
       "criticalHitChance": 0,
+      "criticalHitDamage": 0,
       "projectileWidth": 0.2,
       "range": 0
     },
@@ -856,6 +904,7 @@
       "baseDamage": 0.4,
       "cooldown": -0.15,
       "criticalHitChance": 0,
+      "criticalHitDamage": 0,
       "projectileWidth": 0,
       "range": 0
     },
@@ -868,6 +917,7 @@
       "baseDamage": 0,
       "cooldown": -0.45,
       "criticalHitChance": 0,
+      "criticalHitDamage": 0,
       "projectileWidth": -0.15,
       "range": 0.4
     },
@@ -880,6 +930,7 @@
       "baseDamage": 0.5,
       "cooldown": -0.75,
       "criticalHitChance": 0,
+      "criticalHitDamage": 0,
       "projectileWidth": 0.2,
       "range": -0.25
     },
@@ -892,6 +943,7 @@
       "baseDamage": 0.8,
       "cooldown": -0.45,
       "criticalHitChance": 0.15,
+      "criticalHitDamage": 0,
       "projectileWidth": -0.25,
       "range": 0.6
     },
@@ -905,6 +957,7 @@
       "baseDamage": 0,
       "cooldown": 0.2,
       "criticalHitChance": 0,
+      "criticalHitDamage": 0,
       "projectileWidth": 0,
       "range": 0
     },
@@ -918,6 +971,7 @@
       "baseDamage": 0.2,
       "cooldown": -0.2,
       "criticalHitChance": 0.2,
+      "criticalHitDamage": 0,
       "projectileWidth": 0,
       "range": 0
     },
@@ -930,6 +984,7 @@
       "baseDamage": 0.25,
       "cooldown": -1,
       "criticalHitChance": -0.45,
+      "criticalHitDamage": 0,
       "projectileWidth": 0.35,
       "range": -0.7
     },
@@ -942,6 +997,7 @@
       "baseDamage": 0,
       "cooldown": -0.35,
       "criticalHitChance": 0,
+      "criticalHitDamage": 0,
       "projectileWidth": 0,
       "range": 0
     }
@@ -951,11 +1007,12 @@
       "name": "Reference",
       "numberOfGems": 1,
       "attackSpeed": 1,
-      "baseDamage": 100,
-      "cooldown": 1,
-      "criticalHitChance": 1,
-      "projectileWidth": 1,
-      "range": 25
+      "baseDamage": 35,
+      "cooldown": 2,
+      "criticalHitChance": 10,
+      "criticalHitDamage": 1.5,
+      "projectileWidth": 0.1,
+      "range": 13
     },
     {
       "name": "Basic Iron Sights",
@@ -965,6 +1022,7 @@
       "baseDamage": 0,
       "cooldown": -0.2,
       "criticalHitChance": 0,
+      "criticalHitDamage": 0,
       "projectileWidth": 0,
       "range": 0
     },
@@ -976,6 +1034,7 @@
       "baseDamage": 0,
       "cooldown": 0.2,
       "criticalHitChance": -0.2,
+      "criticalHitDamage": 0,
       "projectileWidth": 0,
       "range": 0
     },
@@ -987,6 +1046,7 @@
       "baseDamage": 0,
       "cooldown": -0.4,
       "criticalHitChance": 0.25,
+      "criticalHitDamage": 0,
       "projectileWidth": 0,
       "range": 0
     },
@@ -998,6 +1058,7 @@
       "baseDamage": 0,
       "cooldown": -0.4,
       "criticalHitChance": 0.45,
+      "criticalHitDamage": 0,
       "projectileWidth": 0,
       "range": 0.75
     },
@@ -1009,6 +1070,7 @@
       "baseDamage": 0,
       "cooldown": -0.5,
       "criticalHitChance": 0.6,
+      "criticalHitDamage": 0,
       "projectileWidth": 0,
       "range": 1
     },
@@ -1020,6 +1082,7 @@
       "baseDamage": 0,
       "cooldown": -0.7,
       "criticalHitChance": 0.5,
+      "criticalHitDamage": 0,
       "projectileWidth": 0,
       "range": 0.5
     },
@@ -1031,6 +1094,7 @@
       "baseDamage": 0,
       "cooldown": -0.9,
       "criticalHitChance": 0.7,
+      "criticalHitDamage": 0,
       "projectileWidth": 0,
       "range": 0
     },
@@ -1042,6 +1106,7 @@
       "baseDamage": 0,
       "cooldown": -0.8,
       "criticalHitChance": 0.8,
+      "criticalHitDamage": 0,
       "projectileWidth": -0.45,
       "range": 0.9
     },
@@ -1053,6 +1118,7 @@
       "baseDamage": 0,
       "cooldown": 0.15,
       "criticalHitChance": 0.1,
+      "criticalHitDamage": 0,
       "projectileWidth": 0,
       "range": 0
     },
@@ -1064,6 +1130,7 @@
       "baseDamage": 0,
       "cooldown": -0.15,
       "criticalHitChance": -0.15,
+      "criticalHitDamage": 0,
       "projectileWidth": 0,
       "range": 0
     },
@@ -1075,6 +1142,7 @@
       "baseDamage": 0,
       "cooldown": -0.6,
       "criticalHitChance": 0.75,
+      "criticalHitDamage": 0,
       "projectileWidth": 0,
       "range": 1.5
     }
@@ -1084,11 +1152,12 @@
       "name": "Reference",
       "numberOfGems": 1,
       "attackSpeed": 1,
-      "baseDamage": 100,
-      "cooldown": 1,
-      "criticalHitChance": 1,
-      "projectileWidth": 1,
-      "range": 25
+      "baseDamage": 35,
+      "cooldown": 2,
+      "criticalHitChance": 10,
+      "criticalHitDamage": 1.5,
+      "projectileWidth": 0.1,
+      "range": 13
     },
     {
       "name": "Adjustable Break Trigger",
@@ -1097,6 +1166,7 @@
       "baseDamage": 0.2,
       "cooldown": 0.5,
       "criticalHitChance": 0.5,
+      "criticalHitDamage": 0,
       "projectileWidth": 0,
       "range": 0
     },
@@ -1107,6 +1177,7 @@
       "baseDamage": 0.3,
       "cooldown": 0.25,
       "criticalHitChance": 0.15,
+      "criticalHitDamage": 0,
       "projectileWidth": -0.2,
       "range": 0.15
     },
@@ -1117,6 +1188,7 @@
       "baseDamage": 0,
       "cooldown": -0.2,
       "criticalHitChance": -0.15,
+      "criticalHitDamage": 0,
       "projectileWidth": 0,
       "range": 0.7
     },
@@ -1127,6 +1199,7 @@
       "baseDamage": 0.5,
       "cooldown": 1.2,
       "criticalHitChance": 0.25,
+      "criticalHitDamage": 0,
       "projectileWidth": 0,
       "range": 0.5
     },
@@ -1138,6 +1211,7 @@
       "baseDamage": 0,
       "cooldown": 0,
       "criticalHitChance": 0.5,
+      "criticalHitDamage": 0,
       "projectileWidth": 0,
       "range": -0.5
     },
@@ -1148,6 +1222,7 @@
       "baseDamage": 1.6,
       "cooldown": 0.75,
       "criticalHitChance": 0.1,
+      "criticalHitDamage": 0,
       "projectileWidth": 0.3,
       "range": -0.2
     },
@@ -1158,6 +1233,7 @@
       "baseDamage": 0.7,
       "cooldown": 0.8,
       "criticalHitChance": 0.2,
+      "criticalHitDamage": 0,
       "projectileWidth": 0,
       "range": 0.9
     },
@@ -1169,6 +1245,7 @@
       "baseDamage": 0.8,
       "cooldown": -0.1,
       "criticalHitChance": 0.35,
+      "criticalHitDamage": 0,
       "projectileWidth": -0.6,
       "range": 1.2
     },
@@ -1180,6 +1257,7 @@
       "baseDamage": -0.1,
       "cooldown": -0.1,
       "criticalHitChance": 0.1,
+      "criticalHitDamage": 0,
       "projectileWidth": -0.1,
       "range": 0
     },
@@ -1190,6 +1268,7 @@
       "baseDamage": 0.2,
       "cooldown": 0.15,
       "criticalHitChance": 0,
+      "criticalHitDamage": 0,
       "projectileWidth": 0,
       "range": 0.05
     },
@@ -1200,6 +1279,7 @@
       "baseDamage": 0.6,
       "cooldown": -0.35,
       "criticalHitChance": 0,
+      "criticalHitDamage": 0,
       "projectileWidth": 0,
       "range": 0.5
     },
@@ -1210,6 +1290,7 @@
       "baseDamage": 0.7,
       "cooldown": 0.65,
       "criticalHitChance": 0,
+      "criticalHitDamage": 0,
       "projectileWidth": 0,
       "range": 0.8
     }
