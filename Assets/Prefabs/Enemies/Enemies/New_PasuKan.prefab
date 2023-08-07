@@ -790,7 +790,7 @@ SphereCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4336743237509427697}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 1
@@ -867,7 +867,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _initialState: 1
-  _navMeshAgent: {fileID: 0}
+  _navMeshAgent: {fileID: 2146313492047633022}
   _obstacleAgent: {fileID: 0}
   _animator: {fileID: 0}
   _rb: {fileID: 0}

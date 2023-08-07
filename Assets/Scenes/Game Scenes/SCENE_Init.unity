@@ -471,6 +471,17 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameDataReader
       objectReference: {fileID: 0}
+    - target: {fileID: 4283075153130197051, guid: 3acfade8d5b4ace4fadbef615fdbfcc4,
+        type: 3}
+      propertyPath: _enemyData.Array.size
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 4283075153130197051, guid: 3acfade8d5b4ace4fadbef615fdbfcc4,
+        type: 3}
+      propertyPath: _enemyData.Array.data[6]
+      value: 
+      objectReference: {fileID: 11400000, guid: 9a831721cb0f4b649abcfe8fb13e4cb5,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3acfade8d5b4ace4fadbef615fdbfcc4, type: 3}
 --- !u!114 &1497091692 stripped

@@ -77,6 +77,19 @@
       "elementalResistance": 25,
       "technicalResistance": 25,
       "healthDropChance": 0
+    },
+    {
+      "name": "Orc",
+      "maxHealth": 2,
+      "damagePerHit": 0.5,
+      "attackSpeed": 3,
+      "givenXP": 7,
+      "maxMoveSpeed": 7,
+      "acceleration": 6,
+      "armor": 200,
+      "elementalResistance": 200,
+      "technicalResistance": -100,
+      "healthDropChance": 0.1
     }
   ],
   "Level": [
