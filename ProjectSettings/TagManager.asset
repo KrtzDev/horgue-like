@@ -11,6 +11,8 @@ TagManager:
   - Wasser
   - EnemyPool
   - Ground
+  - ExplosiveObject
+  - DestroyableObject
   layers:
   - Default
   - TransparentFX
