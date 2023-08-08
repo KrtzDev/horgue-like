@@ -163,7 +163,7 @@ GameObject:
   - component: {fileID: 4908612970722046690}
   - component: {fileID: 8270753814037413858}
   m_Layer: 5
-  m_Name: P_UI_Reward
+  m_Name: P_UI_WeaponPart
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

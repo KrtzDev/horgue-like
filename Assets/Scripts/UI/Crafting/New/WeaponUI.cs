@@ -27,7 +27,7 @@ public class WeaponUI : MonoBehaviour
 	private WeaponPartSlot _triggerParent;
 
 	[SerializeField]
-	private RewardUI _rewardUI_prefab;
+	private WeaponPartUI _rewardUI_prefab;
 
 	[Header("Weapon Stats")]
 	[SerializeField]
@@ -43,41 +43,42 @@ public class WeaponUI : MonoBehaviour
 
 		ShowWeaponName();
 		ShowWeaponBackground();
-		ShowWeaponParts();
 		InitializeWeaponSlots();
+		ShowWeaponParts();
 
 		ShowWeaponStats(_weapon.CalculateWeaponStats(_weapon));
 	}
 
-	public bool SetNewWeaponPart(WeaponPart newWeaponPart, WeaponPartSlot weaponPartSlot)
+	public bool SetNewWeaponPart(WeaponPartUI newWeaponPartUI, WeaponPartSlot weaponPartSlot)
 	{
-		if (newWeaponPart.GetType() == weaponPartSlot.GetCurrentSlottedWeaponPart().GetType() && !newWeaponPart.isSlotted)
+		if (newWeaponPartUI.weaponPart.GetType() == weaponPartSlot.GetCurrentSlottedWeaponPart().GetType() && !newWeaponPartUI.isSlotted)
 		{
-			if (newWeaponPart is Grip)
+			if (newWeaponPartUI.weaponPart is Grip)
 			{
-				_weapon.grip = newWeaponPart as Grip;
+				_weapon.grip = newWeaponPartUI.weaponPart as Grip;
 			}
-			else if (newWeaponPart is Barrel)
+			else if (newWeaponPartUI.weaponPart is Barrel)
 			{
-				_weapon.barrel = newWeaponPart as Barrel;
+				_weapon.barrel = newWeaponPartUI.weaponPart as Barrel;
 			}
-			else if (newWeaponPart is Magazine)
+			else if (newWeaponPartUI.weaponPart is Magazine)
 			{
-				_weapon.magazine = newWeaponPart as Magazine;
+				_weapon.magazine = newWeaponPartUI.weaponPart as Magazine;
 			}
-			else if (newWeaponPart is Ammunition)
+			else if (newWeaponPartUI.weaponPart is Ammunition)
 			{
-				_weapon.ammunition = newWeaponPart as Ammunition;
+				_weapon.ammunition = newWeaponPartUI.weaponPart as Ammunition;
 			}
-			else if (newWeaponPart is TriggerMechanism)
+			else if (newWeaponPartUI.weaponPart is TriggerMechanism)
 			{
-				_weapon.triggerMechanism = newWeaponPart as TriggerMechanism;
+				_weapon.triggerMechanism = newWeaponPartUI.weaponPart as TriggerMechanism;
 			}
-			else if (newWeaponPart is Sight)
+			else if (newWeaponPartUI.weaponPart is Sight)
 			{
-				_weapon.sight = newWeaponPart as Sight;
+				_weapon.sight = newWeaponPartUI.weaponPart as Sight;
 			}
 
+			newWeaponPartUI.isSlotted = true;
 			_weapon.Initialize(_weapon.OwningTransform);
 
 			Initialize(_weapon);
@@ -99,26 +100,32 @@ public class WeaponUI : MonoBehaviour
 
 	private void ShowWeaponParts()
 	{
-		RewardUI rewardUI;
+		WeaponPartUI rewardUI;
 
 		rewardUI = Instantiate(_rewardUI_prefab, _ammunitionParent.transform);
-		Reward ammo = new Reward(_weapon.ammunition);
-		rewardUI.Initialize(ammo);
+		rewardUI.Initialize(_weapon.ammunition);
+		rewardUI.isSlotted = true;
+		rewardUI.weaponUI = this;
 		rewardUI = Instantiate(_rewardUI_prefab, _barrelParent.transform);
-		Reward barrel = new Reward(_weapon.barrel);
-		rewardUI.Initialize(barrel);
+		rewardUI.Initialize(_weapon.barrel);
+		rewardUI.isSlotted = true;
+		rewardUI.weaponUI = this;
 		rewardUI = Instantiate(_rewardUI_prefab, _gripParent.transform);
-		Reward grip = new Reward(_weapon.grip);
-		rewardUI.Initialize(grip);
+		rewardUI.Initialize(_weapon.grip);
+		rewardUI.isSlotted = true;
+		rewardUI.weaponUI = this;
 		rewardUI = Instantiate(_rewardUI_prefab, _magazineParent.transform);
-		Reward mag = new Reward(_weapon.magazine);
-		rewardUI.Initialize(mag);
+		rewardUI.Initialize(_weapon.magazine);
+		rewardUI.isSlotted = true;
+		rewardUI.weaponUI = this;
 		rewardUI = Instantiate(_rewardUI_prefab, _sightParent.transform);
-		Reward sight = new Reward(_weapon.sight);
-		rewardUI.Initialize(sight);
+		rewardUI.Initialize(_weapon.sight);
+		rewardUI.isSlotted = true;
+		rewardUI.weaponUI = this;
 		rewardUI = Instantiate(_rewardUI_prefab, _triggerParent.transform);
-		Reward trigger = new Reward(_weapon.triggerMechanism);
-		rewardUI.Initialize(trigger);
+		rewardUI.Initialize(_weapon.triggerMechanism);
+		rewardUI.isSlotted = true;
+		rewardUI.weaponUI = this;
 	}
 
 	private void InitializeWeaponSlots()
@@ -134,9 +141,7 @@ public class WeaponUI : MonoBehaviour
 	private void ClearWeaponStats()
 	{
 		for (int i = 0; i < _weaponStatsParent.childCount; i++)
-		{
 			Destroy(_weaponStatsParent.GetChild(i).gameObject);
-		}
 	}
 
 

@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class WeaponPartSlot : MonoBehaviour
 {
@@ -14,12 +13,6 @@ public class WeaponPartSlot : MonoBehaviour
 	public void Initialize(WeaponUI owningWeaponUI, WeaponPart weaponPart) 
 	{
 		_owningWeaponUI = owningWeaponUI;
-		_slottedWeaponPart = weaponPart;
-		weaponPart.isSlotted = true;
-	}
-
-	public void SetNewWeaponPart(WeaponPart weaponPart)
-	{
 		_slottedWeaponPart = weaponPart;
 	}
 }

@@ -1,10 +1,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class RewardUI : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler, IPointerMoveHandler, IDragHandler, IBeginDragHandler, IEndDragHandler
+public class WeaponPartUI : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler, IPointerMoveHandler, IDragHandler, IBeginDragHandler, IEndDragHandler
 {
 	[SerializeField]
 	private Image _rewardImage;
@@ -12,17 +11,20 @@ public class RewardUI : MonoBehaviour, IPointerClickHandler, IPointerEnterHandle
 	[SerializeField]
 	private ToolTipUI _toolTip_prefab;
 
-	private Reward _reward;
 	private ToolTipUI _currentToolTipUI;
 
 	private RectTransform _parent;
 	private RectTransform _rectTransform;
 	private Vector2 _defaultPos;
 
-	public void Initialize(Reward reward)
+	public WeaponUI weaponUI;
+	public WeaponPart weaponPart;
+	public bool isSlotted;
+
+	public void Initialize(WeaponPart weaponPart)
 	{
-		_reward = reward;
-		_rewardImage.sprite = reward.weaponPartReward.WeaponPartUISprite;
+		this.weaponPart = weaponPart;
+		_rewardImage.sprite = weaponPart.WeaponPartUISprite;
 		_rectTransform = GetComponent<RectTransform>();
 		_parent = transform.parent.GetComponent<RectTransform>();
 		_defaultPos = _rectTransform.localPosition;
@@ -30,16 +32,10 @@ public class RewardUI : MonoBehaviour, IPointerClickHandler, IPointerEnterHandle
 
 	public void OnPointerEnter(PointerEventData eventData)
 	{
-		if (_reward.weaponPartReward.isSlotted) 
+		if (isSlotted)
 			return;
 
-		if (SceneManager.GetActiveScene().name == "SCENE_Weapon_Crafting")
-		{
-			foreach (WeaponUI weaponUI in UIManager.Instance.CraftingMenu.weaponUIs)
-			{
-				weaponUI.ShowPotentilaUpdatedWeaponStats(_reward.weaponPartReward);
-			}
-		}
+		weaponUI.ShowPotentilaUpdatedWeaponStats(weaponPart);
 	}
 
 	public void OnPointerClick(PointerEventData eventData)
@@ -47,7 +43,7 @@ public class RewardUI : MonoBehaviour, IPointerClickHandler, IPointerEnterHandle
 		DestroyToolTip();
 
 		_currentToolTipUI = Instantiate(_toolTip_prefab, transform.root);
-		_currentToolTipUI.Initialize(_reward.weaponPartReward);
+		_currentToolTipUI.Initialize(weaponPart);
 
 		_currentToolTipUI.transform.position = eventData.position + Vector2.right * 50 * transform.root.GetComponent<Canvas>().scaleFactor;
 	}
@@ -76,63 +72,48 @@ public class RewardUI : MonoBehaviour, IPointerClickHandler, IPointerEnterHandle
 	{
 		DestroyToolTip();
 
-		if (_reward.weaponPartReward.isSlotted)
+		if (isSlotted)
 			return;
 
-		if (SceneManager.GetActiveScene().name == "SCENE_Weapon_Crafting")
-		{
-			foreach (WeaponUI weaponUI in UIManager.Instance.CraftingMenu.weaponUIs)
-			{
-				weaponUI.ShowWeaponStats(weaponUI._weapon.CalculateWeaponStats(weaponUI._weapon));
-			}
-		}
+		weaponUI.ShowWeaponStats(weaponUI._weapon.CalculateWeaponStats(weaponUI._weapon));
 	}
 
 	public void OnBeginDrag(PointerEventData eventData)
 	{
-		if (SceneManager.GetActiveScene().name == "SCENE_Weapon_Crafting")
-		{
-			DestroyToolTip();
-			transform.SetParent(transform.root);
-			transform.SetAsLastSibling();
-		}
+		DestroyToolTip();
+		transform.SetParent(transform.root);
+		transform.SetAsLastSibling();
 	}
 
 	public void OnDrag(PointerEventData eventData)
 	{
-		if (SceneManager.GetActiveScene().name == "SCENE_Weapon_Crafting")
-		{
-			transform.position += (Vector3)eventData.delta;
-		}
+		transform.position += (Vector3)eventData.delta;
 	}
 
 	public void OnEndDrag(PointerEventData eventData)
 	{
-		if (SceneManager.GetActiveScene().name == "SCENE_Weapon_Crafting")
-		{
-			DestroyToolTip();
+		DestroyToolTip();
 
-			List<RaycastResult> hits = new List<RaycastResult>();
-			EventSystem.current.RaycastAll(eventData, hits);
-			foreach (var hit in hits)
+		List<RaycastResult> hits = new List<RaycastResult>();
+		EventSystem.current.RaycastAll(eventData, hits);
+		foreach (var hit in hits)
+		{
+			if (hit.gameObject.TryGetComponent(out WeaponPartSlot weaponPartSlot))
 			{
-				if (hit.gameObject.TryGetComponent(out WeaponPartSlot weaponPartSlot))
+				if (weaponPartSlot._owningWeaponUI.SetNewWeaponPart(this, weaponPartSlot))
 				{
-					if (weaponPartSlot._owningWeaponUI.SetNewWeaponPart(_reward.weaponPartReward, weaponPartSlot))
-					{
-						Destroy(gameObject);
-					}
-					else
-					{
-						transform.SetParent(_parent);
-						_rectTransform.localPosition = _defaultPos;
-					}
+					Destroy(gameObject);
 				}
 				else
 				{
 					transform.SetParent(_parent);
 					_rectTransform.localPosition = _defaultPos;
 				}
+			}
+			else
+			{
+				transform.SetParent(_parent);
+				_rectTransform.localPosition = _defaultPos;
 			}
 		}
 	}

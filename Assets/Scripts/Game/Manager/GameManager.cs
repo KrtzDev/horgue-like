@@ -230,7 +230,7 @@ public class GameManager : Singleton<GameManager>
 
 		_lastLevel = _currentLevel;
 
-		List<Reward> rewards = new List<Reward>();
+		List<WeaponPart> rewards = new List<WeaponPart>();
 		for (int i = 0; i < _numberOfRewards; i++)
 		{
 			rewards.Add(RewardManager.Instance.GetRandomReward());
