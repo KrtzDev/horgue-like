@@ -9,13 +9,13 @@ using UnityEngine.AI;
 public class EnemiesToSpawn
 {
     public AI_Agent_Enemy _enemy;
-    public int _spawnChance;
+    public int _spawnRatio;
     public SpawnBias _spawnBias;
 
-    public EnemiesToSpawn (AI_Agent_Enemy enemy, int spawnChance, SpawnBias spawnBias)
+    public EnemiesToSpawn (AI_Agent_Enemy enemy, int spawnRation, SpawnBias spawnBias)
     {
         _enemy = enemy;
-        _spawnChance = spawnChance;
+        _spawnRatio = spawnRation;
         _spawnBias = spawnBias;
     }
 }
@@ -38,6 +38,7 @@ public class EnemySpawner : MonoBehaviour
     private bool _canSpawnEnemies = true;
     private float _boxHeight;
 
+    private float _enemiesSpawned = 0;
     public List<EnemiesToSpawn> _enemiesToSpawn = new List<EnemiesToSpawn>();
 
     [Header("Box Colliders")]
@@ -86,36 +87,52 @@ public class EnemySpawner : MonoBehaviour
         if (_spawnTimer >= _enemySpawnerData._spawnTick)
         {
             int spawnIndex = 0;
+            int currentEnemiesFromMin = _enemySpawnerData._minEnemyCount - GameManager.Instance._enemyCount;
+
+            bool minSpawn = false;
+            bool normalSpawn = false;
 
             foreach (EnemiesToSpawn enemy in _enemiesToSpawn)
             {
-                int currentEnemiesFromMin = _enemySpawnerData._minEnemyCount;
+                int enemiesToBeSpawned = 0;
 
-                if(GameManager.Instance._enemyCount > 0)
-                {
-                    currentEnemiesFromMin = _enemySpawnerData._minEnemyCount - GameManager.Instance._enemyCount;
-                }
-
-                int enemiesToBeSpawned;
-                enemiesToBeSpawned = 0;
-
-                if (GameManager.Instance._enemyCount >= _enemySpawnerData._maxEnemyCount) // else if expected enemies < maxEnemy Count
+                if (GameManager.Instance._enemyCount >= _enemySpawnerData._maxEnemyCount) // if expected enemies < maxEnemy Count
                 {
                     enemiesToBeSpawned = 0; // spawn nothing
                 }
-                else if (GameManager.Instance._enemyCount + (_enemySpawnerData._spawnsPerTick * (enemy._spawnChance * 0.01f) + 0.4f) >= _enemySpawnerData._minEnemyCount) // if expected enemy count > minEnemyCount
+                else if (GameManager.Instance._enemyCount + _enemySpawnerData._spawnsPerTick >= _enemySpawnerData._minEnemyCount) // if expected enemy count > minEnemyCount
                 {
-                    enemiesToBeSpawned = Mathf.RoundToInt(_enemySpawnerData._spawnsPerTick * (enemy._spawnChance * 0.01f) + 0.4f); // spawn normal Tick
+                    normalSpawn = true;
+                    enemiesToBeSpawned = Mathf.RoundToInt((float)(enemy._spawnRatio * 0.01 * _enemySpawnerData._spawnsPerTick)); // spawn normal Tick
                 }
-                else if (GameManager.Instance._enemyCount + (_enemySpawnerData._spawnsPerTick * (enemy._spawnChance * 0.01f) + 0.4f) < _enemySpawnerData._minEnemyCount) // else if expected enemy count < minEnemyCount
+                else if (GameManager.Instance._enemyCount + _enemySpawnerData._spawnsPerTick < _enemySpawnerData._minEnemyCount) // if expected enemy count < minEnemyCount
                 {
-                    enemiesToBeSpawned = Mathf.RoundToInt(currentEnemiesFromMin * (enemy._spawnChance * 0.01f) + 0.4f); // spawn until min amount is achieved
+                    minSpawn = true;
+                    enemiesToBeSpawned = Mathf.RoundToInt((float)(enemy._spawnRatio * 0.01 * _enemySpawnerData._spawnsPerTick));  // spawn until min amount is achieved
                 }
+                _enemiesSpawned += enemiesToBeSpawned;
                 SpawnEnemies(enemy, enemiesToBeSpawned, spawnIndex);
                 spawnIndex++;
             }
+
+            if(normalSpawn)
+            {
+                if (_enemiesSpawned >= _enemySpawnerData._spawnsPerTick)
+                {
+                    _spawnTimer = 0;
+                    _enemiesSpawned = 0;
+                }
+            }
+            else if (minSpawn)
+            {
+                if (GameManager.Instance._enemyCount + _enemiesSpawned >= _enemySpawnerData._minEnemyCount)
+                {
+                    _spawnTimer = 0;
+                    _enemiesSpawned = 0;
+                }
+            }
+
             // Debug.Log("Current Enemy Count: " + GameManager.Instance._enemyCount + " | Time " + Time.time);
-            _spawnTimer = 0;
         }
         _spawnTimer += Time.deltaTime;
     }
