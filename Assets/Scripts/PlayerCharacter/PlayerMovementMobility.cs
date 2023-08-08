@@ -63,7 +63,7 @@ public class PlayerMovementMobility : MonoBehaviour
     private void Awake()
     {
         _inputActions = new PlayerInputMappings();
-        _inputActions.Character.MovementAction.performed += UseAbility;
+        _inputActions.Character.Ability.performed += UseAbility;
         _enemySpawner = GameObject.FindGameObjectWithTag("EnemySpawner").GetComponent<EnemySpawner>();
         _simpleShot = this.GetComponent<PlayerSimpleShot>();
 
@@ -192,7 +192,7 @@ public class PlayerMovementMobility : MonoBehaviour
 
     private void FallPhysics()
     {
-        if ((_character.CharacterRigidbody.velocity.y < _jumpVelocityFalloff || _character.CharacterRigidbody.velocity.y > 0 && !_inputActions.Character.MovementAction.triggered) && !_isGrounded)
+        if ((_character.CharacterRigidbody.velocity.y < _jumpVelocityFalloff || _character.CharacterRigidbody.velocity.y > 0 && !_inputActions.Character.Ability.triggered) && !_isGrounded)
         {
             _character.CharacterRigidbody.velocity += _fallMultiplier * Physics.gravity.y * Vector3.up * Time.deltaTime;
         }

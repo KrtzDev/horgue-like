@@ -21,6 +21,10 @@ public class PlayerCharacter : MonoBehaviour
 
     private float _waterDamageTimer;
 
+    public LayerMask WalkLayer;
+    public LayerMask GroundLayer;
+    public LayerMask EnemyLayer;
+
     private void Awake()
     {
         _healthComponent = this.GetComponent<HealthComponent>();

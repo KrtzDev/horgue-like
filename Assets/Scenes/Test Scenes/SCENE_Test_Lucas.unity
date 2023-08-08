@@ -1197,6 +1197,46 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2907804301207705110, guid: 62d6286d223d00e49ba8ca796795cc73,
+        type: 3}
+      propertyPath: WalkLayer.m_Bits
+      value: 528
+      objectReference: {fileID: 0}
+    - target: {fileID: 2907804301207705110, guid: 62d6286d223d00e49ba8ca796795cc73,
+        type: 3}
+      propertyPath: EnemyLayer.m_Bits
+      value: 128
+      objectReference: {fileID: 0}
+    - target: {fileID: 2907804301207705110, guid: 62d6286d223d00e49ba8ca796795cc73,
+        type: 3}
+      propertyPath: GroundLayer.m_Bits
+      value: 512
+      objectReference: {fileID: 0}
+    - target: {fileID: 7535219065241409037, guid: 62d6286d223d00e49ba8ca796795cc73,
+        type: 3}
+      propertyPath: _jumpCD
+      value: 0.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 7535219065241409037, guid: 62d6286d223d00e49ba8ca796795cc73,
+        type: 3}
+      propertyPath: _groundCheckBox.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7535219065241409037, guid: 62d6286d223d00e49ba8ca796795cc73,
+        type: 3}
+      propertyPath: _groundCheckBox.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7535219065241409037, guid: 62d6286d223d00e49ba8ca796795cc73,
+        type: 3}
+      propertyPath: _groundCheckBox.z
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7535219065241409037, guid: 62d6286d223d00e49ba8ca796795cc73,
+        type: 3}
+      propertyPath: _groundCheckValueY
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 62d6286d223d00e49ba8ca796795cc73, type: 3}
 --- !u!43 &132878249

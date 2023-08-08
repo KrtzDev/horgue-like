@@ -212,8 +212,8 @@ GameObject:
   - component: {fileID: 2136897129691636545}
   - component: {fileID: 2907804301207705110}
   - component: {fileID: 2136897129691636548}
+  - component: {fileID: 7535219065241409037}
   - component: {fileID: 8500660712739362474}
-  - component: {fileID: 6670527696543464466}
   - component: {fileID: 1382852200032817076}
   - component: {fileID: 1007379291321604861}
   m_Layer: 6
@@ -395,6 +395,18 @@ MonoBehaviour:
   <CanMove>k__BackingField: 1
   _historicalPositionDuration: 1
   _historicalPositionInterval: 0.1
+--- !u!114 &7535219065241409037
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2136897129691636549}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 613b59678034fa2419c1312da8d8a26d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &8500660712739362474
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -411,51 +423,6 @@ MonoBehaviour:
   _currentHealth: 0
   _canTakeDamage: 0
   _isDead: 0
---- !u!114 &6670527696543464466
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2136897129691636549}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7d77f2c814ba0d2439230330d48d587e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _abilityCDTimer: 0
-  _currentMaxCD: 0
-  _isGrounded: 0
-  _groundCheckValueY: 0.1
-  _groundCheckBox: {x: 0.25, y: 0.2, z: 0.25}
-  _walkLayer:
-    serializedVersion: 2
-    m_Bits: 528
-  _groundLayer:
-    serializedVersion: 2
-    m_Bits: 512
-  _enemyLayer:
-    serializedVersion: 2
-    m_Bits: 128
-  _canUseJumpAbility: 1
-  _canUseDashAbility: 0
-  _canUseStealthAbility: 0
-  _canUseFlickerStrikeAbility: 0
-  _jumpCD: 0.275
-  _fallMultiplier: 10
-  _jumpVelocityFalloff: 11
-  _jumpForce: 20
-  _decoy: {fileID: 6670527697290465931}
-  _dashCD: 2.5
-  _dashForce: 30
-  _dashTime: 0.2
-  _stealthCD: 5
-  _stealthTime: 5
-  _enemySpawner: {fileID: 0}
-  _movementSpeedMultiplier: 1.25
-  _flickerStrikeCD: 5
-  _flickerStrikeTime: 0.25
-  _flickerStrikeRange: 12
 --- !u!114 &1382852200032817076
 MonoBehaviour:
   m_ObjectHideFlags: 0
