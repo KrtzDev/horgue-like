@@ -8,22 +8,26 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Networking;
+using UnityEngine.SceneManagement;
 
 public class UpdateTuningData : MonoBehaviour
 {
-	public void Start()
-	{
+    private void Start()
+    {
 		GameDataReader = FindObjectOfType<GameDataReader>();
-		
-		if(!GameDataReader._dataRetrieved)
-        {
+		SceneLoader.Instance.CompletedSceneLoad += OnCompletedSceneLoad;
+	}
+
+    private void OnCompletedSceneLoad()
+    {
+		if (!GameDataReader._dataRetrieved && SceneManager.GetActiveScene().name == "SCENE_Main_Menu")
+		{
 			GetTuningDataGame();
-        }
+		}
 		else
-        {
+		{
 			GameDataReader.GetGameData();
 		}
-			
 	}
 
 	public class ExportError
@@ -38,7 +42,7 @@ public class UpdateTuningData : MonoBehaviour
 	private static List<string[]> s_DataUpdateQueue = new List<string[]>();
 	static UnityWebRequest www;
 
-	public GameDataReader GameDataReader;
+	private GameDataReader GameDataReader;
 
 	public void GetTuningDataGame()
 	{
@@ -75,7 +79,7 @@ public class UpdateTuningData : MonoBehaviour
 
 	private void Update()
 	{
-		if (!GameDataReader._dataRetrieved)
+		if (!GameDataReader._dataRetrieved && SceneManager.GetActiveScene().name == "SCENE_Main_Menu")
 		{
 			while (!www.isDone)
 				return;

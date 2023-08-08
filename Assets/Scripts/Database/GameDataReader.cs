@@ -291,8 +291,13 @@ public class GameDataReader : MonoBehaviour
         }
         else
         {
-            startButton = GameObject.Find("StartButton").GetComponent<Button>();
-            StartCoroutine(EnableButton(0));
+            if (SceneManager.GetActiveScene().name == "SCENE_Main_Menu")
+            {
+                startButton = GameObject.Find("StartButton").GetComponent<Button>();
+                StartCoroutine(EnableButton(0));
+
+                return;
+            }
         }
     }
 

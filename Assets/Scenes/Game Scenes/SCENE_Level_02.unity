@@ -14224,7 +14224,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh82930
+  m_Name: pb_Mesh149740
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -18578,6 +18578,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6843213763226438607, guid: b0d5d15041526b8408159035025686a3,
         type: 3}
+      propertyPath: _enemiesToSpawn.Array.data[0]._spawnRatio
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 6843213763226438607, guid: b0d5d15041526b8408159035025686a3,
+        type: 3}
       propertyPath: _enemiesToSpawn.Array.data[1].SpawnChance
       value: 35
       objectReference: {fileID: 0}
@@ -18588,6 +18593,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6843213763226438607, guid: b0d5d15041526b8408159035025686a3,
         type: 3}
+      propertyPath: _enemiesToSpawn.Array.data[1]._spawnRatio
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 6843213763226438607, guid: b0d5d15041526b8408159035025686a3,
+        type: 3}
       propertyPath: _enemiesToSpawn.Array.data[2].SpawnChance
       value: 20
       objectReference: {fileID: 0}
@@ -18595,6 +18605,11 @@ PrefabInstance:
         type: 3}
       propertyPath: _enemiesToSpawn.Array.data[2]._sSpawnBias
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6843213763226438607, guid: b0d5d15041526b8408159035025686a3,
+        type: 3}
+      propertyPath: _enemiesToSpawn.Array.data[2]._spawnRatio
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 6843213763226438607, guid: b0d5d15041526b8408159035025686a3,
         type: 3}
@@ -29163,6 +29178,7 @@ MonoBehaviour:
   RangedRobot: []
   Sniper: []
   Drone: []
+  Orc: []
 --- !u!1 &892620281
 GameObject:
   m_ObjectHideFlags: 0
@@ -82094,17 +82110,17 @@ Transform:
   - {fileID: 1452597916}
   - {fileID: 2037924142}
   - {fileID: 89625989}
+  - {fileID: 1472484512}
   - {fileID: 1092848734}
   - {fileID: 1304186855}
   - {fileID: 99563413}
   - {fileID: 381305181}
+  - {fileID: 1978226977}
+  - {fileID: 1397203743}
   - {fileID: 1662902726}
   - {fileID: 1552057133}
   - {fileID: 697784878}
   - {fileID: 1193696901}
-  - {fileID: 1978226977}
-  - {fileID: 1472484512}
-  - {fileID: 1397203743}
   - {fileID: 1176407166}
   - {fileID: 1829368016}
   - {fileID: 999813636}
@@ -82120,16 +82136,16 @@ Transform:
   - {fileID: 1691826546}
   - {fileID: 1003946746}
   - {fileID: 183603635}
+  - {fileID: 1995786185}
   - {fileID: 448750410}
   - {fileID: 2147481670}
-  - {fileID: 1995786185}
+  - {fileID: 1156654118}
+  - {fileID: 1062614019}
+  - {fileID: 1324843530}
   - {fileID: 928568778}
   - {fileID: 2051348137}
   - {fileID: 139475554}
   - {fileID: 111732883}
-  - {fileID: 1156654118}
-  - {fileID: 1324843530}
-  - {fileID: 1062614019}
   m_Father: {fileID: 136991109}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

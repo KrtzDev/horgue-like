@@ -15526,6 +15526,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6843213763226438607, guid: b0d5d15041526b8408159035025686a3,
         type: 3}
+      propertyPath: _enemiesToSpawn.Array.data[0]._spawnRatio
+      value: 55
+      objectReference: {fileID: 0}
+    - target: {fileID: 6843213763226438607, guid: b0d5d15041526b8408159035025686a3,
+        type: 3}
       propertyPath: _enemiesToSpawn.Array.data[1].SpawnChance
       value: 35
       objectReference: {fileID: 0}
@@ -15536,8 +15541,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6843213763226438607, guid: b0d5d15041526b8408159035025686a3,
         type: 3}
+      propertyPath: _enemiesToSpawn.Array.data[1]._spawnRatio
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 6843213763226438607, guid: b0d5d15041526b8408159035025686a3,
+        type: 3}
       propertyPath: _enemiesToSpawn.Array.data[2]._sSpawnBias
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6843213763226438607, guid: b0d5d15041526b8408159035025686a3,
+        type: 3}
+      propertyPath: _enemiesToSpawn.Array.data[2]._spawnRatio
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 6843213763226438607, guid: b0d5d15041526b8408159035025686a3,
         type: 3}
@@ -37010,6 +37025,7 @@ MonoBehaviour:
   RangedRobot: []
   Sniper: []
   Drone: []
+  Orc: []
 --- !u!43 &873204027
 Mesh:
   m_ObjectHideFlags: 0
