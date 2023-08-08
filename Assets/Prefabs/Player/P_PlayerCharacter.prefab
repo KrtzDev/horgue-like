@@ -330,6 +330,15 @@ MonoBehaviour:
   _camera: {fileID: 2136897129495592176}
   _weaponSpawnTransform: {fileID: 6356963750585930601}
   _playerData: {fileID: 11400000, guid: f1f5e7d0dc811114fbdc1e3cee110906, type: 2}
+  WalkLayer:
+    serializedVersion: 2
+    m_Bits: 528
+  GroundLayer:
+    serializedVersion: 2
+    m_Bits: 512
+  EnemyLayer:
+    serializedVersion: 2
+    m_Bits: 128
 --- !u!114 &2136897129691636548
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -407,6 +416,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 613b59678034fa2419c1312da8d8a26d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _isGrounded: 0
+  _groundCheckValueY: 0.1
+  _groundCheckBox: {x: 0.25, y: 0.2, z: 0.25}
+  _jumpCD: 0.275
+  _fallMultiplier: 10
+  _jumpVelocityFalloff: 11
+  _jumpForce: 20
 --- !u!114 &8500660712739362474
 MonoBehaviour:
   m_ObjectHideFlags: 0

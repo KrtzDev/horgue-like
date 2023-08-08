@@ -1127,11 +1127,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1382852200032817076, guid: 62d6286d223d00e49ba8ca796795cc73,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 2136897129495592176, guid: 62d6286d223d00e49ba8ca796795cc73,
         type: 3}
       propertyPath: near clip plane
@@ -1155,7 +1150,7 @@ PrefabInstance:
     - target: {fileID: 2136897129691636550, guid: 62d6286d223d00e49ba8ca796795cc73,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2136897129691636550, guid: 62d6286d223d00e49ba8ca796795cc73,
         type: 3}
@@ -1197,45 +1192,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2907804301207705110, guid: 62d6286d223d00e49ba8ca796795cc73,
-        type: 3}
-      propertyPath: WalkLayer.m_Bits
-      value: 528
-      objectReference: {fileID: 0}
-    - target: {fileID: 2907804301207705110, guid: 62d6286d223d00e49ba8ca796795cc73,
-        type: 3}
-      propertyPath: EnemyLayer.m_Bits
-      value: 128
-      objectReference: {fileID: 0}
-    - target: {fileID: 2907804301207705110, guid: 62d6286d223d00e49ba8ca796795cc73,
-        type: 3}
-      propertyPath: GroundLayer.m_Bits
-      value: 512
-      objectReference: {fileID: 0}
     - target: {fileID: 7535219065241409037, guid: 62d6286d223d00e49ba8ca796795cc73,
         type: 3}
       propertyPath: _jumpCD
-      value: 0.15
-      objectReference: {fileID: 0}
-    - target: {fileID: 7535219065241409037, guid: 62d6286d223d00e49ba8ca796795cc73,
-        type: 3}
-      propertyPath: _groundCheckBox.x
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 7535219065241409037, guid: 62d6286d223d00e49ba8ca796795cc73,
-        type: 3}
-      propertyPath: _groundCheckBox.y
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 7535219065241409037, guid: 62d6286d223d00e49ba8ca796795cc73,
-        type: 3}
-      propertyPath: _groundCheckBox.z
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 7535219065241409037, guid: 62d6286d223d00e49ba8ca796795cc73,
-        type: 3}
-      propertyPath: _groundCheckValueY
-      value: 2
+      value: 0.2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 62d6286d223d00e49ba8ca796795cc73, type: 3}
@@ -2142,7 +2102,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh129944
+  m_Name: pb_Mesh31998
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -3955,7 +3915,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh129412
+  m_Name: pb_Mesh31466
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -6566,7 +6526,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh129962
+  m_Name: pb_Mesh32016
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -9713,7 +9673,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh129528
+  m_Name: pb_Mesh31582
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -28741,7 +28701,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh129336
+  m_Name: pb_Mesh31390
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2

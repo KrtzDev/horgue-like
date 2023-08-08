@@ -4,7 +4,6 @@ using UnityEngine.InputSystem;
 
 public class PlayerJump : MonoBehaviour
 {
-    private float _jumpCDTimer;
 
     [SerializeField] private bool _isGrounded;
     [SerializeField] private float _groundCheckValueY;
@@ -14,20 +13,16 @@ public class PlayerJump : MonoBehaviour
     private PlayerInputMappings _inputActions;
 
     private bool _isJumping;
+    private bool _jumpAttempt;
 
-    [SerializeField] private float _jumpCD;
     [SerializeField] private float _fallMultiplier = 7;
     [SerializeField] private float _jumpVelocityFalloff = 8;
     [SerializeField] private float _jumpForce = 15;
-
-    private bool _hasJumped;
 
     private void Awake()
     {
         _inputActions = new PlayerInputMappings();
         _inputActions.Character.Jump.performed += Jump;
-
-        _jumpCDTimer = -1;
     }
 
     private void Start()
@@ -47,7 +42,6 @@ public class PlayerJump : MonoBehaviour
 
     private void Update()
     {
-        TrackTimer();
         FallPhysics();
         CheckIfGrounded();
     }
@@ -56,18 +50,21 @@ public class PlayerJump : MonoBehaviour
 
     private void Jump(InputAction.CallbackContext ctx)
     {
-        if (ctx.performed && !_isJumping && GameManager.Instance._playerCanUseAbilities)
+        if (ctx.performed && !_isJumping && _isGrounded)
         {
-            if (_jumpCDTimer <= 0)
+            JumpAbility();
+        }
+        else if (ctx.performed && _isJumping && !_isGrounded)
+        {
+            Debug.Log("Jump Input while Jumping");
+
+            if(Physics.Raycast(this.transform.position + new Vector3(0, _groundCheckValueY, 0), Vector3.down, 2 * _groundCheckValueY, _character.WalkLayer))
             {
-                JumpAbility();
+                Debug.Log("Buffer Jump?");
+
+                _jumpAttempt = true;
             }
         }
-    }
-
-    private void TrackTimer()
-    {
-        if (_jumpCDTimer > 0) _jumpCDTimer -= Time.deltaTime;
     }
 
     private void CheckIfGrounded()
@@ -86,15 +83,10 @@ public class PlayerJump : MonoBehaviour
 
     // Jump
 
-    private void ResetAbilityTimer(float cd)
-    {
-        _jumpCDTimer = cd;
-    }
-
     private void JumpAbility()
     {
         _isJumping = true;
-        _hasJumped = true;
+        _jumpAttempt = false;
 
         Vector2 jumpDir = new Vector2(_character.CharacterRigidbody.velocity.x, _jumpForce);
         _character.CharacterRigidbody.AddForce(jumpDir, ForceMode.Impulse);
@@ -107,7 +99,7 @@ public class PlayerJump : MonoBehaviour
             _character.CharacterRigidbody.velocity += _fallMultiplier * Physics.gravity.y * Vector3.up * Time.deltaTime;
         }
 
-        if (_hasJumped)
+        if (_isJumping)
         {
             if (_isGrounded && _character.CharacterRigidbody.velocity.y < 1)
             {
@@ -119,9 +111,14 @@ public class PlayerJump : MonoBehaviour
     private void ResetJumpAbility()
     {
         _isJumping = false;
-        _hasJumped = false;
+        Debug.Log("Reset Jump!");
 
-        ResetAbilityTimer(_jumpCD);
+        if (_jumpAttempt)
+        {
+            Debug.Log("Jump Attempt?");
+
+            JumpAbility();
+        }
     }
 
     #region Draw_Gizmos
@@ -129,6 +126,8 @@ public class PlayerJump : MonoBehaviour
     {
         Gizmos.color = Color.green;
         Gizmos.DrawWireCube(this.transform.position + new Vector3(0, _groundCheckValueY, 0), _groundCheckBox);
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawLine(this.transform.position + new Vector3(0, _groundCheckValueY, 0), this.transform.position - new Vector3(0, 2 * _groundCheckValueY, 0));
     }
     #endregion
 }

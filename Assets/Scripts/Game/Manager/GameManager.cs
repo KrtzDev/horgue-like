@@ -286,7 +286,7 @@ public class GameManager : Singleton<GameManager>
 		}
 
 		RaycastHit hit;
-		if(Physics.Raycast(spawnPos, Vector3.down, out hit, Mathf.Infinity, _player.GetComponent<PlayerMovementMobility>()._groundLayer))
+		if(Physics.Raycast(spawnPos, Vector3.down, out hit, Mathf.Infinity, _player.GetComponent<PlayerCharacter>().GroundLayer))
 		{
 			spawnPos = new Vector3(spawnPos.x, spawnPos.y - hit.distance, spawnPos.z);
         }
