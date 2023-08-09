@@ -416,15 +416,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 613b59678034fa2419c1312da8d8a26d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _isGrounded: 0
-  _bufferJumpCheckValueY: 2
-  _groundCheckValueY: 0.1
-  _groundCheckBox: {x: 0.25, y: 0.25, z: 0.25}
-  _isJumping: 0
-  _jumpAttempt: 0
+  _bufferJumpCheckValueY: 1.75
+  _groundCheckY: 0.525
+  _groundCheckBox: {x: 0.55, y: 0.3, z: 0.55}
   _fallMultiplier: 10
   _jumpVelocityFalloff: 11
-  _jumpForce: 20
+  _jumpForce: 23
 --- !u!114 &8500660712739362474
 MonoBehaviour:
   m_ObjectHideFlags: 0

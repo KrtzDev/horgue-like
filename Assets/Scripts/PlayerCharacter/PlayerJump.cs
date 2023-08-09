@@ -5,16 +5,16 @@ using UnityEngine.InputSystem;
 public class PlayerJump : MonoBehaviour
 {
 
-    [SerializeField] private bool _isGrounded;
+    private bool _isGrounded;
     [SerializeField] private float _bufferJumpCheckValueY;
-    [SerializeField] private float _groundCheckValueY;
+    [SerializeField] private float _groundCheckY;
     [SerializeField] private Vector3 _groundCheckBox;
 
     private PlayerCharacter _character;
     private PlayerInputMappings _inputActions;
 
-    [SerializeField] private bool _isJumping;
-    [SerializeField] private bool _jumpAttempt = false;
+    private bool _isJumping;
+    private bool _jumpAttempt = false;
 
     [SerializeField] private float _fallMultiplier = 7;
     [SerializeField] private float _jumpVelocityFalloff = 8;
@@ -46,7 +46,8 @@ public class PlayerJump : MonoBehaviour
         CheckIfGrounded();
         FallPhysics();
 
-        Debug.DrawRay(this.transform.position + new Vector3(0, _groundCheckValueY, 0), new Vector3(0, -_bufferJumpCheckValueY, 0), Color.red);
+        Debug.DrawRay(this.transform.position, new Vector3(0, -_bufferJumpCheckValueY, 0), Color.red);
+        Debug.DrawRay(this.transform.position, new Vector3(0, -_groundCheckY, 0), Color.yellow);
     }
 
     // General
@@ -59,7 +60,7 @@ public class PlayerJump : MonoBehaviour
         }
         else if (ctx.performed && _isJumping && !_isGrounded && !_jumpAttempt)
         {
-            if(Physics.Raycast(this.transform.position + new Vector3(0, _groundCheckValueY, 0), Vector3.down, _bufferJumpCheckValueY, _character.WalkLayer))
+            if(Physics.Raycast(this.transform.position, Vector3.down, _bufferJumpCheckValueY, _character.WalkLayer))
             {
                 _jumpAttempt = true;
             }
@@ -68,9 +69,9 @@ public class PlayerJump : MonoBehaviour
 
     private void CheckIfGrounded()
     {
-        Collider[] hitColliders = (Physics.OverlapBox(this.transform.position + new Vector3(0, _groundCheckValueY, 0), _groundCheckBox / 2, Quaternion.identity, _character.WalkLayer));
+        Collider[] hitColliders = (Physics.OverlapBox(this.transform.position, _groundCheckBox / 2, Quaternion.identity, _character.WalkLayer));
 
-        if (hitColliders.Length > 0)
+        if (hitColliders.Length > 0 || Physics.Raycast(this.transform.position, Vector2.down, _groundCheckY, _character.WalkLayer))
         {
             _isGrounded = true;
         }
@@ -89,13 +90,15 @@ public class PlayerJump : MonoBehaviour
         _isJumping = true;
         _jumpAttempt = false;
 
+        _character.CharacterRigidbody.velocity = new Vector3(_character.CharacterRigidbody.velocity.x, 0, _character.CharacterRigidbody.velocity.z);
+
         Vector2 jumpDir = new Vector2(_character.CharacterRigidbody.velocity.x, _jumpForce);
         _character.CharacterRigidbody.AddForce(jumpDir, ForceMode.Impulse);
     }
 
     private void FallPhysics()
     {
-        if ((_character.CharacterRigidbody.velocity.y < _jumpVelocityFalloff || _character.CharacterRigidbody.velocity.y > 0 && !_inputActions.Character.Jump.triggered) && !_isGrounded)
+        if ((_character.CharacterRigidbody.velocity.y < _jumpVelocityFalloff || (_character.CharacterRigidbody.velocity.y > 0 && !_inputActions.Character.Jump.triggered)) && !_isGrounded)
         {
             _character.CharacterRigidbody.velocity += _fallMultiplier * Physics.gravity.y * Vector3.up * Time.deltaTime;
             _isJumping = true;
@@ -135,7 +138,7 @@ public class PlayerJump : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.green;
-        Gizmos.DrawWireCube(this.transform.position + new Vector3(0, _groundCheckValueY, 0), _groundCheckBox);
+        Gizmos.DrawWireCube(this.transform.position,  _groundCheckBox);
     }
     #endregion
 }
