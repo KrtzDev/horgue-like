@@ -1,18 +1,55 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class InventorySlot : Selectable
 {
-	[SerializeField, HideInInspector]
-	private WeaponPartUI _rewardUI;
+	public Action OnSubmit;
+
+	[SerializeField]
+	private GameObject _selectionIndicator;
 
 	[HideInInspector]
-	public WeaponPart weaponPart;
-	[HideInInspector]
-	public int index;
+	private WeaponPartUI _weaponPart;
 
-	public void SetWeaponPart(WeaponPart weaponPart)
+	protected override void Awake()
 	{
-		this.weaponPart = weaponPart;
+		base.Awake();
+		OnSubmit += StartEquip;
+	}
+
+
+	public void SetWeaponPart(WeaponPartUI weaponPart)
+	{
+		this._weaponPart = weaponPart;
+	}
+
+	public override void OnSelect(BaseEventData eventData)
+	{
+		base.OnSelect(eventData);
+		_selectionIndicator.SetActive(true);
+
+		if (_weaponPart)
+			_weaponPart.Select();
+	}
+
+	public override void OnDeselect(BaseEventData eventData)
+	{
+		if (_weaponPart)
+			_weaponPart.DestroyToolTip();
+
+		base.OnDeselect(eventData);
+		Deselect();
+	}
+
+	public void Deselect()
+	{
+		_selectionIndicator.SetActive(false);
+	}
+
+	private void StartEquip()
+	{
+		Debug.Log("Eqip");
 	}
 }

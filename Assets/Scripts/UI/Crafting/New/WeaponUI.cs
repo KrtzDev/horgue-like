@@ -264,7 +264,7 @@ public class WeaponUI : MonoBehaviour
 		_previousWeaponStats = weaponStats;
 	}
 
-	public void ShowPotentilaUpdatedWeaponStats(WeaponPart weaponPart)
+	public void ShowPotentialUpdatedWeaponStats(WeaponPart weaponPart)
 	{
 		ShowWeaponStats(_weapon.CalculatePotentialStats(weaponPart), true);
 	}

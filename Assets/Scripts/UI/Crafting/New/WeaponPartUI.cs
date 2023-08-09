@@ -19,6 +19,7 @@ public class WeaponPartUI : MonoBehaviour, IPointerClickHandler, IPointerEnterHa
 
 	public WeaponUI weaponUI;
 	public WeaponPart weaponPart;
+	public Transform statsContainer;
 	public bool isSlotted;
 
 	public void Initialize(WeaponPart weaponPart)
@@ -30,27 +31,36 @@ public class WeaponPartUI : MonoBehaviour, IPointerClickHandler, IPointerEnterHa
 		_defaultPos = _rectTransform.localPosition;
 	}
 
+	public void Select()
+	{
+		_currentToolTipUI = Instantiate(_toolTip_prefab, statsContainer);
+		_currentToolTipUI.Initialize(weaponPart);
+	}
+
 	public void OnPointerEnter(PointerEventData eventData)
 	{
 		if (isSlotted)
 			return;
 
-		weaponUI.ShowPotentilaUpdatedWeaponStats(weaponPart);
+		weaponUI.ShowPotentialUpdatedWeaponStats(weaponPart);
 	}
 
 	public void OnPointerClick(PointerEventData eventData)
 	{
+		if(!isSlotted) 
+			return;
+
 		DestroyToolTip();
 
 		_currentToolTipUI = Instantiate(_toolTip_prefab, transform.root);
 		_currentToolTipUI.Initialize(weaponPart);
 
-		_currentToolTipUI.transform.position = eventData.position + Vector2.right * 50 * transform.root.GetComponent<Canvas>().scaleFactor;
+		_currentToolTipUI.transform.position = eventData.position + Vector2.right * 50 * statsContainer.GetComponent<Canvas>().scaleFactor;
 	}
 
 	public void OnPointerMove(PointerEventData eventData)
 	{
-		if (_currentToolTipUI)
+		if (_currentToolTipUI && isSlotted)
 		{
 			_currentToolTipUI.transform.position += (Vector3)eventData.delta;
 
@@ -70,10 +80,10 @@ public class WeaponPartUI : MonoBehaviour, IPointerClickHandler, IPointerEnterHa
 
 	public void OnPointerExit(PointerEventData eventData)
 	{
-		DestroyToolTip();
-
-		if (isSlotted)
+		if (!isSlotted)
 			return;
+
+		DestroyToolTip();
 
 		weaponUI.ShowWeaponStats(weaponUI._weapon.CalculateWeaponStats(weaponUI._weapon));
 	}
@@ -118,7 +128,7 @@ public class WeaponPartUI : MonoBehaviour, IPointerClickHandler, IPointerEnterHa
 		}
 	}
 
-	private void DestroyToolTip()
+	public void DestroyToolTip()
 	{
 		if (_currentToolTipUI)
 		{

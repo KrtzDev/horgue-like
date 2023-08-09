@@ -1,7 +1,10 @@
+using System.Collections;
 using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
-public class InventoryUI : MonoBehaviour
+public class InventoryUI : UIMenu
 {
 	[SerializeField]
 	private WeaponUI _weaponUI;
@@ -9,6 +12,9 @@ public class InventoryUI : MonoBehaviour
 	private WeaponPartUI _weaponPartUI;
 	[SerializeField]
 	private Transform _inventorySlotContainer;
+
+	[SerializeField]
+	private Transform _selectedStatsUIContainer;
 
 	private InventorySlot[] _inventorySlots;
 
@@ -18,10 +24,19 @@ public class InventoryUI : MonoBehaviour
 		for (int i = 0; i < _inventorySlotContainer.childCount; i++)
 		{
 			_inventorySlots[i] = _inventorySlotContainer.GetChild(i).GetComponent<InventorySlot>();
-			_inventorySlots[i].index = i;
 		}
 
+		InputManager.Instance.CharacterInputActions.UI.Submit.started += OnSubmit;
+
 		SetUpNavigation();
+	}
+
+	private void OnSubmit(InputAction.CallbackContext obj)
+	{
+		if(EventSystem.current.currentSelectedGameObject.TryGetComponent<InventorySlot>(out InventorySlot slot))
+		{
+			slot.OnSubmit.Invoke();
+		}
 	}
 
 	private void SetUpNavigation()
@@ -31,9 +46,9 @@ public class InventoryUI : MonoBehaviour
 
 			Navigation navigation = new Navigation();
 			navigation.mode = Navigation.Mode.Explicit;
-			if(i - 1 > 0)
+			if(i - 1 >= 0)
 				navigation.selectOnLeft = _inventorySlots[i - 1];
-			if(i - 8 > 0)
+			if(i - 8 >= 0)
 				navigation.selectOnUp = _inventorySlots[i - 8];
 			if(i + 1 < _inventorySlots.Length)
 				navigation.selectOnRight = _inventorySlots[i + 1];
@@ -49,17 +64,36 @@ public class InventoryUI : MonoBehaviour
 		FillInventoryUI();
 	}
 
+	private void OnDisable()
+	{
+		for (int i = 0; i < _inventorySlots.Length; i++)
+		{
+			_inventorySlots[i].Deselect();
+		}
+	}
+
+	public override  void SetFocusedMenu()
+	{
+		StartCoroutine(FocusAfterFrame());
+	}
+
+	private IEnumerator FocusAfterFrame()
+	{
+		yield return new WaitForEndOfFrame();
+		_inventorySlots[0].Select();
+	}
+
 	private void FillInventoryUI()
 	{
-		Inventory playerInventory = GameManager.Instance._player.GetComponent<PlayerCharacter>().Inventory;
+		Inventory playerInventory = GameManager.Instance.inventory;
 		WeaponPart[] weaponParts = playerInventory.GetAll();
 		for (int i = 0; i < weaponParts.Length; i++)
 		{
-			_inventorySlots[i].SetWeaponPart(weaponParts[i]);
-
-			WeaponPartUI newReward = Instantiate(_weaponPartUI, _inventorySlots[i].transform);
-			newReward.Initialize(weaponParts[i]);
-			newReward.weaponUI = _weaponUI;
+			WeaponPartUI weaponPartUI = Instantiate(_weaponPartUI, _inventorySlots[i].transform);
+			_inventorySlots[i].SetWeaponPart(weaponPartUI);
+			weaponPartUI.Initialize(weaponParts[i]);
+			weaponPartUI.weaponUI = _weaponUI;
+			weaponPartUI.statsContainer = _selectedStatsUIContainer;
 		}
 	}
 }

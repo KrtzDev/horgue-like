@@ -54,6 +54,9 @@ public class GameManager : Singleton<GameManager>
 	public bool _playerCanUseAbilities;
 	public Ability _currentAbility;
 
+	[SerializeField]
+	public Inventory inventory;
+
 	private void Start()
 	{
 		SceneLoader.Instance.CompletedSceneLoad += OnCompletedSceneLoad;
