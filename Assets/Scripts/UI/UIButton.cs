@@ -52,11 +52,7 @@ public abstract class UIButton : MonoBehaviour, ISelectHandler, IDeselectHandler
 
 	public virtual void OnDeselect(BaseEventData eventData) => OnButtonDeselect?.Invoke();
 
-	public void OnPointerDown(PointerEventData eventData)
-	{
-		Debug.Log("PointerDown");
-		OnButtonDown?.Invoke();
-	}
+	public void OnPointerDown(PointerEventData eventData) => OnButtonDown?.Invoke();
 
 	public void OnPointerUp(PointerEventData eventData) => OnButtonUp?.Invoke();
 

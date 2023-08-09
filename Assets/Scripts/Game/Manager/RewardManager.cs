@@ -6,14 +6,14 @@ using UnityEngine.SceneManagement;
 public class RewardManager : Singleton<RewardManager>
 {
 	public List<Weapon> equippedWeapons = new List<Weapon>();
-	public List<Reward> drawnRewards = new List<Reward>();
+	public List<WeaponPart> drawnRewards = new List<WeaponPart>();
 
 	[SerializeField]
 	private List<WeaponPart> _weaponPartRewards = new List<WeaponPart>();
 
-	public Reward GetRandomReward()
+	public WeaponPart GetRandomReward()
 	{
-		Reward drawnReward = new Reward(_weaponPartRewards[Random.Range(0, _weaponPartRewards.Count - 1)]);
+		WeaponPart drawnReward = _weaponPartRewards[Random.Range(0, _weaponPartRewards.Count - 1)];
 		drawnRewards.Add(drawnReward);
 		return drawnReward;
 	}

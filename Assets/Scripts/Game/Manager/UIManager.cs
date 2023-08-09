@@ -25,7 +25,7 @@ public class UIManager : Singleton<UIManager>
 	[SerializeField]
 	private GameObject _gameUI_prefab;
 	[SerializeField]
-	private RewardUI _rewardUI_prefab;
+	private WeaponPartUI _rewardUI_prefab;
 	[SerializeField] private ChooseAbility _chooseAbility_prefab;
 	[SerializeField] private AbilityUI _abilityUI_prefab;
 
@@ -66,11 +66,11 @@ public class UIManager : Singleton<UIManager>
 		WaveEndScreen.gameObject.SetActive(true);
 	}
 
-	public void DisplayRewards(List<Reward> rewards)
+	public void DisplayRewards(List<WeaponPart> rewards)
 	{
-		foreach (Reward reward in rewards)
+		foreach (WeaponPart reward in rewards)
 		{
-			RewardUI newReward = Instantiate(_rewardUI_prefab,Endscreen.RewardParent);
+			WeaponPartUI newReward = Instantiate(_rewardUI_prefab,Endscreen.RewardParent);
 			newReward.Initialize(reward);
 		}
 	}
@@ -105,20 +105,20 @@ public class UIManager : Singleton<UIManager>
 			WaveEndScreen = Instantiate(_waveEndScreenUI_prefab);
 			WaveEndScreen.gameObject.SetActive(false);
 
-			GameUI = Instantiate(_gameUI_prefab);
-			GameUI.gameObject.SetActive(true);
+			//GameUI = Instantiate(_gameUI_prefab);
+			//GameUI.gameObject.SetActive(true);
 
-			ChooseAbility = Instantiate(_chooseAbility_prefab);
-			ChooseAbility.gameObject.SetActive(true);
+			//ChooseAbility = Instantiate(_chooseAbility_prefab);
+			//ChooseAbility.gameObject.SetActive(true);
 
-			List<Ability> abilities = new List<Ability>();
+			//List<Ability> abilities = new List<Ability>();
 
-			for (int i = 0; i < ChooseAbility.instance._abilitiesToDisplay; i++)
-			{
-				abilities.Add(ChooseAbility.instance.GetRandomAbility());
-			}
+			//for (int i = 0; i < ChooseAbility.instance._abilitiesToDisplay; i++)
+			//{
+			//	abilities.Add(ChooseAbility.instance.GetRandomAbility());
+			//}
 
-			DisplayAbilities(abilities);
+			//DisplayAbilities(abilities);
 		}
 	}
 }

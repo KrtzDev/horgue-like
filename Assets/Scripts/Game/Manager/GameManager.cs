@@ -54,6 +54,9 @@ public class GameManager : Singleton<GameManager>
 	public bool _playerCanUseAbilities;
 	public Ability _currentAbility;
 
+	[SerializeField]
+	public Inventory inventory;
+
 	private void Start()
 	{
 		SceneLoader.Instance.CompletedSceneLoad += OnCompletedSceneLoad;
@@ -230,7 +233,7 @@ public class GameManager : Singleton<GameManager>
 
 		_lastLevel = _currentLevel;
 
-		List<Reward> rewards = new List<Reward>();
+		List<WeaponPart> rewards = new List<WeaponPart>();
 		for (int i = 0; i < _numberOfRewards; i++)
 		{
 			rewards.Add(RewardManager.Instance.GetRandomReward());

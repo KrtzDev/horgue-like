@@ -10,6 +10,8 @@ public class PlayerCharacter : MonoBehaviour
     private Camera _camera;
 	[SerializeField]
 	private Transform _weaponSpawnTransform;
+	[SerializeField]
+	private Inventory _inventory;
     [SerializeField]
     public PlayerData _playerData;
     private HealthComponent _healthComponent;
@@ -18,6 +20,7 @@ public class PlayerCharacter : MonoBehaviour
     public Rigidbody CharacterRigidbody { get => _characterRigidbody; set => _characterRigidbody = value; }
     public Camera Camera { get => _camera; set => _camera = value; }
 	public Transform WeaponSpawnTransform { get => _weaponSpawnTransform; set => _weaponSpawnTransform = value; }
+	public Inventory Inventory { get => _inventory; set => _inventory = value; }
 
     private float _waterDamageTimer;
 

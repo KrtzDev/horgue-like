@@ -3,7 +3,7 @@ using UnityEngine;
 public class MenuTab : UIButton
 {
 	[field: SerializeField]
-	public GameObject AssociatedMenu { get; private set; }
+	public UIMenu AssociatedMenu { get; private set; }
 
 	private void OnEnable()
 	{
@@ -19,16 +19,17 @@ public class MenuTab : UIButton
 
 	private void KeepMenuFocus()
 	{
-		AssociatedMenu.SetActive(true);
+		AssociatedMenu.gameObject.SetActive(true);
 	}
 
 	private void FocusMenu()
 	{
-		AssociatedMenu.SetActive(true);
+		AssociatedMenu.gameObject.SetActive(true);
+		AssociatedMenu.SetFocusedMenu();
 	}
 
 	public void UnFocusMenu()
 	{
-		AssociatedMenu.SetActive(false);
+		AssociatedMenu.gameObject.SetActive(false);
 	}
 }

@@ -14,7 +14,7 @@ public class CraftingMenu : MonoBehaviour
 
 	[Header("Inventory")]
 	[SerializeField]
-	private RewardUI _rewardUI_prefab;
+	private WeaponPartUI _rewardUI_prefab;
 	[SerializeField]
 	private RectTransform _rewardedWeaponPartsParent;
 
@@ -28,11 +28,11 @@ public class CraftingMenu : MonoBehaviour
 		}
 	}
 
-	public void PopulateRewardUI(List<Reward> rewards)
+	public void PopulateRewardUI(List<WeaponPart> rewards)
 	{
-		foreach (Reward reward in rewards)
+		foreach (WeaponPart reward in rewards)
 		{
-			RewardUI rewardUI = Instantiate(_rewardUI_prefab,_rewardedWeaponPartsParent);
+			WeaponPartUI rewardUI = Instantiate(_rewardUI_prefab,_rewardedWeaponPartsParent);
 			rewardUI.Initialize(reward);
 		}
 	}
