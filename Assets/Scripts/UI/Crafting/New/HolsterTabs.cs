@@ -44,7 +44,7 @@ public class HolsterTabs : MonoBehaviour
 
 	private void CreateWeaponTabs()
 	{
-		foreach (Weapon weapon in GameManager.Instance._player.GetComponent<WeaponHolster>().weapons)
+		foreach (Weapon weapon in RewardManager.Instance.equippedWeapons)
 		{
 			WeaponTab weaponTab = Instantiate(_weaponTabPrefab, _tabContainer);
 			weaponTab.AssociatedWeapon = weapon;

@@ -328,7 +328,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b3999f354236034ea5313822afec58b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  equippedWeapons: []
+  equippedWeapons:
+  - {fileID: 11400000, guid: c82686377885c5b45bb908aa042c721c, type: 2}
+  - {fileID: 11400000, guid: 7a12e50f6e9942d4aa8d94a6400be84c, type: 2}
   drawnRewards: []
   _weaponPartRewards:
   - {fileID: 11400000, guid: b1c2d414a1341f348bcf9b8b6fe73077, type: 2}
