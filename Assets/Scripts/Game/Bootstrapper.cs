@@ -18,8 +18,7 @@ public class Bootstrapper
 #if UNITY_EDITOR
 	static Bootstrapper()
 	{
-		if (EditorSceneManager.playModeStartScene == null)
-			EditorSceneManager.playModeStartScene = AssetDatabase.LoadAssetAtPath<SceneAsset>(INIT_SCENE_PATH);
+		EditorSceneManager.playModeStartScene = AssetDatabase.LoadAssetAtPath<SceneAsset>(INIT_SCENE_PATH);
 
 		EditorApplication.playModeStateChanged += OnPlayModeStateChanged;
 
