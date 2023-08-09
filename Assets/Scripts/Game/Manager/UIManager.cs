@@ -105,20 +105,20 @@ public class UIManager : Singleton<UIManager>
 			WaveEndScreen = Instantiate(_waveEndScreenUI_prefab);
 			WaveEndScreen.gameObject.SetActive(false);
 
-			//GameUI = Instantiate(_gameUI_prefab);
-			//GameUI.gameObject.SetActive(true);
+			GameUI = Instantiate(_gameUI_prefab);
+			GameUI.gameObject.SetActive(true);
 
-			//ChooseAbility = Instantiate(_chooseAbility_prefab);
-			//ChooseAbility.gameObject.SetActive(true);
+			ChooseAbility = Instantiate(_chooseAbility_prefab);
+			ChooseAbility.gameObject.SetActive(true);
 
-			//List<Ability> abilities = new List<Ability>();
+			List<Ability> abilities = new List<Ability>();
 
-			//for (int i = 0; i < ChooseAbility.instance._abilitiesToDisplay; i++)
-			//{
-			//	abilities.Add(ChooseAbility.instance.GetRandomAbility());
-			//}
+			for (int i = 0; i < ChooseAbility.instance._abilitiesToDisplay; i++)
+			{
+				abilities.Add(ChooseAbility.instance.GetRandomAbility());
+			}
 
-			//DisplayAbilities(abilities);
+			DisplayAbilities(abilities);
 		}
 	}
 }
