@@ -417,9 +417,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _isGrounded: 0
+  _bufferJumpCheckValueY: 2
   _groundCheckValueY: 0.1
-  _groundCheckBox: {x: 0.25, y: 0.2, z: 0.25}
-  _jumpCD: 0.275
+  _groundCheckBox: {x: 0.25, y: 0.25, z: 0.25}
+  _isJumping: 0
+  _jumpAttempt: 0
   _fallMultiplier: 10
   _jumpVelocityFalloff: 11
   _jumpForce: 20

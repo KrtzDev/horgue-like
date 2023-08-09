@@ -6,14 +6,15 @@ public class PlayerJump : MonoBehaviour
 {
 
     [SerializeField] private bool _isGrounded;
+    [SerializeField] private float _bufferJumpCheckValueY;
     [SerializeField] private float _groundCheckValueY;
     [SerializeField] private Vector3 _groundCheckBox;
 
     private PlayerCharacter _character;
     private PlayerInputMappings _inputActions;
 
-    private bool _isJumping;
-    private bool _jumpAttempt;
+    [SerializeField] private bool _isJumping;
+    [SerializeField] private bool _jumpAttempt = false;
 
     [SerializeField] private float _fallMultiplier = 7;
     [SerializeField] private float _jumpVelocityFalloff = 8;
@@ -42,26 +43,24 @@ public class PlayerJump : MonoBehaviour
 
     private void Update()
     {
-        FallPhysics();
         CheckIfGrounded();
+        FallPhysics();
+
+        Debug.DrawRay(this.transform.position + new Vector3(0, _groundCheckValueY, 0), new Vector3(0, -_bufferJumpCheckValueY, 0), Color.red);
     }
 
     // General
 
     private void Jump(InputAction.CallbackContext ctx)
     {
-        if (ctx.performed && !_isJumping && _isGrounded)
+        if (ctx.performed && !_isJumping && _isGrounded && !_jumpAttempt)
         {
             JumpAbility();
         }
-        else if (ctx.performed && _isJumping && !_isGrounded)
+        else if (ctx.performed && _isJumping && !_isGrounded && !_jumpAttempt)
         {
-            Debug.Log("Jump Input while Jumping");
-
-            if(Physics.Raycast(this.transform.position + new Vector3(0, _groundCheckValueY, 0), Vector3.down, 2 * _groundCheckValueY, _character.WalkLayer))
+            if(Physics.Raycast(this.transform.position + new Vector3(0, _groundCheckValueY, 0), Vector3.down, _bufferJumpCheckValueY, _character.WalkLayer))
             {
-                Debug.Log("Buffer Jump?");
-
                 _jumpAttempt = true;
             }
         }
@@ -69,7 +68,7 @@ public class PlayerJump : MonoBehaviour
 
     private void CheckIfGrounded()
     {
-        Collider[] hitColliders = (Physics.OverlapBox(this.transform.position + new Vector3(0, _groundCheckValueY, 0), _groundCheckBox, Quaternion.identity, _character.WalkLayer));
+        Collider[] hitColliders = (Physics.OverlapBox(this.transform.position + new Vector3(0, _groundCheckValueY, 0), _groundCheckBox / 2, Quaternion.identity, _character.WalkLayer));
 
         if (hitColliders.Length > 0)
         {
@@ -85,6 +84,8 @@ public class PlayerJump : MonoBehaviour
 
     private void JumpAbility()
     {
+        Debug.Log("Jump " + Time.time);
+
         _isJumping = true;
         _jumpAttempt = false;
 
@@ -97,28 +98,37 @@ public class PlayerJump : MonoBehaviour
         if ((_character.CharacterRigidbody.velocity.y < _jumpVelocityFalloff || _character.CharacterRigidbody.velocity.y > 0 && !_inputActions.Character.Jump.triggered) && !_isGrounded)
         {
             _character.CharacterRigidbody.velocity += _fallMultiplier * Physics.gravity.y * Vector3.up * Time.deltaTime;
+            _isJumping = true;
         }
 
-        if (_isJumping)
+        if (_isGrounded && _character.CharacterRigidbody.velocity.y <= 0 && _isJumping)
         {
-            if (_isGrounded && _character.CharacterRigidbody.velocity.y < 1)
-            {
-                ResetJumpAbility();
-            }
+            ResetJumpAbility();
         }
     }
 
     private void ResetJumpAbility()
     {
-        _isJumping = false;
-        Debug.Log("Reset Jump!");
-
         if (_jumpAttempt)
         {
-            Debug.Log("Jump Attempt?");
-
-            JumpAbility();
+            BufferJump();
+            return;
         }
+
+        _isJumping = false;
+    }
+
+    private void BufferJump()
+    {
+        Debug.Log("B Jump " + Time.time);
+
+        _isJumping = true;
+        _jumpAttempt = false;
+
+        _character.CharacterRigidbody.velocity = new Vector3(_character.CharacterRigidbody.velocity.x, 0, _character.CharacterRigidbody.velocity.z);
+
+        Vector2 jumpDir = new Vector2(_character.CharacterRigidbody.velocity.x, _jumpForce);
+        _character.CharacterRigidbody.AddForce(jumpDir, ForceMode.Impulse);
     }
 
     #region Draw_Gizmos
@@ -126,8 +136,6 @@ public class PlayerJump : MonoBehaviour
     {
         Gizmos.color = Color.green;
         Gizmos.DrawWireCube(this.transform.position + new Vector3(0, _groundCheckValueY, 0), _groundCheckBox);
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawLine(this.transform.position + new Vector3(0, _groundCheckValueY, 0), this.transform.position - new Vector3(0, 2 * _groundCheckValueY, 0));
     }
     #endregion
 }

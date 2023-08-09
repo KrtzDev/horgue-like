@@ -1150,7 +1150,7 @@ PrefabInstance:
     - target: {fileID: 2136897129691636550, guid: 62d6286d223d00e49ba8ca796795cc73,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2136897129691636550, guid: 62d6286d223d00e49ba8ca796795cc73,
         type: 3}
@@ -1194,8 +1194,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7535219065241409037, guid: 62d6286d223d00e49ba8ca796795cc73,
         type: 3}
-      propertyPath: _jumpCD
-      value: 0.2
+      propertyPath: _jumpForce
+      value: 23
+      objectReference: {fileID: 0}
+    - target: {fileID: 7535219065241409037, guid: 62d6286d223d00e49ba8ca796795cc73,
+        type: 3}
+      propertyPath: _bufferJumpCheckValueY
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 62d6286d223d00e49ba8ca796795cc73, type: 3}
@@ -23481,7 +23486,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh129780
+  m_Name: pb_Mesh29448
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -27051,17 +27056,17 @@ PrefabInstance:
     - target: {fileID: 6843213763226438607, guid: b0d5d15041526b8408159035025686a3,
         type: 3}
       propertyPath: _enemiesToSpawn.Array.data[0]._spawnRatio
-      value: 45
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6843213763226438607, guid: b0d5d15041526b8408159035025686a3,
         type: 3}
       propertyPath: _enemiesToSpawn.Array.data[1]._spawnRatio
-      value: 45
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6843213763226438607, guid: b0d5d15041526b8408159035025686a3,
         type: 3}
       propertyPath: _enemiesToSpawn.Array.data[2]._spawnRatio
-      value: 10
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6843213763226438607, guid: b0d5d15041526b8408159035025686a3,
         type: 3}
@@ -42045,7 +42050,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh32546
+  m_Name: pb_Mesh29596
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
