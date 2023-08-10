@@ -1,102 +1,90 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class ToolTipUI : MonoBehaviour
+public class ToolTipUI : Selectable
 {
+	public Action OnSubmit;
+
 	[SerializeField]
-	private Image _image;
+	private Image _selectionIndicator;
+
+	[SerializeField]
+	private Image _partImage;
 	[SerializeField]
 	private RectTransform _statParent;
 	[SerializeField]
 	private StatUI _statUI_prefab;
 
+	protected override void Awake()
+	{
+		base.Awake();
+		OnSubmit += StartBuy;
+	}
+
 	public void Initialize(WeaponPart weaponPartData)
 	{
-		_image.sprite = weaponPartData.WeaponPartUISprite;
-		if (weaponPartData is Grip)
-		{
-			Grip grip = weaponPartData as Grip;
-			StatUI currentStat = Instantiate(_statUI_prefab, _statParent);
-			currentStat.Initialize("Attack Speed: ", grip.attackSpeed.ToString());
-			currentStat = Instantiate(_statUI_prefab, _statParent);
-			currentStat.Initialize("Reload Time: ", grip.cooldown.ToString());
-			currentStat = Instantiate(_statUI_prefab, _statParent);
-			currentStat.Initialize("Crit Chance: ", grip.critChance.ToString());
-		}
-		else if (weaponPartData is Barrel)
+		_partImage.sprite = weaponPartData.WeaponPartUISprite;
+
+		InitializeStats(weaponPartData);
+	}
+
+	private void InitializeStats(WeaponPart weaponPartData)
+	{
+		StatUI currentStat = Instantiate(_statUI_prefab, _statParent);
+		currentStat.Initialize("Damage: ", weaponPartData.baseDamage.ToString());
+		currentStat = Instantiate(_statUI_prefab, _statParent);
+		currentStat.Initialize("Attack Speed: ", weaponPartData.attackSpeed.ToString());
+		currentStat = Instantiate(_statUI_prefab, _statParent);
+		currentStat.Initialize("Reload Time: ", weaponPartData.cooldown.ToString());
+		currentStat = Instantiate(_statUI_prefab, _statParent);
+		currentStat.Initialize("Projectile Size: ", weaponPartData.projectileSize.ToString());
+		currentStat = Instantiate(_statUI_prefab, _statParent);
+		currentStat.Initialize("Crit Chance: ", weaponPartData.critChance.ToString());
+		currentStat = Instantiate(_statUI_prefab, _statParent);
+		currentStat.Initialize("Range: ", weaponPartData.range.ToString());
+
+		if (weaponPartData is Barrel)
 		{
 			Barrel barrel = weaponPartData as Barrel;
-			StatUI currentStat = Instantiate(_statUI_prefab, _statParent);
-			currentStat.Initialize("Damage: ", barrel.baseDamage.ToString());
-			currentStat = Instantiate(_statUI_prefab, _statParent);
-			currentStat.Initialize("Attack Speed: ", barrel.attackSpeed.ToString());
-			currentStat = Instantiate(_statUI_prefab, _statParent);
-			currentStat.Initialize("Reload Time: ", barrel.cooldown.ToString());
-			currentStat = Instantiate(_statUI_prefab, _statParent);
-			currentStat.Initialize("Projectile Size: ", barrel.projectileSize.ToString());
-			currentStat = Instantiate(_statUI_prefab, _statParent);
-			currentStat.Initialize("Crit Chance: ", barrel.critChance.ToString());
-			currentStat = Instantiate(_statUI_prefab, _statParent);
-			currentStat.Initialize("Range: ", barrel.range.ToString());
+
 			currentStat = Instantiate(_statUI_prefab, _statParent);
 			currentStat.Initialize("Projectile trajectory: ", barrel.attackPattern.PatternName());
 		}
 		else if (weaponPartData is Magazine)
 		{
 			Magazine mag = weaponPartData as Magazine;
-			StatUI currentStat = Instantiate(_statUI_prefab,_statParent);
-			currentStat.Initialize("Attack Speed: ",mag.attackSpeed.ToString());
-			currentStat = Instantiate(_statUI_prefab, _statParent);
-			currentStat.Initialize("Reload Time: ", mag.cooldown.ToString());
-			currentStat = Instantiate(_statUI_prefab, _statParent);
-			currentStat.Initialize("Projectile Size: ", mag.projectileSize.ToString());
+
 			currentStat = Instantiate(_statUI_prefab, _statParent);
 			currentStat.Initialize("Capacity: ", mag.capacity.ToString());
 		}
 		else if (weaponPartData is Ammunition)
 		{
 			Ammunition ammunition = weaponPartData as Ammunition;
-			StatUI currentStat = Instantiate(_statUI_prefab, _statParent);
-			currentStat.Initialize("Damage: ", ammunition.baseDamage.ToString());
-			currentStat = Instantiate(_statUI_prefab, _statParent);
-			currentStat.Initialize("Attack Speed: ", ammunition.attackSpeed.ToString());
-			currentStat = Instantiate(_statUI_prefab, _statParent);
-			currentStat.Initialize("Reload Time: ", ammunition.cooldown.ToString());
-			currentStat = Instantiate(_statUI_prefab, _statParent);
-			currentStat.Initialize("Projectile Size: ", ammunition.projectileSize.ToString());
-			currentStat = Instantiate(_statUI_prefab, _statParent);
-			currentStat.Initialize("Crit Chance: ", ammunition.critChance.ToString());
-			currentStat = Instantiate(_statUI_prefab, _statParent);
-			currentStat.Initialize("Range: ", ammunition.range.ToString());
-			if(ammunition.statusEffect != null)
+
+			if (ammunition.statusEffect != null)
 			{
 				currentStat = Instantiate(_statUI_prefab, _statParent);
 				currentStat.Initialize("Impact Effect", ammunition.statusEffect.StatusName());
 			}
 		}
-		else if (weaponPartData is TriggerMechanism)
-		{
-			TriggerMechanism trigger = weaponPartData as TriggerMechanism;
-			StatUI currentStat = Instantiate(_statUI_prefab, _statParent);
-			currentStat.Initialize("Damage: ", trigger.baseDamage.ToString());
-			currentStat = Instantiate(_statUI_prefab, _statParent);
-			currentStat.Initialize("Attack Speed: ", trigger.attackSpeed.ToString());
-			currentStat = Instantiate(_statUI_prefab, _statParent);
-			currentStat.Initialize("Reload Time: ", trigger.cooldown.ToString());
-			currentStat = Instantiate(_statUI_prefab, _statParent);
-			currentStat.Initialize("Crit Chance: ", trigger.critChance.ToString());
-			currentStat = Instantiate(_statUI_prefab, _statParent);
-			currentStat.Initialize("Range: ", trigger.range.ToString());
-		}
-		else if (weaponPartData is Sight)
-		{
-			Sight sight = weaponPartData as Sight;
-			StatUI currentStat = Instantiate(_statUI_prefab, _statParent);
-			currentStat.Initialize("Attack Speed: ", sight.attackSpeed.ToString());
-			currentStat = Instantiate(_statUI_prefab, _statParent);
-			currentStat.Initialize("Crit Chance: ", sight.critChance.ToString());
-			currentStat = Instantiate(_statUI_prefab, _statParent);
-			currentStat.Initialize("Range: ", sight.range.ToString());
-		}
+	}
+
+	private void StartBuy()
+	{
+		Debug.Log("Buy");
+	}
+
+	public override void OnSelect(BaseEventData eventData)
+	{
+		base.OnSelect(eventData);
+		_selectionIndicator.enabled = true;
+	}
+
+	public override void OnDeselect(BaseEventData eventData)
+	{
+		base.OnDeselect(eventData);
+		_selectionIndicator.enabled = false;
 	}
 }

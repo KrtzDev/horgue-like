@@ -31,9 +31,9 @@ public class InventoryUI : UIMenu
 		SetUpNavigation();
 	}
 
-	private void OnSubmit(InputAction.CallbackContext obj)
+	private void OnSubmit(InputAction.CallbackContext ctx)
 	{
-		if(EventSystem.current.currentSelectedGameObject.TryGetComponent<InventorySlot>(out InventorySlot slot))
+		if (EventSystem.current.currentSelectedGameObject.TryGetComponent<InventorySlot>(out InventorySlot slot))
 		{
 			slot.OnSubmit.Invoke();
 		}
@@ -46,13 +46,13 @@ public class InventoryUI : UIMenu
 
 			Navigation navigation = new Navigation();
 			navigation.mode = Navigation.Mode.Explicit;
-			if(i - 1 >= 0)
+			if (i - 1 >= 0)
 				navigation.selectOnLeft = _inventorySlots[i - 1];
-			if(i - 8 >= 0)
+			if (i - 8 >= 0)
 				navigation.selectOnUp = _inventorySlots[i - 8];
-			if(i + 1 < _inventorySlots.Length)
+			if (i + 1 < _inventorySlots.Length)
 				navigation.selectOnRight = _inventorySlots[i + 1];
-			if(i + 8 < _inventorySlots.Length)
+			if (i + 8 < _inventorySlots.Length)
 				navigation.selectOnDown = _inventorySlots[i + 8];
 
 			_inventorySlots[i].navigation = navigation;
@@ -72,7 +72,7 @@ public class InventoryUI : UIMenu
 		}
 	}
 
-	public override  void SetFocusedMenu()
+	public override void SetFocusedMenu()
 	{
 		StartCoroutine(FocusAfterFrame());
 	}

@@ -8,7 +8,7 @@ public class InventorySlot : Selectable
 	public Action OnSubmit;
 
 	[SerializeField]
-	private GameObject _selectionIndicator;
+	private Image _selectionIndicator;
 
 	[HideInInspector]
 	private WeaponPartUI _weaponPart;
@@ -28,7 +28,7 @@ public class InventorySlot : Selectable
 	public override void OnSelect(BaseEventData eventData)
 	{
 		base.OnSelect(eventData);
-		_selectionIndicator.SetActive(true);
+		_selectionIndicator.enabled= true;
 
 		if (_weaponPart)
 			_weaponPart.Select();
@@ -45,7 +45,7 @@ public class InventorySlot : Selectable
 
 	public void Deselect()
 	{
-		_selectionIndicator.SetActive(false);
+		_selectionIndicator.enabled = false;
 	}
 
 	private void StartEquip()
