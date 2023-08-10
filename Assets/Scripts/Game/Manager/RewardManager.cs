@@ -33,8 +33,8 @@ public class RewardManager : Singleton<RewardManager>
 		await Task.Delay(10);
 		if (SceneManager.GetActiveScene().name == "SCENE_Weapon_Crafting")
 		{
-			UIManager.Instance.CraftingMenu.PopulateRewardUI(drawnRewards);
-			UIManager.Instance.CraftingMenu.PopulateWeaponUI();
+			//UIManager.Instance.CraftingMenu.PopulateRewardUI(drawnRewards);
+			//UIManager.Instance.CraftingMenu.PopulateWeaponUI();
 		}
 		else if (	SceneManager.GetActiveScene().name == "SCENE_Level_00" ||
 					SceneManager.GetActiveScene().name == "SCENE_Level_00" ||

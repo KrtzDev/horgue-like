@@ -17,17 +17,22 @@ public class HoldButton : UIButton
 	[SerializeField]
 	private float _holdTime;
 
+	private bool _canExecute = true;
 
 	private void OnEnable()
 	{
 		_holdAction.action.Enable();
 
-		_holdAction.action.started += (_) => StartHold();
-		_holdAction.action.canceled += (_) => CancleHold();
+		_holdAction.action.started += ButtonPressed;
+		_holdAction.action.canceled += ButtonReleased;
 
 		OnButtonDown += StartHold;
 		OnButtonUp += CancleHold;
 	}
+
+	private void ButtonReleased(InputAction.CallbackContext ctx) => CancleHold();
+
+	private void ButtonPressed(InputAction.CallbackContext ctx) => StartHold();
 
 	private void Awake()
 	{
@@ -36,10 +41,8 @@ public class HoldButton : UIButton
 
 	private void OnDisable()
 	{
-		_holdAction.action.Disable();
-
-		_holdAction.action.started -= (_) => StartHold();
-		_holdAction.action.canceled -= (_) => CancleHold();
+		_holdAction.action.started -= ButtonPressed;
+		_holdAction.action.canceled -= ButtonReleased;
 
 		OnButtonDown -= StartHold;
 		OnButtonUp -= CancleHold;
@@ -54,19 +57,25 @@ public class HoldButton : UIButton
 
 	private IEnumerator FillHoldBar()
 	{
-		while (_holdBar.fillAmount < 1)
+		if (_canExecute)
 		{
-			_holdBar.fillAmount += Time.deltaTime / _holdTime;
-			yield return null;
-		}
-		_holdBar.fillAmount = 1;
+			while (_holdBar.fillAmount < 1)
+			{
+				_holdBar.fillAmount += Time.deltaTime / _holdTime;
+				yield return null;
+			}
+			_holdBar.fillAmount = 1;
 
-		OnButtonExecute?.Invoke();
+			_canExecute = false;
+			OnButtonExecute?.Invoke();
+			_holdBar.fillAmount = 0;
+		}
 	}
 
-	private void CancleHold() 
+	private void CancleHold()
 	{
 		StopAllCoroutines();
 		_holdBar.fillAmount = 0;
+		_canExecute = true;
 	}
 }

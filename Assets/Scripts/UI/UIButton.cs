@@ -39,9 +39,14 @@ public abstract class UIButton : MonoBehaviour, ISelectHandler, IDeselectHandler
 		_selectedcolors.fadeDuration = Button.colors.fadeDuration;
 	}
 
+	public void Enable() => gameObject.SetActive(true);
+
+	public void Disable() => gameObject.SetActive(false);
+
 	public void Select() => Button.Select();
 
 	public void Deselect() => OnButtonDeselect?.Invoke();
+
 
 
 	public void Addlistener(UnityAction action) => Button.onClick.AddListener(action);

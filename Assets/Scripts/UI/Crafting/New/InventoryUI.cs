@@ -1,4 +1,6 @@
+using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
@@ -7,11 +9,18 @@ using UnityEngine.UI;
 public class InventoryUI : UIMenu
 {
 	[SerializeField]
+	private ShopUI _shopUI;
+
+	[SerializeField]
 	private WeaponUI _weaponUI;
 	[SerializeField]
 	private WeaponPartUI _weaponPartUI;
 	[SerializeField]
 	private Transform _inventorySlotContainer;
+	[SerializeField]
+	private HoldButton _buyButton;
+	[SerializeField]
+	private HoldButton _equipButton;
 
 	[SerializeField]
 	private Transform _selectedStatsUIContainer;
@@ -20,20 +29,29 @@ public class InventoryUI : UIMenu
 
 	private void Awake()
 	{
+
 		_inventorySlots = new InventorySlot[_inventorySlotContainer.childCount];
 		for (int i = 0; i < _inventorySlotContainer.childCount; i++)
 		{
 			_inventorySlots[i] = _inventorySlotContainer.GetChild(i).GetComponent<InventorySlot>();
 		}
 
+		_shopUI.OnBought += AddToInventory;
+
 		InputManager.Instance.CharacterInputActions.UI.Submit.started += OnSubmit;
 
 		SetUpNavigation();
 	}
 
+	private void AddToInventory(WeaponPart weaponPart)
+	{
+		GameManager.Instance.inventory.AddToInventory(weaponPart);
+		FillInventoryUI();
+	}
+
 	private void OnSubmit(InputAction.CallbackContext ctx)
 	{
-		if (EventSystem.current.currentSelectedGameObject.TryGetComponent<InventorySlot>(out InventorySlot slot))
+		if (EventSystem.current.currentSelectedGameObject.TryGetComponent(out InventorySlot slot))
 		{
 			slot.OnSubmit.Invoke();
 		}
@@ -74,6 +92,8 @@ public class InventoryUI : UIMenu
 
 	public override void SetFocusedMenu()
 	{
+		_equipButton.Enable();
+		_buyButton.Disable();
 		StartCoroutine(FocusAfterFrame());
 	}
 
@@ -86,8 +106,8 @@ public class InventoryUI : UIMenu
 	private void FillInventoryUI()
 	{
 		Inventory playerInventory = GameManager.Instance.inventory;
-		WeaponPart[] weaponParts = playerInventory.GetAll();
-		for (int i = 0; i < weaponParts.Length; i++)
+		List<WeaponPart> weaponParts = playerInventory.GetAll();
+		for (int i = 0; i < weaponParts.Count; i++)
 		{
 			WeaponPartUI weaponPartUI = Instantiate(_weaponPartUI, _inventorySlots[i].transform);
 			_inventorySlots[i].SetWeaponPart(weaponPartUI);

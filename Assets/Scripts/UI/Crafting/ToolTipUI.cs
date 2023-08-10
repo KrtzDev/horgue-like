@@ -5,7 +5,9 @@ using UnityEngine.UI;
 
 public class ToolTipUI : Selectable
 {
-	public Action OnSubmit;
+	public event Action<ToolTipUI> OnBuy;
+	[SerializeField]
+	public HoldButton buyButton;
 
 	[SerializeField]
 	private Image _selectionIndicator;
@@ -13,21 +15,28 @@ public class ToolTipUI : Selectable
 	[SerializeField]
 	private Image _partImage;
 	[SerializeField]
+	private LayoutGroup _layoutGroup;
+	[SerializeField]
 	private RectTransform _statParent;
 	[SerializeField]
 	private StatUI _statUI_prefab;
 
-	protected override void Awake()
-	{
-		base.Awake();
-		OnSubmit += StartBuy;
-	}
+	public WeaponPart weaponPart;
+	private int _value;
+
+	private bool _selected;
 
 	public void Initialize(WeaponPart weaponPartData)
 	{
 		_partImage.sprite = weaponPartData.WeaponPartUISprite;
+		weaponPart = weaponPartData;
+		_value = weaponPartData.value;
 
 		InitializeStats(weaponPartData);
+		LayoutRebuilder.ForceRebuildLayoutImmediate(_layoutGroup.transform as RectTransform);	
+
+		if(buyButton)
+			buyButton.OnButtonExecute += Buy;
 	}
 
 	private void InitializeStats(WeaponPart weaponPartData)
@@ -71,20 +80,30 @@ public class ToolTipUI : Selectable
 		}
 	}
 
-	private void StartBuy()
+	private void Buy()
 	{
-		Debug.Log("Buy");
+		if (!_selected)
+			return;
+
+		GameManager.Instance.inventory.Wallet.TryPay(_value);
+
+		OnBuy.Invoke(this);
+		buyButton.OnButtonExecute -= Buy;
+
+		Destroy(gameObject);
 	}
 
 	public override void OnSelect(BaseEventData eventData)
 	{
 		base.OnSelect(eventData);
 		_selectionIndicator.enabled = true;
+		_selected = true;
 	}
 
 	public override void OnDeselect(BaseEventData eventData)
 	{
 		base.OnDeselect(eventData);
 		_selectionIndicator.enabled = false;
+		_selected = false;
 	}
 }

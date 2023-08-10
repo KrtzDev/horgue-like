@@ -16,4 +16,8 @@ public class WeaponPart : ScriptableObject
 	public float critChance;
 	public float critDamage;
 	public float range;
+
+	[Space(22)]
+	[SerializeField]
+	public int value;
 }

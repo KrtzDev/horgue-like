@@ -815,7 +815,7 @@ public partial class @PlayerInputMappings : IInputActionCollection2, IDisposable
                     ""path"": ""*/{Submit}"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Gamepad;Touch;Joystick;XR"",
+                    ""groups"": ""Gamepad;Touch;Joystick;XR;ControllScheme"",
                     ""action"": ""Submit"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false

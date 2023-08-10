@@ -1,21 +1,27 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Inventory : MonoBehaviour
 {
+	[field: SerializeField]
+	public Wallet Wallet {  get; private set; }
+
 	[SerializeField]
-	private WeaponPart[] _weaponParts;
+	private List<WeaponPart> _weaponParts;
 
-	public void AddToInventory()
+	public void AddToInventory(WeaponPart weaponPartToAdd)
 	{
-
+		_weaponParts.Add(weaponPartToAdd);
 	}
 
-	public void GetFromInventory(int index)
+	public WeaponPart GetFromInventory(int index)
 	{
-
+		WeaponPart weaponPart = _weaponParts[index];
+		_weaponParts.RemoveAt(index);
+		return weaponPart;
 	}
 
-	public WeaponPart[] GetAll()
+	public List<WeaponPart> GetAll()
 	{
 		return _weaponParts;
 	}

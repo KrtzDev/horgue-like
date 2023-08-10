@@ -452,6 +452,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84d07dd9f3e78f347a9ed2ee7c633837, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <Wallet>k__BackingField:
+    _money: 100
   _weaponParts:
   - {fileID: 11400000, guid: 83a1eecf3296d7f4b998eceec3eeac24, type: 2}
   - {fileID: 11400000, guid: 69e3f0420738dfc42bfbd5097f3a11c1, type: 2}

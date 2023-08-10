@@ -1,45 +1,63 @@
 using System;
+using System.Linq;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.EventSystems;
-using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 public class ShopUI : UIMenu
 {
+	public event Action<WeaponPart> OnBought;
+
 	[SerializeField]
 	private Transform _shopItemContainer;
+	[SerializeField]
+	private HoldButton _buyButton;
+	[SerializeField]
+	private HoldButton _equipButton;
 
 	[SerializeField]
 	private ToolTipUI _toolTipUI_prefab;
 
-	private ToolTipUI[] _shopItems;
+	private List<ToolTipUI> _shopItems;
 
 	private void Awake()
 	{
-		_shopItems = new ToolTipUI[_shopItemContainer.childCount];
-		for (int i = 0; i < _shopItems.Length; i++)
+		_shopItems = new List<ToolTipUI>();
+		for (int i = 0; i < 3; i++)
 		{
-			_shopItems[i] = _shopItemContainer.GetChild(i).GetComponent<ToolTipUI>();
-		}
+			ToolTipUI tooltipUI = Instantiate(_toolTipUI_prefab,_shopItemContainer);
 
-		InputManager.Instance.CharacterInputActions.UI.Submit.started += OnSubmit;
+			_shopItems.Add(tooltipUI);
+			tooltipUI.OnBuy += OnItemBought;
+
+			tooltipUI = _shopItemContainer.GetChild(i).GetComponent<ToolTipUI>();
+			tooltipUI.buyButton = _buyButton;
+			tooltipUI.Initialize(RewardManager.Instance.GetRandomReward());
+			RewardManager.Instance.ClearRewards();
+		}
 
 		SetUpNavigation();
 	}
 
-
-	private void OnSubmit(InputAction.CallbackContext obj)
+	private void OnItemBought(ToolTipUI TooltipUi)
 	{
-		if (EventSystem.current.currentSelectedGameObject.TryGetComponent<ToolTipUI>(out ToolTipUI shopItem))
-		{
-			shopItem.OnSubmit.Invoke();
-		}
+		 OnBought.Invoke(TooltipUi.weaponPart);
+		_shopItems.Remove(TooltipUi);
+
+		if(_shopItems.Count > 0)
+			StartCoroutine(SelectFirstItemAfterFrame());
+	}
+
+	private IEnumerator SelectFirstItemAfterFrame()
+	{
+		yield return null;
+		_shopItems.First().Select();
 	}
 
 	private void SetUpNavigation()
 	{
-		for (int i = 0; i < _shopItems.Length; i++)
+		for (int i = 0; i < _shopItems.Count; i++)
 		{
 			Navigation navigation = new Navigation();
 			navigation.mode = Navigation.Mode.Explicit;
@@ -47,9 +65,9 @@ public class ShopUI : UIMenu
 				navigation.selectOnLeft = _shopItems[i - 1];
 			if (i - 3 >= 0)
 				navigation.selectOnUp = _shopItems[i - 3];
-			if (i + 1 < _shopItems.Length)
+			if (i + 1 < _shopItems.Count)
 				navigation.selectOnRight = _shopItems[i + 1];
-			if (i + 3 < _shopItems.Length)
+			if (i + 3 < _shopItems.Count)
 				navigation.selectOnDown = _shopItems[i + 3];
 
 			_shopItems[i].navigation = navigation;
@@ -58,6 +76,8 @@ public class ShopUI : UIMenu
 
 	public override void SetFocusedMenu()
 	{
+		_buyButton.Enable();
+		_equipButton.Disable();
 		StartCoroutine(FocusafterFrame());
 	}
 
