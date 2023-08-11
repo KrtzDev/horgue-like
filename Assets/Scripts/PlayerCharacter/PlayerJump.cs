@@ -9,7 +9,7 @@ public class PlayerJump : MonoBehaviour
     [SerializeField] private float _bufferJumpCheckValueY;
     [SerializeField] private float _groundCheckY;
     [SerializeField] private Vector3 _groundCheckBox;
-
+    
     private PlayerCharacter _character;
     private PlayerInputMappings _inputActions;
 
