@@ -112,7 +112,7 @@ public class AI_Agent_Drone : AI_Agent_Enemy
 
             // if something is infront of you, get onto it
 
-            if(Physics.BoxCast(_detectionGO.transform.position, _detectionGO.GetComponent<BoxCollider>().size / 2, Vector3.down, out hit, transform.rotation, _maxHeightAboveGround, _player.GetComponent<PlayerMovementMobility>()._groundLayer))
+            if(Physics.BoxCast(_detectionGO.transform.position, _detectionGO.GetComponent<BoxCollider>().size / 2, Vector3.down, out hit, transform.rotation, _maxHeightAboveGround, _player.GetComponent<PlayerCharacter>().GroundLayer))
             {
                 Debug.DrawLine(_detectionGO.transform.position, hit.point, Color.green);
 
@@ -127,7 +127,7 @@ public class AI_Agent_Drone : AI_Agent_Enemy
             {
                 _rayCastPosOnLerp = new(transform.position.x, _heightGO.transform.position.y + transform.position.y, transform.position.z);
 
-                if (Physics.Raycast(_rayCastPosOnLerp, Vector3.down, out hit, Mathf.Infinity, _player.GetComponent<PlayerMovementMobility>()._groundLayer))
+                if (Physics.Raycast(_rayCastPosOnLerp, Vector3.down, out hit, Mathf.Infinity, _player.GetComponent<PlayerCharacter>().GroundLayer))
                 {
                     Debug.DrawLine(_rayCastPosOnLerp, hit.point, Color.red);
 
@@ -152,7 +152,7 @@ public class AI_Agent_Drone : AI_Agent_Enemy
         Vector3 heightPosOwnPosition = new(transform.position.x, _heightGO.transform.position.y + transform.position.y, transform.position.z);
         RaycastHit hit;
 
-        if (Physics.Raycast(heightPosOwnPosition, Vector3.down, out hit, Mathf.Infinity, _player.GetComponent<PlayerMovementMobility>()._groundLayer))
+        if (Physics.Raycast(heightPosOwnPosition, Vector3.down, out hit, Mathf.Infinity, _player.GetComponent<PlayerCharacter>().GroundLayer))
         {
             Debug.DrawLine(heightPosOwnPosition, hit.point, Color.red);
 

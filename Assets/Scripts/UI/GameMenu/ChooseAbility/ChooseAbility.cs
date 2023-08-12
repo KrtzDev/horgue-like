@@ -39,9 +39,9 @@ public class ChooseAbility: MonoBehaviour
     public GameObject LastSelected { get; set; }
     public int LastSelectedIndex { get; set; }
 
-    public Ability GetRandomAbility()
+    public Ability GetAbilities()
     {
-        Ability drawnAbility = _tempAbilities[Random.Range(0, _tempAbilities.Count - 1)];
+        Ability drawnAbility = _tempAbilities[0];
         _drawnAbilities.Add(drawnAbility);
         _tempAbilities.Remove(drawnAbility);
         return drawnAbility;

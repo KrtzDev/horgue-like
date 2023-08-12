@@ -2,11 +2,11 @@ using UnityEngine;
 
 public class UIImageFillAmountAbility : UIImageFillAmount
 {
-    private PlayerMovementMobility _playerMovementMoblity;
+    private PlayerAbilities _playerMovementMoblity;
 
     public override void Awake()
     {
-        _playerMovementMoblity = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovementMobility>();
+        _playerMovementMoblity = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerAbilities>();
 
         base.Awake();
     }

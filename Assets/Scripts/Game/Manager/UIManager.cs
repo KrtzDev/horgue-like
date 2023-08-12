@@ -115,7 +115,7 @@ public class UIManager : Singleton<UIManager>
 
 			for (int i = 0; i < ChooseAbility.instance._abilitiesToDisplay; i++)
 			{
-				abilities.Add(ChooseAbility.instance.GetRandomAbility());
+				abilities.Add(ChooseAbility.instance.GetAbilities());
 			}
 
 			DisplayAbilities(abilities);

@@ -16,7 +16,7 @@ public class PlayerJump : MonoBehaviour
     private bool _isJumping;
     private bool _jumpAttempt = false;
 
-    [SerializeField] private float _fallMultiplier = 7;
+    public float _fallMultiplier = 7;
     [SerializeField] private float _jumpVelocityFalloff = 8;
     [SerializeField] private float _jumpForce = 15;
 
@@ -85,8 +85,6 @@ public class PlayerJump : MonoBehaviour
 
     private void JumpAbility()
     {
-        Debug.Log("Jump " + Time.time);
-
         _isJumping = true;
         _jumpAttempt = false;
 
@@ -123,8 +121,6 @@ public class PlayerJump : MonoBehaviour
 
     private void BufferJump()
     {
-        Debug.Log("B Jump " + Time.time);
-
         _isJumping = true;
         _jumpAttempt = false;
 

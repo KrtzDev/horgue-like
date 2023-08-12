@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fda9461c54729a14cadaef75f159ef8d, type: 3}
-  m_Name: Jump
+  m_Name: Earthquake
   m_EditorClassIdentifier: 
-  _name: Jump
-  _icon: {fileID: 21300000, guid: ae111c00a8b7fc14a911d7e01e7ff51f, type: 3}
+  _name: Earthquake
+  _icon: {fileID: 21300000, guid: 9aebd705574f9e642aef1e5f59b3e4d8, type: 3}
