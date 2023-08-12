@@ -15,12 +15,12 @@ public class UIImageFillAmountHealthbar : UIImageFillAmount
         base.Awake();
     }
 
-    public override void FixedUpdate()
+    public override void OnGUI()
     {
         // maxHealth Update falls man mehr Health dazu bekommt
         _currentValue = _HealthComponent._currentHealth;
         _healthText.text = _currentValue + " / " + _maxValue;
 
-        base.FixedUpdate();
+        base.OnGUI();
     }
 }

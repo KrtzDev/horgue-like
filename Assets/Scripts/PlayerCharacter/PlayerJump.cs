@@ -96,15 +96,25 @@ public class PlayerJump : MonoBehaviour
 
     private void FallPhysics()
     {
-        if ((_character.CharacterRigidbody.velocity.y < _jumpVelocityFalloff || (_character.CharacterRigidbody.velocity.y > 0 && !_inputActions.Character.Jump.triggered)) && !_isGrounded)
+        if(_character.GetComponent<PlayerAbilities>().IsUsingJetpack)
         {
-            _character.CharacterRigidbody.velocity += _fallMultiplier * Physics.gravity.y * Vector3.up * Time.deltaTime;
-            _isJumping = true;
+            if ((_character.CharacterRigidbody.velocity.y < _jumpVelocityFalloff || (_character.CharacterRigidbody.velocity.y > 0 && !_inputActions.Character.Jump.triggered)) && !_isGrounded)
+            {
+                _character.CharacterRigidbody.velocity += _fallMultiplier * Physics.gravity.y * Vector3.up * Time.deltaTime;
+            }
         }
-
-        if (_isGrounded && _character.CharacterRigidbody.velocity.y <= 0 && _isJumping)
+        else
         {
-            ResetJumpAbility();
+            if ((_character.CharacterRigidbody.velocity.y < _jumpVelocityFalloff || (_character.CharacterRigidbody.velocity.y > 0 && !_inputActions.Character.Jump.triggered)) && !_isGrounded)
+            {
+                _character.CharacterRigidbody.velocity += _fallMultiplier * Physics.gravity.y * Vector3.up * Time.deltaTime;
+                _isJumping = true;
+            }
+
+            if (_isGrounded && _character.CharacterRigidbody.velocity.y <= 0 && _isJumping)
+            {
+                ResetJumpAbility();
+            }
         }
     }
 

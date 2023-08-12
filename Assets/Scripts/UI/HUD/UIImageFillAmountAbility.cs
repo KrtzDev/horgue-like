@@ -11,11 +11,11 @@ public class UIImageFillAmountAbility : UIImageFillAmount
         base.Awake();
     }
 
-    public override void FixedUpdate()
+    public override void OnGUI()
     {
         _maxValue = _playerMovementMoblity._currentMaxCD;
         _currentValue = _playerMovementMoblity._abilityCDTimer;
 
-        base.FixedUpdate();
+        base.OnGUI();
     }
 }

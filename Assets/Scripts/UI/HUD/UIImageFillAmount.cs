@@ -14,7 +14,7 @@ public abstract class UIImageFillAmount : MonoBehaviour
         }
     }
 
-    public virtual void FixedUpdate()
+    public virtual void OnGUI()
     {
         _imageToFill.fillAmount = _currentValue / _maxValue;
     }

@@ -35,4 +35,9 @@ public class EnemyAnimationController : MonoBehaviour
     {
         _enemyType.DoneShooting();
     }
+
+    public virtual void SetState(AI_StateID state)
+    {
+        _enemyType.SetState(state);
+    }
 }

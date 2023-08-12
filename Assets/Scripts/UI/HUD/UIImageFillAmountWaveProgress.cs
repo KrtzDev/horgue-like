@@ -27,7 +27,7 @@ public class UIImageFillAmountWaveProgress : UIImageFillAmount
         _CurrentLevelWave.text = "Level: " + GameManager.Instance._currentLevel;
 	}
 
-    public override void FixedUpdate()
+    public override void OnGUI()
     {
 		if (!GameManager.Instance) return;
 
@@ -63,6 +63,6 @@ public class UIImageFillAmountWaveProgress : UIImageFillAmount
         _enemiesKilledText.text = _enemiesKilled.ToString("000");
         _ScoreText.text = GameManager.Instance._currentScore.ToString("000");
 
-        base.FixedUpdate();
+        base.OnGUI();
     }
 }

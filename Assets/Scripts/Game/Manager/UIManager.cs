@@ -11,6 +11,7 @@ public class UIManager : Singleton<UIManager>
 	public PauseMenu PauseMenu { get; private set; }
 	public CraftingMenu CraftingMenu { get; private set; }
 	public GameObject GameUI { get; private set; }
+	public GameObject JetPackUI { get; private set; }
 	public ChooseAbility ChooseAbility { get; private set; }
 
 
@@ -107,6 +108,8 @@ public class UIManager : Singleton<UIManager>
 
 			GameUI = Instantiate(_gameUI_prefab);
 			GameUI.gameObject.SetActive(true);
+			JetPackUI = GameUI.gameObject.GetComponentInChildren<UIImageFillAmount_Jetpack>().gameObject;
+			JetPackUI.SetActive(false);
 
 			ChooseAbility = Instantiate(_chooseAbility_prefab);
 			ChooseAbility.gameObject.SetActive(true);

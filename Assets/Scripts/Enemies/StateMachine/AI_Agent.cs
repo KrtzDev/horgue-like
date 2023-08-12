@@ -46,7 +46,7 @@ public class AI_Agent : MonoBehaviour
         _stateMachine.RegisterState(new AI_State_Death());
     }
 
-    protected void SetState(AI_StateID state) => _stateMachine.ChangeState(state);
+    public void SetState(AI_StateID state) => _stateMachine.ChangeState(state);
 
     public void SetTarget(AI_Agent agent, Vector3 followPosition)
     {

@@ -14,7 +14,7 @@ public class PlayerAbilities : MonoBehaviour
     private PlayerInputMappings _inputActions;
 
     private bool _isUsingAbility;
-    private bool _buttonHeld;
+    public bool _buttonHeld;
 
     [Header("Which (one) Ability can be used?")]
 
@@ -30,16 +30,18 @@ public class PlayerAbilities : MonoBehaviour
     [SerializeField] private float _dashTime = 0.25f;
 
     [Header("Player Jetpack Ability")]
+    public bool IsUsingJetpack;
     [SerializeField] private GameObject _jetpackVisuals;
+    [SerializeField] private Transform _jetpackEffectPosition;
+    [SerializeField] private ParticleSystem _jetpackEffect;
     [SerializeField] private float _jetpackCD;
     [Range(0.0f, 100.0f)] public float jetpackFuel;
-    private float _maxJetpackFuel;
+    public float _maxJetpackFuel;
     [SerializeField] private float _energyExpansionRate;
-    [SerializeField] private float _jetpackForce;
-    private float _startMass;
-    [SerializeField] private float _massMultiplier;
-    private float _startHeight;
-    private float _currentHeight;
+    [SerializeField] private float _jetpackThrustForce;
+    [SerializeField] private float _jetpackHeatFallOffTime;
+    [SerializeField] private float _jetpackHeatFallOffMultiplier;
+    private float _jetpackActiveTimer;
 
     [Header("Player Earthquake Ability")]
     [SerializeField] private GameObject _earthquakeVisuals;
@@ -130,6 +132,7 @@ public class PlayerAbilities : MonoBehaviour
             else if (_canUseJetpackAbility && _abilityCDTimer <= 0)
             {
                 JetpackAbility();
+                JetpackParticleEffect();
             }
             else if (_canUseEarthquakeAbility && _abilityCDTimer <= 0)
             {
@@ -139,6 +142,10 @@ public class PlayerAbilities : MonoBehaviour
             {
                 StealthAbility();
             }
+        }
+        else if (ctx.started && _isUsingAbility && _canUseJetpackAbility && GameManager.Instance._playerCanUseAbilities)
+        {
+            JetpackParticleEffect();
         }
     }
 
@@ -195,62 +202,83 @@ public class PlayerAbilities : MonoBehaviour
 
         _maxJetpackFuel = jetpackFuel;
 
-        _startMass = _character.CharacterRigidbody.mass;
-        _startHeight = transform.position.y;
-
         _isUsingAbility = true;
+    }
+
+    private void JetpackParticleEffect()
+    {
+        ParticleSystem jp_effect = _jetpackEffect;
+        Instantiate(jp_effect, _jetpackEffectPosition);
     }
 
     private void JetpackForce()
     {
         if(_canUseJetpackAbility && _isUsingAbility)
         {
-            _currentHeight = transform.position.y;
-
-            if(_currentHeight > _startHeight + 1)
+            if (_buttonHeld && jetpackFuel > 0)
             {
-                if(_buttonHeld)
+                IsUsingJetpack = true;
+
+                _character.CharacterRigidbody.velocity = new Vector3(_character.CharacterRigidbody.velocity.x, 0, _character.CharacterRigidbody.velocity.z);
+
+                jetpackFuel -= _energyExpansionRate * Time.deltaTime;
+
+                _jetpackActiveTimer += Time.deltaTime;
+
+                float multiplier = 1;
+
+                if(_jetpackActiveTimer >= _jetpackHeatFallOffTime)
                 {
-                    _character.CharacterRigidbody.mass = _startMass * (1 + _massMultiplier *  (_currentHeight - _startHeight));
+                    if(_jetpackActiveTimer < 1)
+                    {
+                        multiplier = 1 - (1 * _jetpackHeatFallOffMultiplier);
+                    }
+                    else
+                    {
+                        multiplier = 1 - (_jetpackActiveTimer * _jetpackHeatFallOffMultiplier);
+                    }
                 }
-                else
-                {
-                    _character.CharacterRigidbody.mass = _startMass;
-                }
+
+                _character.CharacterRigidbody.AddForce(_character.CharacterRigidbody.transform.up * _jetpackThrustForce * multiplier, ForceMode.Impulse);
             }
-        }
+            else if (!_buttonHeld)
+            {
+                if(_jetpackActiveTimer > 0)
+                    _jetpackActiveTimer -= Time.deltaTime;
 
-        if(_buttonHeld && _canUseJetpackAbility && _isUsingAbility && jetpackFuel > 0)
-        {
-            Vector2 _jetpackDir = new Vector2(_character.CharacterRigidbody.velocity.x, _jetpackForce);
-            _character.CharacterRigidbody.AddForce(_jetpackDir, ForceMode.Force);
+                IsUsingJetpack = false;
+            }
 
-            jetpackFuel -= _energyExpansionRate * Time.deltaTime;
-        }
-        else if (jetpackFuel <= 0)
-        {
-            ResetJetpackAbility();
+            if (jetpackFuel <= 0)
+            {
+                ResetJetpackAbility();
+            }
         }
     }
 
     private void ResetJetpackAbility()
     {
+        IsUsingJetpack = false;
         _isUsingAbility = false;
-
-        jetpackFuel = _maxJetpackFuel;
-        _character.CharacterRigidbody.mass = _startMass;
+        _jetpackActiveTimer = 0;
 
         _jetpackVisuals.GetComponentInChildren<Animator>().SetBool("jetpackOn", false);
         _jetpackVisuals.GetComponentInChildren<Animator>().SetBool("jetpackOff", true);
 
         ResetAbilityTimer(_jetpackCD);
+        StartCoroutine(ResetJetpackFuel());
+    }
+
+    private IEnumerator ResetJetpackFuel()
+    {
+        yield return new WaitForSeconds(_jetpackCD);
+        jetpackFuel = _maxJetpackFuel;
     }
 
     // Earthquake
 
     private void EarthquakeAbility()
     {
-
     }
 
     private void ResetEarthquakeAbility()

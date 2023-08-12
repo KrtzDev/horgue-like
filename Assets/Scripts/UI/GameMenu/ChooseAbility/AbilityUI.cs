@@ -294,6 +294,8 @@ public class AbilityUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
                 playerAbilities._canUseJetpackAbility = true;
                 playerAbilities._canUseEarthquakeAbility = false;
                 playerAbilities._canUseStealthAbility = false;
+
+                UIManager.Instance.JetPackUI.SetActive(true);
                 break;
             case "Earthquake":
                 playerAbilities._canUseDashAbility = false;
