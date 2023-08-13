@@ -18,6 +18,7 @@ MonoBehaviour:
     cooldown: 2.5
     projectileSize: 0.14
     critChance: 1.1
+    critDamage: 0
     range: 393.75
     capacity: 30
     attackPattern: {fileID: 11400000, guid: cb578d9958690974390a1eba6fa458d1, type: 2}
@@ -25,7 +26,7 @@ MonoBehaviour:
     statusEffect: {fileID: 0}
   _weaponSkeleton: {fileID: 4852173439239307193, guid: 534ea9bec0f3ace4cb13174feb65375c,
     type: 3}
-  weaponSprite: {fileID: 0}
+  weaponSprite: {fileID: 21300000, guid: eca85a8e4e3a2ff4fb87267d50041074, type: 3}
   defaultGrip: {fileID: 11400000, guid: b98793dca6bcd854bbc17cd226a39a18, type: 2}
   defaultBarrel: {fileID: 11400000, guid: 8a83f155cd04e2344b0ef2b3bc798cfa, type: 2}
   defaultMagazine: {fileID: 11400000, guid: fca930e11b1b96c44aa54114ff5a2047, type: 2}

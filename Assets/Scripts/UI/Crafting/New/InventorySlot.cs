@@ -6,12 +6,18 @@ using UnityEngine.UI;
 public class InventorySlot : Selectable
 {
 	public Action OnSubmit;
+	public Action<WeaponPart> OnSell;
+	public Action OnSelected;
+
+	public HoldButton sellButton;
 
 	[SerializeField]
-	private GameObject _selectionIndicator;
+	private Image _selectionIndicator;
 
 	[HideInInspector]
 	private WeaponPartUI _weaponPart;
+
+	private bool _selected;
 
 	protected override void Awake()
 	{
@@ -19,19 +25,51 @@ public class InventorySlot : Selectable
 		OnSubmit += StartEquip;
 	}
 
+	public bool HasWeaponPart()
+	{
+		return _weaponPart != null;
+	}
+
+	public WeaponPartUI GetWeaponPart()
+	{
+		return _weaponPart;
+	}
 
 	public void SetWeaponPart(WeaponPartUI weaponPart)
 	{
-		this._weaponPart = weaponPart;
+		_weaponPart = weaponPart;
+
+		sellButton.OnButtonExecute += Sell;
+	}
+
+	private void Sell()
+	{ 
+		if (!_selected || _weaponPart == null)
+			return;
+
+		_selected = false;
+
+		GameManager.Instance.inventory.Wallet.Store(_weaponPart.weaponPart.value);
+		GameManager.Instance.inventory.RemoveFromInventory(_weaponPart.weaponPart);
+
+		OnSell.Invoke(_weaponPart.weaponPart);
+		sellButton.OnButtonExecute -= Sell;
+
+		_weaponPart.DestroyToolTip();
+		Destroy(_weaponPart.gameObject);
 	}
 
 	public override void OnSelect(BaseEventData eventData)
 	{
 		base.OnSelect(eventData);
-		_selectionIndicator.SetActive(true);
+
+		OnSelected.Invoke();
+		_selectionIndicator.enabled= true;
 
 		if (_weaponPart)
 			_weaponPart.Select();
+
+		_selected = true;
 	}
 
 	public override void OnDeselect(BaseEventData eventData)
@@ -41,11 +79,13 @@ public class InventorySlot : Selectable
 
 		base.OnDeselect(eventData);
 		Deselect();
+
+		_selected = false;
 	}
 
 	public void Deselect()
 	{
-		_selectionIndicator.SetActive(false);
+		_selectionIndicator.enabled = false;
 	}
 
 	private void StartEquip()

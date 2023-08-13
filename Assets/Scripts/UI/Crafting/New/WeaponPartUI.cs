@@ -85,7 +85,7 @@ public class WeaponPartUI : MonoBehaviour, IPointerClickHandler, IPointerEnterHa
 
 		DestroyToolTip();
 
-		weaponUI.ShowWeaponStats(weaponUI._weapon.CalculateWeaponStats(weaponUI._weapon));
+		weaponUI.ShowWeaponStats(weaponUI.weapon.CalculateWeaponStats(weaponUI.weapon));
 	}
 
 	public void OnBeginDrag(PointerEventData eventData)

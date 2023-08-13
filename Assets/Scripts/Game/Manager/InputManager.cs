@@ -1,18 +1,12 @@
-using UnityEngine;
-
 public class InputManager : Singleton<InputManager>
 {
-	[SerializeField] private PlayerInputMappings _inputActions;
 
-	public PlayerInputMappings CharacterInputActions
+	public PlayerInputMappings CharacterInputActions { get; private set; }
+
+	protected override void Awake()
 	{
-		get
-		{
-			if (_inputActions == null)
-				_inputActions = new PlayerInputMappings();
-
-			return _inputActions;
-		}
+		base.Awake();
+		CharacterInputActions = new PlayerInputMappings();
 	}
 
 	public void DisableCharacterInputs() => CharacterInputActions?.Disable();

@@ -91,8 +91,8 @@ public class UIManager : Singleton<UIManager>
 
 		if (SceneManager.GetActiveScene().name == "SCENE_Weapon_Crafting")
 		{
-			CraftingMenu = Instantiate(_craftingMenuUI_prefab);
-			CraftingMenu.gameObject.SetActive(true);
+			//CraftingMenu = Instantiate(_craftingMenuUI_prefab);
+			//CraftingMenu.gameObject.SetActive(true);
 			return;
 		}
 

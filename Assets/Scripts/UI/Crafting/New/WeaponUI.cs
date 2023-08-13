@@ -4,6 +4,8 @@ using UnityEngine.UI;
 
 public class WeaponUI : MonoBehaviour
 {
+	public Weapon weapon;
+
 	[Header("Header")]
 	[SerializeField]
 	private TMP_Text _weaponName;
@@ -35,18 +37,17 @@ public class WeaponUI : MonoBehaviour
 	[SerializeField]
 	private StatUI _statUI_prefab;
 
-	public Weapon _weapon;
 
 	public void Initialize(Weapon weapon)
 	{
-		_weapon = weapon;
+		this.weapon = weapon;
 
 		ShowWeaponName();
 		ShowWeaponBackground();
 		InitializeWeaponSlots();
 		ShowWeaponParts();
 
-		ShowWeaponStats(_weapon.CalculateWeaponStats(_weapon));
+		ShowWeaponStats(this.weapon.CalculateWeaponStats(this.weapon));
 	}
 
 	public bool SetNewWeaponPart(WeaponPartUI newWeaponPartUI, WeaponPartSlot weaponPartSlot)
@@ -55,33 +56,33 @@ public class WeaponUI : MonoBehaviour
 		{
 			if (newWeaponPartUI.weaponPart is Grip)
 			{
-				_weapon.grip = newWeaponPartUI.weaponPart as Grip;
+				weapon.grip = newWeaponPartUI.weaponPart as Grip;
 			}
 			else if (newWeaponPartUI.weaponPart is Barrel)
 			{
-				_weapon.barrel = newWeaponPartUI.weaponPart as Barrel;
+				weapon.barrel = newWeaponPartUI.weaponPart as Barrel;
 			}
 			else if (newWeaponPartUI.weaponPart is Magazine)
 			{
-				_weapon.magazine = newWeaponPartUI.weaponPart as Magazine;
+				weapon.magazine = newWeaponPartUI.weaponPart as Magazine;
 			}
 			else if (newWeaponPartUI.weaponPart is Ammunition)
 			{
-				_weapon.ammunition = newWeaponPartUI.weaponPart as Ammunition;
+				weapon.ammunition = newWeaponPartUI.weaponPart as Ammunition;
 			}
 			else if (newWeaponPartUI.weaponPart is TriggerMechanism)
 			{
-				_weapon.triggerMechanism = newWeaponPartUI.weaponPart as TriggerMechanism;
+				weapon.triggerMechanism = newWeaponPartUI.weaponPart as TriggerMechanism;
 			}
 			else if (newWeaponPartUI.weaponPart is Sight)
 			{
-				_weapon.sight = newWeaponPartUI.weaponPart as Sight;
+				weapon.sight = newWeaponPartUI.weaponPart as Sight;
 			}
 
 			newWeaponPartUI.isSlotted = true;
-			_weapon.Initialize(_weapon.OwningTransform);
+			weapon.Initialize(weapon.OwningTransform);
 
-			Initialize(_weapon);
+			Initialize(weapon);
 
 			return true;
 		}
@@ -90,12 +91,12 @@ public class WeaponUI : MonoBehaviour
 
 	private void ShowWeaponName()
 	{
-		_weaponName.text = _weapon.name;
+		_weaponName.text = weapon.name;
 	}
 
 	private void ShowWeaponBackground()
 	{
-		_weaponImage.sprite = _weapon.weaponSprite;
+		_weaponImage.sprite = weapon.weaponSprite;
 	}
 
 	private void ShowWeaponParts()
@@ -103,39 +104,39 @@ public class WeaponUI : MonoBehaviour
 		WeaponPartUI rewardUI;
 
 		rewardUI = Instantiate(_rewardUI_prefab, _ammunitionParent.transform);
-		rewardUI.Initialize(_weapon.ammunition);
+		rewardUI.Initialize(weapon.ammunition);
 		rewardUI.isSlotted = true;
 		rewardUI.weaponUI = this;
 		rewardUI = Instantiate(_rewardUI_prefab, _barrelParent.transform);
-		rewardUI.Initialize(_weapon.barrel);
+		rewardUI.Initialize(weapon.barrel);
 		rewardUI.isSlotted = true;
 		rewardUI.weaponUI = this;
 		rewardUI = Instantiate(_rewardUI_prefab, _gripParent.transform);
-		rewardUI.Initialize(_weapon.grip);
+		rewardUI.Initialize(weapon.grip);
 		rewardUI.isSlotted = true;
 		rewardUI.weaponUI = this;
 		rewardUI = Instantiate(_rewardUI_prefab, _magazineParent.transform);
-		rewardUI.Initialize(_weapon.magazine);
+		rewardUI.Initialize(weapon.magazine);
 		rewardUI.isSlotted = true;
 		rewardUI.weaponUI = this;
 		rewardUI = Instantiate(_rewardUI_prefab, _sightParent.transform);
-		rewardUI.Initialize(_weapon.sight);
+		rewardUI.Initialize(weapon.sight);
 		rewardUI.isSlotted = true;
 		rewardUI.weaponUI = this;
 		rewardUI = Instantiate(_rewardUI_prefab, _triggerParent.transform);
-		rewardUI.Initialize(_weapon.triggerMechanism);
+		rewardUI.Initialize(weapon.triggerMechanism);
 		rewardUI.isSlotted = true;
 		rewardUI.weaponUI = this;
 	}
 
 	private void InitializeWeaponSlots()
 	{
-		_ammunitionParent.Initialize(this, _weapon.ammunition);
-		_barrelParent.Initialize(this, _weapon.barrel);
-		_gripParent.Initialize(this, _weapon.grip);
-		_magazineParent.Initialize(this, _weapon.magazine);
-		_sightParent.Initialize(this, _weapon.sight);
-		_triggerParent.Initialize(this, _weapon.triggerMechanism);
+		_ammunitionParent.Initialize(this, weapon.ammunition);
+		_barrelParent.Initialize(this, weapon.barrel);
+		_gripParent.Initialize(this, weapon.grip);
+		_magazineParent.Initialize(this, weapon.magazine);
+		_sightParent.Initialize(this, weapon.sight);
+		_triggerParent.Initialize(this, weapon.triggerMechanism);
 	}
 
 	private void ClearWeaponStats()
@@ -266,6 +267,6 @@ public class WeaponUI : MonoBehaviour
 
 	public void ShowPotentialUpdatedWeaponStats(WeaponPart weaponPart)
 	{
-		ShowWeaponStats(_weapon.CalculatePotentialStats(weaponPart), true);
+		ShowWeaponStats(weapon.CalculatePotentialStats(weaponPart), true);
 	}
 }
