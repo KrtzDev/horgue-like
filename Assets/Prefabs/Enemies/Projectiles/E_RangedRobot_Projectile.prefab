@@ -14,9 +14,9 @@ GameObject:
   - component: {fileID: -4007479725491826198}
   - component: {fileID: 6064448851983090240}
   - component: {fileID: 8331073926669857340}
-  - component: {fileID: -2540252099999053896}
+  - component: {fileID: 7732120427448389330}
   m_Layer: 8
-  m_Name: P_Enemy_SniperProjectile
+  m_Name: E_RangedRobot_Projectile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -31,7 +31,7 @@ Transform:
   m_GameObject: {fileID: 8451927325676435795}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.4, y: 0.4, z: 0.4}
+  m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -133,7 +133,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 576
   baseDamage: 8
---- !u!96 &-2540252099999053896
+--- !u!96 &7732120427448389330
 TrailRenderer:
   serializedVersion: 2
   m_ObjectHideFlags: 0

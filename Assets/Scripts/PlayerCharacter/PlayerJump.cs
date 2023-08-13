@@ -96,14 +96,7 @@ public class PlayerJump : MonoBehaviour
 
     private void FallPhysics()
     {
-        if(_character.GetComponent<PlayerAbilities>().IsUsingJetpack)
-        {
-            if ((_character.CharacterRigidbody.velocity.y < _jumpVelocityFalloff || (_character.CharacterRigidbody.velocity.y > 0 && !_inputActions.Character.Jump.triggered)) && !_isGrounded)
-            {
-                _character.CharacterRigidbody.velocity += _fallMultiplier * Physics.gravity.y * Vector3.up * Time.deltaTime;
-            }
-        }
-        else
+        if(!_character.GetComponent<PlayerAbilities>().IsUsingJetpack)
         {
             if ((_character.CharacterRigidbody.velocity.y < _jumpVelocityFalloff || (_character.CharacterRigidbody.velocity.y > 0 && !_inputActions.Character.Jump.triggered)) && !_isGrounded)
             {

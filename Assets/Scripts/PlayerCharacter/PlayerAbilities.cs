@@ -13,8 +13,8 @@ public class PlayerAbilities : MonoBehaviour
     private PlayerMovement _playerMovement;
     private PlayerInputMappings _inputActions;
 
-    private bool _isUsingAbility;
-    public bool _buttonHeld;
+    public bool IsUsingAbility;
+    public bool ButtonHeld;
 
     [Header("Which (one) Ability can be used?")]
 
@@ -25,6 +25,8 @@ public class PlayerAbilities : MonoBehaviour
 
     [Header("Player Dash Ability")]
     [SerializeField] private GameObject _dashVisuals;
+    [SerializeField] private Transform _dashEffectPosition;
+    [SerializeField] private ParticleSystem _dashEffect;
     [SerializeField] private float _dashCD;
     [SerializeField] private float _dashForce = 30;
     [SerializeField] private float _dashTime = 0.25f;
@@ -41,7 +43,7 @@ public class PlayerAbilities : MonoBehaviour
     [SerializeField] private float _jetpackThrustForce;
     [SerializeField] private float _jetpackHeatFallOffTime;
     [SerializeField] private float _jetpackHeatFallOffMultiplier;
-    private float _jetpackActiveTimer;
+    [SerializeField] private float _jetpackActiveTimer;
 
     [Header("Player Earthquake Ability")]
     [SerializeField] private GameObject _earthquakeVisuals;
@@ -96,7 +98,7 @@ public class PlayerAbilities : MonoBehaviour
         if (ctx.canceled)
         {
             Debug.Log("Release Button");
-            _buttonHeld = false;
+            ButtonHeld = false;
         }
     }
 
@@ -120,10 +122,10 @@ public class PlayerAbilities : MonoBehaviour
     {
         if(ctx.started)
         {
-            _buttonHeld = true;
+            ButtonHeld = true;
         }
 
-        if (ctx.started && !_isUsingAbility && GameManager.Instance._playerCanUseAbilities)
+        if (ctx.started && !IsUsingAbility && GameManager.Instance._playerCanUseAbilities)
         {
             if (_canUseDashAbility && _abilityCDTimer <= 0)
             {
@@ -143,7 +145,7 @@ public class PlayerAbilities : MonoBehaviour
                 StealthAbility();
             }
         }
-        else if (ctx.started && _isUsingAbility && _canUseJetpackAbility && GameManager.Instance._playerCanUseAbilities)
+        else if (ctx.started && IsUsingAbility && _canUseJetpackAbility && GameManager.Instance._playerCanUseAbilities)
         {
             JetpackParticleEffect();
         }
@@ -165,7 +167,7 @@ public class PlayerAbilities : MonoBehaviour
     private void DashAbility()
     {
         _playerMovement.CanMove = false;
-        _isUsingAbility = true;
+        IsUsingAbility = true;
 
         Vector3 dashDir = transform.TransformDirection(Vector3.forward);
         Vector3 forceToApply = dashDir * _dashForce;
@@ -174,7 +176,15 @@ public class PlayerAbilities : MonoBehaviour
         _character.CharacterRigidbody.useGravity = false;
         _character.CharacterRigidbody.AddForce(forceToApply, ForceMode.Impulse);
 
+        DashParticleEffect();
+
         StartCoroutine(StopDash());
+    }
+
+    private void DashParticleEffect()
+    {
+        ParticleSystem jp_effect = _dashEffect;
+        Instantiate(jp_effect, _dashEffectPosition);
     }
 
     private IEnumerator StopDash()
@@ -188,7 +198,7 @@ public class PlayerAbilities : MonoBehaviour
     {
         _playerMovement.CanMove = true;
         _character.CharacterRigidbody.useGravity = true;
-        _isUsingAbility = false;
+        IsUsingAbility = false;
 
         ResetAbilityTimer(_dashCD);
     }
@@ -202,7 +212,7 @@ public class PlayerAbilities : MonoBehaviour
 
         _maxJetpackFuel = jetpackFuel;
 
-        _isUsingAbility = true;
+        IsUsingAbility = true;
     }
 
     private void JetpackParticleEffect()
@@ -213,13 +223,11 @@ public class PlayerAbilities : MonoBehaviour
 
     private void JetpackForce()
     {
-        if(_canUseJetpackAbility && _isUsingAbility)
+        if(_canUseJetpackAbility && IsUsingAbility)
         {
-            if (_buttonHeld && jetpackFuel > 0)
+            if (ButtonHeld && jetpackFuel > 0)
             {
                 IsUsingJetpack = true;
-
-                _character.CharacterRigidbody.velocity = new Vector3(_character.CharacterRigidbody.velocity.x, 0, _character.CharacterRigidbody.velocity.z);
 
                 jetpackFuel -= _energyExpansionRate * Time.deltaTime;
 
@@ -239,12 +247,13 @@ public class PlayerAbilities : MonoBehaviour
                     }
                 }
 
+                _character.CharacterRigidbody.velocity = new Vector3(_character.CharacterRigidbody.velocity.x, 0, _character.CharacterRigidbody.velocity.z);
                 _character.CharacterRigidbody.AddForce(_character.CharacterRigidbody.transform.up * _jetpackThrustForce * multiplier, ForceMode.Impulse);
             }
-            else if (!_buttonHeld)
+            else if (!ButtonHeld)
             {
                 if(_jetpackActiveTimer > 0)
-                    _jetpackActiveTimer -= Time.deltaTime;
+                    _jetpackActiveTimer -= 5 * Time.deltaTime;
 
                 IsUsingJetpack = false;
             }
@@ -259,7 +268,7 @@ public class PlayerAbilities : MonoBehaviour
     private void ResetJetpackAbility()
     {
         IsUsingJetpack = false;
-        _isUsingAbility = false;
+        IsUsingAbility = false;
         _jetpackActiveTimer = 0;
 
         _jetpackVisuals.GetComponentInChildren<Animator>().SetBool("jetpackOn", false);
@@ -290,7 +299,7 @@ public class PlayerAbilities : MonoBehaviour
 
     private void StealthAbility()
     {
-        _isUsingAbility = true;
+        IsUsingAbility = true;
 
         _decoy.transform.parent = null;
         _decoy.GetComponent<CapsuleCollider>().enabled = true;
@@ -326,7 +335,7 @@ public class PlayerAbilities : MonoBehaviour
 
     private void ResetStealthbility()
     {
-        _isUsingAbility = false;
+        IsUsingAbility = false;
 
         for (int i = 0; i < _enemySpawner._enemyObjectPoolParent.transform.childCount; i++)
         {
