@@ -14,11 +14,19 @@ public class Inventory : MonoBehaviour
 		_weaponParts.Add(weaponPartToAdd);
 	}
 
+	public void RemoveFromInventory(int index)
+	{
+		_weaponParts.RemoveAt(index);
+	}
+
+	public void RemoveFromInventory(WeaponPart weaponPart)
+	{
+		_weaponParts.Remove(weaponPart);
+	}
+
 	public WeaponPart GetFromInventory(int index)
 	{
-		WeaponPart weaponPart = _weaponParts[index];
-		_weaponParts.RemoveAt(index);
-		return weaponPart;
+		return _weaponParts[index];
 	}
 
 	public List<WeaponPart> GetAll()

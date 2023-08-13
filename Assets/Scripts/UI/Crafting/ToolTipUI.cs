@@ -6,6 +6,8 @@ using UnityEngine.UI;
 public class ToolTipUI : Selectable
 {
 	public event Action<ToolTipUI> OnBuy;
+	public event Action<WeaponPart> OnSelected;
+
 	[SerializeField]
 	public HoldButton buyButton;
 
@@ -96,6 +98,8 @@ public class ToolTipUI : Selectable
 	public override void OnSelect(BaseEventData eventData)
 	{
 		base.OnSelect(eventData);
+		OnSelected.Invoke(weaponPart);
+
 		_selectionIndicator.enabled = true;
 		_selected = true;
 	}
