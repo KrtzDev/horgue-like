@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 public class PlayerJump : MonoBehaviour
 {
 
-    private bool _isGrounded;
+    public bool IsGrounded;
     [SerializeField] private float _bufferJumpCheckValueY;
     [SerializeField] private float _groundCheckY;
     [SerializeField] private Vector3 _groundCheckBox;
@@ -54,11 +54,11 @@ public class PlayerJump : MonoBehaviour
 
     private void Jump(InputAction.CallbackContext ctx)
     {
-        if (ctx.performed && !_isJumping && _isGrounded && !_jumpAttempt)
+        if (ctx.performed && !_isJumping && IsGrounded && !_jumpAttempt)
         {
             JumpAbility();
         }
-        else if (ctx.performed && _isJumping && !_isGrounded && !_jumpAttempt)
+        else if (ctx.performed && _isJumping && !IsGrounded && !_jumpAttempt)
         {
             if(Physics.Raycast(this.transform.position, Vector3.down, _bufferJumpCheckValueY, _character.WalkLayer))
             {
@@ -73,11 +73,11 @@ public class PlayerJump : MonoBehaviour
 
         if (hitColliders.Length > 0 || Physics.Raycast(this.transform.position, Vector2.down, _groundCheckY, _character.WalkLayer))
         {
-            _isGrounded = true;
+            IsGrounded = true;
         }
         else
         {
-            _isGrounded = false;
+            IsGrounded = false;
         }
     }
 
@@ -98,13 +98,13 @@ public class PlayerJump : MonoBehaviour
     {
         if(!_character.GetComponent<PlayerAbilities>().IsUsingJetpack)
         {
-            if ((_character.CharacterRigidbody.velocity.y < _jumpVelocityFalloff || (_character.CharacterRigidbody.velocity.y > 0 && !_inputActions.Character.Jump.triggered)) && !_isGrounded)
+            if ((_character.CharacterRigidbody.velocity.y < _jumpVelocityFalloff || (_character.CharacterRigidbody.velocity.y > 0 && !_inputActions.Character.Jump.triggered)) && !IsGrounded)
             {
                 _character.CharacterRigidbody.velocity += _fallMultiplier * Physics.gravity.y * Vector3.up * Time.deltaTime;
                 _isJumping = true;
             }
 
-            if (_isGrounded && _character.CharacterRigidbody.velocity.y <= 0 && _isJumping)
+            if (IsGrounded && _character.CharacterRigidbody.velocity.y <= 0 && _isJumping)
             {
                 ResetJumpAbility();
             }

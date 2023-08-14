@@ -9,7 +9,7 @@ public class PlayerAbilities : MonoBehaviour
     public float _abilityCDTimer;
     public float _currentMaxCD;
 
-    private PlayerCharacter _character;
+    private PlayerCharacter _playerCharacter;
     private PlayerMovement _playerMovement;
     private PlayerInputMappings _inputActions;
 
@@ -47,7 +47,16 @@ public class PlayerAbilities : MonoBehaviour
 
     [Header("Player Earthquake Ability")]
     [SerializeField] private GameObject _earthquakeVisuals;
+    [SerializeField] private GameObject _earthquakePreviewPrefab;
+    [SerializeField] private GameObject _earthquakePrefab;
+    [SerializeField] private Transform _earthquakeSpawnPosition;
+    [SerializeField] private Transform _earthquakeEffectPosition;
+    [SerializeField] private ParticleSystem _earthquakeEffect;
     [SerializeField] private float _earthquakeCD;
+    [SerializeField] private float _earthquakeRadius;
+    public float _earthquakeLoadUpTime;
+    public float _earthquakeActiveTime;
+    [SerializeField] private float _earthquakeForce;
 
     [Header("Player Stealth Ability")]
     [SerializeField] private GameObject _decoy;
@@ -71,7 +80,7 @@ public class PlayerAbilities : MonoBehaviour
 
     private void Start()
     {
-        _character = GetComponent<PlayerCharacter>();
+        _playerCharacter = GetComponent<PlayerCharacter>();
         _playerMovement = GetComponent<PlayerMovement>();
     }
 
@@ -136,7 +145,7 @@ public class PlayerAbilities : MonoBehaviour
                 JetpackAbility();
                 JetpackParticleEffect();
             }
-            else if (_canUseEarthquakeAbility && _abilityCDTimer <= 0)
+            else if (_canUseEarthquakeAbility && _playerCharacter.GetComponent<PlayerJump>().IsGrounded && _abilityCDTimer <= 0)
             {
                 EarthquakeAbility();
             }
@@ -172,9 +181,9 @@ public class PlayerAbilities : MonoBehaviour
         Vector3 dashDir = transform.TransformDirection(Vector3.forward);
         Vector3 forceToApply = dashDir * _dashForce;
 
-        _character.CharacterRigidbody.velocity = Vector3.zero;
-        _character.CharacterRigidbody.useGravity = false;
-        _character.CharacterRigidbody.AddForce(forceToApply, ForceMode.Impulse);
+        _playerCharacter.CharacterRigidbody.velocity = Vector3.zero;
+        _playerCharacter.CharacterRigidbody.useGravity = false;
+        _playerCharacter.CharacterRigidbody.AddForce(forceToApply, ForceMode.Impulse);
 
         DashParticleEffect();
 
@@ -197,7 +206,7 @@ public class PlayerAbilities : MonoBehaviour
     private void ResetDashAbility()
     {
         _playerMovement.CanMove = true;
-        _character.CharacterRigidbody.useGravity = true;
+        _playerCharacter.CharacterRigidbody.useGravity = true;
         IsUsingAbility = false;
 
         ResetAbilityTimer(_dashCD);
@@ -247,8 +256,8 @@ public class PlayerAbilities : MonoBehaviour
                     }
                 }
 
-                _character.CharacterRigidbody.velocity = new Vector3(_character.CharacterRigidbody.velocity.x, 0, _character.CharacterRigidbody.velocity.z);
-                _character.CharacterRigidbody.AddForce(_character.CharacterRigidbody.transform.up * _jetpackThrustForce * multiplier, ForceMode.Impulse);
+                _playerCharacter.CharacterRigidbody.velocity = new Vector3(_playerCharacter.CharacterRigidbody.velocity.x, 0, _playerCharacter.CharacterRigidbody.velocity.z);
+                _playerCharacter.CharacterRigidbody.AddForce(_playerCharacter.CharacterRigidbody.transform.up * _jetpackThrustForce * multiplier, ForceMode.Impulse);
             }
             else if (!ButtonHeld)
             {
@@ -288,10 +297,48 @@ public class PlayerAbilities : MonoBehaviour
 
     private void EarthquakeAbility()
     {
+        // Instantiate Circle
+
+        IsUsingAbility = true;
+
+        GameObject earthquakePreview = _earthquakePreviewPrefab;
+        earthquakePreview.transform.localScale = new Vector3(_earthquakeRadius, earthquakePreview.transform.localScale.y, _earthquakeRadius);
+        Instantiate(earthquakePreview, _earthquakeSpawnPosition.transform.position, Quaternion.identity);
+
+        StartCoroutine(Earthquake(_earthquakeSpawnPosition.transform.position));
+    }
+
+    private IEnumerator Earthquake(Vector3 spawnPos)
+    {
+        yield return new WaitForSeconds(_earthquakeLoadUpTime);
+
+        // Earthquake
+
+        GameObject earthquake = _earthquakePrefab;
+        earthquake.transform.localScale = new Vector3(_earthquakeRadius, earthquake.transform.localScale.y, _earthquakeRadius);
+        Instantiate(earthquake, spawnPos, Quaternion.identity);
+
+        EarthquakeParticleEffect(spawnPos);
+
+        yield return new WaitForSeconds(_earthquakeActiveTime);
+
+        ResetEarthquakeAbility();
+    }
+
+    private void EarthquakeParticleEffect(Vector3 spawnPos)
+    {
+        ParticleSystem eq_effect = _earthquakeEffect;
+        ParticleSystem.ShapeModule shape = eq_effect.shape;
+        
+        shape.radius = _earthquakeRadius / 2;
+
+        Instantiate(eq_effect, spawnPos, Quaternion.identity);
     }
 
     private void ResetEarthquakeAbility()
     {
+        IsUsingAbility = false;
+
         ResetAbilityTimer(_earthquakeCD);
     }
 

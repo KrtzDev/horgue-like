@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5387054103721467128}
   - component: {fileID: 3405687798162579502}
   - component: {fileID: 9081674497254707955}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cone_02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -491,7 +491,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 2826
+  m_VersionIndex: 2898
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -658,7 +658,7 @@ GameObject:
   - component: {fileID: 9106352691889787588}
   - component: {fileID: 4647542219760387388}
   - component: {fileID: 1401401407049474815}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1136,7 +1136,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 2701
+  m_VersionIndex: 2773
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -1254,6 +1254,8 @@ Transform:
   - {fileID: 8562356599663256226}
   - {fileID: 7757839291102061947}
   - {fileID: 4159363568575415937}
+  - {fileID: 515180688252245660}
+  - {fileID: 7390447292559187016}
   m_Father: {fileID: 5497117873432566793}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1354,7 +1356,7 @@ GameObject:
   - component: {fileID: 7053067738666766258}
   - component: {fileID: 69098147822727501}
   - component: {fileID: 6245865877825404180}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cone_02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1832,7 +1834,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 2321
+  m_VersionIndex: 2393
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -1964,7 +1966,7 @@ GameObject:
   - component: {fileID: 7245982845157149606}
   - component: {fileID: 5424324705743078158}
   - component: {fileID: 3716682343730746505}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cone_03
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2442,7 +2444,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 2874
+  m_VersionIndex: 2946
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -2540,7 +2542,7 @@ GameObject:
   - component: {fileID: 4524537571736217418}
   - component: {fileID: 3401508882462958616}
   - component: {fileID: 1313446770413010266}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cone_03
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3018,7 +3020,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 2829
+  m_VersionIndex: 2901
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -3231,7 +3233,7 @@ GameObject:
   - component: {fileID: 5129446249208250340}
   - component: {fileID: 4530456906628713275}
   - component: {fileID: 2405866279000959541}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cone_02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3709,7 +3711,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 2874
+  m_VersionIndex: 2946
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -3807,7 +3809,7 @@ GameObject:
   - component: {fileID: 6789239559136551213}
   - component: {fileID: 3971160102951053310}
   - component: {fileID: 5617527763263120230}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cone_04
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4285,7 +4287,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 2612
+  m_VersionIndex: 2684
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -4379,7 +4381,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7336742999931250485}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: HitParticlePosition
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4786,6 +4788,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 613b59678034fa2419c1312da8d8a26d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  IsGrounded: 0
   _bufferJumpCheckValueY: 1.75
   _groundCheckY: 0.525
   _groundCheckBox: {x: 0.55, y: 0.3, z: 0.55}
@@ -4850,14 +4853,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _abilityCDTimer: 0
   _currentMaxCD: 0
-  _buttonHeld: 0
+  IsUsingAbility: 0
+  ButtonHeld: 0
   _canUseDashAbility: 0
   _canUseJetpackAbility: 0
   _canUseEarthquakeAbility: 0
   _canUseStealthAbility: 0
   _dashVisuals: {fileID: 7501021514167150150}
-  _dashEffectPosition: {fileID: 0}
-  _dashEffect: {fileID: 0}
+  _dashEffectPosition: {fileID: 6880873398517538318}
+  _dashEffect: {fileID: 8581875668392718890, guid: 0ba155d033d3768479d321f5236b19a3,
+    type: 3}
   _dashCD: 3
   _dashForce: 30
   _dashTime: 0.5
@@ -4875,7 +4880,19 @@ MonoBehaviour:
   _jetpackHeatFallOffMultiplier: 0.225
   _jetpackActiveTimer: 0
   _earthquakeVisuals: {fileID: 896446014685434785}
+  _earthquakePreviewPrefab: {fileID: 6982214405592628148, guid: 6f05dd2b089c80e4ca09adc01a09c03e,
+    type: 3}
+  _earthquakePrefab: {fileID: 6982214405592628148, guid: c457ac614118fb44a9ecf625b5001528,
+    type: 3}
+  _earthquakeSpawnPosition: {fileID: 515180688252245660}
+  _earthquakeEffectPosition: {fileID: 7390447292559187016}
+  _earthquakeEffect: {fileID: 838511276648990624, guid: b67426d4377f4ad44ac576b1339cef39,
+    type: 3}
   _earthquakeCD: 10
+  _earthquakeRadius: 6
+  _earthquakeLoadUpTime: 0.75
+  _earthquakeActiveTime: 1.25
+  _earthquakeForce: 15
   _decoy: {fileID: 6670527697290465931}
   _stealthCD: 10
   _stealthTime: 4
@@ -5204,7 +5221,7 @@ GameObject:
   - component: {fileID: 803117915261839701}
   - component: {fileID: 4279505032899068841}
   - component: {fileID: 8542766149504412296}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cone_04
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5682,7 +5699,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 2734
+  m_VersionIndex: 2806
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -5780,7 +5797,7 @@ GameObject:
   - component: {fileID: 4566776835148780116}
   - component: {fileID: 3105792875412467603}
   - component: {fileID: 9017652264775651}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cone_03
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6258,7 +6275,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 2615
+  m_VersionIndex: 2687
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -6439,7 +6456,7 @@ GameObject:
   - component: {fileID: 6222337614129871561}
   - component: {fileID: 1899136931488529208}
   - component: {fileID: 2492542411501287927}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Headband
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12493,7 +12510,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 6100
+  m_VersionIndex: 6457
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -12619,6 +12636,37 @@ Transform:
   m_Father: {fileID: 8549999435292742993}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &3518808455545556340
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7390447292559187016}
+  m_Layer: 6
+  m_Name: ParticlePosition
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7390447292559187016
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3518808455545556340}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: -1, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8549999435292742993}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!1 &3589619316332609759
 GameObject:
   m_ObjectHideFlags: 0
@@ -12632,7 +12680,7 @@ GameObject:
   - component: {fileID: 6318363608613777380}
   - component: {fileID: 4568984579835103857}
   - component: {fileID: 4358526760482247259}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13110,7 +13158,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 2820
+  m_VersionIndex: 2892
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -13208,7 +13256,7 @@ GameObject:
   - component: {fileID: 6891047468272570968}
   - component: {fileID: 6238809200469405135}
   - component: {fileID: 1712122845024190746}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cone_05
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13686,7 +13734,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 2710
+  m_VersionIndex: 2782
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -13885,6 +13933,37 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &4038930745211271067
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 515180688252245660}
+  m_Layer: 6
+  m_Name: SpawnPosition
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &515180688252245660
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4038930745211271067}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.95, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8549999435292742993}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!1 &4115699177166486498
 GameObject:
   m_ObjectHideFlags: 0
@@ -13898,7 +13977,7 @@ GameObject:
   - component: {fileID: 7985916654736058590}
   - component: {fileID: 4677274758743492878}
   - component: {fileID: 7784914686886967854}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cone_02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14376,7 +14455,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 2645
+  m_VersionIndex: 2717
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -14612,7 +14691,7 @@ GameObject:
   - component: {fileID: 2882664818615663951}
   - component: {fileID: 6895048013080933114}
   - component: {fileID: 5373829842869027229}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cone_04
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15090,7 +15169,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 2874
+  m_VersionIndex: 2946
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -15188,7 +15267,7 @@ GameObject:
   - component: {fileID: 3876422013522427495}
   - component: {fileID: 8684918097993658095}
   - component: {fileID: 4462826430563374114}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Headband_02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -21240,7 +21319,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 6055
+  m_VersionIndex: 6412
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -21342,7 +21421,7 @@ GameObject:
   - component: {fileID: 4660800719247878520}
   - component: {fileID: 4026253820090516998}
   - component: {fileID: 4719578676860666611}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -21820,7 +21899,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 2585
+  m_VersionIndex: 2657
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -21918,7 +21997,7 @@ GameObject:
   - component: {fileID: 4930556059186217493}
   - component: {fileID: 4504350410896700012}
   - component: {fileID: 5439079404221296630}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cone_03
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -22396,7 +22475,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 2734
+  m_VersionIndex: 2806
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -22657,7 +22736,7 @@ GameObject:
   - component: {fileID: 2717784414878586106}
   - component: {fileID: 6323478005680972888}
   - component: {fileID: 2893056297953786661}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Band
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -28842,7 +28921,7 @@ GameObject:
   - component: {fileID: 6034082741690642151}
   - component: {fileID: 751029068194312890}
   - component: {fileID: 6935729081248652323}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cone_05
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -29320,7 +29399,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 2612
+  m_VersionIndex: 2684
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -29418,7 +29497,7 @@ GameObject:
   - component: {fileID: 3135944586172864096}
   - component: {fileID: 5398667426404480149}
   - component: {fileID: 4624689927734110991}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cone_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -29896,7 +29975,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 2407
+  m_VersionIndex: 2479
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -29994,7 +30073,7 @@ GameObject:
   - component: {fileID: 3181072426484122136}
   - component: {fileID: 2161641153007550870}
   - component: {fileID: 524511433134998060}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cone_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -30472,7 +30551,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 2642
+  m_VersionIndex: 2714
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -30570,7 +30649,7 @@ GameObject:
   - component: {fileID: 659012549573621601}
   - component: {fileID: 199530137617025646}
   - component: {fileID: 9034379173790074892}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cone_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -31048,7 +31127,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 2874
+  m_VersionIndex: 2946
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -31146,7 +31225,7 @@ GameObject:
   - component: {fileID: 7614341891181378173}
   - component: {fileID: 2956195062782521557}
   - component: {fileID: 1074121122887235274}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Trikot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -37199,7 +37278,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 5998
+  m_VersionIndex: 6355
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -37301,7 +37380,7 @@ GameObject:
   - component: {fileID: 7177011420747938436}
   - component: {fileID: 3680436062458146038}
   - component: {fileID: 8394900181841471282}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Collar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -43353,7 +43432,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 7561
+  m_VersionIndex: 7918
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -43488,7 +43567,7 @@ GameObject:
   - component: {fileID: 3608726656241149372}
   - component: {fileID: 8478348101108423206}
   - component: {fileID: 1477749126728958825}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Headband_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -49540,7 +49619,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 5908
+  m_VersionIndex: 6265
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -49678,7 +49757,7 @@ GameObject:
   - component: {fileID: 604497145604671207}
   - component: {fileID: 5164313005604336735}
   - component: {fileID: 817756625582999779}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cone_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -50156,7 +50235,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 2734
+  m_VersionIndex: 2806
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -50254,7 +50333,7 @@ GameObject:
   - component: {fileID: 8546569794598338012}
   - component: {fileID: 3395230810508541961}
   - component: {fileID: 6664282029782187132}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -50732,7 +50811,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 2124
+  m_VersionIndex: 2196
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -51044,7 +51123,7 @@ GameObject:
   - component: {fileID: 4220479921883667913}
   - component: {fileID: 1191264320445280487}
   - component: {fileID: 6252126959527423580}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cone_02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -51522,7 +51601,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 2734
+  m_VersionIndex: 2806
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -51692,7 +51771,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1336738603789973455
 Transform:
   m_ObjectHideFlags: 0
@@ -51989,7 +52068,7 @@ GameObject:
   - component: {fileID: 838124919798625602}
   - component: {fileID: 1556639392607221959}
   - component: {fileID: 3489164783147529800}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cone_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -52467,7 +52546,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 2823
+  m_VersionIndex: 2895
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -52565,7 +52644,7 @@ GameObject:
   - component: {fileID: 6537103434457099117}
   - component: {fileID: 2618481599307568638}
   - component: {fileID: 3465867125390899428}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cone_04
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -53043,7 +53122,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 2832
+  m_VersionIndex: 2904
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
