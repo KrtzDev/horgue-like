@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class WeaponPartUI : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler, IPointerMoveHandler, IDragHandler, IBeginDragHandler, IEndDragHandler
+public class WeaponPartUI : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler, IDragHandler, IBeginDragHandler, IEndDragHandler
 {
 	[SerializeField]
 	private Image _rewardImage;
@@ -52,31 +52,9 @@ public class WeaponPartUI : MonoBehaviour, IPointerClickHandler, IPointerEnterHa
 
 		DestroyToolTip();
 
-		_currentToolTipUI = Instantiate(_toolTip_prefab, transform.root);
-		_currentToolTipUI.Initialize(weaponPart);
-
-		_currentToolTipUI.transform.position = eventData.position + Vector2.right * 50 * statsContainer.GetComponent<Canvas>().scaleFactor;
+		Select();
 	}
 
-	public void OnPointerMove(PointerEventData eventData)
-	{
-		if (_currentToolTipUI && isSlotted)
-		{
-			_currentToolTipUI.transform.position += (Vector3)eventData.delta;
-
-			RectTransform currentToolTipUiRect = _currentToolTipUI.GetComponent<RectTransform>();
-
-			Vector3 pos = currentToolTipUiRect.localPosition;
-
-			Vector3 minPosition = transform.root.GetComponent<RectTransform>().rect.min - currentToolTipUiRect.rect.min;
-			Vector3 maxPosition = transform.root.GetComponent<RectTransform>().rect.max - currentToolTipUiRect.rect.max;
-
-			pos.x = Mathf.Clamp(currentToolTipUiRect.localPosition.x, minPosition.x, maxPosition.x);
-			pos.y = Mathf.Clamp(currentToolTipUiRect.localPosition.y, minPosition.y, maxPosition.y);
-
-			currentToolTipUiRect.localPosition = pos;
-		}
-	}
 
 	public void OnPointerExit(PointerEventData eventData)
 	{
@@ -108,11 +86,12 @@ public class WeaponPartUI : MonoBehaviour, IPointerClickHandler, IPointerEnterHa
 		EventSystem.current.RaycastAll(eventData, hits);
 		foreach (var hit in hits)
 		{
-			if (hit.gameObject.TryGetComponent(out WeaponPartSlot weaponPartSlot))
+			if (hit.gameObject.TryGetComponent(out WeaponUI weaponUI))
 			{
-				if (weaponPartSlot._owningWeaponUI.SetNewWeaponPart(this, weaponPartSlot))
+				if (weaponUI.SetNewWeaponPart(this))
 				{
 					Destroy(gameObject);
+					GameManager.Instance.inventory.RemoveFromInventory(weaponPart);
 				}
 				else
 				{

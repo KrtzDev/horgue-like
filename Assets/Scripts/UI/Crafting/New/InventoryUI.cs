@@ -39,12 +39,22 @@ public class InventoryUI : UIMenu
 
 			inventorySlot.OnSell += OnItemSold;
 			inventorySlot.sellButton = _sellButton;
+			inventorySlot.OnEquip += OnItemEquip;
+			inventorySlot.equipButton = _equipButton;
 			inventorySlot.OnSelected += UpdateComparisonUI;
 		}
 
 		_shopUI.OnBought += AddToInventory;
 
 		SetUpNavigation();
+	}
+
+	private void OnItemEquip(WeaponPartUI weaponPart)
+	{
+		GameManager.Instance.inventory.RemoveFromInventory(weaponPart.weaponPart);
+		_weaponUI.SetNewWeaponPart(weaponPart);
+		
+		StartCoroutine(FillInventoryUI());
 	}
 
 	private void OnItemSold(WeaponPart weaponPart)
@@ -130,8 +140,7 @@ public class InventoryUI : UIMenu
 		{
 			if (inventorySlot.HasWeaponPart())
 			{
-				BaseEventData baseEventData = new BaseEventData(EventSystem.current);
-				inventorySlot.OnSelect(baseEventData);
+				inventorySlot.Select();
 				_currentSelection = inventorySlot.GetWeaponPart();
 			}
 			else
@@ -144,6 +153,9 @@ public class InventoryUI : UIMenu
 
 	public void UpdateComparisonUI()
 	{
+		for (int i = 0; i < _selectedStatsUIContainer.childCount; i++)
+			Destroy(_selectedStatsUIContainer.GetChild(i).gameObject);
+
 		if (EventSystem.current.currentSelectedGameObject.TryGetComponent(out InventorySlot inventorySlot))
 			_currentSelection = inventorySlot.HasWeaponPart() ? inventorySlot.GetWeaponPart() : null;
 

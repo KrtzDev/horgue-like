@@ -56,15 +56,16 @@ public class ShopUI : UIMenu
 		 OnBought.Invoke(TooltipUi.weaponPart);
 		_shopItems.Remove(TooltipUi);
 
-		if(_shopItems.Count > 0)
+		SetUpNavigation();
+
+		if (_shopItems.Count > 0)
 			StartCoroutine(SelectFirstItemAfterFrame());
 	}
 
 	private IEnumerator SelectFirstItemAfterFrame()
 	{
-		yield return null;
-		BaseEventData baseEventData = new BaseEventData(EventSystem.current);
-		_shopItems.First().OnSelect(baseEventData);
+		yield return new WaitForEndOfFrame();
+		_shopItems[0].Select();
 	}
 
 	private void SetUpNavigation()
@@ -75,12 +76,12 @@ public class ShopUI : UIMenu
 			navigation.mode = Navigation.Mode.Explicit;
 			if (i - 1 >= 0)
 				navigation.selectOnLeft = _shopItems[i - 1];
-			if (i - 3 >= 0)
-				navigation.selectOnUp = _shopItems[i - 3];
+			if (i - _shopItems.Count >= 0)
+				navigation.selectOnUp = _shopItems[i - _shopItems.Count];
 			if (i + 1 < _shopItems.Count)
 				navigation.selectOnRight = _shopItems[i + 1];
-			if (i + 3 < _shopItems.Count)
-				navigation.selectOnDown = _shopItems[i + 3];
+			if (i + _shopItems.Count < _shopItems.Count)
+				navigation.selectOnDown = _shopItems[i + _shopItems.Count];
 
 			_shopItems[i].navigation = navigation;
 		}
