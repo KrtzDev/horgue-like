@@ -50,9 +50,9 @@ public class WeaponUI : MonoBehaviour
 		ShowWeaponStats(this.weapon.CalculateWeaponStats(this.weapon));
 	}
 
-	public bool SetNewWeaponPart(WeaponPartUI newWeaponPartUI, WeaponPartSlot weaponPartSlot)
+	public bool SetNewWeaponPart(WeaponPartUI newWeaponPartUI)
 	{
-		if (newWeaponPartUI.weaponPart.GetType() == weaponPartSlot.GetCurrentSlottedWeaponPart().GetType() && !newWeaponPartUI.isSlotted)
+		if (!newWeaponPartUI.isSlotted)
 		{
 			if (newWeaponPartUI.weaponPart is Grip)
 			{

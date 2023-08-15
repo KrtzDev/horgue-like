@@ -7,9 +7,11 @@ public class InventorySlot : Selectable
 {
 	public Action OnSubmit;
 	public Action<WeaponPart> OnSell;
+	public Action<WeaponPartUI> OnEquip;
 	public Action OnSelected;
 
 	public HoldButton sellButton;
+	public HoldButton equipButton;
 
 	[SerializeField]
 	private Image _selectionIndicator;
@@ -19,27 +21,29 @@ public class InventorySlot : Selectable
 
 	private bool _selected;
 
-	protected override void Awake()
-	{
-		base.Awake();
-		OnSubmit += StartEquip;
-	}
+	public bool HasWeaponPart() => _weaponPart != null;
 
-	public bool HasWeaponPart()
-	{
-		return _weaponPart != null;
-	}
-
-	public WeaponPartUI GetWeaponPart()
-	{
-		return _weaponPart;
-	}
+	public WeaponPartUI GetWeaponPart() => _weaponPart;
 
 	public void SetWeaponPart(WeaponPartUI weaponPart)
 	{
 		_weaponPart = weaponPart;
 
 		sellButton.OnButtonExecute += Sell;
+		equipButton.OnButtonExecute += Equip;
+	}
+
+	private void Equip()
+	{
+		if (!_selected || _weaponPart == null)
+			return;
+
+		_selected = false;
+
+		OnEquip.Invoke(_weaponPart);
+		equipButton.OnButtonExecute -= Equip;
+
+		_weaponPart.DestroyToolTip();
 	}
 
 	private void Sell()
@@ -86,10 +90,5 @@ public class InventorySlot : Selectable
 	public void Deselect()
 	{
 		_selectionIndicator.enabled = false;
-	}
-
-	private void StartEquip()
-	{
-		Debug.Log("Eqip");
 	}
 }
