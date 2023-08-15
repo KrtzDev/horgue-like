@@ -91,6 +91,7 @@ public class WeaponPartUI : MonoBehaviour, IPointerClickHandler, IPointerEnterHa
 				if (weaponUI.SetNewWeaponPart(this))
 				{
 					Destroy(gameObject);
+					GameManager.Instance.inventory.RemoveFromInventory(weaponPart);
 				}
 				else
 				{

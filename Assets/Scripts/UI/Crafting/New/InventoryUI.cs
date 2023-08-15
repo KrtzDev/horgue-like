@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -52,7 +51,10 @@ public class InventoryUI : UIMenu
 
 	private void OnItemEquip(WeaponPartUI weaponPart)
 	{
+		GameManager.Instance.inventory.RemoveFromInventory(weaponPart.weaponPart);
 		_weaponUI.SetNewWeaponPart(weaponPart);
+		
+		StartCoroutine(FillInventoryUI());
 	}
 
 	private void OnItemSold(WeaponPart weaponPart)
@@ -138,8 +140,7 @@ public class InventoryUI : UIMenu
 		{
 			if (inventorySlot.HasWeaponPart())
 			{
-				BaseEventData baseEventData = new BaseEventData(EventSystem.current);
-				inventorySlot.OnSelect(baseEventData);
+				inventorySlot.Select();
 				_currentSelection = inventorySlot.GetWeaponPart();
 			}
 			else
