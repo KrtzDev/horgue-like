@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Jetpack
   m_EditorClassIdentifier: 
   _name: Jetpack
-  _icon: {fileID: 21300000, guid: ae111c00a8b7fc14a911d7e01e7ff51f, type: 3}
+  _icon: {fileID: 21300000, guid: eb1a41b3c77ed43438362eb9c30faa24, type: 3}

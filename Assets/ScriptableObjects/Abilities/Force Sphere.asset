@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fda9461c54729a14cadaef75f159ef8d, type: 3}
-  m_Name: Decoy
+  m_Name: Force Sphere
   m_EditorClassIdentifier: 
-  _name: Decoy
-  _icon: {fileID: 21300000, guid: 0bedec7021b7d674a8fd2c73a8e7c4f7, type: 3}
+  _name: Force Sphere
+  _icon: {fileID: 21300000, guid: de25eb5ac0d5bca4395ff4288d387ad5, type: 3}

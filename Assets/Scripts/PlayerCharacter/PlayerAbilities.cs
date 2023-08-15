@@ -18,12 +18,13 @@ public class PlayerAbilities : MonoBehaviour
 
     [Header("Which (one) Ability can be used?")]
 
-    public bool _canUseDashAbility;
-    public bool _canUseJetpackAbility;
-    public bool _canUseEarthquakeAbility;
-    public bool _canUseStealthAbility;
+    public bool CanUseDashAbility;
+    public bool CanUseForceSphereAbility;
+    public bool CanUseJetpackAbility;
+    public bool CanUseEarthquakeAbility;
+    public bool CanUseStealthAbility;
 
-    [Header("Player Dash Ability")]
+    [Header("Dash Ability")]
     [SerializeField] private GameObject _dashVisuals;
     [SerializeField] private Transform _dashEffectPosition;
     [SerializeField] private ParticleSystem _dashEffect;
@@ -31,7 +32,19 @@ public class PlayerAbilities : MonoBehaviour
     [SerializeField] private float _dashForce = 30;
     [SerializeField] private float _dashTime = 0.25f;
 
-    [Header("Player Jetpack Ability")]
+    [Header("Force Sphere Ability")]
+    [SerializeField] private GameObject _forceSphereVisuals;
+    [SerializeField] private GameObject _forceSpherePrefab;
+    [SerializeField] private Transform _forceSphereSpawnPosition;
+    [SerializeField] private Transform _forceSphereEffectPosition;
+    [SerializeField] private ParticleSystem _forceSphereEffect;
+    [SerializeField] private float _forceSphereCD;
+    [SerializeField] private float _forceSphereRadius;
+    [SerializeField] private float _forceSphereForce;
+    public float _forceSphereLoadUpTime;
+    public float _forceSphereActiveTime;
+
+    [Header("Jetpack Ability")]
     public bool IsUsingJetpack;
     [SerializeField] private GameObject _jetpackVisuals;
     [SerializeField] private Transform _jetpackEffectPosition;
@@ -45,7 +58,7 @@ public class PlayerAbilities : MonoBehaviour
     [SerializeField] private float _jetpackHeatFallOffMultiplier;
     [SerializeField] private float _jetpackActiveTimer;
 
-    [Header("Player Earthquake Ability")]
+    [Header("Earthquake Ability")]
     [SerializeField] private GameObject _earthquakeVisuals;
     [SerializeField] private GameObject _earthquakePreviewPrefab;
     [SerializeField] private GameObject _earthquakePrefab;
@@ -54,11 +67,11 @@ public class PlayerAbilities : MonoBehaviour
     [SerializeField] private ParticleSystem _earthquakeEffect;
     [SerializeField] private float _earthquakeCD;
     [SerializeField] private float _earthquakeRadius;
+    [SerializeField] private float _earthquakeForce;
     public float _earthquakeLoadUpTime;
     public float _earthquakeActiveTime;
-    [SerializeField] private float _earthquakeForce;
 
-    [Header("Player Stealth Ability")]
+    [Header("Stealth Ability")]
     [SerializeField] private GameObject _decoy;
     [SerializeField] private float _stealthCD;
     [SerializeField] private float _stealthTime;
@@ -113,15 +126,19 @@ public class PlayerAbilities : MonoBehaviour
 
     public void ActivateVisuals()
     {
-        if (_canUseDashAbility)
+        if (CanUseDashAbility)
         {
             _dashVisuals.SetActive(true);
         }
-        else if (_canUseJetpackAbility)
+        else if (CanUseForceSphereAbility)
+        {
+            _forceSphereVisuals.SetActive(true);
+        }
+        else if (CanUseJetpackAbility)
         {
             _jetpackVisuals.SetActive(true);
         }
-        else if (_canUseEarthquakeAbility)
+        else if (CanUseEarthquakeAbility)
         {
             _earthquakeVisuals.SetActive(true);
         }
@@ -136,25 +153,30 @@ public class PlayerAbilities : MonoBehaviour
 
         if (ctx.started && !IsUsingAbility && GameManager.Instance._playerCanUseAbilities)
         {
-            if (_canUseDashAbility && _abilityCDTimer <= 0)
+            if (CanUseDashAbility && _abilityCDTimer <= 0)
             {
                 DashAbility();
             }
-            else if (_canUseJetpackAbility && _abilityCDTimer <= 0)
+            else if (CanUseForceSphereAbility && _abilityCDTimer <= 0)
+            {
+                ForceSphereAbility();
+            }
+            else if (CanUseJetpackAbility && _abilityCDTimer <= 0)
             {
                 JetpackAbility();
                 JetpackParticleEffect();
             }
-            else if (_canUseEarthquakeAbility && _playerCharacter.GetComponent<PlayerJump>().IsGrounded && _abilityCDTimer <= 0)
+            else if (CanUseStealthAbility && _abilityCDTimer <= 0)
+            {
+                DecoyAbility();
+            }
+            else if (CanUseEarthquakeAbility && _playerCharacter.GetComponent<PlayerJump>().IsGrounded && _abilityCDTimer <= 0)
             {
                 EarthquakeAbility();
             }
-            else if (_canUseStealthAbility && _abilityCDTimer <= 0)
-            {
-                StealthAbility();
-            }
+            
         }
-        else if (ctx.started && IsUsingAbility && _canUseJetpackAbility && GameManager.Instance._playerCanUseAbilities)
+        else if (ctx.started && IsUsingAbility && CanUseJetpackAbility && GameManager.Instance._playerCanUseAbilities)
         {
             JetpackParticleEffect();
         }
@@ -212,6 +234,18 @@ public class PlayerAbilities : MonoBehaviour
         ResetAbilityTimer(_dashCD);
     }
 
+    // Force Sphere
+
+    private void ForceSphereAbility()
+    {
+
+    }
+
+    private void ResetForceSphereAbility()
+    {
+
+    }
+
     // Jetpack
 
     private void JetpackAbility()
@@ -232,7 +266,7 @@ public class PlayerAbilities : MonoBehaviour
 
     private void JetpackForce()
     {
-        if(_canUseJetpackAbility && IsUsingAbility)
+        if(CanUseJetpackAbility && IsUsingAbility)
         {
             if (ButtonHeld && jetpackFuel > 0)
             {
@@ -344,7 +378,7 @@ public class PlayerAbilities : MonoBehaviour
 
     // Stealth
 
-    private void StealthAbility()
+    private void DecoyAbility()
     {
         IsUsingAbility = true;
 

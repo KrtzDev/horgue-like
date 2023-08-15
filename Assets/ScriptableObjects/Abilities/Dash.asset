@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Dash
   m_EditorClassIdentifier: 
   _name: Dash
-  _icon: {fileID: 21300000, guid: d024cc0b997f4724eb55092c793bc726, type: 3}
+  _icon: {fileID: 21300000, guid: 9954ba20dcc19214abee305d13144d64, type: 3}

@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Earthquake
   m_EditorClassIdentifier: 
   _name: Earthquake
-  _icon: {fileID: 21300000, guid: 9aebd705574f9e642aef1e5f59b3e4d8, type: 3}
+  _icon: {fileID: 21300000, guid: 0ab678cc0821c7e45959da26541b920d, type: 3}
