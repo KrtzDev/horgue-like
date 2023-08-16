@@ -3853,6 +3853,9 @@ MonoBehaviour:
   _sellButton: {fileID: 3463862568457808998}
   _equipButton: {fileID: 4350783318343213287}
   _selectedStatsUIContainer: {fileID: 5792337393968354489}
+  _comparisonContainerEquipped: {fileID: 5618710198366156315}
+  _toolTipUI_prefab: {fileID: 1632619086718026943, guid: 060763a266677f6469ac0e95f2facdfc,
+    type: 3}
 --- !u!1 &6281649211352225547
 GameObject:
   m_ObjectHideFlags: 0

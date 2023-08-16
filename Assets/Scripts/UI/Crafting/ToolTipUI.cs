@@ -7,6 +7,7 @@ public class ToolTipUI : Selectable
 {
 	public event Action<ToolTipUI> OnBuy;
 	public event Action<WeaponPart> OnSelected;
+	public event Action OnDeselected;
 
 	[SerializeField]
 	public HoldButton buyButton;
@@ -107,6 +108,8 @@ public class ToolTipUI : Selectable
 	public override void OnDeselect(BaseEventData eventData)
 	{
 		base.OnDeselect(eventData);
+		OnDeselected.Invoke();
+
 		_selectionIndicator.enabled = false;
 		_selected = false;
 	}

@@ -41,6 +41,7 @@ public class ShopUI : UIMenu
 			_shopItems.Add(tooltipUI);
 			tooltipUI.OnBuy += OnItemBought;
 			tooltipUI.OnSelected += UpdateEquippedComparisonUI;
+			tooltipUI.OnDeselected += UpdateWeaponUI;
 
 			tooltipUI = _shopItemContainer.GetChild(i).GetComponent<ToolTipUI>();
 			tooltipUI.buyButton = _buyButton;
@@ -101,8 +102,16 @@ public class ShopUI : UIMenu
 		_shopItems[0].Select();
 	}
 
+	private void UpdateWeaponUI()
+	{
+		_weaponUI.ShowWeaponStats(_weaponUI.weapon.CalculateWeaponStats(_weaponUI.weapon));
+	}
+
 	private void UpdateEquippedComparisonUI(WeaponPart weaponPart)
 	{
+		UpdateWeaponUI();
+		_weaponUI.ShowPotentialUpdatedWeaponStats(weaponPart);
+
 		ClearComparisonContainer();
 
 		if(weaponPart.GetType() == typeof(Grip))

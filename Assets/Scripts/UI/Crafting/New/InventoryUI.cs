@@ -24,6 +24,10 @@ public class InventoryUI : UIMenu
 
 	[SerializeField]
 	private Transform _selectedStatsUIContainer;
+	[SerializeField]
+	private Transform _comparisonContainerEquipped;
+	[SerializeField]
+	private ToolTipUI _toolTipUI_prefab;
 
 	private List<InventorySlot> _inventorySlots;
 
@@ -92,9 +96,7 @@ public class InventoryUI : UIMenu
 	private void OnDisable()
 	{
 		for (int i = 0; i < _inventorySlots.Count; i++)
-		{
 			_inventorySlots[i].Deselect();
-		}
 	}
 
 	public override void SetFocusedMenu()
@@ -108,9 +110,9 @@ public class InventoryUI : UIMenu
 	private IEnumerator FocusAfterFrame()
 	{
 		yield return new WaitForEndOfFrame();
-		_inventorySlots[0].Select();
-
 		StartCoroutine(FillInventoryUI());
+
+		_inventorySlots[0].Select();
 	}
 
 	private IEnumerator FillInventoryUI()
@@ -160,6 +162,43 @@ public class InventoryUI : UIMenu
 			_currentSelection = inventorySlot.HasWeaponPart() ? inventorySlot.GetWeaponPart() : null;
 
 		_shopUI.UpdateComparisonUI(_currentSelection);
+
+		if(_currentSelection)
+			UpdateEquippedComparisonUI(_currentSelection.weaponPart);
+	}
+
+	private void UpdateEquippedComparisonUI(WeaponPart weaponPart)
+	{
+		if (weaponPart.GetType() == typeof(Grip))
+		{
+			ToolTipUI toolTipUI = Instantiate(_toolTipUI_prefab, _comparisonContainerEquipped);
+			toolTipUI.Initialize(_weaponUI.weapon.grip);
+		}
+		else if (weaponPart.GetType() == typeof(Barrel))
+		{
+			ToolTipUI toolTipUI = Instantiate(_toolTipUI_prefab, _comparisonContainerEquipped);
+			toolTipUI.Initialize(_weaponUI.weapon.barrel);
+		}
+		else if (weaponPart.GetType() == typeof(Magazine))
+		{
+			ToolTipUI toolTipUI = Instantiate(_toolTipUI_prefab, _comparisonContainerEquipped);
+			toolTipUI.Initialize(_weaponUI.weapon.magazine);
+		}
+		else if (weaponPart.GetType() == typeof(Ammunition))
+		{
+			ToolTipUI toolTipUI = Instantiate(_toolTipUI_prefab, _comparisonContainerEquipped);
+			toolTipUI.Initialize(_weaponUI.weapon.ammunition);
+		}
+		else if (weaponPart.GetType() == typeof(TriggerMechanism))
+		{
+			ToolTipUI toolTipUI = Instantiate(_toolTipUI_prefab, _comparisonContainerEquipped);
+			toolTipUI.Initialize(_weaponUI.weapon.triggerMechanism);
+		}
+		else if (weaponPart.GetType() == typeof(Sight))
+		{
+			ToolTipUI toolTipUI = Instantiate(_toolTipUI_prefab, _comparisonContainerEquipped);
+			toolTipUI.Initialize(_weaponUI.weapon.sight);
+		}
 	}
 
 	private void ClearInventoryUI()

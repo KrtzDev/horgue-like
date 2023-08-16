@@ -80,7 +80,10 @@ public class InventorySlot : Selectable
 	public override void OnDeselect(BaseEventData eventData)
 	{
 		if (_weaponPart)
+		{
 			_weaponPart.DestroyToolTip();
+			_weaponPart.Deselect();
+		}
 
 		base.OnDeselect(eventData);
 		Deselect();
