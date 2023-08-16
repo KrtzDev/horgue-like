@@ -6065,7 +6065,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 7474
+  m_VersionIndex: 7702
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -6645,7 +6645,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 2898
+  m_VersionIndex: 2904
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -7291,7 +7291,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 2773
+  m_VersionIndex: 2779
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -7989,7 +7989,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 2393
+  m_VersionIndex: 2399
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -8599,7 +8599,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 2946
+  m_VersionIndex: 2952
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -9175,7 +9175,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 2901
+  m_VersionIndex: 2907
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -9866,7 +9866,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 2946
+  m_VersionIndex: 2952
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -10473,7 +10473,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 2684
+  m_VersionIndex: 2690
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -10771,10 +10771,10 @@ GameObject:
   - component: {fileID: 2907804301207705110}
   - component: {fileID: 2136897129691636548}
   - component: {fileID: 7535219065241409037}
+  - component: {fileID: 1580901617}
   - component: {fileID: 8500660712739362474}
   - component: {fileID: 1382852200032817076}
   - component: {fileID: 1007379291321604861}
-  - component: {fileID: 1580901617}
   m_Layer: 6
   m_Name: P_PlayerCharacter
   m_TagString: Player
@@ -10981,6 +10981,78 @@ MonoBehaviour:
   _fallMultiplier: 10
   _jumpVelocityFalloff: 11
   _jumpForce: 21
+--- !u!114 &1580901617
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2136897129691636549}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3218fd64fc149fb44b79805f608610f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _abilityCDTimer: 0
+  _currentMaxCD: 0
+  IsUsingAbility: 0
+  ButtonHeld: 0
+  CanUseDashAbility: 0
+  CanUseForceSphereAbility: 0
+  CanUseJetpackAbility: 0
+  CanUseEarthquakeAbility: 0
+  CanUseStealthAbility: 0
+  _dashVisuals: {fileID: 7501021514167150150}
+  _dashEffectPosition: {fileID: 6880873398517538318}
+  _dashEffect: {fileID: 8581875668392718890, guid: 0ba155d033d3768479d321f5236b19a3,
+    type: 3}
+  _dashCD: 3
+  _dashForce: 30
+  _dashTime: 0.5
+  _forceSphereVisuals: {fileID: 8462656708722640411}
+  _forceSpherePrefab: {fileID: 8401165594809964829, guid: c82b9ba1d0fedd94e97523635f7a74d6,
+    type: 3}
+  _forceSphereSpawnPosition: {fileID: 2712107493480440920}
+  _forceSphereEffectPosition: {fileID: 7868157610372633933}
+  _forceSphereEffect: {fileID: 0}
+  _forceSphereCD: 10
+  ForceSphereStartRadius: 1
+  ForceSphereEndRadius: 5
+  ForceSphereDuration: 0.2
+  ForceSphereStartTransparency: 0.65
+  ForceSphereEndTransparency: 0.45
+  ForceSphereForce: 50
+  IsUsingJetpack: 0
+  _jetpackVisuals: {fileID: 366271092508608397}
+  _jetpackEffectPosition: {fileID: 4828017958775833798}
+  _jetpackEffect: {fileID: 8590939859680090131, guid: ec1247f932d3f7f438123a885da220b9,
+    type: 3}
+  _jetpackCD: 10
+  JetpackFuel: 0
+  MaxJetpackFuel: 0
+  _energyExpansionRate: 25
+  _jetpackThrustForce: 0.85
+  _jetpackHeatFallOffTime: 0.625
+  _jetpackHeatFallOffMultiplier: 0.225
+  _earthquakeVisuals: {fileID: 896446014685434785}
+  _earthquakePreviewPrefab: {fileID: 6982214405592628148, guid: 6f05dd2b089c80e4ca09adc01a09c03e,
+    type: 3}
+  _earthquakePrefab: {fileID: 6982214405592628148, guid: c457ac614118fb44a9ecf625b5001528,
+    type: 3}
+  _earthquakeSpawnPosition: {fileID: 515180688252245660}
+  _earthquakeEffectPosition: {fileID: 7390447292559187016}
+  _earthquakeEffect: {fileID: 838511276648990624, guid: b67426d4377f4ad44ac576b1339cef39,
+    type: 3}
+  _earthquakeCD: 10
+  _earthquakeRadius: 6
+  _earthquakeForce: 15
+  _earthquakeLoadUpTime: 0.75
+  _earthquakeActiveTime: 1.25
+  _decoy: {fileID: 6670527697290465931}
+  _stealthCD: 10
+  _stealthTime: 4
+  _enemySpawner: {fileID: 0}
+  _movementSpeedMultiplier: 1.25
 --- !u!114 &8500660712739362474
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11025,76 +11097,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.75, y: 2, z: 0.75}
   m_Center: {x: 0, y: 1, z: 0}
---- !u!114 &1580901617
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2136897129691636549}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3218fd64fc149fb44b79805f608610f3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _abilityCDTimer: 0
-  _currentMaxCD: 0
-  IsUsingAbility: 0
-  ButtonHeld: 0
-  CanUseDashAbility: 0
-  CanUseForceSphereAbility: 0
-  CanUseJetpackAbility: 0
-  CanUseEarthquakeAbility: 0
-  CanUseStealthAbility: 0
-  _dashVisuals: {fileID: 7501021514167150150}
-  _dashEffectPosition: {fileID: 6880873398517538318}
-  _dashEffect: {fileID: 8581875668392718890, guid: 0ba155d033d3768479d321f5236b19a3,
-    type: 3}
-  _dashCD: 3
-  _dashForce: 30
-  _dashTime: 0.5
-  _forceSphereVisuals: {fileID: 8462656708722640411}
-  _forceSpherePrefab: {fileID: 0}
-  _forceSphereSpawnPosition: {fileID: 2712107493480440920}
-  _forceSphereEffectPosition: {fileID: 7868157610372633933}
-  _forceSphereEffect: {fileID: 0}
-  _forceSphereCD: 10
-  _forceSphereRadius: 5
-  _forceSphereForce: 15
-  _forceSphereLoadUpTime: 0.5
-  _forceSphereActiveTime: 1.25
-  IsUsingJetpack: 0
-  _jetpackVisuals: {fileID: 366271092508608397}
-  _jetpackEffectPosition: {fileID: 4828017958775833798}
-  _jetpackEffect: {fileID: 8590939859680090131, guid: ec1247f932d3f7f438123a885da220b9,
-    type: 3}
-  _jetpackCD: 10
-  jetpackFuel: 100
-  _maxJetpackFuel: 0
-  _energyExpansionRate: 25
-  _jetpackThrustForce: 0.85
-  _jetpackHeatFallOffTime: 0.625
-  _jetpackHeatFallOffMultiplier: 0.225
-  _jetpackActiveTimer: 0
-  _earthquakeVisuals: {fileID: 896446014685434785}
-  _earthquakePreviewPrefab: {fileID: 6982214405592628148, guid: 6f05dd2b089c80e4ca09adc01a09c03e,
-    type: 3}
-  _earthquakePrefab: {fileID: 6982214405592628148, guid: c457ac614118fb44a9ecf625b5001528,
-    type: 3}
-  _earthquakeSpawnPosition: {fileID: 515180688252245660}
-  _earthquakeEffectPosition: {fileID: 7390447292559187016}
-  _earthquakeEffect: {fileID: 838511276648990624, guid: b67426d4377f4ad44ac576b1339cef39,
-    type: 3}
-  _earthquakeCD: 10
-  _earthquakeRadius: 6
-  _earthquakeForce: 15
-  _earthquakeLoadUpTime: 0.75
-  _earthquakeActiveTime: 1.25
-  _decoy: {fileID: 6670527697290465931}
-  _stealthCD: 10
-  _stealthTime: 4
-  _enemySpawner: {fileID: 0}
-  _movementSpeedMultiplier: 1.25
 --- !u!1 &2136897129718072671
 GameObject:
   m_ObjectHideFlags: 0
@@ -11896,7 +11898,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 2806
+  m_VersionIndex: 2812
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -12472,7 +12474,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 2687
+  m_VersionIndex: 2693
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -19386,7 +19388,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 2892
+  m_VersionIndex: 2898
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -19962,7 +19964,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 2782
+  m_VersionIndex: 2788
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -20683,7 +20685,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 2717
+  m_VersionIndex: 2723
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -21397,7 +21399,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 2946
+  m_VersionIndex: 2952
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -28127,7 +28129,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 2657
+  m_VersionIndex: 2663
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -28703,7 +28705,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 2806
+  m_VersionIndex: 2812
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -35627,7 +35629,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 2684
+  m_VersionIndex: 2690
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -36203,7 +36205,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 2479
+  m_VersionIndex: 2485
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -36814,7 +36816,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 2714
+  m_VersionIndex: 2720
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -37390,7 +37392,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 2946
+  m_VersionIndex: 2952
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -56498,7 +56500,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 2806
+  m_VersionIndex: 2812
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -57074,7 +57076,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 2196
+  m_VersionIndex: 2202
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -57864,7 +57866,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 2806
+  m_VersionIndex: 2812
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -64084,7 +64086,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 7492
+  m_VersionIndex: 7741
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -70272,7 +70274,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 7489
+  m_VersionIndex: 7744
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -104447,7 +104449,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 637
+  m_VersionIndex: 1211
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -110680,7 +110682,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 7426
+  m_VersionIndex: 6715
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -111378,7 +111380,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 2895
+  m_VersionIndex: 2901
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -111954,7 +111956,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 2904
+  m_VersionIndex: 2910
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []

@@ -39,10 +39,12 @@ public class PlayerAbilities : MonoBehaviour
     [SerializeField] private Transform _forceSphereEffectPosition;
     [SerializeField] private ParticleSystem _forceSphereEffect;
     [SerializeField] private float _forceSphereCD;
-    [SerializeField] private float _forceSphereRadius;
-    [SerializeField] private float _forceSphereForce;
-    public float _forceSphereLoadUpTime;
-    public float _forceSphereActiveTime;
+    public float ForceSphereStartRadius;
+    public float ForceSphereEndRadius;
+    public float ForceSphereDuration;
+    [Range(0.0f, 1.0f)] public float ForceSphereStartTransparency;
+    [Range(0.0f, 1.0f)] public float ForceSphereEndTransparency;
+    public float ForceSphereForce;
 
     [Header("Jetpack Ability")]
     public bool IsUsingJetpack;
@@ -50,13 +52,13 @@ public class PlayerAbilities : MonoBehaviour
     [SerializeField] private Transform _jetpackEffectPosition;
     [SerializeField] private ParticleSystem _jetpackEffect;
     [SerializeField] private float _jetpackCD;
-    [Range(0.0f, 100.0f)] public float jetpackFuel;
-    public float _maxJetpackFuel;
+    [Range(0.0f, 100.0f)] public float JetpackFuel;
+    public float MaxJetpackFuel;
     [SerializeField] private float _energyExpansionRate;
     [SerializeField] private float _jetpackThrustForce;
     [SerializeField] private float _jetpackHeatFallOffTime;
     [SerializeField] private float _jetpackHeatFallOffMultiplier;
-    [SerializeField] private float _jetpackActiveTimer;
+    private float _jetpackActiveTimer;
 
     [Header("Earthquake Ability")]
     [SerializeField] private GameObject _earthquakeVisuals;
@@ -238,12 +240,17 @@ public class PlayerAbilities : MonoBehaviour
 
     private void ForceSphereAbility()
     {
+        IsUsingAbility = true;
 
+        GameObject forceSphere = _forceSpherePrefab;
+        Instantiate(forceSphere, _forceSphereSpawnPosition);
     }
 
-    private void ResetForceSphereAbility()
+    public void ResetForceSphereAbility()
     {
+        IsUsingAbility = false;
 
+        ResetAbilityTimer(_forceSphereCD);
     }
 
     // Jetpack
@@ -253,7 +260,7 @@ public class PlayerAbilities : MonoBehaviour
         _jetpackVisuals.GetComponentInChildren<Animator>().SetBool("jetpackOn", true);
         _jetpackVisuals.GetComponentInChildren<Animator>().SetBool("jetpackOff", false);
 
-        _maxJetpackFuel = jetpackFuel;
+        MaxJetpackFuel = JetpackFuel;
 
         IsUsingAbility = true;
     }
@@ -268,11 +275,11 @@ public class PlayerAbilities : MonoBehaviour
     {
         if(CanUseJetpackAbility && IsUsingAbility)
         {
-            if (ButtonHeld && jetpackFuel > 0)
+            if (ButtonHeld && JetpackFuel > 0)
             {
                 IsUsingJetpack = true;
 
-                jetpackFuel -= _energyExpansionRate * Time.deltaTime;
+                JetpackFuel -= _energyExpansionRate * Time.deltaTime;
 
                 _jetpackActiveTimer += Time.deltaTime;
 
@@ -301,7 +308,7 @@ public class PlayerAbilities : MonoBehaviour
                 IsUsingJetpack = false;
             }
 
-            if (jetpackFuel <= 0)
+            if (JetpackFuel <= 0)
             {
                 ResetJetpackAbility();
             }
@@ -324,7 +331,7 @@ public class PlayerAbilities : MonoBehaviour
     private IEnumerator ResetJetpackFuel()
     {
         yield return new WaitForSeconds(_jetpackCD);
-        jetpackFuel = _maxJetpackFuel;
+        JetpackFuel = MaxJetpackFuel;
     }
 
     // Earthquake
