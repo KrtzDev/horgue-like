@@ -11,9 +11,9 @@ public class AI_State_Death : AI_State
 
     public virtual void Enter(AI_Agent agent)
     {
-        agent._animator.enabled = true;
-        agent._animator.SetBool("death", true);
-        agent._animator.SetTrigger("deathTrigger");
+        agent.Animator.enabled = true;
+        agent.Animator.SetBool("death", true);
+        agent.Animator.SetTrigger("deathTrigger");
     }
 
     public virtual void Update(AI_Agent agent)

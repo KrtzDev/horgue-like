@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 9171908391368446828}
   - component: {fileID: 2595136856034241519}
   - component: {fileID: 4169903955590555241}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Healthbar_Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -128,7 +128,7 @@ GameObject:
   - component: {fileID: 7109051650865746779}
   - component: {fileID: 6613505330727993126}
   - component: {fileID: 7042951088307907710}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: MeleeAttackHitBox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -186,7 +186,7 @@ GameObject:
   - component: {fileID: 292236157754052154}
   - component: {fileID: 4550890725223086206}
   - component: {fileID: 3866529980829462873}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: maxHealth
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -260,7 +260,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5795002812233537480}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Spike_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -292,7 +292,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5797803753685221218}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Tooth_F_IK_L_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -323,7 +323,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5794468053036266318}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Leg_F_Guide_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -355,7 +355,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5797796977005140994}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Arm_1_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -387,7 +387,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5795000330296588180}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Leg_B_IK_R_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -418,7 +418,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5797598639254959734}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Pincer_2_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -450,7 +450,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5797676358913741698}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Arm_3_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -482,7 +482,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5794540387288660768}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Leg_F_Guide_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -514,7 +514,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5797803470465194906}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Tooth_F_IK_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -546,7 +546,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5794507374917196364}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Mouth_Movement_Even_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -577,7 +577,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5795003828674834374}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Leg_F_1_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -609,7 +609,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5794943150274773716}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Tooth_F_Target_L_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -640,7 +640,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5794567032286729982}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Pincer_Claw_1_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -672,7 +672,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5794998637100537916}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Leg_B_1_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -705,7 +705,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5794938625125766756}
   - component: {fileID: 5873509129527304430}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Eyes
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -882,7 +882,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5797324809993123564}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Spike_Guide_R_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -913,7 +913,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5794453228301427210}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Leg_F_6_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -945,7 +945,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5794616857569096124}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -986,7 +986,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5794464897083750882}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Tooth_M_Target_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1018,7 +1018,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5794857648805215274}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Tooth_F_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1050,7 +1050,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5794650279350015270}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Spike_Guide_L_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1081,7 +1081,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5797413465547667290}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Tooth_M_IK_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1113,7 +1113,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5794645561752991366}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Tooth_F_IK_R_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1144,7 +1144,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5794878794753540538}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Pincer_4_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1178,7 +1178,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5797321244482903638}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Spike_IK_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1210,7 +1210,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5794481658246129518}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Tooth_M_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1242,7 +1242,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5797794465138400232}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Leg_B_Guide_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1274,7 +1274,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5797711710734263490}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Head_Target
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1306,7 +1306,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5794910336872937476}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Tooth_B_IK_R_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1337,7 +1337,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5797384353848257756}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Tooth_B_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1369,7 +1369,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5794892657165817542}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Tooth_B_IK_L_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1400,7 +1400,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5797508208269790532}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Head_Look_IK_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1431,7 +1431,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5797373974380182014}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Leg_F_IK_R_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1462,7 +1462,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5794565065940576020}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Leg_F_Guide_L_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1493,7 +1493,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5797685020749943552}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Tooth_B_Target_L_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1524,7 +1524,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5794504841949607474}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Leg_B_3_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1556,7 +1556,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5794704024758393910}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Leg_F_5_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1588,7 +1588,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5797787853002386632}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Tooth_B_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1620,7 +1620,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5797746789868261382}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Tooth_F_Target_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1652,7 +1652,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5797449130294077648}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Pincer_Claw_2_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1684,7 +1684,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5794756396886151804}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Floor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1716,7 +1716,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5797713190961405958}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Mandible_M_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1748,7 +1748,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5797816501779816970}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Leg_F_IK_L_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1779,7 +1779,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5797554849394775690}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Mandible_M_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1811,7 +1811,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5794614446540454766}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Pincer_Target_L_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1842,7 +1842,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5794511875756433306}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Pincer_2_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1874,7 +1874,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5794547950173017804}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Root
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1906,7 +1906,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5797397390848532534}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Pincer_1_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1938,7 +1938,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5797430788333113990}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Tooth_M_IK_R_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1969,7 +1969,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5794859362468937970}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Thorax_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2003,7 +2003,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5797425592540551260}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Leg_B_4_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2035,7 +2035,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5794830889238953316}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Pincer_1_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2067,7 +2067,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5797555461220318174}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Mandible_F_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2099,7 +2099,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5794634722703601100}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Leg_F_IK_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2131,7 +2131,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5794813922670399660}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Leg_F_3_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2163,7 +2163,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5797626961419008716}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Tooth_B_IK_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2195,7 +2195,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5797755660864614222}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Leg_B_Guide_R_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2226,7 +2226,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5797763984497133520}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Pincer_Target_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2258,7 +2258,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5794819647043266918}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Spike_IK_L_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2289,7 +2289,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5797551469553347744}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Mandible_F_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2321,7 +2321,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5794688517694386462}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Thorax_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2362,7 +2362,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5797548928150878548}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Leg_F_4_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2394,7 +2394,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5794527524109598038}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Pincer_IK_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2426,7 +2426,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5797669483315110614}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Tail_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2458,7 +2458,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5797618315350032076}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Leg_B_Guide_L_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2489,7 +2489,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5794855570495279318}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Tooth_M_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2521,7 +2521,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5797716123650728756}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Tooth_F_IK_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2553,7 +2553,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5797589498131590208}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Arm_3_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2585,7 +2585,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5794935684410737866}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Leg_F_3_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2617,7 +2617,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5794721736323309578}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Mandible_B_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2649,7 +2649,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5797820431939065900}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Mouth_Movement_Odd
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2681,7 +2681,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5794696484341881544}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Arm_1_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2713,7 +2713,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5794757201216382770}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Leg_B_4_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2745,7 +2745,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5794721780062354838}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Tooth_M_Target_R_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2776,7 +2776,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5794873520380711430}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Leg_F_IK_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2808,7 +2808,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5797621341948874742}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Tooth_M_IK_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2840,7 +2840,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5794547318352507842}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Head_Target_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2871,7 +2871,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5797691557717540996}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Leg_B_5_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2903,7 +2903,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5797312385629420362}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Tooth_F_Target_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2935,7 +2935,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5794489086867466104}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Armature
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2981,7 +2981,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5797562524234380718}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Leg_F_Guide_R_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3012,7 +3012,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5794983522078308492}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Leg_B_3_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3044,7 +3044,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5797321931494058694}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Pincer_Claw_2_R_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3075,7 +3075,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5797718907193910846}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Tooth_B_Target_R_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3106,7 +3106,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5797259901056631430}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Leg_B_Guide_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3138,7 +3138,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5797793726455335996}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Leg_B_1_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3170,7 +3170,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5797557637614836502}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Head_IK_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3201,7 +3201,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5794639968105276376}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Tooth_M_Target_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3233,7 +3233,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5797732800522890428}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Leg_F_1_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3265,7 +3265,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5797617086673441776}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Pincer_IK_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3297,7 +3297,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5797418178402184158}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Spike_Guide_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3329,7 +3329,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5794917020355527340}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Pincer_Claw_2_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3361,7 +3361,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5797765343931469278}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Leg_F_4_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3393,7 +3393,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5794968908473820188}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Pincer_4_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3427,7 +3427,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5794897336216100282}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Tooth_M_IK_L_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3458,7 +3458,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5797436365741315306}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Thorax_3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3490,7 +3490,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5797384331678197904}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Tooth_M_Target_L_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3521,7 +3521,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5797786788465325192}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Pincer_IK_L_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3552,7 +3552,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5794811532965518508}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Spike_IK_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3584,7 +3584,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5797306386775797028}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Pincer_Claw_1_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3616,7 +3616,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5794641205097656834}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Arm_2_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3648,7 +3648,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5797674754813940008}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Head_IK
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3680,7 +3680,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5794587500546846214}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Pincer_Claw_2_L_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3711,7 +3711,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5797262573124642122}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Leg_B_5_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3743,7 +3743,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5794918037198347586}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Leg_B_2_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3775,7 +3775,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5797571353346110540}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Pincer_Claw_1_R_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3806,7 +3806,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5794852948237793626}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Pincer_Claw_1_L_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3837,7 +3837,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5794942471116799948}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Leg_B_IK_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3869,7 +3869,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5797545137153833838}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Arm_2_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3901,7 +3901,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5797629895256168622}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Tooth_B_Target_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3933,7 +3933,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5794994450505706190}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Mouth_Movement_Odd_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3964,7 +3964,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5797618636812777192}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Floor_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3995,7 +3995,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5797727356802042160}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Tooth_B_IK_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4027,7 +4027,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5797392067042181006}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Pincer_3_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4059,7 +4059,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5794582290419329190}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Tooth_F_Target_R_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4090,7 +4090,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5794802120109692504}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Pincer_Target_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4123,7 +4123,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5797261709182472796}
   - component: {fileID: 5873409178248562610}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Rikayon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4300,7 +4300,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5794593682556833176}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Leg_F_6_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4332,7 +4332,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5794838384779853502}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Pincer_Target_R_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4363,7 +4363,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5794563710362632344}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Spike_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4506,31 +4506,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0619836ec3ab6a5469a4bbb4a739bfbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _initialState: 1
-  _navMeshAgent: {fileID: 0}
-  _obstacleAgent: {fileID: 0}
-  _animator: {fileID: 0}
-  _rb: {fileID: 0}
-  _originalAnimationSpeed: 0
-  _groundLayer:
+  InitialState: 0
+  NavMeshAgent: {fileID: 0}
+  ObstacleAgent: {fileID: 0}
+  Animator: {fileID: 0}
+  RigidBody: {fileID: 0}
+  OriginalAnimationSpeed: 0
+  IsAffectedByAbility: 0
+  GroundLayer:
     serializedVersion: 2
-    m_Bits: 512
-  _enemyLayer:
+    m_Bits: 0
+  EnemyLayer:
     serializedVersion: 2
-    m_Bits: 128
-  _playerLayer:
+    m_Bits: 0
+  PlayerLayer:
     serializedVersion: 2
-    m_Bits: 64
-  _player: {fileID: 0}
-  _playerTransform: {fileID: 0}
-  _decoyTransform: {fileID: 0}
-  _attackTimer: 0
-  _lookRotationSpeed: 1
-  _followDecoy: 0
-  _canUseSkill: 0
-  _useMovementPrediction: 0
-  _movementPredictionThreshold: 0
-  _movementPredictionTime: 1
+    m_Bits: 0
+  Player: {fileID: 0}
+  PlayerTransform: {fileID: 0}
+  DecoyTransform: {fileID: 0}
+  AttackTimer: 0
+  LookRotationSpeed: 1
+  FollowDecoy: 0
+  CanUseSkill: 0
+  UseMovementPrediction: 0
+  MovementPredictionThreshold: 0
+  MovementPredictionTime: 1
   _enemyData: {fileID: 11400000, guid: 82118306e108d9743814036562f61341, type: 2}
   _followPosition: {x: 0, y: 0, z: 0}
   _isBossEnemy: 1
@@ -4573,8 +4574,8 @@ MonoBehaviour:
     type: 3}
   _spikePreviewOuter_prefab: {fileID: 6982214405592628148, guid: 3f85f4ea0d832ae4abf1a6da9c20d773,
     type: 3}
-  _damageOnTouch: 0
-  _damageTime: 0
+  _damageOnTouch: 5
+  _damageTime: 1
 --- !u!208 &1028229596
 NavMeshObstacle:
   m_ObjectHideFlags: 0
@@ -4644,7 +4645,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5794608036640460506}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Leg_B_IK_L_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4675,7 +4676,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5797634534754423204}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Pincer_3_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4707,7 +4708,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5797623809263699652}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Leg_F_5_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4739,7 +4740,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5794748900037556152}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Head_Look_IK
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4771,7 +4772,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5797311662168503200}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Tooth_F_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4803,7 +4804,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5797733190175906128}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Mandible_B_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4835,7 +4836,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5794539142694685254}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Tail_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4867,7 +4868,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5797609440381495634}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Tooth_B_Target_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4899,7 +4900,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5794497913141097522}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Mouth_Movement_Even
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4931,7 +4932,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5797711060104499436}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Tail_2_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4962,7 +4963,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5794915111595554928}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Spike_IK_R_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4993,7 +4994,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5794454057963673094}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Pincer_IK_R_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5024,7 +5025,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5797467091249500102}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Leg_B_2_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5056,7 +5057,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5794892545416821460}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Spike_Guide_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5088,7 +5089,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5797334388237117266}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Leg_B_IK_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5122,7 +5123,7 @@ GameObject:
   - component: {fileID: 4509217188999523734}
   - component: {fileID: 4064086729238065460}
   - component: {fileID: 2992325114324225325}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: currentHealth
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5196,7 +5197,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6932071819929543486}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: SpecialAttackSpawn
   m_TagString: Untagged
   m_Icon: {fileID: 0}

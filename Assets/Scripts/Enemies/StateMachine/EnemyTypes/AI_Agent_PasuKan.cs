@@ -18,11 +18,11 @@ public class AI_Agent_PasuKan : AI_Agent_Enemy
 
     protected override void RegisterStates()
     {
-        _stateMachine.RegisterState(new PasuKan_State_Idle());
-        _stateMachine.RegisterState(new PasuKan_State_ChasePlayer());
-        _stateMachine.RegisterState(new PasuKan_State_Attack());
-        _stateMachine.RegisterState(new PasuKan_State_JumpAttack());
-        _stateMachine.RegisterState(new AI_State_Death());
+        StateMachine.RegisterState(new PasuKan_State_Idle());
+        StateMachine.RegisterState(new PasuKan_State_ChasePlayer());
+        StateMachine.RegisterState(new PasuKan_State_Attack());
+        StateMachine.RegisterState(new PasuKan_State_JumpAttack());
+        StateMachine.RegisterState(new AI_State_Death());
     }
 
     public override void SetDeactive()

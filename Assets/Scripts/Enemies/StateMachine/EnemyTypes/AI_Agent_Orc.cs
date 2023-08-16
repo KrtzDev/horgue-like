@@ -18,10 +18,10 @@ public class AI_Agent_Orc : AI_Agent_Enemy
 
     protected override void RegisterStates()
     {
-        _stateMachine.RegisterState(new Orc_State_Idle());
-        _stateMachine.RegisterState(new Orc_State_ChasePlayer());
-        _stateMachine.RegisterState(new Orc_State_Attack());
-        _stateMachine.RegisterState(new AI_State_Death());
+        StateMachine.RegisterState(new Orc_State_Idle());
+        StateMachine.RegisterState(new Orc_State_ChasePlayer());
+        StateMachine.RegisterState(new Orc_State_Attack());
+        StateMachine.RegisterState(new AI_State_Death());
     }
 
     public override void SetDeactive()

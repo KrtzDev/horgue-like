@@ -17,22 +17,22 @@ public class Rikayon_State_Attack : AI_State_Attack
         agent.SetTarget(agent, _rikayon._followPosition);
 
         int random = Random.Range(1, _rikayon._numberOfAttacks + 1);
-        agent._animator.SetFloat("attackNumber", random);
+        agent.Animator.SetFloat("attackNumber", random);
 
-        agent._animator.SetBool("isAttacking", true);
+        agent.Animator.SetBool("isAttacking", true);
     }
 
     public override void Update(AI_Agent agent)
     {
-        if (agent._animator.GetCurrentAnimatorStateInfo(0).IsName("Attack"))
+        if (agent.Animator.GetCurrentAnimatorStateInfo(0).IsName("Attack"))
         {
             switch (_rikayon._currentBossStage)
             {
                 case 1:
-                    agent._animator.speed = _rikayon._bossStageAnimationMultiplier.x;
+                    agent.Animator.speed = _rikayon._bossStageAnimationMultiplier.x;
                     break;
                 case 2:
-                    agent._animator.speed = _rikayon._bossStageAnimationMultiplier.y;
+                    agent.Animator.speed = _rikayon._bossStageAnimationMultiplier.y;
                     break;
             }
         }
@@ -42,20 +42,20 @@ public class Rikayon_State_Attack : AI_State_Attack
 
             if(random < _rikayon._currentSpecialAttackProbablity)
             {
-                agent._animator.speed = agent._originalAnimationSpeed;
-                agent._stateMachine.ChangeState(AI_StateID.SpecialAttack);
+                agent.Animator.speed = agent.OriginalAnimationSpeed;
+                agent.StateMachine.ChangeState(AI_StateID.SpecialAttack);
             }
             else
             {
                 _rikayon._currentSpecialAttackProbablity = Mathf.RoundToInt(_rikayon._currentSpecialAttackProbablity * _rikayon._specialAttackProbablityModifier);
-                agent._animator.speed = agent._originalAnimationSpeed;
-                agent._stateMachine.ChangeState(AI_StateID.Idle);
+                agent.Animator.speed = agent.OriginalAnimationSpeed;
+                agent.StateMachine.ChangeState(AI_StateID.Idle);
             }
         }
     }
 
     public override void Exit(AI_Agent agent)
     {
-        agent._animator.SetBool("isAttacking", false);
+        agent.Animator.SetBool("isAttacking", false);
     }
 }

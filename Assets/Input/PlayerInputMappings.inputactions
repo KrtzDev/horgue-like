@@ -15,7 +15,7 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "Movement Action",
+                    "name": "Jump",
                     "type": "Button",
                     "id": "ec13812d-9832-4b93-9378-fe0bb83cb6d0",
                     "expectedControlType": "Button",
@@ -54,6 +54,15 @@
                     "name": "Pause",
                     "type": "Button",
                     "id": "617ec7a2-4f3c-4216-bc6c-c5fe245061e8",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Ability",
+                    "type": "Button",
+                    "id": "4574deda-05af-4e9f-8904-b49e1fb7a774",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -178,7 +187,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Movement Action",
+                    "action": "Jump",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -189,7 +198,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Movement Action",
+                    "action": "Jump",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -377,6 +386,28 @@
                     "processors": "",
                     "groups": "",
                     "action": "Pause",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "a8caef23-5cf4-46b6-b360-94e1ba8b7eaa",
+                    "path": "<Keyboard>/leftShift",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Ability",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "4e5e86e3-5ea9-4650-8fe8-a4baeda52d0f",
+                    "path": "<Gamepad>/buttonEast",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Ability",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

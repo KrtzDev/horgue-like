@@ -13,19 +13,19 @@ public class Sniper_State_Attack : AI_State_Attack
 
         _sniper = agent as AI_Agent_Sniper;
 
-        agent._animator.SetBool("isAttacking", true);
-        agent._navMeshAgent.SetDestination(agent.transform.position);
+        agent.Animator.SetBool("isAttacking", true);
+        agent.NavMeshAgent.SetDestination(agent.transform.position);
     }
 
     public override void Update(AI_Agent agent)
     {
-        if (!agent._followDecoy)
+        if (!agent.FollowDecoy)
         {
-            _sniper._followPosition = agent._playerTransform.position;
+            _sniper._followPosition = agent.PlayerTransform.position;
         }
         else
         {
-            _sniper._followPosition = agent._decoyTransform.position;
+            _sniper._followPosition = agent.DecoyTransform.position;
         }
 
         Vector3 _lookPosition = new Vector3(_sniper._followPosition.x, agent.transform.position.y, _sniper._followPosition.z);
@@ -34,38 +34,38 @@ public class Sniper_State_Attack : AI_State_Attack
         float distance = Vector3.Distance(agent.transform.position, _sniper._followPosition);
 
         RaycastHit hit;
-        if (!Physics.Raycast(_sniper.ProjectilePoint.transform.position, (_sniper._followPosition + new Vector3(0, 0.5f, 0) - _sniper.ProjectilePoint.transform.position), out hit, distance, agent._groundLayer))
+        if (!Physics.Raycast(_sniper.ProjectilePoint.transform.position, (_sniper._followPosition + new Vector3(0, 0.5f, 0) - _sniper.ProjectilePoint.transform.position), out hit, distance, agent.GroundLayer))
         {
-            if (agent._attackTimer <= 0)
+            if (agent.AttackTimer <= 0)
             {
-                agent._attackTimer = _enemy._enemyData._attackSpeed;
+                agent.AttackTimer = _enemy._enemyData._attackSpeed;
                 _sniper.TargetDirection = (_sniper._followPosition - agent.transform.position).normalized;
-                agent._animator.SetTrigger("shoot");
-                agent._animator.SetBool("isShooting", true);
+                agent.Animator.SetTrigger("shoot");
+                agent.Animator.SetBool("isShooting", true);
                 return;
             }
-            else if (!agent._animator.GetBool("isShooting"))
+            else if (!agent.Animator.GetBool("isShooting"))
             {
-                agent._attackTimer -= Time.deltaTime;
+                agent.AttackTimer -= Time.deltaTime;
 
                 if (distance > _enemy._enemyData._attackRange)
                 {
-                    agent._stateMachine.ChangeState(AI_StateID.Idle);
+                    agent.StateMachine.ChangeState(AI_StateID.Idle);
                 }
                 else if (distance < _enemy._enemyData._retreatRange)
                 {
-                    agent._stateMachine.ChangeState(AI_StateID.Retreat);
+                    agent.StateMachine.ChangeState(AI_StateID.Retreat);
                 }
             }
         }
-        else if (!agent._animator.GetBool("isShooting"))
+        else if (!agent.Animator.GetBool("isShooting"))
         {
-            agent._stateMachine.ChangeState(AI_StateID.Idle);
+            agent.StateMachine.ChangeState(AI_StateID.Idle);
         }
     }
 
     public override void Exit(AI_Agent agent)
     {
-        agent._animator.SetBool("isAttacking", false);
+        agent.Animator.SetBool("isAttacking", false);
     }
 }

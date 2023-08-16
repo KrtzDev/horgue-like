@@ -402,12 +402,12 @@ public class EnemySpawner : MonoBehaviour
         NavMeshHit nv_hit;
         NavMeshQueryFilter enemy_nvq = new NavMeshQueryFilter();
 
-        if (enemy._navMeshAgent == null)
+        if (enemy.NavMeshAgent == null)
         {
-            enemy._navMeshAgent = enemy.GetComponent<NavMeshAgent>();
+            enemy.NavMeshAgent = enemy.GetComponent<NavMeshAgent>();
         }
 
-        enemy_nvq.agentTypeID = enemy._navMeshAgent.agentTypeID;
+        enemy_nvq.agentTypeID = enemy.NavMeshAgent.agentTypeID;
         enemy_nvq.areaMask = NavMesh.AllAreas;
 
         if (NavMesh.SamplePosition(possibleSpawnPosition, out nv_hit, 2f, enemy_nvq))
@@ -426,12 +426,12 @@ public class EnemySpawner : MonoBehaviour
             yield return new WaitForSeconds(spawnDelay);
 
             NavMeshQueryFilter enemy_nvq = new NavMeshQueryFilter();
-            if(enemies._enemy._navMeshAgent == null)
+            if(enemies._enemy.NavMeshAgent == null)
             {
-                enemies._enemy._navMeshAgent = enemies._enemy.GetComponent<NavMeshAgent>();
+                enemies._enemy.NavMeshAgent = enemies._enemy.GetComponent<NavMeshAgent>();
             }
             
-            enemy_nvq.agentTypeID = enemies._enemy._navMeshAgent.agentTypeID;
+            enemy_nvq.agentTypeID = enemies._enemy.NavMeshAgent.agentTypeID;
             enemy_nvq.areaMask = NavMesh.AllAreas;
 
             NavMeshHit Hit;

@@ -170,7 +170,6 @@ public class AbilityUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
             GameManager.Instance._currentAbility = _ability;
             
             ChooseAbility.instance._abilityCoolDownToReplace.GetComponent<Image>().sprite = _ability._icon;
-            GameManager.Instance.EnableAbilityUsage(_ability);
 
             while (elapsedTime < 0.5f)
             {
@@ -266,7 +265,8 @@ public class AbilityUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
     {
         if(!GameManager.Instance._gameIsPaused)
         {
-            _abilitySelected = true;
+            _abilitySelected = true; 
+            EnableAbilityUsage(_ability);
 
             // change Text
             ChooseAbility.instance._titleText.text = "Ability was selected";
@@ -275,5 +275,53 @@ public class AbilityUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
 
             StartCoroutine(MoveAbilityOnActivation());
         }
+    }
+
+    public void EnableAbilityUsage(Ability ability)
+    {
+        PlayerAbilities playerAbilities = FindObjectOfType<PlayerAbilities>();
+
+        switch (ability._name)
+        {
+            case "Dash":
+                playerAbilities.CanUseDashAbility = true;
+                playerAbilities.CanUseForceSphereAbility = false;
+                playerAbilities.CanUseJetpackAbility = false;
+                playerAbilities.CanUseEarthquakeAbility = false;
+                playerAbilities.CanUseStealthAbility = false;
+                break;
+            case "Force Sphere":
+                playerAbilities.CanUseDashAbility = false;
+                playerAbilities.CanUseForceSphereAbility = true;
+                playerAbilities.CanUseJetpackAbility = false;
+                playerAbilities.CanUseEarthquakeAbility = false;
+                playerAbilities.CanUseStealthAbility = false;
+                break;
+            case "Jetpack":
+                playerAbilities.CanUseDashAbility = false;
+                playerAbilities.CanUseForceSphereAbility = false;
+                playerAbilities.CanUseJetpackAbility = true;
+                playerAbilities.CanUseEarthquakeAbility = false;
+                playerAbilities.CanUseStealthAbility = false;
+
+                UIManager.Instance.JetPackUI.SetActive(true);
+                break;
+            case "Earthquake":
+                playerAbilities.CanUseDashAbility = false;
+                playerAbilities.CanUseForceSphereAbility = false;
+                playerAbilities.CanUseJetpackAbility = false;
+                playerAbilities.CanUseEarthquakeAbility = true;
+                playerAbilities.CanUseStealthAbility = false;
+                break;
+            case "Decoy":
+                playerAbilities.CanUseDashAbility = false;
+                playerAbilities.CanUseForceSphereAbility = false;
+                playerAbilities.CanUseJetpackAbility = false;
+                playerAbilities.CanUseEarthquakeAbility = false;
+                playerAbilities.CanUseStealthAbility = true;
+                break;
+        }
+
+        playerAbilities.ActivateVisuals();
     }
 }

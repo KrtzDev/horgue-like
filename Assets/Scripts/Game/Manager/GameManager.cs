@@ -125,7 +125,6 @@ public class GameManager : Singleton<GameManager>
         {
 			AbilityCooldownToReplace abilityCoolDownToReplace = FindObjectOfType<AbilityCooldownToReplace>();
 			abilityCoolDownToReplace.GetComponent<Image>().sprite = _currentAbility._icon;
-			EnableAbilityUsage(_currentAbility);
 		}
 
 		if(_lastLevel == _currentLevel)
@@ -193,39 +192,6 @@ public class GameManager : Singleton<GameManager>
 		RoundLost();
 	}
 
-	public void EnableAbilityUsage(Ability ability)
-    {
-		PlayerMovementMobility playerMobility = FindObjectOfType<PlayerMovementMobility>();
-
-		switch (ability._name)
-        {
-			case "Jump":
-				playerMobility._canUseJumpAbility = true;
-				playerMobility._canUseDashAbility = false;
-				playerMobility._canUseStealthAbility = false;
-				playerMobility._canUseFlickerStrikeAbility = false;
-				break;
-			case "Dash":
-				playerMobility._canUseJumpAbility = false;
-				playerMobility._canUseDashAbility = true;
-				playerMobility._canUseStealthAbility = false;
-				playerMobility._canUseFlickerStrikeAbility = false;
-				break;
-			case "Decoy":
-				playerMobility._canUseJumpAbility = false;
-				playerMobility._canUseDashAbility = false;
-				playerMobility._canUseStealthAbility = true;
-				playerMobility._canUseFlickerStrikeAbility = false;
-				break;
-			case "FlickerStrike":
-				playerMobility._canUseJumpAbility = false;
-				playerMobility._canUseDashAbility = false;
-				playerMobility._canUseStealthAbility = false;
-				playerMobility._canUseFlickerStrikeAbility = true;
-				break;
-        }
-	}
-
 	private void RoundWon()
 	{
 		Debug.Log("Round won");
@@ -290,7 +256,7 @@ public class GameManager : Singleton<GameManager>
 		}
 
 		RaycastHit hit;
-		if(Physics.Raycast(spawnPos, Vector3.down, out hit, Mathf.Infinity, _player.GetComponent<PlayerMovementMobility>()._groundLayer))
+		if(Physics.Raycast(spawnPos, Vector3.down, out hit, Mathf.Infinity, _player.GetComponent<PlayerCharacter>().GroundLayer))
 		{
 			spawnPos = new Vector3(spawnPos.x, spawnPos.y - hit.distance, spawnPos.z);
         }

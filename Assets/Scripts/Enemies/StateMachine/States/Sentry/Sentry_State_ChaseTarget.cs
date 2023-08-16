@@ -23,27 +23,27 @@ public class Sentry_State_ChaseTarget : AI_State_ChasePlayer
                 break;
 
             case SentryStatus.Enemy:
-                float _distance = Vector3.Distance(agent.transform.position, agent._playerTransform.position);
+                float _distance = Vector3.Distance(agent.transform.position, agent.PlayerTransform.position);
 
                 if (_distance < _sentry._range)
                 {
                     _sentry.LookAtTarget();
 
-                    if (agent._attackTimer < 0)
+                    if (agent.AttackTimer < 0)
                     {
-                        agent._animator.SetBool("isAttacking", true);
-                        agent._animator.SetBool("isChasing", false);
-                        agent._stateMachine.ChangeState(AI_StateID.Attack);
+                        agent.Animator.SetBool("isAttacking", true);
+                        agent.Animator.SetBool("isChasing", false);
+                        agent.StateMachine.ChangeState(AI_StateID.Attack);
                     }
 
-                    agent._attackTimer -= Time.deltaTime;
+                    agent.AttackTimer -= Time.deltaTime;
                 }
                 break;
 
             case SentryStatus.Off:
-                agent._animator.SetBool("isAttacking", false);
-                agent._animator.SetBool("isChasing", false);
-                agent._stateMachine.ChangeState(AI_StateID.Death);
+                agent.Animator.SetBool("isAttacking", false);
+                agent.Animator.SetBool("isChasing", false);
+                agent.StateMachine.ChangeState(AI_StateID.Death);
                 break;
         }
     }

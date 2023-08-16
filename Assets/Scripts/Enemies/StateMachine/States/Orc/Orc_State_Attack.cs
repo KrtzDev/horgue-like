@@ -18,7 +18,7 @@ public class Orc_State_Attack : AI_State_Attack
 
     public override void Update(AI_Agent agent)
     {
-        if (agent._animator.GetCurrentAnimatorStateInfo(0).IsName("Attack"))
+        if (agent.Animator.GetCurrentAnimatorStateInfo(0).IsName("Attack"))
         {
         }
         else
@@ -27,11 +27,11 @@ public class Orc_State_Attack : AI_State_Attack
 
             if (distance > _enemy._enemyData._attackRange)
             {
-                agent._stateMachine.ChangeState(AI_StateID.ChasePlayer);
+                agent.StateMachine.ChangeState(AI_StateID.ChasePlayer);
             }
             else
             {
-                agent._stateMachine.ChangeState(AI_StateID.Idle);
+                agent.StateMachine.ChangeState(AI_StateID.Idle);
             }
         }
     }

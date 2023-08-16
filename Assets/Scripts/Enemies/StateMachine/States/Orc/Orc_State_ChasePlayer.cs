@@ -12,12 +12,12 @@ public class Orc_State_ChasePlayer : AI_State_ChasePlayer
 
         _orc = agent as AI_Agent_Orc;
 
-        agent._animator.SetBool("isChasing", true);
+        agent.Animator.SetBool("isChasing", true);
     }
 
     public override void Update(AI_Agent agent)
     {
-        if (!agent._navMeshAgent.enabled)
+        if (!agent.NavMeshAgent.enabled)
         {
             return;
         }
@@ -26,39 +26,39 @@ public class Orc_State_ChasePlayer : AI_State_ChasePlayer
 
         if (_timer < 0f)
         {
-            if (agent._navMeshAgent.pathStatus != UnityEngine.AI.NavMeshPathStatus.PathPartial)
+            if (agent.NavMeshAgent.pathStatus != UnityEngine.AI.NavMeshPathStatus.PathPartial)
             {
-                if (!agent._useMovementPrediction)
+                if (!agent.UseMovementPrediction)
                 {
-                    if (agent._followDecoy)
+                    if (agent.FollowDecoy)
                     {
-                        _orc._followPosition = agent._decoyTransform.position;
+                        _orc._followPosition = agent.DecoyTransform.position;
                         agent.SetTarget(agent, _orc._followPosition);
                     }
                     else
                     {
-                        _orc._followPosition = agent._playerTransform.position;
+                        _orc._followPosition = agent.PlayerTransform.position;
                         agent.SetTarget(agent, _orc._followPosition);
                     }
                 }
                 else
                 {
-                    if (agent._followDecoy)
+                    if (agent.FollowDecoy)
                     {
-                        _orc._followPosition = agent._decoyTransform.position;
+                        _orc._followPosition = agent.DecoyTransform.position;
                         agent.SetTarget(agent, _orc._followPosition);
                     }
                     else
                     {
-                        _orc._followPosition = agent._playerTransform.position + (agent._player.GetComponent<PlayerMovement>().AverageVelocity * agent._movementPredictionTime);
+                        _orc._followPosition = agent.PlayerTransform.position + (agent.Player.GetComponent<PlayerMovement>().AverageVelocity * agent.MovementPredictionTime);
 
                         Vector3 directionToTarget = (_orc._followPosition - agent.transform.position).normalized;
-                        Vector3 directionToPlayer = (agent._playerTransform.position - agent.transform.position).normalized;
+                        Vector3 directionToPlayer = (agent.PlayerTransform.position - agent.transform.position).normalized;
 
                         float dot = Vector3.Dot(directionToPlayer, directionToTarget);
-                        if (dot < agent._movementPredictionThreshold)
+                        if (dot < agent.MovementPredictionThreshold)
                         {
-                            _orc._followPosition = agent._playerTransform.position;
+                            _orc._followPosition = agent.PlayerTransform.position;
                         }
 
                         agent.SetTarget(agent, _orc._followPosition);
@@ -69,13 +69,13 @@ public class Orc_State_ChasePlayer : AI_State_ChasePlayer
             _timer = _maxTime;
         }
 
-        float distance = Vector3.Distance(agent.transform.position, agent._playerTransform.position);
+        float distance = Vector3.Distance(agent.transform.position, agent.PlayerTransform.position);
         CheckForAttack(_enemy, distance);
     }
 
     public override void Exit(AI_Agent agent)
     {
-        agent._animator.SetBool("isChasing", false);
+        agent.Animator.SetBool("isChasing", false);
     }
 
     private void StartRotating(AI_Agent agent)
@@ -90,21 +90,21 @@ public class Orc_State_ChasePlayer : AI_State_ChasePlayer
 
     private void CheckForAttack(AI_Agent agent, float distance)
     {
-        if (distance < _enemy._enemyData._attackRange && agent._attackTimer <= 0)
+        if (distance < _enemy._enemyData._attackRange && agent.AttackTimer <= 0)
         {
-            agent._attackTimer = _enemy._enemyData._attackSpeed;
+            agent.AttackTimer = _enemy._enemyData._attackSpeed;
             agent.transform.LookAt(_orc._followPosition);
-            agent._animator.SetTrigger("attack");
-            agent._animator.SetBool("isChasing", false);
-            agent._stateMachine.ChangeState(AI_StateID.Attack);
+            agent.Animator.SetTrigger("attack");
+            agent.Animator.SetBool("isChasing", false);
+            agent.StateMachine.ChangeState(AI_StateID.Attack);
         }
         else if (distance < _enemy._enemyData._attackRange)
         {
-            agent._stateMachine.ChangeState(AI_StateID.Idle);
+            agent.StateMachine.ChangeState(AI_StateID.Idle);
         }
         else
         {
-            agent._attackTimer -= Time.deltaTime;
+            agent.AttackTimer -= Time.deltaTime;
         }
     }
 }

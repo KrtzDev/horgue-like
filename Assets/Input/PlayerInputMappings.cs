@@ -37,7 +37,7 @@ public partial class @PlayerInputMappings : IInputActionCollection2, IDisposable
                     ""initialStateCheck"": true
                 },
                 {
-                    ""name"": ""Movement Action"",
+                    ""name"": ""Jump"",
                     ""type"": ""Button"",
                     ""id"": ""ec13812d-9832-4b93-9378-fe0bb83cb6d0"",
                     ""expectedControlType"": ""Button"",
@@ -76,6 +76,15 @@ public partial class @PlayerInputMappings : IInputActionCollection2, IDisposable
                     ""name"": ""Pause"",
                     ""type"": ""Button"",
                     ""id"": ""617ec7a2-4f3c-4216-bc6c-c5fe245061e8"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Ability"",
+                    ""type"": ""Button"",
+                    ""id"": ""4574deda-05af-4e9f-8904-b49e1fb7a774"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -200,7 +209,7 @@ public partial class @PlayerInputMappings : IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Movement Action"",
+                    ""action"": ""Jump"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -211,7 +220,7 @@ public partial class @PlayerInputMappings : IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Movement Action"",
+                    ""action"": ""Jump"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -399,6 +408,28 @@ public partial class @PlayerInputMappings : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a8caef23-5cf4-46b6-b360-94e1ba8b7eaa"",
+                    ""path"": ""<Keyboard>/leftShift"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Ability"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""4e5e86e3-5ea9-4650-8fe8-a4baeda52d0f"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Ability"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -1092,11 +1123,12 @@ public partial class @PlayerInputMappings : IInputActionCollection2, IDisposable
         // Character
         m_Character = asset.FindActionMap("Character", throwIfNotFound: true);
         m_Character_Movement = m_Character.FindAction("Movement", throwIfNotFound: true);
-        m_Character_MovementAction = m_Character.FindAction("Movement Action", throwIfNotFound: true);
+        m_Character_Jump = m_Character.FindAction("Jump", throwIfNotFound: true);
         m_Character_Aim = m_Character.FindAction("Aim", throwIfNotFound: true);
         m_Character_Shoot = m_Character.FindAction("Shoot", throwIfNotFound: true);
         m_Character_SwitchMode = m_Character.FindAction("SwitchMode", throwIfNotFound: true);
         m_Character_Pause = m_Character.FindAction("Pause", throwIfNotFound: true);
+        m_Character_Ability = m_Character.FindAction("Ability", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -1174,21 +1206,23 @@ public partial class @PlayerInputMappings : IInputActionCollection2, IDisposable
     private readonly InputActionMap m_Character;
     private ICharacterActions m_CharacterActionsCallbackInterface;
     private readonly InputAction m_Character_Movement;
-    private readonly InputAction m_Character_MovementAction;
+    private readonly InputAction m_Character_Jump;
     private readonly InputAction m_Character_Aim;
     private readonly InputAction m_Character_Shoot;
     private readonly InputAction m_Character_SwitchMode;
     private readonly InputAction m_Character_Pause;
+    private readonly InputAction m_Character_Ability;
     public struct CharacterActions
     {
         private @PlayerInputMappings m_Wrapper;
         public CharacterActions(@PlayerInputMappings wrapper) { m_Wrapper = wrapper; }
         public InputAction @Movement => m_Wrapper.m_Character_Movement;
-        public InputAction @MovementAction => m_Wrapper.m_Character_MovementAction;
+        public InputAction @Jump => m_Wrapper.m_Character_Jump;
         public InputAction @Aim => m_Wrapper.m_Character_Aim;
         public InputAction @Shoot => m_Wrapper.m_Character_Shoot;
         public InputAction @SwitchMode => m_Wrapper.m_Character_SwitchMode;
         public InputAction @Pause => m_Wrapper.m_Character_Pause;
+        public InputAction @Ability => m_Wrapper.m_Character_Ability;
         public InputActionMap Get() { return m_Wrapper.m_Character; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1201,9 +1235,9 @@ public partial class @PlayerInputMappings : IInputActionCollection2, IDisposable
                 @Movement.started -= m_Wrapper.m_CharacterActionsCallbackInterface.OnMovement;
                 @Movement.performed -= m_Wrapper.m_CharacterActionsCallbackInterface.OnMovement;
                 @Movement.canceled -= m_Wrapper.m_CharacterActionsCallbackInterface.OnMovement;
-                @MovementAction.started -= m_Wrapper.m_CharacterActionsCallbackInterface.OnMovementAction;
-                @MovementAction.performed -= m_Wrapper.m_CharacterActionsCallbackInterface.OnMovementAction;
-                @MovementAction.canceled -= m_Wrapper.m_CharacterActionsCallbackInterface.OnMovementAction;
+                @Jump.started -= m_Wrapper.m_CharacterActionsCallbackInterface.OnJump;
+                @Jump.performed -= m_Wrapper.m_CharacterActionsCallbackInterface.OnJump;
+                @Jump.canceled -= m_Wrapper.m_CharacterActionsCallbackInterface.OnJump;
                 @Aim.started -= m_Wrapper.m_CharacterActionsCallbackInterface.OnAim;
                 @Aim.performed -= m_Wrapper.m_CharacterActionsCallbackInterface.OnAim;
                 @Aim.canceled -= m_Wrapper.m_CharacterActionsCallbackInterface.OnAim;
@@ -1216,6 +1250,9 @@ public partial class @PlayerInputMappings : IInputActionCollection2, IDisposable
                 @Pause.started -= m_Wrapper.m_CharacterActionsCallbackInterface.OnPause;
                 @Pause.performed -= m_Wrapper.m_CharacterActionsCallbackInterface.OnPause;
                 @Pause.canceled -= m_Wrapper.m_CharacterActionsCallbackInterface.OnPause;
+                @Ability.started -= m_Wrapper.m_CharacterActionsCallbackInterface.OnAbility;
+                @Ability.performed -= m_Wrapper.m_CharacterActionsCallbackInterface.OnAbility;
+                @Ability.canceled -= m_Wrapper.m_CharacterActionsCallbackInterface.OnAbility;
             }
             m_Wrapper.m_CharacterActionsCallbackInterface = instance;
             if (instance != null)
@@ -1223,9 +1260,9 @@ public partial class @PlayerInputMappings : IInputActionCollection2, IDisposable
                 @Movement.started += instance.OnMovement;
                 @Movement.performed += instance.OnMovement;
                 @Movement.canceled += instance.OnMovement;
-                @MovementAction.started += instance.OnMovementAction;
-                @MovementAction.performed += instance.OnMovementAction;
-                @MovementAction.canceled += instance.OnMovementAction;
+                @Jump.started += instance.OnJump;
+                @Jump.performed += instance.OnJump;
+                @Jump.canceled += instance.OnJump;
                 @Aim.started += instance.OnAim;
                 @Aim.performed += instance.OnAim;
                 @Aim.canceled += instance.OnAim;
@@ -1238,6 +1275,9 @@ public partial class @PlayerInputMappings : IInputActionCollection2, IDisposable
                 @Pause.started += instance.OnPause;
                 @Pause.performed += instance.OnPause;
                 @Pause.canceled += instance.OnPause;
+                @Ability.started += instance.OnAbility;
+                @Ability.performed += instance.OnAbility;
+                @Ability.canceled += instance.OnAbility;
             }
         }
     }
@@ -1399,11 +1439,12 @@ public partial class @PlayerInputMappings : IInputActionCollection2, IDisposable
     public interface ICharacterActions
     {
         void OnMovement(InputAction.CallbackContext context);
-        void OnMovementAction(InputAction.CallbackContext context);
+        void OnJump(InputAction.CallbackContext context);
         void OnAim(InputAction.CallbackContext context);
         void OnShoot(InputAction.CallbackContext context);
         void OnSwitchMode(InputAction.CallbackContext context);
         void OnPause(InputAction.CallbackContext context);
+        void OnAbility(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {

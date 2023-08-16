@@ -42,7 +42,7 @@ public class AI_Manager : MonoBehaviour
             float xPos = target.position.x + radiusAroundTarget * Mathf.Cos(2 * Mathf.PI * i / PasuKan.Count);
             float yPos = target.position.y;
             float zPos = target.position.z + radiusAroundTarget * Mathf.Sin(2 * Mathf.PI * i / PasuKan.Count);
-            EnemyType[i]._navMeshAgent.destination = new Vector3(xPos, yPos, zPos);
+            EnemyType[i].NavMeshAgent.destination = new Vector3(xPos, yPos, zPos);
         }
     }
 
@@ -55,7 +55,7 @@ public class AI_Manager : MonoBehaviour
         while (time < maxTime)
         {
             agent.transform.rotation = Quaternion.Slerp(agent.transform.rotation, lookRotation, time);
-            time += Time.deltaTime * agent._lookRotationSpeed;
+            time += Time.deltaTime * agent.LookRotationSpeed;
 
             yield return null;
         }

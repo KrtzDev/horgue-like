@@ -41820,7 +41820,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh113472
+  m_Name: pb_Mesh118150
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -61438,43 +61438,8 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2136897129495592176, guid: 62d6286d223d00e49ba8ca796795cc73,
         type: 3}
-      propertyPath: m_ClearFlags
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 2136897129495592176, guid: 62d6286d223d00e49ba8ca796795cc73,
-        type: 3}
       propertyPath: near clip plane
       value: 0.001
-      objectReference: {fileID: 0}
-    - target: {fileID: 2136897129495592176, guid: 62d6286d223d00e49ba8ca796795cc73,
-        type: 3}
-      propertyPath: m_BackGroundColor.a
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2136897129495592176, guid: 62d6286d223d00e49ba8ca796795cc73,
-        type: 3}
-      propertyPath: m_BackGroundColor.b
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2136897129495592176, guid: 62d6286d223d00e49ba8ca796795cc73,
-        type: 3}
-      propertyPath: m_BackGroundColor.g
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2136897129495592176, guid: 62d6286d223d00e49ba8ca796795cc73,
-        type: 3}
-      propertyPath: m_BackGroundColor.r
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2136897129495592179, guid: 62d6286d223d00e49ba8ca796795cc73,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -15
-      objectReference: {fileID: 0}
-    - target: {fileID: 2136897129495592179, guid: 62d6286d223d00e49ba8ca796795cc73,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -15
       objectReference: {fileID: 0}
     - target: {fileID: 2136897129691636549, guid: 62d6286d223d00e49ba8ca796795cc73,
         type: 3}
@@ -61535,21 +61500,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5032546609719715741, guid: 62d6286d223d00e49ba8ca796795cc73,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -15
-      objectReference: {fileID: 0}
-    - target: {fileID: 5032546609719715741, guid: 62d6286d223d00e49ba8ca796795cc73,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -15
-      objectReference: {fileID: 0}
-    - target: {fileID: 6670527696543464466, guid: 62d6286d223d00e49ba8ca796795cc73,
-        type: 3}
-      propertyPath: _jumpForce
-      value: 20
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 62d6286d223d00e49ba8ca796795cc73, type: 3}

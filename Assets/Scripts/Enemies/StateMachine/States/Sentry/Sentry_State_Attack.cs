@@ -12,12 +12,12 @@ public class Sentry_State_Attack : AI_State_Attack
 
         _sentry = agent as AI_Agent_Sentry;
 
-        agent._attackTimer = _sentry._attackRate;
+        agent.AttackTimer = _sentry._attackRate;
 
         switch (_sentry._sentryStatus)
         {
             case SentryStatus.Enemy:
-                _sentry._targetDirection = (agent._playerTransform.position - agent.transform.position).normalized;
+                _sentry._targetDirection = (agent.PlayerTransform.position - agent.transform.position).normalized;
                 break;
 
             case SentryStatus.Ally:
@@ -27,9 +27,9 @@ public class Sentry_State_Attack : AI_State_Attack
 
         _sentry.Shoot();
 
-        agent._animator.SetBool("isAttacking", false);
-        agent._animator.SetBool("isChasing", true);
-        agent._stateMachine.ChangeState(AI_StateID.ChasePlayer);
+        agent.Animator.SetBool("isAttacking", false);
+        agent.Animator.SetBool("isChasing", true);
+        agent.StateMachine.ChangeState(AI_StateID.ChasePlayer);
     }
 
     public override void Update(AI_Agent agent)

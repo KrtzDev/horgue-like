@@ -15,37 +15,37 @@ public class Drone_State_Idle : AI_State_Idle
 
     public override void Update(AI_Agent agent)
     {
-        if (agent._followDecoy)
+        if (agent.FollowDecoy)
         {
-            _drone._followPosition = agent._decoyTransform.position;
+            _drone._followPosition = agent.DecoyTransform.position;
         }
         else
         {
-            _drone._followPosition = agent._playerTransform.position;
+            _drone._followPosition = agent.PlayerTransform.position;
         }
 
         float distance = Vector3.Distance(_drone.ProjectilePoint.transform.position, _drone._followPosition + new Vector3(0, 0.5f, 0));
 
         // agent.transform.LookAt(_followPosition);
 
-        agent._attackTimer -= Time.deltaTime;
+        agent.AttackTimer -= Time.deltaTime;
 
-        if (!Physics.Raycast(_drone.ProjectilePoint.transform.position, (_drone._followPosition + new Vector3(0, 0.5f, 0) - _drone.ProjectilePoint.transform.position).normalized, distance, agent._groundLayer))
+        if (!Physics.Raycast(_drone.ProjectilePoint.transform.position, (_drone._followPosition + new Vector3(0, 0.5f, 0) - _drone.ProjectilePoint.transform.position).normalized, distance, agent.GroundLayer))
         {
             if (distance >= _enemy._enemyData._attackRange)
             {
-                agent._stateMachine.ChangeState(AI_StateID.ChasePlayer);
+                agent.StateMachine.ChangeState(AI_StateID.ChasePlayer);
             }
-            else if (distance < _enemy._enemyData._attackRange && _enemy._attackTimer <= 0)
+            else if (distance < _enemy._enemyData._attackRange && _enemy.AttackTimer <= 0)
             {
-                agent._stateMachine.ChangeState(AI_StateID.Attack);
+                agent.StateMachine.ChangeState(AI_StateID.Attack);
             }
         }
         else
         {
             if (distance >= _enemy._enemyData._attackRange)
             {
-                agent._stateMachine.ChangeState(AI_StateID.ChasePlayer);
+                agent.StateMachine.ChangeState(AI_StateID.ChasePlayer);
             }
         }
     }

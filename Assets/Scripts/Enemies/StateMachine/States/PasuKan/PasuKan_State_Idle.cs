@@ -10,7 +10,7 @@ public class PasuKan_State_Idle : AI_State_Idle
     {
         base.Enter(agent);
 
-        agent._animator.SetBool("isIdle", true);
+        agent.Animator.SetBool("isIdle", true);
 
         _pasuKan = agent as AI_Agent_PasuKan;
 
@@ -21,50 +21,50 @@ public class PasuKan_State_Idle : AI_State_Idle
 
     public override void Update(AI_Agent agent)
     {
-        if (!agent._navMeshAgent.enabled)
+        if (!agent.NavMeshAgent.enabled)
         {
             return;
         }
 
-        agent._attackTimer -= Time.deltaTime;
+        agent.AttackTimer -= Time.deltaTime;
 
-        if (agent._followDecoy)
+        if (agent.FollowDecoy)
         {
-            _pasuKan._followPosition = agent._decoyTransform.position;
+            _pasuKan._followPosition = agent.DecoyTransform.position;
         }
         else
         {
-            _pasuKan._followPosition = agent._playerTransform.position;
+            _pasuKan._followPosition = agent.PlayerTransform.position;
         }
 
         float distance = Vector3.Distance(agent.transform.position, _pasuKan._followPosition);
 
         RaycastHit hit;
-        if (Physics.Raycast(_pasuKan.transform.position, (_pasuKan._followPosition + new Vector3(0, 0.5f, 0) - _pasuKan.transform.position), out hit, distance, agent._groundLayer))
+        if (Physics.Raycast(_pasuKan.transform.position, (_pasuKan._followPosition + new Vector3(0, 0.5f, 0) - _pasuKan.transform.position), out hit, distance, agent.GroundLayer))
         {
             if (distance >= _enemy._enemyData._attackRange)
             {
-                agent._stateMachine.ChangeState(AI_StateID.ChasePlayer);
+                agent.StateMachine.ChangeState(AI_StateID.ChasePlayer);
             }
         }
         else
         {
-            if (distance <= _enemy._enemyData._attackRange && _enemy._attackTimer <= 0)
+            if (distance <= _enemy._enemyData._attackRange && _enemy.AttackTimer <= 0)
             {
-                agent._attackTimer = _enemy._enemyData._attackSpeed;
+                agent.AttackTimer = _enemy._enemyData._attackSpeed;
                 agent.transform.LookAt(_pasuKan._followPosition);
-                agent._animator.SetTrigger("attack");
-                agent._stateMachine.ChangeState(AI_StateID.Attack);
+                agent.Animator.SetTrigger("attack");
+                agent.StateMachine.ChangeState(AI_StateID.Attack);
             }
             else if (distance >= _enemy._enemyData._attackRange)
             {
-                agent._stateMachine.ChangeState(AI_StateID.ChasePlayer);
+                agent.StateMachine.ChangeState(AI_StateID.ChasePlayer);
             }
         }
     }
 
     public override void Exit(AI_Agent agent)
     {
-        agent._animator.SetBool("isIdle", false);
+        agent.Animator.SetBool("isIdle", false);
     }
 }

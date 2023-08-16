@@ -19,47 +19,47 @@ public class RangedRobot_State_Idle : AI_State_Idle
 
     public override void Update(AI_Agent agent)
     {
-        if (!agent._navMeshAgent.enabled)
+        if (!agent.NavMeshAgent.enabled)
         {
             return;
         }
 
-        if (agent._followDecoy)
+        if (agent.FollowDecoy)
         {
-            _rangedRobot._followPosition = agent._decoyTransform.position;
+            _rangedRobot._followPosition = agent.DecoyTransform.position;
         }
         else
         {
-            _rangedRobot._followPosition = agent._playerTransform.position;
+            _rangedRobot._followPosition = agent.PlayerTransform.position;
         }
 
         float distance = Vector3.Distance(agent.transform.position, _rangedRobot._followPosition);
 
         RaycastHit hit;
-        if (Physics.Raycast(_rangedRobot.ProjectilePoint.transform.position, (_rangedRobot._followPosition + new Vector3(0, 0.5f, 0) - _rangedRobot.ProjectilePoint.transform.position), out hit, distance, agent._groundLayer))
+        if (Physics.Raycast(_rangedRobot.ProjectilePoint.transform.position, (_rangedRobot._followPosition + new Vector3(0, 0.5f, 0) - _rangedRobot.ProjectilePoint.transform.position), out hit, distance, agent.GroundLayer))
         {
             if (distance <= _enemy._enemyData._retreatRange)
             {
-                agent._stateMachine.ChangeState(AI_StateID.Retreat);
+                agent.StateMachine.ChangeState(AI_StateID.Retreat);
             }
             else
             {
-                agent._stateMachine.ChangeState(AI_StateID.ChasePlayer);
+                agent.StateMachine.ChangeState(AI_StateID.ChasePlayer);
             }
         }
         else
         {
             if (distance <= _enemy._enemyData._retreatRange)
             {
-                agent._stateMachine.ChangeState(AI_StateID.Retreat);
+                agent.StateMachine.ChangeState(AI_StateID.Retreat);
             }
             else if (distance < _enemy._enemyData._attackRange)
             {
-                agent._stateMachine.ChangeState(AI_StateID.Attack);
+                agent.StateMachine.ChangeState(AI_StateID.Attack);
             }
             else if (distance >= _enemy._enemyData._attackRange)
             {
-                agent._stateMachine.ChangeState(AI_StateID.ChasePlayer);
+                agent.StateMachine.ChangeState(AI_StateID.ChasePlayer);
             }
         }
     }

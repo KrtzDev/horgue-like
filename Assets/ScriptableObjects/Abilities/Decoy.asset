@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Decoy
   m_EditorClassIdentifier: 
   _name: Decoy
-  _icon: {fileID: 21300000, guid: 9aebd705574f9e642aef1e5f59b3e4d8, type: 3}
+  _icon: {fileID: 21300000, guid: 0bedec7021b7d674a8fd2c73a8e7c4f7, type: 3}
