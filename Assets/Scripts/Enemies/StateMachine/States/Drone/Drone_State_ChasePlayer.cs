@@ -12,7 +12,7 @@ public class Drone_State_ChasePlayer : AI_State_ChasePlayer
 
         _drone = agent as AI_Agent_Drone;
 
-        agent._animator.SetBool("isChasing", true);
+        agent.Animator.SetBool("isChasing", true);
     }
 
     public override void Update(AI_Agent agent)
@@ -21,42 +21,42 @@ public class Drone_State_ChasePlayer : AI_State_ChasePlayer
         Debug.DrawLine(_drone.ProjectilePoint.transform.position, _drone._followPosition + new Vector3(0, 0.5f, 0), Color.yellow);
         CheckForBehaviour(agent, distance);
 
-        if (!agent._navMeshAgent.enabled)
+        if (!agent.NavMeshAgent.enabled)
         {
             return;
         }
 
-        if (!agent._useMovementPrediction)
+        if (!agent.UseMovementPrediction)
         {
-            if (agent._followDecoy)
+            if (agent.FollowDecoy)
             {
-                _drone._followPosition = agent._decoyTransform.position;
+                _drone._followPosition = agent.DecoyTransform.position;
                 agent.SetTarget(agent, new Vector3(_drone._followPosition.x, agent.transform.position.y, _drone._followPosition.z));
             }
             else
             {
-                _drone._followPosition = agent._playerTransform.position;
+                _drone._followPosition = agent.PlayerTransform.position;
                 agent.SetTarget(agent, new Vector3(_drone._followPosition.x, agent.transform.position.y, _drone._followPosition.z));
             }
         }
         else
         {
-            if (agent._followDecoy)
+            if (agent.FollowDecoy)
             {
-                _drone._followPosition = agent._decoyTransform.position;
+                _drone._followPosition = agent.DecoyTransform.position;
                 agent.SetTarget(agent, new Vector3(_drone._followPosition.x, agent.transform.position.y, _drone._followPosition.z));
             }
             else
             {
-                _drone._followPosition = agent._playerTransform.position + (agent._player.GetComponent<PlayerMovement>().AverageVelocity * agent._movementPredictionTime);
+                _drone._followPosition = agent.PlayerTransform.position + (agent.Player.GetComponent<PlayerMovement>().AverageVelocity * agent.MovementPredictionTime);
 
                 Vector3 directionToTarget = (_drone._followPosition - agent.transform.position).normalized;
-                Vector3 directionToPlayer = (agent._playerTransform.position - agent.transform.position).normalized;
+                Vector3 directionToPlayer = (agent.PlayerTransform.position - agent.transform.position).normalized;
 
                 float dot = Vector3.Dot(directionToPlayer, directionToTarget);
-                if (dot < agent._movementPredictionThreshold)
+                if (dot < agent.MovementPredictionThreshold)
                 {
-                    _drone._followPosition = agent._playerTransform.position;
+                    _drone._followPosition = agent.PlayerTransform.position;
                 }
 
                 agent.SetTarget(agent, new Vector3(_drone._followPosition.x, agent.transform.position.y, _drone._followPosition.z));
@@ -66,7 +66,7 @@ public class Drone_State_ChasePlayer : AI_State_ChasePlayer
 
     public override void Exit(AI_Agent agent)
     {
-        agent._animator.SetBool("isChasing", false);
+        agent.Animator.SetBool("isChasing", false);
     }
 
     private void StartRotating(AI_Agent agent)
@@ -81,15 +81,15 @@ public class Drone_State_ChasePlayer : AI_State_ChasePlayer
 
     private void CheckForBehaviour(AI_Agent agent, float distance)
     {
-        agent._attackTimer -= Time.deltaTime;
+        agent.AttackTimer -= Time.deltaTime;
 
-        if (!Physics.Raycast(_drone.ProjectilePoint.transform.position, (_drone._followPosition + new Vector3(0, 0.5f, 0) - _drone.ProjectilePoint.transform.position).normalized, distance, agent._groundLayer))
+        if (!Physics.Raycast(_drone.ProjectilePoint.transform.position, (_drone._followPosition + new Vector3(0, 0.5f, 0) - _drone.ProjectilePoint.transform.position).normalized, distance, agent.GroundLayer))
         {
             if (distance <= _enemy._enemyData._attackRange)
             {
-                if(agent._attackTimer <= 0)
+                if(agent.AttackTimer <= 0)
                 {
-                    agent._stateMachine.ChangeState(AI_StateID.Attack);
+                    agent.StateMachine.ChangeState(AI_StateID.Attack);
                     return;
                 }
             }

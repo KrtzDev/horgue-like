@@ -31,11 +31,11 @@ public class AI_Agent_Sniper : AI_Agent_Enemy
 
     protected override void RegisterStates()
     {
-        _stateMachine.RegisterState(new Sniper_State_Idle());
-        _stateMachine.RegisterState(new Sniper_State_ChasePlayer());
-        _stateMachine.RegisterState(new Sniper_State_Retreat());
-        _stateMachine.RegisterState(new Sniper_State_Attack());
-        _stateMachine.RegisterState(new AI_State_Death());
+        StateMachine.RegisterState(new Sniper_State_Idle());
+        StateMachine.RegisterState(new Sniper_State_ChasePlayer());
+        StateMachine.RegisterState(new Sniper_State_Retreat());
+        StateMachine.RegisterState(new Sniper_State_Attack());
+        StateMachine.RegisterState(new AI_State_Death());
     }
 
     public override void SetDeactive()
@@ -52,8 +52,8 @@ public class AI_Agent_Sniper : AI_Agent_Enemy
 
     public override void DoneShooting()
     {
-        _animator.SetBool("isShooting", false);
-        _animator.SetBool("isAttacking", false);
-        _stateMachine.ChangeState(AI_StateID.Idle);
+        Animator.SetBool("isShooting", false);
+        Animator.SetBool("isAttacking", false);
+        StateMachine.ChangeState(AI_StateID.Idle);
     }
 }

@@ -19,21 +19,21 @@ public class Rikayon_State_Idle : AI_State_Idle
 
     public override void Update(AI_Agent agent)
     {
-        if (!agent._navMeshAgent.enabled)
+        if (!agent.NavMeshAgent.enabled)
         {
             return;
         }
 
-        if (agent._attackTimer > 0)
-            agent._attackTimer -= Time.deltaTime;
+        if (agent.AttackTimer > 0)
+            agent.AttackTimer -= Time.deltaTime;
 
-        if (agent._followDecoy)
+        if (agent.FollowDecoy)
         {
-            _rikayon._followPosition = agent._decoyTransform.position;
+            _rikayon._followPosition = agent.DecoyTransform.position;
         }
         else
         {
-            _rikayon._followPosition = agent._playerTransform.position;
+            _rikayon._followPosition = agent.PlayerTransform.position;
         }
 
         float distance = Vector3.Distance(agent.transform.position, _rikayon._followPosition);
@@ -46,17 +46,17 @@ public class Rikayon_State_Idle : AI_State_Idle
 
             if (distance > _enemy._enemyData._attackRange)
             {
-                agent._stateMachine.ChangeState(AI_StateID.ChasePlayer);
+                agent.StateMachine.ChangeState(AI_StateID.ChasePlayer);
                 return;
             }
-            else if (distance > _enemy._enemyData._attackRange && agent._attackTimer <= 0)
+            else if (distance > _enemy._enemyData._attackRange && agent.AttackTimer <= 0)
             {
-                agent._stateMachine.ChangeState(AI_StateID.Attack);
+                agent.StateMachine.ChangeState(AI_StateID.Attack);
                 return;
             }
             else
             {
-                agent._stateMachine.ChangeState(AI_StateID.SpecialAttack);
+                agent.StateMachine.ChangeState(AI_StateID.SpecialAttack);
                 return;
             }
 

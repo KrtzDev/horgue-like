@@ -55,7 +55,7 @@ public class AI_Agent_Rikayon : AI_Agent_Enemy
     {
         base.Start();
 
-        _originalAnimationSpeed = _animator.speed;
+        OriginalAnimationSpeed = Animator.speed;
         _currentSpecialAttackProbablity = _baseSpecialAttackProbability;
     }
 
@@ -69,12 +69,12 @@ public class AI_Agent_Rikayon : AI_Agent_Enemy
 
     protected override void RegisterStates()
     {
-        _stateMachine.RegisterState(new Rikayon_State_ChasePlayer());
-        _stateMachine.RegisterState(new Rikayon_State_Attack());
-        _stateMachine.RegisterState(new Rikayon_State_SpecialAttack());
-        _stateMachine.RegisterState(new Rikayon_State_Retreat());
-        _stateMachine.RegisterState(new Rikayon_State_Idle());
-        _stateMachine.RegisterState(new AI_State_Death());
+        StateMachine.RegisterState(new Rikayon_State_ChasePlayer());
+        StateMachine.RegisterState(new Rikayon_State_Attack());
+        StateMachine.RegisterState(new Rikayon_State_SpecialAttack());
+        StateMachine.RegisterState(new Rikayon_State_Retreat());
+        StateMachine.RegisterState(new Rikayon_State_Idle());
+        StateMachine.RegisterState(new AI_State_Death());
     }
 
     public override void SetDeactive()
@@ -87,35 +87,35 @@ public class AI_Agent_Rikayon : AI_Agent_Enemy
 
         if (_healthComponent._currentHealth <= _healthComponent._maxHealth / 2.5 && _currentBossStage == 0)
         {
-            transform.LookAt(_playerTransform);
+            transform.LookAt(PlayerTransform);
 
-            _animator.speed = _originalAnimationSpeed;
+            Animator.speed = OriginalAnimationSpeed;
 
-            _animator.SetTrigger("bossStage1");
+            Animator.SetTrigger("bossStage1");
             _currentBossStage = 1;
             _healthComponent._canTakeDamage = false;
 
-            _navMeshAgent.speed *= _bossStageMovementMultiplier.x;
-            _navMeshAgent.acceleration *= _bossStageMovementMultiplier.x;
+            NavMeshAgent.speed *= _bossStageMovementMultiplier.x;
+            NavMeshAgent.acceleration *= _bossStageMovementMultiplier.x;
 
             gameObject.GetComponent <AI_Agent_Rikayon> ().enabled = false;
         }
 
         if (_healthComponent._currentHealth <= _healthComponent._maxHealth / 4.5 && _currentBossStage == 1)
         {
-            transform.LookAt(_playerTransform);
+            transform.LookAt(PlayerTransform);
 
-            _animator.speed = _originalAnimationSpeed;
+            Animator.speed = OriginalAnimationSpeed;
 
-            _animator.SetTrigger("bossStage2");
+            Animator.SetTrigger("bossStage2");
             _currentBossStage = 2;
             _healthComponent._canTakeDamage = false;
 
-            _navMeshAgent.speed /= _bossStageMovementMultiplier.x;
-            _navMeshAgent.acceleration /= _bossStageMovementMultiplier.x;
+            NavMeshAgent.speed /= _bossStageMovementMultiplier.x;
+            NavMeshAgent.acceleration /= _bossStageMovementMultiplier.x;
 
-            _navMeshAgent.speed *= _bossStageMovementMultiplier.y;
-            _navMeshAgent.acceleration *= _bossStageMovementMultiplier.y;
+            NavMeshAgent.speed *= _bossStageMovementMultiplier.y;
+            NavMeshAgent.acceleration *= _bossStageMovementMultiplier.y;
 
             gameObject.GetComponent<AI_Agent_Rikayon>().enabled = false;
         }

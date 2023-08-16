@@ -52,8 +52,8 @@ public class EnemyHealthComponent : HealthComponent
 
     private void MarkEnemyToTakeDamage()
 	{
-		_enemy._rb.velocity = new Vector3(0, _enemy._rb.velocity.y, 0);
-		_enemy._animator.SetTrigger("damage");
+		_enemy.RigidBody.velocity = new Vector3(0, _enemy.RigidBody.velocity.y, 0);
+		_enemy.Animator.SetTrigger("damage");
 	}
 
 	private void MarkEnemyToDie()
@@ -78,7 +78,7 @@ public class EnemyHealthComponent : HealthComponent
 
 		GameManager.Instance.EnemyDied();
 
-		_enemy._stateMachine.ChangeState(AI_StateID.Death);
+		_enemy.StateMachine.ChangeState(AI_StateID.Death);
 	}
 
 	public void DropScore()

@@ -24,32 +24,32 @@ public class AI_Agent_Enemy : AI_Agent
 
         // Register States
 
-        _navMeshAgent = GetComponent<NavMeshAgent>();
-        _obstacleAgent = GetComponent<ObstacleAgent>();
-        _animator = GetComponentInChildren<Animator>();
-        _rb = GetComponent<Rigidbody>();
+        NavMeshAgent = GetComponent<NavMeshAgent>();
+        ObstacleAgent = GetComponent<ObstacleAgent>();
+        Animator = GetComponentInChildren<Animator>();
+        RigidBody = GetComponent<Rigidbody>();
         _healthComponent = GetComponent<EnemyHealthComponent>();
-        _player = GameObject.FindGameObjectWithTag("Player");
-        _playerTransform = _player.GetComponent<Transform>();
-        _decoyTransform = GameObject.FindGameObjectWithTag("Decoy").transform;
+        Player = GameObject.FindGameObjectWithTag("Player");
+        PlayerTransform = Player.GetComponent<Transform>();
+        DecoyTransform = GameObject.FindGameObjectWithTag("Decoy").transform;
 
         SetEnemyData();
 
-        _stateMachine = new AI_StateMachine(this);
+        StateMachine = new AI_StateMachine(this);
         RegisterStates();
-        _stateMachine.ChangeState(_initialState);
+        StateMachine.ChangeState(InitialState);
     }
 
     protected virtual void Update()
     {
-        _stateMachine.Update(GetComponent<AI_Agent_Enemy>());
+        StateMachine.Update(GetComponent<AI_Agent_Enemy>());
     }
 
     protected virtual void SetEnemyData()
     {
-        _navMeshAgent.speed = _enemyData._maxMoveSpeed;
-        _navMeshAgent.acceleration = _enemyData._acceleration;
-        _attackTimer = 0f;
+        NavMeshAgent.speed = _enemyData._maxMoveSpeed;
+        NavMeshAgent.acceleration = _enemyData._acceleration;
+        AttackTimer = 0f;
     }
 
     public virtual void SetDeactive()

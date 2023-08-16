@@ -34,26 +34,26 @@ public class AI_Agent_Sentry : AI_Agent
     protected override void Start()
     {
         // Register States
-        _animator = GetComponent<Animator>();
-        _player = GameObject.FindGameObjectWithTag("Player");
-        _playerTransform = _player.GetComponent<Transform>();
-        _decoyTransform = GameObject.FindGameObjectWithTag("Decoy").transform;
+        Animator = GetComponent<Animator>();
+        Player = GameObject.FindGameObjectWithTag("Player");
+        PlayerTransform = Player.GetComponent<Transform>();
+        DecoyTransform = GameObject.FindGameObjectWithTag("Decoy").transform;
 
-        _stateMachine = new AI_StateMachine(this);
+        StateMachine = new AI_StateMachine(this);
         RegisterStates();
-        _stateMachine.ChangeState(_initialState);
+        StateMachine.ChangeState(InitialState);
     }
 
     protected override void RegisterStates()
     {
-        _stateMachine.RegisterState(new Sentry_State_ChaseTarget());
-        _stateMachine.RegisterState(new Sentry_State_Attack());
-        _stateMachine.RegisterState(new Sentry_State_Off());
+        StateMachine.RegisterState(new Sentry_State_ChaseTarget());
+        StateMachine.RegisterState(new Sentry_State_Attack());
+        StateMachine.RegisterState(new Sentry_State_Off());
     }
 
     protected virtual void Update()
     {
-        _stateMachine.Update(GetComponent<AI_Agent>());
+        StateMachine.Update(GetComponent<AI_Agent>());
     }
 
     public void SwitchSentryStatus(SentryStatus _newStatus)
@@ -92,7 +92,7 @@ public class AI_Agent_Sentry : AI_Agent
 
     public void LookAtTarget()
     {
-        Vector3 targetPos = _playerTransform.position - _turretHead.transform.position;
+        Vector3 targetPos = PlayerTransform.position - _turretHead.transform.position;
         targetPos.y = 0.0f;
         _turretHead.transform.rotation = Quaternion.LookRotation(targetPos);
     }
@@ -102,7 +102,7 @@ public class AI_Agent_Sentry : AI_Agent
         float currentclosestdistance = Mathf.Infinity;
         AI_Agent_Enemy closestEnemy = null;
 
-        Collider[] enemies = Physics.OverlapSphere(_projectilePoint.position, _range, _enemyLayer);
+        Collider[] enemies = Physics.OverlapSphere(_projectilePoint.position, _range, EnemyLayer);
         foreach (Collider enemy in enemies)
         {
             float distanceToEnemy = Vector3.Distance(_projectilePoint.position, enemy.transform.position);
@@ -110,7 +110,7 @@ public class AI_Agent_Sentry : AI_Agent
                 continue;
 
             Vector3 directionToEnemy = enemy.transform.position + Vector3.up - _projectilePoint.position;
-            if (!Physics.Raycast(_projectilePoint.position, directionToEnemy, distanceToEnemy, _groundLayer))
+            if (!Physics.Raycast(_projectilePoint.position, directionToEnemy, distanceToEnemy, GroundLayer))
             {
                 closestEnemy = enemy.GetComponent<AI_Agent_Enemy>();
                 currentclosestdistance = distanceToEnemy;
@@ -124,17 +124,17 @@ public class AI_Agent_Sentry : AI_Agent
             _turretHead.transform.rotation = Quaternion.LookRotation(rotateTowardsDirection);
             if ((_turretHead.forward - direction.normalized).magnitude <= .1f)
             {
-                if (_attackTimer < 0)
+                if (AttackTimer < 0)
                 {
-                    _attackTimer = _attackRate;
+                    AttackTimer = _attackRate;
                     _closestEnemy = closestEnemy;
 
-                    _animator.SetBool("isAttacking", true);
-                    _animator.SetBool("isChasing", false);
-                    _stateMachine.ChangeState(AI_StateID.Attack);
+                    Animator.SetBool("isAttacking", true);
+                    Animator.SetBool("isChasing", false);
+                    StateMachine.ChangeState(AI_StateID.Attack);
                 }
 
-                _attackTimer -= Time.deltaTime;
+                AttackTimer -= Time.deltaTime;
             }
         }
     }

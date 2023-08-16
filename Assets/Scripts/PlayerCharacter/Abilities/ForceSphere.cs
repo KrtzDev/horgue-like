@@ -29,19 +29,10 @@ public class ForceSphere : MonoBehaviour
 
     private void Update()
     {
+
+
         if(_timer > _playerAbilities.ForceSphereDuration && _isActive)
         {
-            Collider[] enemies = Physics.OverlapSphere(transform.position, _scaleModifier, _playerCharacter.EnemyLayer);
-            foreach (Collider enemy in enemies)
-            {
-                Vector3 direction = (enemy.transform.position - transform.position) / (enemy.transform.position - transform.position).magnitude;
-                direction = new Vector3(direction.x, 0, direction.y);
-
-                enemy.GetComponent<NavMeshAgent>().enabled = false;
-                enemy.GetComponent<Rigidbody>().AddForce(direction * _playerAbilities.ForceSphereForce, ForceMode.Impulse);
-                StartCoroutine(EnableEnemyAfterKnockback(enemy));
-            }
-
             _playerAbilities.ResetForceSphereAbility();
             _isActive = false;
             _meshRenderer.enabled = false;
@@ -51,6 +42,23 @@ public class ForceSphere : MonoBehaviour
         {
             _timer += Time.deltaTime;
 
+            Collider[] enemies = Physics.OverlapSphere(transform.position, _scaleModifier + 1, _playerCharacter.EnemyLayer);
+            foreach (Collider enemy in enemies)
+            {
+                if(!enemy.GetComponent<AI_Agent_Enemy>().IsAffectedByAbility)
+                {
+                    Vector3 direction = (enemy.transform.position - transform.position) / (enemy.transform.position - transform.position).magnitude;
+                    direction = new Vector3(direction.x, 0, direction.y);
+
+                    enemy.isTrigger = false;
+                    enemy.GetComponent<AI_Agent_Enemy>().IsAffectedByAbility = true;
+                    enemy.GetComponent<NavMeshAgent>().enabled = false;
+                    enemy.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezeRotation;
+                    enemy.GetComponent<Rigidbody>().velocity = Vector3.zero;
+                    enemy.GetComponent<Rigidbody>().AddForce(direction * _playerAbilities.ForceSphereForce, ForceMode.Impulse);
+                    StartCoroutine(EnableEnemyAfterKnockback(enemy));
+                }
+            }
         }
     }
 
@@ -85,7 +93,11 @@ public class ForceSphere : MonoBehaviour
     {
         yield return new WaitForSeconds(_waitTime);
 
-        enemy.GetComponent<Rigidbody>().velocity = new Vector3(0, enemy.GetComponent<Rigidbody>().velocity.y, 0);
+        enemy.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
+        enemy.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation;
+        enemy.GetComponent<Rigidbody>().velocity = Vector3.zero;
+        enemy.GetComponent<AI_Agent_Enemy>().IsAffectedByAbility = false;
+        enemy.isTrigger = true;
 
         NavMeshHit nv_hit;
 

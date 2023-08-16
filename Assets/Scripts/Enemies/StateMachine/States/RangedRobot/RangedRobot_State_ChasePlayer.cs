@@ -10,47 +10,47 @@ public class RangedRobot_State_ChasePlayer : AI_State_ChasePlayer
 
         _rangedRobot = agent as AI_Agent_RangedRobot;
 
-        agent._animator.SetBool("isChasing", true);
+        agent.Animator.SetBool("isChasing", true);
     }
 
     public override void Update(AI_Agent agent)
     {
-        if (!agent._navMeshAgent.enabled)
+        if (!agent.NavMeshAgent.enabled)
         {
             return;
         }
 
-        if (!agent._useMovementPrediction)
+        if (!agent.UseMovementPrediction)
         {
-            if (agent._followDecoy)
+            if (agent.FollowDecoy)
             {
-                _rangedRobot._followPosition = agent._decoyTransform.position;
+                _rangedRobot._followPosition = agent.DecoyTransform.position;
                 agent.SetTarget(agent, _rangedRobot._followPosition);
             }
             else
             {
-                _rangedRobot._followPosition = agent._playerTransform.position;
+                _rangedRobot._followPosition = agent.PlayerTransform.position;
                 agent.SetTarget(agent, _rangedRobot._followPosition);
             }
         }
         else
         {
-            if (agent._followDecoy)
+            if (agent.FollowDecoy)
             {
-                _rangedRobot._followPosition = agent._decoyTransform.position;
+                _rangedRobot._followPosition = agent.DecoyTransform.position;
                 agent.SetTarget(agent, _rangedRobot._followPosition);
             }
             else
             {
-                _rangedRobot._followPosition = agent._playerTransform.position + (agent._player.GetComponent<PlayerMovement>().AverageVelocity * agent._movementPredictionTime);
+                _rangedRobot._followPosition = agent.PlayerTransform.position + (agent.Player.GetComponent<PlayerMovement>().AverageVelocity * agent.MovementPredictionTime);
 
                 Vector3 directionToTarget = (_rangedRobot._followPosition - agent.transform.position).normalized;
-                Vector3 directionToPlayer = (agent._playerTransform.position - agent.transform.position).normalized;
+                Vector3 directionToPlayer = (agent.PlayerTransform.position - agent.transform.position).normalized;
 
                 float dot = Vector3.Dot(directionToPlayer, directionToTarget);
-                if (dot < agent._movementPredictionThreshold)
+                if (dot < agent.MovementPredictionThreshold)
                 {
-                    _rangedRobot._followPosition = agent._playerTransform.position;
+                    _rangedRobot._followPosition = agent.PlayerTransform.position;
                 }
 
                 agent.SetTarget(agent, _rangedRobot._followPosition);
@@ -63,7 +63,7 @@ public class RangedRobot_State_ChasePlayer : AI_State_ChasePlayer
 
     public override void Exit(AI_Agent agent)
     {
-        agent._animator.SetBool("isChasing", false);
+        agent.Animator.SetBool("isChasing", false);
     }
 
     private void StartRotating(AI_Agent agent)
@@ -79,22 +79,22 @@ public class RangedRobot_State_ChasePlayer : AI_State_ChasePlayer
     private void CheckForBehaviour(AI_Agent agent, float distance)
     {
         RaycastHit hit;
-        if (Physics.Raycast(_rangedRobot.ProjectilePoint.transform.position, (_rangedRobot._followPosition + new Vector3(0, 0.5f, 0) - _rangedRobot.ProjectilePoint.transform.position), out hit, distance, agent._groundLayer))
+        if (Physics.Raycast(_rangedRobot.ProjectilePoint.transform.position, (_rangedRobot._followPosition + new Vector3(0, 0.5f, 0) - _rangedRobot.ProjectilePoint.transform.position), out hit, distance, agent.GroundLayer))
         {
             if (distance < _enemy._enemyData._retreatRange)
             {
-                agent._stateMachine.ChangeState(AI_StateID.Retreat);
+                agent.StateMachine.ChangeState(AI_StateID.Retreat);
             }
         }
         else
         {
             if (distance <= _enemy._enemyData._retreatRange)
             {
-                agent._stateMachine.ChangeState(AI_StateID.Retreat);
+                agent.StateMachine.ChangeState(AI_StateID.Retreat);
             }
             else if (distance < _enemy._enemyData._attackRange)
             {
-                agent._stateMachine.ChangeState(AI_StateID.Attack);
+                agent.StateMachine.ChangeState(AI_StateID.Attack);
             }
         }
     }

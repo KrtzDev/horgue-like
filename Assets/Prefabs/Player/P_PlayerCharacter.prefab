@@ -11017,8 +11017,8 @@ MonoBehaviour:
   _forceSphereEffect: {fileID: 0}
   _forceSphereCD: 10
   ForceSphereStartRadius: 1
-  ForceSphereEndRadius: 5
-  ForceSphereDuration: 0.2
+  ForceSphereEndRadius: 6
+  ForceSphereDuration: 0.25
   ForceSphereStartTransparency: 0.65
   ForceSphereEndTransparency: 0.45
   ForceSphereForce: 50

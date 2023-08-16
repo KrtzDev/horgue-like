@@ -406,7 +406,7 @@ public class PlayerAbilities : MonoBehaviour
                 for (int j = 0; j < _enemySpawner._enemyObjectPoolParent.transform.GetChild(i).childCount; j++)
                 {
                     // _EnemySpawner.transform.GetChild(i).GetChild(j).GetComponent<EnemyMovement>().PlayerTarget = _Decoy.transform;
-                    _enemySpawner._enemyObjectPoolParent.transform.GetChild(i).GetChild(j).GetComponent<AI_Agent_Enemy>()._followDecoy = true;
+                    _enemySpawner._enemyObjectPoolParent.transform.GetChild(i).GetChild(j).GetComponent<AI_Agent_Enemy>().FollowDecoy = true;
                 }
             }
         }
@@ -430,7 +430,7 @@ public class PlayerAbilities : MonoBehaviour
             for (int j = 0; j < _enemySpawner._enemyObjectPoolParent.transform.GetChild(i).childCount; j++)
             {
                 // _EnemySpawner.transform.GetChild(i).GetChild(j).GetComponent<EnemyMovement>().PlayerTarget = this.transform;
-                _enemySpawner._enemyObjectPoolParent.transform.GetChild(i).GetChild(j).GetComponent<AI_Agent_Enemy>()._followDecoy = false;
+                _enemySpawner._enemyObjectPoolParent.transform.GetChild(i).GetChild(j).GetComponent<AI_Agent_Enemy>().FollowDecoy = false;
             }
         }
 

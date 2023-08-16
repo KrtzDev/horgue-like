@@ -10,58 +10,58 @@ public class Rikayon_State_ChasePlayer : AI_State_ChasePlayer
     {
         base.Enter(agent);
 
-        agent._animator.SetBool("isChasing", true);
+        agent.Animator.SetBool("isChasing", true);
 
         _rikayon = agent as AI_Agent_Rikayon;
     }
 
     public override void Update(AI_Agent agent)
     {
-        if (!agent._navMeshAgent.enabled)
+        if (!agent.NavMeshAgent.enabled)
         {
             return;
         }
 
         _timer -= Time.deltaTime;
 
-        float distance = Vector3.Distance(agent.transform.position, agent._playerTransform.position);
+        float distance = Vector3.Distance(agent.transform.position, agent.PlayerTransform.position);
         CheckForAttack(_enemy, distance);
 
         if (_timer < 0f)
         {
-            if (agent._navMeshAgent.pathStatus != UnityEngine.AI.NavMeshPathStatus.PathPartial)
+            if (agent.NavMeshAgent.pathStatus != UnityEngine.AI.NavMeshPathStatus.PathPartial)
             {
-                if (!agent._useMovementPrediction)
+                if (!agent.UseMovementPrediction)
                 {
-                    if (agent._followDecoy)
+                    if (agent.FollowDecoy)
                     {
-                        _rikayon._followPosition = agent._decoyTransform.position;
+                        _rikayon._followPosition = agent.DecoyTransform.position;
                         agent.SetTarget(agent, _rikayon._followPosition);
                     }
                     else
                     {
-                        _rikayon._followPosition = agent._playerTransform.position;
+                        _rikayon._followPosition = agent.PlayerTransform.position;
                         agent.SetTarget(agent, _rikayon._followPosition);
                     }
                 }
                 else
                 {
-                    if (agent._followDecoy)
+                    if (agent.FollowDecoy)
                     {
-                        _rikayon._followPosition = agent._decoyTransform.position;
+                        _rikayon._followPosition = agent.DecoyTransform.position;
                         agent.SetTarget(agent, _rikayon._followPosition);
                     }
                     else
                     {
-                        _rikayon._followPosition = agent._playerTransform.position + (agent._player.GetComponent<PlayerMovement>().AverageVelocity * agent._movementPredictionTime);
+                        _rikayon._followPosition = agent.PlayerTransform.position + (agent.Player.GetComponent<PlayerMovement>().AverageVelocity * agent.MovementPredictionTime);
 
                         Vector3 directionToTarget = (_rikayon._followPosition - agent.transform.position).normalized;
-                        Vector3 directionToPlayer = (agent._playerTransform.position - agent.transform.position).normalized;
+                        Vector3 directionToPlayer = (agent.PlayerTransform.position - agent.transform.position).normalized;
 
                         float dot = Vector3.Dot(directionToPlayer, directionToTarget);
-                        if (dot < agent._movementPredictionThreshold)
+                        if (dot < agent.MovementPredictionThreshold)
                         {
-                            _rikayon._followPosition = agent._playerTransform.position;
+                            _rikayon._followPosition = agent.PlayerTransform.position;
                         }
 
                         agent.SetTarget(agent, _rikayon._followPosition);
@@ -77,7 +77,7 @@ public class Rikayon_State_ChasePlayer : AI_State_ChasePlayer
 
     public override void Exit(AI_Agent agent)
     {
-        agent._animator.SetBool("isChasing", false);
+        agent.Animator.SetBool("isChasing", false);
     }
 
     private void StartRotating(AI_Agent agent)
@@ -92,16 +92,16 @@ public class Rikayon_State_ChasePlayer : AI_State_ChasePlayer
 
     private void CheckForAttack(AI_Agent agent, float distance)
     {
-        if (agent._attackTimer > 0)
-            agent._attackTimer -= Time.deltaTime;
+        if (agent.AttackTimer > 0)
+            agent.AttackTimer -= Time.deltaTime;
 
-        if (distance < _enemy._enemyData._attackRange && agent._attackTimer <= 0)
+        if (distance < _enemy._enemyData._attackRange && agent.AttackTimer <= 0)
         {
-            agent._attackTimer = _enemy._enemyData._attackSpeed;
-            _rikayon._followPosition = agent._playerTransform.position;
+            agent.AttackTimer = _enemy._enemyData._attackSpeed;
+            _rikayon._followPosition = agent.PlayerTransform.position;
             agent.transform.LookAt(_rikayon._followPosition);
 
-            agent._stateMachine.ChangeState(AI_StateID.Attack);
+            agent.StateMachine.ChangeState(AI_StateID.Attack);
 
             return;
         }

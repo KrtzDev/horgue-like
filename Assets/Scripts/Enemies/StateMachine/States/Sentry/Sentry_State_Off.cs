@@ -17,9 +17,9 @@ public class Sentry_State_Off : AI_State_Death
     {
         if (_sentry._sentryStatus != SentryStatus.Off)
         {
-            agent._animator.SetBool("death", false);
-            agent._animator.SetBool("isChasing", true);
-            agent._stateMachine.ChangeState(AI_StateID.ChasePlayer);
+            agent.Animator.SetBool("death", false);
+            agent.Animator.SetBool("isChasing", true);
+            agent.StateMachine.ChangeState(AI_StateID.ChasePlayer);
         }
     }
 

@@ -17,33 +17,33 @@ public class Drone_State_Attack : AI_State_Attack
 
     public override void Update(AI_Agent agent)
     {
-        if (!agent._followDecoy)
+        if (!agent.FollowDecoy)
         {
-            _drone._followPosition = agent._playerTransform.position;
+            _drone._followPosition = agent.PlayerTransform.position;
         }
         else
         {
-            _drone._followPosition = agent._decoyTransform.position;
+            _drone._followPosition = agent.DecoyTransform.position;
         }
 
-        if (agent._attackTimer <= 0)
+        if (agent.AttackTimer <= 0)
         {
-            agent._attackTimer = _enemy._enemyData._attackSpeed;
+            agent.AttackTimer = _enemy._enemyData._attackSpeed;
 
             _drone.DetermineTargetPosition(_drone._followPosition);
-            agent._animator.SetTrigger("shoot");
-            agent._animator.SetBool("isShooting", true);
+            agent.Animator.SetTrigger("shoot");
+            agent.Animator.SetBool("isShooting", true);
             return;
         }
 
-        if (!agent._animator.GetCurrentAnimatorStateInfo(0).IsName("Shoot"))
+        if (!agent.Animator.GetCurrentAnimatorStateInfo(0).IsName("Shoot"))
         {
-            agent._stateMachine.ChangeState(AI_StateID.Idle);
+            agent.StateMachine.ChangeState(AI_StateID.Idle);
         }
     }
 
     public override void Exit(AI_Agent agent)
     {
-        agent._animator.SetBool("isShooting", false);
+        agent.Animator.SetBool("isShooting", false);
     }
 }

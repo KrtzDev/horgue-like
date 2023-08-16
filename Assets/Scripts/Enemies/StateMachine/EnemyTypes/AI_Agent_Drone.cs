@@ -38,7 +38,7 @@ public class AI_Agent_Drone : AI_Agent_Enemy
         _heightAboveGround.postWrapMode = WrapMode.PingPong;
 
         _startHeightReached = false;
-        _navMeshAgent.stoppingDistance = _enemyData._attackRange;
+        NavMeshAgent.stoppingDistance = _enemyData._attackRange;
     }
 
     protected override void Update()
@@ -64,10 +64,10 @@ public class AI_Agent_Drone : AI_Agent_Enemy
 
     protected override void RegisterStates()
     {
-        _stateMachine.RegisterState(new Drone_State_Idle());
-        _stateMachine.RegisterState(new Drone_State_ChasePlayer());
-        _stateMachine.RegisterState(new Drone_State_Attack());
-        _stateMachine.RegisterState(new AI_State_Death());
+        StateMachine.RegisterState(new Drone_State_Idle());
+        StateMachine.RegisterState(new Drone_State_ChasePlayer());
+        StateMachine.RegisterState(new Drone_State_Attack());
+        StateMachine.RegisterState(new AI_State_Death());
     }
 
     public override void SetDeactive()
@@ -92,13 +92,13 @@ public class AI_Agent_Drone : AI_Agent_Enemy
 
     public override void DoneShooting()
     {
-        _animator.SetBool("isShooting", false);
-        _stateMachine.ChangeState(AI_StateID.Idle);
+        Animator.SetBool("isShooting", false);
+        StateMachine.ChangeState(AI_StateID.Idle);
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (_animator.GetCurrentAnimatorStateInfo(0).IsName("Death") && other.CompareTag("Ground"))
+        if (Animator.GetCurrentAnimatorStateInfo(0).IsName("Death") && other.CompareTag("Ground"))
         {
             SetDeactive();
         }
@@ -106,13 +106,13 @@ public class AI_Agent_Drone : AI_Agent_Enemy
 
     private void CheckHeight()
     {
-        if(_navMeshAgent.enabled)
+        if(NavMeshAgent.enabled)
         {
             RaycastHit hit;
 
             // if something is infront of you, get onto it
 
-            if(Physics.BoxCast(_detectionGO.transform.position, _detectionGO.GetComponent<BoxCollider>().size / 2, Vector3.down, out hit, transform.rotation, _maxHeightAboveGround, _player.GetComponent<PlayerCharacter>().GroundLayer))
+            if(Physics.BoxCast(_detectionGO.transform.position, _detectionGO.GetComponent<BoxCollider>().size / 2, Vector3.down, out hit, transform.rotation, _maxHeightAboveGround, Player.GetComponent<PlayerCharacter>().GroundLayer))
             {
                 Debug.DrawLine(_detectionGO.transform.position, hit.point, Color.green);
 
@@ -127,7 +127,7 @@ public class AI_Agent_Drone : AI_Agent_Enemy
             {
                 _rayCastPosOnLerp = new(transform.position.x, _heightGO.transform.position.y + transform.position.y, transform.position.z);
 
-                if (Physics.Raycast(_rayCastPosOnLerp, Vector3.down, out hit, Mathf.Infinity, _player.GetComponent<PlayerCharacter>().GroundLayer))
+                if (Physics.Raycast(_rayCastPosOnLerp, Vector3.down, out hit, Mathf.Infinity, Player.GetComponent<PlayerCharacter>().GroundLayer))
                 {
                     Debug.DrawLine(_rayCastPosOnLerp, hit.point, Color.red);
 
@@ -152,7 +152,7 @@ public class AI_Agent_Drone : AI_Agent_Enemy
         Vector3 heightPosOwnPosition = new(transform.position.x, _heightGO.transform.position.y + transform.position.y, transform.position.z);
         RaycastHit hit;
 
-        if (Physics.Raycast(heightPosOwnPosition, Vector3.down, out hit, Mathf.Infinity, _player.GetComponent<PlayerCharacter>().GroundLayer))
+        if (Physics.Raycast(heightPosOwnPosition, Vector3.down, out hit, Mathf.Infinity, Player.GetComponent<PlayerCharacter>().GroundLayer))
         {
             Debug.DrawLine(heightPosOwnPosition, hit.point, Color.red);
 
