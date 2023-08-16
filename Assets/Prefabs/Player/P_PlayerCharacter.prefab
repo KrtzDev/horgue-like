@@ -11016,7 +11016,7 @@ MonoBehaviour:
   _forceSphereSpawnPosition: {fileID: 2712107493480440920}
   _forceSphereEffectPosition: {fileID: 7868157610372633933}
   _forceSphereEffect: {fileID: 0}
-  _forceSphereCD: 10
+  _forceSphereCD: 8
   ForceSphereStartRadius: 1
   ForceSphereEndRadius: 6
   ForceSphereDuration: 0.25
@@ -11028,8 +11028,8 @@ MonoBehaviour:
   _jetpackEffectPosition: {fileID: 4828017958775833798}
   _jetpackEffect: {fileID: 8590939859680090131, guid: ec1247f932d3f7f438123a885da220b9,
     type: 3}
-  _jetpackCD: 10
-  JetpackFuel: 0
+  _jetpackCD: 8
+  JetpackFuel: 100
   MaxJetpackFuel: 0
   _energyExpansionRate: 25
   _jetpackThrustForce: 0.85
@@ -11044,7 +11044,7 @@ MonoBehaviour:
   _earthquakeEffectPosition: {fileID: 7390447292559187016}
   _earthquakeEffect: {fileID: 838511276648990624, guid: b67426d4377f4ad44ac576b1339cef39,
     type: 3}
-  _earthquakeCD: 10
+  _earthquakeCD: 8
   _earthquakeRadius: 6
   _earthquakeForce: 15
   _earthquakeLoadUpTime: 0.75
