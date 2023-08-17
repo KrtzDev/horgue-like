@@ -8,8 +8,13 @@ public class TrapSpikes : MonoBehaviour
 
     [SerializeField] private int _spikeDamage;
 
-    [SerializeField] private bool _isTriggered;
-
+    private bool _isTriggered;
+    
+    [Header("On Trigger")]
+    [SerializeField] private float _delay;
+    [SerializeField] private float _rearming;
+    
+    [Header("Automatic")]
     [SerializeField] private bool _isAutomated;
     [SerializeField] private float _cooldown;
     
@@ -39,20 +44,48 @@ public class TrapSpikes : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (_isAutomated)
-            return;
-
-        if (!_isTriggered)
+        if (other.CompareTag("Enemy") || other.CompareTag("Player"))
         {
-            _animator.SetTrigger("Triggered");
-            _isTriggered = true;
+            if (_isAutomated)
+                return;
+
+            if (!_isTriggered)
+            {
+                StartCoroutine(ActivateTrap());
+                _isTriggered = true;
+            }
         }
+    }
+
+    private IEnumerator ActivateTrap()
+    {
+        yield return new WaitForSeconds(_cooldown);
+
+        _animator.SetTrigger("Triggered");
     }
 
     private void OnTriggerExit(Collider other)
     {
+        if (other.CompareTag("Enemy") || other.CompareTag("Player"))
+        {
+            if (_isAutomated)
+                return;
+
+            _isTriggered = false;
+        }
+    }
+
+    public void RearmTrap()
+    {
         if (_isAutomated)
             return;
+
+        StartCoroutine(TrapDelay());
+    }
+
+    private IEnumerator TrapDelay()
+    {
+        yield return new WaitForSeconds(_rearming);
 
         _isTriggered = false;
     }
