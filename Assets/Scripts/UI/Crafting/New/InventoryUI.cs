@@ -8,6 +8,8 @@ public class InventoryUI : UIMenu
 {
 	[SerializeField]
 	private ShopUI _shopUI;
+	[SerializeField]
+	private ComparisonUI _comparisonUI;
 
 	[SerializeField]
 	private WeaponUI _weaponUI;
@@ -26,6 +28,8 @@ public class InventoryUI : UIMenu
 	private Transform _selectedStatsUIContainer;
 	[SerializeField]
 	private Transform _comparisonContainerEquipped;
+	[SerializeField]
+	private Transform _comparisonContainerShopItem;
 	[SerializeField]
 	private ToolTipUI _toolTipUI_prefab;
 
@@ -155,16 +159,37 @@ public class InventoryUI : UIMenu
 
 	public void UpdateComparisonUI()
 	{
-		for (int i = 0; i < _selectedStatsUIContainer.childCount; i++)
-			Destroy(_selectedStatsUIContainer.GetChild(i).gameObject);
+		ClearComparisonUI();
 
 		if (EventSystem.current.currentSelectedGameObject.TryGetComponent(out InventorySlot inventorySlot))
 			_currentSelection = inventorySlot.HasWeaponPart() ? inventorySlot.GetWeaponPart() : null;
 
-		_shopUI.UpdateComparisonUI(_currentSelection);
+		if (_currentSelection == null)
+			return;
 
-		if(_currentSelection)
+		foreach (ToolTipUI item in _shopUI.shopItems)
+		{
+			if (item.weaponPart.GetType() == _currentSelection.weaponPart.GetType())
+			{
+				ToolTipUI toolTipUI = Instantiate(_toolTipUI_prefab, _comparisonContainerShopItem);
+				toolTipUI.Initialize(item.weaponPart);
+			}
+		}
+
+		if (_currentSelection)
 			UpdateEquippedComparisonUI(_currentSelection.weaponPart);
+
+		StartCoroutine(CompareAfterFrame());
+	}
+
+	private void ClearComparisonUI()
+	{
+		for (int i = 0; i < _selectedStatsUIContainer.childCount; i++)
+			Destroy(_selectedStatsUIContainer.GetChild(i).gameObject);
+		for (int i = 0; i < _comparisonContainerEquipped.childCount; i++)
+			Destroy(_comparisonContainerEquipped.GetChild(i).gameObject);
+		for (int i = 0; i < _comparisonContainerShopItem.childCount; i++)
+			Destroy(_comparisonContainerShopItem.GetChild(i).gameObject);	
 	}
 
 	private void UpdateEquippedComparisonUI(WeaponPart weaponPart)
@@ -199,6 +224,14 @@ public class InventoryUI : UIMenu
 			ToolTipUI toolTipUI = Instantiate(_toolTipUI_prefab, _comparisonContainerEquipped);
 			toolTipUI.Initialize(_weaponUI.weapon.sight);
 		}
+
+		StartCoroutine(CompareAfterFrame());
+	}
+
+	private IEnumerator CompareAfterFrame()
+	{
+		yield return new WaitForEndOfFrame();
+		_comparisonUI.Compare();
 	}
 
 	private void ClearInventoryUI()
