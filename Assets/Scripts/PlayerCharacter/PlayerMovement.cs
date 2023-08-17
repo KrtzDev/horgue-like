@@ -57,7 +57,7 @@ public class PlayerMovement : MonoBehaviour
         _maxQueueSize = Mathf.CeilToInt(1f / _historicalPositionInterval * _historicalPositionDuration);  // Calculate Queue Size
         _historicalVelocities = new Queue<Vector3>(_maxQueueSize);
 
-        MovementSpeed = _playerCharacter._playerData._movementSpeed;
+        MovementSpeed = _playerCharacter._playerData.movementSpeed;
 		_inputActions = InputManager.Instance?.CharacterInputActions;
     }
 

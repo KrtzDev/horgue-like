@@ -54,6 +54,7 @@ public class GameDataReader : MonoBehaviour
         public string name;
         public float movementSpeed;
         public float maxHealth;
+        public float levelMultiplier;
     }
 
     [System.Serializable]
@@ -338,8 +339,9 @@ public class GameDataReader : MonoBehaviour
 
     private IEnumerator SetPlayerData()
     {
-        _playerData._movementSpeed = myPlayerList.Player[0].movementSpeed;
-        _playerData._maxHealth = Mathf.RoundToInt(myPlayerList.Player[0].maxHealth);
+        _playerData.movementSpeed = myPlayerList.Player[0].movementSpeed;
+        _playerData.maxHealth = Mathf.RoundToInt(myPlayerList.Player[0].maxHealth);
+        _playerData.levelMultiplier = myPlayerList.Player[0].levelMultiplier;
 
         yield return null;
     }

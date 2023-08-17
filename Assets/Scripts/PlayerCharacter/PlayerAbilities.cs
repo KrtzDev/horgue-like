@@ -88,7 +88,7 @@ public class PlayerAbilities : MonoBehaviour
         _inputActions = new PlayerInputMappings();
         _inputActions.Character.Ability.started += UseAbility;
         _inputActions.Character.Ability.canceled += HoldAbility;
-        _enemySpawner = GameObject.FindGameObjectWithTag("EnemySpawner").GetComponent<EnemySpawner>();
+        // _enemySpawner = GameObject.FindGameObjectWithTag("EnemySpawner").GetComponent<EnemySpawner>();
 
         _abilityCDTimer = -1;
     }
