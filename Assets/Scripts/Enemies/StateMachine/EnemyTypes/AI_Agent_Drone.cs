@@ -59,7 +59,7 @@ public class AI_Agent_Drone : AI_Agent_Enemy
     {
         base.SetEnemyData();
 
-        _projectile.GetComponent<EnemyProjectile>().baseDamage = _enemyData._damagePerHit;
+        _projectile.GetComponent<EnemyProjectile>().baseDamage = damagePerHit;
     }
 
     protected override void RegisterStates()

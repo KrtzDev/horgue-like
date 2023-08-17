@@ -26,7 +26,7 @@ public class AI_Agent_RangedRobot : AI_Agent_Enemy
     {
         base.SetEnemyData();
 
-        _projectile.GetComponent<EnemyProjectile>().baseDamage = _enemyData._damagePerHit;
+        _projectile.GetComponent<EnemyProjectile>().baseDamage = damagePerHit;
     }
 
     protected override void RegisterStates()

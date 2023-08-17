@@ -13,12 +13,12 @@ public class EnemyAnimationController : MonoBehaviour
 
     public virtual void DropScore()
     {
-        _enemyType._healthComponent.DropScore();
+        _enemyType.HealthComponent.DropScore();
     }
 
     public virtual void DropHealthPotion()
     {
-        _enemyType._healthComponent.DropHealthPotion();
+        _enemyType.HealthComponent.DropHealthPotion();
     }
 
     public virtual void SetDeactive()
