@@ -35,6 +35,13 @@ public class WeaponPartUI : MonoBehaviour, IPointerClickHandler, IPointerEnterHa
 	{
 		_currentToolTipUI = Instantiate(_toolTip_prefab, statsContainer);
 		_currentToolTipUI.Initialize(weaponPart);
+
+		weaponUI.ShowPotentialUpdatedWeaponStats(weaponPart);
+	}
+
+	public void Deselect()
+	{
+		weaponUI.ShowWeaponStats(weaponUI.weapon.CalculateWeaponStats(weaponUI.weapon));
 	}
 
 	public void OnPointerEnter(PointerEventData eventData)

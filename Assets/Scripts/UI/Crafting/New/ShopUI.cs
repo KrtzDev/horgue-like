@@ -1,10 +1,8 @@
 using System;
-using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.EventSystems;
 
 public class ShopUI : UIMenu
 {
@@ -12,6 +10,8 @@ public class ShopUI : UIMenu
 
 	[SerializeField]
 	private WeaponUI _weaponUI;
+	[SerializeField]
+	private ComparisonUI _comparisonUI;
 
 	[SerializeField]
 	private Transform _shopItemContainer;
@@ -19,6 +19,8 @@ public class ShopUI : UIMenu
 	private Transform _comparisonContainerShopItem;
 	[SerializeField]
 	private Transform _comparisonContainerEquipped;
+	[SerializeField]
+	private Transform _comparisonContainerSelected;
 	[SerializeField]
 	private HoldButton _buyButton;
 	[SerializeField]
@@ -29,23 +31,24 @@ public class ShopUI : UIMenu
 	[SerializeField]
 	private ToolTipUI _toolTipUI_prefab;
 
-	private List<ToolTipUI> _shopItems;
+	public List<ToolTipUI> shopItems;
 
-	private void Awake()
+	private void Start()
 	{
-		_shopItems = new List<ToolTipUI>();
+		shopItems = new List<ToolTipUI>();
 		for (int i = 0; i < 3; i++)
 		{
 			ToolTipUI tooltipUI = Instantiate(_toolTipUI_prefab,_shopItemContainer);
+			WeaponPart weaponPart = RewardManager.Instance.GetRandomReward();
+			RewardManager.Instance.ClearRewards();
 
-			_shopItems.Add(tooltipUI);
 			tooltipUI.OnBuy += OnItemBought;
 			tooltipUI.OnSelected += UpdateEquippedComparisonUI;
-
-			tooltipUI = _shopItemContainer.GetChild(i).GetComponent<ToolTipUI>();
+			tooltipUI.OnDeselected += UpdateWeaponUI;
 			tooltipUI.buyButton = _buyButton;
-			tooltipUI.Initialize(RewardManager.Instance.GetRandomReward());
-			RewardManager.Instance.ClearRewards();
+
+			tooltipUI.Initialize(weaponPart);
+			shopItems.Add(tooltipUI);
 		}
 
 		SetUpNavigation();
@@ -54,36 +57,38 @@ public class ShopUI : UIMenu
 	private void OnItemBought(ToolTipUI TooltipUi)
 	{
 		 OnBought.Invoke(TooltipUi.weaponPart);
-		_shopItems.Remove(TooltipUi);
+		shopItems.Remove(TooltipUi);
+
+		Debug.Log("Ping");
 
 		SetUpNavigation();
 
-		if (_shopItems.Count > 0)
+		if (shopItems.Count > 0)
 			StartCoroutine(SelectFirstItemAfterFrame());
 	}
 
 	private IEnumerator SelectFirstItemAfterFrame()
 	{
 		yield return new WaitForEndOfFrame();
-		_shopItems[0].Select();
+		shopItems[0].Select();
 	}
 
 	private void SetUpNavigation()
 	{
-		for (int i = 0; i < _shopItems.Count; i++)
+		for (int i = 0; i < shopItems.Count; i++)
 		{
 			Navigation navigation = new Navigation();
 			navigation.mode = Navigation.Mode.Explicit;
 			if (i - 1 >= 0)
-				navigation.selectOnLeft = _shopItems[i - 1];
-			if (i - _shopItems.Count >= 0)
-				navigation.selectOnUp = _shopItems[i - _shopItems.Count];
-			if (i + 1 < _shopItems.Count)
-				navigation.selectOnRight = _shopItems[i + 1];
-			if (i + _shopItems.Count < _shopItems.Count)
-				navigation.selectOnDown = _shopItems[i + _shopItems.Count];
+				navigation.selectOnLeft = shopItems[i - 1];
+			if (i - shopItems.Count >= 0)
+				navigation.selectOnUp = shopItems[i - shopItems.Count];
+			if (i + 1 < shopItems.Count)
+				navigation.selectOnRight = shopItems[i + 1];
+			if (i + shopItems.Count < shopItems.Count)
+				navigation.selectOnDown = shopItems[i + shopItems.Count];
 
-			_shopItems[i].navigation = navigation;
+			shopItems[i].navigation = navigation;
 		}
 	}
 
@@ -92,18 +97,23 @@ public class ShopUI : UIMenu
 		_buyButton.Enable();
 		_equipButton.Disable();
 		_sellButton.Disable();
-		StartCoroutine(FocusafterFrame());
+		StartCoroutine(SelectFirstItemAfterFrame());
 	}
 
-	private IEnumerator FocusafterFrame()
+	private void UpdateWeaponUI()
 	{
-		yield return new WaitForEndOfFrame();
-		_shopItems[0].Select();
+		_weaponUI.ShowWeaponStats(_weaponUI.weapon.CalculateWeaponStats(_weaponUI.weapon));
 	}
 
 	private void UpdateEquippedComparisonUI(WeaponPart weaponPart)
 	{
+		UpdateWeaponUI();
+		_weaponUI.ShowPotentialUpdatedWeaponStats(weaponPart);
+
 		ClearComparisonContainer();
+
+		ToolTipUI selectedTooltip = Instantiate(_toolTipUI_prefab, _comparisonContainerSelected);
+		selectedTooltip.Initialize(weaponPart);
 
 		if(weaponPart.GetType() == typeof(Grip))
 		{
@@ -135,20 +145,14 @@ public class ShopUI : UIMenu
 			ToolTipUI toolTipUI = Instantiate(_toolTipUI_prefab, _comparisonContainerEquipped);
 			toolTipUI.Initialize(_weaponUI.weapon.sight);
 		}
+
+		StartCoroutine(CompareAfterFrame());
 	}
 
-	public void UpdateComparisonUI(WeaponPartUI weaponPartUI)
+	private IEnumerator CompareAfterFrame()
 	{
-		ClearComparisonContainer();
-
-		foreach (ToolTipUI item in _shopItems)
-		{
-			if (weaponPartUI != null && item.weaponPart.GetType() == weaponPartUI.weaponPart.GetType())
-			{
-				ToolTipUI toolTipUI = Instantiate(_toolTipUI_prefab, _comparisonContainerShopItem);
-				toolTipUI.Initialize(item.weaponPart);
-			}
-		}
+		yield return new WaitForEndOfFrame();
+		_comparisonUI.Compare();
 	}
 
 	private void ClearComparisonContainer()
@@ -158,5 +162,8 @@ public class ShopUI : UIMenu
 
 		for (int i = 0; i < _comparisonContainerEquipped.childCount; i++)
 			Destroy(_comparisonContainerEquipped.GetChild(i).gameObject);
+
+		for (int i = 0; i < _comparisonContainerSelected.childCount; i++)
+			Destroy(_comparisonContainerSelected.GetChild(i).gameObject);
 	}
 }

@@ -314,7 +314,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 135, y: 0}
-  m_SizeDelta: {x: 270, y: 95}
+  m_SizeDelta: {x: 270, y: 0}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!222 &7045034321814646366
 CanvasRenderer:
@@ -427,9 +427,9 @@ RectTransform:
   m_Father: {fileID: 5452614881417057406}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 135, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 135, y: -80}
   m_SizeDelta: {x: 280, y: 0}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &3628073920878208209
@@ -595,6 +595,15 @@ MonoBehaviour:
   _statUI_prefab: {fileID: 9018271247152603339, guid: dda6b321a08fb4f429ba9fe2654739a8,
     type: 3}
   weaponPart: {fileID: 0}
+  damageStatUI: {fileID: 0}
+  attackSpeedStatUI: {fileID: 0}
+  cooldownStatUI: {fileID: 0}
+  projectileSizeStatUI: {fileID: 0}
+  critChanceStatUI: {fileID: 0}
+  rangeStatUI: {fileID: 0}
+  attackPatternStatUI: {fileID: 0}
+  capacityStatUI: {fileID: 0}
+  statusEffectStatUI: {fileID: 0}
 --- !u!1 &8623937125551465015
 GameObject:
   m_ObjectHideFlags: 0
