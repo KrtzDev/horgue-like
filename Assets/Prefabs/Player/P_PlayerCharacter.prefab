@@ -6065,7 +6065,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 7702
+  m_VersionIndex: 7534
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -11016,10 +11016,10 @@ MonoBehaviour:
   _forceSphereSpawnPosition: {fileID: 2712107493480440920}
   _forceSphereEffectPosition: {fileID: 7868157610372633933}
   _forceSphereEffect: {fileID: 0}
-  _forceSphereCD: 8
+  _forceSphereCD: 5
   ForceSphereStartRadius: 1
-  ForceSphereEndRadius: 6
-  ForceSphereDuration: 0.25
+  ForceSphereEndRadius: 8
+  ForceSphereDuration: 0.35
   ForceSphereStartTransparency: 0.65
   ForceSphereEndTransparency: 0.45
   ForceSphereForce: 50
@@ -64087,7 +64087,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 7741
+  m_VersionIndex: 7552
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -70275,7 +70275,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 7744
+  m_VersionIndex: 7549
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -104450,7 +104450,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 1211
+  m_VersionIndex: 697
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -110683,7 +110683,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 6715
+  m_VersionIndex: 7486
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
