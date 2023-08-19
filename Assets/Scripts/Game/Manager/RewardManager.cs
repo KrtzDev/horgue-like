@@ -25,37 +25,37 @@ public class RewardManager : Singleton<RewardManager>
 	{
 		if(weaponPart.baseDamage > 0)
 		{
-			weaponPart.baseDamage *= (1 + (GameManager.Instance.GameManagerValues[0]._weaponPartMultiplierPerLevel) * weaponPart.levelObtained);
+			weaponPart.baseDamage *= 1 + GameManager.Instance.GameManagerValues[0]._weaponPartMultiplierPerLevel * (weaponPart.levelObtained - 1);
 		}
 
 		if(weaponPart.attackSpeed > 0)
 		{
-			weaponPart.attackSpeed *= (1 + (GameManager.Instance.GameManagerValues[0]._weaponPartMultiplierPerLevel) * weaponPart.levelObtained);
+			weaponPart.attackSpeed *= 1 + GameManager.Instance.GameManagerValues[0]._weaponPartMultiplierPerLevel * (weaponPart.levelObtained - 1);
 		}
 
 		if(weaponPart.cooldown > 0)
 		{
-			weaponPart.cooldown *=  (1 + (GameManager.Instance.GameManagerValues[0]._weaponPartMultiplierPerLevel) *  weaponPart.levelObtained);
+			weaponPart.cooldown *=  1 + GameManager.Instance.GameManagerValues[0]._weaponPartMultiplierPerLevel *  (weaponPart.levelObtained - 1);
 		}
 
 		if(weaponPart.projectileSize > 0)
 		{
-			weaponPart.projectileSize *=  (1 + (GameManager.Instance.GameManagerValues[0]._weaponPartMultiplierPerLevel) *  weaponPart.levelObtained);
+			weaponPart.projectileSize *=  1 + GameManager.Instance.GameManagerValues[0]._weaponPartMultiplierPerLevel *  (weaponPart.levelObtained - 1);
 		}
 
 		if(weaponPart.critChance > 0)
 		{
-			weaponPart.critChance *=  (1 + (GameManager.Instance.GameManagerValues[0]._weaponPartMultiplierPerLevel) * weaponPart.levelObtained);
+			weaponPart.critChance *=  1 + GameManager.Instance.GameManagerValues[0]._weaponPartMultiplierPerLevel * (weaponPart.levelObtained - 1);
 		}
 
 		if(weaponPart.critDamage > 0)
 		{
-			weaponPart.critDamage *=  (1 + (GameManager.Instance.GameManagerValues[0]._weaponPartMultiplierPerLevel) *  weaponPart.levelObtained);
+			weaponPart.critDamage *=  1 + GameManager.Instance.GameManagerValues[0]._weaponPartMultiplierPerLevel *  (weaponPart.levelObtained - 1);
 		}
 
 		if(weaponPart.range > 0)
 		{
-			weaponPart.range *=  (1 + (GameManager.Instance.GameManagerValues[0]._weaponPartMultiplierPerLevel) * weaponPart.levelObtained);
+			weaponPart.range *=  1 + GameManager.Instance.GameManagerValues[0]._weaponPartMultiplierPerLevel * (weaponPart.levelObtained - 1);
 		}
 
 		// check if over cap ?
