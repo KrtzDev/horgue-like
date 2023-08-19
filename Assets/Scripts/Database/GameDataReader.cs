@@ -18,9 +18,6 @@ public class GameDataReader : MonoBehaviour
     [Header("ENEMY DATA")]
     [SerializeField] private List<BasicEnemyData> _enemyData = new List<BasicEnemyData>();
 
-    [Header("LEVEL DATA")]
-    [SerializeField] private List<GameManagerValues> _LevelData = new List<GameManagerValues>();
-
     [Header("ENEMY SPAWNER DATA")]
     [SerializeField] private List<EnemySpawnerData> _enemySpawnerData = new List<EnemySpawnerData>();
 
@@ -54,6 +51,7 @@ public class GameDataReader : MonoBehaviour
         public string name;
         public float movementSpeed;
         public float maxHealth;
+        public float levelMultiplier;
     }
 
     [System.Serializable]
@@ -70,15 +68,21 @@ public class GameDataReader : MonoBehaviour
         public float elementalResistance;
         public float technicalResistance;
         public float healthDropChance;
+
+        public float baseDmgMultiplier;
+        public float dmgModifier;
+        public float addDmgModifier;
+        public float baseHealthMultiplier;
+        public float healthModifier;
+        public float addHealthModifier;
     }
 
     [System.Serializable]
     public class Level
     {
         public string name;
-        public float healthBonus;
-        public float damageBonus;
         public int TimeToSurvive;
+        public float weaponPartMultiplierPerLevel;
         public int spawnTick;
         public int spawnsPerTick;
         public int minEnemyCount;
@@ -338,8 +342,9 @@ public class GameDataReader : MonoBehaviour
 
     private IEnumerator SetPlayerData()
     {
-        _playerData._movementSpeed = myPlayerList.Player[0].movementSpeed;
-        _playerData._maxHealth = Mathf.RoundToInt(myPlayerList.Player[0].maxHealth);
+        _playerData.movementSpeed = myPlayerList.Player[0].movementSpeed;
+        _playerData.maxHealth = Mathf.RoundToInt(myPlayerList.Player[0].maxHealth);
+        _playerData.levelMultiplier = myPlayerList.Player[0].levelMultiplier;
 
         yield return null;
     }
@@ -349,8 +354,8 @@ public class GameDataReader : MonoBehaviour
         {
             if (i == 0)
             {
-                _enemyData[i]._maxHealth = (int)(myEnemyList.Enemies[0].maxHealth * GameManager.Instance._GameManagerValues[GameManager.Instance._currentLevelArray]._healthBonus);
-                _enemyData[i]._damagePerHit = (int)(myEnemyList.Enemies[0].damagePerHit * GameManager.Instance._GameManagerValues[GameManager.Instance._currentLevelArray]._damageBonus);
+                _enemyData[i]._maxHealth = (int)(myEnemyList.Enemies[0].maxHealth);  // * GameManager.Instance.GameManagerValues[GameManager.Instance._currentLevelArray]._healthBonus);
+                _enemyData[i]._damagePerHit = (int)(myEnemyList.Enemies[0].damagePerHit); // * GameManager.Instance.GameManagerValues[GameManager.Instance._currentLevelArray]._damageBonus);
                 _enemyData[i]._attackSpeed = myEnemyList.Enemies[i].attackSpeed;
                 _enemyData[i]._givenXP = (int)myEnemyList.Enemies[i].givenXP;
                 _enemyData[i]._maxMoveSpeed = myEnemyList.Enemies[i].maxMoveSpeed;
@@ -359,6 +364,13 @@ public class GameDataReader : MonoBehaviour
                 _enemyData[i]._elementalResistance = myEnemyList.Enemies[i].elementalResistance;
                 _enemyData[i]._technicalResistance = myEnemyList.Enemies[i].technicalResistance;
                 _enemyData[i]._healthDropChance = myEnemyList.Enemies[i].healthDropChance;
+
+                _enemyData[i].baseDmgMultiplier = myEnemyList.Enemies[i].baseDmgMultiplier;
+                _enemyData[i].dmgModifier = myEnemyList.Enemies[i].dmgModifier;
+                _enemyData[i].addDmgModifier = myEnemyList.Enemies[i].addDmgModifier;
+                _enemyData[i].baseHealthMultiplier = myEnemyList.Enemies[i].baseHealthMultiplier;
+                _enemyData[i].healthModifier = myEnemyList.Enemies[i].healthModifier;
+                _enemyData[i].addHealthModifier = myEnemyList.Enemies[i].addHealthModifier;
             }
             else
             {
@@ -372,6 +384,13 @@ public class GameDataReader : MonoBehaviour
                 _enemyData[i]._elementalResistance = myEnemyList.Enemies[i].elementalResistance * _enemyData[0]._elementalResistance;
                 _enemyData[i]._technicalResistance = myEnemyList.Enemies[i].technicalResistance * _enemyData[0]._technicalResistance;
                 _enemyData[i]._healthDropChance = myEnemyList.Enemies[i].healthDropChance * _enemyData[0]._healthDropChance;
+
+                _enemyData[i].baseDmgMultiplier = myEnemyList.Enemies[i].baseDmgMultiplier * _enemyData[0].baseDmgMultiplier;
+                _enemyData[i].dmgModifier = myEnemyList.Enemies[i].dmgModifier * _enemyData[0].dmgModifier;
+                _enemyData[i].addDmgModifier = myEnemyList.Enemies[i].addDmgModifier * _enemyData[0].addDmgModifier;
+                _enemyData[i].baseHealthMultiplier = myEnemyList.Enemies[i].baseHealthMultiplier * _enemyData[0].baseHealthMultiplier;
+                _enemyData[i].healthModifier = myEnemyList.Enemies[i].healthModifier * _enemyData[0].healthModifier;
+                _enemyData[i].addHealthModifier = myEnemyList.Enemies[i].addHealthModifier * _enemyData[0].addHealthModifier;
             }
         }
 
@@ -381,6 +400,8 @@ public class GameDataReader : MonoBehaviour
     {
         for (int i = 0; i < _enemySpawnerData.Count; i++)
         {
+            _enemySpawnerData[i]._timeToSurvive = myLevelList.Level[i].TimeToSurvive;
+            _enemySpawnerData[i]._weaponPartMultiplierPerLevel = myLevelList.Level[i].weaponPartMultiplierPerLevel;
             _enemySpawnerData[i]._spawnTick = myLevelList.Level[i].spawnTick;
             _enemySpawnerData[i]._spawnsPerTick = myLevelList.Level[i].spawnsPerTick;
             _enemySpawnerData[i]._minEnemyCount = myLevelList.Level[i].minEnemyCount;
@@ -395,13 +416,6 @@ public class GameDataReader : MonoBehaviour
             _enemySpawnerData[i]._maxCloseZoneOcc = myLevelList.Level[i].maxCloseZoneOcc;
             _enemySpawnerData[i]._maxMidZoneOcc = myLevelList.Level[i].maxMidZoneOcc;
             _enemySpawnerData[i]._maxFarZoneOcc = myLevelList.Level[i].maxFarZoneOcc;
-        }
-
-        for (int i = 0; i < _LevelData.Count; i++)
-        {
-            _LevelData[i]._healthBonus = myLevelList.Level[i].healthBonus;
-            _LevelData[i]._damageBonus = myLevelList.Level[i].damageBonus;
-            _LevelData[i]._timeToSurvive = myLevelList.Level[i].TimeToSurvive;
         }
 
         yield return null;

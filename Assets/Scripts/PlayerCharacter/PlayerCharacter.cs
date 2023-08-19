@@ -31,7 +31,7 @@ public class PlayerCharacter : MonoBehaviour
     private void Awake()
     {
         _healthComponent = this.GetComponent<HealthComponent>();
-        _healthComponent._maxHealth = _playerData._maxHealth;
+        _healthComponent._maxHealth = (int)(_playerData.maxHealth * (1 + (_playerData.levelMultiplier * GameManager.Instance._currentLevelArray)));
         _healthComponent._currentHealth = _healthComponent._maxHealth;
 
         _inputActions = InputManager.Instance?.CharacterInputActions;

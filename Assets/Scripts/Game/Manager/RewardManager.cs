@@ -14,8 +14,52 @@ public class RewardManager : Singleton<RewardManager>
 	public WeaponPart GetRandomReward()
 	{
 		WeaponPart drawnReward = _weaponPartRewards[Random.Range(0, _weaponPartRewards.Count - 1)];
-		drawnRewards.Add(drawnReward);
-		return drawnReward;
+		WeaponPart newReward = Instantiate(drawnReward);
+		newReward.levelObtained = GameManager.Instance._currentLevel;
+		ScaleWeaponPartToLevel(newReward);
+		drawnRewards.Add(newReward);
+		return newReward;
+	}
+
+	private void ScaleWeaponPartToLevel(WeaponPart weaponPart)
+	{
+		if(weaponPart.baseDamage > 0)
+		{
+			weaponPart.baseDamage *= (1 + (GameManager.Instance.GameManagerValues[0]._weaponPartMultiplierPerLevel) * weaponPart.levelObtained);
+		}
+
+		if(weaponPart.attackSpeed > 0)
+		{
+			weaponPart.attackSpeed *= (1 + (GameManager.Instance.GameManagerValues[0]._weaponPartMultiplierPerLevel) * weaponPart.levelObtained);
+		}
+
+		if(weaponPart.cooldown > 0)
+		{
+			weaponPart.cooldown *=  (1 + (GameManager.Instance.GameManagerValues[0]._weaponPartMultiplierPerLevel) *  weaponPart.levelObtained);
+		}
+
+		if(weaponPart.projectileSize > 0)
+		{
+			weaponPart.projectileSize *=  (1 + (GameManager.Instance.GameManagerValues[0]._weaponPartMultiplierPerLevel) *  weaponPart.levelObtained);
+		}
+
+		if(weaponPart.critChance > 0)
+		{
+			weaponPart.critChance *=  (1 + (GameManager.Instance.GameManagerValues[0]._weaponPartMultiplierPerLevel) * weaponPart.levelObtained);
+		}
+
+		if(weaponPart.critDamage > 0)
+		{
+			weaponPart.critDamage *=  (1 + (GameManager.Instance.GameManagerValues[0]._weaponPartMultiplierPerLevel) *  weaponPart.levelObtained);
+		}
+
+		if(weaponPart.range > 0)
+		{
+			weaponPart.range *=  (1 + (GameManager.Instance.GameManagerValues[0]._weaponPartMultiplierPerLevel) * weaponPart.levelObtained);
+		}
+
+		// check if over cap ?
+
 	}
 
 	public void ClearRewards()

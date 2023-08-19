@@ -12,7 +12,9 @@ public class AI_Agent_Enemy : AI_Agent
     public BasicEnemyData _enemyData;
     public Vector3 _followPosition;
     public bool _isBossEnemy;
-    [HideInInspector] public EnemyHealthComponent _healthComponent;
+    [HideInInspector] public EnemyHealthComponent HealthComponent;
+
+    public int damagePerHit;
 
     [Header("Height Control")]
     public bool _useHeightControl;
@@ -28,7 +30,7 @@ public class AI_Agent_Enemy : AI_Agent
         ObstacleAgent = GetComponent<ObstacleAgent>();
         Animator = GetComponentInChildren<Animator>();
         RigidBody = GetComponent<Rigidbody>();
-        _healthComponent = GetComponent<EnemyHealthComponent>();
+        HealthComponent = GetComponent<EnemyHealthComponent>();
         Player = GameObject.FindGameObjectWithTag("Player");
         PlayerTransform = Player.GetComponent<Transform>();
         DecoyTransform = GameObject.FindGameObjectWithTag("Decoy").transform;
@@ -50,6 +52,13 @@ public class AI_Agent_Enemy : AI_Agent
         NavMeshAgent.speed = _enemyData._maxMoveSpeed;
         NavMeshAgent.acceleration = _enemyData._acceleration;
         AttackTimer = 0f;
+
+        float enemyDamageMultiplier = _enemyData.baseDmgMultiplier + (_enemyData.baseDmgMultiplier * (GameManager.Instance._currentLevelArray * _enemyData.dmgModifier) * (1 + (GameManager.Instance._currentLevelArray * _enemyData.addDmgModifier)));
+        float enemyHealthMultiplier = _enemyData.baseHealthMultiplier + (_enemyData.baseHealthMultiplier * (GameManager.Instance._currentLevelArray * _enemyData.healthModifier) * (1 + (GameManager.Instance._currentLevelArray * _enemyData.addHealthModifier)));
+
+        damagePerHit = (int)(_enemyData._damagePerHit * enemyDamageMultiplier);
+        HealthComponent._maxHealth = (int)(_enemyData._maxHealth * enemyHealthMultiplier);
+        HealthComponent._currentHealth = HealthComponent._maxHealth;
     }
 
     public virtual void SetDeactive()
@@ -64,12 +73,12 @@ public class AI_Agent_Enemy : AI_Agent
 
     private void SetHealthToPercentOfMax(float percent)
     {
-        _healthComponent._currentHealth = (int)(_healthComponent._maxHealth * percent);
-        if(_healthComponent._currentHealth > _healthComponent._maxHealth)
+        HealthComponent._currentHealth = (int)(HealthComponent._maxHealth * percent);
+        if(HealthComponent._currentHealth > HealthComponent._maxHealth)
         {
-            _healthComponent._currentHealth = _healthComponent._maxHealth;
+            HealthComponent._currentHealth = HealthComponent._maxHealth;
         }
-        _healthComponent._enemyHealthBar.HandleHealthChanged(percent);
+        HealthComponent._enemyHealthBar.HandleHealthChanged(percent);
     }
 
     public virtual void Shoot()

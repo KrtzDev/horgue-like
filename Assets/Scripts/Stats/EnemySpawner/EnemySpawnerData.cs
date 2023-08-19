@@ -3,6 +3,10 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "newEnemySpawnerData", menuName = "Data/EnemySpawner Data/Base Data")]
 public class EnemySpawnerData : ScriptableObject
 {
+    [Header("Level Data")]
+    public int _timeToSurvive;
+    public float _weaponPartMultiplierPerLevel;
+
     [Header("Spawn Settings")]
     public int _spawnTick;
     public int _spawnsPerTick;

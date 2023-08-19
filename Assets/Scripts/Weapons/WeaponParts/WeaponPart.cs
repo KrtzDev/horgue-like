@@ -17,6 +17,9 @@ public class WeaponPart : ScriptableObject
 	public float critDamage;
 	public float range;
 
+	[Header("Level Obainted")]
+	public int levelObtained = 1;
+
 	[Space(22)]
 	[SerializeField]
 	public int value;

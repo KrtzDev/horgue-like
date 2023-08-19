@@ -19,9 +19,8 @@ public class EnemyHealthComponent : HealthComponent
     {
         base.Awake();
 
-        _enemy = gameObject.GetComponent<AI_Agent_Enemy>();
-        _maxHealth = _enemy._enemyData._maxHealth;
-        _currentHealth = _maxHealth;
+		_enemy = GetComponent<AI_Agent_Enemy>();
+
 		_enemyHealthBar = gameObject.GetComponentInChildren<EnemyHealthBar>();
         _healthDropChance = (int)(_enemy._enemyData._healthDropChance * 100);
     }

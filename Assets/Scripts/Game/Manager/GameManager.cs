@@ -21,7 +21,8 @@ public class GameManager : Singleton<GameManager>
 	[SerializeField]
 	private GameDataReader _gameDataReader;
 
-	public List<GameManagerValues> _GameManagerValues = new List<GameManagerValues>();
+	public List<EnemySpawnerData> GameManagerValues = new List<EnemySpawnerData>();
+	[SerializeField] private int _maxLevels;
 
 	[Header("WinningCondition")]
 	[SerializeField]
@@ -96,7 +97,15 @@ public class GameManager : Singleton<GameManager>
 		_gameDataReader.GetGameData();
 		_gameDataReader.SetGameData();
 
-		_currentTimeToSurvive = _GameManagerValues[_currentLevelArray]._timeToSurvive;
+		if(_currentLevelArray < _maxLevels)
+        {
+			_currentTimeToSurvive = GameManagerValues[_currentLevelArray]._timeToSurvive;
+        }
+		else
+        {
+			_currentTimeToSurvive = GameManagerValues[_maxLevels]._timeToSurvive;
+		}
+
 
 		_hasWon = false;
 		_hasLost = false;
@@ -157,7 +166,7 @@ public class GameManager : Singleton<GameManager>
 		if (!_hasWon && _currentTimeToSurvive <= 0 && _winningCondition == WinningCondition.SurviveForTime)
 		{
 			_hasWon = true;
-			_currentTimeToSurvive = _GameManagerValues[_currentLevelArray]._timeToSurvive;
+			_currentTimeToSurvive = GameManagerValues[_currentLevelArray]._timeToSurvive;
 			RoundWon();
 		}
 	}
@@ -168,7 +177,7 @@ public class GameManager : Singleton<GameManager>
 		_enemyCount--;
 		_enemiesKilled++;
 
-		// alle Gegner getötet
+		// alle Gegner getï¿½tet
 
 		if (!_hasWon && _neededEnemyKill == 0 && _winningCondition == WinningCondition.KillAllEnemies)
 		{
@@ -176,7 +185,7 @@ public class GameManager : Singleton<GameManager>
 			RoundWon();
 		}
 
-		// einen bestimmten Gegner getötet
+		// einen bestimmten Gegner getï¿½tet
 
 		if (!_hasWon && _neededEnemyKill == 0 && _winningCondition == WinningCondition.KillSpecificEnemy)
 		{
