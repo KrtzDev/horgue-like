@@ -151,7 +151,8 @@
       "farZoneSize": 30,
       "maxCloseZoneOcc": 6,
       "maxMidZoneOcc": 16,
-      "maxFarZoneOcc": 24
+      "maxFarZoneOcc": 24,
+      "weaponPartMultiplierPerLevel": 0.1
     },
     {
       "name": "Level1.5",
@@ -169,7 +170,8 @@
       "farZoneSize": 30,
       "maxCloseZoneOcc": 6,
       "maxMidZoneOcc": 16,
-      "maxFarZoneOcc": 24
+      "maxFarZoneOcc": 24,
+      "weaponPartMultiplierPerLevel": 0.1
     },
     {
       "name": "Level2",
@@ -187,7 +189,8 @@
       "farZoneSize": 30,
       "maxCloseZoneOcc": 6,
       "maxMidZoneOcc": 16,
-      "maxFarZoneOcc": 24
+      "maxFarZoneOcc": 24,
+      "weaponPartMultiplierPerLevel": 0.1
     },
     {
       "name": "Level2.5",
@@ -205,7 +208,8 @@
       "farZoneSize": 30,
       "maxCloseZoneOcc": 6,
       "maxMidZoneOcc": 16,
-      "maxFarZoneOcc": 24
+      "maxFarZoneOcc": 24,
+      "weaponPartMultiplierPerLevel": 0.1
     },
     {
       "name": "Level3",
@@ -223,7 +227,8 @@
       "farZoneSize": 30,
       "maxCloseZoneOcc": 6,
       "maxMidZoneOcc": 16,
-      "maxFarZoneOcc": 24
+      "maxFarZoneOcc": 24,
+      "weaponPartMultiplierPerLevel": 0.1
     },
     {
       "name": "Level3.5",
@@ -241,7 +246,8 @@
       "farZoneSize": 30,
       "maxCloseZoneOcc": 6,
       "maxMidZoneOcc": 16,
-      "maxFarZoneOcc": 24
+      "maxFarZoneOcc": 24,
+      "weaponPartMultiplierPerLevel": 0.1
     },
     {
       "name": "Level4",
@@ -259,7 +265,8 @@
       "farZoneSize": 30,
       "maxCloseZoneOcc": 6,
       "maxMidZoneOcc": 16,
-      "maxFarZoneOcc": 24
+      "maxFarZoneOcc": 24,
+      "weaponPartMultiplierPerLevel": 0.1
     },
     {
       "name": "Level4.5",
@@ -277,7 +284,8 @@
       "farZoneSize": 30,
       "maxCloseZoneOcc": 6,
       "maxMidZoneOcc": 16,
-      "maxFarZoneOcc": 24
+      "maxFarZoneOcc": 24,
+      "weaponPartMultiplierPerLevel": 0.1
     },
     {
       "name": "LevelBoss",
@@ -295,7 +303,8 @@
       "farZoneSize": 30,
       "maxCloseZoneOcc": 6,
       "maxMidZoneOcc": 16,
-      "maxFarZoneOcc": 24
+      "maxFarZoneOcc": 24,
+      "weaponPartMultiplierPerLevel": 0.1
     },
     {
       "name": "LevelNewGamePlus",
@@ -313,7 +322,8 @@
       "farZoneSize": 30,
       "maxCloseZoneOcc": 6,
       "maxMidZoneOcc": 16,
-      "maxFarZoneOcc": 24
+      "maxFarZoneOcc": 24,
+      "weaponPartMultiplierPerLevel": 0.1
     }
   ],
   "Player": [
@@ -356,7 +366,7 @@
       "baseDamage": 0.95,
       "cooldown": 0.5,
       "criticalHitChance": 0,
-      "criticalHitDamage": 0.1,
+      "criticalHitDamage": 0,
       "projectileWidth": 0.6,
       "range": -0.35
     },

@@ -177,7 +177,7 @@ public class GameManager : Singleton<GameManager>
 		_enemyCount--;
 		_enemiesKilled++;
 
-		// alle Gegner getötet
+		// alle Gegner getï¿½tet
 
 		if (!_hasWon && _neededEnemyKill == 0 && _winningCondition == WinningCondition.KillAllEnemies)
 		{
@@ -185,7 +185,7 @@ public class GameManager : Singleton<GameManager>
 			RoundWon();
 		}
 
-		// einen bestimmten Gegner getötet
+		// einen bestimmten Gegner getï¿½tet
 
 		if (!_hasWon && _neededEnemyKill == 0 && _winningCondition == WinningCondition.KillSpecificEnemy)
 		{

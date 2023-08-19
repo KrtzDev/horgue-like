@@ -82,6 +82,7 @@ public class GameDataReader : MonoBehaviour
     {
         public string name;
         public int TimeToSurvive;
+        public float weaponPartMultiplierPerLevel;
         public int spawnTick;
         public int spawnsPerTick;
         public int minEnemyCount;
@@ -400,6 +401,7 @@ public class GameDataReader : MonoBehaviour
         for (int i = 0; i < _enemySpawnerData.Count; i++)
         {
             _enemySpawnerData[i]._timeToSurvive = myLevelList.Level[i].TimeToSurvive;
+            _enemySpawnerData[i]._weaponPartMultiplierPerLevel = myLevelList.Level[i].weaponPartMultiplierPerLevel;
             _enemySpawnerData[i]._spawnTick = myLevelList.Level[i].spawnTick;
             _enemySpawnerData[i]._spawnsPerTick = myLevelList.Level[i].spawnsPerTick;
             _enemySpawnerData[i]._minEnemyCount = myLevelList.Level[i].minEnemyCount;
