@@ -24,6 +24,8 @@ public class GameManager : Singleton<GameManager>
 	public List<EnemySpawnerData> GameManagerValues = new List<EnemySpawnerData>();
 	[SerializeField] private int _maxLevels;
 
+	private EnemySpawner _currentEnemySpawner;
+
 	[Header("WinningCondition")]
 	[SerializeField]
 	private WinningCondition _winningCondition;
@@ -48,7 +50,12 @@ public class GameManager : Singleton<GameManager>
 	private int _numberOfRewards = 6;
 
 	public bool _gameIsPaused;
+
+	[Header("New Game Plus")]
 	public bool _newGamePlus;
+	public int firstLevelNumberInBuild;
+	public int lastLevelNumberInBuild;
+	public Vector2Int lastLevelNumbers;
 
 	[Header("Player")]
 	public GameObject _player;
@@ -80,8 +87,11 @@ public class GameManager : Singleton<GameManager>
 
 		if (SceneManager.GetActiveScene().name == "SCENE_Main_Menu")
 		{
+			_currentScore = 0;
 			_currentLevel = 1;
-
+			_lastLevel = 0;
+			_currentLevelArray = _currentLevel - 1;
+			_gameIsPaused = false;
 			return;
 		}
 
@@ -105,8 +115,9 @@ public class GameManager : Singleton<GameManager>
 		else
         {
 			_currentTimeToSurvive = GameManagerValues[_maxLevels]._timeToSurvive;
+			_currentEnemySpawner = FindObjectOfType<EnemySpawner>();
+			_currentEnemySpawner._enemySpawnerData = GameManagerValues[_maxLevels];
 		}
-
 
 		_hasWon = false;
 		_hasLost = false;
@@ -118,7 +129,6 @@ public class GameManager : Singleton<GameManager>
 
 		_player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerCharacter>().gameObject;
 		MovePlayerToRandomPos(DetermineRandomSpawnLocation());
-
 
 		if (_currentLevel == 1)
 		{
@@ -141,15 +151,6 @@ public class GameManager : Singleton<GameManager>
         {
 			_player.GetComponent<HealthComponent>()._currentHealth = _currentPlayerHealth;
         }
-
-		if (_currentLevel >= 0)
-		{
-			_playerCanUseAbilities = true;
-		}
-		else
-		{
-			_playerCanUseAbilities = false;
-		}
 
 		Debug.Log("neededEnemyKill ( " + _neededEnemyKill + " ) = enemySpawner.MaxAmount ( " + _enemySpawner._enemySpawnerData._maxEnemyCount + " )");
 	}

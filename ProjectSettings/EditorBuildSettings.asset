@@ -24,6 +24,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Game Scenes/SCENE_Level_04.unity
     guid: ce9ce29c12a36ea4c90644a90ed096d9
   - enabled: 1
+    path: Assets/Scenes/Game Scenes/SCENE_Level_04_05_Boss.unity
+    guid: 92b6c1c909cf3c74ba820a6544151c07
+  - enabled: 1
     path: Assets/Scenes/Game Scenes/SCENE_Weapon_Crafting.unity
     guid: fbbb3b1e874237c42bf7c071f9f12af7
   m_configObjects: {}

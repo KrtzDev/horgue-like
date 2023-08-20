@@ -14,7 +14,16 @@ public class ProgressionUI : MonoBehaviour
 	{
 		if (GameManager.Instance._newGamePlus)
 		{
-			int random = Random.Range(2, 10);
+			int random = GameManager.Instance.lastLevelNumbers.y;
+
+			while (random == GameManager.Instance.lastLevelNumbers.y)
+			{
+				random = Random.Range(GameManager.Instance.firstLevelNumberInBuild, GameManager.Instance.lastLevelNumberInBuild + 1);
+			}
+
+			GameManager.Instance.lastLevelNumbers.x = GameManager.Instance.lastLevelNumbers.y;
+			GameManager.Instance.lastLevelNumbers.y = random;
+
 			SceneLoader.Instance.LoadScene(random);
 		}
 		else

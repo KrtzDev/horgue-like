@@ -267,19 +267,23 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 14bef83bfa09adf45b0d8a6b7ad9ca7b, type: 2}
   - {fileID: 11400000, guid: bf53881ad9e341c4ba6211a4e7fabc6c, type: 2}
   - {fileID: 11400000, guid: 13e4e87bbee05684c803ee8265c4eefe, type: 2}
-  - {fileID: 11400000, guid: d0e3587d7f1e81b46bed0a82e7760c99, type: 2}
   - {fileID: 11400000, guid: 1de1f6f20ca28814d80004febe7eed3a, type: 2}
-  _maxLevels: 9
+  - {fileID: 11400000, guid: d0e3587d7f1e81b46bed0a82e7760c99, type: 2}
+  _maxLevels: 5
   _winningCondition: 1
   _currentTimeToSurvive: 0
   _currentScore: 0
   _neededEnemyKill: 0
   _enemyCount: 0
   _enemiesKilled: 0
+  killedBoss: 0
   _currentLevel: 1
   _currentLevelArray: 0
   _gameIsPaused: 0
   _newGamePlus: 0
+  firstLevelNumberInBuild: 2
+  lastLevelNumberInBuild: 5
+  lastLevelNumbers: {x: 0, y: 0}
   _player: {fileID: 0}
   _currentPlayerHealth: 0
   _playerCanUseAbilities: 0
