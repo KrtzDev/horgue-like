@@ -12,32 +12,17 @@ EditorBuildSettings:
     path: Assets/Scenes/Game Scenes/SCENE_Main_Menu.unity
     guid: 6dd9264c898ee1d40a48331813648033
   - enabled: 1
-    path: Assets/Scenes/Game Scenes/SCENE_Level_00.unity
+    path: Assets/Scenes/Game Scenes/SCENE_Level_01.unity
     guid: 993e7fc0dd066d54c89c6a0acde31383
   - enabled: 1
-    path: Assets/Scenes/Game Scenes/SCENE_Level_01.unity
+    path: Assets/Scenes/Game Scenes/SCENE_Level_02.unity
     guid: a506e3a10d887a44a9121ee0b9cce6ce
   - enabled: 1
-    path: Assets/Scenes/Game Scenes/SCENE_Level_02.unity
+    path: Assets/Scenes/Game Scenes/SCENE_Level_03.unity
+    guid: f5b2efde0fe944445873b9d8117dbb87
+  - enabled: 1
+    path: Assets/Scenes/Game Scenes/SCENE_Level_04.unity
     guid: ce9ce29c12a36ea4c90644a90ed096d9
-  - enabled: 1
-    path: Assets/Scenes/Game Scenes/SCENE_Level_Lucas_3.unity
-    guid: c696405746b91094b9f870cd68efe480
-  - enabled: 1
-    path: Assets/Scenes/Game Scenes/SCENE_Level_Lucas_4.unity
-    guid: 8f245fb8a623acd40a2f4bfb5cb7d3bf
-  - enabled: 1
-    path: Assets/Scenes/Game Scenes/SCENE_Level_Lucas_5.unity
-    guid: 29fddb7331795924dad4b265ce2be003
-  - enabled: 1
-    path: Assets/Scenes/Game Scenes/SCENE_Level_Lucas_6.unity
-    guid: e3a8b74ca9a9468409ccd13a1337fb27
-  - enabled: 1
-    path: Assets/Scenes/Game Scenes/SCENE_Level_Lucas_7.unity
-    guid: 3ba983bf689fcba489dc08058ceb1b06
-  - enabled: 1
-    path: Assets/Scenes/Game Scenes/SCENE_Level_Lucas_Boss.unity
-    guid: f2988d616cb72c8489ccb75eb3e3ef4d
   - enabled: 1
     path: Assets/Scenes/Game Scenes/SCENE_Weapon_Crafting.unity
     guid: fbbb3b1e874237c42bf7c071f9f12af7
