@@ -37,6 +37,7 @@ public class GameManager : Singleton<GameManager>
 	public int _neededEnemyKill;
 	public int _enemyCount;
 	public int _enemiesKilled;
+	public bool killedBoss;
 	private bool _hasWon;
 	private bool _hasLost;
 
@@ -91,7 +92,7 @@ public class GameManager : Singleton<GameManager>
 		else
         {
 			_winningCondition = WinningCondition.SurviveForTime;
-
+		 	killedBoss = false;
 		}
 
 		_gameDataReader.GetGameData();
@@ -162,7 +163,8 @@ public class GameManager : Singleton<GameManager>
 
 		if (!_hasWon)
 			if (!_hasLost)
-				_currentTimeToSurvive -= Time.deltaTime;
+				if(!SceneManager.GetActiveScene().name.Contains("Boss"))
+					_currentTimeToSurvive -= Time.deltaTime;
 		if (!_hasWon && _currentTimeToSurvive <= 0 && _winningCondition == WinningCondition.SurviveForTime)
 		{
 			_hasWon = true;
@@ -187,7 +189,7 @@ public class GameManager : Singleton<GameManager>
 
 		// einen bestimmten Gegner get�tet
 
-		if (!_hasWon && _neededEnemyKill == 0 && _winningCondition == WinningCondition.KillSpecificEnemy)
+		if (!_hasWon && killedBoss && _winningCondition == WinningCondition.KillSpecificEnemy)
 		{
 			_hasWon = true;
 			RoundWon();

@@ -32,4 +32,19 @@ public class RikayonAnimationController : EnemyAnimationController
     {
         _rikayon.SpitAttack();
     }
+
+    public void SetAgentActive()
+    {
+        _rikayon.GetComponent<EnemyHealthComponent>().SetAgentActive();
+    }
+
+    public void CanTakeDamageActive()
+    {
+        _rikayon.GetComponent<EnemyHealthComponent>().CanTakeDamageActive();
+    }
+
+    public void SetHealthToPercentOfMax()
+    {
+        _rikayon.GetComponent<EnemyHealthComponent>().SetHealthToPercentOfMax();
+    }
 }
