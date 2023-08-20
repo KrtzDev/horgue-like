@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4283075153130197044}
   - component: {fileID: 4283075153130197051}
+  - component: {fileID: 1497091694}
   m_Layer: 0
   m_Name: GameDataReader
   m_TagString: Untagged
@@ -55,16 +56,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 8dc834b5e34dc44468852d86bbd441ba, type: 2}
   - {fileID: 11400000, guid: 82118306e108d9743814036562f61341, type: 2}
   - {fileID: 11400000, guid: eee9c19ae006f9f4dacc1942c4c5316d, type: 2}
-  _LevelData:
-  - {fileID: 11400000, guid: d87aa26dde7df3e469ed4ce81cab15d7, type: 2}
-  - {fileID: 11400000, guid: 20a93495e13578a4abab49b8fd960b7f, type: 2}
-  - {fileID: 11400000, guid: 15ce0c668d7fd6d46a6d3167086a31de, type: 2}
-  - {fileID: 11400000, guid: 97a31eb4a4737304f8048720d9ee9724, type: 2}
-  - {fileID: 11400000, guid: ffb617e12eaa10942a1210052869048e, type: 2}
-  - {fileID: 11400000, guid: ae55e267d2f8a334ab446fe86af05276, type: 2}
-  - {fileID: 11400000, guid: f9e653bc1fb51d840b4c5d9fb544d24e, type: 2}
-  - {fileID: 11400000, guid: c597f4632ab921c4e9bbb208b92470f5, type: 2}
-  - {fileID: 11400000, guid: eb4ba3d1298ffa34cb66b97dbdac0ae8, type: 2}
+  - {fileID: 11400000, guid: 9a831721cb0f4b649abcfe8fb13e4cb5, type: 2}
   _enemySpawnerData:
   - {fileID: 11400000, guid: b61728d096d80df45baa1ef8526d58ed, type: 2}
   - {fileID: 11400000, guid: 5a95116ec7ad03d439c523841b5cf5b4, type: 2}
@@ -184,3 +176,15 @@ MonoBehaviour:
     Sight: []
   myTriggerMechanismList:
     TriggerMechanism: []
+--- !u!114 &1497091694
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4283075153130197046}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d61c52b8bd1b316469dcee4c9486f68f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

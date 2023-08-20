@@ -147,6 +147,8 @@ public class GameManager : Singleton<GameManager>
 			abilityCoolDownToReplace.GetComponent<Image>().sprite = _currentAbility._icon;
 		}
 
+		_playerCanUseAbilities = true;
+
 		if(_lastLevel == _currentLevel)
         {
 			_player.GetComponent<HealthComponent>()._currentHealth = _currentPlayerHealth;
