@@ -171,7 +171,16 @@ public class GameManager : Singleton<GameManager>
 		if (!_hasWon && _currentTimeToSurvive <= 0 && _winningCondition == WinningCondition.SurviveForTime)
 		{
 			_hasWon = true;
-			_currentTimeToSurvive = GameManagerValues[_currentLevelArray]._timeToSurvive;
+
+			if(_currentLevelArray < _maxLevels)
+			{
+				_currentTimeToSurvive = GameManagerValues[_currentLevelArray]._timeToSurvive;
+			}
+			else
+			{
+				_currentTimeToSurvive = GameManagerValues[_maxLevels]._timeToSurvive;
+			}
+
 			RoundWon();
 		}
 	}
@@ -227,8 +236,6 @@ public class GameManager : Singleton<GameManager>
 		_currentLevelArray = _currentLevel - 1;
 
 		// UIManager.Instance.ShowWaveEndScreen(LevelStatus.Won);
-
-		_currentPlayerHealth = _player.GetComponent<HealthComponent>()._currentHealth;
 
 		EnemyStopFollowing();
 	}

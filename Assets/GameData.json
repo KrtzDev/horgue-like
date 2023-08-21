@@ -274,7 +274,7 @@
       "spawnTick": 5,
       "spawnsPerTick": 5,
       "minEnemyCount": 5,
-      "maxEnemyCount": 30,
+      "maxEnemyCount": 15,
       "spawnAnimDelay": 1,
       "minSpawnDelay": 0,
       "maxSpawnDelay": 1,
