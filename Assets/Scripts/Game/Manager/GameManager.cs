@@ -24,6 +24,8 @@ public class GameManager : Singleton<GameManager>
 	public List<EnemySpawnerData> GameManagerValues = new List<EnemySpawnerData>();
 	[SerializeField] private int _maxLevels;
 
+	private EnemySpawner _currentEnemySpawner;
+
 	[Header("WinningCondition")]
 	[SerializeField]
 	private WinningCondition _winningCondition;
@@ -37,6 +39,7 @@ public class GameManager : Singleton<GameManager>
 	public int _neededEnemyKill;
 	public int _enemyCount;
 	public int _enemiesKilled;
+	public bool killedBoss;
 	private bool _hasWon;
 	private bool _hasLost;
 
@@ -47,7 +50,12 @@ public class GameManager : Singleton<GameManager>
 	private int _numberOfRewards = 6;
 
 	public bool _gameIsPaused;
+
+	[Header("New Game Plus")]
 	public bool _newGamePlus;
+	public int firstLevelNumberInBuild;
+	public int lastLevelNumberInBuild;
+	public Vector2Int lastLevelNumbers;
 
 	[Header("Player")]
 	public GameObject _player;
@@ -79,8 +87,11 @@ public class GameManager : Singleton<GameManager>
 
 		if (SceneManager.GetActiveScene().name == "SCENE_Main_Menu")
 		{
+			_currentScore = 0;
 			_currentLevel = 1;
-
+			_lastLevel = 0;
+			_currentLevelArray = _currentLevel - 1;
+			_gameIsPaused = false;
 			return;
 		}
 
@@ -91,7 +102,7 @@ public class GameManager : Singleton<GameManager>
 		else
         {
 			_winningCondition = WinningCondition.SurviveForTime;
-
+		 	killedBoss = false;
 		}
 
 		_gameDataReader.GetGameData();
@@ -104,8 +115,9 @@ public class GameManager : Singleton<GameManager>
 		else
         {
 			_currentTimeToSurvive = GameManagerValues[_maxLevels]._timeToSurvive;
+			_currentEnemySpawner = FindObjectOfType<EnemySpawner>();
+			_currentEnemySpawner._enemySpawnerData = GameManagerValues[_maxLevels];
 		}
-
 
 		_hasWon = false;
 		_hasLost = false;
@@ -117,7 +129,6 @@ public class GameManager : Singleton<GameManager>
 
 		_player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerCharacter>().gameObject;
 		MovePlayerToRandomPos(DetermineRandomSpawnLocation());
-
 
 		if (_currentLevel == 1)
 		{
@@ -136,19 +147,12 @@ public class GameManager : Singleton<GameManager>
 			abilityCoolDownToReplace.GetComponent<Image>().sprite = _currentAbility._icon;
 		}
 
+		_playerCanUseAbilities = true;
+
 		if(_lastLevel == _currentLevel)
         {
 			_player.GetComponent<HealthComponent>()._currentHealth = _currentPlayerHealth;
         }
-
-		if (_currentLevel >= 0)
-		{
-			_playerCanUseAbilities = true;
-		}
-		else
-		{
-			_playerCanUseAbilities = false;
-		}
 
 		Debug.Log("neededEnemyKill ( " + _neededEnemyKill + " ) = enemySpawner.MaxAmount ( " + _enemySpawner._enemySpawnerData._maxEnemyCount + " )");
 	}
@@ -162,11 +166,21 @@ public class GameManager : Singleton<GameManager>
 
 		if (!_hasWon)
 			if (!_hasLost)
-				_currentTimeToSurvive -= Time.deltaTime;
+				if(!SceneManager.GetActiveScene().name.Contains("Boss"))
+					_currentTimeToSurvive -= Time.deltaTime;
 		if (!_hasWon && _currentTimeToSurvive <= 0 && _winningCondition == WinningCondition.SurviveForTime)
 		{
 			_hasWon = true;
-			_currentTimeToSurvive = GameManagerValues[_currentLevelArray]._timeToSurvive;
+
+			if(_currentLevelArray < _maxLevels)
+			{
+				_currentTimeToSurvive = GameManagerValues[_currentLevelArray]._timeToSurvive;
+			}
+			else
+			{
+				_currentTimeToSurvive = GameManagerValues[_maxLevels]._timeToSurvive;
+			}
+
 			RoundWon();
 		}
 	}
@@ -187,7 +201,7 @@ public class GameManager : Singleton<GameManager>
 
 		// einen bestimmten Gegner get�tet
 
-		if (!_hasWon && _neededEnemyKill == 0 && _winningCondition == WinningCondition.KillSpecificEnemy)
+		if (!_hasWon && killedBoss && _winningCondition == WinningCondition.KillSpecificEnemy)
 		{
 			_hasWon = true;
 			RoundWon();
@@ -222,8 +236,6 @@ public class GameManager : Singleton<GameManager>
 		_currentLevelArray = _currentLevel - 1;
 
 		// UIManager.Instance.ShowWaveEndScreen(LevelStatus.Won);
-
-		_currentPlayerHealth = _player.GetComponent<HealthComponent>()._currentHealth;
 
 		EnemyStopFollowing();
 	}

@@ -12065,7 +12065,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5164913324426907931}
   m_LocalRotation: {x: 0.0000000842937, y: -0.0000000635783, z: 0.0000000635783, w: 1}
-  m_LocalPosition: {x: 26.5, y: 0, z: 18.500004}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -12120,7 +12120,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _spikeDamage: 50
-  _isTriggered: 0
+  _delay: 0
+  _rearming: 0
   _isAutomated: 1
   _cooldown: 3
 --- !u!1 &5164913324438757313

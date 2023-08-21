@@ -27,7 +27,6 @@ public class EnemySpawner : MonoBehaviour
     public GameObject _enemySpawnIndicator;
     public GameObject _enemyObjectPoolParent;
     private GameObject _player;
-    private bool _spawnedBoss = false;
     [SerializeField] private GameObject _boxZoneParent;
 
     [Header("Settings")]
@@ -40,6 +39,9 @@ public class EnemySpawner : MonoBehaviour
 
     private float _enemiesSpawned = 0;
     public List<EnemiesToSpawn> _enemiesToSpawn = new List<EnemiesToSpawn>();
+
+    [Header("Boss?")]
+    public EnemiesToSpawn bossEnemy;
 
     [Header("Box Colliders")]
     [SerializeField] private BoxCollider _safeZone;
@@ -64,26 +66,23 @@ public class EnemySpawner : MonoBehaviour
 
     private void Start()
     {
+        int lastKey = 0;
+
         for (int i = 0; i < _enemiesToSpawn.Count; i++)
         {
             _enemyObjectPool.Add(i, ObjectPool<AI_Agent_Enemy>.CreatePool(_enemiesToSpawn[i]._enemy, _enemySpawnerData._maxEnemyCount, _enemyObjectPoolParent.transform));
+            lastKey = i;
         }
 
-        _spawnedBoss = false;
+        if(SceneManager.GetActiveScene().name.Contains("Boss"))
+        {
+		    _enemyObjectPool.Add(lastKey + 1, ObjectPool<AI_Agent_Enemy>.CreatePool(bossEnemy._enemy, 1, _enemyObjectPoolParent.transform));
+            SpawnEnemies(bossEnemy, 1, lastKey + 1);
+		}
     }
 
     private void Update()
     {
-        if (SceneManager.GetActiveScene().name.Contains("Boss"))
-        {
-            if(!_spawnedBoss)
-            {
-                SpawnEnemies(_enemiesToSpawn[0], 1, 0);
-                _spawnedBoss = true;
-            }
-            return;
-        }
-
         if (_spawnTimer >= _enemySpawnerData._spawnTick)
         {
             int spawnIndex = 0;

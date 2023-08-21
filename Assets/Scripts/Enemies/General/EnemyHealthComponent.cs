@@ -72,6 +72,7 @@ public class EnemyHealthComponent : HealthComponent
 
 		if(_enemy._isBossEnemy)
         {
+			GameManager.Instance.killedBoss = true;
 			GameManager.Instance._newGamePlus = true;
         }
 
@@ -100,4 +101,9 @@ public class EnemyHealthComponent : HealthComponent
 
 	public void SetAgentActive() => _enemy.enabled = true;
 	public void CanTakeDamageActive() => _canTakeDamage = true;
+
+	public void SetHealthToPercentOfMax()
+	{
+		// Rikayon Damage thingy
+	}
 }
