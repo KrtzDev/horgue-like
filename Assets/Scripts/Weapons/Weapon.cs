@@ -223,7 +223,8 @@ public class Weapon : ScriptableObject
 			return _currentWeaponSkeleton.skeletonBaseStats.baseDamage;
 
 		float partsDamage = damageCalcKind == DamageCalcKind.Mean ? totalDamage / partCount : totalDamage;
-		float damage = _currentWeaponSkeleton.skeletonBaseStats.baseDamage + (_currentWeaponSkeleton.skeletonBaseStats.baseDamage * partsDamage * .1f);
+		// float damage = _currentWeaponSkeleton.skeletonBaseStats.baseDamage + (_currentWeaponSkeleton.skeletonBaseStats.baseDamage * partsDamage * .1f);
+		float damage = _currentWeaponSkeleton.skeletonBaseStats.baseDamage + partsDamage;
 
 		if(totalDamage < _currentWeaponSkeleton.skeletonBaseStats.minBaseDamage) // min
 			return _currentWeaponSkeleton.skeletonBaseStats.minBaseDamage;
@@ -273,7 +274,7 @@ public class Weapon : ScriptableObject
 			return _currentWeaponSkeleton.skeletonBaseStats.attackSpeed;
 
 		float partsAttackSpeed = damageCalcKind == DamageCalcKind.Mean ? totalAttackSpeed / partCount : totalAttackSpeed;
-		float attackSpeed = _currentWeaponSkeleton.skeletonBaseStats.attackSpeed + (_currentWeaponSkeleton.skeletonBaseStats.attackSpeed * partsAttackSpeed);
+		float attackSpeed = _currentWeaponSkeleton.skeletonBaseStats.attackSpeed + partsAttackSpeed;
 
 		if(attackSpeed < _currentWeaponSkeleton.skeletonBaseStats.minAttackSpeed) // min
 			return _currentWeaponSkeleton.skeletonBaseStats.minAttackSpeed;
@@ -324,7 +325,7 @@ public class Weapon : ScriptableObject
 			return _currentWeaponSkeleton.skeletonBaseStats.cooldown;
 
 		float partsCooldown = damageCalcKind == DamageCalcKind.Mean ? totalCooldown / partCount : totalCooldown;
-		float cooldown = _currentWeaponSkeleton.skeletonBaseStats.cooldown + (_currentWeaponSkeleton.skeletonBaseStats.cooldown * partsCooldown);
+		float cooldown = _currentWeaponSkeleton.skeletonBaseStats.cooldown + partsCooldown;
 
 		if(cooldown < _currentWeaponSkeleton.skeletonBaseStats.minCooldown) // min
 			return _currentWeaponSkeleton.skeletonBaseStats.minCooldown;
@@ -375,7 +376,7 @@ public class Weapon : ScriptableObject
 			return _currentWeaponSkeleton.skeletonBaseStats.projectileSize;
 
 		float partsProjectileSize = damageCalcKind == DamageCalcKind.Mean ? totalProjectileSize / partCount : totalProjectileSize;
-		float projectileSize = _currentWeaponSkeleton.skeletonBaseStats.projectileSize +(_currentWeaponSkeleton.skeletonBaseStats.projectileSize * partsProjectileSize);
+		float projectileSize = _currentWeaponSkeleton.skeletonBaseStats.projectileSize + partsProjectileSize;
 
 		if(projectileSize < _currentWeaponSkeleton.skeletonBaseStats.minProjectileSize) // min
 			return _currentWeaponSkeleton.skeletonBaseStats.minProjectileSize;
@@ -426,7 +427,7 @@ public class Weapon : ScriptableObject
 			return _currentWeaponSkeleton.skeletonBaseStats.critChance;
 
 		float partsCritChance = damageCalcKind == DamageCalcKind.Mean ? totalCritChance / partCount : totalCritChance;
-		float critChance = _currentWeaponSkeleton.skeletonBaseStats.critChance +(_currentWeaponSkeleton.skeletonBaseStats.critChance * partsCritChance);
+		float critChance = _currentWeaponSkeleton.skeletonBaseStats.critChance + partsCritChance;
 
 		if(critChance  < _currentWeaponSkeleton.skeletonBaseStats.minCritChance) // min
 			return _currentWeaponSkeleton.skeletonBaseStats.minCritChance;
@@ -477,7 +478,7 @@ public class Weapon : ScriptableObject
 			return _currentWeaponSkeleton.skeletonBaseStats.critDamage;
 
 		float partsCritDamage = damageCalcKind == DamageCalcKind.Mean ? totalCritDamage / partCount : totalCritDamage;
-		float critDamage = _currentWeaponSkeleton.skeletonBaseStats.critDamage + (_currentWeaponSkeleton.skeletonBaseStats.critChance * partsCritDamage);
+		float critDamage = _currentWeaponSkeleton.skeletonBaseStats.critDamage + partsCritDamage;
 
 		if(critDamage < _currentWeaponSkeleton.skeletonBaseStats.minCritDamage) // min
 			return _currentWeaponSkeleton.skeletonBaseStats.minCritDamage;
@@ -527,7 +528,7 @@ public class Weapon : ScriptableObject
 			return _currentWeaponSkeleton.skeletonBaseStats.range;
 
 		float partsRange = damageCalcKind == DamageCalcKind.Mean ? totalRange / partCount : totalRange;
-		float range = _currentWeaponSkeleton.skeletonBaseStats.range + (_currentWeaponSkeleton.skeletonBaseStats.range * partsRange * .1f);
+		float range = _currentWeaponSkeleton.skeletonBaseStats.range + partsRange;
 
 		if(range < _currentWeaponSkeleton.skeletonBaseStats.minRange) // min
 			return _currentWeaponSkeleton.skeletonBaseStats.minRange;
