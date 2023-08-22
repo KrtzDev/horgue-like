@@ -532,18 +532,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameDataReader
       objectReference: {fileID: 0}
-    - target: {fileID: 4283075153130197051, guid: 3acfade8d5b4ace4fadbef615fdbfcc4,
-        type: 3}
-      propertyPath: _enemySpawnerData.Array.data[7]
-      value: 
-      objectReference: {fileID: 11400000, guid: 1de1f6f20ca28814d80004febe7eed3a,
-        type: 2}
-    - target: {fileID: 4283075153130197051, guid: 3acfade8d5b4ace4fadbef615fdbfcc4,
-        type: 3}
-      propertyPath: _enemySpawnerData.Array.data[8]
-      value: 
-      objectReference: {fileID: 11400000, guid: d0e3587d7f1e81b46bed0a82e7760c99,
-        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3acfade8d5b4ace4fadbef615fdbfcc4, type: 3}
 --- !u!114 &1497091692 stripped

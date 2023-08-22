@@ -324,7 +324,18 @@
       "criticalHitChance": 10,
       "criticalHitDamage": 1.5,
       "projectileWidth": 0.1,
-      "range": 13
+      "range": 13,
+      "maxAttackSpeed": 5,
+      "maxCooldown": 5,
+      "maxCriticalHitChance": 100,
+      "maxProjectileWidth": 0.5,
+      "minAttackSpeed": 0.5,
+      "minBaseDamage": 1,
+      "minCooldown": 0.1,
+      "minCriticalHitChance": 0,
+      "minCriticalHitDamage": 1,
+      "minProjectileWidth": 0.025,
+      "minRange": 5
     }
   ],
   "Ammunition": [

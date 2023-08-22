@@ -102,6 +102,7 @@ public class GameDataReader : MonoBehaviour
     [System.Serializable]
     public class FirearmDB
     {
+        [Header("Stats")]
         public string name;
         public float attackSpeed;
         public float baseDamage;
@@ -110,6 +111,21 @@ public class GameDataReader : MonoBehaviour
         public float criticalHitDamage;
         public float projectileWidth;
         public float range;
+
+        [Header("Max Stats")]
+        public float maxAttackSpeed;
+        public float maxCooldown;
+        public float maxProjectileWidth;
+        public float maxCriticalHitChance;
+
+        [Header("Min Stats")]
+        public float minBaseDamage;
+        public float minAttackSpeed;
+        public float minCooldown;
+        public float minProjectileWidth;
+        public float minCriticalHitChance;
+        public float minCriticalHitDamage;
+        public float minRange;
     }
 
     [System.Serializable]
@@ -444,6 +460,18 @@ public class GameDataReader : MonoBehaviour
             _firearmData[i].critChance      = myFirearmList.Firearm[i].criticalHitChance;
             _firearmData[i].critDamage      = myFirearmList.Firearm[i].criticalHitDamage;
             _firearmData[i].range           = myFirearmList.Firearm[i].range;
+
+            _firearmData[i].maxAttackSpeed      = myFirearmList.Firearm[i].maxAttackSpeed;
+            _firearmData[i].maxCooldown         = myFirearmList.Firearm[i].maxCooldown;
+            _firearmData[i].maxProjectileSize   = myFirearmList.Firearm[i].maxProjectileWidth;
+            _firearmData[i].maxCritChance       = myFirearmList.Firearm[i].maxCriticalHitChance;
+            _firearmData[i].minAttackSpeed      = myFirearmList.Firearm[i].minAttackSpeed;
+            _firearmData[i].minBaseDamage       = myFirearmList.Firearm[i].minBaseDamage;
+            _firearmData[i].minCooldown         = myFirearmList.Firearm[i].minCooldown;
+            _firearmData[i].minCritChance       = myFirearmList.Firearm[i].minCriticalHitChance;
+            _firearmData[i].minCritDamage       = myFirearmList.Firearm[i].minCriticalHitDamage;
+            _firearmData[i].minProjectileSize   = myFirearmList.Firearm[i].minProjectileWidth;
+            _firearmData[i].minRange            = myFirearmList.Firearm[i].minRange;
         }
     }
 
