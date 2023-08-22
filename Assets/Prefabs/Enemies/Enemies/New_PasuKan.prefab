@@ -758,6 +758,7 @@ GameObject:
   - component: {fileID: 8390179539913523764}
   - component: {fileID: 6129024201269930772}
   - component: {fileID: 9178833790121921127}
+  - component: {fileID: -6857233238335152665}
   m_Layer: 7
   m_Name: New_PasuKan
   m_TagString: Enemy
@@ -866,35 +867,37 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd6eddb0a4ac344459cfa5a81beaf37f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _initialState: 1
-  _navMeshAgent: {fileID: 2146313492047633022}
-  _obstacleAgent: {fileID: 0}
-  _animator: {fileID: 0}
-  _rb: {fileID: 0}
-  _originalAnimationSpeed: 0
-  _groundLayer:
+  InitialState: 0
+  NavMeshAgent: {fileID: 0}
+  ObstacleAgent: {fileID: 0}
+  Animator: {fileID: 0}
+  RigidBody: {fileID: 0}
+  OriginalAnimationSpeed: 0
+  IsAffectedByAbility: 0
+  GroundLayer:
     serializedVersion: 2
-    m_Bits: 512
-  _enemyLayer:
+    m_Bits: 0
+  EnemyLayer:
     serializedVersion: 2
-    m_Bits: 128
-  _playerLayer:
+    m_Bits: 0
+  PlayerLayer:
     serializedVersion: 2
-    m_Bits: 64
-  _player: {fileID: 0}
-  _playerTransform: {fileID: 0}
-  _decoyTransform: {fileID: 0}
-  _attackTimer: 0
-  _lookRotationSpeed: 0.75
-  _followDecoy: 0
-  _canUseSkill: 1
-  _useMovementPrediction: 0
-  _movementPredictionThreshold: 0.2
-  _movementPredictionTime: 0.5
+    m_Bits: 0
+  Player: {fileID: 0}
+  PlayerTransform: {fileID: 0}
+  DecoyTransform: {fileID: 0}
+  AttackTimer: 0
+  LookRotationSpeed: 1
+  FollowDecoy: 0
+  CanUseSkill: 0
+  UseMovementPrediction: 0
+  MovementPredictionThreshold: 0
+  MovementPredictionTime: 1
   _enemyData: {fileID: 11400000, guid: 1c6784eeb238619469f87bbb4a9877f5, type: 2}
   _followPosition: {x: 0, y: 0, z: 0}
   _isBossEnemy: 0
-  _healthComponent: {fileID: 0}
+  HealthComponent: {fileID: 0}
+  damagePerHit: 0
   _useHeightControl: 0
   _heightGO: {fileID: 0}
 --- !u!208 &8390179539913523764
@@ -943,6 +946,52 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
+--- !u!114 &-6857233238335152665
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4336743237509427697}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98d2a026c68edc842b1633421874f572, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Method: 3
+  m_Curve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.5
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &4471637785259607398
 GameObject:
   m_ObjectHideFlags: 0
