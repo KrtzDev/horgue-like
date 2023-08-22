@@ -43,6 +43,7 @@ public class Rikayon_State_Idle : AI_State_Idle
         if (_timer < 0f)
         {
             StartRotating(agent);
+            _timer = _maxTime;
 
             if (distance > _enemy._enemyData._attackRange)
             {
@@ -60,7 +61,6 @@ public class Rikayon_State_Idle : AI_State_Idle
                 return;
             }
 
-            _timer = _maxTime;
         }
     }
 

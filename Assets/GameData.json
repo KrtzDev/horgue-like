@@ -137,7 +137,7 @@
   "Level": [
     {
       "name": "Level1",
-      "TimeToSurvive": 1,
+      "TimeToSurvive": 45,
       "spawnTick": 3,
       "spawnsPerTick": 7,
       "minEnemyCount": 12,
@@ -156,7 +156,7 @@
     },
     {
       "name": "Level1.5",
-      "TimeToSurvive": 1,
+      "TimeToSurvive": 45,
       "spawnTick": 3,
       "spawnsPerTick": 7,
       "minEnemyCount": 12,
@@ -175,7 +175,7 @@
     },
     {
       "name": "Level2",
-      "TimeToSurvive": 1,
+      "TimeToSurvive": 55,
       "spawnTick": 3,
       "spawnsPerTick": 8,
       "minEnemyCount": 15,
@@ -194,7 +194,7 @@
     },
     {
       "name": "Level2.5",
-      "TimeToSurvive": 1,
+      "TimeToSurvive": 55,
       "spawnTick": 3,
       "spawnsPerTick": 8,
       "minEnemyCount": 15,
@@ -213,7 +213,7 @@
     },
     {
       "name": "Level3",
-      "TimeToSurvive": 1,
+      "TimeToSurvive": 65,
       "spawnTick": 3,
       "spawnsPerTick": 9,
       "minEnemyCount": 18,
@@ -232,7 +232,7 @@
     },
     {
       "name": "Level3.5",
-      "TimeToSurvive": 1,
+      "TimeToSurvive": 65,
       "spawnTick": 3,
       "spawnsPerTick": 9,
       "minEnemyCount": 18,
@@ -251,7 +251,7 @@
     },
     {
       "name": "Level4",
-      "TimeToSurvive": 1,
+      "TimeToSurvive": 75,
       "spawnTick": 3,
       "spawnsPerTick": 10,
       "minEnemyCount": 20,
@@ -270,7 +270,7 @@
     },
     {
       "name": "LevelBoss",
-      "TimeToSurvive": 1,
+      "TimeToSurvive": 180,
       "spawnTick": 5,
       "spawnsPerTick": 5,
       "minEnemyCount": 5,
@@ -289,7 +289,7 @@
     },
     {
       "name": "LevelNewGamePlus",
-      "TimeToSurvive": 5,
+      "TimeToSurvive": 75,
       "spawnTick": 3,
       "spawnsPerTick": 12,
       "minEnemyCount": 10,
