@@ -12,7 +12,7 @@ public class Rikayon_ToxicSpit : MonoBehaviour
     [SerializeField] private Vector2 _bossStageDamageMultiplier;
     [SerializeField] private float _damageTime;
     private float _damageTimer;
-    [SerializeField] private int _damagePerTick;
+    private int _damagePerTick;
 
     GameObject _player;
     ParticleSystem ps;
@@ -23,6 +23,7 @@ public class Rikayon_ToxicSpit : MonoBehaviour
         ps = GetComponent<ParticleSystem>();
         _player = GameObject.FindWithTag("Player");
         ps.trigger.AddCollider(_player.GetComponent<BoxCollider>());
+        _damagePerTick = (int)(_rikayon._enemyData._damagePerHit / 10);
 
         _damageTimer = 0;
         _lifeTimer = 0;

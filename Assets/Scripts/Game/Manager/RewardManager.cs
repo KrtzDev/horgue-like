@@ -33,7 +33,8 @@ public class RewardManager : Singleton<RewardManager>
 			weaponPart.attackSpeed *= 1 + GameManager.Instance.GameManagerValues[0]._weaponPartMultiplierPerLevel * (weaponPart.levelObtained - 1);
 		}
 
-		if(weaponPart.cooldown > 0)
+		/* 
+		if(weaponPart.cooldown < 0)
 		{
 			weaponPart.cooldown *=  1 + GameManager.Instance.GameManagerValues[0]._weaponPartMultiplierPerLevel *  (weaponPart.levelObtained - 1);
 		}
@@ -42,6 +43,7 @@ public class RewardManager : Singleton<RewardManager>
 		{
 			weaponPart.projectileSize *=  1 + GameManager.Instance.GameManagerValues[0]._weaponPartMultiplierPerLevel *  (weaponPart.levelObtained - 1);
 		}
+		*/
 
 		if(weaponPart.critChance > 0)
 		{

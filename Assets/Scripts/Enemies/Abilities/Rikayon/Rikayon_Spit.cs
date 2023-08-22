@@ -11,6 +11,7 @@ public class Rikayon_Spit : MonoBehaviour
     private void Start()
     {
         _rikayon = GameObject.FindObjectOfType<AI_Agent_Rikayon>();
+
     }
 
     private void OnTriggerEnter(Collider other)

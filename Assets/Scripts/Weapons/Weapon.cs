@@ -60,7 +60,7 @@ public class Weapon : ScriptableObject
 	private ObjectPool<HorgueVFX> _vfxPool;
 
 	private float _shotDelay;
-	private int _capacity;
+	public int _capacity;
 	private bool _isReloading;
 	private float _reloadTime;
 

@@ -7,7 +7,7 @@ public class Rikayon_Spike : MonoBehaviour
     private AI_Agent_Rikayon _rikayon;
 
     [SerializeField] private Vector2 _bossStageDamageMultiplier;
-    [SerializeField] private int _damageOnTrigger;
+    private int _damageOnTrigger;
 
     private bool _hasDamaged;
 
@@ -36,5 +36,6 @@ public class Rikayon_Spike : MonoBehaviour
     {
         _rikayon = GameObject.FindObjectOfType<AI_Agent_Rikayon>();
         _hasDamaged = false;
+        _damageOnTrigger = (int)(_rikayon._enemyData._damagePerHit / 3);
     }
 }

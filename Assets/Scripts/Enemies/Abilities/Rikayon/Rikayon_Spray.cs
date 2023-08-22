@@ -9,7 +9,7 @@ public class Rikayon_Spray : MonoBehaviour
     private float _damageTimer;
     [SerializeField] private float _damageTime;
     [SerializeField] private Vector2 _bossStageDamageMultiplier;
-    [SerializeField] private int _damagePerTick;
+    private int _damagePerTick;
 
     GameObject _player;
     ParticleSystem ps;
@@ -51,6 +51,7 @@ public class Rikayon_Spray : MonoBehaviour
         _player = GameObject.FindWithTag("Player");
         ps.trigger.AddCollider(_player.GetComponent<BoxCollider>());
         _damageTimer = 0;
+        _damagePerTick = (int)(_rikayon._enemyData._damagePerHit / 10);
     }
 
     private void Update()
