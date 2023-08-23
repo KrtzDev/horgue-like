@@ -117,8 +117,8 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 4
-      minScalar: 3
+      scalar: 3
+      minScalar: 2.5
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -286,7 +286,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.35
+      scalar: 0.5
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -1483,7 +1483,7 @@ ParticleSystem:
     uvChannelMask: -1
     rowMode: 1
     sprites:
-    - sprite: {fileID: 21300000, guid: 40685941c1361aa4a957b61174bce3f6, type: 3}
+    - sprite: {fileID: 21300000, guid: f92c09021ee373448b956c372212c50e, type: 3}
     flipU: 0
     flipV: 0
   VelocityModule:
@@ -3928,9 +3928,9 @@ ParticleSystem:
         m_RotationOrder: 4
     maxLights: 20
   TrailModule:
-    enabled: 1
+    enabled: 0
     mode: 0
-    ratio: 0.33
+    ratio: 1
     lifetime:
       serializedVersion: 2
       minMaxState: 0
@@ -3984,23 +3984,23 @@ ParticleSystem:
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
-    minVertexDistance: 0.2
+    minVertexDistance: 5
     textureMode: 0
     ribbonCount: 1
     shadowBias: 0.5
     worldSpace: 0
     dieWithParticles: 1
-    sizeAffectsWidth: 1
+    sizeAffectsWidth: 0
     sizeAffectsLifetime: 0
-    inheritParticleColor: 1
+    inheritParticleColor: 0
     generateLightingData: 0
     splitSubEmitterRibbons: 0
     attachRibbonsToTransform: 0
     colorOverLifetime:
       serializedVersion: 2
       minMaxState: 2
-      minColor: {r: 0.10726433, g: 0.3301887, b: 0.0513973, a: 1}
-      maxColor: {r: 0.2574404, g: 0.509434, b: 0.11294055, a: 1}
+      minColor: {r: 0.25490198, g: 0.73333335, b: 0.37254903, a: 0.29411766}
+      maxColor: {r: 0.2392157, g: 0.7294118, b: 0.3529412, a: 1}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -4062,8 +4062,8 @@ ParticleSystem:
     widthOverTrail:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 0.25
-      minScalar: 0.1
+      scalar: 0.1
+      minScalar: 0.05
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -4115,8 +4115,8 @@ ParticleSystem:
     colorOverTrail:
       serializedVersion: 2
       minMaxState: 2
-      minColor: {r: 0.0748932, g: 0.31132078, b: 0.10779174, a: 1}
-      maxColor: {r: 0.12743573, g: 0.31132078, b: 0.033775374, a: 1}
+      minColor: {r: 0.227451, g: 0.48235297, b: 0.2901961, a: 1}
+      maxColor: {r: 0.22921859, g: 0.4811321, b: 0.289198, a: 1}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -4763,7 +4763,6 @@ ParticleSystemRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: 088a7f7bc44698447a4c4a8afde5c956, type: 2}
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -4828,4 +4827,3 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _damageTime: 0.15
   _bossStageDamageMultiplier: {x: 1.5, y: 2}
-  _damagePerTick: 2

@@ -50,7 +50,6 @@ MonoBehaviour:
   _lifeTime: 10
   _bossStageDamageMultiplier: {x: 1.25, y: 1.5}
   _damageTime: 0.25
-  _damagePerTick: 3
 --- !u!198 &3265306658973970704
 ParticleSystem:
   m_ObjectHideFlags: 0
@@ -1373,7 +1372,7 @@ ParticleSystem:
         m_RotationOrder: 4
     separateAxes: 0
   ColorModule:
-    enabled: 0
+    enabled: 1
     gradient:
       serializedVersion: 2
       minMaxState: 1

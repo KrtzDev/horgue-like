@@ -10648,7 +10648,7 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.01
+  near clip plane: 6
   far clip plane: 200
   field of view: 45
   orthographic: 0
@@ -11022,7 +11022,7 @@ MonoBehaviour:
   ForceSphereDuration: 0.35
   ForceSphereStartTransparency: 0.65
   ForceSphereEndTransparency: 0.45
-  ForceSphereForce: 50
+  ForceSphereForce: 62
   IsUsingJetpack: 0
   _jetpackVisuals: {fileID: 366271092508608397}
   _jetpackEffectPosition: {fileID: 4828017958775833798}
@@ -70422,7 +70422,7 @@ MonoBehaviour:
   m_Lens:
     FieldOfView: 45
     OrthographicSize: 10
-    NearClipPlane: 0.001
+    NearClipPlane: 6
     FarClipPlane: 200
     Dutch: 0
     ModeOverride: 2

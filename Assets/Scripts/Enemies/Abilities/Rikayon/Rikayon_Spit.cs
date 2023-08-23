@@ -23,15 +23,15 @@ public class Rikayon_Spit : MonoBehaviour
             switch (_rikayon._currentBossStage)
             {
                 case 0:
-                    toxicSpit = Instantiate(_toxicSpit_Prefab, new Vector3(transform.position.x, other.transform.position.y + other.GetComponent<Renderer>().bounds.max.y + 1f, transform.position.z), Quaternion.identity);
+                    toxicSpit = Instantiate(_toxicSpit_Prefab, new Vector3(transform.position.x, other.transform.position.y + other.GetComponent<Renderer>().bounds.max.y + 2f, transform.position.z), Quaternion.identity);
                     Destroy(gameObject);
                     break;
                 case 1:
-                    toxicSpit = Instantiate(_toxicSpit_Prefab, new Vector3(transform.position.x, other.transform.position.y + other.GetComponent<Renderer>().bounds.max.y + 1f, transform.position.z), Quaternion.identity);
+                    toxicSpit = Instantiate(_toxicSpit_Prefab, new Vector3(transform.position.x, other.transform.position.y + other.GetComponent<Renderer>().bounds.max.y + 2f, transform.position.z), Quaternion.identity);
                     Destroy(gameObject);
                     break;
                 case 2:
-                    toxicSpit = Instantiate(_toxicSpit_Prefab, new Vector3(transform.position.x, other.transform.position.y + other.GetComponent<Renderer>().bounds.max.y + 1f, transform.position.z), Quaternion.identity);
+                    toxicSpit = Instantiate(_toxicSpit_Prefab, new Vector3(transform.position.x, other.transform.position.y + other.GetComponent<Renderer>().bounds.max.y + 2f, transform.position.z), Quaternion.identity);
                     Destroy(gameObject);
                     break;
             }

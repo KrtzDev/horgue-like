@@ -436,7 +436,8 @@ public class EnemySpawner : MonoBehaviour
             NavMeshHit Hit;
             if (NavMesh.SamplePosition(spawnPosition, out Hit, 2f, enemy_nvq))
             {
-                Instantiate(_enemySpawnIndicator, Hit.position, Quaternion.identity);
+                GameObject spawnIndicator = _enemySpawnIndicator;
+                Instantiate(spawnIndicator, Hit.position, Quaternion.identity);
             }
             else
             {

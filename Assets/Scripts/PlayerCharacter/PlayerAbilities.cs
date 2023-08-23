@@ -298,7 +298,8 @@ public class PlayerAbilities : MonoBehaviour
                 }
 
                 _playerCharacter.CharacterRigidbody.velocity = new Vector3(_playerCharacter.CharacterRigidbody.velocity.x, 0, _playerCharacter.CharacterRigidbody.velocity.z);
-                _playerCharacter.CharacterRigidbody.AddForce(_playerCharacter.CharacterRigidbody.transform.up * _jetpackThrustForce * multiplier, ForceMode.Impulse);
+                // _playerCharacter.CharacterRigidbody.AddForce(_playerCharacter.CharacterRigidbody.transform.up * _jetpackThrustForce * multiplier, ForceMode.Impulse);
+                _playerCharacter.transform.position += new Vector3(0, _jetpackThrustForce * 8 * multiplier * Time.deltaTime, 0);
             }
             else if (!ButtonHeld)
             {

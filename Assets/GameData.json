@@ -137,7 +137,7 @@
   "Level": [
     {
       "name": "Level1",
-      "TimeToSurvive": 1,
+      "TimeToSurvive": 45,
       "spawnTick": 3,
       "spawnsPerTick": 7,
       "minEnemyCount": 12,
@@ -152,11 +152,11 @@
       "maxCloseZoneOcc": 6,
       "maxMidZoneOcc": 16,
       "maxFarZoneOcc": 24,
-      "weaponPartMultiplierPerLevel": 0.1
+      "weaponPartMultiplierPerLevel": 0.12
     },
     {
       "name": "Level1.5",
-      "TimeToSurvive": 1,
+      "TimeToSurvive": 45,
       "spawnTick": 3,
       "spawnsPerTick": 7,
       "minEnemyCount": 12,
@@ -171,11 +171,11 @@
       "maxCloseZoneOcc": 6,
       "maxMidZoneOcc": 16,
       "maxFarZoneOcc": 24,
-      "weaponPartMultiplierPerLevel": 0.1
+      "weaponPartMultiplierPerLevel": 0.13
     },
     {
       "name": "Level2",
-      "TimeToSurvive": 1,
+      "TimeToSurvive": 55,
       "spawnTick": 3,
       "spawnsPerTick": 8,
       "minEnemyCount": 15,
@@ -190,11 +190,11 @@
       "maxCloseZoneOcc": 6,
       "maxMidZoneOcc": 16,
       "maxFarZoneOcc": 24,
-      "weaponPartMultiplierPerLevel": 0.1
+      "weaponPartMultiplierPerLevel": 0.14
     },
     {
       "name": "Level2.5",
-      "TimeToSurvive": 1,
+      "TimeToSurvive": 55,
       "spawnTick": 3,
       "spawnsPerTick": 8,
       "minEnemyCount": 15,
@@ -209,11 +209,11 @@
       "maxCloseZoneOcc": 6,
       "maxMidZoneOcc": 16,
       "maxFarZoneOcc": 24,
-      "weaponPartMultiplierPerLevel": 0.1
+      "weaponPartMultiplierPerLevel": 0.15000000000000002
     },
     {
       "name": "Level3",
-      "TimeToSurvive": 1,
+      "TimeToSurvive": 65,
       "spawnTick": 3,
       "spawnsPerTick": 9,
       "minEnemyCount": 18,
@@ -228,11 +228,11 @@
       "maxCloseZoneOcc": 6,
       "maxMidZoneOcc": 16,
       "maxFarZoneOcc": 24,
-      "weaponPartMultiplierPerLevel": 0.1
+      "weaponPartMultiplierPerLevel": 0.16000000000000003
     },
     {
       "name": "Level3.5",
-      "TimeToSurvive": 1,
+      "TimeToSurvive": 65,
       "spawnTick": 3,
       "spawnsPerTick": 9,
       "minEnemyCount": 18,
@@ -247,11 +247,11 @@
       "maxCloseZoneOcc": 6,
       "maxMidZoneOcc": 16,
       "maxFarZoneOcc": 24,
-      "weaponPartMultiplierPerLevel": 0.1
+      "weaponPartMultiplierPerLevel": 0.17000000000000004
     },
     {
       "name": "Level4",
-      "TimeToSurvive": 1,
+      "TimeToSurvive": 75,
       "spawnTick": 3,
       "spawnsPerTick": 10,
       "minEnemyCount": 20,
@@ -266,7 +266,7 @@
       "maxCloseZoneOcc": 6,
       "maxMidZoneOcc": 16,
       "maxFarZoneOcc": 24,
-      "weaponPartMultiplierPerLevel": 0.1
+      "weaponPartMultiplierPerLevel": 0.18000000000000005
     },
     {
       "name": "LevelBoss",
@@ -274,7 +274,7 @@
       "spawnTick": 5,
       "spawnsPerTick": 5,
       "minEnemyCount": 5,
-      "maxEnemyCount": 6,
+      "maxEnemyCount": 15,
       "spawnAnimDelay": 1,
       "minSpawnDelay": 0,
       "maxSpawnDelay": 1,
@@ -285,7 +285,7 @@
       "maxCloseZoneOcc": 6,
       "maxMidZoneOcc": 16,
       "maxFarZoneOcc": 24,
-      "weaponPartMultiplierPerLevel": 0.1
+      "weaponPartMultiplierPerLevel": 0.19000000000000006
     },
     {
       "name": "LevelNewGamePlus",
@@ -304,7 +304,7 @@
       "maxCloseZoneOcc": 6,
       "maxMidZoneOcc": 16,
       "maxFarZoneOcc": 24,
-      "weaponPartMultiplierPerLevel": 0.1
+      "weaponPartMultiplierPerLevel": 0.20000000000000007
     }
   ],
   "Player": [

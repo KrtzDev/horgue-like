@@ -271,7 +271,7 @@ public class GameManager : Singleton<GameManager>
 		}
 
 		NavMeshHit nv_hit;
-		if (NavMesh.SamplePosition(spawnPos, out nv_hit, Mathf.Infinity, NavMesh.AllAreas))
+		if (NavMesh.SamplePosition(spawnPos, out nv_hit, Mathf.Infinity, 2))
 		{
 			spawnPos = nv_hit.position;
 		}

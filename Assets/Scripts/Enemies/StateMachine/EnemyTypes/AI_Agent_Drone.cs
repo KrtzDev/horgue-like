@@ -15,7 +15,6 @@ public class AI_Agent_Drone : AI_Agent_Enemy
     private Vector3 _rayCastPosOnLerp;
     private Vector3 _finalPosOnLerp;
 
-
     [Header("Projectile")]
     [SerializeField] private GameObject _projectile;
     [field: SerializeField] public Transform ProjectilePoint { get; private set; }
@@ -149,6 +148,11 @@ public class AI_Agent_Drone : AI_Agent_Enemy
 
     private void SetStartHeight()
     {
+        if (Physics.Raycast(_heightGO.transform.position + new Vector3(0, 5, 0), Vector3.down, out RaycastHit rc, Player.GetComponent<PlayerCharacter>().GroundLayer))
+        {
+            _heightGO.transform.position = rc.point;
+        }
+
         Vector3 heightPosOwnPosition = new(transform.position.x, _heightGO.transform.position.y + transform.position.y, transform.position.z);
         RaycastHit hit;
 

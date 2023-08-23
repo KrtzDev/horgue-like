@@ -181,13 +181,13 @@ MonoBehaviour:
   IsAffectedByAbility: 0
   GroundLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 512
   EnemyLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 128
   PlayerLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
   Player: {fileID: 0}
   PlayerTransform: {fileID: 0}
   DecoyTransform: {fileID: 0}

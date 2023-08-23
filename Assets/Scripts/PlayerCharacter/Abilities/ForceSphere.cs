@@ -29,8 +29,6 @@ public class ForceSphere : MonoBehaviour
 
     private void Update()
     {
-
-
         if(_timer > _playerAbilities.ForceSphereDuration && _isActive)
         {
             _playerAbilities.ResetForceSphereAbility();

@@ -104,6 +104,26 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1057519859814403644}
     m_Modifications:
+    - target: {fileID: 2863348396610963022, guid: 6defd2a8d58851a429030e2de9d0bd0a,
+        type: 3}
+      propertyPath: InitialModule.startSpeed.scalar
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 2863348396610963022, guid: 6defd2a8d58851a429030e2de9d0bd0a,
+        type: 3}
+      propertyPath: InitialModule.startLifetime.scalar
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2863348396610963022, guid: 6defd2a8d58851a429030e2de9d0bd0a,
+        type: 3}
+      propertyPath: InitialModule.startSpeed.minScalar
+      value: 23
+      objectReference: {fileID: 0}
+    - target: {fileID: 2863348396610963022, guid: 6defd2a8d58851a429030e2de9d0bd0a,
+        type: 3}
+      propertyPath: InitialModule.startLifetime.minScalar
+      value: 0.25
+      objectReference: {fileID: 0}
     - target: {fileID: 4568266593299803250, guid: 6defd2a8d58851a429030e2de9d0bd0a,
         type: 3}
       propertyPath: m_RootOrder
