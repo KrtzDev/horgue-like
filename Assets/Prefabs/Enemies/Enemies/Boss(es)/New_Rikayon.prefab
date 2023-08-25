@@ -5259,8 +5259,8 @@ MonoBehaviour:
   _baseSpecialAttackProbability: 22
   _specialAttackProbablityModifier: 3.4
   _currentSpecialAttackProbablity: 0
-  _bossStageSpeedMultiplier_Spray: {x: 1, y: 1.25, z: 1.5}
-  _bossStageAngle_Spray: {x: 10, y: 16, z: 23}
+  _bossStageSpeedMultiplier_Spray: {x: 1, y: 1.15, z: 1.3}
+  _bossStageAngle_Spray: {x: 10, y: 14, z: 19}
   _sprayAttack_prefab: {fileID: 6054152865423660124, guid: 39ea3660cd09a9548a9664042503d98e,
     type: 3}
   _spitAttack_prefab: {fileID: 2431302338451663198, guid: 173a47ebaaeda6942a5755c60ca509ac,
@@ -5271,8 +5271,8 @@ MonoBehaviour:
   _spitForceMaxY: 22.5
   _spitForceMinZ: -3
   _spitForceMaxZ: 3
-  _spikePreviewTime: 0.35
-  _bossStageScaleMultiplier_Spikes: {x: 1, y: 1.3, z: 1.65}
+  _spikePreviewTime: 0.4
+  _bossStageScaleMultiplier_Spikes: {x: 1, y: 1.15, z: 1.3}
   _spikeAttackInner_prefab: {fileID: 6982214405592628148, guid: 3c739bca7c192e443b22e923f33e7997,
     type: 3}
   _spikeAttackMid_prefab: {fileID: 6982214405592628148, guid: 38fb7ce11fb2df94b9eef1ce37d2b1bd,

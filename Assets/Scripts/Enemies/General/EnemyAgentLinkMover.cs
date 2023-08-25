@@ -72,7 +72,7 @@ public class EnemyAgentLinkMover : MonoBehaviour
         {
             float yOffset = m_Curve.Evaluate(normalizedTime);
             agent.transform.position = Vector3.Lerp(startPos, endPos, normalizedTime) + yOffset * Vector3.up;
-            normalizedTime += Time.deltaTime / duration;
+            normalizedTime += (Time.deltaTime / 1.66f) / duration;
             yield return null;
         }
     }

@@ -17189,7 +17189,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh135030
+  m_Name: pb_Mesh314434
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -29581,7 +29581,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh135294
+  m_Name: pb_Mesh314756
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -30124,7 +30124,7 @@ PrefabInstance:
     - target: {fileID: 2136897129495592176, guid: 62d6286d223d00e49ba8ca796795cc73,
         type: 3}
       propertyPath: near clip plane
-      value: 0.001
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 2136897129495592179, guid: 62d6286d223d00e49ba8ca796795cc73,
         type: 3}
@@ -32286,7 +32286,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh135406
+  m_Name: pb_Mesh314872
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -36523,7 +36523,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh133942
+  m_Name: pb_Mesh313328
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -61289,7 +61289,7 @@ Transform:
   m_GameObject: {fileID: 2020363729}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -48.5, y: 1, z: 21}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 10, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 905673179}
@@ -61907,7 +61907,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh133804
+  m_Name: pb_Mesh313204
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
