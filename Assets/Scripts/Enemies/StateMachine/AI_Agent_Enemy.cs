@@ -80,7 +80,7 @@ public class AI_Agent_Enemy : AI_Agent
 
     }
 
-    private void SetHealthToPercentOfMax(float percent)
+    public void SetHealthToPercentOfMax(float percent)
     {
         HealthComponent._currentHealth = (int)(HealthComponent._maxHealth * percent);
         if(HealthComponent._currentHealth > HealthComponent._maxHealth)

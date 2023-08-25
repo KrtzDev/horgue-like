@@ -43,8 +43,13 @@ public class RikayonAnimationController : EnemyAnimationController
         _rikayon.GetComponent<EnemyHealthComponent>().CanTakeDamageActive();
     }
 
-    public void SetHealthToPercentOfMax()
+    public void SetHealthToPercentOfMax1()
     {
-        _rikayon.GetComponent<EnemyHealthComponent>().SetHealthToPercentOfMax();
+        _rikayon.GetComponent<AI_Agent_Enemy>().SetHealthToPercentOfMax(65);
+    }
+
+    public void SetHealthToPercentOfMax2()
+    {
+        _rikayon.GetComponent<AI_Agent_Enemy>().SetHealthToPercentOfMax(35);
     }
 }

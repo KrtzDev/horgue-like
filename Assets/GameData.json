@@ -78,7 +78,7 @@
     },
     {
       "name": "Rikayon",
-      "maxHealth": 150,
+      "maxHealth": 75,
       "damagePerHit": 2.5,
       "attackSpeed": 1,
       "givenXP": 500,
@@ -88,12 +88,12 @@
       "elementalResistance": 100,
       "technicalResistance": 100,
       "healthDropChance": 0,
-      "baseDmgMultiplier": 1,
-      "dmgModifier": 0.4,
-      "addDmgModifier": 0.05,
-      "baseHealthMultiplier": 1,
-      "healthModifier": 0.075,
-      "addHealthModifier": 0.05
+      "baseDmgMultiplier": 0,
+      "dmgModifier": 0,
+      "addDmgModifier": 0,
+      "baseHealthMultiplier": 0,
+      "healthModifier": 0,
+      "addHealthModifier": 0
     },
     {
       "name": "Drone",
