@@ -31,6 +31,7 @@ public class EnemyHealthComponent : HealthComponent
 
 		ParticleSystem hitParticle = _hitParticle;
 		Instantiate(hitParticle, _hitParticlePosition.position, Quaternion.identity);
+		_enemy.DamageFlash();
 
 		if (_currentHealth <= 0 && !_isDead && _canTakeDamage)
 		{

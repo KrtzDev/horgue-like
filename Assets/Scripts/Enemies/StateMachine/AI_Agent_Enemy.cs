@@ -16,6 +16,13 @@ public class AI_Agent_Enemy : AI_Agent
 
     public int damagePerHit;
 
+    [SerializeField] private Material _damageFlashMaterial;
+    [SerializeField] private float _damageFlashTime;
+    private bool _isDamageFlashing;
+    private Material[] _originalMaterials;
+    private SkinnedMeshRenderer[] _skinnedMeshes;
+    private MeshRenderer[] _meshes;
+
     [Header("Height Control")]
     public bool _useHeightControl;
     public GameObject _heightGO;
@@ -40,6 +47,8 @@ public class AI_Agent_Enemy : AI_Agent
         StateMachine = new AI_StateMachine(this);
         RegisterStates();
         StateMachine.ChangeState(InitialState);
+
+        DeclareMeshes();
     }
 
     protected virtual void Update()
@@ -87,5 +96,72 @@ public class AI_Agent_Enemy : AI_Agent
 
     public virtual void DoneShooting()
     {
+    }
+
+    private void DeclareMeshes()
+    {
+        if (GetComponentInChildren<SkinnedMeshRenderer>() != null)
+        {
+            _skinnedMeshes = GetComponentsInChildren<SkinnedMeshRenderer>();
+            _originalMaterials = new Material[_skinnedMeshes.Length];
+        }
+        else
+        {
+            _meshes = GetComponentsInChildren<MeshRenderer>();
+            _originalMaterials = new Material[_meshes.Length];
+        }
+
+        _isDamageFlashing = false;
+    }
+
+    public virtual void DamageFlash()
+    {
+        if (_isDamageFlashing)
+            return;
+
+        if (GetComponentInChildren<SkinnedMeshRenderer>() != null)
+        {
+            for (int i = 0; i < _skinnedMeshes.Length; i++)
+            {
+                _originalMaterials[i] = _skinnedMeshes[i].material;
+                _skinnedMeshes[i].material = _damageFlashMaterial;
+            }
+        }
+        else
+        {
+            for (int i = 0; i < _meshes.Length; i++)
+            {
+                _originalMaterials[i] = _meshes[i].material;
+                _meshes[i].material = _damageFlashMaterial;
+            }
+        }
+
+        _isDamageFlashing = true;
+
+        StartCoroutine(StopDamageFlash());
+    }
+
+    private IEnumerator StopDamageFlash()
+    {
+        yield return new WaitForSeconds(_damageFlashTime);
+
+        if (GetComponentInChildren<SkinnedMeshRenderer>() != null)
+        {
+            for (int i = 0; i < _skinnedMeshes.Length; i++)
+            {
+                _skinnedMeshes[i].material = _originalMaterials[i];
+            }
+        }
+        else
+        {
+            for (int i = 0; i < _meshes.Length; i++)
+            {
+                _meshes[i].material = _originalMaterials[i];
+            }
+        }
+
+        yield return new WaitForSeconds(_damageFlashTime);
+
+        _isDamageFlashing = false;
     }
 }

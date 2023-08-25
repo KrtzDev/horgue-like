@@ -62,11 +62,16 @@ public class RangedRobot_State_Retreat : AI_State_Retreat
             if (agent.ObstacleAgent.enabled && agent.enabled)
             {
                 Vector3 dirToPlayer = agent.transform.position - _rangedRobot._followPosition;
-                _retreatPosition = agent.transform.position + dirToPlayer;
 
-                if (NavMesh.SamplePosition(_retreatPosition, out NavMeshHit hit, 1f, agent.NavMeshAgent.areaMask))
+                if (NavMesh.SamplePosition(agent.transform.position + dirToPlayer, out NavMeshHit hit, 2f, agent.NavMeshAgent.areaMask))
                 {
                     _retreatPosition = hit.position;
+                }
+                else
+                {
+                    _retreatPosition = agent.transform.position;
+                    agent.StateMachine.ChangeState(AI_StateID.Idle);
+                    return;
                 }
 
                 agent.ObstacleAgent.SetDestination(_retreatPosition);
@@ -74,11 +79,16 @@ public class RangedRobot_State_Retreat : AI_State_Retreat
             else if (agent.NavMeshAgent.enabled && agent.enabled)
             {
                 Vector3 dirToPlayer = agent.transform.position - _rangedRobot._followPosition;
-                _retreatPosition = agent.transform.position + dirToPlayer;
 
-                if (NavMesh.SamplePosition(_retreatPosition, out NavMeshHit hit, 1f, agent.NavMeshAgent.areaMask))
+                if (NavMesh.SamplePosition(agent.transform.position + dirToPlayer, out NavMeshHit hit, 2f, agent.NavMeshAgent.areaMask))
                 {
                     _retreatPosition = hit.position;
+                }
+                else
+                {
+                    _retreatPosition = agent.transform.position;
+                    agent.StateMachine.ChangeState(AI_StateID.Idle);
+                    return;
                 }
 
                 agent.NavMeshAgent.SetDestination(_retreatPosition);
