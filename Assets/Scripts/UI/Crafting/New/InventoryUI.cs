@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -25,7 +26,7 @@ public class InventoryUI : UIMenu
 	private HoldButton _equipButton;
 
 	[SerializeField]
-	private Transform _selectedStatsUIContainer;
+	private Transform _comparisonContainerSelected;
 	[SerializeField]
 	private Transform _comparisonContainerEquipped;
 	[SerializeField]
@@ -59,9 +60,18 @@ public class InventoryUI : UIMenu
 
 	private void OnItemEquip(WeaponPartUI weaponPart)
 	{
+		weaponPart.GetComponent<RectTransform>().DOMove(_weaponUI.GetComponent<RectTransform>().position,.5f).OnComplete(() => OnEquipTweenFinished(weaponPart));
+	}
+
+	private void OnEquipTweenFinished(WeaponPartUI weaponPart)
+	{
 		GameManager.Instance.inventory.RemoveFromInventory(weaponPart.weaponPart);
+
 		_weaponUI.SetNewWeaponPart(weaponPart);
-		
+
+		weaponPart.DestroyToolTip();
+		Destroy(weaponPart.gameObject);
+
 		StartCoroutine(FillInventoryUI());
 	}
 
@@ -134,7 +144,7 @@ public class InventoryUI : UIMenu
 			_inventorySlots[i].SetWeaponPart(weaponPartUI);
 			weaponPartUI.Initialize(weaponParts[i]);
 			weaponPartUI.weaponUI = _weaponUI;
-			weaponPartUI.statsContainer = _selectedStatsUIContainer;
+			weaponPartUI.statsContainer = _comparisonContainerSelected;
 		}
 
 		SelectInventorySlot();
@@ -184,8 +194,8 @@ public class InventoryUI : UIMenu
 
 	private void ClearComparisonUI()
 	{
-		for (int i = 0; i < _selectedStatsUIContainer.childCount; i++)
-			Destroy(_selectedStatsUIContainer.GetChild(i).gameObject);
+		for (int i = 0; i < _comparisonContainerSelected.childCount; i++)
+			Destroy(_comparisonContainerSelected.GetChild(i).gameObject);
 		for (int i = 0; i < _comparisonContainerEquipped.childCount; i++)
 			Destroy(_comparisonContainerEquipped.GetChild(i).gameObject);
 		for (int i = 0; i < _comparisonContainerShopItem.childCount; i++)
@@ -194,6 +204,9 @@ public class InventoryUI : UIMenu
 
 	private void UpdateEquippedComparisonUI(WeaponPart weaponPart)
 	{
+		ToolTipUI selectedTooltip = Instantiate(_toolTipUI_prefab, _comparisonContainerSelected);
+		selectedTooltip.Initialize(weaponPart);
+
 		if (weaponPart.GetType() == typeof(Grip))
 		{
 			ToolTipUI toolTipUI = Instantiate(_toolTipUI_prefab, _comparisonContainerEquipped);

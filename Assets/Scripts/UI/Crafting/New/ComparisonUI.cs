@@ -2,6 +2,12 @@ using UnityEngine;
 
 public class ComparisonUI : MonoBehaviour
 {
+	public WeaponPart CurrentSelected =>
+		_selectionContainer.childCount > 0 ?
+		_selectionContainer.GetChild(0)?.GetComponent<ToolTipUI>().weaponPart :
+		null;
+
+
 	[SerializeField]
 	private Transform _selectionContainer;
 	[SerializeField]
@@ -39,7 +45,7 @@ public class ComparisonUI : MonoBehaviour
 			newPart.damageStatUI.statBackground.color = newPart.damageStatUI.positiveColor;
 		else if (newWeaponPart.baseDamage < equippedWeaponPart.baseDamage)
 			newPart.damageStatUI.statBackground.color = newPart.damageStatUI.negativeColor;
-			
+
 		if (newWeaponPart.attackSpeed > equippedWeaponPart.attackSpeed)
 			newPart.attackSpeedStatUI.statBackground.color = newPart.attackSpeedStatUI.positiveColor;
 		else if (newWeaponPart.attackSpeed < equippedWeaponPart.attackSpeed)

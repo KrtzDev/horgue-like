@@ -45,6 +45,12 @@ public abstract class UIButton : MonoBehaviour, ISelectHandler, IDeselectHandler
 
 	public void Select() => Button.Select();
 
+	public void SelectVisualy()
+	{
+		Button.colors = _selectedcolors;
+		OnButtonSelect?.Invoke();
+	}
+
 	public void Deselect() => OnButtonDeselect?.Invoke();
 
 

@@ -19,6 +19,10 @@ public class HolsterTabs : MonoBehaviour
 	private RectTransform _tabContainer;
 	[SerializeField]
 	private WeaponTab _weaponTabPrefab;
+	[SerializeField]
+	private WeaponUI _weaponUI;
+	[SerializeField]
+	private ComparisonUI _comparisonUI;
 
 	private int _currentSelectedTab;
 
@@ -69,8 +73,10 @@ public class HolsterTabs : MonoBehaviour
 
 		_currentSelectedTab += navInput;
 		_currentSelectedTab = Mathf.Clamp(_currentSelectedTab, 0, _weaponTabs.Count -1);
-		_weaponTabs[_currentSelectedTab].Select();
+		_weaponTabs[_currentSelectedTab].SelectVisualy();
 		_weaponTabs[_currentSelectedTab].KeepFocus();
+
+
 	}
 
 	private void KeepTabSelected(InputAction.CallbackContext obj)
@@ -78,7 +84,13 @@ public class HolsterTabs : MonoBehaviour
 		_weaponTabs[_currentSelectedTab].KeepFocus();
 	}
 
-	private void SelectWeapon(Weapon weapon) => OnSelectWeapon.Invoke(weapon);
+	private void SelectWeapon(Weapon weapon)
+	{
+		OnSelectWeapon.Invoke(weapon);
+
+		if(_comparisonUI.CurrentSelected)
+			_weaponUI.ShowPotentialUpdatedWeaponStats(_comparisonUI.CurrentSelected);
+	}
 
 	private void SelectWeaponMouse(Weapon weapon)
 	{

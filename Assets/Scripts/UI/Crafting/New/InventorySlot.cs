@@ -42,9 +42,6 @@ public class InventorySlot : Selectable
 
 		OnEquip.Invoke(_weaponPart);
 		equipButton.OnButtonExecute -= Equip;
-
-		_weaponPart.DestroyToolTip();
-		Destroy(_weaponPart.gameObject);
 	}
 
 	private void Sell()
