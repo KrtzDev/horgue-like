@@ -89,6 +89,15 @@ public partial class @PlayerInputMappings : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""CameraMovement"",
+                    ""type"": ""Value"",
+                    ""id"": ""a57e8e77-a675-42c7-92a6-3a79b60b6d78"",
+                    ""expectedControlType"": ""Analog"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -348,7 +357,7 @@ public partial class @PlayerInputMappings : IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""3fe2d298-fd1b-441e-92ea-64cc3bef9263"",
-                    ""path"": ""<Gamepad>/rightTrigger"",
+                    ""path"": ""<Gamepad>/buttonEast"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -403,7 +412,7 @@ public partial class @PlayerInputMappings : IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""cd55752f-bf50-4802-865c-980a037ceeee"",
-                    ""path"": ""<Gamepad>/buttonNorth"",
+                    ""path"": ""<Gamepad>/start"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -425,13 +434,90 @@ public partial class @PlayerInputMappings : IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""4e5e86e3-5ea9-4650-8fe8-a4baeda52d0f"",
-                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""path"": ""<Gamepad>/leftShoulder"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Ability"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""842a1ce3-2e8b-45c2-8dbb-34894aee6f3e"",
+                    ""path"": ""<Gamepad>/rightShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Ability"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""1D Axis"",
+                    ""id"": ""23473e90-be9e-4080-beb1-4eac84d90e83"",
+                    ""path"": ""1DAxis"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""CameraMovement"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""negative"",
+                    ""id"": ""64922e77-356f-4850-a93b-802b5c190ef0"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""CameraMovement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""positive"",
+                    ""id"": ""88cc7a81-3514-4bdd-9b8f-9ec71282a651"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""CameraMovement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""1D Axis"",
+                    ""id"": ""02300334-3f4e-44fe-a5d2-dfa9eb738792"",
+                    ""path"": ""1DAxis"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""CameraMovement"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""negative"",
+                    ""id"": ""66b9153b-08d6-40d1-8128-a1b432326537"",
+                    ""path"": ""<Gamepad>/leftTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""CameraMovement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""positive"",
+                    ""id"": ""f5197175-6161-4cbc-a8d2-cae5e63995b4"",
+                    ""path"": ""<Gamepad>/rightTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""CameraMovement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
                 }
             ]
         },
@@ -1129,6 +1215,7 @@ public partial class @PlayerInputMappings : IInputActionCollection2, IDisposable
         m_Character_SwitchMode = m_Character.FindAction("SwitchMode", throwIfNotFound: true);
         m_Character_Pause = m_Character.FindAction("Pause", throwIfNotFound: true);
         m_Character_Ability = m_Character.FindAction("Ability", throwIfNotFound: true);
+        m_Character_CameraMovement = m_Character.FindAction("CameraMovement", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -1212,6 +1299,7 @@ public partial class @PlayerInputMappings : IInputActionCollection2, IDisposable
     private readonly InputAction m_Character_SwitchMode;
     private readonly InputAction m_Character_Pause;
     private readonly InputAction m_Character_Ability;
+    private readonly InputAction m_Character_CameraMovement;
     public struct CharacterActions
     {
         private @PlayerInputMappings m_Wrapper;
@@ -1223,6 +1311,7 @@ public partial class @PlayerInputMappings : IInputActionCollection2, IDisposable
         public InputAction @SwitchMode => m_Wrapper.m_Character_SwitchMode;
         public InputAction @Pause => m_Wrapper.m_Character_Pause;
         public InputAction @Ability => m_Wrapper.m_Character_Ability;
+        public InputAction @CameraMovement => m_Wrapper.m_Character_CameraMovement;
         public InputActionMap Get() { return m_Wrapper.m_Character; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1253,6 +1342,9 @@ public partial class @PlayerInputMappings : IInputActionCollection2, IDisposable
                 @Ability.started -= m_Wrapper.m_CharacterActionsCallbackInterface.OnAbility;
                 @Ability.performed -= m_Wrapper.m_CharacterActionsCallbackInterface.OnAbility;
                 @Ability.canceled -= m_Wrapper.m_CharacterActionsCallbackInterface.OnAbility;
+                @CameraMovement.started -= m_Wrapper.m_CharacterActionsCallbackInterface.OnCameraMovement;
+                @CameraMovement.performed -= m_Wrapper.m_CharacterActionsCallbackInterface.OnCameraMovement;
+                @CameraMovement.canceled -= m_Wrapper.m_CharacterActionsCallbackInterface.OnCameraMovement;
             }
             m_Wrapper.m_CharacterActionsCallbackInterface = instance;
             if (instance != null)
@@ -1278,6 +1370,9 @@ public partial class @PlayerInputMappings : IInputActionCollection2, IDisposable
                 @Ability.started += instance.OnAbility;
                 @Ability.performed += instance.OnAbility;
                 @Ability.canceled += instance.OnAbility;
+                @CameraMovement.started += instance.OnCameraMovement;
+                @CameraMovement.performed += instance.OnCameraMovement;
+                @CameraMovement.canceled += instance.OnCameraMovement;
             }
         }
     }
@@ -1445,6 +1540,7 @@ public partial class @PlayerInputMappings : IInputActionCollection2, IDisposable
         void OnSwitchMode(InputAction.CallbackContext context);
         void OnPause(InputAction.CallbackContext context);
         void OnAbility(InputAction.CallbackContext context);
+        void OnCameraMovement(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {
