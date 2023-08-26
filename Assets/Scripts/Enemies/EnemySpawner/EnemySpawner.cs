@@ -79,6 +79,8 @@ public class EnemySpawner : MonoBehaviour
 		    _enemyObjectPool.Add(lastKey + 1, ObjectPool<AI_Agent_Enemy>.CreatePool(bossEnemy._enemy, 1, _enemyObjectPoolParent.transform));
             SpawnEnemies(bossEnemy, 1, lastKey + 1);
 		}
+
+        _spawnTimer = _enemySpawnerData._spawnTick;
     }
 
     private void Update()

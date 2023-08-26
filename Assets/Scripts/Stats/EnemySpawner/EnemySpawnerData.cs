@@ -8,7 +8,7 @@ public class EnemySpawnerData : ScriptableObject
     public float _weaponPartMultiplierPerLevel;
 
     [Header("Spawn Settings")]
-    public int _spawnTick;
+    public float _spawnTick;
     public int _spawnsPerTick;
     public int _minEnemyCount;
     public int _maxEnemyCount;

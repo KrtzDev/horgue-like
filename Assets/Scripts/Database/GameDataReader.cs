@@ -83,7 +83,7 @@ public class GameDataReader : MonoBehaviour
         public string name;
         public int TimeToSurvive;
         public float weaponPartMultiplierPerLevel;
-        public int spawnTick;
+        public float spawnTick;
         public int spawnsPerTick;
         public int minEnemyCount;
         public int maxEnemyCount;
