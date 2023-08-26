@@ -70463,6 +70463,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _rotation: 90
+  _canRotate: 1
 --- !u!1 &7902866535888758308
 GameObject:
   m_ObjectHideFlags: 0
