@@ -28902,7 +28902,7 @@ MonoBehaviour:
     m_MaxSpeed: 300
     m_AccelTime: 0.1
     m_DecelTime: 0.1
-    m_InputAxisName: Camera X
+    m_InputAxisName: 
     m_InputAxisValue: 0
     m_InvertInput: 1
     m_MinValue: -180
@@ -70463,7 +70463,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _rotation: 90
-  _canRotate: 1
 --- !u!1 &7902866535888758308
 GameObject:
   m_ObjectHideFlags: 0
