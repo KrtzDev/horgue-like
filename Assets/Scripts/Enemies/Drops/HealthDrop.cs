@@ -5,7 +5,6 @@ using UnityEngine;
 public class HealthDrop : MonoBehaviour
 {
     [SerializeField] private int _healAmount;
-    [SerializeField] private AudioSource _collectSound;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -19,17 +18,8 @@ public class HealthDrop : MonoBehaviour
                 hp._currentHealth = hp._maxHealth;
             }
 
-            StartCoroutine(DeleteGameObject());
+            AudioManager.Instance.PlaySound("HealthPack");
+            Destroy(transform.parent.gameObject);
         }
-    }
-
-    IEnumerator DeleteGameObject()
-    {
-        _collectSound.Play();
-        gameObject.SetActive(false);
-
-        yield return new WaitForSeconds(_collectSound.clip.length);
-
-        Destroy(transform.parent.gameObject);
     }
 }

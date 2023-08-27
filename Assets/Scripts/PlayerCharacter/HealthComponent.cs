@@ -30,7 +30,7 @@ public class HealthComponent : MonoBehaviour
 
 		if (gameObject.CompareTag("Player"))
 		{
-			GameObject.FindGameObjectWithTag("UI")?.GetComponentInChildren<UIDamageFlash>().DamageFlash(0.25f, .5f);
+			FindObjectOfType<UIDamageFlash>().DamageFlash(0.25f, .4f, .2f);
 
 			if (_currentHealth <= 0 && !_isDead)
 			{
