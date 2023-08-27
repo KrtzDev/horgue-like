@@ -60,7 +60,15 @@ public class InventoryUI : UIMenu
 
 	private void OnItemEquip(WeaponPartUI weaponPart)
 	{
-		weaponPart.GetComponent<RectTransform>().DOMove(_weaponUI.GetComponent<RectTransform>().position,.5f).OnComplete(() => OnEquipTweenFinished(weaponPart));
+		Tween move = weaponPart.transform.DOMove(_weaponUI.equipNewPartTransform.position, .5f);
+		Tween color = weaponPart.WeaponPartImage.DOColor(Color.white,.5f);
+
+		Sequence sequence = DOTween.Sequence();
+		sequence.Append(move)
+			.Append(color)
+			.OnComplete(() => OnEquipTweenFinished(weaponPart));
+
+		sequence.Play();
 	}
 
 	private void OnEquipTweenFinished(WeaponPartUI weaponPart)
