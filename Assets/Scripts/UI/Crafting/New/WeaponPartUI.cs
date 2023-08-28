@@ -5,8 +5,12 @@ using UnityEngine.UI;
 
 public class WeaponPartUI : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler, IDragHandler, IBeginDragHandler, IEndDragHandler
 {
+	public Image WeaponPartImage => _effectImage;
+
 	[SerializeField]
 	private Image _rewardImage;
+	[SerializeField]
+	private Image _effectImage;
 
 	[SerializeField]
 	private ToolTipUI _toolTip_prefab;
@@ -54,7 +58,7 @@ public class WeaponPartUI : MonoBehaviour, IPointerClickHandler, IPointerEnterHa
 
 	public void OnPointerClick(PointerEventData eventData)
 	{
-		if(!isSlotted) 
+		if (!isSlotted)
 			return;
 
 		DestroyToolTip();

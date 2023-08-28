@@ -4,6 +4,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using TMPro;
+using System;
 
 public class ChooseAbility: MonoBehaviour
 {
@@ -79,4 +80,27 @@ public class ChooseAbility: MonoBehaviour
         yield return null;
         EventSystem.current.SetSelectedGameObject(AbilityParent.transform.GetChild(0).gameObject);
     }
+
+	internal void Initialize()
+	{
+		List<Ability> abilities = new List<Ability>();
+
+		for (int i = 0; i < instance._abilitiesToDisplay; i++)
+		{
+			abilities.Add(instance.GetAbilities());
+		}
+
+		DisplayAbilities(abilities);
+	}
+
+	public void DisplayAbilities(List<Ability> abilities)
+	{
+		foreach (Ability ability in abilities)
+		{
+			AbilityUI newAbility = Instantiate(_abilityUI_prefab, instance.AbilityParent);
+			newAbility.Initialize(ability);
+		}
+
+		instance.AbilityParent.GetChild(0).GetComponent<AbilityUI>().Select();
+	}
 }

@@ -340,7 +340,7 @@ MonoBehaviour:
   m_Color: {r: 0.16240154, g: 0.0748042, b: 0.38679248, a: 1}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 0
+  m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -427,9 +427,9 @@ RectTransform:
   m_Father: {fileID: 5452614881417057406}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 135, y: -80}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 135, y: 0}
   m_SizeDelta: {x: 280, y: 0}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &3628073920878208209
@@ -592,6 +592,7 @@ MonoBehaviour:
   _partImage: {fileID: 6758376027109104541}
   _layoutGroup: {fileID: 2734264759241265304}
   _statParent: {fileID: 5450814324576322202}
+  _contentRect: {fileID: 5452614881417057406}
   _statUI_prefab: {fileID: 9018271247152603339, guid: dda6b321a08fb4f429ba9fe2654739a8,
     type: 3}
   weaponPart: {fileID: 0}

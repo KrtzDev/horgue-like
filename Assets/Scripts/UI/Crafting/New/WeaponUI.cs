@@ -1,10 +1,12 @@
-﻿using TMPro;
+﻿using DG.Tweening;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class WeaponUI : MonoBehaviour
 {
 	public Weapon weapon;
+	public RectTransform equipNewPartTransform;
 
 	[Header("Header")]
 	[SerializeField]
@@ -13,6 +15,8 @@ public class WeaponUI : MonoBehaviour
 	[Header("Weapon Image")]
 	[SerializeField]
 	private Image _weaponImage;
+	[SerializeField]
+	private Image _effectImage;
 
 	[Header("Weapon Parts")]
 	[SerializeField]
@@ -84,9 +88,23 @@ public class WeaponUI : MonoBehaviour
 
 			Initialize(weapon);
 
+			DoCraftingEffect();
+
 			return true;
 		}
 		return false;
+	}
+
+	private void DoCraftingEffect()
+	{
+		Tween colorToWhite = _effectImage.DOColor(Color.white, .1f).SetEase(Ease.OutBounce);
+		Tween ColorToNormal = _effectImage.DOColor(new Color(1, 1, 1, 0), .1f).SetEase(Ease.OutBounce);
+
+		Sequence sequence = DOTween.Sequence();
+		sequence.Append(colorToWhite)
+			.Append(ColorToNormal);
+
+		sequence.Play();
 	}
 
 	private void ShowWeaponName()

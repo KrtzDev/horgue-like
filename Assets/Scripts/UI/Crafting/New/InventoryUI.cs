@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -25,11 +26,11 @@ public class InventoryUI : UIMenu
 	private HoldButton _equipButton;
 
 	[SerializeField]
-	private Transform _selectedStatsUIContainer;
+	private Transform _comparisonContainerSelected;
 	[SerializeField]
 	private Transform _comparisonContainerEquipped;
 	[SerializeField]
-	private Transform _comparisonContainerShopItem;
+	private RectTransform _comparisonContainerShopItem;
 	[SerializeField]
 	private ToolTipUI _toolTipUI_prefab;
 
@@ -49,7 +50,7 @@ public class InventoryUI : UIMenu
 			inventorySlot.sellButton = _sellButton;
 			inventorySlot.OnEquip += OnItemEquip;
 			inventorySlot.equipButton = _equipButton;
-			inventorySlot.OnSelected += UpdateComparisonUI;
+			inventorySlot.OnSelected += OnInventorySlotSelected;
 		}
 
 		_shopUI.OnBought += AddToInventory;
@@ -59,9 +60,26 @@ public class InventoryUI : UIMenu
 
 	private void OnItemEquip(WeaponPartUI weaponPart)
 	{
+		Tween move = weaponPart.transform.DOMove(_weaponUI.equipNewPartTransform.position, .5f);
+		Tween color = weaponPart.WeaponPartImage.DOColor(Color.white, .5f);
+
+		Sequence sequence = DOTween.Sequence();
+		sequence.Append(move)
+			.Append(color)
+			.OnComplete(() => OnEquipTweenFinished(weaponPart));
+
+		sequence.Play();
+	}
+
+	private void OnEquipTweenFinished(WeaponPartUI weaponPart)
+	{
 		GameManager.Instance.inventory.RemoveFromInventory(weaponPart.weaponPart);
+
 		_weaponUI.SetNewWeaponPart(weaponPart);
-		
+
+		weaponPart.DestroyToolTip();
+		Destroy(weaponPart.gameObject);
+
 		StartCoroutine(FillInventoryUI());
 	}
 
@@ -73,7 +91,7 @@ public class InventoryUI : UIMenu
 	private void AddToInventory(WeaponPart weaponPart)
 	{
 		GameManager.Instance.inventory.AddToInventory(weaponPart);
-		if(gameObject.activeSelf)
+		if (gameObject.activeSelf)
 			StartCoroutine(FillInventoryUI());
 	}
 
@@ -100,7 +118,7 @@ public class InventoryUI : UIMenu
 	private void OnDisable()
 	{
 		for (int i = 0; i < _inventorySlots.Count; i++)
-			_inventorySlots[i].Deselect();
+			_inventorySlots[i].Setselected(false);
 	}
 
 	public override void SetFocusedMenu()
@@ -134,7 +152,7 @@ public class InventoryUI : UIMenu
 			_inventorySlots[i].SetWeaponPart(weaponPartUI);
 			weaponPartUI.Initialize(weaponParts[i]);
 			weaponPartUI.weaponUI = _weaponUI;
-			weaponPartUI.statsContainer = _selectedStatsUIContainer;
+			weaponPartUI.statsContainer = _comparisonContainerSelected;
 		}
 
 		SelectInventorySlot();
@@ -157,9 +175,24 @@ public class InventoryUI : UIMenu
 		}
 	}
 
+	private void OnInventorySlotSelected(InventorySlot inventorySlot)
+	{
+		UpdateComparisonUI();
+		SetSelected(inventorySlot);
+	}
+
+	private void SetSelected(InventorySlot inventorySlot)
+	{
+		for (int i = 0; i < _inventorySlots.Count; i++)
+		{
+			_inventorySlots[i].Setselected(false);
+		}
+		inventorySlot.Setselected(true);
+	}
+
 	public void UpdateComparisonUI()
 	{
-		ClearComparisonUI();
+		_comparisonUI.ClearComparisonContainer();
 
 		if (EventSystem.current.currentSelectedGameObject.TryGetComponent(out InventorySlot inventorySlot))
 			_currentSelection = inventorySlot.HasWeaponPart() ? inventorySlot.GetWeaponPart() : null;
@@ -173,65 +206,27 @@ public class InventoryUI : UIMenu
 			{
 				ToolTipUI toolTipUI = Instantiate(_toolTipUI_prefab, _comparisonContainerShopItem);
 				toolTipUI.Initialize(item.weaponPart);
+
+				StartCoroutine(LayoutAfterFrame());
 			}
 		}
 
 		if (_currentSelection)
 			UpdateEquippedComparisonUI(_currentSelection.weaponPart);
-
-		StartCoroutine(CompareAfterFrame());
 	}
 
-	private void ClearComparisonUI()
+	private IEnumerator LayoutAfterFrame()
 	{
-		for (int i = 0; i < _selectedStatsUIContainer.childCount; i++)
-			Destroy(_selectedStatsUIContainer.GetChild(i).gameObject);
-		for (int i = 0; i < _comparisonContainerEquipped.childCount; i++)
-			Destroy(_comparisonContainerEquipped.GetChild(i).gameObject);
-		for (int i = 0; i < _comparisonContainerShopItem.childCount; i++)
-			Destroy(_comparisonContainerShopItem.GetChild(i).gameObject);	
+		yield return new WaitForEndOfFrame();
+		LayoutRebuilder.ForceRebuildLayoutImmediate(_comparisonContainerShopItem);
 	}
 
 	private void UpdateEquippedComparisonUI(WeaponPart weaponPart)
 	{
-		if (weaponPart.GetType() == typeof(Grip))
-		{
-			ToolTipUI toolTipUI = Instantiate(_toolTipUI_prefab, _comparisonContainerEquipped);
-			toolTipUI.Initialize(_weaponUI.weapon.grip);
-		}
-		else if (weaponPart.GetType() == typeof(Barrel))
-		{
-			ToolTipUI toolTipUI = Instantiate(_toolTipUI_prefab, _comparisonContainerEquipped);
-			toolTipUI.Initialize(_weaponUI.weapon.barrel);
-		}
-		else if (weaponPart.GetType() == typeof(Magazine))
-		{
-			ToolTipUI toolTipUI = Instantiate(_toolTipUI_prefab, _comparisonContainerEquipped);
-			toolTipUI.Initialize(_weaponUI.weapon.magazine);
-		}
-		else if (weaponPart.GetType() == typeof(Ammunition))
-		{
-			ToolTipUI toolTipUI = Instantiate(_toolTipUI_prefab, _comparisonContainerEquipped);
-			toolTipUI.Initialize(_weaponUI.weapon.ammunition);
-		}
-		else if (weaponPart.GetType() == typeof(TriggerMechanism))
-		{
-			ToolTipUI toolTipUI = Instantiate(_toolTipUI_prefab, _comparisonContainerEquipped);
-			toolTipUI.Initialize(_weaponUI.weapon.triggerMechanism);
-		}
-		else if (weaponPart.GetType() == typeof(Sight))
-		{
-			ToolTipUI toolTipUI = Instantiate(_toolTipUI_prefab, _comparisonContainerEquipped);
-			toolTipUI.Initialize(_weaponUI.weapon.sight);
-		}
+		ToolTipUI selectedTooltip = Instantiate(_toolTipUI_prefab, _comparisonContainerSelected);
+		selectedTooltip.Initialize(weaponPart);
 
-		StartCoroutine(CompareAfterFrame());
-	}
-
-	private IEnumerator CompareAfterFrame()
-	{
-		yield return new WaitForEndOfFrame();
-		_comparisonUI.Compare();
+		_comparisonUI.UpdateEquippedComparisonUI(_weaponUI, weaponPart);
 	}
 
 	private void ClearInventoryUI()

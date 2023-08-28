@@ -4,7 +4,7 @@ using UnityEngine;
 public class Inventory : MonoBehaviour
 {
 	[field: SerializeField]
-	public Wallet Wallet {  get; private set; }
+	public Wallet Wallet { get; private set; }
 
 	[SerializeField]
 	private List<WeaponPart> _weaponParts;

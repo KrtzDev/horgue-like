@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -33,8 +32,6 @@ public class GameManager : Singleton<GameManager>
 
 	[HideInInspector]
 	public float _currentTimeToSurvive;
-
-	public int _currentScore;
 
 	private EnemySpawner _enemySpawner;
 	public int _neededEnemyKill;
@@ -71,7 +68,7 @@ public class GameManager : Singleton<GameManager>
 	{
 		SceneLoader.Instance.CompletedSceneLoad += OnCompletedSceneLoad;
 
-		_currentScore = 0;
+		inventory.Wallet.Reset();
 		_currentLevel = 1;
 		_lastLevel = 0;
 		_currentLevelArray = _currentLevel - 1;
@@ -88,7 +85,7 @@ public class GameManager : Singleton<GameManager>
 
 		if (SceneManager.GetActiveScene().name == "SCENE_Main_Menu")
 		{
-			_currentScore = 0;
+			inventory.Wallet.Reset();
 			_currentLevel = 1;
 			_lastLevel = 0;
 			_currentLevelArray = _currentLevel - 1;

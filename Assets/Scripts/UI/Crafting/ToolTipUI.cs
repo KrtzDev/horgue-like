@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -6,14 +7,14 @@ using UnityEngine.UI;
 public class ToolTipUI : Selectable
 {
 	public event Action<ToolTipUI> OnBuy;
-	public event Action<WeaponPart> OnSelected;
+	public event Action<ToolTipUI> OnSelected;
 	public event Action OnDeselected;
 
 	[SerializeField]
 	public HoldButton buyButton;
 
 	[SerializeField]
-	private Image _selectionIndicator;
+	public Image _selectionIndicator;
 
 	[SerializeField]
 	private Image _partImage;
@@ -21,6 +22,8 @@ public class ToolTipUI : Selectable
 	private LayoutGroup _layoutGroup;
 	[SerializeField]
 	private RectTransform _statParent;
+	[SerializeField]
+	private RectTransform _contentRect;
 	[SerializeField]
 	private StatUI _statUI_prefab;
 
@@ -47,10 +50,17 @@ public class ToolTipUI : Selectable
 		_value = weaponPartData.value;
 
 		InitializeStats(weaponPartData);
-		LayoutRebuilder.ForceRebuildLayoutImmediate(_layoutGroup.transform as RectTransform);	
-
+		LayoutRebuilder.ForceRebuildLayoutImmediate(_layoutGroup.transform as RectTransform);
+		StartCoroutine(UpdateHeightAfterFrame());
+		
 		if(buyButton)
 			buyButton.OnButtonExecute += Buy;
+	}
+
+	private IEnumerator UpdateHeightAfterFrame()
+	{
+		yield return new WaitForEndOfFrame();
+		GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical,_contentRect.rect.height);
 	}
 
 	private void InitializeStats(WeaponPart weaponPartData)
@@ -99,7 +109,8 @@ public class ToolTipUI : Selectable
 		if (!_selected)
 			return;
 
-		GameManager.Instance.inventory.Wallet.TryPay(_value);
+		if (!GameManager.Instance.inventory.Wallet.TryPay(_value))
+			return;
 
 		OnBuy.Invoke(this);
 		buyButton.OnButtonExecute -= Buy;
@@ -107,21 +118,21 @@ public class ToolTipUI : Selectable
 		Destroy(gameObject);
 	}
 
+	public void SetSelected(bool selected)
+	{
+		_selected = selected;
+		_selectionIndicator.enabled = selected;
+	}
+
 	public override void OnSelect(BaseEventData eventData)
 	{
 		base.OnSelect(eventData);
-		OnSelected.Invoke(weaponPart);
-
-		_selectionIndicator.enabled = true;
-		_selected = true;
+		OnSelected.Invoke(this);
 	}
 
 	public override void OnDeselect(BaseEventData eventData)
 	{
 		base.OnDeselect(eventData);
 		OnDeselected.Invoke();
-
-		_selectionIndicator.enabled = false;
-		_selected = false;
 	}
 }

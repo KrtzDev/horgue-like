@@ -1,15 +1,70 @@
+using System;
+using System.Collections;
 using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class ComparisonUI : MonoBehaviour
 {
+	public WeaponPart CurrentSelected =>
+		_selectionContainer.childCount > 0 ?
+		_selectionContainer.GetChild(0)?.GetComponent<ToolTipUI>().weaponPart :
+		null;
+
+	[SerializeField]
+	private ToolTipUI _toolTipUI_prefab;
+
 	[SerializeField]
 	private Transform _selectionContainer;
 	[SerializeField]
 	private Transform _equippedContainer;
 	[SerializeField]
 	private Transform _shopItemContainer;
+	[SerializeField]
+	private Scrollbar _shopItemScrollBar;
 
-	public void Compare()
+	private Vector2 _scrollInput;
+
+	private void OnEnable()
+	{
+		InputManager.Instance.CharacterInputActions.UI.ScrollWheel.performed += Scroll;
+	}
+
+	private void Scroll(InputAction.CallbackContext ctx) => _scrollInput = ctx.ReadValue<Vector2>();
+
+	private void Update()
+	{
+		if(Mathf.Abs(_scrollInput.y) > 0)
+			_shopItemScrollBar.value = Mathf.Clamp(_shopItemScrollBar.value + _scrollInput.y * .7f * Time.deltaTime, 0, 1);
+	}
+
+	public void ClearComparisonContainer()
+	{
+		for (int i = 0; i < _selectionContainer.childCount; i++)
+			Destroy(_selectionContainer.GetChild(i).gameObject);
+
+		for (int i = 0; i < _equippedContainer.childCount; i++)
+			Destroy(_equippedContainer.GetChild(i).gameObject);
+
+		for (int i = 0; i < _shopItemContainer.childCount; i++)
+			Destroy(_shopItemContainer.GetChild(i).gameObject);
+	}
+
+	public void UpdateEquippedComparisonUI(WeaponUI weaponUI, WeaponPart weaponPart)
+	{
+		ToolTipUI toolTipUI = Instantiate(_toolTipUI_prefab, _equippedContainer);
+		toolTipUI.Initialize(weaponUI.weapon.GetWeaponPartOfType(weaponPart));
+
+		StartCoroutine(CompareAfterFrame());
+	}
+
+	private IEnumerator CompareAfterFrame()
+	{
+		yield return new WaitForEndOfFrame();
+		Compare();
+	}
+
+	private void Compare()
 	{
 		ToolTipUI[] selection = GetTooltipUIsFromContainer(_selectionContainer);
 		ToolTipUI[] equipped = GetTooltipUIsFromContainer(_equippedContainer);
@@ -39,7 +94,7 @@ public class ComparisonUI : MonoBehaviour
 			newPart.damageStatUI.statBackground.color = newPart.damageStatUI.positiveColor;
 		else if (newWeaponPart.baseDamage < equippedWeaponPart.baseDamage)
 			newPart.damageStatUI.statBackground.color = newPart.damageStatUI.negativeColor;
-			
+
 		if (newWeaponPart.attackSpeed > equippedWeaponPart.attackSpeed)
 			newPart.attackSpeedStatUI.statBackground.color = newPart.attackSpeedStatUI.positiveColor;
 		else if (newWeaponPart.attackSpeed < equippedWeaponPart.attackSpeed)

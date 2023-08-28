@@ -76,15 +76,6 @@ public class UIManager : Singleton<UIManager>
 		}
 	}
 
-	public void DisplayAbilities(List<Ability> abilities)
-    {
-		foreach (Ability ability in abilities)
-        {
-			AbilityUI newAbility = Instantiate(_abilityUI_prefab, ChooseAbility.AbilityParent);
-			newAbility.Initialize(ability);
-        }
-    }
-
 	private void OnCompletedSceneLoad()
 	{
 		if (SceneManager.GetActiveScene().name == "SCENE_Main_Menu")
@@ -113,15 +104,11 @@ public class UIManager : Singleton<UIManager>
 
 			ChooseAbility = Instantiate(_chooseAbility_prefab);
 			ChooseAbility.gameObject.SetActive(true);
+			ChooseAbility.Initialize();
 
-			List<Ability> abilities = new List<Ability>();
 
-			for (int i = 0; i < ChooseAbility.instance._abilitiesToDisplay; i++)
-			{
-				abilities.Add(ChooseAbility.instance.GetAbilities());
-			}
 
-			DisplayAbilities(abilities);
+
 		}
 	}
 }
