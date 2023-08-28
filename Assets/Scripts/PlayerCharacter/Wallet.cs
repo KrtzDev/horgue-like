@@ -20,10 +20,13 @@ public class Wallet
 		OnMoneyChanged?.Invoke(_money);
 	}
 
-	public void TryPay(int value)
+	public bool TryPay(int value)
 	{
-		if (_money - value >= 0)
-			Pay(value);
+		if (_money - value <= 0)
+			return false;
+
+		Pay(value);
+		return true;
 	}
 
 	private void Pay(int value)

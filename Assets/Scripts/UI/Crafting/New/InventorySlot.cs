@@ -8,7 +8,8 @@ public class InventorySlot : Selectable
 	public Action OnSubmit;
 	public Action<WeaponPart> OnSell;
 	public Action<WeaponPartUI> OnEquip;
-	public Action OnSelected;
+	public Action<InventorySlot> OnSelected;
+	public Action OnDeselected;
 
 	public HoldButton sellButton;
 	public HoldButton equipButton;
@@ -35,7 +36,7 @@ public class InventorySlot : Selectable
 
 	private void Equip()
 	{
-		if (!_selected || _weaponPart == null)
+		if (!_selected || !HasWeaponPart())
 			return;
 
 		_selected = false;
@@ -45,8 +46,8 @@ public class InventorySlot : Selectable
 	}
 
 	private void Sell()
-	{ 
-		if (!_selected || _weaponPart == null)
+	{
+		if (!_selected || !HasWeaponPart())
 			return;
 
 		_selected = false;
@@ -61,35 +62,30 @@ public class InventorySlot : Selectable
 		Destroy(_weaponPart.gameObject);
 	}
 
+	public void Setselected(bool selected)
+	{
+		_selected = selected;
+		_selectionIndicator.enabled = selected;
+	}
+
 	public override void OnSelect(BaseEventData eventData)
 	{
 		base.OnSelect(eventData);
-
-		OnSelected.Invoke();
-		_selectionIndicator.enabled= true;
+		OnSelected.Invoke(this);
 
 		if (_weaponPart)
 			_weaponPart.Select();
-
-		_selected = true;
 	}
 
 	public override void OnDeselect(BaseEventData eventData)
 	{
+		base.OnDeselect(eventData);
+		OnDeselected?.Invoke();
+
 		if (_weaponPart)
 		{
 			_weaponPart.DestroyToolTip();
 			_weaponPart.Deselect();
 		}
-
-		base.OnDeselect(eventData);
-		Deselect();
-
-		_selected = false;
-	}
-
-	public void Deselect()
-	{
-		_selectionIndicator.enabled = false;
 	}
 }

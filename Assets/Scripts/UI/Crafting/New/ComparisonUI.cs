@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class ComparisonUI : MonoBehaviour
@@ -7,6 +8,8 @@ public class ComparisonUI : MonoBehaviour
 		_selectionContainer.GetChild(0)?.GetComponent<ToolTipUI>().weaponPart :
 		null;
 
+	[SerializeField]
+	private ToolTipUI _toolTipUI_prefab;
 
 	[SerializeField]
 	private Transform _selectionContainer;
@@ -15,7 +18,33 @@ public class ComparisonUI : MonoBehaviour
 	[SerializeField]
 	private Transform _shopItemContainer;
 
-	public void Compare()
+	public void ClearComparisonContainer()
+	{
+		for (int i = 0; i < _selectionContainer.childCount; i++)
+			Destroy(_selectionContainer.GetChild(i).gameObject);
+
+		for (int i = 0; i < _equippedContainer.childCount; i++)
+			Destroy(_equippedContainer.GetChild(i).gameObject);
+
+		for (int i = 0; i < _shopItemContainer.childCount; i++)
+			Destroy(_shopItemContainer.GetChild(i).gameObject);
+	}
+
+	public void UpdateEquippedComparisonUI(WeaponUI weaponUI, WeaponPart weaponPart)
+	{
+		ToolTipUI toolTipUI = Instantiate(_toolTipUI_prefab, _equippedContainer);
+		toolTipUI.Initialize(weaponUI.weapon.GetWeaponPartOfType(weaponPart));
+
+		StartCoroutine(CompareAfterFrame());
+	}
+
+	private IEnumerator CompareAfterFrame()
+	{
+		yield return new WaitForEndOfFrame();
+		Compare();
+	}
+
+	private void Compare()
 	{
 		ToolTipUI[] selection = GetTooltipUIsFromContainer(_selectionContainer);
 		ToolTipUI[] equipped = GetTooltipUIsFromContainer(_equippedContainer);

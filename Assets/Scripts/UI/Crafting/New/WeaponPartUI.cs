@@ -58,7 +58,7 @@ public class WeaponPartUI : MonoBehaviour, IPointerClickHandler, IPointerEnterHa
 
 	public void OnPointerClick(PointerEventData eventData)
 	{
-		if(!isSlotted) 
+		if (!isSlotted)
 			return;
 
 		DestroyToolTip();

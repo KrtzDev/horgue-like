@@ -686,4 +686,22 @@ public class Weapon : ScriptableObject
 		_capacity = magazine.capacity;
 		_isReloading = false;
 	}
+
+	public WeaponPart GetWeaponPartOfType(WeaponPart weaponPart)
+	{
+		if (weaponPart.GetType() == typeof(Grip))
+			return grip;
+		else if (weaponPart.GetType() == typeof(Barrel))
+			return barrel;
+		else if (weaponPart.GetType() == typeof(Magazine))
+			return magazine;
+		else if (weaponPart.GetType() == typeof(Ammunition))
+			return ammunition;
+		else if (weaponPart.GetType() == typeof(TriggerMechanism))
+			return triggerMechanism;
+		else if (weaponPart.GetType() == typeof(Sight))
+			return sight;
+
+		return null;
+	}
 }
