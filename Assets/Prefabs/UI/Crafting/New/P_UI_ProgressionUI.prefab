@@ -2945,7 +2945,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 689e58aab17d0e046be5e030b4076865, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <Image>k__BackingField: {fileID: 9095558312718149837}
   <Button>k__BackingField: {fileID: 4945501108580098852}
   <ButtonText>k__BackingField: {fileID: 1259125804346777278}
   <AssociatedMenu>k__BackingField: {fileID: 5035685159186285804}
@@ -3894,7 +3893,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 689e58aab17d0e046be5e030b4076865, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <Image>k__BackingField: {fileID: 4501992839705171008}
   <Button>k__BackingField: {fileID: 5607964370871897979}
   <ButtonText>k__BackingField: {fileID: 1100398123504975803}
   <AssociatedMenu>k__BackingField: {fileID: 6125829607908593843}
@@ -5274,7 +5272,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00efb54148c448948853d7491fd57d07, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <Image>k__BackingField: {fileID: 3933080464947847333}
   <Button>k__BackingField: {fileID: 7498898081987206543}
   <ButtonText>k__BackingField: {fileID: 7430065286742645937}
   _holdAction: {fileID: -1693316616457421850, guid: 0a10147d3bb40644fb3addf3dec9f517,
@@ -5493,7 +5490,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00efb54148c448948853d7491fd57d07, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <Image>k__BackingField: {fileID: 1728957241383938099}
   <Button>k__BackingField: {fileID: 3357787147613763245}
   <ButtonText>k__BackingField: {fileID: 6816549354792729909}
   _holdAction: {fileID: -3002638214087144579, guid: 0a10147d3bb40644fb3addf3dec9f517,
@@ -6195,7 +6191,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00efb54148c448948853d7491fd57d07, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <Image>k__BackingField: {fileID: 3015655399306946717}
   <Button>k__BackingField: {fileID: 4337049188180487086}
   <ButtonText>k__BackingField: {fileID: 4475910881737645163}
   _holdAction: {fileID: 4191648995724654269, guid: 0a10147d3bb40644fb3addf3dec9f517,
@@ -6323,8 +6318,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 4468125209169816226}
   m_HandleRect: {fileID: 9192379466507579908}
   m_Direction: 2
-  m_Value: 0
-  m_Size: 1
+  m_Value: 1
+  m_Size: 0
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -6556,7 +6551,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00efb54148c448948853d7491fd57d07, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <Image>k__BackingField: {fileID: 627649377804580565}
   <Button>k__BackingField: {fileID: 6318694305081648486}
   <ButtonText>k__BackingField: {fileID: 5212521535655176998}
   _holdAction: {fileID: 4191648995724654269, guid: 0a10147d3bb40644fb3addf3dec9f517,
@@ -6573,6 +6567,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6584131402342506408}
   - component: {fileID: 2966044128362838828}
+  - component: {fileID: 1036723432}
   m_Layer: 5
   m_Name: Content
   m_TagString: Untagged
@@ -6595,9 +6590,9 @@ RectTransform:
   m_Father: {fileID: 6568999022211361291}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: -0.0000035762787}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &2966044128362838828
@@ -6626,6 +6621,20 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!114 &1036723432
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9032573808424266296}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3245ec927659c4140ac4f8d17403cc18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_HorizontalFit: 0
+  m_VerticalFit: 2
 --- !u!1 &9165034608874953021
 GameObject:
   m_ObjectHideFlags: 0

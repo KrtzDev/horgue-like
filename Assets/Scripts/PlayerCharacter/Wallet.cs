@@ -9,6 +9,11 @@ public class Wallet
 	[SerializeField]
 	private int _money;
 
+	public void Reset()
+	{
+		_money = 0;
+	}
+
 	public int GetMoneyAmount()
 	{
 		return _money;

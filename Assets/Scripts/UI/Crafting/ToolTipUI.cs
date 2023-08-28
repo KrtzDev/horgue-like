@@ -1,5 +1,5 @@
 ﻿using System;
-using Unity.VisualScripting;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -22,6 +22,8 @@ public class ToolTipUI : Selectable
 	private LayoutGroup _layoutGroup;
 	[SerializeField]
 	private RectTransform _statParent;
+	[SerializeField]
+	private RectTransform _contentRect;
 	[SerializeField]
 	private StatUI _statUI_prefab;
 
@@ -48,10 +50,21 @@ public class ToolTipUI : Selectable
 		_value = weaponPartData.value;
 
 		InitializeStats(weaponPartData);
-		LayoutRebuilder.ForceRebuildLayoutImmediate(_layoutGroup.transform as RectTransform);	
-
+		LayoutRebuilder.ForceRebuildLayoutImmediate(_layoutGroup.transform as RectTransform);
+		
+		Debug.Log(_contentRect.rect.height);
+		StartCoroutine(UpdateHeightAfterFrame());
+		
 		if(buyButton)
 			buyButton.OnButtonExecute += Buy;
+	}
+
+	private IEnumerator UpdateHeightAfterFrame()
+	{
+		yield return new WaitForSeconds(.5f);
+		Debug.Log(_contentRect.rect.height);
+		LayoutRebuilder.ForceRebuildLayoutImmediate(_contentRect);
+		_contentRect.GetComponent<LayoutGroup>().SetLayoutVertical();
 	}
 
 	private void InitializeStats(WeaponPart weaponPartData)

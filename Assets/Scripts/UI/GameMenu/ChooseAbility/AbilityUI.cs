@@ -5,7 +5,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using TMPro;
 
-public class AbilityUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, ISelectHandler, IDeselectHandler
+public class AbilityUI : UIButton, IPointerEnterHandler, IPointerExitHandler, ISelectHandler, IDeselectHandler
 {
     [SerializeField] private Image _abilityIcon;
     [SerializeField] private Image _abilityBackground;
@@ -28,6 +28,8 @@ public class AbilityUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
         _abilityNameText.GetComponent<TextMeshProUGUI>().text = _ability.name;
         _abilityIcon.sprite = ability._icon;
         _rectTransform = GetComponent<RectTransform>();
+
+		Addlistener(AbilitySelected);
     }
 
     private void Start()
@@ -37,53 +39,54 @@ public class AbilityUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
 
     IEnumerator MoveAbilityOnSelection(bool startingAnimation)
     {
-        Vector3 endPosition;
-        Vector3 endScale;
+		yield return new WaitForEndOfFrame();
+		//Vector3 endPosition;
+		//Vector3 endScale;
 
-        float elapsedTime = 0f;
+		//float elapsedTime = 0f;
 
-        if (startingAnimation)
-        {
-            if(_firstSelection)
-            {
-                _firstSelection = false;
-                _startPos = _rectTransform.position;
-                _startScale = _rectTransform.localScale;
-            }
+		//if (startingAnimation)
+		//{
+		//	if (_firstSelection)
+		//	{
+		//		_firstSelection = false;
+		//		_startPos = _rectTransform.position;
+		//		_startScale = _rectTransform.localScale;
+		//	}
 
-            _selectionMarker.SetActive(true);
-            _abilityNameText.GetComponent<TextMeshProUGUI>().color = gameObject.GetComponentInChildren<Button>().colors.selectedColor;
-        }
-        else
-        {
-            _selectionMarker.SetActive(false);
-            _abilityNameText.GetComponent<TextMeshProUGUI>().color = gameObject.GetComponentInChildren<Button>().colors.normalColor;
-        }  
+		//	_selectionMarker.SetActive(true);
+		//	_abilityNameText.GetComponent<TextMeshProUGUI>().color = gameObject.GetComponentInChildren<Button>().colors.selectedColor;
+		//}
+		//else
+		//{
+		//	_selectionMarker.SetActive(false);
+		//	_abilityNameText.GetComponent<TextMeshProUGUI>().color = gameObject.GetComponentInChildren<Button>().colors.normalColor;
+		//}
 
-        while (elapsedTime < ChooseAbility.instance._moveSelectionTime)
-        {
-            elapsedTime += Time.unscaledDeltaTime;
+		//while (elapsedTime < ChooseAbility.instance._moveSelectionTime)
+		//{
+		//	elapsedTime += Time.unscaledDeltaTime;
 
-            if (startingAnimation)
-            {
-                endPosition = _startPos + new Vector3(0f, ChooseAbility.instance._verticalMoveAmount, 0f);
-                endScale = _startScale * ChooseAbility.instance._scaleAmount;
-            }
-            else
-            {
-                endPosition = _startPos;
-                endScale = _startScale;
-            }
+		//	if (startingAnimation)
+		//	{
+		//		endPosition = _startPos + new Vector3(0f, ChooseAbility.instance._verticalMoveAmount, 0f);
+		//		endScale = _startScale * ChooseAbility.instance._scaleAmount;
+		//	}
+		//	else
+		//	{
+		//		endPosition = _startPos;
+		//		endScale = _startScale;
+		//	}
 
-            Vector3 lerpedPos = Vector3.Lerp(_rectTransform.position, endPosition, (elapsedTime / ChooseAbility.instance._moveSelectionTime));
-            Vector3 lerpedScale = Vector3.Lerp(_rectTransform.localScale, endScale, (elapsedTime / ChooseAbility.instance._moveSelectionTime));
+		//	Vector3 lerpedPos = Vector3.Lerp(_rectTransform.position, endPosition, (elapsedTime / ChooseAbility.instance._moveSelectionTime));
+		//	Vector3 lerpedScale = Vector3.Lerp(_rectTransform.localScale, endScale, (elapsedTime / ChooseAbility.instance._moveSelectionTime));
 
-            _rectTransform.position = lerpedPos;
-            _rectTransform.localScale = lerpedScale;
+		//	_rectTransform.position = lerpedPos;
+		//	_rectTransform.localScale = lerpedScale;
 
-            yield return null;    
-        }
-    }
+		//	yield return null;
+		//}
+	}
 
     IEnumerator MoveAbilityOnActivation()
     {
@@ -237,8 +240,9 @@ public class AbilityUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
             eventData.selectedObject = null;
     }
 
-    public void OnSelect(BaseEventData eventData)
+    public override void OnSelect(BaseEventData eventData)
     {
+		Debug.Log("Ping");
         if (!_abilitySelected)
         {
             StartCoroutine(MoveAbilityOnSelection(true));

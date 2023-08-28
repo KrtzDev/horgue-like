@@ -5,7 +5,7 @@ using UnityEngine.Events;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-[RequireComponent(typeof(Image), typeof(Button))]
+[RequireComponent (typeof(Button))]
 public abstract class UIButton : MonoBehaviour, ISelectHandler, IDeselectHandler, IPointerDownHandler, IPointerUpHandler
 {
 	public event Action OnButtonSelect;
@@ -13,9 +13,6 @@ public abstract class UIButton : MonoBehaviour, ISelectHandler, IDeselectHandler
 	public event Action OnButtonDown;
 	public event Action OnButtonUp;
 	public event Action OnButtonKeepFocus;
-
-	[field: SerializeField]
-	public Image Image { get; private set; }
 
 	[field: SerializeField]
 	public Button Button { get; private set; }
@@ -82,7 +79,6 @@ public abstract class UIButton : MonoBehaviour, ISelectHandler, IDeselectHandler
 #if UNITY_EDITOR
 	private void OnValidate()
 	{
-		if (!Image) Image = GetComponent<Image>();
 		if (!Button) Button = GetComponent<Button>();
 		if (!ButtonText) ButtonText = GetComponentInChildren<TMP_Text>();
 	}

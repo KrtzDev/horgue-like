@@ -22,7 +22,7 @@ public class CoinDrop : MonoBehaviour
         gameObject.transform.parent.gameObject.GetComponent<Collider>().enabled = false;
         _collectSound.Play();
         _animator.SetBool("pickup", true);
-        GameManager.Instance._currentScore += _givenScore;
+		GameManager.Instance.inventory.Wallet.Store(_givenScore);
     }
 
     public void Delete()

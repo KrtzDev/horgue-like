@@ -61,7 +61,8 @@ public class UIImageFillAmountWaveProgress : UIImageFillAmount
 
         // EnemiesKilledText.text = _enemiesKilled + " / " + _maxEnemiesAmount;
         _enemiesKilledText.text = _enemiesKilled.ToString("000");
-        _ScoreText.text = GameManager.Instance._currentScore.ToString("000");
+		int money = GameManager.Instance.inventory.Wallet.GetMoneyAmount();
+		_ScoreText.text = money.ToString("000");
 
         base.OnGUI();
     }
