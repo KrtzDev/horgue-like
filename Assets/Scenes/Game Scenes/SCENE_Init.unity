@@ -512,13 +512,13 @@ MonoBehaviour:
   sounds:
   - name: HealthPack
     clip: {fileID: 8300000, guid: 19f89c6e740e7447f9e12a8310d3e973, type: 3}
-    volume: 0.35
+    volume: 0.1
     pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: Coin
     clip: {fileID: 8300000, guid: ffb159a21c8a04135a5616979c828fab, type: 3}
-    volume: 0.35
+    volume: 0.075
     pitch: 1
     loop: 0
     source: {fileID: 0}

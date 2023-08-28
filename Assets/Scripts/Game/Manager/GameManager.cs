@@ -15,6 +15,7 @@ public class GameManager : Singleton<GameManager>
 	}
 
 	public WeaponControllKind weaponControll = WeaponControllKind.AllAuto;
+	public bool returnToAutoShooting = true;
 
 	public DamageCalcKind damageCalcKind = DamageCalcKind.Mean;
 

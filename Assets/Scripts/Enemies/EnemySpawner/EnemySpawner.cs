@@ -80,7 +80,7 @@ public class EnemySpawner : MonoBehaviour
             SpawnEnemies(bossEnemy, 1, lastKey + 1);
 		}
 
-        _spawnTimer = _enemySpawnerData._spawnTick;
+        _spawnTimer = _enemySpawnerData._spawnTick - 1f;
     }
 
     private void Update()

@@ -34,6 +34,8 @@ public class WeaponHolster : MonoBehaviour
 		}
 
 		InputManager.Instance.CharacterInputActions.Character.SwitchMode.performed += SwitchWeaponControllMode;
+		InputManager.Instance.CharacterInputActions.Character.Aim.performed += SwitchWeaponControllMode_OnAim;
+		InputManager.Instance.CharacterInputActions.Character.Aim.canceled += SwitchWeaponControllMode_OnAim;
 
 		InputManager.Instance.CharacterInputActions.Character.Shoot.performed += ShootWeapons;
 		InputManager.Instance.CharacterInputActions.Character.Shoot.canceled += ShootWeapons;
@@ -41,7 +43,39 @@ public class WeaponHolster : MonoBehaviour
 
 	private void SwitchWeaponControllMode(InputAction.CallbackContext ctx)
 	{
-		GameManager.Instance.weaponControll = (WeaponControllKind)(((int)GameManager.Instance.weaponControll + 1) % 3);
+		// GameManager.Instance.weaponControll = (WeaponControllKind)(((int)GameManager.Instance.weaponControll + 1) % 3);
+
+		if(ctx.performed)
+        {
+			if (GameManager.Instance.weaponControll == WeaponControllKind.AllAuto && GameManager.Instance.returnToAutoShooting == true)
+			{
+				GameManager.Instance.weaponControll = WeaponControllKind.AutoShootManualAim;
+				GameManager.Instance.returnToAutoShooting = false;
+			}
+			else if (GameManager.Instance.weaponControll == WeaponControllKind.AutoShootManualAim && GameManager.Instance.returnToAutoShooting == false)
+			{
+				GameManager.Instance.weaponControll = WeaponControllKind.AllAuto;
+				GameManager.Instance.returnToAutoShooting = true;
+			}
+		}
+
+		Debug.Log(GameManager.Instance.weaponControll);
+	}
+
+	private void SwitchWeaponControllMode_OnAim(InputAction.CallbackContext ctx)
+	{
+		// GameManager.Instance.weaponControll = (WeaponControllKind)(((int)GameManager.Instance.weaponControll + 1) % 3);
+
+		if (ctx.performed && GameManager.Instance.weaponControll == WeaponControllKind.AllAuto)
+		{
+			GameManager.Instance.weaponControll = WeaponControllKind.AutoShootManualAim;
+			GameManager.Instance.returnToAutoShooting = true;
+		}
+		
+		if (ctx.canceled && GameManager.Instance.weaponControll == WeaponControllKind.AutoShootManualAim && GameManager.Instance.returnToAutoShooting == true)
+		{
+			GameManager.Instance.weaponControll = WeaponControllKind.AllAuto;
+		}
 		Debug.Log(GameManager.Instance.weaponControll);
 	}
 
