@@ -1,5 +1,8 @@
+using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class ComparisonUI : MonoBehaviour
 {
@@ -17,6 +20,23 @@ public class ComparisonUI : MonoBehaviour
 	private Transform _equippedContainer;
 	[SerializeField]
 	private Transform _shopItemContainer;
+	[SerializeField]
+	private Scrollbar _shopItemScrollBar;
+
+	private Vector2 _scrollInput;
+
+	private void OnEnable()
+	{
+		InputManager.Instance.CharacterInputActions.UI.ScrollWheel.performed += Scroll;
+	}
+
+	private void Scroll(InputAction.CallbackContext ctx) => _scrollInput = ctx.ReadValue<Vector2>();
+
+	private void Update()
+	{
+		if(Mathf.Abs(_scrollInput.y) > 0)
+			_shopItemScrollBar.value = Mathf.Clamp(_shopItemScrollBar.value + _scrollInput.y * .7f * Time.deltaTime, 0, 1);
+	}
 
 	public void ClearComparisonContainer()
 	{

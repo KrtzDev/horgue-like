@@ -207,12 +207,18 @@ public class InventoryUI : UIMenu
 				ToolTipUI toolTipUI = Instantiate(_toolTipUI_prefab, _comparisonContainerShopItem);
 				toolTipUI.Initialize(item.weaponPart);
 
-				LayoutRebuilder.ForceRebuildLayoutImmediate(_comparisonContainerShopItem);
+				StartCoroutine(LayoutAfterFrame());
 			}
 		}
 
 		if (_currentSelection)
 			UpdateEquippedComparisonUI(_currentSelection.weaponPart);
+	}
+
+	private IEnumerator LayoutAfterFrame()
+	{
+		yield return new WaitForEndOfFrame();
+		LayoutRebuilder.ForceRebuildLayoutImmediate(_comparisonContainerShopItem);
 	}
 
 	private void UpdateEquippedComparisonUI(WeaponPart weaponPart)
