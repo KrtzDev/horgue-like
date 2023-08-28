@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using TMPro;
 
+[DefaultExecutionOrder(-1)]
 public class GameDataReader : MonoBehaviour
 {
     public TextAsset gameData;
@@ -51,6 +52,7 @@ public class GameDataReader : MonoBehaviour
         public string name;
         public float movementSpeed;
         public float maxHealth;
+        public float invincibilityTime;
         public float levelMultiplier;
     }
 
@@ -360,6 +362,7 @@ public class GameDataReader : MonoBehaviour
     {
         _playerData.movementSpeed = myPlayerList.Player[0].movementSpeed;
         _playerData.maxHealth = Mathf.RoundToInt(myPlayerList.Player[0].maxHealth);
+        _playerData.invincibilityTime = myPlayerList.Player[0].invincibilityTime;
         _playerData.levelMultiplier = myPlayerList.Player[0].levelMultiplier;
 
         yield return null;

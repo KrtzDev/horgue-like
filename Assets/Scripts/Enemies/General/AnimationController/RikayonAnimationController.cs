@@ -35,7 +35,7 @@ public class RikayonAnimationController : EnemyAnimationController
 
     public void SetAgentActive()
     {
-        _rikayon.GetComponent<EnemyHealthComponent>().SetAgentActive();
+        _rikayon.GetComponent<AI_Agent>().enabled = true;
     }
 
     public void CanTakeDamageActive()

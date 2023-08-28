@@ -152,7 +152,7 @@ public class GameManager : Singleton<GameManager>
 
 		if(_lastLevel == _currentLevel)
         {
-			_player.GetComponent<HealthComponent>()._currentHealth = _currentPlayerHealth;
+			_player.GetComponent<HealthComponent>().currentHealth = _currentPlayerHealth;
         }
 
 		Debug.Log("neededEnemyKill ( " + _neededEnemyKill + " ) = enemySpawner.MaxAmount ( " + _enemySpawner._enemySpawnerData._maxEnemyCount + " )");

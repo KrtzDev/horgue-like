@@ -9,8 +9,8 @@ public class UIImageFillAmountHealthbar : UIImageFillAmount
     public override void Awake()
     {
         _HealthComponent = GameObject.FindGameObjectWithTag("Player").GetComponent<HealthComponent>();
-        _maxValue = _HealthComponent._maxHealth;
-        _currentValue = _HealthComponent._currentHealth;
+        _maxValue = _HealthComponent.maxHealth;
+        _currentValue = _HealthComponent.currentHealth;
 
         base.Awake();
     }
@@ -18,7 +18,7 @@ public class UIImageFillAmountHealthbar : UIImageFillAmount
     public override void OnGUI()
     {
         // maxHealth Update falls man mehr Health dazu bekommt
-        _currentValue = _HealthComponent._currentHealth;
+        _currentValue = _HealthComponent.currentHealth;
         _healthText.text = _currentValue + " / " + _maxValue;
 
         base.OnGUI();

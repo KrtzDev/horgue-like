@@ -31,20 +31,19 @@ public class EnemyHealthComponent : HealthComponent
 
 		ParticleSystem hitParticle = _hitParticle;
 		Instantiate(hitParticle, _hitParticlePosition.position, Quaternion.identity);
-		_enemy.DamageFlash();
 
-		if (_currentHealth <= 0 && !_isDead && _canTakeDamage)
+		if (currentHealth <= 0 && !isDead && canTakeDamage)
 		{
 			MarkEnemyToDie();
 			return;
 		}
 		
-		if (_currentHealth > 0 && !_isDead && !_enemy._isBossEnemy && _canTakeDamage)
+		if (currentHealth > 0 && !isDead && !_enemy._isBossEnemy && canTakeDamage)
         {
 			MarkEnemyToTakeDamage();
         }
 
-		if(_enemy._isBossEnemy && _canTakeDamage)
+		if(_enemy._isBossEnemy && canTakeDamage)
         {
 			_enemy.CheckForBossStage();
         }
@@ -69,7 +68,7 @@ public class EnemyHealthComponent : HealthComponent
 
 		gameObject.tag = "Untagged";
 
-		_isDead = true;
+		isDead = true;
 
 		if(_enemy._isBossEnemy)
         {
@@ -100,11 +99,33 @@ public class EnemyHealthComponent : HealthComponent
 		}
 	}
 
-	public void SetAgentActive() => _enemy.enabled = true;
-	public void CanTakeDamageActive() => _canTakeDamage = true;
+	public void CanTakeDamageActive() => canTakeDamage = true;
 
-	public void SetHealthToPercentOfMax()
+
+	public override void DamageFlash()
 	{
-		// Rikayon Damage thingy
+		if (_isDamageFlashing)
+			return;
+
+		if (GetComponentInChildren<SkinnedMeshRenderer>() != null)
+		{
+			for (int i = 0; i < _skinnedMeshes.Length; i++)
+			{
+				_originalMaterials[i] = _skinnedMeshes[i].material;
+				_skinnedMeshes[i].material = _damageFlashMaterial;
+			}
+		}
+		else if (GetComponentInChildren<MeshRenderer>() != null)
+		{
+			for (int i = 0; i < _meshes.Length; i++)
+			{
+				_originalMaterials[i] = _meshes[i].material;
+				_meshes[i].material = _damageFlashMaterial;
+			}
+		}
+
+		_isDamageFlashing = true;
+
+		StartCoroutine(StopDamageFlash());
 	}
 }

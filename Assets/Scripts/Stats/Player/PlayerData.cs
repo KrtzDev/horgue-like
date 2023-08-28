@@ -5,5 +5,6 @@ public class PlayerData : ScriptableObject
 {
     public float movementSpeed = 5f;
     public int maxHealth = 50;
+    public float invincibilityTime;
     public float levelMultiplier;
 }

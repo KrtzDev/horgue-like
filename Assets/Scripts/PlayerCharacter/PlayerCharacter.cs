@@ -13,8 +13,8 @@ public class PlayerCharacter : MonoBehaviour
 	[SerializeField]
 	private Inventory _inventory;
     [SerializeField]
-    public PlayerData _playerData;
-    private HealthComponent _healthComponent;
+    public PlayerData playerData;
+    [HideInInspector] public HealthComponent healthComponent;
     private PlayerInputMappings _inputActions;
 
     public Rigidbody CharacterRigidbody { get => _characterRigidbody; set => _characterRigidbody = value; }
@@ -30,9 +30,9 @@ public class PlayerCharacter : MonoBehaviour
 
     private void Awake()
     {
-        _healthComponent = this.GetComponent<HealthComponent>();
-        _healthComponent._maxHealth = (int)(_playerData.maxHealth * (1 + (_playerData.levelMultiplier * GameManager.Instance._currentLevelArray)));
-        _healthComponent._currentHealth = _healthComponent._maxHealth;
+        healthComponent = this.GetComponent<HealthComponent>();
+        healthComponent.maxHealth = (int)(playerData.maxHealth * (1 + (playerData.levelMultiplier * GameManager.Instance._currentLevelArray)));
+        healthComponent.currentHealth = healthComponent.maxHealth;
 
         _inputActions = InputManager.Instance?.CharacterInputActions;
         _inputActions.Character.Pause.performed += PauseGame;

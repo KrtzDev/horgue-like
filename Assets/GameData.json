@@ -32,8 +32,8 @@
       "technicalResistance": 0,
       "healthDropChance": 0.025,
       "baseDmgMultiplier": 1,
-      "dmgModifier": 0.3,
-      "addDmgModifier": 0.025,
+      "dmgModifier": 0.25,
+      "addDmgModifier": 0.0125,
       "baseHealthMultiplier": 1,
       "healthModifier": 0.1,
       "addHealthModifier": 0.075
@@ -51,8 +51,8 @@
       "technicalResistance": -50,
       "healthDropChance": 0.075,
       "baseDmgMultiplier": 1,
-      "dmgModifier": 0.3,
-      "addDmgModifier": 0.025,
+      "dmgModifier": 0.25,
+      "addDmgModifier": 0.0125,
       "baseHealthMultiplier": 1,
       "healthModifier": 0.1,
       "addHealthModifier": 0.075
@@ -70,8 +70,8 @@
       "technicalResistance": 0,
       "healthDropChance": 0.05,
       "baseDmgMultiplier": 1,
-      "dmgModifier": 0.3,
-      "addDmgModifier": 0.025,
+      "dmgModifier": 0.25,
+      "addDmgModifier": 0.0125,
       "baseHealthMultiplier": 1,
       "healthModifier": 0.1,
       "addHealthModifier": 0.075
@@ -108,8 +108,8 @@
       "technicalResistance": 25,
       "healthDropChance": 0,
       "baseDmgMultiplier": 1,
-      "dmgModifier": 0.3,
-      "addDmgModifier": 0.025,
+      "dmgModifier": 0.25,
+      "addDmgModifier": 0.0125,
       "baseHealthMultiplier": 1,
       "healthModifier": 0.1,
       "addHealthModifier": 0.075
@@ -127,8 +127,8 @@
       "technicalResistance": -100,
       "healthDropChance": 0.075,
       "baseDmgMultiplier": 1,
-      "dmgModifier": 0.3,
-      "addDmgModifier": 0.025,
+      "dmgModifier": 0.25,
+      "addDmgModifier": 0.0125,
       "baseHealthMultiplier": 1,
       "healthModifier": 0.1,
       "addHealthModifier": 0.075
@@ -271,7 +271,7 @@
     {
       "name": "LevelBoss",
       "TimeToSurvive": 0,
-      "spawnTick": 5,
+      "spawnTick": 7.5,
       "spawnsPerTick": 5,
       "minEnemyCount": 5,
       "maxEnemyCount": 15,
@@ -312,7 +312,8 @@
       "name": "Player",
       "movementSpeed": 10,
       "maxHealth": 250,
-      "levelMultiplier": 0.2
+      "levelMultiplier": 0.2,
+      "invincibilityTime": 0.5
     }
   ],
   "Firearm": [
@@ -360,7 +361,7 @@
       "criticalHitChance": 0,
       "criticalHitDamage": 0.1,
       "projectileWidth": 0.6,
-      "range": -1.75
+      "range": -0.35
     },
     {
       "name": "Caliber .308",

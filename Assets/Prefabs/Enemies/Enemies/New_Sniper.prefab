@@ -102,10 +102,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aae483b5fc3237b4290efb3d1fcea032, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxHealth: 0
-  _currentHealth: 0
-  _canTakeDamage: 0
-  _isDead: 0
+  maxHealth: 0
+  currentHealth: 0
+  canTakeDamage: 0
+  isDead: 0
+  _damageFlashMaterial: {fileID: 2100000, guid: 7b1f06aefc284754e8992920270f9b8d,
+    type: 2}
+  _damageFlashTime: 0.1125
   _hitParticlePosition: {fileID: 570442342513492923}
   _hitParticle: {fileID: 6362102834014993675, guid: 5561755790406d148a233f12b01260c5,
     type: 3}
@@ -203,9 +206,6 @@ MonoBehaviour:
   _isBossEnemy: 0
   HealthComponent: {fileID: 0}
   damagePerHit: 0
-  _damageFlashMaterial: {fileID: 2100000, guid: 7b1f06aefc284754e8992920270f9b8d,
-    type: 2}
-  _damageFlashTime: 0.1
   _useHeightControl: 0
   _heightGO: {fileID: 0}
   _projectile: {fileID: 8451927325676435795, guid: cfda9bcf2cc39a54282424fcca06f77b,

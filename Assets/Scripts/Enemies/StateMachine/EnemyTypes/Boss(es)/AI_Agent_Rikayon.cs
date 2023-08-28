@@ -85,7 +85,7 @@ public class AI_Agent_Rikayon : AI_Agent_Enemy
     public override void CheckForBossStage()
     {
 
-        if (HealthComponent._currentHealth <= HealthComponent._maxHealth / 2.5 && _currentBossStage == 0)
+        if (HealthComponent.currentHealth <= HealthComponent.maxHealth / 2.5 && _currentBossStage == 0)
         {
             transform.LookAt(PlayerTransform);
 
@@ -93,7 +93,7 @@ public class AI_Agent_Rikayon : AI_Agent_Enemy
 
             Animator.SetTrigger("bossStage1");
             _currentBossStage = 1;
-            HealthComponent._canTakeDamage = false;
+            HealthComponent.canTakeDamage = false;
 
             NavMeshAgent.speed *= _bossStageMovementMultiplier.x;
             NavMeshAgent.acceleration *= _bossStageMovementMultiplier.x;
@@ -101,7 +101,7 @@ public class AI_Agent_Rikayon : AI_Agent_Enemy
             gameObject.GetComponent <AI_Agent_Rikayon> ().enabled = false;
         }
 
-        if (HealthComponent._currentHealth <= HealthComponent._maxHealth / 4.5 && _currentBossStage == 1)
+        if (HealthComponent.currentHealth <= HealthComponent.maxHealth / 4.5 && _currentBossStage == 1)
         {
             transform.LookAt(PlayerTransform);
 
@@ -109,7 +109,7 @@ public class AI_Agent_Rikayon : AI_Agent_Enemy
 
             Animator.SetTrigger("bossStage2");
             _currentBossStage = 2;
-            HealthComponent._canTakeDamage = false;
+            HealthComponent.canTakeDamage = false;
 
             NavMeshAgent.speed /= _bossStageMovementMultiplier.x;
             NavMeshAgent.acceleration /= _bossStageMovementMultiplier.x;

@@ -12,10 +12,10 @@ public class HealthDrop : MonoBehaviour
         {
             HealthComponent hp = other.GetComponent<HealthComponent>();
 
-            hp._currentHealth += _healAmount;
-            if(hp._currentHealth > hp._maxHealth)
+            hp.currentHealth += _healAmount;
+            if(hp.currentHealth > hp.maxHealth)
             {
-                hp._currentHealth = hp._maxHealth;
+                hp.currentHealth = hp.maxHealth;
             }
 
             AudioManager.Instance.PlaySound("HealthPack");

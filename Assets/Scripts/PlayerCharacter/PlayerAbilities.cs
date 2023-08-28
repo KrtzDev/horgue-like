@@ -208,6 +208,7 @@ public class PlayerAbilities : MonoBehaviour
         _playerCharacter.CharacterRigidbody.velocity = Vector3.zero;
         _playerCharacter.CharacterRigidbody.useGravity = false;
         _playerCharacter.CharacterRigidbody.AddForce(forceToApply, ForceMode.Impulse);
+        _playerCharacter.healthComponent.canTakeDamage = false;
 
         DashParticleEffect();
 
@@ -232,6 +233,8 @@ public class PlayerAbilities : MonoBehaviour
         _playerMovement.CanMove = true;
         _playerCharacter.CharacterRigidbody.useGravity = true;
         IsUsingAbility = false;
+
+        _playerCharacter.healthComponent.canTakeDamage = true;
 
         ResetAbilityTimer(_dashCD);
     }

@@ -28,12 +28,12 @@ public class EnemyHealthBar : MonoBehaviour
 
     public void HandleHealthChanged(float percent)
     {
-		if (_healthComponent._isDead)
+		if (_healthComponent.isDead)
 			return;
 
         StartCoroutine(ChangeToPercent(percent));
 
-        if(_healthComponent._currentHealth < _healthComponent._maxHealth)
+        if(_healthComponent.currentHealth < _healthComponent.maxHealth)
         {
             for (int i = 0; i < transform.childCount; i++)
             {

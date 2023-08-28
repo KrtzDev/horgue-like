@@ -69,4 +69,6 @@ public class AI_Agent : MonoBehaviour
             }
         }
     }
+
+    public void SetAgentActive() => gameObject.GetComponent<AI_Agent>().enabled = true;
 }
