@@ -73,6 +73,11 @@ public class PlayerJump : MonoBehaviour
 
         if (hitColliders.Length > 0 || Physics.Raycast(this.transform.position, Vector2.down, _groundCheckY, _character.WalkLayer))
         {
+            if(IsGrounded == false)
+            {
+                AudioManager.Instance.PlaySound("Landing");
+            }
+
             IsGrounded = true;
         }
         else
@@ -94,6 +99,8 @@ public class PlayerJump : MonoBehaviour
 
         Vector2 jumpDir = new Vector2(_character.CharacterRigidbody.velocity.x, _jumpForce);
         _character.CharacterRigidbody.AddForce(jumpDir, ForceMode.Impulse);
+
+        AudioManager.Instance.PlaySound("Jump");
     }
 
     private void FallPhysics()

@@ -34,6 +34,8 @@ public class Lever : MonoBehaviour
 
         _animator.SetBool("isSwitchA", _switchA);
 
+        AudioManager.Instance.PlaySound("Lever");
+
         SwitchOutcome();
     }
 

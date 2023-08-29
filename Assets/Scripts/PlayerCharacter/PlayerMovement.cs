@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using System.Collections.Generic;
 using Unity.VisualScripting;
+using System;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -64,7 +65,7 @@ public class PlayerMovement : MonoBehaviour
 	private void Start()
 	{
         _character = GetComponent<PlayerCharacter>();
-	}
+    }
 
     private void OnEnable()
     {

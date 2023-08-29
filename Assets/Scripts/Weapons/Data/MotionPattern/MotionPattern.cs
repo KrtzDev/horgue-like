@@ -52,7 +52,7 @@ public class MotionPattern : ScriptableObject
 
 		projectile.GetComponent<Rigidbody>().velocity = projectile.transform.forward * _speed;
 
-		_lastPlayerPos = GameManager.Instance._player.transform.position;
+		LateUpdateMotion(projectile);
 	}
 
 	private void DisableGravity(Projectile projectile)

@@ -145,7 +145,7 @@ public class AbilityUI : UIButton, IPointerEnterHandler, IPointerExitHandler, IS
         ChooseAbility.instance._titleText.text = "Level Begins in";
         ChooseAbility.instance._countdownText.rectTransform.localScale = textStartScale;
 
-        if(countdown == ChooseAbility.instance._countDown)
+        if (countdown == ChooseAbility.instance._countDown)
         {
             StartCoroutine(FadeBackground());
         }
@@ -158,6 +158,8 @@ public class AbilityUI : UIButton, IPointerEnterHandler, IPointerExitHandler, IS
             }
 
             ChooseAbility.instance._countdownText.text =  "GO!!!!";
+
+            AudioManager.Instance.PlaySound("LevelCountDownGO");
 
             GameManager.Instance._currentAbility = _ability;
             
@@ -178,6 +180,8 @@ public class AbilityUI : UIButton, IPointerEnterHandler, IPointerExitHandler, IS
         else
         {
             ChooseAbility.instance._countdownText.text = "" + countdown;
+
+            AudioManager.Instance.PlaySound("LevelCountDown");
 
             while (elapsedTime < countdown + 1)
             {

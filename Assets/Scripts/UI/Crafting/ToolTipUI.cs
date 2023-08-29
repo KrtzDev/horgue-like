@@ -112,6 +112,8 @@ public class ToolTipUI : Selectable
 		if (!GameManager.Instance.inventory.Wallet.TryPay(_value))
 			return;
 
+		AudioManager.Instance.PlaySound("ShopConfirmation");
+
 		OnBuy.Invoke(this);
 		buyButton.OnButtonExecute -= Buy;
 

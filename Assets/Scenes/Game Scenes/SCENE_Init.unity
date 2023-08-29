@@ -571,16 +571,154 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sounds:
   - name: HealthPack
-    clip: {fileID: 8300000, guid: 19f89c6e740e7447f9e12a8310d3e973, type: 3}
+    clip: {fileID: 8300000, guid: 759b8927b70829747bca13090cd6920c, type: 3}
+    volume: 0.1
+    pitch: 0.9
+    loop: 0
+    source: {fileID: 0}
+  - name: Coin
+    clip: {fileID: 8300000, guid: 759b8927b70829747bca13090cd6920c, type: 3}
+    volume: 0.075
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Dash
+    clip: {fileID: 8300000, guid: e02f713fbd993944ea9fe19b6c27ba09, type: 3}
+    volume: 0.1
+    pitch: 0.75
+    loop: 0
+    source: {fileID: 0}
+  - name: Steps
+    clip: {fileID: 8300000, guid: 170c5829184cd3e459709d277f192a61, type: 3}
+    volume: 0.05
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: TakeDamage
+    clip: {fileID: 8300000, guid: 0a7fc0cff50d7994082be858ca62dbbe, type: 3}
+    volume: 0.075
+    pitch: 0.9
+    loop: 0
+    source: {fileID: 0}
+  - name: Landing
+    clip: {fileID: 8300000, guid: a52b40ee8b5e18d4685734e25d3ce6b3, type: 3}
+    volume: 0.05
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Jump
+    clip: {fileID: 8300000, guid: eda86c2e8e94c47489e01caf847d2367, type: 3}
+    volume: 0.075
+    pitch: 0.9
+    loop: 0
+    source: {fileID: 0}
+  - name: HitIndicator
+    clip: {fileID: 8300000, guid: 034bd9b342d8d9f4aa71c9191ec28f54, type: 3}
+    volume: 0.025
+    pitch: 0.8
+    loop: 0
+    source: {fileID: 0}
+  - name: HitIndicatorCrit
+    clip: {fileID: 8300000, guid: b1d48330e4ec148499a79a9244d2c36f, type: 3}
+    volume: 0.025
+    pitch: 0.8
+    loop: 0
+    source: {fileID: 0}
+  - name: RikayonScream
+    clip: {fileID: 8300000, guid: afb54bbb6ba01794d932d6c91ce28649, type: 3}
+    volume: 0.075
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: RikayonGrowl
+    clip: {fileID: 8300000, guid: fc085f87b3cf89a488ca87a928ae42ec, type: 3}
+    volume: 0.075
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: WeaponReload
+    clip: {fileID: 8300000, guid: e7ee18bfb1a856940b8876c4fe8be82f, type: 3}
+    volume: 0.08
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: WeaponShot
+    clip: {fileID: 8300000, guid: 884dbdf50ffeace478a61c955ece2fdb, type: 3}
+    volume: 0.08
+    pitch: 1.25
+    loop: 0
+    source: {fileID: 0}
+  - name: Chest
+    clip: {fileID: 8300000, guid: 7ecea5f0630cec44886f7eb4b03ecca6, type: 3}
     volume: 0.1
     pitch: 1
     loop: 0
     source: {fileID: 0}
-  - name: Coin
-    clip: {fileID: 8300000, guid: ffb159a21c8a04135a5616979c828fab, type: 3}
-    volume: 0.075
+  - name: TrapSpikes
+    clip: {fileID: 8300000, guid: 8b4eb77c80318394e9cd5347344e0564, type: 3}
+    volume: 0.1
     pitch: 1
     loop: 0
+    source: {fileID: 0}
+  - name: Turret
+    clip: {fileID: 8300000, guid: 48128f91d74ad8f40a5b6f1f61e1ad4f, type: 3}
+    volume: 0.1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Lever
+    clip: {fileID: 8300000, guid: 7a1e27cf45ee00b449d7ef19292bf6b1, type: 3}
+    volume: 0.1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Swamp
+    clip: {fileID: 8300000, guid: e0af5d1440d38a241ad55914a7bfc12e, type: 3}
+    volume: 0.035
+    pitch: 1
+    loop: 1
+    source: {fileID: 0}
+  - name: LevelCountDown
+    clip: {fileID: 8300000, guid: 4e072edf2bca1164caa76216d910a0a1, type: 3}
+    volume: 0.1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: LevelCountDownGO
+    clip: {fileID: 8300000, guid: 4e072edf2bca1164caa76216d910a0a1, type: 3}
+    volume: 0.125
+    pitch: 0.95
+    loop: 0
+    source: {fileID: 0}
+  - name: LevelConfirmation
+    clip: {fileID: 8300000, guid: 5b4aaf758e1bc0444a49e2c5a0a702aa, type: 3}
+    volume: 0.175
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: WaveConfirmation
+    clip: {fileID: 8300000, guid: e0d04ebd444760942b155a4b3ecb4b7e, type: 3}
+    volume: 0.175
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: ShopConfirmation
+    clip: {fileID: 8300000, guid: 820efe01f51af5248b09a483f5e206dc, type: 3}
+    volume: 0.15
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: ButtonSelect
+    clip: {fileID: 8300000, guid: 70b08b55872eb5b49aff8e989eb98680, type: 3}
+    volume: 0.1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Theme
+    clip: {fileID: 8300000, guid: e43eea53cb71fe34cae5702b62775852, type: 3}
+    volume: 0.05
+    pitch: 1.1
+    loop: 1
     source: {fileID: 0}
 --- !u!1001 &1497091691
 PrefabInstance:

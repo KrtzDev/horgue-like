@@ -598,7 +598,7 @@ public class Weapon : ScriptableObject
 			_shotDelay = 1 / weaponStats.attackspeed;
 
 			_currentWeaponSkeleton.MuzzleFlash.Play();
-			StatsTracker.Instance.shotsFiredLevel++;
+			AudioManager.Instance.PlaySound("WeaponShot");
 		}
 	}
 
@@ -683,6 +683,7 @@ public class Weapon : ScriptableObject
 	private async void Reload()
 	{
 		await Task.Delay((int)(_reloadTime * 1000));
+		AudioManager.Instance.PlaySound("WeaponReload");
 
 		_capacity = magazine.capacity;
 		_isReloading = false;

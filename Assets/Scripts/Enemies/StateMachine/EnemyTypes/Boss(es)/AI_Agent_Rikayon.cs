@@ -126,7 +126,7 @@ public class AI_Agent_Rikayon : AI_Agent_Enemy
         // Spray attack in cone shape infront of Rikayon
         // Intimidate 1
 
-        switch(_currentBossStage)
+        switch (_currentBossStage)
         {
             case 0:
                 SprayAttackAbility(_bossStageSpeedMultiplier_Spray.x, _bossStageAngle_Spray.x);
@@ -138,12 +138,14 @@ public class AI_Agent_Rikayon : AI_Agent_Enemy
                 SprayAttackAbility(_bossStageSpeedMultiplier_Spray.z, _bossStageAngle_Spray.z);
                 break;
         }
+
     }
 
     private void SprayAttackAbility(float currentSpeedMultiplier, int currentAngle)
     {
         if (!_sprayAttackActive)
         {
+            AudioManager.Instance.PlaySound("RikayonScream");
             _sprayAttackActive = true;
 
             GameObject sprayAttack;
@@ -172,6 +174,8 @@ public class AI_Agent_Rikayon : AI_Agent_Enemy
         // Spawn Spikes around Rikayon
         // Move Spikes slowly outwards
         // Make Spikes dissapear after x Seconds
+
+        AudioManager.Instance.PlaySound("RikayonGrowl");
 
         switch (_spikeAttackNumber)
         {
@@ -270,6 +274,8 @@ public class AI_Agent_Rikayon : AI_Agent_Enemy
     {
         // Spits semi-lingering toxic waste into the air which falls onto the ground (near the player and on the NavMesh) and stays for a while
         // Intimidate 3
+
+        AudioManager.Instance.PlaySound("RikayonGrowl");
 
         switch (_currentBossStage)
         {

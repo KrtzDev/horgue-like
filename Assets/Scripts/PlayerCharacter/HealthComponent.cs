@@ -51,6 +51,7 @@ public class HealthComponent : MonoBehaviour
             if (gameObject.CompareTag("Player"))
             {
                 FindObjectOfType<UIDamageFlash>().DamageFlash(0.25f, .4f, .2f);
+                AudioManager.Instance.PlaySound("TakeDamage");
 
                 if (currentHealth <= 0 && !isDead)
                 {
