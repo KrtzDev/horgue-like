@@ -23,7 +23,7 @@ public class Rikayon_ToxicSpit : MonoBehaviour
         ps = GetComponent<ParticleSystem>();
         _player = GameObject.FindWithTag("Player");
         ps.trigger.AddCollider(_player.GetComponent<BoxCollider>());
-        _damagePerTick = (int)(_rikayon._enemyData._damagePerHit / 10);
+        _damagePerTick = (int)(_rikayon._enemyData._damagePerHit / 8);
 
         _damageTimer = 0;
         _lifeTimer = 0;
@@ -51,15 +51,15 @@ public class Rikayon_ToxicSpit : MonoBehaviour
                 switch (_rikayon._currentBossStage)
                 {
                     case 0:
-                        ps.trigger.GetCollider(0).GetComponent<HealthComponent>().TakeDamage(_damagePerTick);
+                        ps.trigger.GetCollider(0).GetComponent<HealthComponent>().TakeDamage(_damagePerTick, true);
                         _damageTimer = _damageTime;
                         break;
                     case 1:
-                        ps.trigger.GetCollider(0).GetComponent<HealthComponent>().TakeDamage((int)(_damagePerTick * _bossStageDamageMultiplier.x));
+                        ps.trigger.GetCollider(0).GetComponent<HealthComponent>().TakeDamage((int)(_damagePerTick * _bossStageDamageMultiplier.x), true);
                         _damageTimer = _damageTime;
                         break;
                     case 2:
-                        ps.trigger.GetCollider(0).GetComponent<HealthComponent>().TakeDamage((int)(_damagePerTick * _bossStageDamageMultiplier.y));
+                        ps.trigger.GetCollider(0).GetComponent<HealthComponent>().TakeDamage((int)(_damagePerTick * _bossStageDamageMultiplier.y), true);
                         _damageTimer = _damageTime;
                         break;
                 }

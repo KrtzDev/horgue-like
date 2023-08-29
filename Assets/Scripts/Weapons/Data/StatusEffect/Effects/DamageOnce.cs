@@ -14,7 +14,7 @@
 
 	public override void Tick(float delta)
 	{
-		_enemyHealth.TakeDamage((int)_additionalDamage);
+		_enemyHealth.TakeDamage((int)_additionalDamage, false);
 
 		OnEffectTicked?.Invoke(this);
 		OnEffectEnded?.Invoke(this);

@@ -11,14 +11,14 @@ public class Spikes : MonoBehaviour
         {
             if (other.GetComponent<HealthComponent>() != null)
             {
-                other.GetComponent<HealthComponent>().TakeDamage(_trapDamage);
+                other.GetComponent<HealthComponent>().TakeDamage(_trapDamage, false);
             }
         }
         else if (other.CompareTag("Player"))
         {
             if (other.GetComponent<HealthComponent>() != null)
             {
-                other.GetComponent<HealthComponent>().TakeDamage(_trapDamage);
+                other.GetComponent<HealthComponent>().TakeDamage(_trapDamage, false);
             }
         }
     }

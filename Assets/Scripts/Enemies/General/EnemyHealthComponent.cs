@@ -25,9 +25,9 @@ public class EnemyHealthComponent : HealthComponent
         _healthDropChance = (int)(_enemy._enemyData._healthDropChance * 100);
     }
 
-    public override void TakeDamage(int damage)
+    public override void TakeDamage(int damage, bool damageOverTime)
     {
-        base.TakeDamage(damage);
+        base.TakeDamage(damage, false);
 
 		ParticleSystem hitParticle = _hitParticle;
 		Instantiate(hitParticle, _hitParticlePosition.position, Quaternion.identity);

@@ -47,7 +47,7 @@ public class Explosion : MonoBehaviour
 
             if (hitCollider.GetComponent<HealthComponent>() != null)
             {
-                hitCollider.GetComponent<HealthComponent>().TakeDamage(_explosionDamage);
+                hitCollider.GetComponent<HealthComponent>().TakeDamage(_explosionDamage, false);
             }
 
             StartCoroutine(Despawn());

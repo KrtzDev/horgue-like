@@ -40,7 +40,7 @@ public class HealthComponent : MonoBehaviour
         }
     }
 
-    public virtual void TakeDamage(int damage)
+    public virtual void TakeDamage(int damage, bool damageOverTime)
 	{
 		if(canTakeDamage)
         {
@@ -51,17 +51,23 @@ public class HealthComponent : MonoBehaviour
             if (gameObject.CompareTag("Player"))
             {
                 FindObjectOfType<UIDamageFlash>().DamageFlash(0.25f, .4f, .2f);
-                canTakeDamage = false;
 
                 if (currentHealth <= 0 && !isDead)
                 {
                     GameManager.Instance.PlayerDied();
                     isDead = true;
+                    canTakeDamage = false;
+                    return;
                 }
                 else
                 {
-                    _playerDamageBlinkTimer = gameObject.GetComponent<PlayerCharacter>().playerData.invincibilityTime;
-                    StartCoroutine(PlayerCanTakeDamage());
+                    if (!damageOverTime)
+                    {
+                        _playerDamageBlinkTimer = gameObject.GetComponent<PlayerCharacter>().playerData.invincibilityTime;
+
+                        canTakeDamage = false;
+                        StartCoroutine(PlayerCanTakeDamage());
+                    }
                 }
             }
             else

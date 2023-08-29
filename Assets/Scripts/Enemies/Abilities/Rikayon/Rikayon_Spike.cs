@@ -18,13 +18,13 @@ public class Rikayon_Spike : MonoBehaviour
             switch (_rikayon._currentBossStage)
             {
                 case 0:
-                    other.GetComponent<HealthComponent>().TakeDamage(_damageOnTrigger);
+                    other.GetComponent<HealthComponent>().TakeDamage(_damageOnTrigger, false);
                     break;
                 case 1:
-                    other.GetComponent<HealthComponent>().TakeDamage((int)(_damageOnTrigger * _bossStageDamageMultiplier.x));
+                    other.GetComponent<HealthComponent>().TakeDamage((int)(_damageOnTrigger * _bossStageDamageMultiplier.x), false);
                     break;
                 case 2:
-                    other.GetComponent<HealthComponent>().TakeDamage((int)(_damageOnTrigger * _bossStageDamageMultiplier.y));
+                    other.GetComponent<HealthComponent>().TakeDamage((int)(_damageOnTrigger * _bossStageDamageMultiplier.y), false);
                     break;
             }
 
@@ -36,6 +36,6 @@ public class Rikayon_Spike : MonoBehaviour
     {
         _rikayon = GameObject.FindObjectOfType<AI_Agent_Rikayon>();
         _hasDamaged = false;
-        _damageOnTrigger = (int)(_rikayon._enemyData._damagePerHit / 3);
+        _damageOnTrigger = (int)(_rikayon._enemyData._damagePerHit / 2);
     }
 }

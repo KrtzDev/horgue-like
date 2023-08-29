@@ -19,7 +19,7 @@ public class EnemyMeleeDamageInAnimation : MonoBehaviour
             {
                 if(!didDamage)
                 {
-                    other.GetComponent<HealthComponent>().TakeDamage(gameObject.GetComponentInParent<AI_Agent_Enemy>().damagePerHit);
+                    other.GetComponent<HealthComponent>().TakeDamage(gameObject.GetComponentInParent<AI_Agent_Enemy>().damagePerHit, false);
                     didDamage = true;
                 }
             }

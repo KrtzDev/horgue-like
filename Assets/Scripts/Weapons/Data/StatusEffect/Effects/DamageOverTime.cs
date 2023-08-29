@@ -26,7 +26,7 @@
 			return;
 		}
 
-		_enemyhealth.TakeDamage((int)_dotDamage);
+		_enemyhealth.TakeDamage((int)_dotDamage, true);
 		OnEffectTicked.Invoke(this);
 	}
 

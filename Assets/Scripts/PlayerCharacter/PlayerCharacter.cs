@@ -48,7 +48,7 @@ public class PlayerCharacter : MonoBehaviour
     {
         if(collision.collider.CompareTag("Wasser") && _waterDamageTimer <= 0)
         {
-            this.GetComponent<HealthComponent>().TakeDamage(1);
+            this.GetComponent<HealthComponent>().TakeDamage(2, true);
             _waterDamageTimer = 0.5f;
         }
 

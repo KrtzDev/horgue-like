@@ -21,7 +21,7 @@ public class SentryProjectile_AttackPlayer : MonoBehaviour
                 // Damage? 
                 if (other.GetComponent<HealthComponent>() != null)
                 {
-                    other.GetComponent<HealthComponent>().TakeDamage(baseDamage);
+                    other.GetComponent<HealthComponent>().TakeDamage(baseDamage, false);
                 }
                 Destroy(gameObject);
             }

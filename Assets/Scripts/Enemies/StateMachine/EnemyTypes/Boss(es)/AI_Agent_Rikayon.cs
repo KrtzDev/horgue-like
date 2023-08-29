@@ -304,7 +304,7 @@ public class AI_Agent_Rikayon : AI_Agent_Enemy
     {
         if(other.gameObject.CompareTag("Player") && _damageTimer <= 0)
         {
-            other.GetComponent<HealthComponent>().TakeDamage(_damageOnTouch);
+            other.GetComponent<HealthComponent>().TakeDamage(_damageOnTouch, true);
             _damageTimer = _damageTime;
         }
     }

@@ -63,7 +63,7 @@ public class Projectile : DamageDealer
 			if (finalCritChance > UnityEngine.Random.Range(0, 100)) // Can crit?
 				finalBaseDamage *= finalCritDamage; // Apply Crit Damage
 
-			health.TakeDamage((int)finalBaseDamage);
+			health.TakeDamage((int)finalBaseDamage, false);
 
 			if (statusEffect != null)
 			{
