@@ -599,6 +599,7 @@ public class Weapon : ScriptableObject
 
 			_currentWeaponSkeleton.MuzzleFlash.Play();
 			AudioManager.Instance.PlaySound("WeaponShot");
+			StatsTracker.Instance.shotsFiredLevel++;
 		}
 	}
 

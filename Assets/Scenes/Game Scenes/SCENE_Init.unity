@@ -573,13 +573,13 @@ MonoBehaviour:
   - name: HealthPack
     clip: {fileID: 8300000, guid: 759b8927b70829747bca13090cd6920c, type: 3}
     volume: 0.1
-    pitch: 0.9
+    pitch: 1.1
     loop: 0
     source: {fileID: 0}
   - name: Coin
     clip: {fileID: 8300000, guid: 759b8927b70829747bca13090cd6920c, type: 3}
     volume: 0.075
-    pitch: 1
+    pitch: 1.25
     loop: 0
     source: {fileID: 0}
   - name: Dash
@@ -674,7 +674,7 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: Swamp
     clip: {fileID: 8300000, guid: e0af5d1440d38a241ad55914a7bfc12e, type: 3}
-    volume: 0.035
+    volume: 0.025
     pitch: 1
     loop: 1
     source: {fileID: 0}
@@ -687,7 +687,7 @@ MonoBehaviour:
   - name: LevelCountDownGO
     clip: {fileID: 8300000, guid: 4e072edf2bca1164caa76216d910a0a1, type: 3}
     volume: 0.125
-    pitch: 0.95
+    pitch: 1.02
     loop: 0
     source: {fileID: 0}
   - name: LevelConfirmation
@@ -716,7 +716,7 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: Theme
     clip: {fileID: 8300000, guid: e43eea53cb71fe34cae5702b62775852, type: 3}
-    volume: 0.05
+    volume: 0.04
     pitch: 1.1
     loop: 1
     source: {fileID: 0}

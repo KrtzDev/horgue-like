@@ -102,6 +102,8 @@ public class GameManager : Singleton<GameManager>
 			AudioManager.Instance.StopSound("Theme", 0f);
 			AudioManager.Instance.PlaySound("Theme");
 
+			StatsTracker.Instance.ResetAllStats();
+
 			return;
 		}
 
@@ -114,6 +116,8 @@ public class GameManager : Singleton<GameManager>
 			_winningCondition = WinningCondition.SurviveForTime;
 		 	killedBoss = false;
 		}
+
+		StatsTracker.Instance.ResetLevelStats();
 
 		_gameDataReader.GetGameData();
 		_gameDataReader.SetGameData();
@@ -201,6 +205,8 @@ public class GameManager : Singleton<GameManager>
 		_enemyCount--;
 		_enemiesKilled++;
 
+		StatsTracker.Instance.enemiesKilledLevel++;
+
 		// alle Gegner get�tet
 
 		if (!_hasWon && _neededEnemyKill == 0 && _winningCondition == WinningCondition.KillAllEnemies)
@@ -228,6 +234,7 @@ public class GameManager : Singleton<GameManager>
 	private void RoundWon()
 	{
 		AudioManager.Instance.PlaySound("LevelConfirmation");
+		StatsTracker.Instance.AddLevelStatsToTotal();
 
 		Debug.Log("Round won");
 		InputManager.Instance.CharacterInputActions.Disable();
@@ -260,6 +267,7 @@ public class GameManager : Singleton<GameManager>
 	private void RoundLost()
 	{
 		Debug.Log("Round Lost");
+		StatsTracker.Instance.AddLevelStatsToTotal();
 		InputManager.Instance.CharacterInputActions.Disable();
 		UIManager.Instance.ShowLevelEndScreen(LevelStatus.Lost);
 		UIManager.Instance.WaveEndScreen.gameObject.SetActive(false);
