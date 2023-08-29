@@ -102,5 +102,5 @@ public class ChooseAbility: MonoBehaviour
 		}
 
 		instance.AbilityParent.GetChild(0).GetComponent<AbilityUI>().Select();
-	}
+    }
 }
