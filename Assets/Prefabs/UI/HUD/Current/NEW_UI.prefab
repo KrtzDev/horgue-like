@@ -3752,6 +3752,8 @@ MonoBehaviour:
   _backGroundColor: {r: 0.9176471, g: 0.16078432, b: 0.050980397, a: 0}
   _textureImage: {fileID: 7958765078388093599}
   _posOffset: {x: 250, y: 125}
+  _cam: {fileID: 0}
+  _screenShakeIntensity: 1.5
 --- !u!1 &6830427890891645879
 GameObject:
   m_ObjectHideFlags: 0

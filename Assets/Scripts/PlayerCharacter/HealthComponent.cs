@@ -21,6 +21,8 @@ public class HealthComponent : MonoBehaviour
 
     private float _playerDamageBlinkTimer;
 
+    [SerializeField] private float _secondsForOneFlash = 0.25f;
+
     protected virtual void Awake()
 	{
 		canTakeDamage = true;
@@ -50,7 +52,7 @@ public class HealthComponent : MonoBehaviour
 
             if (gameObject.CompareTag("Player"))
             {
-                FindObjectOfType<UIDamageFlash>().DamageFlash(0.25f, .4f, .2f);
+                FindObjectOfType<UIDamageFlash>().DamageFlash(_secondsForOneFlash, .4f, .2f);
                 canTakeDamage = false;
 
                 if (currentHealth <= 0 && !isDead)

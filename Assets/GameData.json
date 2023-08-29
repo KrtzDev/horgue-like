@@ -22,7 +22,7 @@
     {
       "name": "RangedRobot",
       "maxHealth": 0.45,
-      "damagePerHit": 1.5,
+      "damagePerHit": 1.7,
       "attackSpeed": 1.5,
       "givenXP": 4,
       "maxMoveSpeed": 10,
@@ -32,8 +32,8 @@
       "technicalResistance": 0,
       "healthDropChance": 0.025,
       "baseDmgMultiplier": 1,
-      "dmgModifier": 0.25,
-      "addDmgModifier": 0.0125,
+      "dmgModifier": 0.275,
+      "addDmgModifier": 0.0225,
       "baseHealthMultiplier": 1,
       "healthModifier": 0.1,
       "addHealthModifier": 0.075
@@ -41,9 +41,9 @@
     {
       "name": "PasuKan",
       "maxHealth": 0.9,
-      "damagePerHit": 1,
+      "damagePerHit": 1.2,
       "attackSpeed": 2.5,
-      "givenXP": 7,
+      "givenXP": 5,
       "maxMoveSpeed": 11,
       "acceleration": 10,
       "armor": 100,
@@ -51,8 +51,8 @@
       "technicalResistance": -50,
       "healthDropChance": 0.075,
       "baseDmgMultiplier": 1,
-      "dmgModifier": 0.25,
-      "addDmgModifier": 0.0125,
+      "dmgModifier": 0.275,
+      "addDmgModifier": 0.0225,
       "baseHealthMultiplier": 1,
       "healthModifier": 0.1,
       "addHealthModifier": 0.075
@@ -60,9 +60,9 @@
     {
       "name": "GIGARangedRobot",
       "maxHealth": 0.75,
-      "damagePerHit": 2.2,
+      "damagePerHit": 2.4,
       "attackSpeed": 2.5,
-      "givenXP": 12,
+      "givenXP": 7,
       "maxMoveSpeed": 9,
       "acceleration": 6,
       "armor": 35,
@@ -70,8 +70,8 @@
       "technicalResistance": 0,
       "healthDropChance": 0.05,
       "baseDmgMultiplier": 1,
-      "dmgModifier": 0.25,
-      "addDmgModifier": 0.0125,
+      "dmgModifier": 0.275,
+      "addDmgModifier": 0.0225,
       "baseHealthMultiplier": 1,
       "healthModifier": 0.1,
       "addHealthModifier": 0.075
@@ -79,9 +79,9 @@
     {
       "name": "Rikayon",
       "maxHealth": 75,
-      "damagePerHit": 2.5,
+      "damagePerHit": 4,
       "attackSpeed": 1,
-      "givenXP": 500,
+      "givenXP": 0,
       "maxMoveSpeed": 10,
       "acceleration": 15,
       "armor": 100,
@@ -98,9 +98,9 @@
     {
       "name": "Drone",
       "maxHealth": 0.25,
-      "damagePerHit": 0.3,
+      "damagePerHit": 0.5,
       "attackSpeed": 2.25,
-      "givenXP": 2,
+      "givenXP": 3,
       "maxMoveSpeed": 5,
       "acceleration": 6,
       "armor": 10,
@@ -108,8 +108,8 @@
       "technicalResistance": 25,
       "healthDropChance": 0,
       "baseDmgMultiplier": 1,
-      "dmgModifier": 0.25,
-      "addDmgModifier": 0.0125,
+      "dmgModifier": 0.275,
+      "addDmgModifier": 0.0225,
       "baseHealthMultiplier": 1,
       "healthModifier": 0.1,
       "addHealthModifier": 0.075
@@ -117,9 +117,9 @@
     {
       "name": "Orc",
       "maxHealth": 1.55,
-      "damagePerHit": 0.7,
+      "damagePerHit": 0.9,
       "attackSpeed": 3,
-      "givenXP": 8,
+      "givenXP": 6,
       "maxMoveSpeed": 9,
       "acceleration": 7,
       "armor": 200,
@@ -127,8 +127,8 @@
       "technicalResistance": -100,
       "healthDropChance": 0.075,
       "baseDmgMultiplier": 1,
-      "dmgModifier": 0.25,
-      "addDmgModifier": 0.0125,
+      "dmgModifier": 0.275,
+      "addDmgModifier": 0.0225,
       "baseHealthMultiplier": 1,
       "healthModifier": 0.1,
       "addHealthModifier": 0.075
@@ -313,7 +313,7 @@
       "movementSpeed": 10,
       "maxHealth": 250,
       "levelMultiplier": 0.2,
-      "invincibilityTime": 0.5
+      "invincibilityTime": 0.35
     }
   ],
   "Firearm": [
@@ -326,6 +326,7 @@
       "criticalHitDamage": 1.5,
       "projectileWidth": 0.1,
       "range": 13,
+      "cost": 75,
       "maxAttackSpeed": 5,
       "maxCooldown": 5,
       "maxCriticalHitChance": 100,
@@ -349,30 +350,33 @@
       "criticalHitChance": 10,
       "criticalHitDamage": 1.5,
       "projectileWidth": 0.1,
-      "range": 13
+      "range": 13,
+      "cost": 75
     },
     {
       "name": "Antique Frag Grenade",
       "effect": "Dismemberment",
       "numberOfGems": 0,
-      "attackSpeed": -0.35,
+      "attackSpeed": -0.35000000000000003,
       "baseDamage": 0.95,
       "cooldown": 0.5,
       "criticalHitChance": 0,
       "criticalHitDamage": 0.1,
       "projectileWidth": 0.6,
-      "range": -0.35
+      "range": -0.35,
+      "cost": 2.5
     },
     {
       "name": "Caliber .308",
       "numberOfGems": 0,
       "attackSpeed": 0.55,
-      "baseDamage": 0.45,
-      "cooldown": 0.35,
+      "baseDamage": 0.44999999999999996,
+      "cooldown": 0.35000000000000003,
       "criticalHitChance": 0.2,
       "criticalHitDamage": 0.15,
       "projectileWidth": 0,
-      "range": 0.35
+      "range": 0.35000000000000003,
+      "cost": 1.5
     },
     {
       "name": "Caliber .38",
@@ -383,18 +387,20 @@
       "criticalHitChance": 0.25,
       "criticalHitDamage": 0,
       "projectileWidth": -0.1,
-      "range": 0.15
+      "range": 0.15,
+      "cost": 1
     },
     {
       "name": "Caliber 5.3",
       "numberOfGems": 0,
       "attackSpeed": 0.3,
-      "baseDamage": 0.35,
+      "baseDamage": 0.35000000000000003,
       "cooldown": 0.25,
       "criticalHitChance": 0.3,
       "criticalHitDamage": 0,
       "projectileWidth": -0.1,
-      "range": 0.2
+      "range": 0.2,
+      "cost": 1
     },
     {
       "name": "Frag Grenade",
@@ -406,55 +412,60 @@
       "criticalHitChance": 0,
       "criticalHitDamage": 0.15,
       "projectileWidth": 0.5,
-      "range": -0.4
+      "range": -0.4,
+      "cost": 2
     },
     {
       "name": "Gremlin",
       "effect": "Chaining (4)",
       "numberOfGems": 0,
       "attackSpeed": 0.6,
-      "baseDamage": 0.7,
+      "baseDamage": 0.7000000000000001,
       "cooldown": 0.6,
       "criticalHitChance": 0,
       "criticalHitDamage": 0.2,
       "projectileWidth": 0.4,
-      "range": 0.4
+      "range": 0.4,
+      "cost": 2
     },
     {
       "name": "Hot Laser Cell",
       "effect": "Piercing, Fire (15%, 25%, 10 s, 10 dp/s, 15%)",
       "numberOfGems": 0,
-      "attackSpeed": 0.9,
-      "baseDamage": 0.9,
-      "cooldown": 0.45,
+      "attackSpeed": 0.8999999999999999,
+      "baseDamage": 0.8999999999999999,
+      "cooldown": 0.44999999999999996,
       "criticalHitChance": 0.15,
       "criticalHitDamage": 0.25,
       "projectileWidth": -0.6,
-      "range": 0.75
+      "range": 0.75,
+      "cost": 2.5
     },
     {
       "name": "Laser Cell",
       "effect": "Piercing",
       "numberOfGems": 0,
-      "attackSpeed": 0.9,
+      "attackSpeed": 0.8999999999999999,
       "baseDamage": 0.8,
       "cooldown": 0.25,
       "criticalHitChance": 0.15,
       "criticalHitDamage": 0.2,
       "projectileWidth": -0.6,
-      "range": 0.75
+      "range": 0.75,
+      "cost": 2.5
     },
     {
       "name": "Nail",
       "effect": "Piercing",
       "numberOfGems": 0,
-      "attackSpeed": 0.45,
-      "baseDamage": 0.35,
+      "attackSpeed": 0.44999999999999996,
+      "baseDamage": 0.35000000000000003,
       "cooldown": -0.2,
       "criticalHitChance": 0.15,
       "criticalHitDamage": 0.2,
       "projectileWidth": -0.4,
-      "range": 0.25
+      "range": 0.25,
+      "cost": 2
     },
     {
       "name": "Rusty Nail",
@@ -464,9 +475,10 @@
       "baseDamage": 1.1,
       "cooldown": 0,
       "criticalHitChance": 0.5,
-      "criticalHitDamage": 0.45,
+      "criticalHitDamage": 0.44999999999999996,
       "projectileWidth": -0.8,
-      "range": 1.5
+      "range": 1.5,
+      "cost": 3
     },
     {
       "name": "Sans Plombe 95",
@@ -478,18 +490,20 @@
       "criticalHitChance": 0,
       "criticalHitDamage": 0,
       "projectileWidth": 0.15,
-      "range": -0.15
+      "range": -0.15,
+      "cost": 2.5
     },
     {
       "name": "Spiked Basketball",
       "numberOfGems": 0,
-      "attackSpeed": -0.35,
-      "baseDamage": 0.85,
+      "attackSpeed": -0.35000000000000003,
+      "baseDamage": 0.8500000000000001,
       "cooldown": 0.3,
       "criticalHitChance": 0,
       "criticalHitDamage": 0.05,
       "projectileWidth": 0.75,
-      "range": -0.45
+      "range": -0.44999999999999996,
+      "cost": 2.5
     }
   ],
   "Barrel": [
@@ -503,7 +517,8 @@
       "criticalHitChance": 10,
       "criticalHitDamage": 1.5,
       "projectileWidth": 0.1,
-      "range": 13
+      "range": 13,
+      "cost": 75
     },
     {
       "name": "Brainified Conical Steel Nickle Barrel",
@@ -517,7 +532,8 @@
       "criticalHitChance": 0.15,
       "criticalHitDamage": 0.15,
       "projectileWidth": 0.1,
-      "range": 0.25
+      "range": 0.25,
+      "cost": 1.5
     },
     {
       "name": "Chrome Lined Rifle Barrel",
@@ -530,7 +546,8 @@
       "criticalHitChance": 0.2,
       "criticalHitDamage": 0,
       "projectileWidth": 0,
-      "range": 0.3
+      "range": 0.3,
+      "cost": 1.5
     },
     {
       "name": "Electron Polymer Pistol Barrel",
@@ -543,7 +560,8 @@
       "criticalHitChance": 0,
       "criticalHitDamage": 0,
       "projectileWidth": 0.1,
-      "range": -0.4
+      "range": -0.4,
+      "cost": 2
     },
     {
       "name": "Garden Hose",
@@ -556,7 +574,8 @@
       "criticalHitChance": 0,
       "criticalHitDamage": 0,
       "projectileWidth": 0,
-      "range": 0.44999999999999996
+      "range": 0.44999999999999996,
+      "cost": 2
     },
     {
       "name": "Gold Alloyed Titanium Coil",
@@ -569,7 +588,8 @@
       "criticalHitChance": 0.1,
       "criticalHitDamage": 0.15,
       "projectileWidth": 0,
-      "range": 0.5
+      "range": 0.5,
+      "cost": 2
     },
     {
       "name": "Iron Revolver Barrel",
@@ -582,7 +602,8 @@
       "criticalHitChance": 0,
       "criticalHitDamage": 0,
       "projectileWidth": 0.1,
-      "range": 0
+      "range": 0,
+      "cost": 1
     },
     {
       "name": "Motivating Tube",
@@ -595,7 +616,8 @@
       "criticalHitChance": 0.75,
       "criticalHitDamage": 0.35000000000000003,
       "projectileWidth": 0.3,
-      "range": 0.15
+      "range": 0.15,
+      "cost": 2.5
     },
     {
       "name": "Neuroplastic Splicer",
@@ -608,7 +630,8 @@
       "criticalHitChance": 0.8,
       "criticalHitDamage": 0.5,
       "projectileWidth": 0.05,
-      "range": -0.5
+      "range": -0.5,
+      "cost": 3
     },
     {
       "name": "Neuroplastic Tube",
@@ -621,7 +644,8 @@
       "criticalHitChance": 0,
       "criticalHitDamage": 0,
       "projectileWidth": 0,
-      "range": -0.2
+      "range": -0.2,
+      "cost": 1.5
     },
     {
       "name": "Oil Funnel",
@@ -634,7 +658,8 @@
       "criticalHitChance": 0.1,
       "criticalHitDamage": 0,
       "projectileWidth": 0,
-      "range": 0.3
+      "range": 0.3,
+      "cost": 1.5
     },
     {
       "name": "Soviet Steel Barrel",
@@ -647,7 +672,8 @@
       "criticalHitChance": 0.05,
       "criticalHitDamage": 0.05,
       "projectileWidth": 0,
-      "range": 0
+      "range": 0,
+      "cost": 1
     },
     {
       "name": "Spout",
@@ -660,7 +686,8 @@
       "criticalHitChance": 0,
       "criticalHitDamage": 0,
       "projectileWidth": 0,
-      "range": 0
+      "range": 0,
+      "cost": 1.5
     },
     {
       "name": "Spud Gun Tube",
@@ -673,7 +700,8 @@
       "criticalHitChance": 0.05,
       "criticalHitDamage": 0,
       "projectileWidth": 0.25,
-      "range": 0.5
+      "range": 0.5,
+      "cost": 2
     },
     {
       "name": "Stapler",
@@ -687,7 +715,8 @@
       "criticalHitChance": -0.1,
       "criticalHitDamage": 0,
       "projectileWidth": 0,
-      "range": -0.15
+      "range": -0.15,
+      "cost": 1.5
     },
     {
       "name": "Wide Long Dispenser",
@@ -700,7 +729,8 @@
       "criticalHitChance": 0.35000000000000003,
       "criticalHitDamage": 0.25,
       "projectileWidth": 0.6,
-      "range": -0.25
+      "range": -0.25,
+      "cost": 2.5
     }
   ],
   "Grip": [
@@ -715,7 +745,8 @@
       "criticalHitChance": 10,
       "criticalHitDamage": 1.5,
       "projectileWidth": 0.1,
-      "range": 13
+      "range": 13,
+      "cost": 75
     },
     {
       "name": "30s Double Grip",
@@ -728,7 +759,8 @@
       "criticalHitChance": 0.15,
       "criticalHitDamage": 0,
       "projectileWidth": 0,
-      "range": 0
+      "range": 0,
+      "cost": 1.5
     },
     {
       "name": "Alloyed Glass Grip",
@@ -741,7 +773,8 @@
       "criticalHitChance": 0.1,
       "criticalHitDamage": 0,
       "projectileWidth": 0,
-      "range": 0
+      "range": 0,
+      "cost": 1.5
     },
     {
       "name": "Chestnut Revolver Grip",
@@ -754,7 +787,8 @@
       "criticalHitChance": 0.35000000000000003,
       "criticalHitDamage": 0,
       "projectileWidth": 0,
-      "range": 0
+      "range": 0,
+      "cost": 2
     },
     {
       "name": "Elastic Hard Rubber Glove",
@@ -767,7 +801,8 @@
       "criticalHitChance": 0.1,
       "criticalHitDamage": 0,
       "projectileWidth": 0,
-      "range": 0
+      "range": 0,
+      "cost": 2
     },
     {
       "name": "Hard Gum Plastic Grip",
@@ -780,7 +815,8 @@
       "criticalHitChance": 0.35000000000000003,
       "criticalHitDamage": 0,
       "projectileWidth": 0,
-      "range": 0
+      "range": 0,
+      "cost": 2
     },
     {
       "name": "Heavy Shoulder Supported Rod",
@@ -793,7 +829,8 @@
       "criticalHitChance": -0.1,
       "criticalHitDamage": 0,
       "projectileWidth": 0,
-      "range": 0
+      "range": 0,
+      "cost": 2.5
     },
     {
       "name": "Hot-Melt Gun Grip",
@@ -806,7 +843,8 @@
       "criticalHitChance": -0.15,
       "criticalHitDamage": 0,
       "projectileWidth": 0,
-      "range": 0
+      "range": 0,
+      "cost": 2.5
     },
     {
       "name": "Oak Revolver Grip",
@@ -819,7 +857,8 @@
       "criticalHitChance": -0.1,
       "criticalHitDamage": 0,
       "projectileWidth": 0,
-      "range": 0.2
+      "range": 0.2,
+      "cost": 1
     },
     {
       "name": "Physiological Synthetic Grip",
@@ -832,7 +871,8 @@
       "criticalHitChance": 0.6,
       "criticalHitDamage": 0,
       "projectileWidth": 0,
-      "range": 0
+      "range": 0,
+      "cost": 2.5
     },
     {
       "name": "Robust Oval Wooden Grip",
@@ -845,7 +885,8 @@
       "criticalHitChance": 0.1,
       "criticalHitDamage": 0,
       "projectileWidth": 0,
-      "range": 0
+      "range": 0,
+      "cost": 1
     },
     {
       "name": "Shape Adapting Super Grip",
@@ -858,7 +899,8 @@
       "criticalHitChance": 0.35000000000000003,
       "criticalHitDamage": 0,
       "projectileWidth": 0,
-      "range": 0
+      "range": 0,
+      "cost": 2.5
     },
     {
       "name": "Soft Gum Plastic Grip",
@@ -871,7 +913,8 @@
       "criticalHitChance": 0.1,
       "criticalHitDamage": 0,
       "projectileWidth": 0,
-      "range": -0.2
+      "range": -0.2,
+      "cost": 1.5
     },
     {
       "name": "Thick Cobalt Finger",
@@ -884,7 +927,8 @@
       "criticalHitChance": 0.4,
       "criticalHitDamage": 0,
       "projectileWidth": 0,
-      "range": 0
+      "range": 0,
+      "cost": 2
     }
   ],
   "Magazine": [
@@ -898,7 +942,8 @@
       "criticalHitChance": 10,
       "criticalHitDamage": 1.5,
       "projectileWidth": 0.1,
-      "range": 13
+      "range": 13,
+      "cost": 75
     },
     {
       "name": "Billard Ball Drum",
@@ -912,7 +957,8 @@
       "criticalHitChance": 0,
       "criticalHitDamage": 0,
       "projectileWidth": 0.25,
-      "range": 0.2
+      "range": 0.2,
+      "cost": 1.5
     },
     {
       "name": "Bolt Storage",
@@ -926,7 +972,8 @@
       "criticalHitChance": 0.25,
       "criticalHitDamage": 0.25,
       "projectileWidth": 0,
-      "range": 0
+      "range": 0,
+      "cost": 1.5
     },
     {
       "name": "Cat Basket",
@@ -939,7 +986,8 @@
       "criticalHitChance": 0,
       "criticalHitDamage": 0,
       "projectileWidth": 0.2,
-      "range": 0.4
+      "range": 0.4,
+      "cost": 2
     },
     {
       "name": "Curved Box",
@@ -952,7 +1000,8 @@
       "criticalHitChance": 0,
       "criticalHitDamage": 0,
       "projectileWidth": 0,
-      "range": 0
+      "range": 0,
+      "cost": 1
     },
     {
       "name": "Explosive Box",
@@ -965,7 +1014,8 @@
       "criticalHitChance": 0.25,
       "criticalHitDamage": 0.75,
       "projectileWidth": 0.25,
-      "range": 0
+      "range": 0,
+      "cost": 2
     },
     {
       "name": "Internal Small Box",
@@ -978,7 +1028,8 @@
       "criticalHitChance": 0,
       "criticalHitDamage": 0,
       "projectileWidth": -0.15,
-      "range": 0.4
+      "range": 0.4,
+      "cost": 2.5
     },
     {
       "name": "Iron Cylinder",
@@ -991,7 +1042,8 @@
       "criticalHitChance": 0.1,
       "criticalHitDamage": 0.1,
       "projectileWidth": 0,
-      "range": 0
+      "range": 0,
+      "cost": 1
     },
     {
       "name": "Medium Energy Cell Block",
@@ -1004,7 +1056,8 @@
       "criticalHitChance": 0.15,
       "criticalHitDamage": 0.1,
       "projectileWidth": -0.25,
-      "range": 0.6
+      "range": 0.6,
+      "cost": 3
     },
     {
       "name": "Petrol Can",
@@ -1018,7 +1071,8 @@
       "criticalHitChance": 0,
       "criticalHitDamage": 0.5,
       "projectileWidth": 0,
-      "range": 0
+      "range": 0,
+      "cost": 1.5
     },
     {
       "name": "Pin Block",
@@ -1032,7 +1086,8 @@
       "criticalHitChance": 0.2,
       "criticalHitDamage": 0,
       "projectileWidth": 0,
-      "range": 0
+      "range": 0,
+      "cost": 1.5
     },
     {
       "name": "Projectile Encyclopedia",
@@ -1045,7 +1100,8 @@
       "criticalHitChance": -0.44999999999999996,
       "criticalHitDamage": 0,
       "projectileWidth": 0.35000000000000003,
-      "range": -0.7000000000000001
+      "range": -0.7000000000000001,
+      "cost": 2.5
     },
     {
       "name": "Submounted Pine Mag",
@@ -1058,7 +1114,8 @@
       "criticalHitChance": 0,
       "criticalHitDamage": 0,
       "projectileWidth": 0,
-      "range": 0
+      "range": 0,
+      "cost": 2
     }
   ],
   "Sight": [
@@ -1071,7 +1128,8 @@
       "criticalHitChance": 10,
       "criticalHitDamage": 1.5,
       "projectileWidth": 0.1,
-      "range": 13
+      "range": 13,
+      "cost": 75
     },
     {
       "name": "Basic Iron Sights",
@@ -1083,7 +1141,8 @@
       "criticalHitChance": 0,
       "criticalHitDamage": 0,
       "projectileWidth": 0,
-      "range": 0
+      "range": 0,
+      "cost": 1
     },
     {
       "name": "Blurry Glass Ring Sight",
@@ -1095,7 +1154,8 @@
       "criticalHitChance": -0.2,
       "criticalHitDamage": 0.05,
       "projectileWidth": 0,
-      "range": 0
+      "range": 0,
+      "cost": 1.5
     },
     {
       "name": "Broken Iron Sights",
@@ -1107,7 +1167,8 @@
       "criticalHitChance": 0.25,
       "criticalHitDamage": 0,
       "projectileWidth": 0,
-      "range": 0
+      "range": 0,
+      "cost": 2
     },
     {
       "name": "Digital Sniper Sight",
@@ -1119,7 +1180,8 @@
       "criticalHitChance": 0.44999999999999996,
       "criticalHitDamage": 0.15,
       "projectileWidth": 0,
-      "range": 0.75
+      "range": 0.75,
+      "cost": 2
     },
     {
       "name": "Digital Target Lock Telescope",
@@ -1131,7 +1193,8 @@
       "criticalHitChance": 0.6,
       "criticalHitDamage": 0.25,
       "projectileWidth": 0,
-      "range": 1
+      "range": 1,
+      "cost": 2
     },
     {
       "name": "Geometrical Sight",
@@ -1143,7 +1206,8 @@
       "criticalHitChance": 0.5,
       "criticalHitDamage": 0.35000000000000003,
       "projectileWidth": 0,
-      "range": 0.5
+      "range": 0.5,
+      "cost": 2.5
     },
     {
       "name": "Leafy Tree Branch",
@@ -1155,7 +1219,8 @@
       "criticalHitChance": 0.7000000000000001,
       "criticalHitDamage": 0.4,
       "projectileWidth": 0,
-      "range": 0
+      "range": 0,
+      "cost": 2.5
     },
     {
       "name": "Plastic Pinned Ring Sight",
@@ -1167,7 +1232,8 @@
       "criticalHitChance": 0.8,
       "criticalHitDamage": 0.55,
       "projectileWidth": -0.44999999999999996,
-      "range": 0.8999999999999999
+      "range": 0.8999999999999999,
+      "cost": 3
     },
     {
       "name": "SLR Lens",
@@ -1179,7 +1245,8 @@
       "criticalHitChance": 0.1,
       "criticalHitDamage": 0.05,
       "projectileWidth": 0,
-      "range": 0
+      "range": 0,
+      "cost": 1.5
     },
     {
       "name": "Sunglasses",
@@ -1191,7 +1258,8 @@
       "criticalHitChance": 0.1,
       "criticalHitDamage": 0.1,
       "projectileWidth": 0,
-      "range": 0
+      "range": 0,
+      "cost": 1.5
     },
     {
       "name": "Quadratic Red Point Sight",
@@ -1203,7 +1271,8 @@
       "criticalHitChance": -0.15,
       "criticalHitDamage": 0,
       "projectileWidth": 0,
-      "range": 0
+      "range": 0,
+      "cost": 1
     }
   ],
   "TriggerMechanism": [
@@ -1216,7 +1285,8 @@
       "criticalHitChance": 10,
       "criticalHitDamage": 1.5,
       "projectileWidth": 0.1,
-      "range": 13
+      "range": 13,
+      "cost": 75
     },
     {
       "name": "Adjustable Break Trigger",
@@ -1227,7 +1297,8 @@
       "criticalHitChance": 0.5,
       "criticalHitDamage": 0,
       "projectileWidth": 0,
-      "range": 0
+      "range": 0,
+      "cost": 1.5
     },
     {
       "name": "Air Pressurizer",
@@ -1238,7 +1309,8 @@
       "criticalHitChance": 0.15,
       "criticalHitDamage": 0.1,
       "projectileWidth": -0.2,
-      "range": 0.15
+      "range": 0.15,
+      "cost": 1.5
     },
     {
       "name": "Ball Dispenser",
@@ -1249,7 +1321,8 @@
       "criticalHitChance": -0.15,
       "criticalHitDamage": -0.05,
       "projectileWidth": 0,
-      "range": 0.6
+      "range": 0.6,
+      "cost": 2
     },
     {
       "name": "Binary Powder Trigger",
@@ -1260,7 +1333,8 @@
       "criticalHitChance": 0.05,
       "criticalHitDamage": 0,
       "projectileWidth": 0,
-      "range": 0
+      "range": 0,
+      "cost": 1
     },
     {
       "name": "Brainifier",
@@ -1272,7 +1346,8 @@
       "criticalHitChance": 0.5,
       "criticalHitDamage": 0.25,
       "projectileWidth": 0,
-      "range": -0.5
+      "range": -0.5,
+      "cost": 2
     },
     {
       "name": "Gas Pressure Grenade Dispenser",
@@ -1283,7 +1358,8 @@
       "criticalHitChance": 0.1,
       "criticalHitDamage": 0,
       "projectileWidth": 0.3,
-      "range": -0.2
+      "range": -0.2,
+      "cost": 2.5
     },
     {
       "name": "Iron Backloader",
@@ -1294,7 +1370,8 @@
       "criticalHitChance": 0,
       "criticalHitDamage": 0,
       "projectileWidth": 0,
-      "range": 0
+      "range": 0,
+      "cost": 1
     },
     {
       "name": "Laser Emitter",
@@ -1306,7 +1383,8 @@
       "criticalHitChance": 0.35000000000000003,
       "criticalHitDamage": 0.15,
       "projectileWidth": -0.6,
-      "range": 1.2
+      "range": 1.2,
+      "cost": 3
     },
     {
       "name": "Petrol Pump",
@@ -1318,7 +1396,8 @@
       "criticalHitChance": 0.1,
       "criticalHitDamage": 0,
       "projectileWidth": -0.1,
-      "range": 0
+      "range": 0,
+      "cost": 1.5
     },
     {
       "name": "Slingshot",
@@ -1329,7 +1408,8 @@
       "criticalHitChance": 0.2,
       "criticalHitDamage": 0.35000000000000003,
       "projectileWidth": 0,
-      "range": 0.8999999999999999
+      "range": 0.8999999999999999,
+      "cost": 1.5
     },
     {
       "name": "Sound Powered Drum Trigger",
@@ -1340,7 +1420,8 @@
       "criticalHitChance": 0,
       "criticalHitDamage": 0,
       "projectileWidth": 0,
-      "range": 0.05
+      "range": 0.05,
+      "cost": 2
     },
     {
       "name": "Quick Underlevel Repeater",
@@ -1351,7 +1432,8 @@
       "criticalHitChance": 0,
       "criticalHitDamage": 0,
       "projectileWidth": 0,
-      "range": 0.5
+      "range": 0.5,
+      "cost": 2.5
     }
   ]
 }
