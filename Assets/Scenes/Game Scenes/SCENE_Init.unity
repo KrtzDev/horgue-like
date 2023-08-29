@@ -212,6 +212,60 @@ MonoBehaviour:
   m_DeselectOnBackgroundClick: 0
   m_PointerBehavior: 0
   m_CursorLockBehavior: 0
+--- !u!1 &260142848
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 260142849}
+  - component: {fileID: 260142850}
+  m_Layer: 0
+  m_Name: StatsTracker
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &260142849
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 260142848}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2028828741}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &260142850
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 260142848}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab609f96cc6dc9a449b8de17255dd30c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damageDealtLevel: 0
+  shotsFiredLevel: 0
+  jumpsUsedLevel: 0
+  scoreCollectedLevel: 0
+  enemiesKilledLevel: 0
+  damageDealtTotal: 0
+  shotsFiredTotal: 0
+  jumpsUsedTotal: 0
+  scoreCollectedTotal: 0
+  enemiesKilledTotal: 0
 --- !u!1 &762801955
 GameObject:
   m_ObjectHideFlags: 0
@@ -257,6 +311,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponControll: 0
+  returnToAutoShooting: 1
   damageCalcKind: 0
   _gameDataReader: {fileID: 1497091692}
   GameManagerValues:
@@ -272,7 +327,6 @@ MonoBehaviour:
   _maxLevels: 8
   _winningCondition: 1
   _currentTimeToSurvive: 0
-  _currentScore: 0
   _neededEnemyKill: 0
   _enemyCount: 0
   _enemiesKilled: 0
@@ -801,6 +855,7 @@ Transform:
   - {fileID: 1161142121}
   - {fileID: 1497091693}
   - {fileID: 1354712361}
+  - {fileID: 260142849}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

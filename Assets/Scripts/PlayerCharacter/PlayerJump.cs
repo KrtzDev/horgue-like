@@ -85,6 +85,8 @@ public class PlayerJump : MonoBehaviour
 
     private void JumpAbility()
     {
+        StatsTracker.Instance.jumpsUsedLevel++;
+
         _isJumping = true;
         _jumpAttempt = false;
 
@@ -124,6 +126,8 @@ public class PlayerJump : MonoBehaviour
 
     private void BufferJump()
     {
+        StatsTracker.Instance.jumpsUsedLevel++;
+
         _isJumping = true;
         _jumpAttempt = false;
 

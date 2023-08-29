@@ -598,6 +598,7 @@ public class Weapon : ScriptableObject
 			_shotDelay = 1 / weaponStats.attackspeed;
 
 			_currentWeaponSkeleton.MuzzleFlash.Play();
+			StatsTracker.Instance.shotsFiredLevel++;
 		}
 	}
 

@@ -24,6 +24,7 @@ public class CoinDrop : MonoBehaviour
         AudioManager.Instance.PlaySound("Coin");
         _animator.SetBool("pickup", true);
 		GameManager.Instance.inventory.Wallet.Store(givenScore);
+        StatsTracker.Instance.scoreCollectedLevel += givenScore;
     }
 
     public void Delete()

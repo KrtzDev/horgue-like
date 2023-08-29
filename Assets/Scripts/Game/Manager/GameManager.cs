@@ -69,6 +69,7 @@ public class GameManager : Singleton<GameManager>
 		SceneLoader.Instance.CompletedSceneLoad += OnCompletedSceneLoad;
 
 		inventory.Wallet.Reset();
+		StatsTracker.Instance.ResetAllStats();
 		_currentLevel = 1;
 		_lastLevel = 0;
 		_currentLevelArray = _currentLevel - 1;
@@ -86,12 +87,15 @@ public class GameManager : Singleton<GameManager>
 		if (SceneManager.GetActiveScene().name == "SCENE_Main_Menu")
 		{
 			inventory.Wallet.Reset();
+			StatsTracker.Instance.ResetAllStats();
 			_currentLevel = 1;
 			_lastLevel = 0;
 			_currentLevelArray = _currentLevel - 1;
 			_gameIsPaused = false;
 			return;
 		}
+
+		StatsTracker.Instance.ResetLevelStats();
 
 		if(SceneManager.GetActiveScene().name.Contains("Boss"))
         {
@@ -189,6 +193,8 @@ public class GameManager : Singleton<GameManager>
 		_enemyCount--;
 		_enemiesKilled++;
 
+		StatsTracker.Instance.enemiesKilledLevel++;
+
 		// alle Gegner get�tet
 
 		if (!_hasWon && _neededEnemyKill == 0 && _winningCondition == WinningCondition.KillAllEnemies)
@@ -218,6 +224,8 @@ public class GameManager : Singleton<GameManager>
 		Debug.Log("Round won");
 		InputManager.Instance.CharacterInputActions.Disable();
 		_playerCanUseAbilities = false;
+
+		StatsTracker.Instance.AddLevelStatsToTotal();
 
 		_lastLevel = _currentLevel;
 
@@ -250,6 +258,9 @@ public class GameManager : Singleton<GameManager>
 		UIManager.Instance.ShowLevelEndScreen(LevelStatus.Lost);
 		UIManager.Instance.WaveEndScreen.gameObject.SetActive(false);
 		_playerCanUseAbilities = false;
+
+		StatsTracker.Instance.AddLevelStatsToTotal();
+
 		EnemyStopFollowing();
 	}
 

@@ -64,6 +64,7 @@ public class Projectile : DamageDealer
 				finalBaseDamage *= finalCritDamage; // Apply Crit Damage
 
 			health.TakeDamage((int)finalBaseDamage, false);
+			StatsTracker.Instance.damageDealtLevel += finalBaseDamage;
 
 			if (statusEffect != null)
 			{
