@@ -1,14 +1,15 @@
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class UIImageFillAmountWaveProgress : UIImageFillAmount
 {
     private EnemySpawner _enemySpawner;
 
-    public Text _enemiesKilledText;
-    public Text _CurrentLevelWave;
-    public Text _ScoreText;
-    public Text _LevelTimer;
+    public TextMeshProUGUI _enemiesKilledText;
+    public TextMeshProUGUI _CurrentLevelWave;
+    public TextMeshProUGUI _ScoreText;
+    public TextMeshProUGUI _LevelTimer;
 
     private int _enemiesKilled;
     private int _maxEnemiesAmount;
