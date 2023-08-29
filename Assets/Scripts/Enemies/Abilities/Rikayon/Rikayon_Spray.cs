@@ -46,7 +46,7 @@ public class Rikayon_Spray : MonoBehaviour
 
     private void Start()
     {
-        _rikayon = GameObject.FindObjectOfType<AI_Agent_Rikayon>();
+        _rikayon = FindObjectOfType<AI_Agent_Rikayon>();
         ps = GetComponent<ParticleSystem>();
         _player = GameObject.FindWithTag("Player");
         ps.trigger.AddCollider(_player.GetComponent<BoxCollider>());

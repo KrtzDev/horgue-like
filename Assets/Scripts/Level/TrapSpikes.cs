@@ -38,6 +38,7 @@ public class TrapSpikes : MonoBehaviour
         if (Time.time > _timing + _cooldown)
         {
             _animator.SetTrigger("Triggered");
+            AudioManager.Instance.PlaySound("TrapSpikes");
             _timing = Time.time;
         }
     }
@@ -61,6 +62,7 @@ public class TrapSpikes : MonoBehaviour
     {
         yield return new WaitForSeconds(_cooldown);
 
+        AudioManager.Instance.PlaySound("TrapSpikes");
         _animator.SetTrigger("Triggered");
     }
 

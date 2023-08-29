@@ -60,8 +60,15 @@ public class Projectile : DamageDealer
 	{
 		if (collider.TryGetComponent(out HealthComponent health))
 		{
-			if (finalCritChance > UnityEngine.Random.Range(0, 100)) // Can crit?
+			if (finalCritChance > UnityEngine.Random.Range(0, 100))             // Can crit?
+			{
 				finalBaseDamage *= finalCritDamage; // Apply Crit Damage
+				AudioManager.Instance.PlaySound("HitIndicatorCrit");
+			}
+			else
+            {
+				AudioManager.Instance.PlaySound("HitIndicator");
+			}
 
 			health.TakeDamage((int)finalBaseDamage, false);
 

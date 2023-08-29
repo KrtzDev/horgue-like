@@ -211,6 +211,7 @@ public class PlayerAbilities : MonoBehaviour
         _playerCharacter.healthComponent.canTakeDamage = false;
 
         DashParticleEffect();
+        AudioManager.Instance.PlaySound("Dash");
 
         StartCoroutine(StopDash());
     }

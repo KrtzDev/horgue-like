@@ -87,6 +87,8 @@ public class AI_Agent_Sentry : AI_Agent
                 break;
         }
 
+        AudioManager.Instance.PlaySound("Turret");
+
         rb.AddForce(_targetDirection * _projectileSpeed, ForceMode.Impulse);
     }
 

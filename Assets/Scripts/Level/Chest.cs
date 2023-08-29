@@ -27,6 +27,7 @@ public class Chest : MonoBehaviour
     {
         _isOpened = true;
 
+        AudioManager.Instance.PlaySound("Chest");
         _animator.SetTrigger("Open");
     }
 

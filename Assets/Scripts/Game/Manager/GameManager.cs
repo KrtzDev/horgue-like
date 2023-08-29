@@ -77,6 +77,14 @@ public class GameManager : Singleton<GameManager>
 
 	private void OnCompletedSceneLoad()
 	{
+		if (SceneManager.GetActiveScene().name.Contains("04"))
+		{
+			AudioManager.Instance.PlaySound("Swamp");
+		}
+		else
+		{
+			AudioManager.Instance.StopSound("Swamp", 0.125f);
+		}
 
 		if (SceneManager.GetActiveScene().name == "SCENE_Weapon_Crafting")
 		{
@@ -90,10 +98,14 @@ public class GameManager : Singleton<GameManager>
 			_lastLevel = 0;
 			_currentLevelArray = _currentLevel - 1;
 			_gameIsPaused = false;
+
+			AudioManager.Instance.StopSound("Theme", 0f);
+			AudioManager.Instance.PlaySound("Theme");
+
 			return;
 		}
 
-		if(SceneManager.GetActiveScene().name.Contains("Boss"))
+		if (SceneManager.GetActiveScene().name.Contains("Boss"))
         {
 			_winningCondition = WinningCondition.KillSpecificEnemy;
 		}
@@ -215,6 +227,8 @@ public class GameManager : Singleton<GameManager>
 
 	private void RoundWon()
 	{
+		AudioManager.Instance.PlaySound("LevelConfirmation");
+
 		Debug.Log("Round won");
 		InputManager.Instance.CharacterInputActions.Disable();
 		_playerCanUseAbilities = false;
