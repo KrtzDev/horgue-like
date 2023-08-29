@@ -723,13 +723,12 @@ MonoBehaviour:
   _explanationText: {fileID: 7354134467047515638}
   _submitText: {fileID: 4417664270109833059}
   _countDown: 3
-  _verticalMoveAmount: 30
   _moveSelectionTime: 0.125
   _moveActivationTime: 0.55
   _moveActivationWaitTime: 0.35
   _moveToUI_Time: 50
   _moveToUI_WaitTime: 0.65
-  _scaleAmount: 1.1
+  _scaleAmount: 1.2
   _textScale: {x: 0.5, y: 0.5, z: 0.5}
   _abilitiesToDisplay: 3
   _abilityCoolDownToReplace: {fileID: 0}

@@ -16,11 +16,9 @@ public class AbilityUI : UIButton, IPointerEnterHandler, IPointerExitHandler, IS
 
     private RectTransform _rectTransform;
 
-    [HideInInspector] public Vector3 _startPos;
     [HideInInspector] public Vector3 _startScale;
 
     private bool _abilitySelected = false;
-    private bool _firstSelection = true;
 
     public void Initialize(Ability ability)
     {
@@ -28,14 +26,9 @@ public class AbilityUI : UIButton, IPointerEnterHandler, IPointerExitHandler, IS
         _abilityNameText.GetComponent<TextMeshProUGUI>().text = _ability.name;
         _abilityIcon.sprite = ability._icon;
         _rectTransform = GetComponent<RectTransform>();
-
-		Addlistener(AbilitySelected);
-    }
-
-    public void SetStartVariables()
-    {
-        _startPos = _rectTransform.position;
         _startScale = _rectTransform.localScale;
+
+        Addlistener(AbilitySelected);
     }
 
     private void Start()
@@ -46,20 +39,12 @@ public class AbilityUI : UIButton, IPointerEnterHandler, IPointerExitHandler, IS
     IEnumerator MoveAbilityOnSelection(bool startingAnimation)
     {
 		yield return new WaitForEndOfFrame();
-		Vector3 endPosition;
 		Vector3 endScale;
 
 		float elapsedTime = 0f;
 
 		if (startingAnimation)
 		{
-			if (_firstSelection)
-			{
-				_firstSelection = false;
-				_startPos = _rectTransform.position;
-				_startScale = _rectTransform.localScale;
-			}
-
 			_selectionMarker.SetActive(true);
 			_abilityNameText.GetComponent<TextMeshProUGUI>().color = gameObject.GetComponentInChildren<Button>().colors.selectedColor;
 		}
@@ -75,19 +60,15 @@ public class AbilityUI : UIButton, IPointerEnterHandler, IPointerExitHandler, IS
 
 			if (startingAnimation)
 			{
-				endPosition = _startPos + new Vector3(0f, ChooseAbility.instance._verticalMoveAmount, 0f);
 				endScale = _startScale * ChooseAbility.instance._scaleAmount;
 			}
 			else
 			{
-				endPosition = _startPos;
 				endScale = _startScale;
 			}
 
-			Vector3 lerpedPos = Vector3.Lerp(_rectTransform.position, endPosition, (elapsedTime / ChooseAbility.instance._moveSelectionTime));
 			Vector3 lerpedScale = Vector3.Lerp(_rectTransform.localScale, endScale, (elapsedTime / ChooseAbility.instance._moveSelectionTime));
 
-			_rectTransform.position = lerpedPos;
 			_rectTransform.localScale = lerpedScale;
 
 			yield return null;
@@ -117,8 +98,10 @@ public class AbilityUI : UIButton, IPointerEnterHandler, IPointerExitHandler, IS
             elapsedTime += Time.unscaledDeltaTime;
 
             Vector3 lerpedPos = Vector3.Lerp(_rectTransform.position, ChooseAbility.instance.AbilityParent.position, (elapsedTime / ChooseAbility.instance._moveActivationTime));
+            Vector3 lerpedScale = Vector3.Lerp(_rectTransform.localScale, _startScale, (elapsedTime / ChooseAbility.instance._moveActivationTime));
 
             _rectTransform.position = lerpedPos;
+            _rectTransform.localScale = lerpedScale;
 
             yield return null;
         }

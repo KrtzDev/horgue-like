@@ -23,7 +23,6 @@ public class ChooseAbility: MonoBehaviour
     public TextMeshProUGUI _submitText;
 
     public int _countDown;
-    public float _verticalMoveAmount = 30f;
     public float _moveSelectionTime = 0.1f;
     public float _moveActivationTime = 0.5f;
     public float _moveActivationWaitTime = 0.25f;

@@ -4210,7 +4210,7 @@ MonoBehaviour:
   m_Colors:
     m_NormalColor: {r: 0.5849056, g: 0.5849056, b: 0.5849056, a: 1}
     m_HighlightedColor: {r: 0, g: 0, b: 0, a: 1}
-    m_PressedColor: {r: 0.53800285, g: 0.735849, b: 0.7338716, a: 1}
+    m_PressedColor: {r: 0, g: 0, b: 0, a: 1}
     m_SelectedColor: {r: 1, g: 1, b: 1, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
@@ -4249,7 +4249,6 @@ MonoBehaviour:
   _abilityBackground: {fileID: 369062270418333195}
   _abilityNameText: {fileID: 4013818961204252072}
   _selectionMarker: {fileID: 7225570122070513653}
-  _startPos: {x: 0, y: 0, z: 0}
   _startScale: {x: 0, y: 0, z: 0}
 --- !u!1 &8420345836620572692
 GameObject:
