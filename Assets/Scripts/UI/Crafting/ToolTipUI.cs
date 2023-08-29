@@ -47,7 +47,7 @@ public class ToolTipUI : Selectable
 	{
 		_partImage.sprite = weaponPartData.WeaponPartUISprite;
 		weaponPart = weaponPartData;
-		_value = weaponPartData.value;
+		_value = (int)weaponPartData.cost;
 
 		InitializeStats(weaponPartData);
 		LayoutRebuilder.ForceRebuildLayoutImmediate(_layoutGroup.transform as RectTransform);

@@ -60,6 +60,12 @@ public class RewardManager : Singleton<RewardManager>
 			weaponPart.range *=  1 + GameManager.Instance.GameManagerValues[0]._weaponPartMultiplierPerLevel * (weaponPart.levelObtained - 1);
 		}
 
+		if(weaponPart.cost > 0)
+        {
+			weaponPart.cost *= 1 + GameManager.Instance.GameManagerValues[0]._weaponPartMultiplierPerLevel * (weaponPart.levelObtained - 1);
+			Mathf.RoundToInt(weaponPart.cost);
+		}
+
 		// check if over cap ?
 
 	}

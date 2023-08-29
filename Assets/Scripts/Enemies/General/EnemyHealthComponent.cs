@@ -85,7 +85,7 @@ public class EnemyHealthComponent : HealthComponent
 	{
 		GameObject newCoin;
 		newCoin = Instantiate(_coinDrop, _hitParticlePosition.position, Quaternion.identity);
-		newCoin.GetComponentInChildren<CoinDrop>()._givenScore =_enemy._enemyData._givenXP;
+		newCoin.GetComponentInChildren<CoinDrop>().givenScore =_enemy._enemyData._givenXP;
 	}
 
 	public void DropHealthPotion()

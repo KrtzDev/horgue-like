@@ -52,7 +52,7 @@ public class InventorySlot : Selectable
 
 		_selected = false;
 
-		GameManager.Instance.inventory.Wallet.Store(_weaponPart.weaponPart.value);
+		GameManager.Instance.inventory.Wallet.Store((int)(_weaponPart.weaponPart.cost * 0.5f));
 		GameManager.Instance.inventory.RemoveFromInventory(_weaponPart.weaponPart);
 
 		OnSell.Invoke(_weaponPart.weaponPart);

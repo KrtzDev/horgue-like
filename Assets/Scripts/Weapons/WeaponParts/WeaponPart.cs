@@ -22,5 +22,5 @@ public class WeaponPart : ScriptableObject
 
 	[Space(22)]
 	[SerializeField]
-	public int value;
+	public float cost;
 }
