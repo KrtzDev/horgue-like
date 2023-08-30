@@ -33,7 +33,7 @@ public class MenuControll : MonoBehaviour
 			tab.Deselect();
 		}
 
-		_currentSelectedTab = 0;
+		_currentSelectedTab = 1;
 		_menuTabs[_currentSelectedTab].KeepFocus();
 		_menuTabs[_currentSelectedTab].Select();
 	}

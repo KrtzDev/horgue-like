@@ -13,16 +13,16 @@ MonoBehaviour:
   m_Name: AK-7423
   m_EditorClassIdentifier: 
   _weaponStats:
-    damage: 550
-    attackspeed: 1.715
-    cooldown: 2.5
-    projectileSize: 0.14
-    critChance: 1.1
-    critDamage: 0
-    range: 393.75
+    damage: 47.25
+    attackspeed: 1.55
+    cooldown: 1.5999999
+    projectileSize: 0.09
+    critChance: 15.5
+    critDamage: 1.575
+    range: 15.6
     capacity: 30
-    attackPattern: {fileID: 11400000, guid: cb578d9958690974390a1eba6fa458d1, type: 2}
-    motionPattern: {fileID: 11400000, guid: 9aa305ff9050739458fbff74de9180b1, type: 2}
+    attackPattern: {fileID: 0}
+    motionPattern: {fileID: 0}
     statusEffect: {fileID: 0}
   _weaponSkeleton: {fileID: 4852173439239307193, guid: 534ea9bec0f3ace4cb13174feb65375c,
     type: 3}
@@ -35,7 +35,7 @@ MonoBehaviour:
     type: 2}
   defaultSight: {fileID: 11400000, guid: 349d596668c422e4aa979fc1117f8724, type: 2}
   grip: {fileID: 11400000, guid: b98793dca6bcd854bbc17cd226a39a18, type: 2}
-  barrel: {fileID: 11400000, guid: 8a83f155cd04e2344b0ef2b3bc798cfa, type: 2}
+  barrel: {fileID: 11400000, guid: 515593ea7be837b42a2b624475df7156, type: 2}
   magazine: {fileID: 11400000, guid: fca930e11b1b96c44aa54114ff5a2047, type: 2}
   ammunition: {fileID: 11400000, guid: ea2bbfd102458f54285f13dfed5ab3f1, type: 2}
   triggerMechanism: {fileID: 11400000, guid: 7c0c2ba72f6ce2f4f84ab9ffb0e27d6a, type: 2}
@@ -46,3 +46,4 @@ MonoBehaviour:
   _groundLayer:
     serializedVersion: 2
     m_Bits: 513
+  _capacity: 30
