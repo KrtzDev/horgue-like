@@ -51,12 +51,16 @@ public class AI_Agent_Rikayon : AI_Agent_Enemy
     [SerializeField] private float _damageTime;
     private float _damageTimer = 0;
 
+    private bool _hasSpitAttacked;
+
     protected override void Start()
     {
         base.Start();
 
         OriginalAnimationSpeed = Animator.speed;
         _currentSpecialAttackProbablity = _baseSpecialAttackProbability;
+
+        _hasSpitAttacked = false;
     }
 
     protected override void Update()
@@ -98,10 +102,10 @@ public class AI_Agent_Rikayon : AI_Agent_Enemy
             NavMeshAgent.speed *= _bossStageMovementMultiplier.x;
             NavMeshAgent.acceleration *= _bossStageMovementMultiplier.x;
 
+            AudioManager.Instance.PlaySound("RikayonScream");
             gameObject.GetComponent <AI_Agent_Rikayon> ().enabled = false;
-        }
-
-        if (HealthComponent.currentHealth <= HealthComponent.maxHealth / 4.5 && _currentBossStage == 1)
+        } 
+        else if (HealthComponent.currentHealth <= HealthComponent.maxHealth / 4.5 && _currentBossStage == 1)
         {
             transform.LookAt(PlayerTransform);
 
@@ -117,6 +121,7 @@ public class AI_Agent_Rikayon : AI_Agent_Enemy
             NavMeshAgent.speed *= _bossStageMovementMultiplier.y;
             NavMeshAgent.acceleration *= _bossStageMovementMultiplier.y;
 
+            AudioManager.Instance.PlaySound("RikayonScream");
             gameObject.GetComponent<AI_Agent_Rikayon>().enabled = false;
         }
     }
@@ -144,8 +149,8 @@ public class AI_Agent_Rikayon : AI_Agent_Enemy
     private void SprayAttackAbility(float currentSpeedMultiplier, int currentAngle)
     {
         if (!_sprayAttackActive)
-        {
-            AudioManager.Instance.PlaySound("RikayonScream");
+        {         
+            AudioManager.Instance.PlaySound("RikayonGrowl");
             _sprayAttackActive = true;
 
             GameObject sprayAttack;
@@ -174,8 +179,6 @@ public class AI_Agent_Rikayon : AI_Agent_Enemy
         // Spawn Spikes around Rikayon
         // Move Spikes slowly outwards
         // Make Spikes dissapear after x Seconds
-
-        AudioManager.Instance.PlaySound("RikayonGrowl");
 
         switch (_spikeAttackNumber)
         {
@@ -218,6 +221,7 @@ public class AI_Agent_Rikayon : AI_Agent_Enemy
         switch (_spikeAttackNumber)
         {
             case 0:
+                AudioManager.Instance.PlaySound("RikayonGrowl");
                 DestroySpawnPositionChilds();
                 spikePreview = Instantiate(_spikePreviewInner_prefab, _specialAttackSpawnPosition.position, Quaternion.identity, _specialAttackSpawnPosition.transform);
                 spikePreview.transform.localScale = new Vector3(spikePreview.transform.localScale.x * currentMultiplier, spikePreview.transform.localScale.y, spikePreview.transform.localScale.z * currentMultiplier);
@@ -275,8 +279,6 @@ public class AI_Agent_Rikayon : AI_Agent_Enemy
         // Spits semi-lingering toxic waste into the air which falls onto the ground (near the player and on the NavMesh) and stays for a while
         // Intimidate 3
 
-        AudioManager.Instance.PlaySound("RikayonGrowl");
-
         switch (_currentBossStage)
         {
             case 0:
@@ -296,6 +298,12 @@ public class AI_Agent_Rikayon : AI_Agent_Enemy
 
     private IEnumerator SpawnSpitAttack(float time)
     {
+        if(!_hasSpitAttacked)
+        {
+            AudioManager.Instance.PlaySound("RikayonGrowl");
+            _hasSpitAttacked = true;
+        }
+
         yield return new WaitForSeconds(time);
 
         GameObject spitAttack;
@@ -313,5 +321,10 @@ public class AI_Agent_Rikayon : AI_Agent_Enemy
             other.GetComponent<HealthComponent>().TakeDamage(_damageOnTouch, true);
             _damageTimer = _damageTime;
         }
+    }
+
+    public void ResetFirstSpitAttack()
+    {
+        _hasSpitAttacked = false;
     }
 }

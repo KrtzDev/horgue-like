@@ -579,12 +579,12 @@ MonoBehaviour:
   - name: Coin
     clip: {fileID: 8300000, guid: 759b8927b70829747bca13090cd6920c, type: 3}
     volume: 0.075
-    pitch: 1.25
+    pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: Dash
     clip: {fileID: 8300000, guid: e02f713fbd993944ea9fe19b6c27ba09, type: 3}
-    volume: 0.1
+    volume: 0.03
     pitch: 0.75
     loop: 0
     source: {fileID: 0}
@@ -638,13 +638,13 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: WeaponReload
     clip: {fileID: 8300000, guid: e7ee18bfb1a856940b8876c4fe8be82f, type: 3}
-    volume: 0.08
+    volume: 0.05
     pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: WeaponShot
     clip: {fileID: 8300000, guid: 884dbdf50ffeace478a61c955ece2fdb, type: 3}
-    volume: 0.08
+    volume: 0.05
     pitch: 1.25
     loop: 0
     source: {fileID: 0}

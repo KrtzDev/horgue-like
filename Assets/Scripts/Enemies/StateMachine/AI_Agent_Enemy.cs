@@ -73,12 +73,12 @@ public class AI_Agent_Enemy : AI_Agent
 
     public void SetHealthToPercentOfMax(float percent)
     {
-        HealthComponent.currentHealth = (int)(HealthComponent.maxHealth * percent);
+        HealthComponent.currentHealth = (int)(HealthComponent.maxHealth * 0.01f * percent);
         if(HealthComponent.currentHealth > HealthComponent.maxHealth)
         {
             HealthComponent.currentHealth = HealthComponent.maxHealth;
         }
-        HealthComponent._enemyHealthBar.HandleHealthChanged(percent);
+        HealthComponent._enemyHealthBar.HandleHealthChanged(percent * 0.01f);
     }
 
     public virtual void Shoot()
