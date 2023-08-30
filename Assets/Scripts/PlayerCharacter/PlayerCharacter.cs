@@ -56,7 +56,7 @@ public class PlayerCharacter : MonoBehaviour
 
     private void PauseGame(InputAction.CallbackContext ctx)
     {
-        if (ctx.performed && !GameManager.Instance._gameIsPaused && SceneManager.GetActiveScene().name.StartsWith("SCENE_Level"))
+        if (Time.timeScale != 0 && ctx.performed && !GameManager.Instance._gameIsPaused && SceneManager.GetActiveScene().name.StartsWith("SCENE_Level"))
         {
             UIManager.Instance.PauseMenu.gameObject.SetActive(true);
             GameManager.Instance._gameIsPaused = true;
