@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -12,6 +13,8 @@ public class ShopUI : UIMenu
 	private WeaponUI _weaponUI;
 	[SerializeField]
 	private ComparisonUI _comparisonUI;
+	[SerializeField]
+	private WalletUI _walletUI;
 
 	[SerializeField]
 	private Transform _shopItemContainer;
@@ -43,6 +46,7 @@ public class ShopUI : UIMenu
 			RewardManager.Instance.ClearRewards();
 
 			tooltipUI.OnBuy += OnItemBought;
+			tooltipUI.OnBuyFailed += OnItemBuyFalied;
 			tooltipUI.OnSelected += OnToolTipSelected;
 			tooltipUI.OnDeselected += OnToolTipDeselected;
 			tooltipUI.buyButton = _buyButton;
@@ -54,10 +58,14 @@ public class ShopUI : UIMenu
 		SetUpNavigation();
 	}
 
-	private void OnItemBought(ToolTipUI TooltipUi)
+	private void OnItemBought(ToolTipUI tooltipUi)
 	{
-		OnBought.Invoke(TooltipUi.weaponPart);
-		shopItems.Remove(TooltipUi);
+		AudioManager.Instance.PlaySound("ShopConfirmation");
+
+		OnBought.Invoke(tooltipUi.weaponPart);
+
+		shopItems.Remove(tooltipUi);
+		tooltipUi.CleanUp();
 
 		SetUpNavigation();
 
@@ -69,6 +77,25 @@ public class ShopUI : UIMenu
 	{
 		yield return new WaitForEndOfFrame();
 		shopItems[0].Select();
+	}
+
+	private void OnItemBuyFalied()
+	{
+		AudioManager.Instance.PlaySound("ShopDecline");
+		DoBlinkEffect(Color.red, Color.white, .1f, 2);
+	}
+
+	private void DoBlinkEffect(Color blinkColor, Color normalColor, float duration, int amount)
+	{
+		Tween colorToRed = _walletUI.BgImage.DOColor(blinkColor, duration).SetEase(Ease.OutBounce);
+		Tween colorToNormal = _walletUI.BgImage.DOColor(normalColor, duration).SetEase(Ease.OutBounce);
+
+		Sequence sequence = DOTween.Sequence();
+		sequence.Append(colorToRed)
+			.Append(colorToNormal);
+
+		sequence.SetLoops(amount);
+		sequence.Play();
 	}
 
 	private void SetUpNavigation()
@@ -134,6 +161,6 @@ public class ShopUI : UIMenu
 		ToolTipUI selectedTooltip = Instantiate(_toolTipUI_prefab, _comparisonContainerSelected);
 		selectedTooltip.Initialize(weaponPart);
 
-		_comparisonUI.UpdateEquippedComparisonUI(_weaponUI,weaponPart);
+		_comparisonUI.UpdateEquippedComparisonUI(_weaponUI, weaponPart);
 	}
 }

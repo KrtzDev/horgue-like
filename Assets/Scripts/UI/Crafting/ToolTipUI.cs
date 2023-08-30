@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class ToolTipUI : Selectable
 {
 	public event Action<ToolTipUI> OnBuy;
+	public event Action OnBuyFailed;
 	public event Action<ToolTipUI> OnSelected;
 	public event Action OnDeselected;
 
@@ -110,13 +111,17 @@ public class ToolTipUI : Selectable
 			return;
 
 		if (!GameManager.Instance.inventory.Wallet.TryPay(_value))
+		{
+			OnBuyFailed.Invoke();
 			return;
-
-		AudioManager.Instance.PlaySound("ShopConfirmation");
+		}
 
 		OnBuy.Invoke(this);
-		buyButton.OnButtonExecute -= Buy;
+	}
 
+	public void CleanUp()
+	{
+		buyButton.OnButtonExecute -= Buy;
 		Destroy(gameObject);
 	}
 
