@@ -12,17 +12,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e53ff1b8ade7b5340af8b4e886fb2c85, type: 3}
   m_Name: Pasu-Kan
   m_EditorClassIdentifier: 
-  _maxHealth: 98
-  _damagePerHit: 10
+  _maxHealth: 90
+  _damagePerHit: 15
   _attackSpeed: 2.5
-  _givenXP: 5
-  _maxMoveSpeed: 11
-  _acceleration: 12
+  _givenXP: 4
+  _maxMoveSpeed: 13
+  _acceleration: 11.5
   _armor: 100
   _elementalResistance: 50
   _technicalResistance: -50
-  _healthDropChance: 0.05
-  _attackRange: 2
+  _healthDropChance: 0.07
+  baseDmgMultiplier: 1
+  dmgModifier: 0.2
+  addDmgModifier: 0.15
+  baseHealthMultiplier: 1
+  healthModifier: 0.325
+  addHealthModifier: 0.225
+  _attackRange: 1.6
   _retreatRange: 0
   _maxJumpAttackRange: 14
   _minJumpAttackRange: 8
