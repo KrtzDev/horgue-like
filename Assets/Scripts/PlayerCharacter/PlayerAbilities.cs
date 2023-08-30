@@ -148,39 +148,42 @@ public class PlayerAbilities : MonoBehaviour
 
     private void UseAbility(InputAction.CallbackContext ctx)
     {
-        if(ctx.started)
+        if(Time.deltaTime != 0)
         {
-            ButtonHeld = true;
-        }
+            if (ctx.started)
+            {
+                ButtonHeld = true;
+            }
 
-        if (ctx.started && !IsUsingAbility && GameManager.Instance._playerCanUseAbilities)
-        {
-            if (CanUseDashAbility && _abilityCDTimer <= 0)
+            if (ctx.started && !IsUsingAbility && GameManager.Instance._playerCanUseAbilities)
             {
-                DashAbility();
+                if (CanUseDashAbility && _abilityCDTimer <= 0)
+                {
+                    DashAbility();
+                }
+                else if (CanUseForceSphereAbility && _abilityCDTimer <= 0)
+                {
+                    ForceSphereAbility();
+                }
+                else if (CanUseJetpackAbility && _abilityCDTimer <= 0)
+                {
+                    JetpackAbility();
+                    JetpackParticleEffect();
+                }
+                else if (CanUseStealthAbility && _abilityCDTimer <= 0)
+                {
+                    DecoyAbility();
+                }
+                else if (CanUseEarthquakeAbility && _playerCharacter.GetComponent<PlayerJump>().IsGrounded && _abilityCDTimer <= 0)
+                {
+                    EarthquakeAbility();
+                }
+
             }
-            else if (CanUseForceSphereAbility && _abilityCDTimer <= 0)
+            else if (ctx.started && IsUsingAbility && CanUseJetpackAbility && GameManager.Instance._playerCanUseAbilities)
             {
-                ForceSphereAbility();
-            }
-            else if (CanUseJetpackAbility && _abilityCDTimer <= 0)
-            {
-                JetpackAbility();
                 JetpackParticleEffect();
             }
-            else if (CanUseStealthAbility && _abilityCDTimer <= 0)
-            {
-                DecoyAbility();
-            }
-            else if (CanUseEarthquakeAbility && _playerCharacter.GetComponent<PlayerJump>().IsGrounded && _abilityCDTimer <= 0)
-            {
-                EarthquakeAbility();
-            }
-            
-        }
-        else if (ctx.started && IsUsingAbility && CanUseJetpackAbility && GameManager.Instance._playerCanUseAbilities)
-        {
-            JetpackParticleEffect();
         }
     }
 

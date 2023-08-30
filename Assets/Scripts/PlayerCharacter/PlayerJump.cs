@@ -54,7 +54,7 @@ public class PlayerJump : MonoBehaviour
 
     private void Jump(InputAction.CallbackContext ctx)
     {
-        if (ctx.performed && !_isJumping && IsGrounded && !_jumpAttempt)
+        if (ctx.performed && !_isJumping && IsGrounded && !_jumpAttempt && Time.deltaTime != 0)
         {
             JumpAbility();
         }
