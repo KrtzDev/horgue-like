@@ -245,7 +245,7 @@ public class GameManager : Singleton<GameManager>
 		List<WeaponPart> rewards = new List<WeaponPart>();
 		for (int i = 0; i < _numberOfRewards; i++)
 		{
-			rewards.Add(RewardManager.Instance.GetRandomReward());
+			rewards.Add(RewardManager.Instance.GetReward());
 		}
 
 		UIManager.Instance.ShowLevelEndScreen(LevelStatus.Won);

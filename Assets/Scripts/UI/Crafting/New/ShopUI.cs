@@ -42,7 +42,7 @@ public class ShopUI : UIMenu
 		for (int i = 0; i < 3; i++)
 		{
 			ToolTipUI tooltipUI = Instantiate(_toolTipUI_prefab, _shopItemContainer);
-			WeaponPart weaponPart = RewardManager.Instance.GetRandomReward();
+			WeaponPart weaponPart = RewardManager.Instance.GetReward();
 			RewardManager.Instance.ClearRewards();
 
 			tooltipUI.OnBuy += OnItemBought;
