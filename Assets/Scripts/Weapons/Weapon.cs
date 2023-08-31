@@ -99,15 +99,15 @@ public class Weapon : ScriptableObject
 
 		if (barrel.motionPattern.explosionVfx != null)
 			_attackPatternExplosiveVFXPool = ObjectPool<HorgueVFX>.CreatePool(barrel.motionPattern.explosionVfx, 25, null);
-		if (ammunition.statusEffect.initialDamageVFX != null)
+		if (ammunition.statusEffect?.initialDamageVFX != null)
 			_statusEffectInitialDamageVFXPool = ObjectPool<HorgueVFX>.CreatePool(ammunition.statusEffect.initialDamageVFX, 100, null);
-		if (ammunition.statusEffect.dotDamageVFX != null)
+		if (ammunition.statusEffect?.dotDamageVFX != null)
 			_statusEffectDamageOverTimeVFXPool = ObjectPool<HorgueVFX>.CreatePool(ammunition.statusEffect.dotDamageVFX, 100, null);
-		if (ammunition.statusEffect.slowVFX != null)
+		if (ammunition.statusEffect?.slowVFX != null)
 			_statusEffectSlowVFXPool = ObjectPool<HorgueVFX>.CreatePool(ammunition.statusEffect.slowVFX, 100, null);
-		if (ammunition.statusEffect.knockBackVFX != null)
+		if (ammunition.statusEffect?.knockBackVFX != null)
 			_statusEffectKnockbackVFXPool = ObjectPool<HorgueVFX>.CreatePool(ammunition.statusEffect.knockBackVFX, 100, null);
-		if (ammunition.statusEffect.propagationVFX != null)
+		if (ammunition.statusEffect?.propagationVFX != null)
 			_statusEffectPropagationVFXPool = ObjectPool<HorgueVFX>.CreatePool(ammunition.statusEffect.propagationVFX, 100, null);
 
 		_camera = Camera.main;
