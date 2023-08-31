@@ -306,7 +306,7 @@ public class PlayerAbilities : MonoBehaviour
 
                 _playerCharacter.CharacterRigidbody.velocity = new Vector3(_playerCharacter.CharacterRigidbody.velocity.x, 0, _playerCharacter.CharacterRigidbody.velocity.z);
                 // _playerCharacter.CharacterRigidbody.AddForce(_playerCharacter.CharacterRigidbody.transform.up * _jetpackThrustForce * multiplier, ForceMode.Impulse);
-                _playerCharacter.transform.position += new Vector3(0, _jetpackThrustForce * 8 * multiplier * Time.deltaTime, 0);
+                _playerCharacter.transform.position += new Vector3(0, _jetpackThrustForce * multiplier * Time.deltaTime, 0);
             }
             else if (!ButtonHeld)
             {
@@ -316,7 +316,7 @@ public class PlayerAbilities : MonoBehaviour
                 IsUsingJetpack = false;
             }
 
-            if (JetpackFuel <= 0)
+            if (JetpackFuel <= 0 || (_playerCharacter.GetComponent<PlayerJump>().IsGrounded && _playerCharacter.CharacterRigidbody.velocity.y < 0))
             {
                 ResetJetpackAbility();
             }
@@ -329,16 +329,21 @@ public class PlayerAbilities : MonoBehaviour
         IsUsingAbility = false;
         _jetpackActiveTimer = 0;
 
+        float usedFuel = MaxJetpackFuel - JetpackFuel;
+        float tempJetPackCD = _jetpackCD * (usedFuel / 100);
+
+        JetpackFuel = 0;
+
         _jetpackVisuals.GetComponentInChildren<Animator>().SetBool("jetpackOn", false);
         _jetpackVisuals.GetComponentInChildren<Animator>().SetBool("jetpackOff", true);
 
-        ResetAbilityTimer(_jetpackCD);
-        StartCoroutine(ResetJetpackFuel());
+        ResetAbilityTimer(tempJetPackCD);
+        StartCoroutine(ResetJetpackFuel(tempJetPackCD));
     }
 
-    private IEnumerator ResetJetpackFuel()
+    private IEnumerator ResetJetpackFuel(float cd)
     {
-        yield return new WaitForSeconds(_jetpackCD);
+        yield return new WaitForSeconds(cd);
         JetpackFuel = MaxJetpackFuel;
     }
 

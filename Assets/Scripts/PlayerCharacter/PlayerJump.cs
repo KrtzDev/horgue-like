@@ -73,6 +73,14 @@ public class PlayerJump : MonoBehaviour
 
         if (hitColliders.Length > 0 || Physics.Raycast(this.transform.position, Vector2.down, _groundCheckY, _character.WalkLayer))
         {
+            if(GetComponent<PlayerAbilities>().IsUsingJetpack)
+            {
+                if(hitColliders.Length <= 0)
+                {
+                    return;
+                }
+            }
+
             if(IsGrounded == false)
             {
                 AudioManager.Instance.PlaySound("Landing");

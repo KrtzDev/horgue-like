@@ -683,6 +683,7 @@ public class Weapon : ScriptableObject
 
 	private async void Reload()
 	{
+		// could play first reload sound, then 2nd when reload is finished
 		await Task.Delay((int)(_reloadTime * 1000));
 		AudioManager.Instance.PlaySound("WeaponReload");
 
