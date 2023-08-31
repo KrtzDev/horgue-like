@@ -25,5 +25,7 @@ public class WeaponPart : ScriptableObject
 	public float cost;
 
 	[HideInInspector]
+	public string rarity;
+	[HideInInspector]
 	public float weight;
 }

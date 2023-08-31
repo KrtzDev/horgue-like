@@ -13,13 +13,13 @@ MonoBehaviour:
   m_Name: DetectiveRevolver
   m_EditorClassIdentifier: 
   _weaponStats:
-    damage: 63
-    attackspeed: 0.9
-    cooldown: 2.9
-    projectileSize: 0.1
-    critChance: 11.5
-    critDamage: 2.25
-    range: 17.55
+    damage: 103.25
+    attackspeed: 3.8
+    cooldown: 4.1
+    projectileSize: 0.13
+    critChance: 23
+    critDamage: 1.5
+    range: 36.4
     capacity: 20
     attackPattern: {fileID: 11400000, guid: cb578d9958690974390a1eba6fa458d1, type: 2}
     motionPattern: {fileID: 11400000, guid: 9aa305ff9050739458fbff74de9180b1, type: 2}
@@ -29,7 +29,7 @@ MonoBehaviour:
   weaponSprite: {fileID: 21300000, guid: 542ca056f31bfd04785c98e6ccaf726d, type: 3}
   defaultGrip: {fileID: 11400000, guid: 97dec1cd5dae84349b447f89207d519e, type: 2}
   defaultBarrel: {fileID: 11400000, guid: 72479c756f21df24d8c149c9273c1cc1, type: 2}
-  defaultMagazine: {fileID: 11400000, guid: 06383c904fd901f4397c4c2bf73d2f55, type: 2}
+  defaultMagazine: {fileID: 11400000, guid: 316b1d3a766537848af8edb8c9389398, type: 2}
   defaultAmmunition: {fileID: 11400000, guid: 1dfe9618dd4cde245a63e8ed2ec4c446, type: 2}
   defaultTriggerMechanism: {fileID: 11400000, guid: c882f0bde8db67749b2f08f7e1f3e0a3,
     type: 2}
@@ -46,3 +46,4 @@ MonoBehaviour:
   _groundLayer:
     serializedVersion: 2
     m_Bits: 513
+  _capacity: 6

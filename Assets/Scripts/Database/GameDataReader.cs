@@ -144,6 +144,7 @@ public class GameDataReader : MonoBehaviour
         public float projectileWidth;
         public float range;
         public float cost;
+		public string rarity;
     }
 
     [System.Serializable]
@@ -162,7 +163,8 @@ public class GameDataReader : MonoBehaviour
         public float projectileWidth;
         public float range;
         public float cost;
-    }
+		public string rarity;
+	}
 
     [System.Serializable]
     public class GripDB
@@ -180,7 +182,8 @@ public class GameDataReader : MonoBehaviour
         public float projectileWidth;
         public float range;
         public float cost;
-    }
+		public string rarity;
+	}
 
     [System.Serializable]
     public class MagazineDB
@@ -198,7 +201,8 @@ public class GameDataReader : MonoBehaviour
         public float projectileWidth;
         public float range;
         public float cost;
-    }
+		public string rarity;
+	}
 
     [System.Serializable]
     public class SightDB
@@ -215,7 +219,8 @@ public class GameDataReader : MonoBehaviour
         public float projectileWidth;
         public float range;
         public float cost;
-    }
+		public string rarity;
+	}
 
     [System.Serializable]
     public class TriggerMechanismDB
@@ -231,7 +236,8 @@ public class GameDataReader : MonoBehaviour
         public float projectileWidth;
         public float range;
         public float cost;
-    }
+		public string rarity;
+	}
 
     #endregion
 
@@ -498,6 +504,7 @@ public class GameDataReader : MonoBehaviour
                 _ammunitionData[i].critDamage = myAmmunitionList.Ammunition[i].criticalHitDamage;
                 _ammunitionData[i].range = myAmmunitionList.Ammunition[i].range;
                 _ammunitionData[i].cost = myAmmunitionList.Ammunition[i].cost;
+				_ammunitionData[i].rarity = myAmmunitionList.Ammunition[i].rarity;
             }
             else
             {
@@ -509,7 +516,8 @@ public class GameDataReader : MonoBehaviour
                 _ammunitionData[i].critDamage = myAmmunitionList.Ammunition[i].criticalHitDamage * _ammunitionData[0].critDamage;
                 _ammunitionData[i].range = myAmmunitionList.Ammunition[i].range * _ammunitionData[0].range;
                 _ammunitionData[i].cost = myAmmunitionList.Ammunition[i].cost * _ammunitionData[0].cost;
-            }
+				_ammunitionData[i].rarity = myAmmunitionList.Ammunition[i].rarity;
+			}
         }
     }
     private void SetBarrelData()
@@ -526,7 +534,8 @@ public class GameDataReader : MonoBehaviour
                 _barrelData[i].critDamage = myBarrelList.Barrel[i].criticalHitDamage;
                 _barrelData[i].range = myBarrelList.Barrel[i].range;
                 _barrelData[i].cost = myBarrelList.Barrel[i].cost;
-            }
+				_barrelData[i].rarity = myBarrelList.Barrel[i].rarity;
+			}
             else
             {
                 _barrelData[i].baseDamage = myBarrelList.Barrel[i].baseDamage * _barrelData[0].baseDamage;
@@ -537,7 +546,8 @@ public class GameDataReader : MonoBehaviour
                 _barrelData[i].critDamage = myBarrelList.Barrel[i].criticalHitDamage * _barrelData[0].critDamage;
                 _barrelData[i].range = myBarrelList.Barrel[i].range * _barrelData[0].range;
                 _barrelData[i].cost = myBarrelList.Barrel[i].cost * _barrelData[0].cost;
-            }
+				_barrelData[i].rarity = myBarrelList.Barrel[i].rarity;
+			}
         }
     }
     private void SetGripData()
@@ -554,7 +564,8 @@ public class GameDataReader : MonoBehaviour
                 _gripData[i].critDamage = myGripList.Grip[i].criticalHitDamage;
                 _gripData[i].range = myGripList.Grip[i].range;
                 _gripData[i].cost = myGripList.Grip[i].cost;
-            }
+				_gripData[i].rarity = myGripList.Grip[i].rarity;
+			}
             else
             {
                 _gripData[i].baseDamage = myGripList.Grip[i].baseDamage * _gripData[0].baseDamage;
@@ -565,7 +576,8 @@ public class GameDataReader : MonoBehaviour
                 _gripData[i].critDamage = myGripList.Grip[i].criticalHitDamage * _gripData[0].critDamage;
                 _gripData[i].range = myGripList.Grip[i].range * _gripData[0].range;
                 _gripData[i].cost = myGripList.Grip[i].cost * _gripData[0].cost;
-            }
+				_gripData[i].rarity = myGripList.Grip[i].rarity;
+			}
         }
     }
     private void SetMagazineData()
@@ -582,6 +594,7 @@ public class GameDataReader : MonoBehaviour
                 _magazineData[i].critDamage = myMagazineList.Magazine[i].criticalHitDamage;
                 _magazineData[i].range = myMagazineList.Magazine[i].range;
                 _magazineData[i].cost = myMagazineList.Magazine[i].cost;
+				_magazineData[i].rarity = myMagazineList.Magazine[i].rarity;
             }
             else
             {
@@ -593,7 +606,8 @@ public class GameDataReader : MonoBehaviour
                 _magazineData[i].critDamage = myMagazineList.Magazine[i].criticalHitDamage * _magazineData[0].critDamage;
                 _magazineData[i].range = myMagazineList.Magazine[i].range * _magazineData[0].range;
                 _magazineData[i].cost = myMagazineList.Magazine[i].cost * _magazineData[0].cost;
-            }
+				_magazineData[i].rarity = myMagazineList.Magazine[i].rarity;
+			}
         }
     }
     private void SetSightData()
@@ -610,6 +624,7 @@ public class GameDataReader : MonoBehaviour
                 _sightData[i].critDamage = mySightList.Sight[i].criticalHitDamage;
                 _sightData[i].range = mySightList.Sight[i].range;
                 _sightData[i].cost = mySightList.Sight[i].cost;
+				_sightData[i].rarity = mySightList.Sight[i].rarity;
             }
             else
             {
@@ -621,7 +636,8 @@ public class GameDataReader : MonoBehaviour
                 _sightData[i].critDamage = mySightList.Sight[i].criticalHitDamage * _sightData[0].critDamage;
                 _sightData[i].range = mySightList.Sight[i].range * _sightData[0].range;
                 _sightData[i].cost = mySightList.Sight[i].cost * _sightData[0].cost;
-            }
+				_sightData[i].rarity = mySightList.Sight[i].rarity;
+			}
         }
     }
     private void SetTriggerMechanismData()
@@ -638,7 +654,8 @@ public class GameDataReader : MonoBehaviour
                 _triggerMechanismData[i].critDamage = myTriggerMechanismList.TriggerMechanism[i].criticalHitDamage;
                 _triggerMechanismData[i].range = myTriggerMechanismList.TriggerMechanism[i].range;
                 _triggerMechanismData[i].cost = myTriggerMechanismList.TriggerMechanism[i].cost;
-            }
+				_triggerMechanismData[i].rarity = myTriggerMechanismList.TriggerMechanism[i].rarity;
+			}
             else
             {
                 _triggerMechanismData[i].baseDamage = myTriggerMechanismList.TriggerMechanism[i].baseDamage * _triggerMechanismData[0].baseDamage;
@@ -649,7 +666,8 @@ public class GameDataReader : MonoBehaviour
                 _triggerMechanismData[i].critDamage = myTriggerMechanismList.TriggerMechanism[i].criticalHitDamage * _triggerMechanismData[0].critDamage;
                 _triggerMechanismData[i].range = myTriggerMechanismList.TriggerMechanism[i].range * _triggerMechanismData[0].range;
                 _triggerMechanismData[i].cost = myTriggerMechanismList.TriggerMechanism[i].cost * _triggerMechanismData[0].cost;
-            }
-        }
+				_triggerMechanismData[i].rarity = myTriggerMechanismList.TriggerMechanism[i].rarity;
+			}
+		}
     }
 }

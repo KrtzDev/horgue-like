@@ -16,18 +16,22 @@ public class RewardManager : Singleton<RewardManager>
 	private WeaponPart _lastDrawnReward;
 
 	private Dictionary<Type, int> _weightBiasByPartType = new Dictionary<Type, int>();
+	private Dictionary<string, float> _weightByRarity = new Dictionary<string, float>();
 
 	private void Start()
 	{
 		SceneLoader.Instance.CompletedSceneLoad += OnCompletedSceneLoad;
 
 		UpdateTypeBiasWeightTable();
+		SetUpWeightByRarityTable();
 	}
 
 	private void UpdateTypeBiasWeightTable()
 	{
 		if (_lastDrawnReward == null)
 		{
+			_weightBiasByPartType.Clear();
+			Debug.Log("Ping");
 			_weightBiasByPartType.Add(typeof(Grip), 16);
 			_weightBiasByPartType.Add(typeof(Barrel), 20);
 			_weightBiasByPartType.Add(typeof(Magazine), 16);
@@ -37,14 +41,25 @@ public class RewardManager : Singleton<RewardManager>
 		}
 		else
 		{
-			foreach (var partType in _weightBiasByPartType)
+			for (int i = 0; i < _weightBiasByPartType.Count; i++)
 			{
-				if (partType.Key == _lastDrawnReward.GetType())
-					_weightBiasByPartType[partType.Key] -= 5;
+				var partType = _weightBiasByPartType.ElementAt(i).Key;
+
+				if (partType == _lastDrawnReward.GetType())
+					_weightBiasByPartType[partType] -= 5;
 				else
-					_weightBiasByPartType[partType.Key]++;
+					_weightBiasByPartType[partType]++;
 			}
 		}
+	}
+
+	private void SetUpWeightByRarityTable()
+	{
+		_weightByRarity.Add("common", 10);
+		_weightByRarity.Add("uncommon", 45);
+		_weightByRarity.Add("rare", 25);
+		_weightByRarity.Add("special", 15);
+		_weightByRarity.Add("unique", 5);
 	}
 
 	private async void OnCompletedSceneLoad()
@@ -70,35 +85,11 @@ public class RewardManager : Singleton<RewardManager>
 		return newReward;
 	}
 
-	private WeaponPart GetRandomPart()
-	{
-		return _weaponPartRewards[UnityEngine.Random.Range(0, _weaponPartRewards.Count - 1)];
-	}
-
 	private WeaponPart GetBiasedPart()
 	{
-		foreach (var part in _weaponPartRewards)
-		{
-			ApplyTypeBias(part);
-			ApplyRarityBias(part);
-			ApplySpecificBias(part);
-		}
-
-		List<WeaponPart> _biasedrewards = _weaponPartRewards.OrderBy(e => e.weight).ToList();
-		WeaponPart drawnReward = null;
-
-		//with this loop mainly "common" items will be drawn as the rarity influnces the weight the most and high weighted Items are first in the List because the orderBy
-		foreach (var part in _biasedrewards)
-		{
-			if (part.weight > UnityEngine.Random.Range(0, 100))
-			{
-				drawnReward = part;
-				break;
-			}
-		}
-
-		if (drawnReward == null)
-			drawnReward = GetRandomPart();
+		List<WeaponPart> typeBiasedParts = GetTypeBiasedList();
+		List<WeaponPart> typeAndRarityBiasedParts = GetRarityBiasedList(typeBiasedParts);
+		WeaponPart drawnReward = GetFinalBiasedPart(typeAndRarityBiasedParts);
 
 		_lastDrawnReward = drawnReward;
 		UpdateTypeBiasWeightTable();
@@ -106,24 +97,68 @@ public class RewardManager : Singleton<RewardManager>
 		return drawnReward;
 	}
 
-	private void ApplyTypeBias(WeaponPart weaponPart)
+	private List<WeaponPart> GetTypeBiasedList()
 	{
-		weaponPart.weight = GetBiasWeightFromType(weaponPart);
+		KeyValuePair<Type, int> chosenType = new KeyValuePair<Type, int>(null, 0);
+		double accumulatedWeight = 0;
+
+		foreach (KeyValuePair<Type, int> partType in _weightBiasByPartType)
+		{
+			if (chosenType.Key == null)
+			{
+				chosenType = partType;
+				accumulatedWeight = partType.Value;
+				continue;
+			}
+			accumulatedWeight += partType.Value;
+
+			double probabilityToChooseNewPart = (double)partType.Value/(accumulatedWeight + partType.Value) * 100;
+			if (probabilityToChooseNewPart >= UnityEngine.Random.Range(0, 100))
+			{
+				chosenType = partType;
+			}
+		}
+
+		return _weaponPartRewards.FindAll(e => e.GetType() == chosenType.Key).ToList();
 	}
 
-	private int GetBiasWeightFromType(WeaponPart weaponPart)
+	private List<WeaponPart> GetRarityBiasedList(List<WeaponPart> weaponParts)
 	{
-		return _weightBiasByPartType[weaponPart.GetType()];
+		foreach (var weaponPart in weaponParts)
+		{
+			weaponPart.weight = GetWeigthByRarity(weaponPart.rarity);
+		}
+
+		return weaponParts;
 	}
 
-	private void ApplyRarityBias(WeaponPart weaponPart)
+	private float GetWeigthByRarity(string rarity)
 	{
-
+		return _weightByRarity[rarity];
 	}
 
-	private void ApplySpecificBias(WeaponPart weaponPart)
+	private WeaponPart GetFinalBiasedPart(List<WeaponPart> weaponParts)
 	{
+		WeaponPart chosenPart = null;
+		double accumulatedWeight = 0;
 
+		foreach (var weaponpart in weaponParts)
+		{
+			if (chosenPart == null)
+			{
+				chosenPart = weaponpart;
+				accumulatedWeight = weaponpart.weight;
+				continue;
+			}
+			accumulatedWeight += weaponpart.weight;
+
+			double probabilityToChooseNewPart = weaponpart.weight/(accumulatedWeight + weaponpart.weight) * 100;
+			if (probabilityToChooseNewPart >= UnityEngine.Random.Range(0, 100))
+			{
+				chosenPart = weaponpart;
+			}
+		}
+		return chosenPart;
 	}
 
 	private void ScaleWeaponPartToLevel(WeaponPart weaponPart)
