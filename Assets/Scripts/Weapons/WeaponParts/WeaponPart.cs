@@ -23,4 +23,9 @@ public class WeaponPart : ScriptableObject
 	[Space(22)]
 	[SerializeField]
 	public float cost;
+
+	[HideInInspector]
+	public string rarity;
+	[HideInInspector]
+	public float weight;
 }

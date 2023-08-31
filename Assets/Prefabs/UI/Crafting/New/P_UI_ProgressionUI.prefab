@@ -57,8 +57,8 @@ MonoBehaviour:
   _walletUI: {fileID: 2273893404088161270}
   _shopItemContainer: {fileID: 6491988764579195317}
   _comparisonContainerShopItem: {fileID: 6584131402342506408}
-  _comparisonContainerEquipped: {fileID: 5618710198366156315}
-  _comparisonContainerSelected: {fileID: 5792337393968354489}
+  _comparisonContainerEquipped: {fileID: 8549508126003923342}
+  _comparisonContainerSelected: {fileID: 1564089169530654091}
   _buyButton: {fileID: 7876300365306583367}
   _sellButton: {fileID: 3463862568457808998}
   _equipButton: {fileID: 4350783318343213287}
@@ -4249,8 +4249,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _toolTipUI_prefab: {fileID: 1632619086718026943, guid: 060763a266677f6469ac0e95f2facdfc,
     type: 3}
-  _selectionContainer: {fileID: 5792337393968354489}
-  _equippedContainer: {fileID: 5618710198366156315}
+  _selectionContainer: {fileID: 1564089169530654091}
+  _equippedContainer: {fileID: 8549508126003923342}
   _shopItemContainer: {fileID: 6584131402342506408}
   _shopItemScrollBar: {fileID: 1404495286403582200}
 --- !u!1 &5734852680828871113
@@ -4722,8 +4722,8 @@ MonoBehaviour:
   _buyButton: {fileID: 7876300365306583367}
   _sellButton: {fileID: 3463862568457808998}
   _equipButton: {fileID: 4350783318343213287}
-  _comparisonContainerSelected: {fileID: 5792337393968354489}
-  _comparisonContainerEquipped: {fileID: 5618710198366156315}
+  _comparisonContainerSelected: {fileID: 1564089169530654091}
+  _comparisonContainerEquipped: {fileID: 8549508126003923342}
   _comparisonContainerShopItem: {fileID: 6584131402342506408}
   _toolTipUI_prefab: {fileID: 1632619086718026943, guid: 060763a266677f6469ac0e95f2facdfc,
     type: 3}
@@ -6356,7 +6356,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 9192379466507579908}
   m_Direction: 2
   m_Value: 1
-  m_Size: 1
+  m_Size: 0
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -6643,7 +6643,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -0.00012207031}
+  m_AnchoredPosition: {x: 0, y: -0.0000039339066}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &2966044128362838828
