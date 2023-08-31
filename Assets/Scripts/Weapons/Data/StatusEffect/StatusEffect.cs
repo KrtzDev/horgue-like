@@ -8,6 +8,12 @@ public class StatusEffect
 	public Action<StatusEffect> OnStatusEffectEnded;
 	public Action<Projectile> OnHitEnemy;
 
+	public ObjectPool<HorgueVFX> initialDamageVFXPool;
+	public ObjectPool<HorgueVFX> damageOverTimeVFXPool;
+	public ObjectPool<HorgueVFX> slowVFXPool;
+	public ObjectPool<HorgueVFX> knockbackVFXPool;
+	public ObjectPool<HorgueVFX> propagationVFXPool;
+
 	public StatusEffectSO StatusEffectSO { get; private set; }
 
 	[Header("General")]
@@ -239,7 +245,11 @@ public class StatusEffect
 		if (_propagationChance < UnityEngine.Random.Range(1, 100))
 			return;
 
-		_propagationVFX?.Play();
+		HorgueVFX spawnedPropagationVFX =  propagationVFXPool.GetObject();
+		spawnedPropagationVFX.transform.position = _enemy.transform.position;
+		spawnedPropagationVFX.Play();
+		spawnedPropagationVFX.ReturnToPoolOnFinished(propagationVFXPool);
+
 		_timesPropagated++;
 
 		Collider[] enemies = Physics.OverlapSphere(_enemy.gameObject.transform.position, _propagationRange, _layersToPropagateTo);

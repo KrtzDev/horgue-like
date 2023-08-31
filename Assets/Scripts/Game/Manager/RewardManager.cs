@@ -31,7 +31,6 @@ public class RewardManager : Singleton<RewardManager>
 		if (_lastDrawnReward == null)
 		{
 			_weightBiasByPartType.Clear();
-			Debug.Log("Ping");
 			_weightBiasByPartType.Add(typeof(Grip), 16);
 			_weightBiasByPartType.Add(typeof(Barrel), 20);
 			_weightBiasByPartType.Add(typeof(Magazine), 16);

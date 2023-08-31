@@ -23,7 +23,7 @@ public class HorgueVFX : MonoBehaviour
 	{
 		await Task.Delay((int)(_longestDuration * 1000f));
 
-		if (Application.isPlaying)
+		if (this != null && Application.isPlaying && this.isActiveAndEnabled)
 			vfxPool.ReturnObjectToPool(this);
 	}
 
