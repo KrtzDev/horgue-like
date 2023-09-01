@@ -21,6 +21,8 @@ public class InventoryUI : UIMenu
 	[SerializeField]
 	private HoldButton _buyButton;
 	[SerializeField]
+	private HoldButton _newShopButton;
+	[SerializeField]
 	private HoldButton _sellButton;
 	[SerializeField]
 	private HoldButton _equipButton;
@@ -126,6 +128,7 @@ public class InventoryUI : UIMenu
 		_equipButton.Enable();
 		_sellButton.Enable();
 		_buyButton.Disable();
+		_newShopButton.Disable();
 		StartCoroutine(FocusAfterFrame());
 	}
 

@@ -13,6 +13,8 @@ public class ToolTipUI : Selectable
 
 	[SerializeField]
 	public HoldButton buyButton;
+	[SerializeField]
+	public HoldButton newShopButton;
 
 	[SerializeField]
 	public Image _selectionIndicator;

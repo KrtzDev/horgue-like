@@ -125,17 +125,23 @@ public class Weapon : ScriptableObject
 
 	public WeaponStats CalculateWeaponStats(Weapon weapon)
 	{
-        WeaponStats weaponStats = new WeaponStats
-        {
-            damage = CalculateDamage(weapon, GameManager.Instance.damageCalcKind),
-            attackspeed = CalculateAttackSpeed(weapon, GameManager.Instance.damageCalcKind),
-            cooldown = CalculateCooldown(weapon, GameManager.Instance.damageCalcKind),
-            projectileSize = CalculateProjectileSize(weapon, GameManager.Instance.damageCalcKind),
-            critChance = CalculateCritChance(weapon, GameManager.Instance.damageCalcKind),
-            critDamage = CalculateCritDamage(weapon, GameManager.Instance.damageCalcKind),
-            range = CalculatefinalRange(weapon, GameManager.Instance.damageCalcKind),
+		WeaponStats weaponStats = new WeaponStats
+		{
+			damage = CalculateDamage(weapon, GameManager.Instance.damageCalcKind),
+			attackspeed = CalculateAttackSpeed(weapon, GameManager.Instance.damageCalcKind),
+			cooldown = CalculateCooldown(weapon, GameManager.Instance.damageCalcKind),
+			projectileSize = CalculateProjectileSize(weapon, GameManager.Instance.damageCalcKind),
+			critChance = CalculateCritChance(weapon, GameManager.Instance.damageCalcKind),
+			critDamage = CalculateCritDamage(weapon, GameManager.Instance.damageCalcKind),
+			range = CalculatefinalRange(weapon, GameManager.Instance.damageCalcKind),
+			dps = CalculateDPS(CalculateDamage(weapon, GameManager.Instance.damageCalcKind), 
+				CalculateAttackSpeed(weapon, GameManager.Instance.damageCalcKind), 
+				CalculateCooldown(weapon, GameManager.Instance.damageCalcKind),
+				CalculateCritChance(weapon, GameManager.Instance.damageCalcKind),
+				CalculateCritDamage(weapon, GameManager.Instance.damageCalcKind),
+				weapon.magazine.capacity),
 
-            capacity = weapon.magazine.capacity,
+			capacity = weapon.magazine.capacity,
             attackPattern = weapon.barrel.attackPattern,
             motionPattern = weapon.barrel.motionPattern,
             statusEffect = weapon.ammunition.statusEffect
@@ -183,6 +189,19 @@ public class Weapon : ScriptableObject
 		projectile.motionPattern = weaponStats.motionPattern;
 		projectile.statusEffect = weaponStats.statusEffect;
 	}
+
+	private float CalculateDPS(float damage, float attackSpeed, float cooldown, float critChance, float critDamage, float capacity)
+    {
+		float critDamagePerShot = damage * (critChance / 100) * critDamage;
+		float normalDamagePerShot = damage * (1 - critChance / 100);
+		float fullDamagePerShot = critDamagePerShot + normalDamagePerShot;
+		float fullDamagePerMagazine = fullDamagePerShot *capacity;
+		float cycleTime = capacity / attackSpeed + cooldown;
+
+		float damagePerSecond = fullDamagePerMagazine / cycleTime;
+
+		return damagePerSecond;
+    }
 
 	private float CalculateDamage(Weapon weapon, DamageCalcKind damageCalcKind)
 	{
