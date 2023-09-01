@@ -180,20 +180,22 @@ public class WeaponUI : MonoBehaviour
 			currenStat = Instantiate(_statUI_prefab, _weaponStatsParent);
 			currenStat.Initialize("Reload Time: ", weaponStats.cooldown.ToString("0.00"));
 			currenStat = Instantiate(_statUI_prefab, _weaponStatsParent);
-			currenStat.Initialize("Projectile Size: ", weaponStats.projectileSize.ToString("0.00"));
+			currenStat.Initialize("Proj. Size: ", weaponStats.projectileSize.ToString("0.00"));
 			currenStat = Instantiate(_statUI_prefab, _weaponStatsParent);
-			currenStat.Initialize("Crit Chance: ", weaponStats.critChance.ToString("0.00"));
+			currenStat.Initialize("Crit. Chance: ", weaponStats.critChance.ToString("0.00"));
+			currenStat = Instantiate(_statUI_prefab, _weaponStatsParent);
+			currenStat.Initialize("Crit. Damage: ", weaponStats.critDamage.ToString("0.00"));
 			currenStat = Instantiate(_statUI_prefab, _weaponStatsParent);
 			currenStat.Initialize("Range: ", weaponStats.range.ToString("0.00"));
 			currenStat = Instantiate(_statUI_prefab, _weaponStatsParent);
 			currenStat.Initialize("Capacity: ", weaponStats.capacity.ToString("0.00"));
 			currenStat = Instantiate(_statUI_prefab, _weaponStatsParent);
-			currenStat.Initialize("Projectile Trajectory: ", weaponStats.attackPattern.PatternName());
+			currenStat.Initialize("Trajectory: ", weaponStats.attackPattern.PatternName());
 			currenStat = Instantiate(_statUI_prefab, _weaponStatsParent);
 			if (weaponStats.statusEffect != null)
-				currenStat.Initialize("Impact Effect: ", weaponStats.statusEffect.StatusName());
+				currenStat.Initialize("Effect: ", weaponStats.statusEffect.StatusName());
 			else
-				currenStat.Initialize("Impact Effect: ", "None");
+				currenStat.Initialize("Effect: ", "None");
 		}
 		else if (_previousWeaponStats != null && colorStats)
 		{
@@ -219,17 +221,24 @@ public class WeaponUI : MonoBehaviour
 				currenStat.statBackground.color = currenStat.negativeColor;
 
 			currenStat = Instantiate(_statUI_prefab, _weaponStatsParent);
-			currenStat.Initialize("Projectile Size: ", weaponStats.projectileSize.ToString("0.00"));
+			currenStat.Initialize("Proj. Size: ", weaponStats.projectileSize.ToString("0.00"));
 			if (weaponStats.projectileSize > _previousWeaponStats.projectileSize)
 				currenStat.statBackground.color = currenStat.positiveColor;
 			else if (weaponStats.projectileSize < _previousWeaponStats.projectileSize)
 				currenStat.statBackground.color = currenStat.negativeColor;
 
 			currenStat = Instantiate(_statUI_prefab, _weaponStatsParent);
-			currenStat.Initialize("Crit Chance: ", weaponStats.critChance.ToString("0.00"));
+			currenStat.Initialize("Crit. Chance: ", weaponStats.critChance.ToString("0.00"));
 			if (weaponStats.critChance > _previousWeaponStats.critChance)
 				currenStat.statBackground.color = currenStat.positiveColor;
 			else if (weaponStats.critChance < _previousWeaponStats.critChance)
+				currenStat.statBackground.color = currenStat.negativeColor;
+
+			currenStat = Instantiate(_statUI_prefab, _weaponStatsParent);
+			currenStat.Initialize("Crit. Damage: ", weaponStats.critChance.ToString("0.00"));
+			if (weaponStats.critDamage > _previousWeaponStats.critDamage)
+				currenStat.statBackground.color = currenStat.positiveColor;
+			else if (weaponStats.critDamage < _previousWeaponStats.critDamage)
 				currenStat.statBackground.color = currenStat.negativeColor;
 
 			currenStat = Instantiate(_statUI_prefab, _weaponStatsParent);
@@ -247,13 +256,13 @@ public class WeaponUI : MonoBehaviour
 				currenStat.statBackground.color = currenStat.negativeColor;
 
 			currenStat = Instantiate(_statUI_prefab, _weaponStatsParent);
-			currenStat.Initialize("Projectile Trajectory: ", weaponStats.attackPattern.PatternName());
+			currenStat.Initialize("Trajectory: ", weaponStats.attackPattern.PatternName());
 
 			currenStat = Instantiate(_statUI_prefab, _weaponStatsParent);
 			if (weaponStats.statusEffect != null)
-				currenStat.Initialize("Impact Effect: ", weaponStats.statusEffect.StatusName());
+				currenStat.Initialize("Effect: ", weaponStats.statusEffect.StatusName());
 			else
-				currenStat.Initialize("Impact Effect: ", "None");
+				currenStat.Initialize("Effect: ", "None");
 		}
 		else
 		{
@@ -264,20 +273,22 @@ public class WeaponUI : MonoBehaviour
 			currenStat = Instantiate(_statUI_prefab, _weaponStatsParent);
 			currenStat.Initialize("Reload Time: ", weaponStats.cooldown.ToString("0.00"));
 			currenStat = Instantiate(_statUI_prefab, _weaponStatsParent);
-			currenStat.Initialize("Projectile Size: ", weaponStats.projectileSize.ToString("0.00"));
+			currenStat.Initialize("Proj. Size: ", weaponStats.projectileSize.ToString("0.00"));
 			currenStat = Instantiate(_statUI_prefab, _weaponStatsParent);
-			currenStat.Initialize("Crit Chance: ", weaponStats.critChance.ToString("0.00"));
+			currenStat.Initialize("Crit. Chance: ", weaponStats.critChance.ToString("0.00"));
+			currenStat = Instantiate(_statUI_prefab, _weaponStatsParent);
+			currenStat.Initialize("Crit. Damage: ", weaponStats.critDamage.ToString("0.00"));
 			currenStat = Instantiate(_statUI_prefab, _weaponStatsParent);
 			currenStat.Initialize("Range: ", weaponStats.range.ToString("0.00"));
 			currenStat = Instantiate(_statUI_prefab, _weaponStatsParent);
 			currenStat.Initialize("Capacity: ", weaponStats.capacity.ToString("0.00"));
 			currenStat = Instantiate(_statUI_prefab, _weaponStatsParent);
-			currenStat.Initialize("Projectile Trajectory: ", weaponStats.attackPattern.PatternName().ToString());
+			currenStat.Initialize("Trajectory: ", weaponStats.attackPattern.PatternName().ToString());
 			currenStat = Instantiate(_statUI_prefab, _weaponStatsParent);
 			if (weaponStats.statusEffect != null)
-				currenStat.Initialize("Impact Effect: ", weaponStats.statusEffect.StatusName().ToString());
+				currenStat.Initialize("Effect: ", weaponStats.statusEffect.StatusName().ToString());
 			else
-				currenStat.Initialize("Impact Effect: ", "None");
+				currenStat.Initialize("Effect: ", "None");
 		}
 
 		_previousWeaponStats = weaponStats;
