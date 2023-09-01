@@ -42,6 +42,8 @@ public class WeaponUI : MonoBehaviour
 	private StatUI _statUI_Prefab;
 	[SerializeField]
 	private StatUI _statUI_Projectile_Trajectory_Prefab;
+	[SerializeField]
+	private StatUI _statUI_DPS_Prefab;
 
 
 	public void Initialize(Weapon weapon)
@@ -175,7 +177,9 @@ public class WeaponUI : MonoBehaviour
 
 		if (!colorStats)
 		{
-			StatUI currenStat = Instantiate(_statUI_Prefab, _weaponStatsParent);
+			StatUI currenStat = Instantiate(_statUI_DPS_Prefab, _weaponStatsParent);
+			currenStat.Initialize("Damage/Second: ", weaponStats.dps.ToString("0.00"));
+			currenStat = Instantiate(_statUI_Prefab, _weaponStatsParent);
 			currenStat.Initialize("Damage: ", weaponStats.damage.ToString("0.00"));
 			currenStat = Instantiate(_statUI_Prefab, _weaponStatsParent);
 			currenStat.Initialize("Attack Speed: ", weaponStats.attackspeed.ToString("0.00"));
@@ -201,7 +205,14 @@ public class WeaponUI : MonoBehaviour
 		}
 		else if (_previousWeaponStats != null && colorStats)
 		{
-			StatUI currenStat = Instantiate(_statUI_Prefab, _weaponStatsParent);
+			StatUI currenStat = Instantiate(_statUI_DPS_Prefab, _weaponStatsParent);
+			currenStat.Initialize("Damage/Seconds: ", weaponStats.dps.ToString("0.00"));
+			if (weaponStats.dps > _previousWeaponStats.dps)
+				currenStat.statBackground.color = currenStat.positiveColor;
+			else if (weaponStats.dps < _previousWeaponStats.dps)
+				currenStat.statBackground.color = currenStat.negativeColor;
+
+			currenStat = Instantiate(_statUI_Prefab, _weaponStatsParent);
 			currenStat.Initialize("Damage: ", weaponStats.damage.ToString("0.00"));
 			if (weaponStats.damage > _previousWeaponStats.damage)
 				currenStat.statBackground.color = currenStat.positiveColor;
@@ -237,7 +248,7 @@ public class WeaponUI : MonoBehaviour
 				currenStat.statBackground.color = currenStat.negativeColor;
 
 			currenStat = Instantiate(_statUI_Prefab, _weaponStatsParent);
-			currenStat.Initialize("Crit Damage: ", weaponStats.critChance.ToString("0.00"));
+			currenStat.Initialize("Crit Damage: ", weaponStats.critDamage.ToString("0.00"));
 			if (weaponStats.critDamage > _previousWeaponStats.critDamage)
 				currenStat.statBackground.color = currenStat.positiveColor;
 			else if (weaponStats.critDamage < _previousWeaponStats.critDamage)
@@ -269,6 +280,8 @@ public class WeaponUI : MonoBehaviour
 		else
 		{
 			StatUI currenStat = Instantiate(_statUI_Prefab, _weaponStatsParent);
+			currenStat.Initialize("Damage/Second: ", weaponStats.dps.ToString("0.00"));
+			currenStat = Instantiate(_statUI_Prefab, _weaponStatsParent);
 			currenStat.Initialize("Damage: ", weaponStats.damage.ToString("0.00"));
 			currenStat = Instantiate(_statUI_Prefab, _weaponStatsParent);
 			currenStat.Initialize("Attack Speed: ", weaponStats.attackspeed.ToString("0.00"));

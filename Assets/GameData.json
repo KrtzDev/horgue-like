@@ -357,7 +357,7 @@
       "name": "Ammunition AK",
       "numberOfGems": 0,
       "attackSpeed": 0.05,
-      "baseDamage": 0.15,
+      "baseDamage": 0.05,
       "cooldown": 0,
       "criticalHitChance": 0,
       "criticalHitDamage": 0,
