@@ -1524,9 +1524,9 @@ MonoBehaviour:
   _rewardUI_prefab: {fileID: 8270753814037413858, guid: 97021b92a4866c844ae8f8c8d345523b,
     type: 3}
   _weaponStatsParent: {fileID: 456480788091859386}
-  _statUI_Name_Value_prefab: {fileID: 9018271247152603339, guid: dda6b321a08fb4f429ba9fe2654739a8,
+  _statUI_Prefab: {fileID: 9018271247152603339, guid: dda6b321a08fb4f429ba9fe2654739a8,
     type: 3}
-  _statUI_Name_prefab: {fileID: 9018271247152603339, guid: 9de4f56ca87ea6449847f7d259d1a0f7,
+  _statUI_Projectile_Trajectory_Prefab: {fileID: 9018271247152603339, guid: 9de4f56ca87ea6449847f7d259d1a0f7,
     type: 3}
 --- !u!1 &8466676851671216919
 GameObject:

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8713472024154021306}
   - component: {fileID: 9018271247152603339}
   m_Layer: 5
-  m_Name: P_UI_Stat_Name
+  m_Name: P_UI_Stat_Projectile_Trajectory
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -39,7 +39,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 200, y: 22}
+  m_SizeDelta: {x: 200, y: 44}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!222 &2110195700849181
 CanvasRenderer:
@@ -162,7 +162,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 
+  m_text: Value
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 2511d73e39bc22541814776ec8ced903, type: 2}
   m_sharedMaterial: {fileID: 4915391599200758979, guid: 1585d8fc11ca69046b7133aef6ca84ce,
@@ -190,7 +190,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
+  m_fontSize: 19.75
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -226,7 +226,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: -20.182693, y: 0.07257748, z: 1.0915985, w: -0.07100487}
+  m_margin: {x: -169.98337, y: 0.07257748, z: -30.37259, w: -22.155247}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -267,7 +267,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 12}
   m_SizeDelta: {x: 200, y: 22}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5906548403508629163
