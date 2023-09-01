@@ -27,6 +27,8 @@ public class ShopUI : UIMenu
 	[SerializeField]
 	private HoldButton _buyButton;
 	[SerializeField]
+	private HoldButton _newShopButton;
+	[SerializeField]
 	private HoldButton _sellButton;
 	[SerializeField]
 	private HoldButton _equipButton;
@@ -50,6 +52,7 @@ public class ShopUI : UIMenu
 			tooltipUI.OnSelected += OnToolTipSelected;
 			tooltipUI.OnDeselected += OnToolTipDeselected;
 			tooltipUI.buyButton = _buyButton;
+			tooltipUI.newShopButton = _newShopButton;
 
 			tooltipUI.Initialize(weaponPart);
 			shopItems.Add(tooltipUI);
@@ -120,6 +123,7 @@ public class ShopUI : UIMenu
 	public override void SetFocusedMenu()
 	{
 		_buyButton.Enable();
+		_newShopButton.Enable();
 		_equipButton.Disable();
 		_sellButton.Disable();
 		StartCoroutine(SelectFirstItemAfterFrame());
