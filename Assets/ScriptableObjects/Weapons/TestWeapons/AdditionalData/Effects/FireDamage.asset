@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: FireDamage
   m_EditorClassIdentifier: 
   _statusName: Fire
-  triggerChance: 20
+  triggerChance: 40
   effectDuration: 6
   tickRate:
     min: 1

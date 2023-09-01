@@ -57,7 +57,13 @@ public class Weapon : ScriptableObject
 	private Transform _weaponTransform;
 
 	private ObjectPool<Projectile> _projectilePool;
-	private ObjectPool<HorgueVFX> _vfxPool;
+	private ObjectPool<HorgueVFX> _attackPatternExplosiveVFXPool;
+
+	private ObjectPool<HorgueVFX> _statusEffectInitialDamageVFXPool;
+	private ObjectPool<HorgueVFX> _statusEffectDamageOverTimeVFXPool;
+	private ObjectPool<HorgueVFX> _statusEffectSlowVFXPool;
+	private ObjectPool<HorgueVFX> _statusEffectKnockbackVFXPool;
+	private ObjectPool<HorgueVFX> _statusEffectPropagationVFXPool;
 
 	private float _shotDelay;
 	public int _capacity;
@@ -92,9 +98,20 @@ public class Weapon : ScriptableObject
 			_projectilePool = ObjectPool<Projectile>.CreatePool(_projectile, 100, null);
 
 		if (barrel.motionPattern.explosionVfx != null)
-			_vfxPool = ObjectPool<HorgueVFX>.CreatePool(barrel.motionPattern.explosionVfx, 25, null);
+			_attackPatternExplosiveVFXPool = ObjectPool<HorgueVFX>.CreatePool(barrel.motionPattern.explosionVfx, 25, null);
+		if (ammunition.statusEffect?.initialDamageVFX != null)
+			_statusEffectInitialDamageVFXPool = ObjectPool<HorgueVFX>.CreatePool(ammunition.statusEffect.initialDamageVFX, 100, null);
+		if (ammunition.statusEffect?.dotDamageVFX != null)
+			_statusEffectDamageOverTimeVFXPool = ObjectPool<HorgueVFX>.CreatePool(ammunition.statusEffect.dotDamageVFX, 100, null);
+		if (ammunition.statusEffect?.slowVFX != null)
+			_statusEffectSlowVFXPool = ObjectPool<HorgueVFX>.CreatePool(ammunition.statusEffect.slowVFX, 100, null);
+		if (ammunition.statusEffect?.knockBackVFX != null)
+			_statusEffectKnockbackVFXPool = ObjectPool<HorgueVFX>.CreatePool(ammunition.statusEffect.knockBackVFX, 100, null);
+		if (ammunition.statusEffect?.propagationVFX != null)
+			_statusEffectPropagationVFXPool = ObjectPool<HorgueVFX>.CreatePool(ammunition.statusEffect.propagationVFX, 100, null);
 
 		_camera = Camera.main;
+		_isReloading = false;
 	}
 
 	public void UpdateAimDirection()
@@ -188,6 +205,11 @@ public class Weapon : ScriptableObject
 		projectile.attackPattern = weaponStats.attackPattern;
 		projectile.motionPattern = weaponStats.motionPattern;
 		projectile.statusEffect = weaponStats.statusEffect;
+		projectile.statusEffectInitialDamageVFXPool = _statusEffectInitialDamageVFXPool;
+		projectile.statusEffectDamageOverTimeVFXPool = _statusEffectDamageOverTimeVFXPool;
+		projectile.statusEffectSlowVFXPool = _statusEffectSlowVFXPool;
+		projectile.statusEffectKnockbackVFXPool = _statusEffectKnockbackVFXPool;
+		projectile.statusEffectPropagationVFXPool = _statusEffectPropagationVFXPool;
 	}
 
 	private float CalculateDPS(float damage, float attackSpeed, float cooldown, float critChance, float critDamage, float capacity)
@@ -567,6 +589,7 @@ public class Weapon : ScriptableObject
 
 	private bool CanShoot()
 	{
+
 		if (_capacity > 0)
 		{
 			return true;
@@ -605,7 +628,7 @@ public class Weapon : ScriptableObject
 				projectile.TargetedEnemy = TargetedEnemy;
 
 				projectile.motionPattern = weaponStats.motionPattern;
-				projectile.motionPattern.explosionVfxPool = _vfxPool;
+				projectile.motionPattern.explosionVfxPool = _attackPatternExplosiveVFXPool;
 				projectile.motionPattern.BeginMotion(projectile);
 
 				projectile.OnHit += CleanUpProjectile;

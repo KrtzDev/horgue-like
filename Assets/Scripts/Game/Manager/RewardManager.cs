@@ -31,7 +31,6 @@ public class RewardManager : Singleton<RewardManager>
 		if (_lastDrawnReward == null)
 		{
 			_weightBiasByPartType.Clear();
-			Debug.Log("Ping");
 			_weightBiasByPartType.Add(typeof(Grip), 16);
 			_weightBiasByPartType.Add(typeof(Barrel), 20);
 			_weightBiasByPartType.Add(typeof(Magazine), 16);
@@ -55,10 +54,9 @@ public class RewardManager : Singleton<RewardManager>
 
 	private void SetUpWeightByRarityTable()
 	{
-		_weightByRarity.Add("common", 10);
-		_weightByRarity.Add("uncommon", 45);
-		_weightByRarity.Add("rare", 25);
-		_weightByRarity.Add("special", 15);
+		_weightByRarity.Add("uncommon", 50);
+		_weightByRarity.Add("rare", 28);
+		_weightByRarity.Add("special", 17);
 		_weightByRarity.Add("unique", 5);
 	}
 

@@ -17,6 +17,13 @@ public class Projectile : DamageDealer
 	public AttackPattern attackPattern;
 	public MotionPattern motionPattern;
 	public StatusEffectSO statusEffect;
+	public ObjectPool<HorgueVFX> statusEffectInitialDamageVFXPool;
+	public ObjectPool<HorgueVFX> statusEffectDamageOverTimeVFXPool;
+	public ObjectPool<HorgueVFX> statusEffectSlowVFXPool;
+	public ObjectPool<HorgueVFX> statusEffectKnockbackVFXPool;
+	public ObjectPool<HorgueVFX> statusEffectPropagationVFXPool;
+
+
 	public Transform spawnTransform;
 
 	[SerializeField]
@@ -78,6 +85,11 @@ public class Projectile : DamageDealer
 				if (health.TryGetComponent(out AI_Agent_Enemy enemy))
 				{
 					StatusEffect thisStatusEffect = new StatusEffect(statusEffect);
+					thisStatusEffect.initialDamageVFXPool = statusEffectInitialDamageVFXPool;
+					thisStatusEffect.damageOverTimeVFXPool = statusEffectDamageOverTimeVFXPool;
+					thisStatusEffect.slowVFXPool = statusEffectSlowVFXPool;
+					thisStatusEffect.knockbackVFXPool = statusEffectKnockbackVFXPool;
+					thisStatusEffect.propagationVFXPool = statusEffectPropagationVFXPool;
 					thisStatusEffect.ApplyStatusEffect(enemy, this);
 					thisStatusEffect.OnHitEnemy.Invoke(this);
 				}
