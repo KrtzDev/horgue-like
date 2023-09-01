@@ -35,8 +35,8 @@
       "dmgModifier": 0.2,
       "addDmgModifier": 0.15,
       "baseHealthMultiplier": 1,
-      "healthModifier": 0.325,
-      "addHealthModifier": 0.225
+      "healthModifier": 0.35,
+      "addHealthModifier": 0.3
     },
     {
       "name": "PasuKan",
@@ -54,8 +54,8 @@
       "dmgModifier": 0.2,
       "addDmgModifier": 0.15,
       "baseHealthMultiplier": 1,
-      "healthModifier": 0.325,
-      "addHealthModifier": 0.225
+      "healthModifier": 0.35,
+      "addHealthModifier": 0.3
     },
     {
       "name": "GIGARangedRobot",
@@ -73,17 +73,17 @@
       "dmgModifier": 0.2,
       "addDmgModifier": 0.15,
       "baseHealthMultiplier": 1,
-      "healthModifier": 0.325,
-      "addHealthModifier": 0.225
+      "healthModifier": 0.35,
+      "addHealthModifier": 0.3
     },
     {
       "name": "Rikayon",
-      "maxHealth": 150,
-      "damagePerHit": 5,
+      "maxHealth": 200,
+      "damagePerHit": 3,
       "attackSpeed": 1,
       "givenXP": 0,
       "maxMoveSpeed": 13,
-      "acceleration": 13,
+      "acceleration": 11,
       "armor": 100,
       "elementalResistance": 100,
       "technicalResistance": 100,
@@ -92,8 +92,8 @@
       "dmgModifier": 0,
       "addDmgModifier": 0,
       "baseHealthMultiplier": 1,
-      "healthModifier": 0,
-      "addHealthModifier": 0
+      "healthModifier": 0.1,
+      "addHealthModifier": 0.1
     },
     {
       "name": "Drone",
@@ -111,8 +111,8 @@
       "dmgModifier": 0.2,
       "addDmgModifier": 0.15,
       "baseHealthMultiplier": 1,
-      "healthModifier": 0.325,
-      "addHealthModifier": 0.225
+      "healthModifier": 0.35,
+      "addHealthModifier": 0.3
     },
     {
       "name": "Orc",
@@ -130,8 +130,8 @@
       "dmgModifier": 0.2,
       "addDmgModifier": 0.15,
       "baseHealthMultiplier": 1,
-      "healthModifier": 0.325,
-      "addHealthModifier": 0.225
+      "healthModifier": 0.35,
+      "addHealthModifier": 0.3
     }
   ],
   "Level": [
@@ -152,7 +152,7 @@
       "maxCloseZoneOcc": 8,
       "maxMidZoneOcc": 18,
       "maxFarZoneOcc": 28,
-      "weaponPartMultiplierPerLevel": 0.05
+      "weaponPartMultiplierPerLevel": 0.025
     },
     {
       "name": "Level1.5",
@@ -171,7 +171,7 @@
       "maxCloseZoneOcc": 8,
       "maxMidZoneOcc": 18,
       "maxFarZoneOcc": 28,
-      "weaponPartMultiplierPerLevel": 0.05
+      "weaponPartMultiplierPerLevel": 0.025
     },
     {
       "name": "Level2",
@@ -190,7 +190,7 @@
       "maxCloseZoneOcc": 8,
       "maxMidZoneOcc": 18,
       "maxFarZoneOcc": 28,
-      "weaponPartMultiplierPerLevel": 0.05
+      "weaponPartMultiplierPerLevel": 0.025
     },
     {
       "name": "Level2.5",
@@ -209,7 +209,7 @@
       "maxCloseZoneOcc": 8,
       "maxMidZoneOcc": 18,
       "maxFarZoneOcc": 28,
-      "weaponPartMultiplierPerLevel": 0.05
+      "weaponPartMultiplierPerLevel": 0.025
     },
     {
       "name": "Level3",
@@ -228,7 +228,7 @@
       "maxCloseZoneOcc": 8,
       "maxMidZoneOcc": 18,
       "maxFarZoneOcc": 28,
-      "weaponPartMultiplierPerLevel": 0.05
+      "weaponPartMultiplierPerLevel": 0.025
     },
     {
       "name": "Level3.5",
@@ -247,7 +247,7 @@
       "maxCloseZoneOcc": 8,
       "maxMidZoneOcc": 18,
       "maxFarZoneOcc": 28,
-      "weaponPartMultiplierPerLevel": 0.05
+      "weaponPartMultiplierPerLevel": 0.025
     },
     {
       "name": "Level4",
@@ -266,15 +266,15 @@
       "maxCloseZoneOcc": 8,
       "maxMidZoneOcc": 18,
       "maxFarZoneOcc": 28,
-      "weaponPartMultiplierPerLevel": 0.05
+      "weaponPartMultiplierPerLevel": 0.025
     },
     {
       "name": "LevelBoss",
       "TimeToSurvive": 0,
       "spawnTick": 5,
-      "spawnsPerTick": 6,
-      "minEnemyCount": 10,
-      "maxEnemyCount": 20,
+      "spawnsPerTick": 5,
+      "minEnemyCount": 5,
+      "maxEnemyCount": 15,
       "spawnAnimDelay": 1,
       "minSpawnDelay": 0,
       "maxSpawnDelay": 1,
@@ -285,7 +285,7 @@
       "maxCloseZoneOcc": 8,
       "maxMidZoneOcc": 18,
       "maxFarZoneOcc": 28,
-      "weaponPartMultiplierPerLevel": 0.05
+      "weaponPartMultiplierPerLevel": 0.025
     },
     {
       "name": "LevelNewGamePlus",
@@ -304,7 +304,7 @@
       "maxCloseZoneOcc": 8,
       "maxMidZoneOcc": 18,
       "maxFarZoneOcc": 28,
-      "weaponPartMultiplierPerLevel": 0.05
+      "weaponPartMultiplierPerLevel": 0.025
     }
   ],
   "Player": [
@@ -326,7 +326,7 @@
       "criticalHitDamage": 1.5,
       "projectileWidth": 0.1,
       "range": 13,
-      "cost": 40,
+      "cost": 50,
       "maxAttackSpeed": 7.5,
       "maxCooldown": 10,
       "maxCriticalHitChance": 100,
@@ -351,7 +351,7 @@
       "criticalHitDamage": 1.5,
       "projectileWidth": 0.1,
       "range": 13,
-      "cost": 40
+      "cost": 50
     },
     {
       "name": "Ammunition AK",
@@ -556,7 +556,7 @@
       "criticalHitDamage": 1.5,
       "projectileWidth": 0.1,
       "range": 13,
-      "cost": 40
+      "cost": 50
     },
     {
       "name": "Barrel AK",
@@ -825,7 +825,7 @@
       "criticalHitDamage": 1.5,
       "projectileWidth": 0.1,
       "range": 13,
-      "cost": 40
+      "cost": 50
     },
     {
       "name": "30s Double Grip",
@@ -1060,7 +1060,7 @@
       "criticalHitDamage": 1.5,
       "projectileWidth": 0.1,
       "range": 13,
-      "cost": 40
+      "cost": 50
     },
     {
       "name": "Billard Ball Drum",
@@ -1284,7 +1284,7 @@
       "criticalHitDamage": 1.5,
       "projectileWidth": 0.1,
       "range": 13,
-      "cost": 40
+      "cost": 50
     },
     {
       "name": "Basic Iron Sights",
@@ -1478,7 +1478,7 @@
       "criticalHitDamage": 1.5,
       "projectileWidth": 0.1,
       "range": 13,
-      "cost": 40
+      "cost": 50
     },
     {
       "name": "Adjustable Break Trigger",

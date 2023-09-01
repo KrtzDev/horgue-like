@@ -343,6 +343,19 @@ MonoBehaviour:
   _playerCanUseAbilities: 0
   _currentAbility: {fileID: 0}
   inventory: {fileID: 1161142122}
+  bossCheat: 0
+  amm1: {fileID: 11400000, guid: f528b1d8c0c1746459b3d3c20a7a3cc8, type: 2}
+  amm2: {fileID: 11400000, guid: 363ceec9abbf65a4c9dd565f2826b4b1, type: 2}
+  trigger1: {fileID: 11400000, guid: 91c39c5e52357aa40b95e54bae74ee3d, type: 2}
+  trigger2: {fileID: 11400000, guid: e5398cc8c1902d14880e5a0609687a27, type: 2}
+  grip1: {fileID: 11400000, guid: be60f2d844d0c024b894cb6440dc9f75, type: 2}
+  grip2: {fileID: 11400000, guid: 97dec1cd5dae84349b447f89207d519e, type: 2}
+  magazine1: {fileID: 11400000, guid: 986ec0fd6e7ad974a9ee5a6d1cdd8af1, type: 2}
+  magazine2: {fileID: 11400000, guid: 95555f8b3dbf33a419293c5b8b068d46, type: 2}
+  barrel1: {fileID: 11400000, guid: e6bb071810b64064bb663c68b4641c9d, type: 2}
+  barrel2: {fileID: 11400000, guid: 72479c756f21df24d8c149c9273c1cc1, type: 2}
+  sight1: {fileID: 11400000, guid: bde4ddc51abd0b8489ceb37bad395f0d, type: 2}
+  sight2: {fileID: 11400000, guid: 349d596668c422e4aa979fc1117f8724, type: 2}
 --- !u!1 &1115456804
 GameObject:
   m_ObjectHideFlags: 0

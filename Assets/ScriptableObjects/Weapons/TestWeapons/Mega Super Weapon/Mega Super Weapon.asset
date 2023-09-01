@@ -1,0 +1,52 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1840ed087b613334e9bf87d5c6d038cd, type: 3}
+  m_Name: Mega Super Weapon
+  m_EditorClassIdentifier: 
+  _weaponStats:
+    dps: 0
+    damage: 103.25
+    attackspeed: 3.8
+    cooldown: 4.1
+    projectileSize: 0.13
+    critChance: 23
+    critDamage: 1.5
+    range: 36.4
+    capacity: 20
+    attackPattern: {fileID: 11400000, guid: cb578d9958690974390a1eba6fa458d1, type: 2}
+    motionPattern: {fileID: 11400000, guid: 9aa305ff9050739458fbff74de9180b1, type: 2}
+    statusEffect: {fileID: 0}
+  _weaponSkeleton: {fileID: 3480419835550209389, guid: b1d6eb9be4236bd42b4cc35c06a394f8,
+    type: 3}
+  weaponSprite: {fileID: 21300000, guid: 542ca056f31bfd04785c98e6ccaf726d, type: 3}
+  defaultGrip: {fileID: 11400000, guid: 42ef989d7614ba448a6f2600b1add41f, type: 2}
+  defaultBarrel: {fileID: 11400000, guid: e6bb071810b64064bb663c68b4641c9d, type: 2}
+  defaultMagazine: {fileID: 11400000, guid: 06383c904fd901f4397c4c2bf73d2f55, type: 2}
+  defaultAmmunition: {fileID: 11400000, guid: 11ac8506e60030e46b8707a9502514e3, type: 2}
+  defaultTriggerMechanism: {fileID: 11400000, guid: c882f0bde8db67749b2f08f7e1f3e0a3,
+    type: 2}
+  defaultSight: {fileID: 11400000, guid: 236b15f49fed1b74db53533c3a1a6dd5, type: 2}
+  grip: {fileID: 11400000, guid: 42ef989d7614ba448a6f2600b1add41f, type: 2}
+  barrel: {fileID: 11400000, guid: e6bb071810b64064bb663c68b4641c9d, type: 2}
+  magazine: {fileID: 11400000, guid: 06383c904fd901f4397c4c2bf73d2f55, type: 2}
+  ammunition: {fileID: 11400000, guid: 11ac8506e60030e46b8707a9502514e3, type: 2}
+  triggerMechanism: {fileID: 11400000, guid: c882f0bde8db67749b2f08f7e1f3e0a3, type: 2}
+  sight: {fileID: 11400000, guid: 236b15f49fed1b74db53533c3a1a6dd5, type: 2}
+  _enemyLayer:
+    serializedVersion: 2
+    m_Bits: 128
+  _groundLayer:
+    serializedVersion: 2
+    m_Bits: 513
+  _capacity: 6
+  _isReloading: 0
+  _reloadTime: 0
