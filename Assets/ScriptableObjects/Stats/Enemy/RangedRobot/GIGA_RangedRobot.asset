@@ -29,7 +29,7 @@ MonoBehaviour:
   healthModifier: 0.325
   addHealthModifier: 0.225
   _attackRange: 16
-  _retreatRange: 6
+  _retreatRange: 5
   _maxJumpAttackRange: 0
   _minJumpAttackRange: 0
   _jumpAttackChance: 0

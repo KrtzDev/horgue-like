@@ -9,12 +9,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3939a441ca7dd8b46bc594c5db649c5e, type: 3}
-  m_Name: QuadraticRedPointSight
+  m_Script: {fileID: 11500000, guid: c73c2eef1d04bd242bb9e55a17097781, type: 3}
+  m_Name: Trigger AK
   m_EditorClassIdentifier: 
-  <WeaponPartUISprite>k__BackingField: {fileID: 21300000, guid: af4501ccf558c544a968f99d4c92c04b,
+  <WeaponPartUISprite>k__BackingField: {fileID: 21300000, guid: 522d7816fdf1b6a41a5bdd37fd6568f0,
     type: 3}
   <WeaponPartPrefab>k__BackingField: {fileID: 0}
-  attackSpeed: 5
-  critChance: 22
-  range: 25
+  baseDamage: 30
+  attackSpeed: 3
+  cooldown: 1.8
+  critChance: 12
+  range: 17.5

@@ -226,7 +226,7 @@ public class Weapon : ScriptableObject
 		// float damage = _currentWeaponSkeleton.skeletonBaseStats.baseDamage + (_currentWeaponSkeleton.skeletonBaseStats.baseDamage * partsDamage * .1f);
 		float damage = _currentWeaponSkeleton.skeletonBaseStats.baseDamage + partsDamage;
 
-		if(totalDamage < _currentWeaponSkeleton.skeletonBaseStats.minBaseDamage) // min
+		if(damage < _currentWeaponSkeleton.skeletonBaseStats.minBaseDamage) // min
 			return _currentWeaponSkeleton.skeletonBaseStats.minBaseDamage;
 
 		// no max

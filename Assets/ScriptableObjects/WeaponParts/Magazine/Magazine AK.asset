@@ -9,15 +9,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c73c2eef1d04bd242bb9e55a17097781, type: 3}
-  m_Name: Reference
+  m_Script: {fileID: 11500000, guid: f11e42008a9795b42bd707c33009fa2d, type: 3}
+  m_Name: Magazine AK
   m_EditorClassIdentifier: 
-  <WeaponPartUISprite>k__BackingField: {fileID: 21300000, guid: 522d7816fdf1b6a41a5bdd37fd6568f0,
+  <WeaponPartUISprite>k__BackingField: {fileID: 21300000, guid: 7e39db67f4eb23a4eb546143f71520fd,
     type: 3}
   <WeaponPartPrefab>k__BackingField: {fileID: 0}
-  isSlotted: 0
-  baseDamage: 0
-  attackSpeed: 0
-  cooldown: 0
-  critChance: 0
-  range: 0
+  attackSpeed: 3
+  cooldown: 1.5
+  projectileSize: 0.2
+  capacity: 30
+  maxAmmoSlots: 1

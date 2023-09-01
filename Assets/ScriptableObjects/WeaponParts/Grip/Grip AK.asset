@@ -9,14 +9,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f11e42008a9795b42bd707c33009fa2d, type: 3}
-  m_Name: CurvedBoxMagazine
+  m_Script: {fileID: 11500000, guid: 41ce7b992483656469ceb6bdc5fce804, type: 3}
+  m_Name: Grip AK
   m_EditorClassIdentifier: 
-  <WeaponPartUISprite>k__BackingField: {fileID: 21300000, guid: 7e39db67f4eb23a4eb546143f71520fd,
+  <WeaponPartUISprite>k__BackingField: {fileID: 21300000, guid: 8cfad73774dabfa48afd69ddddd8bd48,
     type: 3}
   <WeaponPartPrefab>k__BackingField: {fileID: 0}
   attackSpeed: 3
-  cooldown: 1.5
-  projectileSize: 0.2
-  capacity: 30
-  maxAmmoSlots: 1
+  cooldown: 2.5
+  critChance: 25
+  maxBarrels: 1
+  maxMagazines: 2

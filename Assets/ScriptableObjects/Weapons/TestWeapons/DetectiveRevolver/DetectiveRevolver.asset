@@ -27,19 +27,19 @@ MonoBehaviour:
   _weaponSkeleton: {fileID: 3480419835550209389, guid: b1d6eb9be4236bd42b4cc35c06a394f8,
     type: 3}
   weaponSprite: {fileID: 21300000, guid: 542ca056f31bfd04785c98e6ccaf726d, type: 3}
-  defaultGrip: {fileID: 11400000, guid: 97dec1cd5dae84349b447f89207d519e, type: 2}
-  defaultBarrel: {fileID: 11400000, guid: 72479c756f21df24d8c149c9273c1cc1, type: 2}
-  defaultMagazine: {fileID: 11400000, guid: 316b1d3a766537848af8edb8c9389398, type: 2}
-  defaultAmmunition: {fileID: 11400000, guid: 1dfe9618dd4cde245a63e8ed2ec4c446, type: 2}
-  defaultTriggerMechanism: {fileID: 11400000, guid: c882f0bde8db67749b2f08f7e1f3e0a3,
+  defaultGrip: {fileID: 11400000, guid: 447aef067792b064b87806eed730cd4e, type: 2}
+  defaultBarrel: {fileID: 11400000, guid: e18b30524c89cd64eaa028eb6e327e03, type: 2}
+  defaultMagazine: {fileID: 11400000, guid: 13ee628900dcfd145989993ec9dffdb3, type: 2}
+  defaultAmmunition: {fileID: 11400000, guid: ce027e4cefc323d4c89abb3dc8a8a051, type: 2}
+  defaultTriggerMechanism: {fileID: 11400000, guid: 91c39c5e52357aa40b95e54bae74ee3d,
     type: 2}
-  defaultSight: {fileID: 11400000, guid: fba835e0161503a4786a1006ea029423, type: 2}
-  grip: {fileID: 11400000, guid: 97dec1cd5dae84349b447f89207d519e, type: 2}
-  barrel: {fileID: 11400000, guid: 72479c756f21df24d8c149c9273c1cc1, type: 2}
-  magazine: {fileID: 11400000, guid: 316b1d3a766537848af8edb8c9389398, type: 2}
-  ammunition: {fileID: 11400000, guid: 1dfe9618dd4cde245a63e8ed2ec4c446, type: 2}
-  triggerMechanism: {fileID: 11400000, guid: c882f0bde8db67749b2f08f7e1f3e0a3, type: 2}
-  sight: {fileID: 11400000, guid: fba835e0161503a4786a1006ea029423, type: 2}
+  defaultSight: {fileID: 11400000, guid: d12bab2c89ef4024d8b1cff458e02898, type: 2}
+  grip: {fileID: 11400000, guid: 447aef067792b064b87806eed730cd4e, type: 2}
+  barrel: {fileID: 11400000, guid: e18b30524c89cd64eaa028eb6e327e03, type: 2}
+  magazine: {fileID: 11400000, guid: 13ee628900dcfd145989993ec9dffdb3, type: 2}
+  ammunition: {fileID: 11400000, guid: ce027e4cefc323d4c89abb3dc8a8a051, type: 2}
+  triggerMechanism: {fileID: 11400000, guid: 91c39c5e52357aa40b95e54bae74ee3d, type: 2}
+  sight: {fileID: 11400000, guid: d12bab2c89ef4024d8b1cff458e02898, type: 2}
   _enemyLayer:
     serializedVersion: 2
     m_Bits: 128

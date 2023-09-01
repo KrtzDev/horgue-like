@@ -595,6 +595,7 @@ public class GameDataReader : MonoBehaviour
                 _magazineData[i].range = myMagazineList.Magazine[i].range;
                 _magazineData[i].cost = myMagazineList.Magazine[i].cost;
 				_magazineData[i].rarity = myMagazineList.Magazine[i].rarity;
+                _magazineData[i].capacity = myMagazineList.Magazine[i].capacity;
             }
             else
             {
@@ -606,7 +607,8 @@ public class GameDataReader : MonoBehaviour
                 _magazineData[i].critDamage = myMagazineList.Magazine[i].criticalHitDamage * _magazineData[0].critDamage;
                 _magazineData[i].range = myMagazineList.Magazine[i].range * _magazineData[0].range;
                 _magazineData[i].cost = myMagazineList.Magazine[i].cost * _magazineData[0].cost;
-				_magazineData[i].rarity = myMagazineList.Magazine[i].rarity;
+                _magazineData[i].capacity = myMagazineList.Magazine[i].capacity * _magazineData[0].capacity;
+                _magazineData[i].rarity = myMagazineList.Magazine[i].rarity;
 			}
         }
     }

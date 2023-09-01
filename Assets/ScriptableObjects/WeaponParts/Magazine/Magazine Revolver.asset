@@ -9,14 +9,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c73c2eef1d04bd242bb9e55a17097781, type: 3}
-  m_Name: IronBackloader
+  m_Script: {fileID: 11500000, guid: f11e42008a9795b42bd707c33009fa2d, type: 3}
+  m_Name: Magazine Revolver
   m_EditorClassIdentifier: 
-  <WeaponPartUISprite>k__BackingField: {fileID: 21300000, guid: 522d7816fdf1b6a41a5bdd37fd6568f0,
+  <WeaponPartUISprite>k__BackingField: {fileID: 21300000, guid: 7e39db67f4eb23a4eb546143f71520fd,
     type: 3}
   <WeaponPartPrefab>k__BackingField: {fileID: 0}
-  baseDamage: 70
-  attackSpeed: 0.8
-  cooldown: 1.4
-  critChance: 40
-  range: 22.5
+  attackSpeed: 0.75
+  cooldown: 1.3
+  projectileSize: 0.15
+  capacity: 8
+  maxAmmoSlots: 0
