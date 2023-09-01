@@ -202,7 +202,7 @@ public class RewardManager : Singleton<RewardManager>
 
 		if (weaponPart.cost > 0)
 		{
-			weaponPart.cost *= 1 + GameManager.Instance.GameManagerValues[0]._weaponPartMultiplierPerLevel * (weaponPart.levelObtained - 1);
+			weaponPart.cost *= 1 + GameManager.Instance.GameManagerValues[0]._weaponPartMultiplierPerLevel * 3 * (weaponPart.levelObtained - 1);
 			Mathf.RoundToInt(weaponPart.cost);
 		}
 

@@ -12,14 +12,37 @@ public class HealthDrop : MonoBehaviour
         {
             HealthComponent hp = other.GetComponent<HealthComponent>();
 
-            hp.currentHealth += _healAmount;
-            if(hp.currentHealth > hp.maxHealth)
+            if(hp.currentHealth < hp.maxHealth)
             {
-                hp.currentHealth = hp.maxHealth;
-            }
+                hp.currentHealth += _healAmount;
+                if (hp.currentHealth > hp.maxHealth)
+                {
+                    hp.currentHealth = hp.maxHealth;
+                }
 
-            AudioManager.Instance.PlaySound("HealthPack");
-            Destroy(transform.parent.gameObject);
+                AudioManager.Instance.PlaySound("HealthPack");
+                Destroy(transform.parent.gameObject);
+            }
+        }
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            HealthComponent hp = other.GetComponent<HealthComponent>();
+
+            if (hp.currentHealth < hp.maxHealth)
+            {
+                hp.currentHealth += _healAmount;
+                if (hp.currentHealth > hp.maxHealth)
+                {
+                    hp.currentHealth = hp.maxHealth;
+                }
+
+                AudioManager.Instance.PlaySound("HealthPack");
+                Destroy(transform.parent.gameObject);
+            }
         }
     }
 }
