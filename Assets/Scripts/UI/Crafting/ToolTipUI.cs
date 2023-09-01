@@ -27,6 +27,8 @@ public class ToolTipUI : Selectable
 	private RectTransform _contentRect;
 	[SerializeField]
 	private StatUI _statUI_prefab;
+	[SerializeField]
+	private StatUI _statUI_Projectile_Trajectory_prefab;
 
 	public WeaponPart weaponPart;
 	private int _value;
@@ -74,11 +76,11 @@ public class ToolTipUI : Selectable
 		cooldownStatUI = Instantiate(_statUI_prefab, _statParent);
 		cooldownStatUI.Initialize("Reload Time: ", weaponPartData.cooldown.ToString("0.00"));
 		projectileSizeStatUI = Instantiate(_statUI_prefab, _statParent);
-		projectileSizeStatUI.Initialize("Proj. Size: ", weaponPartData.projectileSize.ToString("0.00"));
+		projectileSizeStatUI.Initialize("Projectile Size: ", weaponPartData.projectileSize.ToString("0.00"));
 		critChanceStatUI = Instantiate(_statUI_prefab, _statParent);
-		critChanceStatUI.Initialize("Crit. Chance: ", weaponPartData.critChance.ToString("0.00"));
+		critChanceStatUI.Initialize("Crit Chance: ", weaponPartData.critChance.ToString("0.00"));
 		critDamageStatUI = Instantiate(_statUI_prefab, _statParent);
-		critDamageStatUI.Initialize("Crit. Damage: ", weaponPartData.critChance.ToString("0.00"));
+		critDamageStatUI.Initialize("Crit Damage: ", weaponPartData.critChance.ToString("0.00"));
 		rangeStatUI = Instantiate(_statUI_prefab, _statParent);
 		rangeStatUI.Initialize("Range: ", weaponPartData.range.ToString("0.00"));
 
@@ -86,8 +88,8 @@ public class ToolTipUI : Selectable
 		{
 			Barrel barrel = weaponPartData as Barrel;
 
-			attackPatternStatUI = Instantiate(_statUI_prefab, _statParent);
-			attackPatternStatUI.Initialize("Trajectory: ", barrel.attackPattern.PatternName());
+			attackPatternStatUI = Instantiate(_statUI_Projectile_Trajectory_prefab, _statParent);
+			attackPatternStatUI.Initialize("Projectile Trajectory: ", barrel.attackPattern.PatternName());
 		}
 		else if (weaponPartData is Magazine)
 		{
