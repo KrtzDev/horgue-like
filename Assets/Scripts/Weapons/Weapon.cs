@@ -61,8 +61,8 @@ public class Weapon : ScriptableObject
 
 	private float _shotDelay;
 	public int _capacity;
-	private bool _isReloading;
-	private float _reloadTime;
+	public bool _isReloading;
+	public float _reloadTime;
 
 	private Camera _camera;
 
