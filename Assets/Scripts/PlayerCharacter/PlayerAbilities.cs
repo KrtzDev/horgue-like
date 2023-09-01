@@ -249,6 +249,8 @@ public class PlayerAbilities : MonoBehaviour
     {
         IsUsingAbility = true;
 
+        AudioManager.Instance.PlaySound("ForceSphere");
+
         GameObject forceSphere = _forceSpherePrefab;
         Instantiate(forceSphere, _forceSphereSpawnPosition);
     }
@@ -282,6 +284,11 @@ public class PlayerAbilities : MonoBehaviour
     {
         if(CanUseJetpackAbility && IsUsingAbility)
         {
+            if(!IsUsingJetpack && ButtonHeld)
+            {
+                AudioManager.Instance.PlaySound("Jetpack");
+            }
+
             if (ButtonHeld && JetpackFuel > 0)
             {
                 IsUsingJetpack = true;
@@ -307,6 +314,7 @@ public class PlayerAbilities : MonoBehaviour
                 _playerCharacter.CharacterRigidbody.velocity = new Vector3(_playerCharacter.CharacterRigidbody.velocity.x, 0, _playerCharacter.CharacterRigidbody.velocity.z);
                 // _playerCharacter.CharacterRigidbody.AddForce(_playerCharacter.CharacterRigidbody.transform.up * _jetpackThrustForce * multiplier, ForceMode.Impulse);
                 _playerCharacter.transform.position += new Vector3(0, _jetpackThrustForce * multiplier * Time.deltaTime, 0);
+
             }
             else if (!ButtonHeld)
             {
@@ -314,6 +322,7 @@ public class PlayerAbilities : MonoBehaviour
                     _jetpackActiveTimer -= 5 * Time.deltaTime;
 
                 IsUsingJetpack = false;
+                AudioManager.Instance.StopSound("Jetpack", 0);
             }
 
             if (JetpackFuel <= 0 || (_playerCharacter.GetComponent<PlayerJump>().IsGrounded && _playerCharacter.CharacterRigidbody.velocity.y < 0))
@@ -336,6 +345,8 @@ public class PlayerAbilities : MonoBehaviour
 
         _jetpackVisuals.GetComponentInChildren<Animator>().SetBool("jetpackOn", false);
         _jetpackVisuals.GetComponentInChildren<Animator>().SetBool("jetpackOff", true);
+
+        AudioManager.Instance.StopSound("Jetpack", 0f);
 
         ResetAbilityTimer(tempJetPackCD);
         StartCoroutine(ResetJetpackFuel(tempJetPackCD));

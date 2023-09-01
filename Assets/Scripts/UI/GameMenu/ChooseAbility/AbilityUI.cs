@@ -121,6 +121,7 @@ public class AbilityUI : UIButton, IPointerEnterHandler, IPointerExitHandler, IS
         ChooseAbility.instance._abilityCoolDownToReplace = FindObjectOfType<AbilityCooldownToReplace>().gameObject;
 
         StartCoroutine(StartLevel(ChooseAbility.instance._countDown, ChooseAbility.instance._countdownText.rectTransform.localScale));
+        AudioManager.Instance.PlaySound("LevelCountDown");
 
         while (elapsedTime < ChooseAbility.instance._moveToUI_Time)
         {
@@ -159,8 +160,6 @@ public class AbilityUI : UIButton, IPointerEnterHandler, IPointerExitHandler, IS
 
             ChooseAbility.instance._countdownText.text =  "GO!!!!";
 
-            AudioManager.Instance.PlaySound("LevelCountDownGO");
-
             GameManager.Instance._currentAbility = _ability;
             
             ChooseAbility.instance._abilityCoolDownToReplace.GetComponent<Image>().sprite = _ability._icon;
@@ -180,8 +179,6 @@ public class AbilityUI : UIButton, IPointerEnterHandler, IPointerExitHandler, IS
         else
         {
             ChooseAbility.instance._countdownText.text = "" + countdown;
-
-            AudioManager.Instance.PlaySound("LevelCountDown");
 
             while (elapsedTime < countdown + 1)
             {

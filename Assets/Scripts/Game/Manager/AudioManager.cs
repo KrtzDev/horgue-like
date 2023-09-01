@@ -34,7 +34,12 @@ public class AudioManager : Singleton<AudioManager>
         s.source.Play();
     }
 
-    public IEnumerator StopSound(string name, float duration)
+    public void StopSound(string name, float duration)
+    {
+        StartCoroutine(SoundStop(name, duration));
+    }
+
+    public IEnumerator SoundStop(string name, float duration)
     {
         Sound s = Array.Find(sounds, sound => sound.name == name);
         if (s == null)

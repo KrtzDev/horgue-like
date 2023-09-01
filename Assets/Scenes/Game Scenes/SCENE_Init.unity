@@ -571,19 +571,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sounds:
   - name: HealthPack
-    clip: {fileID: 8300000, guid: 759b8927b70829747bca13090cd6920c, type: 3}
-    volume: 0.1
-    pitch: 1.1
+    clip: {fileID: 8300000, guid: f8448351c78d91c419b4213b09319e98, type: 3}
+    volume: 0.05
+    pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: Coin
-    clip: {fileID: 8300000, guid: 759b8927b70829747bca13090cd6920c, type: 3}
-    volume: 0.075
+    clip: {fileID: 8300000, guid: 6e54511108e9df748a50f59d23d45034, type: 3}
+    volume: 0.5
     pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: Dash
-    clip: {fileID: 8300000, guid: e02f713fbd993944ea9fe19b6c27ba09, type: 3}
+    clip: {fileID: 8300000, guid: fc4e8dc1173787a478e836f4cc3a73bc, type: 3}
     volume: 0.03
     pitch: 0.75
     loop: 0
@@ -595,9 +595,9 @@ MonoBehaviour:
     loop: 0
     source: {fileID: 0}
   - name: TakeDamage
-    clip: {fileID: 8300000, guid: 0a7fc0cff50d7994082be858ca62dbbe, type: 3}
-    volume: 0.075
-    pitch: 0.9
+    clip: {fileID: 8300000, guid: 1fc1938f7323a5646a904e0baa970790, type: 3}
+    volume: 0.02
+    pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: Landing
@@ -608,44 +608,50 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: Jump
     clip: {fileID: 8300000, guid: eda86c2e8e94c47489e01caf847d2367, type: 3}
-    volume: 0.075
-    pitch: 0.9
+    volume: 0.03
+    pitch: 0.975
     loop: 0
     source: {fileID: 0}
   - name: HitIndicator
-    clip: {fileID: 8300000, guid: 034bd9b342d8d9f4aa71c9191ec28f54, type: 3}
-    volume: 0.025
-    pitch: 0.8
+    clip: {fileID: 8300000, guid: 62cce7de0e91a714f832d1f334eeb264, type: 3}
+    volume: 0.005
+    pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: HitIndicatorCrit
-    clip: {fileID: 8300000, guid: b1d48330e4ec148499a79a9244d2c36f, type: 3}
-    volume: 0.025
-    pitch: 0.8
+    clip: {fileID: 8300000, guid: 62cce7de0e91a714f832d1f334eeb264, type: 3}
+    volume: 0.015
+    pitch: 1.05
     loop: 0
     source: {fileID: 0}
   - name: RikayonScream
-    clip: {fileID: 8300000, guid: afb54bbb6ba01794d932d6c91ce28649, type: 3}
-    volume: 0.075
+    clip: {fileID: 8300000, guid: c1ac33555af71b345bad84336befaa6d, type: 3}
+    volume: 0.02
     pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: RikayonGrowl
-    clip: {fileID: 8300000, guid: fc085f87b3cf89a488ca87a928ae42ec, type: 3}
-    volume: 0.075
+    clip: {fileID: 8300000, guid: 213fdb64987a2c34ebfe8fc442d7c52d, type: 3}
+    volume: 0.04
     pitch: 1
     loop: 0
     source: {fileID: 0}
-  - name: WeaponReload
-    clip: {fileID: 8300000, guid: e7ee18bfb1a856940b8876c4fe8be82f, type: 3}
+  - name: WeaponReloadEmpty
+    clip: {fileID: 8300000, guid: ace79a9e0d4a65547af6715539b6e0c0, type: 3}
+    volume: 0.05
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: WeaponReloadFull
+    clip: {fileID: 8300000, guid: c11fb3b3ced9fff40a645a5a5d1157a1, type: 3}
     volume: 0.05
     pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: WeaponShot
-    clip: {fileID: 8300000, guid: 884dbdf50ffeace478a61c955ece2fdb, type: 3}
-    volume: 0.05
-    pitch: 1.25
+    clip: {fileID: 8300000, guid: de812cfb519929c4aad9d296f655c81d, type: 3}
+    volume: 0.0125
+    pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: Chest
@@ -679,7 +685,7 @@ MonoBehaviour:
     loop: 1
     source: {fileID: 0}
   - name: LevelCountDown
-    clip: {fileID: 8300000, guid: 4e072edf2bca1164caa76216d910a0a1, type: 3}
+    clip: {fileID: 8300000, guid: 14eba4474b8290b47aa6942047120395, type: 3}
     volume: 0.1
     pitch: 1
     loop: 0
@@ -691,34 +697,58 @@ MonoBehaviour:
     loop: 0
     source: {fileID: 0}
   - name: LevelConfirmation
-    clip: {fileID: 8300000, guid: 5b4aaf758e1bc0444a49e2c5a0a702aa, type: 3}
+    clip: {fileID: 8300000, guid: 9ac7714ebf1279f468ae8e420dec91bc, type: 3}
     volume: 0.175
     pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: WaveConfirmation
-    clip: {fileID: 8300000, guid: e0d04ebd444760942b155a4b3ecb4b7e, type: 3}
+    clip: {fileID: 8300000, guid: 9ac7714ebf1279f468ae8e420dec91bc, type: 3}
     volume: 0.175
     pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: ShopConfirmation
-    clip: {fileID: 8300000, guid: 820efe01f51af5248b09a483f5e206dc, type: 3}
-    volume: 0.15
+    clip: {fileID: 8300000, guid: f543d680cde34e24f829b7d812f79828, type: 3}
+    volume: 0.05
     pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: ButtonSelect
-    clip: {fileID: 8300000, guid: 70b08b55872eb5b49aff8e989eb98680, type: 3}
-    volume: 0.2
+    clip: {fileID: 8300000, guid: 625ad317b451ec147984e94636d712a6, type: 3}
+    volume: 0.05
     pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: Theme
-    clip: {fileID: 8300000, guid: e43eea53cb71fe34cae5702b62775852, type: 3}
-    volume: 0.04
-    pitch: 1.1
+    clip: {fileID: 8300000, guid: 799da7faf9dc2fa43b520822c680df8e, type: 3}
+    volume: 0.0225
+    pitch: 1
     loop: 1
+    source: {fileID: 0}
+  - name: Jetpack
+    clip: {fileID: 8300000, guid: 05bca6b3ebde4504e97e95c458446efd, type: 3}
+    volume: 0.075
+    pitch: 1
+    loop: 1
+    source: {fileID: 0}
+  - name: ShopDecline
+    clip: {fileID: 8300000, guid: a76afbd1edb03e6488cbf9d0e62fe2de, type: 3}
+    volume: 0.02
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: WeaponPartEquip
+    clip: {fileID: 8300000, guid: 8610b5bf30b2e6542b5686b30de25a1e, type: 3}
+    volume: 0.04
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: ForceSphere
+    clip: {fileID: 8300000, guid: cabfae866cab347928b74b7d0ca6bfa9, type: 3}
+    volume: 0.045
+    pitch: 1
+    loop: 0
     source: {fileID: 0}
 --- !u!1001 &1497091691
 PrefabInstance:

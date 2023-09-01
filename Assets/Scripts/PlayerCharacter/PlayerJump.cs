@@ -83,7 +83,7 @@ public class PlayerJump : MonoBehaviour
 
             if(IsGrounded == false)
             {
-                AudioManager.Instance.PlaySound("Landing");
+                // AudioManager.Instance.PlaySound("Landing");
             }
 
             IsGrounded = true;

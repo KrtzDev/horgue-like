@@ -79,6 +79,8 @@ public class InventoryUI : UIMenu
 
 		_weaponUI.SetNewWeaponPart(weaponPart);
 
+		AudioManager.Instance.PlaySound("WeaponPartEquip");
+
 		weaponPart.DestroyToolTip();
 		Destroy(weaponPart.gameObject);
 

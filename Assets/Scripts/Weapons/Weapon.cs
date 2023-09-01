@@ -705,9 +705,10 @@ public class Weapon : ScriptableObject
 		// could play first reload sound, then 2nd when reload is finished
 
 		FindObjectOfType<ReloadIndicator>().UseReloadIndicator(weaponSprite, _reloadTime);
+		AudioManager.Instance.PlaySound("WeaponReloadEmpty");
 
 		await Task.Delay((int)(_reloadTime * 1000));
-		AudioManager.Instance.PlaySound("WeaponReload");
+		AudioManager.Instance.PlaySound("WeaponReloadFull");
 
 		_capacity = magazine.capacity;
 		_isReloading = false;
