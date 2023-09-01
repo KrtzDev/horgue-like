@@ -36,6 +36,9 @@ public class ShopUI : UIMenu
 	[SerializeField]
 	private ToolTipUI _toolTipUI_prefab;
 
+	[SerializeField]
+	private List<ShopCostUI> _shopCostUIs;
+
 	public List<ToolTipUI> shopItems;
 
 	private void Start()
@@ -57,6 +60,7 @@ public class ShopUI : UIMenu
 			tooltipUI.Initialize(weaponPart);
 			shopItems.Add(tooltipUI);
 		}
+		UpdateShopCostUIs();
 
 		SetUpNavigation();
 	}
@@ -74,6 +78,14 @@ public class ShopUI : UIMenu
 
 		if (shopItems.Count > 0)
 			StartCoroutine(SelectFirstItemAfterFrame());
+
+		UpdateShopCostUIs();
+	}
+
+	private void UpdateShopCostUIs()
+	{
+		for (int i = 0; i < shopItems.Count; i++)
+			_shopCostUIs[i].CostText.text = $"$: {shopItems[i].weaponPart.cost}";
 	}
 
 	private IEnumerator SelectFirstItemAfterFrame()
