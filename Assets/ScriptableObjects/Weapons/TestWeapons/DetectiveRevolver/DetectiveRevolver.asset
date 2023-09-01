@@ -13,17 +13,18 @@ MonoBehaviour:
   m_Name: DetectiveRevolver
   m_EditorClassIdentifier: 
   _weaponStats:
-    damage: 103.25
-    attackspeed: 3.8
-    cooldown: 4.1
-    projectileSize: 0.13
-    critChance: 23
-    critDamage: 1.5
-    range: 36.4
-    capacity: 20
+    dps: 65.35256
+    damage: 59.5
+    attackspeed: 1.45
+    cooldown: 3
+    projectileSize: 0.1
+    critChance: 12
+    critDamage: 1.725
+    range: 17.55
+    capacity: 10
     attackPattern: {fileID: 11400000, guid: cb578d9958690974390a1eba6fa458d1, type: 2}
     motionPattern: {fileID: 11400000, guid: 9aa305ff9050739458fbff74de9180b1, type: 2}
-    statusEffect: {fileID: 0}
+    statusEffect: {fileID: 11400000, guid: 0833c4979fc39a2429e8cd01a1234bf1, type: 2}
   _weaponSkeleton: {fileID: 3480419835550209389, guid: b1d6eb9be4236bd42b4cc35c06a394f8,
     type: 3}
   weaponSprite: {fileID: 21300000, guid: 542ca056f31bfd04785c98e6ccaf726d, type: 3}
@@ -37,7 +38,7 @@ MonoBehaviour:
   grip: {fileID: 11400000, guid: 447aef067792b064b87806eed730cd4e, type: 2}
   barrel: {fileID: 11400000, guid: e18b30524c89cd64eaa028eb6e327e03, type: 2}
   magazine: {fileID: 11400000, guid: 13ee628900dcfd145989993ec9dffdb3, type: 2}
-  ammunition: {fileID: 11400000, guid: ce027e4cefc323d4c89abb3dc8a8a051, type: 2}
+  ammunition: {fileID: 11400000, guid: ea2bbfd102458f54285f13dfed5ab3f1, type: 2}
   triggerMechanism: {fileID: 11400000, guid: 91c39c5e52357aa40b95e54bae74ee3d, type: 2}
   sight: {fileID: 11400000, guid: d12bab2c89ef4024d8b1cff458e02898, type: 2}
   _enemyLayer:
@@ -46,4 +47,6 @@ MonoBehaviour:
   _groundLayer:
     serializedVersion: 2
     m_Bits: 513
-  _capacity: 6
+  _capacity: 7
+  _isReloading: 0
+  _reloadTime: 3.5

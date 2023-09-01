@@ -22,7 +22,7 @@
     {
       "name": "RangedRobot",
       "maxHealth": 0.35,
-      "damagePerHit": 2,
+      "damagePerHit": 1.5,
       "attackSpeed": 1.5,
       "givenXP": 7,
       "maxMoveSpeed": 12,
@@ -60,7 +60,7 @@
     {
       "name": "GIGARangedRobot",
       "maxHealth": 0.65,
-      "damagePerHit": 2.5,
+      "damagePerHit": 2,
       "attackSpeed": 2.5,
       "givenXP": 10,
       "maxMoveSpeed": 11,
@@ -79,11 +79,11 @@
     {
       "name": "Rikayon",
       "maxHealth": 200,
-      "damagePerHit": 3,
+      "damagePerHit": 5,
       "attackSpeed": 1,
       "givenXP": 0,
-      "maxMoveSpeed": 13,
-      "acceleration": 11,
+      "maxMoveSpeed": 12,
+      "acceleration": 10,
       "armor": 100,
       "elementalResistance": 100,
       "technicalResistance": 100,
@@ -92,8 +92,8 @@
       "dmgModifier": 0,
       "addDmgModifier": 0,
       "baseHealthMultiplier": 1,
-      "healthModifier": 0.1,
-      "addHealthModifier": 0.1
+      "healthModifier": 0.15,
+      "addHealthModifier": 0.15
     },
     {
       "name": "Drone",

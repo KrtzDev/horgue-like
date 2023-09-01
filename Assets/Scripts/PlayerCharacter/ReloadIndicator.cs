@@ -22,7 +22,7 @@ public class ReloadIndicator : MonoBehaviour
         Image currentReloadCircle;
         Image currentBackground;
 
-        if (!_reloadCircleWeapon1.enabled)
+        if (!_background1.gameObject.activeInHierarchy)
         {
             _background1.gameObject.SetActive(true);
             _background1.enabled = true;
@@ -36,7 +36,7 @@ public class ReloadIndicator : MonoBehaviour
         }
         else
         {
-            _background1.gameObject.SetActive(true);
+            _background2.gameObject.SetActive(true);
             _background2.enabled = true;
             _reloadCircleWeapon2.gameObject.SetActive(true);
             _reloadCircleWeapon2.enabled = true;

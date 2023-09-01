@@ -13,16 +13,17 @@ MonoBehaviour:
   m_Name: AK-7423
   m_EditorClassIdentifier: 
   _weaponStats:
-    damage: 47.25
-    attackspeed: 1.55
-    cooldown: 1.5999999
-    projectileSize: 0.09
-    critChance: 15.5
-    critDamage: 1.575
-    range: 15.6
-    capacity: 30
-    attackPattern: {fileID: 0}
-    motionPattern: {fileID: 0}
+    dps: 41.52542
+    damage: 35
+    attackspeed: 1.25
+    cooldown: 1.7
+    projectileSize: 0.1
+    critChance: 10
+    critDamage: 1.5
+    range: 13
+    capacity: 20
+    attackPattern: {fileID: 11400000, guid: cb578d9958690974390a1eba6fa458d1, type: 2}
+    motionPattern: {fileID: 11400000, guid: 9aa305ff9050739458fbff74de9180b1, type: 2}
     statusEffect: {fileID: 0}
   _weaponSkeleton: {fileID: 4852173439239307193, guid: 534ea9bec0f3ace4cb13174feb65375c,
     type: 3}
@@ -46,4 +47,6 @@ MonoBehaviour:
   _groundLayer:
     serializedVersion: 2
     m_Bits: 513
-  _capacity: 30
+  _capacity: 13
+  _isReloading: 0
+  _reloadTime: 2.6
