@@ -26,7 +26,9 @@ public class ToolTipUI : Selectable
 	[SerializeField]
 	private RectTransform _contentRect;
 	[SerializeField]
-	private StatUI _statUI_prefab;
+	private StatUI _statUI_Name_Value_prefab;
+	[SerializeField]
+	private StatUI _statUI_Name_prefab;
 
 	public WeaponPart weaponPart;
 	private int _value;
@@ -67,33 +69,35 @@ public class ToolTipUI : Selectable
 
 	private void InitializeStats(WeaponPart weaponPartData)
 	{
-		damageStatUI = Instantiate(_statUI_prefab, _statParent);
+		damageStatUI = Instantiate(_statUI_Name_Value_prefab, _statParent);
 		damageStatUI.Initialize("Damage: ", weaponPartData.baseDamage.ToString("0.00"));
-		attackSpeedStatUI = Instantiate(_statUI_prefab, _statParent);
+		attackSpeedStatUI = Instantiate(_statUI_Name_Value_prefab, _statParent);
 		attackSpeedStatUI.Initialize("Attack Speed: ", weaponPartData.attackSpeed.ToString("0.00"));
-		cooldownStatUI = Instantiate(_statUI_prefab, _statParent);
+		cooldownStatUI = Instantiate(_statUI_Name_Value_prefab, _statParent);
 		cooldownStatUI.Initialize("Reload Time: ", weaponPartData.cooldown.ToString("0.00"));
-		projectileSizeStatUI = Instantiate(_statUI_prefab, _statParent);
-		projectileSizeStatUI.Initialize("Proj. Size: ", weaponPartData.projectileSize.ToString("0.00"));
-		critChanceStatUI = Instantiate(_statUI_prefab, _statParent);
-		critChanceStatUI.Initialize("Crit. Chance: ", weaponPartData.critChance.ToString("0.00"));
-		critDamageStatUI = Instantiate(_statUI_prefab, _statParent);
-		critDamageStatUI.Initialize("Crit. Damage: ", weaponPartData.critChance.ToString("0.00"));
-		rangeStatUI = Instantiate(_statUI_prefab, _statParent);
+		projectileSizeStatUI = Instantiate(_statUI_Name_Value_prefab, _statParent);
+		projectileSizeStatUI.Initialize("Projectile Size: ", weaponPartData.projectileSize.ToString("0.00"));
+		critChanceStatUI = Instantiate(_statUI_Name_Value_prefab, _statParent);
+		critChanceStatUI.Initialize("Crit Chance: ", weaponPartData.critChance.ToString("0.00"));
+		critDamageStatUI = Instantiate(_statUI_Name_Value_prefab, _statParent);
+		critDamageStatUI.Initialize("Crit Damage: ", weaponPartData.critChance.ToString("0.00"));
+		rangeStatUI = Instantiate(_statUI_Name_Value_prefab, _statParent);
 		rangeStatUI.Initialize("Range: ", weaponPartData.range.ToString("0.00"));
 
 		if (weaponPartData is Barrel)
 		{
 			Barrel barrel = weaponPartData as Barrel;
 
-			attackPatternStatUI = Instantiate(_statUI_prefab, _statParent);
-			attackPatternStatUI.Initialize("Trajectory: ", barrel.attackPattern.PatternName());
+			attackPatternStatUI = Instantiate(_statUI_Name_prefab, _statParent);
+			attackPatternStatUI.Initialize("Projectile Trajectory: ", "");
+			attackPatternStatUI = Instantiate(_statUI_Name_prefab, _statParent);
+			attackPatternStatUI.Initialize( barrel.attackPattern.PatternName(), "");
 		}
 		else if (weaponPartData is Magazine)
 		{
 			Magazine mag = weaponPartData as Magazine;
 
-			capacityStatUI = Instantiate(_statUI_prefab, _statParent);
+			capacityStatUI = Instantiate(_statUI_Name_Value_prefab, _statParent);
 			capacityStatUI.Initialize("Capacity: ", mag.capacity.ToString());
 		}
 		else if (weaponPartData is Ammunition)
@@ -102,7 +106,7 @@ public class ToolTipUI : Selectable
 
 			if (ammunition.statusEffect != null)
 			{
-				statusEffectStatUI = Instantiate(_statUI_prefab, _statParent);
+				statusEffectStatUI = Instantiate(_statUI_Name_Value_prefab, _statParent);
 				statusEffectStatUI.Initialize("Effect", ammunition.statusEffect.StatusName());
 			}
 		}

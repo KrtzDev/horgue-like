@@ -1802,6 +1802,18 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 9083020944113373785, guid: 6b8da813f2573f84395a53efcdce39ed,
+        type: 3}
+      propertyPath: _statUI_Name_prefab
+      value: 
+      objectReference: {fileID: 9018271247152603339, guid: 9de4f56ca87ea6449847f7d259d1a0f7,
+        type: 3}
+    - target: {fileID: 9083020944113373785, guid: 6b8da813f2573f84395a53efcdce39ed,
+        type: 3}
+      propertyPath: _statUI_Name_Value_prefab
+      value: 
+      objectReference: {fileID: 9018271247152603339, guid: dda6b321a08fb4f429ba9fe2654739a8,
+        type: 3}
     - target: {fileID: 9192379466507579908, guid: 6b8da813f2573f84395a53efcdce39ed,
         type: 3}
       propertyPath: m_AnchorMax.x

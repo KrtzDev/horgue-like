@@ -562,7 +562,9 @@ MonoBehaviour:
   _layoutGroup: {fileID: 2734264759241265304}
   _statParent: {fileID: 5450814324576322202}
   _contentRect: {fileID: 5452614881417057406}
-  _statUI_prefab: {fileID: 9018271247152603339, guid: dda6b321a08fb4f429ba9fe2654739a8,
+  _statUI_Name_Value_prefab: {fileID: 9018271247152603339, guid: dda6b321a08fb4f429ba9fe2654739a8,
+    type: 3}
+  _statUI_Name_prefab: {fileID: 9018271247152603339, guid: 9de4f56ca87ea6449847f7d259d1a0f7,
     type: 3}
   weaponPart: {fileID: 0}
   damageStatUI: {fileID: 0}
@@ -570,6 +572,7 @@ MonoBehaviour:
   cooldownStatUI: {fileID: 0}
   projectileSizeStatUI: {fileID: 0}
   critChanceStatUI: {fileID: 0}
+  critDamageStatUI: {fileID: 0}
   rangeStatUI: {fileID: 0}
   attackPatternStatUI: {fileID: 0}
   capacityStatUI: {fileID: 0}
