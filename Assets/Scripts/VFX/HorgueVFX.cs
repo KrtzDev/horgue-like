@@ -19,12 +19,24 @@ public class HorgueVFX : MonoBehaviour
 		}
 	}
 
+	public void ReturnToPool(ObjectPool<HorgueVFX> vfxPool)
+	{
+		if (this != null && Application.isPlaying && this.isActiveAndEnabled)
+			vfxPool.ReturnObjectToPool(this);
+	}
+
 	public async void ReturnToPoolOnFinished(ObjectPool<HorgueVFX> vfxPool)
 	{
 		await Task.Delay((int)(_longestDuration * 1000f));
 
-		if (this != null && Application.isPlaying && this.isActiveAndEnabled)
-			vfxPool.ReturnObjectToPool(this);
+		ReturnToPool(vfxPool);
+	}
+
+	public async void ReturnToPoolAfterTime(ObjectPool<HorgueVFX> vfxPool, float duration)
+	{
+		await Task.Delay((int)(duration * 1000f));
+
+		ReturnToPool(vfxPool);
 	}
 
 #if UNITY_EDITOR

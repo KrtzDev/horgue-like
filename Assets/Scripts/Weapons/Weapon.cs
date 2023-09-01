@@ -111,6 +111,7 @@ public class Weapon : ScriptableObject
 			_statusEffectPropagationVFXPool = ObjectPool<HorgueVFX>.CreatePool(ammunition.statusEffect.propagationVFX, 100, null);
 
 		_camera = Camera.main;
+		_isReloading = false;
 	}
 
 	public void UpdateAimDirection()
@@ -569,6 +570,7 @@ public class Weapon : ScriptableObject
 
 	private bool CanShoot()
 	{
+
 		if (_capacity > 0)
 		{
 			return true;

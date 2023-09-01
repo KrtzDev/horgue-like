@@ -2,7 +2,7 @@
   "Enemies": [
     {
       "name": "Basic",
-      "maxHealth": 100,
+      "maxHealth": 200,
       "damagePerHit": 10,
       "attackSpeed": 1,
       "givenXP": 1,
@@ -21,7 +21,7 @@
     },
     {
       "name": "RangedRobot",
-      "maxHealth": 0.45,
+      "maxHealth": 0.35,
       "damagePerHit": 2,
       "attackSpeed": 1.5,
       "givenXP": 7,
@@ -35,12 +35,12 @@
       "dmgModifier": 0.2,
       "addDmgModifier": 0.15,
       "baseHealthMultiplier": 1,
-      "healthModifier": 0.325,
-      "addHealthModifier": 0.225
+      "healthModifier": 0.35,
+      "addHealthModifier": 0.3
     },
     {
       "name": "PasuKan",
-      "maxHealth": 0.9,
+      "maxHealth": 0.75,
       "damagePerHit": 1.5,
       "attackSpeed": 2.5,
       "givenXP": 4,
@@ -54,12 +54,12 @@
       "dmgModifier": 0.2,
       "addDmgModifier": 0.15,
       "baseHealthMultiplier": 1,
-      "healthModifier": 0.325,
-      "addHealthModifier": 0.225
+      "healthModifier": 0.35,
+      "addHealthModifier": 0.3
     },
     {
       "name": "GIGARangedRobot",
-      "maxHealth": 0.75,
+      "maxHealth": 0.65,
       "damagePerHit": 2.5,
       "attackSpeed": 2.5,
       "givenXP": 10,
@@ -73,12 +73,12 @@
       "dmgModifier": 0.2,
       "addDmgModifier": 0.15,
       "baseHealthMultiplier": 1,
-      "healthModifier": 0.325,
-      "addHealthModifier": 0.225
+      "healthModifier": 0.35,
+      "addHealthModifier": 0.3
     },
     {
       "name": "Rikayon",
-      "maxHealth": 175,
+      "maxHealth": 150,
       "damagePerHit": 5,
       "attackSpeed": 1,
       "givenXP": 0,
@@ -97,7 +97,7 @@
     },
     {
       "name": "Drone",
-      "maxHealth": 0.25,
+      "maxHealth": 0.2,
       "damagePerHit": 0.6,
       "attackSpeed": 2.25,
       "givenXP": 3,
@@ -111,12 +111,12 @@
       "dmgModifier": 0.2,
       "addDmgModifier": 0.15,
       "baseHealthMultiplier": 1,
-      "healthModifier": 0.325,
-      "addHealthModifier": 0.225
+      "healthModifier": 0.35,
+      "addHealthModifier": 0.3
     },
     {
       "name": "Orc",
-      "maxHealth": 1.7,
+      "maxHealth": 1.5,
       "damagePerHit": 1,
       "attackSpeed": 3,
       "givenXP": 5,
@@ -130,8 +130,8 @@
       "dmgModifier": 0.2,
       "addDmgModifier": 0.15,
       "baseHealthMultiplier": 1,
-      "healthModifier": 0.325,
-      "addHealthModifier": 0.225
+      "healthModifier": 0.35,
+      "addHealthModifier": 0.3
     }
   ],
   "Level": [
@@ -152,7 +152,7 @@
       "maxCloseZoneOcc": 8,
       "maxMidZoneOcc": 18,
       "maxFarZoneOcc": 28,
-      "weaponPartMultiplierPerLevel": 0.05
+      "weaponPartMultiplierPerLevel": 0.025
     },
     {
       "name": "Level1.5",
@@ -171,7 +171,7 @@
       "maxCloseZoneOcc": 8,
       "maxMidZoneOcc": 18,
       "maxFarZoneOcc": 28,
-      "weaponPartMultiplierPerLevel": 0.05
+      "weaponPartMultiplierPerLevel": 0.025
     },
     {
       "name": "Level2",
@@ -190,7 +190,7 @@
       "maxCloseZoneOcc": 8,
       "maxMidZoneOcc": 18,
       "maxFarZoneOcc": 28,
-      "weaponPartMultiplierPerLevel": 0.05
+      "weaponPartMultiplierPerLevel": 0.025
     },
     {
       "name": "Level2.5",
@@ -209,7 +209,7 @@
       "maxCloseZoneOcc": 8,
       "maxMidZoneOcc": 18,
       "maxFarZoneOcc": 28,
-      "weaponPartMultiplierPerLevel": 0.05
+      "weaponPartMultiplierPerLevel": 0.025
     },
     {
       "name": "Level3",
@@ -228,7 +228,7 @@
       "maxCloseZoneOcc": 8,
       "maxMidZoneOcc": 18,
       "maxFarZoneOcc": 28,
-      "weaponPartMultiplierPerLevel": 0.05
+      "weaponPartMultiplierPerLevel": 0.025
     },
     {
       "name": "Level3.5",
@@ -247,7 +247,7 @@
       "maxCloseZoneOcc": 8,
       "maxMidZoneOcc": 18,
       "maxFarZoneOcc": 28,
-      "weaponPartMultiplierPerLevel": 0.05
+      "weaponPartMultiplierPerLevel": 0.025
     },
     {
       "name": "Level4",
@@ -266,7 +266,7 @@
       "maxCloseZoneOcc": 8,
       "maxMidZoneOcc": 18,
       "maxFarZoneOcc": 28,
-      "weaponPartMultiplierPerLevel": 0.05
+      "weaponPartMultiplierPerLevel": 0.025
     },
     {
       "name": "LevelBoss",
@@ -285,7 +285,7 @@
       "maxCloseZoneOcc": 8,
       "maxMidZoneOcc": 18,
       "maxFarZoneOcc": 28,
-      "weaponPartMultiplierPerLevel": 0.05
+      "weaponPartMultiplierPerLevel": 0.025
     },
     {
       "name": "LevelNewGamePlus",
@@ -304,7 +304,7 @@
       "maxCloseZoneOcc": 8,
       "maxMidZoneOcc": 18,
       "maxFarZoneOcc": 28,
-      "weaponPartMultiplierPerLevel": 0.05
+      "weaponPartMultiplierPerLevel": 0.025
     }
   ],
   "Player": [
@@ -326,7 +326,7 @@
       "criticalHitDamage": 1.5,
       "projectileWidth": 0.1,
       "range": 13,
-      "cost": 65,
+      "cost": 50,
       "maxAttackSpeed": 7.5,
       "maxCooldown": 10,
       "maxCriticalHitChance": 100,
@@ -351,7 +351,33 @@
       "criticalHitDamage": 1.5,
       "projectileWidth": 0.1,
       "range": 13,
-      "cost": 65
+      "cost": 50
+    },
+    {
+      "name": "Ammunition AK",
+      "numberOfGems": 0,
+      "attackSpeed": 0.05,
+      "baseDamage": 0.05,
+      "cooldown": 0,
+      "criticalHitChance": 0,
+      "criticalHitDamage": 0,
+      "projectileWidth": 0,
+      "range": 0,
+      "rarity": "common",
+      "cost": 0.5
+    },
+    {
+      "name": "Ammunition Revolver",
+      "numberOfGems": 0,
+      "attackSpeed": 0,
+      "baseDamage": 0.2,
+      "cooldown": 0,
+      "criticalHitChance": 0,
+      "criticalHitDamage": 0,
+      "projectileWidth": 0,
+      "range": 0,
+      "rarity": "common",
+      "cost": 0.5
     },
     {
       "name": "Antique Frag Grenade",
@@ -365,7 +391,7 @@
       "projectileWidth": 0.6,
       "range": -0.35,
       "rarity": "special",
-      "cost": 2.5
+      "cost": 2
     },
     {
       "name": "Caliber .308",
@@ -377,8 +403,8 @@
       "criticalHitDamage": 0,
       "projectileWidth": -0.1,
       "range": 0.15,
-      "rarity": "common",
-      "cost": 1.5
+      "rarity": "uncommon",
+      "cost": 1
     },
     {
       "name": "Caliber .38",
@@ -390,7 +416,7 @@
       "criticalHitDamage": 0,
       "projectileWidth": -0.1,
       "range": 0.2,
-      "rarity": "common",
+      "rarity": "uncommon",
       "cost": 1
     },
     {
@@ -418,7 +444,7 @@
       "projectileWidth": 0.5,
       "range": -0.4,
       "rarity": "rare",
-      "cost": 2
+      "cost": 1.5
     },
     {
       "name": "Gremlin",
@@ -432,7 +458,7 @@
       "projectileWidth": 0.4,
       "range": 0.4,
       "rarity": "rare",
-      "cost": 2
+      "cost": 1.5
     },
     {
       "name": "Hot Laser Cell",
@@ -446,7 +472,7 @@
       "projectileWidth": -0.6,
       "range": 0.6,
       "rarity": "special",
-      "cost": 2.5
+      "cost": 2
     },
     {
       "name": "Laser Cell",
@@ -460,7 +486,7 @@
       "projectileWidth": -0.6,
       "range": 0.75,
       "rarity": "special",
-      "cost": 2.5
+      "cost": 2
     },
     {
       "name": "Nail",
@@ -474,7 +500,7 @@
       "projectileWidth": -0.4,
       "range": 0.25,
       "rarity": "rare",
-      "cost": 2
+      "cost": 1.5
     },
     {
       "name": "Rusty Nail",
@@ -488,7 +514,7 @@
       "projectileWidth": -0.8,
       "range": 1.5,
       "rarity": "unique",
-      "cost": 3
+      "cost": 2.5
     },
     {
       "name": "Sans Plombe 95",
@@ -502,7 +528,7 @@
       "projectileWidth": 0.15,
       "range": -0.15,
       "rarity": "special",
-      "cost": 2.5
+      "cost": 2
     },
     {
       "name": "Spiked Basketball",
@@ -515,7 +541,7 @@
       "projectileWidth": 0.75,
       "range": -0.45,
       "rarity": "special",
-      "cost": 2.5
+      "cost": 2
     }
   ],
   "Barrel": [
@@ -530,7 +556,33 @@
       "criticalHitDamage": 1.5,
       "projectileWidth": 0.1,
       "range": 13,
-      "cost": 65
+      "cost": 50
+    },
+    {
+      "name": "Barrel AK",
+      "attackPattern": "Straight Line Shot",
+      "attackSpeed": 0.1,
+      "baseDamage": 0.05,
+      "cooldown": 0,
+      "criticalHitChance": 0,
+      "criticalHitDamage": 0,
+      "projectileWidth": 0,
+      "range": 0,
+      "rarity": "common",
+      "cost": 0.5
+    },
+    {
+      "name": "Barrel Revolver",
+      "attackPattern": "Straight Line Shot",
+      "attackSpeed": 0.05,
+      "baseDamage": 0.1,
+      "cooldown": 0,
+      "criticalHitChance": 0,
+      "criticalHitDamage": 0,
+      "projectileWidth": 0,
+      "range": 0,
+      "rarity": "common",
+      "cost": 0.5
     },
     {
       "name": "Brainified Conical Steel Nickle Barrel",
@@ -546,7 +598,7 @@
       "projectileWidth": 0.1,
       "range": 0.25,
       "rarity": "uncommon",
-      "cost": 1.5
+      "cost": 1
     },
     {
       "name": "Chrome Lined Rifle Barrel",
@@ -561,7 +613,7 @@
       "projectileWidth": 0,
       "range": 0.3,
       "rarity": "uncommon",
-      "cost": 1.5
+      "cost": 1
     },
     {
       "name": "Electron Polymer Pistol Barrel",
@@ -576,7 +628,7 @@
       "projectileWidth": 0.1,
       "range": -0.4,
       "rarity": "uncommon",
-      "cost": 2
+      "cost": 1
     },
     {
       "name": "Garden Hose",
@@ -591,7 +643,7 @@
       "projectileWidth": 0,
       "range": 0.45,
       "rarity": "rare",
-      "cost": 2
+      "cost": 1.5
     },
     {
       "name": "Gold Alloyed Titanium Coil",
@@ -606,7 +658,7 @@
       "projectileWidth": 0,
       "range": 0.5,
       "rarity": "rare",
-      "cost": 2
+      "cost": 1.5
     },
     {
       "name": "Iron Revolver Barrel",
@@ -621,7 +673,7 @@
       "projectileWidth": 0.4,
       "range": 0.7,
       "rarity": "rare",
-      "cost": 1
+      "cost": 1.5
     },
     {
       "name": "Motivating Tube",
@@ -636,7 +688,7 @@
       "projectileWidth": 0.3,
       "range": 0.15,
       "rarity": "special",
-      "cost": 2.5
+      "cost": 2
     },
     {
       "name": "Neuroplastic Splicer",
@@ -651,7 +703,7 @@
       "projectileWidth": 0.05,
       "range": -0.5,
       "rarity": "unique",
-      "cost": 3
+      "cost": 2.5
     },
     {
       "name": "Neuroplastic Tube",
@@ -665,8 +717,8 @@
       "criticalHitDamage": 0,
       "projectileWidth": 0,
       "range": -0.2,
-      "rarity": "common",
-      "cost": 1.5
+      "rarity": "uncommon",
+      "cost": 1
     },
     {
       "name": "Oil Funnel",
@@ -680,8 +732,8 @@
       "criticalHitDamage": 0,
       "projectileWidth": 0,
       "range": 0.3,
-      "rarity": "common",
-      "cost": 1.5
+      "rarity": "uncommon",
+      "cost": 1
     },
     {
       "name": "Soviet Steel Barrel",
@@ -711,7 +763,7 @@
       "projectileWidth": 0,
       "range": 0,
       "rarity": "uncommon",
-      "cost": 1.5
+      "cost": 1
     },
     {
       "name": "Spud Gun Tube",
@@ -726,7 +778,7 @@
       "projectileWidth": 0,
       "range": 0,
       "rarity": "rare",
-      "cost": 2
+      "cost": 1.5
     },
     {
       "name": "Stapler",
@@ -742,7 +794,7 @@
       "projectileWidth": 0,
       "range": -0.15,
       "rarity": "uncommon",
-      "cost": 1.5
+      "cost": 1
     },
     {
       "name": "Wide Long Dispenser",
@@ -757,7 +809,7 @@
       "projectileWidth": 0.6,
       "range": -0.25,
       "rarity": "special",
-      "cost": 2.5
+      "cost": 2
     }
   ],
   "Grip": [
@@ -773,7 +825,7 @@
       "criticalHitDamage": 1.5,
       "projectileWidth": 0.1,
       "range": 13,
-      "cost": 65
+      "cost": 50
     },
     {
       "name": "30s Double Grip",
@@ -788,7 +840,7 @@
       "projectileWidth": 0,
       "range": 0,
       "rarity": "uncommon",
-      "cost": 1.5
+      "cost": 1
     },
     {
       "name": "Alloyed Glass Grip",
@@ -803,7 +855,7 @@
       "projectileWidth": 0,
       "range": 0,
       "rarity": "uncommon",
-      "cost": 1.5
+      "cost": 1
     },
     {
       "name": "Chestnut Revolver Grip",
@@ -818,7 +870,7 @@
       "projectileWidth": 0,
       "range": 0,
       "rarity": "uncommon",
-      "cost": 2
+      "cost": 1
     },
     {
       "name": "Elastic Hard Rubber Glove",
@@ -833,7 +885,31 @@
       "projectileWidth": 0,
       "range": 0,
       "rarity": "rare",
-      "cost": 2
+      "cost": 1.5
+    },
+    {
+      "name": "Grip AK",
+      "attackSpeed": 0.05,
+      "baseDamage": 0,
+      "cooldown": -0.05,
+      "criticalHitChance": 0,
+      "criticalHitDamage": 0,
+      "projectileWidth": 0,
+      "range": 0,
+      "rarity": "common",
+      "cost": 0.5
+    },
+    {
+      "name": "Grip Revolver",
+      "attackSpeed": -0.05,
+      "baseDamage": 0.1,
+      "cooldown": 0.05,
+      "criticalHitChance": 0,
+      "criticalHitDamage": 0,
+      "projectileWidth": 0,
+      "range": 0,
+      "rarity": "common",
+      "cost": 0.5
     },
     {
       "name": "Hard Gum Plastic Grip",
@@ -848,7 +924,7 @@
       "projectileWidth": 0,
       "range": 0,
       "rarity": "rare",
-      "cost": 2
+      "cost": 1.5
     },
     {
       "name": "Heavy Shoulder Supported Rod",
@@ -863,7 +939,7 @@
       "projectileWidth": 0,
       "range": 0,
       "rarity": "rare",
-      "cost": 2.5
+      "cost": 1.5
     },
     {
       "name": "Hot-Melt Gun Grip",
@@ -878,7 +954,7 @@
       "projectileWidth": 0,
       "range": 0,
       "rarity": "special",
-      "cost": 2.5
+      "cost": 2
     },
     {
       "name": "Oak Revolver Grip",
@@ -892,8 +968,8 @@
       "criticalHitDamage": 0,
       "projectileWidth": 0,
       "range": 0,
-      "rarity": "special",
-      "cost": 1
+      "rarity": "unique",
+      "cost": 2.5
     },
     {
       "name": "Physiological Synthetic Grip",
@@ -908,7 +984,7 @@
       "projectileWidth": 0,
       "range": 0,
       "rarity": "special",
-      "cost": 2.5
+      "cost": 2
     },
     {
       "name": "Robust Oval Wooden Grip",
@@ -922,7 +998,7 @@
       "criticalHitDamage": 0,
       "projectileWidth": 0,
       "range": 0.2,
-      "rarity": "common",
+      "rarity": "uncommon",
       "cost": 1
     },
     {
@@ -938,7 +1014,7 @@
       "projectileWidth": 0,
       "range": 0,
       "rarity": "special",
-      "cost": 2.5
+      "cost": 2
     },
     {
       "name": "Soft Gum Plastic Grip",
@@ -952,8 +1028,8 @@
       "criticalHitDamage": 0,
       "projectileWidth": 0,
       "range": -0.2,
-      "rarity": "common",
-      "cost": 1.5
+      "rarity": "uncommon",
+      "cost": 1
     },
     {
       "name": "Thick Cobalt Finger",
@@ -968,12 +1044,13 @@
       "projectileWidth": 0,
       "range": 0,
       "rarity": "rare",
-      "cost": 2
+      "cost": 1.5
     }
   ],
   "Magazine": [
     {
       "name": "Reference",
+      "capacity": 1,
       "numberOfAmmunitionSlots": 1,
       "numberOfGems": 1,
       "attackSpeed": 1,
@@ -983,7 +1060,7 @@
       "criticalHitDamage": 1.5,
       "projectileWidth": 0.1,
       "range": 13,
-      "cost": 65
+      "cost": 50
     },
     {
       "name": "Billard Ball Drum",
@@ -999,7 +1076,7 @@
       "projectileWidth": 0.25,
       "range": 0.2,
       "rarity": "uncommon",
-      "cost": 1.5
+      "cost": 1
     },
     {
       "name": "Bolt Storage",
@@ -1015,7 +1092,7 @@
       "projectileWidth": 0,
       "range": 0,
       "rarity": "uncommon",
-      "cost": 1.5
+      "cost": 1
     },
     {
       "name": "Cat Basket",
@@ -1030,7 +1107,7 @@
       "projectileWidth": 0.2,
       "range": 0.4,
       "rarity": "uncommon",
-      "cost": 2
+      "cost": 1
     },
     {
       "name": "Curved Box",
@@ -1045,7 +1122,7 @@
       "projectileWidth": 0.2,
       "range": 0,
       "rarity": "rare",
-      "cost": 1
+      "cost": 1.5
     },
     {
       "name": "Explosive Box",
@@ -1060,7 +1137,7 @@
       "projectileWidth": 0,
       "range": 0,
       "rarity": "rare",
-      "cost": 2
+      "cost": 1.5
     },
     {
       "name": "Internal Small Box",
@@ -1075,7 +1152,7 @@
       "projectileWidth": -0.15,
       "range": 0.4,
       "rarity": "rare",
-      "cost": 2.5
+      "cost": 1.5
     },
     {
       "name": "Iron Cylinder",
@@ -1090,7 +1167,33 @@
       "projectileWidth": 0.2,
       "range": -0.25,
       "rarity": "special",
-      "cost": 1
+      "cost": 2
+    },
+    {
+      "name": "Magazine AK",
+      "capacity": 20,
+      "attackSpeed": 0,
+      "baseDamage": 0,
+      "cooldown": -0.05,
+      "criticalHitChance": 0,
+      "criticalHitDamage": 0,
+      "projectileWidth": 0,
+      "range": 0,
+      "rarity": "common",
+      "cost": 0.5
+    },
+    {
+      "name": "Magazine Revolver",
+      "capacity": 10,
+      "attackSpeed": 0,
+      "baseDamage": 0,
+      "cooldown": 0.05,
+      "criticalHitChance": 0,
+      "criticalHitDamage": 0,
+      "projectileWidth": 0,
+      "range": 0,
+      "rarity": "common",
+      "cost": 0.5
     },
     {
       "name": "Medium Energy Cell Block",
@@ -1105,7 +1208,7 @@
       "projectileWidth": -0.25,
       "range": 0.6,
       "rarity": "unique",
-      "cost": 3
+      "cost": 2.5
     },
     {
       "name": "Petrol Can",
@@ -1120,8 +1223,8 @@
       "criticalHitDamage": 0,
       "projectileWidth": 0,
       "range": 0,
-      "rarity": "common",
-      "cost": 1.5
+      "rarity": "uncommon",
+      "cost": 1
     },
     {
       "name": "Pin Block",
@@ -1136,8 +1239,8 @@
       "criticalHitDamage": 0,
       "projectileWidth": 0,
       "range": 0,
-      "rarity": "common",
-      "cost": 1.5
+      "rarity": "uncommon",
+      "cost": 1
     },
     {
       "name": "Projectile Encyclopedia",
@@ -1152,7 +1255,7 @@
       "projectileWidth": 0.35,
       "range": -0.7,
       "rarity": "special",
-      "cost": 2.5
+      "cost": 2
     },
     {
       "name": "Submounted Pine Mag",
@@ -1167,7 +1270,7 @@
       "projectileWidth": 0,
       "range": 0,
       "rarity": "uncommon",
-      "cost": 2
+      "cost": 1
     }
   ],
   "Sight": [
@@ -1181,7 +1284,7 @@
       "criticalHitDamage": 1.5,
       "projectileWidth": 0.1,
       "range": 13,
-      "cost": 65
+      "cost": 50
     },
     {
       "name": "Basic Iron Sights",
@@ -1209,7 +1312,7 @@
       "projectileWidth": 0,
       "range": 0,
       "rarity": "uncommon",
-      "cost": 1.5
+      "cost": 1
     },
     {
       "name": "Broken Iron Sights",
@@ -1223,7 +1326,7 @@
       "projectileWidth": 0,
       "range": 0,
       "rarity": "uncommon",
-      "cost": 2
+      "cost": 1
     },
     {
       "name": "Digital Sniper Sight",
@@ -1237,7 +1340,7 @@
       "projectileWidth": 0,
       "range": 0.75,
       "rarity": "rare",
-      "cost": 2
+      "cost": 1.5
     },
     {
       "name": "Digital Target Lock Telescope",
@@ -1251,7 +1354,7 @@
       "projectileWidth": 0,
       "range": 1,
       "rarity": "rare",
-      "cost": 2
+      "cost": 1.5
     },
     {
       "name": "Geometrical Sight",
@@ -1265,7 +1368,7 @@
       "projectileWidth": 0,
       "range": 0.5,
       "rarity": "special",
-      "cost": 2.5
+      "cost": 2
     },
     {
       "name": "Leafy Tree Branch",
@@ -1279,7 +1382,7 @@
       "projectileWidth": 0,
       "range": 0,
       "rarity": "special",
-      "cost": 2.5
+      "cost": 2
     },
     {
       "name": "Plastic Pinned Ring Sight",
@@ -1293,10 +1396,10 @@
       "projectileWidth": -0.45,
       "range": 0.9,
       "rarity": "unique",
-      "cost": 3
+      "cost": 2.5
     },
     {
-      "name": "SLR Lens",
+      "name": "Quadratic Red Point Sight",
       "attackPattern": "Straight Line Shot",
       "numberOfGems": 0,
       "attackSpeed": 0.65,
@@ -1310,7 +1413,33 @@
       "cost": 1.5
     },
     {
-      "name": "Sunglasses",
+      "name": "Sight AK",
+      "attackPattern": "Straight Line Shot",
+      "attackSpeed": 0,
+      "baseDamage": 0,
+      "cooldown": 0,
+      "criticalHitChance": 0,
+      "criticalHitDamage": 0,
+      "projectileWidth": 0,
+      "range": 0,
+      "rarity": "common",
+      "cost": 0.5
+    },
+    {
+      "name": "Sight Revolver",
+      "attackPattern": "Straight Line Shot",
+      "attackSpeed": 0,
+      "baseDamage": 0,
+      "cooldown": 0,
+      "criticalHitChance": 0,
+      "criticalHitDamage": 0,
+      "projectileWidth": 0,
+      "range": 0,
+      "rarity": "common",
+      "cost": 0.5
+    },
+    {
+      "name": "SLR Lens",
       "attackPattern": "Straight Line Shot",
       "numberOfGems": 0,
       "attackSpeed": 0.2,
@@ -1320,11 +1449,11 @@
       "criticalHitDamage": 0.1,
       "projectileWidth": 0,
       "range": 0,
-      "rarity": "common",
-      "cost": 1.5
+      "rarity": "uncommon",
+      "cost": 1
     },
     {
-      "name": "Quadratic Red Point Sight",
+      "name": "Sunglasses",
       "attackPattern": "Straight Line Shot",
       "numberOfGems": 0,
       "attackSpeed": -0.15,
@@ -1334,7 +1463,7 @@
       "criticalHitDamage": 0,
       "projectileWidth": 0,
       "range": 0,
-      "rarity": "common",
+      "rarity": "uncommon",
       "cost": 1
     }
   ],
@@ -1349,7 +1478,7 @@
       "criticalHitDamage": 1.5,
       "projectileWidth": 0.1,
       "range": 13,
-      "cost": 65
+      "cost": 50
     },
     {
       "name": "Adjustable Break Trigger",
@@ -1362,7 +1491,7 @@
       "projectileWidth": 0,
       "range": 0,
       "rarity": "uncommon",
-      "cost": 1.5
+      "cost": 1
     },
     {
       "name": "Air Pressurizer",
@@ -1375,7 +1504,7 @@
       "projectileWidth": -0.2,
       "range": 0.15,
       "rarity": "uncommon",
-      "cost": 1.5
+      "cost": 1
     },
     {
       "name": "Ball Dispenser",
@@ -1388,7 +1517,7 @@
       "projectileWidth": 0,
       "range": 0.7,
       "rarity": "uncommon",
-      "cost": 2
+      "cost": 1
     },
     {
       "name": "Binary Powder Trigger",
@@ -1415,7 +1544,7 @@
       "projectileWidth": 0,
       "range": -0.5,
       "rarity": "rare",
-      "cost": 2
+      "cost": 1.5
     },
     {
       "name": "Gas Pressure Grenade Dispenser",
@@ -1428,7 +1557,7 @@
       "projectileWidth": 0.3,
       "range": -0.2,
       "rarity": "rare",
-      "cost": 2.5
+      "cost": 1.5
     },
     {
       "name": "Iron Backloader",
@@ -1441,7 +1570,7 @@
       "projectileWidth": 0,
       "range": 0.9,
       "rarity": "special",
-      "cost": 1
+      "cost": 2
     },
     {
       "name": "Laser Emitter",
@@ -1455,7 +1584,7 @@
       "projectileWidth": -0.6,
       "range": 1.2,
       "rarity": "unique",
-      "cost": 3
+      "cost": 2.5
     },
     {
       "name": "Petrol Pump",
@@ -1468,11 +1597,11 @@
       "criticalHitDamage": 0,
       "projectileWidth": -0.1,
       "range": 0,
-      "rarity": "common",
-      "cost": 1.5
+      "rarity": "uncommon",
+      "cost": 1
     },
     {
-      "name": "Slingshot",
+      "name": "Quick Underlevel Repeater",
       "numberOfGems": 0,
       "attackSpeed": 0.9,
       "baseDamage": 0.7,
@@ -1482,10 +1611,10 @@
       "projectileWidth": 0,
       "range": 0.8,
       "rarity": "special",
-      "cost": 1.5
+      "cost": 2
     },
     {
-      "name": "Sound Powered Drum Trigger",
+      "name": "Slingshot",
       "numberOfGems": 0,
       "attackSpeed": -0.1,
       "baseDamage": 0.2,
@@ -1494,11 +1623,11 @@
       "criticalHitDamage": 0,
       "projectileWidth": 0,
       "range": 0.05,
-      "rarity": "common",
-      "cost": 2
+      "rarity": "uncommon",
+      "cost": 1
     },
     {
-      "name": "Quick Underlevel Repeater",
+      "name": "Sound Powered Drum Trigger",
       "numberOfGems": 0,
       "attackSpeed": 0.55,
       "baseDamage": 0.6,
@@ -1508,7 +1637,31 @@
       "projectileWidth": 0,
       "range": 0.5,
       "rarity": "rare",
-      "cost": 2.5
+      "cost": 1.5
+    },
+    {
+      "name": "Trigger AK",
+      "attackSpeed": 0.05,
+      "baseDamage": -0.1,
+      "cooldown": -0.05,
+      "criticalHitChance": 0,
+      "criticalHitDamage": 0,
+      "projectileWidth": 0,
+      "range": 0,
+      "rarity": "common",
+      "cost": 0.5
+    },
+    {
+      "name": "Trigger Revolver",
+      "attackSpeed": -0.1,
+      "baseDamage": 0.05,
+      "cooldown": 0.05,
+      "criticalHitChance": 0,
+      "criticalHitDamage": 0,
+      "projectileWidth": 0,
+      "range": 0,
+      "rarity": "common",
+      "cost": 0.5
     }
   ]
 }

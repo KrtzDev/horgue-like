@@ -9816,5 +9816,4 @@ MonoBehaviour:
   _particleSystems:
   - {fileID: 5758294487807923599}
   - {fileID: 5758294486509655759}
-  - {fileID: 0}
   _longestDuration: 5

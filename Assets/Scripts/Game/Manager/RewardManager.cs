@@ -54,10 +54,9 @@ public class RewardManager : Singleton<RewardManager>
 
 	private void SetUpWeightByRarityTable()
 	{
-		_weightByRarity.Add("common", 10);
-		_weightByRarity.Add("uncommon", 45);
-		_weightByRarity.Add("rare", 25);
-		_weightByRarity.Add("special", 15);
+		_weightByRarity.Add("uncommon", 50);
+		_weightByRarity.Add("rare", 28);
+		_weightByRarity.Add("special", 17);
 		_weightByRarity.Add("unique", 5);
 	}
 

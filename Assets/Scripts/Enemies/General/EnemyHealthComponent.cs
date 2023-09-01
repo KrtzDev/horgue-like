@@ -1,9 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 
 public class EnemyHealthComponent : HealthComponent
 {
+	public event Action OnEnemyDied;
+
     [SerializeField] private Transform _hitParticlePosition;
     [SerializeField] private ParticleSystem _hitParticle;
 	public EnemyHealthBar _enemyHealthBar;
@@ -66,6 +67,8 @@ public class EnemyHealthComponent : HealthComponent
 		if (gameObject.GetComponent<AI_Agent_Enemy>() != null)
 			gameObject.GetComponent<AI_Agent_Enemy>().enabled = false;
 
+		OnEnemyDied?.Invoke();
+
 		gameObject.tag = "Untagged";
 
 		isDead = true;
@@ -91,7 +94,7 @@ public class EnemyHealthComponent : HealthComponent
 
 	public void DropHealthPotion()
 	{
-		int random = Random.Range(0, 100);
+		int random = UnityEngine.Random.Range(0, 100);
 		if (random < _healthDropChance)
 		{
 			Vector3 spawnPos = _hitParticlePosition.position;

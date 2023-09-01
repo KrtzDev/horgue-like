@@ -19,8 +19,6 @@ public class ReloadIndicator : MonoBehaviour
     {
         Image currentReloadCircle;
 
-        Debug.Log("Reload Indicator");
-
         if (!_reloadCircleWeapon1.enabled)
         {
             _reloadCircleWeapon1.gameObject.SetActive(true);
