@@ -68,6 +68,7 @@ public class HoldButton : UIButton
 
 			_canExecute = false;
 			OnButtonExecute?.Invoke();
+			AudioManager.Instance.PlaySound("ButtonSelect");
 			_holdBar.fillAmount = 0;
 		}
 	}

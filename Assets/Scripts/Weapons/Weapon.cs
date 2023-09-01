@@ -61,8 +61,8 @@ public class Weapon : ScriptableObject
 
 	private float _shotDelay;
 	public int _capacity;
-	private bool _isReloading;
-	private float _reloadTime;
+	public bool _isReloading;
+	public float _reloadTime;
 
 	private Camera _camera;
 
@@ -226,7 +226,7 @@ public class Weapon : ScriptableObject
 		// float damage = _currentWeaponSkeleton.skeletonBaseStats.baseDamage + (_currentWeaponSkeleton.skeletonBaseStats.baseDamage * partsDamage * .1f);
 		float damage = _currentWeaponSkeleton.skeletonBaseStats.baseDamage + partsDamage;
 
-		if(totalDamage < _currentWeaponSkeleton.skeletonBaseStats.minBaseDamage) // min
+		if(damage < _currentWeaponSkeleton.skeletonBaseStats.minBaseDamage) // min
 			return _currentWeaponSkeleton.skeletonBaseStats.minBaseDamage;
 
 		// no max
@@ -683,6 +683,10 @@ public class Weapon : ScriptableObject
 
 	private async void Reload()
 	{
+		// could play first reload sound, then 2nd when reload is finished
+
+		FindObjectOfType<ReloadIndicator>().UseReloadIndicator(weaponSprite, _reloadTime);
+
 		await Task.Delay((int)(_reloadTime * 1000));
 		AudioManager.Instance.PlaySound("WeaponReload");
 

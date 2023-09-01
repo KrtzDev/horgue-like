@@ -1,8 +1,14 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class WalletUI : MonoBehaviour
 {
+	public Image BgImage => _bgImage;
+
+	[SerializeField]
+	private Image _bgImage;
+
 	[SerializeField]
 	private TMP_Text _moneyText;
 

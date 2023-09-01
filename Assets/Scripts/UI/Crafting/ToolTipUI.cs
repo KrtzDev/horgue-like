@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class ToolTipUI : Selectable
 {
 	public event Action<ToolTipUI> OnBuy;
+	public event Action OnBuyFailed;
 	public event Action<ToolTipUI> OnSelected;
 	public event Action OnDeselected;
 
@@ -26,6 +27,8 @@ public class ToolTipUI : Selectable
 	private RectTransform _contentRect;
 	[SerializeField]
 	private StatUI _statUI_prefab;
+	[SerializeField]
+	private StatUI _statUI_Projectile_Trajectory_prefab;
 
 	public WeaponPart weaponPart;
 	private int _value;
@@ -37,6 +40,7 @@ public class ToolTipUI : Selectable
 	public StatUI cooldownStatUI;
 	public StatUI projectileSizeStatUI;
 	public StatUI critChanceStatUI;
+	public StatUI critDamageStatUI;
 	public StatUI rangeStatUI;
 
 	public StatUI attackPatternStatUI;
@@ -75,6 +79,8 @@ public class ToolTipUI : Selectable
 		projectileSizeStatUI.Initialize("Projectile Size: ", weaponPartData.projectileSize.ToString("0.00"));
 		critChanceStatUI = Instantiate(_statUI_prefab, _statParent);
 		critChanceStatUI.Initialize("Crit Chance: ", weaponPartData.critChance.ToString("0.00"));
+		critDamageStatUI = Instantiate(_statUI_prefab, _statParent);
+		critDamageStatUI.Initialize("Crit Damage: ", weaponPartData.critChance.ToString("0.00"));
 		rangeStatUI = Instantiate(_statUI_prefab, _statParent);
 		rangeStatUI.Initialize("Range: ", weaponPartData.range.ToString("0.00"));
 
@@ -82,8 +88,8 @@ public class ToolTipUI : Selectable
 		{
 			Barrel barrel = weaponPartData as Barrel;
 
-			attackPatternStatUI = Instantiate(_statUI_prefab, _statParent);
-			attackPatternStatUI.Initialize("Projectile trajectory: ", barrel.attackPattern.PatternName());
+			attackPatternStatUI = Instantiate(_statUI_Projectile_Trajectory_prefab, _statParent);
+			attackPatternStatUI.Initialize("Projectile Trajectory: ", barrel.attackPattern.PatternName());
 		}
 		else if (weaponPartData is Magazine)
 		{
@@ -99,7 +105,7 @@ public class ToolTipUI : Selectable
 			if (ammunition.statusEffect != null)
 			{
 				statusEffectStatUI = Instantiate(_statUI_prefab, _statParent);
-				statusEffectStatUI.Initialize("Impact Effect", ammunition.statusEffect.StatusName());
+				statusEffectStatUI.Initialize("Effect", ammunition.statusEffect.StatusName());
 			}
 		}
 	}
@@ -110,13 +116,17 @@ public class ToolTipUI : Selectable
 			return;
 
 		if (!GameManager.Instance.inventory.Wallet.TryPay(_value))
+		{
+			OnBuyFailed.Invoke();
 			return;
-
-		AudioManager.Instance.PlaySound("ShopConfirmation");
+		}
 
 		OnBuy.Invoke(this);
-		buyButton.OnButtonExecute -= Buy;
+	}
 
+	public void CleanUp()
+	{
+		buyButton.OnButtonExecute -= Buy;
 		Destroy(gameObject);
 	}
 

@@ -88,7 +88,7 @@ public class HolsterTabs : MonoBehaviour
 	{
 		OnSelectWeapon.Invoke(weapon);
 
-		if (_comparisonUI.CurrentSelected)
+		if (_comparisonUI.CurrentSelected != null)
 		{
 			_weaponUI.ShowPotentialUpdatedWeaponStats(_comparisonUI.CurrentSelected);
 			_comparisonUI.UpdateEquippedComparisonUI(_weaponUI, _comparisonUI.CurrentSelected);

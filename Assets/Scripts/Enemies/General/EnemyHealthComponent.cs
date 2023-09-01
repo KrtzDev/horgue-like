@@ -72,9 +72,10 @@ public class EnemyHealthComponent : HealthComponent
 
 		if(_enemy._isBossEnemy)
         {
+			AudioManager.Instance.PlaySound("RikayonScream");
 			GameManager.Instance.killedBoss = true;
 			GameManager.Instance._newGamePlus = true;
-        }
+		}
 
 		GameManager.Instance.EnemyDied();
 

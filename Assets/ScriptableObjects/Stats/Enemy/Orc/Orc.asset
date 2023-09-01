@@ -12,17 +12,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e53ff1b8ade7b5340af8b4e886fb2c85, type: 3}
   m_Name: Orc
   m_EditorClassIdentifier: 
-  _maxHealth: 300
-  _damagePerHit: 5
+  _maxHealth: 170
+  _damagePerHit: 10
   _attackSpeed: 3
-  _givenXP: 7
-  _maxMoveSpeed: 7
-  _acceleration: 6
+  _givenXP: 5
+  _maxMoveSpeed: 11
+  _acceleration: 10
   _armor: 200
   _elementalResistance: 200
   _technicalResistance: -100
-  _healthDropChance: 0.1
-  _attackRange: 2
+  _healthDropChance: 0.08
+  baseDmgMultiplier: 1
+  dmgModifier: 0.2
+  addDmgModifier: 0.15
+  baseHealthMultiplier: 1
+  healthModifier: 0.325
+  addHealthModifier: 0.225
+  _attackRange: 1.6
   _retreatRange: 0
   _maxJumpAttackRange: 0
   _minJumpAttackRange: 0

@@ -734,7 +734,7 @@ public partial class @PlayerInputMappings : IInputActionCollection2, IDisposable
                     ""path"": ""<Gamepad>/dpad"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": "";Gamepad"",
+                    ""groups"": ""Gamepad;ControllScheme"",
                     ""action"": ""Navigate"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
