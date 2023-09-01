@@ -12120,9 +12120,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _spikeDamage: 50
-  _delay: 0
-  _rearming: 0
-  _isAutomated: 1
+  _delay: 1
+  _rearming: 2
+  _isAutomated: 0
   _cooldown: 3
 --- !u!1 &5164913324438757313
 GameObject:
