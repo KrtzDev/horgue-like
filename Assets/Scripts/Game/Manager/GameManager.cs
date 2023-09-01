@@ -42,7 +42,7 @@ public class GameManager : Singleton<GameManager>
 	private bool _hasLost;
 
 	public int _currentLevel = 1;
-	private int _lastLevel;
+	// private int _lastLevel;
 	public int _currentLevelArray;
 
 	private int _numberOfRewards = 6;
@@ -64,13 +64,27 @@ public class GameManager : Singleton<GameManager>
 	[SerializeField]
 	public Inventory inventory;
 
+	[Header("Boss Cheat")]
+	public bool bossCheat;
+	public Ammunition amm1;
+	public Ammunition amm2;
+	public TriggerMechanism trigger1;
+	public TriggerMechanism trigger2;
+	public Grip grip1;
+	public Grip grip2;
+	public Magazine magazine1;
+	public Magazine magazine2;
+	public Barrel barrel1;
+	public Barrel barrel2;
+	public Sight sight1;
+	public Sight sight2;
+
 	private void Start()
 	{
 		SceneLoader.Instance.CompletedSceneLoad += OnCompletedSceneLoad;
 
 		inventory.Wallet.Reset();
 		_currentLevel = 1;
-		_lastLevel = 0;
 		_currentLevelArray = _currentLevel - 1;
 		_gameIsPaused = false;
 	}
@@ -95,7 +109,6 @@ public class GameManager : Singleton<GameManager>
 		{
 			inventory.Wallet.Reset();
 			_currentLevel = 1;
-			_lastLevel = 0;
 			_currentLevelArray = _currentLevel - 1;
 			_gameIsPaused = false;
 
@@ -144,6 +157,7 @@ public class GameManager : Singleton<GameManager>
 		_player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerCharacter>().gameObject;
 		MovePlayerToRandomPos(DetermineRandomSpawnLocation());
 
+
 		if (_currentLevel == 1)
 		{
 			WeaponHolster weaponHolster = FindObjectOfType<WeaponHolster>();
@@ -151,6 +165,11 @@ public class GameManager : Singleton<GameManager>
 			{
 				weapon.ResetWeaponParts();
 			}
+		}
+
+		if (bossCheat)
+		{
+			BossCheat();
 		}
 
 		_currentAbility = null;
@@ -162,11 +181,6 @@ public class GameManager : Singleton<GameManager>
 		}
 
 		_playerCanUseAbilities = true;
-
-		if(_lastLevel == _currentLevel)
-        {
-			_player.GetComponent<HealthComponent>().currentHealth = _currentPlayerHealth;
-        }
 
 		Debug.Log("neededEnemyKill ( " + _neededEnemyKill + " ) = enemySpawner.MaxAmount ( " + _enemySpawner._enemySpawnerData._maxEnemyCount + " )");
 	}
@@ -240,8 +254,6 @@ public class GameManager : Singleton<GameManager>
 		InputManager.Instance.CharacterInputActions.Disable();
 		_playerCanUseAbilities = false;
 
-		_lastLevel = _currentLevel;
-
 		List<WeaponPart> rewards = new List<WeaponPart>();
 		for (int i = 0; i < _numberOfRewards; i++)
 		{
@@ -303,5 +315,70 @@ public class GameManager : Singleton<GameManager>
         }
 
 		return spawnPos;
+	}
+
+	private void BossCheat()
+    {
+		Ammunition newAmm = amm1;
+		newAmm.levelObtained = _currentLevel - 1;
+		RewardManager.Instance.ScaleWeaponPartToLevel(newAmm);
+
+		Barrel newBarrel = barrel1;
+		newBarrel.levelObtained = _currentLevel - 1;
+		RewardManager.Instance.ScaleWeaponPartToLevel(newBarrel);
+
+		Grip newGrip = grip1;
+		newGrip.levelObtained = _currentLevel - 1;
+		RewardManager.Instance.ScaleWeaponPartToLevel(newGrip);
+
+		Magazine newMagazine = magazine1;
+		newMagazine.levelObtained = _currentLevel - 1;
+		RewardManager.Instance.ScaleWeaponPartToLevel(newMagazine);
+
+		Sight newSight = sight1;
+		newSight.levelObtained = _currentLevel - 1;
+		RewardManager.Instance.ScaleWeaponPartToLevel(newSight);
+
+		TriggerMechanism newTrigger = trigger1;
+		newTrigger.levelObtained = _currentLevel - 1;
+		RewardManager.Instance.ScaleWeaponPartToLevel(newTrigger);
+
+		_player.GetComponent<WeaponHolster>().weapons[0].ammunition = newAmm;
+		_player.GetComponent<WeaponHolster>().weapons[0].barrel = newBarrel;
+		_player.GetComponent<WeaponHolster>().weapons[0].grip = newGrip;
+		_player.GetComponent<WeaponHolster>().weapons[0].magazine = newMagazine;
+		_player.GetComponent<WeaponHolster>().weapons[0].sight = newSight;
+		_player.GetComponent<WeaponHolster>().weapons[0].triggerMechanism = newTrigger;
+
+		newAmm = amm2;
+		newAmm.levelObtained = _currentLevel - 1;
+		RewardManager.Instance.ScaleWeaponPartToLevel(newAmm);
+
+		newBarrel = barrel2;
+		newBarrel.levelObtained = _currentLevel - 1;
+		RewardManager.Instance.ScaleWeaponPartToLevel(newBarrel);
+
+		newGrip = grip2;
+		newGrip.levelObtained = _currentLevel - 1;
+		RewardManager.Instance.ScaleWeaponPartToLevel(newGrip);
+
+		newMagazine = magazine2;
+		newMagazine.levelObtained = _currentLevel - 1;
+		RewardManager.Instance.ScaleWeaponPartToLevel(newMagazine);
+
+		newSight = sight2;
+		newSight.levelObtained = _currentLevel - 1;
+		RewardManager.Instance.ScaleWeaponPartToLevel(newSight);
+
+		newTrigger = trigger2;
+		newTrigger.levelObtained = _currentLevel - 1;
+		RewardManager.Instance.ScaleWeaponPartToLevel(newTrigger);
+
+		_player.GetComponent<WeaponHolster>().weapons[1].ammunition = newAmm;
+		_player.GetComponent<WeaponHolster>().weapons[1].barrel = newBarrel;
+		_player.GetComponent<WeaponHolster>().weapons[1].grip = newGrip;
+		_player.GetComponent<WeaponHolster>().weapons[1].magazine = newMagazine;
+		_player.GetComponent<WeaponHolster>().weapons[1].sight = newSight;
+		_player.GetComponent<WeaponHolster>().weapons[1].triggerMechanism = newTrigger;
 	}
 }

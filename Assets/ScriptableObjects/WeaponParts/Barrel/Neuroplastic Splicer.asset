@@ -23,8 +23,8 @@ MonoBehaviour:
   critDamage: 0.75
   range: -6.5
   levelObtained: 1
-  cost: 100
+  cost: 125
   rarity: unique
   weight: 5
-  attackPattern: {fileID: 11400000, guid: 4ec7ba1c2a6a2ac498b53328a374375e, type: 2}
-  motionPattern: {fileID: 11400000, guid: b5c4140aca9687345b5e29cdf7f785a5, type: 2}
+  attackPattern: {fileID: 11400000, guid: cb578d9958690974390a1eba6fa458d1, type: 2}
+  motionPattern: {fileID: 11400000, guid: 9aa305ff9050739458fbff74de9180b1, type: 2}

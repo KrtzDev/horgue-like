@@ -161,7 +161,7 @@ public class RewardManager : Singleton<RewardManager>
 		return chosenPart;
 	}
 
-	private void ScaleWeaponPartToLevel(WeaponPart weaponPart)
+	public void ScaleWeaponPartToLevel(WeaponPart weaponPart)
 	{
 		if (weaponPart.baseDamage > 0)
 		{
