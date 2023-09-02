@@ -1,10 +1,18 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MainMenu : MonoBehaviour
 {
+	[SerializeField] private Button _controlButton;
+	[SerializeField] private Button _backButton;
+	[SerializeField] private GameObject _controlScheme;
+
+	private bool _controlSchemeActive;
+
     private void Start()
     {
 		Time.timeScale = 1;
+		_controlSchemeActive = false;
 	}
 
     public void StartGame()
@@ -27,6 +35,24 @@ public class MainMenu : MonoBehaviour
 	public void Quit()
 	{
 		Application.Quit();
+	}
+
+	public void Controls()
+    {
+		_controlSchemeActive = !_controlSchemeActive;
+
+		if(_controlSchemeActive)
+        {
+			_controlScheme.SetActive(true);
+			_backButton.gameObject.SetActive(true);
+            _backButton.Select();
+		}
+		else
+        {
+			_controlScheme.SetActive(false);
+			_controlButton.Select();
+			_backButton.gameObject.SetActive(false);
+		}
 	}
 
 }
