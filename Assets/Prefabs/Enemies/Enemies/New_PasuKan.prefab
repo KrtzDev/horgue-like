@@ -1137,7 +1137,7 @@ NavMeshAgent:
   m_Acceleration: 8
   avoidancePriority: 45
   m_AngularSpeed: 1000
-  m_StoppingDistance: 1.25
+  m_StoppingDistance: 0.5
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
@@ -1185,7 +1185,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   InitialState: 0
-  NavMeshAgent: {fileID: 0}
+  NavMeshAgent: {fileID: 2146313492047633022}
   ObstacleAgent: {fileID: 0}
   Animator: {fileID: 0}
   RigidBody: {fileID: 0}

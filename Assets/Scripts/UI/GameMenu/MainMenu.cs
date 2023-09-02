@@ -18,7 +18,7 @@ public class MainMenu : MonoBehaviour
 		GameManager.Instance._currentLevelArray = _levelIndex - 2;
 		SceneLoader.Instance.LoadScene(_levelIndex);
 	}
-
+	
 	public void EquipWeaponsForBoss()
     {
 		GameManager.Instance.bossCheat = true;
