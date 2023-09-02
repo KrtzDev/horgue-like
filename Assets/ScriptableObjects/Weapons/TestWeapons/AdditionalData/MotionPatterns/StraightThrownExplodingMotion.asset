@@ -14,14 +14,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shouldExplodeOnDeath: 1
   explosionRange: 3
-  explosionVfx: {fileID: 5758294487887650858, guid: f071090d32a11254fa67fed6411beeaa,
+  explosionVfx: {fileID: 3622428853669183405, guid: 813be39cad3c3324f80213783306de23,
     type: 3}
   _shouldSnapToGround: 0
   _hasGravity: 1
   _isHoming: 0
   _homingRadius: 0
   _homingStrength: 0
-  _isSineWave: 0
+  _manipulateTrajectory: 0
+  _manipulationDirection: {x: 0, y: 0, z: 0}
+  _manipulationAmount: 0
+  _followPlayer: 0
   _speed: 7
   _lifeTime: 5
   _enemyLayerMask:

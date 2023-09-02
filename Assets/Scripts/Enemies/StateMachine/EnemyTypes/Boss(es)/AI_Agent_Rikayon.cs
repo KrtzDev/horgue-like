@@ -103,6 +103,7 @@ public class AI_Agent_Rikayon : AI_Agent_Enemy
             NavMeshAgent.acceleration *= _bossStageMovementMultiplier.x;
 
             AudioManager.Instance.PlaySound("RikayonScream");
+            gameObject.GetComponent<Status>().RemoveAllEffects();
             gameObject.GetComponent <AI_Agent_Rikayon> ().enabled = false;
         } 
         else if (HealthComponent.currentHealth <= HealthComponent.maxHealth / 4.5 && _currentBossStage == 1)
@@ -122,6 +123,7 @@ public class AI_Agent_Rikayon : AI_Agent_Enemy
             NavMeshAgent.acceleration *= _bossStageMovementMultiplier.y;
 
             AudioManager.Instance.PlaySound("RikayonScream");
+            gameObject.GetComponent<Status>().RemoveAllEffects();
             gameObject.GetComponent<AI_Agent_Rikayon>().enabled = false;
         }
     }

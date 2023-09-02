@@ -5164,6 +5164,7 @@ GameObject:
   - component: {fileID: 3979922638086297123}
   - component: {fileID: 8023711566904951068}
   - component: {fileID: 6202795444591101346}
+  - component: {fileID: 6652940563935205012}
   m_Layer: 7
   m_Name: New_Rikayon
   m_TagString: Enemy
@@ -5377,3 +5378,16 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 4.5, y: 4.5, z: 4.5}
   m_Center: {x: 0, y: 2.25, z: 0}
+--- !u!114 &6652940563935205012
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9048833491393981023}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f0ed12ae8b7ccd4aa9e40759c23fc18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _statusEffects: []

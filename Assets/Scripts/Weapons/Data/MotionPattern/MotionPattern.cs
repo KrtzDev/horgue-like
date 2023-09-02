@@ -141,6 +141,10 @@ public class MotionPattern : ScriptableObject
 
 	public void LateUpdateMotion(Projectile projectile)
 	{
-		_lastPlayerPos = GameManager.Instance._player.transform.position;
+		if (!_followPlayer)
+			return;
+
+		if(GameManager.Instance._player != null)
+			_lastPlayerPos = GameManager.Instance._player.transform.position;
 	}
 }

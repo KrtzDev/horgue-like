@@ -66,6 +66,7 @@ public class GameManager : Singleton<GameManager>
 
 	[Header("Boss Cheat")]
 	public bool bossCheat;
+	[Header("Boss Items")]
 	public Ammunition amm1;
 	public Ammunition amm2;
 	public TriggerMechanism trigger1;
@@ -87,6 +88,7 @@ public class GameManager : Singleton<GameManager>
 		_currentLevel = 1;
 		_currentLevelArray = _currentLevel - 1;
 		_gameIsPaused = false;
+		bossCheat = false;
 	}
 
 	private void OnCompletedSceneLoad()
@@ -111,6 +113,7 @@ public class GameManager : Singleton<GameManager>
 			_currentLevel = 1;
 			_currentLevelArray = _currentLevel - 1;
 			_gameIsPaused = false;
+			bossCheat = false;
 
 			AudioManager.Instance.StopSound("Theme", 0f);
 			AudioManager.Instance.PlaySound("Theme");
@@ -157,7 +160,6 @@ public class GameManager : Singleton<GameManager>
 		_player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerCharacter>().gameObject;
 		MovePlayerToRandomPos(DetermineRandomSpawnLocation());
 
-
 		if (_currentLevel == 1)
 		{
 			WeaponHolster weaponHolster = FindObjectOfType<WeaponHolster>();
@@ -169,7 +171,16 @@ public class GameManager : Singleton<GameManager>
 
 		if (bossCheat)
 		{
-			BossCheat();
+			WeaponHolster weaponHolster = FindObjectOfType<WeaponHolster>();
+			BossCheat(weaponHolster);
+			weaponHolster.Initialize();
+			UIManager.Instance.GameUI.GetComponent<UIWeapon>().SetMaxCapacity(weaponHolster);
+		}
+		else
+        {
+			WeaponHolster weaponHolster = FindObjectOfType<WeaponHolster>();
+			weaponHolster.Initialize();
+			UIManager.Instance.GameUI.GetComponent<UIWeapon>().SetMaxCapacity(weaponHolster);
 		}
 
 		_currentAbility = null;
@@ -317,68 +328,69 @@ public class GameManager : Singleton<GameManager>
 		return spawnPos;
 	}
 
-	private void BossCheat()
+	private void BossCheat(WeaponHolster weaponHolster)
     {
-		Ammunition newAmm = amm1;
-		newAmm.levelObtained = _currentLevel - 1;
-		RewardManager.Instance.ScaleWeaponPartToLevel(newAmm);
+			Ammunition newAmm = amm1;
+			newAmm.levelObtained = _currentLevel - 1;
+			RewardManager.Instance.ScaleWeaponPartToLevel(newAmm);
 
-		Barrel newBarrel = barrel1;
-		newBarrel.levelObtained = _currentLevel - 1;
-		RewardManager.Instance.ScaleWeaponPartToLevel(newBarrel);
+			Barrel newBarrel = barrel1;
+			newBarrel.levelObtained = _currentLevel - 1;
+			RewardManager.Instance.ScaleWeaponPartToLevel(newBarrel);
 
-		Grip newGrip = grip1;
-		newGrip.levelObtained = _currentLevel - 1;
-		RewardManager.Instance.ScaleWeaponPartToLevel(newGrip);
+			Grip newGrip = grip1;
+			newGrip.levelObtained = _currentLevel - 1;
+			RewardManager.Instance.ScaleWeaponPartToLevel(newGrip);
 
-		Magazine newMagazine = magazine1;
-		newMagazine.levelObtained = _currentLevel - 1;
-		RewardManager.Instance.ScaleWeaponPartToLevel(newMagazine);
+			Magazine newMagazine = magazine1;
+			newMagazine.levelObtained = _currentLevel - 1;
+			RewardManager.Instance.ScaleWeaponPartToLevel(newMagazine);
 
-		Sight newSight = sight1;
-		newSight.levelObtained = _currentLevel - 1;
-		RewardManager.Instance.ScaleWeaponPartToLevel(newSight);
+			Sight newSight = sight1;
+			newSight.levelObtained = _currentLevel - 1;
+			RewardManager.Instance.ScaleWeaponPartToLevel(newSight);
 
-		TriggerMechanism newTrigger = trigger1;
-		newTrigger.levelObtained = _currentLevel - 1;
-		RewardManager.Instance.ScaleWeaponPartToLevel(newTrigger);
+			TriggerMechanism newTrigger = trigger1;
+			newTrigger.levelObtained = _currentLevel - 1;
+			RewardManager.Instance.ScaleWeaponPartToLevel(newTrigger);
 
-		_player.GetComponent<WeaponHolster>().weapons[0].ammunition = newAmm;
-		_player.GetComponent<WeaponHolster>().weapons[0].barrel = newBarrel;
-		_player.GetComponent<WeaponHolster>().weapons[0].grip = newGrip;
-		_player.GetComponent<WeaponHolster>().weapons[0].magazine = newMagazine;
-		_player.GetComponent<WeaponHolster>().weapons[0].sight = newSight;
-		_player.GetComponent<WeaponHolster>().weapons[0].triggerMechanism = newTrigger;
+			weaponHolster.weapons[0].ammunition = newAmm;
+			weaponHolster.weapons[0].barrel = newBarrel;
+			weaponHolster.weapons[0].grip = newGrip;
+			weaponHolster.weapons[0].magazine = newMagazine;
+			weaponHolster.weapons[0].sight = newSight;
+			weaponHolster.weapons[0].triggerMechanism = newTrigger;
 
-		newAmm = amm2;
-		newAmm.levelObtained = _currentLevel - 1;
-		RewardManager.Instance.ScaleWeaponPartToLevel(newAmm);
+			newAmm = amm2;
+			newAmm.levelObtained = _currentLevel - 1;
+			RewardManager.Instance.ScaleWeaponPartToLevel(newAmm);
 
-		newBarrel = barrel2;
-		newBarrel.levelObtained = _currentLevel - 1;
-		RewardManager.Instance.ScaleWeaponPartToLevel(newBarrel);
+			newBarrel = barrel2;
+			newBarrel.levelObtained = _currentLevel - 1;
+			RewardManager.Instance.ScaleWeaponPartToLevel(newBarrel);
 
-		newGrip = grip2;
-		newGrip.levelObtained = _currentLevel - 1;
-		RewardManager.Instance.ScaleWeaponPartToLevel(newGrip);
+			newGrip = grip2;
+			newGrip.levelObtained = _currentLevel - 1;
+			RewardManager.Instance.ScaleWeaponPartToLevel(newGrip);
 
-		newMagazine = magazine2;
-		newMagazine.levelObtained = _currentLevel - 1;
-		RewardManager.Instance.ScaleWeaponPartToLevel(newMagazine);
+			newMagazine = magazine2;
+			newMagazine.levelObtained = _currentLevel - 1;
+			RewardManager.Instance.ScaleWeaponPartToLevel(newMagazine);
 
-		newSight = sight2;
-		newSight.levelObtained = _currentLevel - 1;
-		RewardManager.Instance.ScaleWeaponPartToLevel(newSight);
+			newSight = sight2;
+			newSight.levelObtained = _currentLevel - 1;
+			RewardManager.Instance.ScaleWeaponPartToLevel(newSight);
 
-		newTrigger = trigger2;
-		newTrigger.levelObtained = _currentLevel - 1;
-		RewardManager.Instance.ScaleWeaponPartToLevel(newTrigger);
+			newTrigger = trigger2;
+			newTrigger.levelObtained = _currentLevel - 1;
+			RewardManager.Instance.ScaleWeaponPartToLevel(newTrigger);
 
-		_player.GetComponent<WeaponHolster>().weapons[1].ammunition = newAmm;
-		_player.GetComponent<WeaponHolster>().weapons[1].barrel = newBarrel;
-		_player.GetComponent<WeaponHolster>().weapons[1].grip = newGrip;
-		_player.GetComponent<WeaponHolster>().weapons[1].magazine = newMagazine;
-		_player.GetComponent<WeaponHolster>().weapons[1].sight = newSight;
-		_player.GetComponent<WeaponHolster>().weapons[1].triggerMechanism = newTrigger;
+			weaponHolster.weapons[1].ammunition = newAmm;
+			weaponHolster.weapons[1].barrel = newBarrel;
+			weaponHolster.weapons[1].grip = newGrip;
+			weaponHolster.weapons[1].magazine = newMagazine;
+			weaponHolster.weapons[1].sight = newSight;
+			weaponHolster.weapons[1].triggerMechanism = newTrigger;
+		
 	}
 }

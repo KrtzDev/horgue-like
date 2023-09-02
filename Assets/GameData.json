@@ -93,7 +93,7 @@
       "addDmgModifier": 0,
       "baseHealthMultiplier": 1,
       "healthModifier": 0.15,
-      "addHealthModifier": 0.15
+      "addHealthModifier": 0.125
     },
     {
       "name": "Drone",

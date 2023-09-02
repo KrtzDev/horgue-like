@@ -235,4 +235,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _healAmount: 20
-  _collectSound: {fileID: 0}

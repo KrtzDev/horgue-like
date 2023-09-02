@@ -20,8 +20,7 @@ public class UIWeapon : MonoBehaviour
     private void Start() 
     {
         _weaponHolster = FindObjectOfType<WeaponHolster>();
-        _maxCapacityWeapon1 = _weaponHolster.weapons[0]._capacity;
-        _maxCapacityWeapon2 = _weaponHolster.weapons[1]._capacity;
+        SetMaxCapacity(_weaponHolster);
 
         _weapon1Bullets.text = _weaponHolster.weapons[0]._capacity + " / " + _maxCapacityWeapon1;
         _weapon2Bullets.text = _weaponHolster.weapons[1]._capacity + " / " + _maxCapacityWeapon2;
@@ -41,6 +40,12 @@ public class UIWeapon : MonoBehaviour
         {
             StartCoroutine(ReloadWeapon2(_weaponHolster.weapons[1]._reloadTime));
         }
+    }
+
+    public void SetMaxCapacity(WeaponHolster weaponHolster)
+    {
+        _maxCapacityWeapon1 = weaponHolster.weapons[0]._capacity;
+        _maxCapacityWeapon2 = weaponHolster.weapons[1]._capacity;
     }
 
     private IEnumerator ReloadWeapon1(float duration)

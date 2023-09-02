@@ -19,11 +19,11 @@ public class Rikayon_ToxicSpit : MonoBehaviour
 
     private void Start()
     {
-        _rikayon = GameObject.FindObjectOfType<AI_Agent_Rikayon>();
+        _rikayon = FindObjectOfType<AI_Agent_Rikayon>();
         ps = GetComponent<ParticleSystem>();
         _player = GameObject.FindWithTag("Player");
         ps.trigger.AddCollider(_player.GetComponent<BoxCollider>());
-        _damagePerTick = (int)(_rikayon._enemyData._damagePerHit / 8);
+        _damagePerTick = _rikayon._enemyData._damagePerHit / 8;
 
         _damageTimer = 0;
         _lifeTimer = 0;

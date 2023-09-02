@@ -11,6 +11,11 @@ public class WeaponHolster : MonoBehaviour
 
 	private void Awake()
 	{
+		Initialize();
+	}
+
+	public void Initialize()
+    {
 		if (GameManager.Instance == null)
 			return;
 
