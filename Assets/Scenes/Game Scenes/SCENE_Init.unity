@@ -700,13 +700,13 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: LevelConfirmation
     clip: {fileID: 8300000, guid: 9ac7714ebf1279f468ae8e420dec91bc, type: 3}
-    volume: 0.175
+    volume: 0.12
     pitch: 0.7
     loop: 0
     source: {fileID: 0}
   - name: WaveConfirmation
     clip: {fileID: 8300000, guid: 9ac7714ebf1279f468ae8e420dec91bc, type: 3}
-    volume: 0.175
+    volume: 0.12
     pitch: 0.7
     loop: 0
     source: {fileID: 0}

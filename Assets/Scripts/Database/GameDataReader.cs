@@ -10,6 +10,7 @@ public class GameDataReader : MonoBehaviour
 {
     public TextAsset gameData;
     public Button startButton;
+    public Button bossButton;
     public bool _dataRetrieved = false;
     private bool _hasLoadedData = false;
 
@@ -316,6 +317,7 @@ public class GameDataReader : MonoBehaviour
             if (SceneManager.GetActiveScene().name == "SCENE_Main_Menu")
             {
                 startButton = GameObject.Find("StartButton").GetComponent<Button>();
+                bossButton = GameObject.Find("BossLevelButton").GetComponent<Button>();
                 StartCoroutine(EnableButton(0));
 
                 return;
@@ -328,6 +330,7 @@ public class GameDataReader : MonoBehaviour
             if (SceneManager.GetActiveScene().name == "SCENE_Main_Menu")
             {
                 startButton = GameObject.Find("StartButton").GetComponent<Button>();
+                bossButton = GameObject.Find("BossLevelButton").GetComponent<Button>();
                 StartCoroutine(EnableButton(0));
 
                 return;
@@ -364,8 +367,9 @@ public class GameDataReader : MonoBehaviour
         yield return new WaitForSecondsRealtime(time); // Wait until everything is set
 
         startButton.GetComponent<Button>().interactable = true;
-        startButton.GetComponentInChildren<TextMeshProUGUI>().text = "START";
-
+        startButton.GetComponentInChildren<TextMeshProUGUI>().text = "Start";
+        bossButton.GetComponent<Button>().interactable = true;
+        bossButton.GetComponentInChildren<TextMeshProUGUI>().text = "Boss level";
 
         Debug.Log("DONE BUTTON");
     }
