@@ -62,7 +62,7 @@ public class UpdateTuningData : MonoBehaviour
 		SendNextRequestGame();
 
 		// Debug.Log("Game Data set Active");
-		// GameDataReader.GetGameData();
+		GameDataReader.GetGameData();
 	}
 
 	private void SendNextRequestGame()
