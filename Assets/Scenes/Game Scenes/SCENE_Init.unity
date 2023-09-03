@@ -526,7 +526,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Wallet>k__BackingField:
     _money: 0
-  _weaponParts: []
+  _weaponParts:
+  - {fileID: 11400000, guid: 3f0db3dcd64af8444a71824f7ad32f49, type: 2}
+  - {fileID: 11400000, guid: f5a77338c7e17fc45a1deac92addcff1, type: 2}
+  - {fileID: 11400000, guid: ce027e4cefc323d4c89abb3dc8a8a051, type: 2}
+  - {fileID: 11400000, guid: b1c2d414a1341f348bcf9b8b6fe73077, type: 2}
+  - {fileID: 11400000, guid: 1dfe9618dd4cde245a63e8ed2ec4c446, type: 2}
+  - {fileID: 11400000, guid: d318b6dc77db78d459aba6e49955b5da, type: 2}
+  - {fileID: 11400000, guid: ea2bbfd102458f54285f13dfed5ab3f1, type: 2}
+  - {fileID: 11400000, guid: 995569c67801ac946a8fffd84e25cf5d, type: 2}
+  - {fileID: 11400000, guid: de19142b941cfbf4eae6e7920c0f2c2d, type: 2}
+  - {fileID: 11400000, guid: ad11d3ee6a4894549a3059743bef9ca4, type: 2}
+  - {fileID: 11400000, guid: 8b50e0b708d17e840937e5b45a4bbe04, type: 2}
+  - {fileID: 11400000, guid: fca930e11b1b96c44aa54114ff5a2047, type: 2}
+  - {fileID: 11400000, guid: 3afb8070bd3d82544af7e6e3b08a7d6e, type: 2}
+  - {fileID: 11400000, guid: 26b4676a981c3ee46b9baec0ccfaef15, type: 2}
 --- !u!1 &1354712360
 GameObject:
   m_ObjectHideFlags: 0

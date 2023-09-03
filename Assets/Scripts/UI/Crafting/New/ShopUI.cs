@@ -83,6 +83,8 @@ public class ShopUI : UIMenu
 		}
 		UpdateShopCostUIs();
 		SetUpNavigation();
+
+		StartCoroutine(SelectFirstItemAfterFrame());
 	}
 
 	private void OnItemBought(ToolTipUI tooltipUi)

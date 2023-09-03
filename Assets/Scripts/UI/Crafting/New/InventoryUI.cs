@@ -84,6 +84,8 @@ public class InventoryUI : UIMenu
 		weaponPart.DestroyToolTip();
 		Destroy(weaponPart.gameObject);
 
+
+
 		StartCoroutine(FillInventoryUI());
 	}
 
@@ -170,6 +172,7 @@ public class InventoryUI : UIMenu
 			if (inventorySlot.HasWeaponPart())
 			{
 				inventorySlot.Select();
+				OnInventorySlotSelected(inventorySlot);
 				_currentSelection = inventorySlot.GetWeaponPart();
 			}
 			else

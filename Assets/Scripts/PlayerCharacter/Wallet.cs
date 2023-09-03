@@ -11,7 +11,7 @@ public class Wallet
 
 	public void Reset()
 	{
-		_money = 0;
+		_money = 1000;
 	}
 
 	public int GetMoneyAmount()
