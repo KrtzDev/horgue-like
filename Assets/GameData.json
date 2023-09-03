@@ -78,12 +78,12 @@
     },
     {
       "name": "Rikayon",
-      "maxHealth": 300,
-      "damagePerHit": 5,
+      "maxHealth": 675,
+      "damagePerHit": 4.5,
       "attackSpeed": 1,
       "givenXP": 0,
-      "maxMoveSpeed": 13.5,
-      "acceleration": 10.5,
+      "maxMoveSpeed": 13,
+      "acceleration": 10,
       "armor": 100,
       "elementalResistance": 100,
       "technicalResistance": 100,
@@ -92,8 +92,8 @@
       "dmgModifier": 0,
       "addDmgModifier": 0,
       "baseHealthMultiplier": 1,
-      "healthModifier": 0.15,
-      "addHealthModifier": 0.125
+      "healthModifier": 0,
+      "addHealthModifier": 0
     },
     {
       "name": "Drone",
@@ -137,7 +137,7 @@
   "Level": [
     {
       "name": "Level1",
-      "TimeToSurvive": 45,
+      "TimeToSurvive": 1,
       "spawnTick": 4.5,
       "spawnsPerTick": 7,
       "minEnemyCount": 12,
@@ -156,7 +156,7 @@
     },
     {
       "name": "Level1.5",
-      "TimeToSurvive": 45,
+      "TimeToSurvive": 1,
       "spawnTick": 4.5,
       "spawnsPerTick": 7,
       "minEnemyCount": 12,
@@ -175,7 +175,7 @@
     },
     {
       "name": "Level2",
-      "TimeToSurvive": 55,
+      "TimeToSurvive": 50,
       "spawnTick": 4.25,
       "spawnsPerTick": 9,
       "minEnemyCount": 16,
@@ -213,7 +213,7 @@
     },
     {
       "name": "Level3",
-      "TimeToSurvive": 65,
+      "TimeToSurvive": 60,
       "spawnTick": 4,
       "spawnsPerTick": 11,
       "minEnemyCount": 22,
@@ -251,7 +251,7 @@
     },
     {
       "name": "Level4",
-      "TimeToSurvive": 75,
+      "TimeToSurvive": 70,
       "spawnTick": 3.5,
       "spawnsPerTick": 13,
       "minEnemyCount": 22,
@@ -271,10 +271,10 @@
     {
       "name": "LevelBoss",
       "TimeToSurvive": 0,
-      "spawnTick": 5,
+      "spawnTick": 6,
       "spawnsPerTick": 10,
       "minEnemyCount": 10,
-      "maxEnemyCount": 20,
+      "maxEnemyCount": 25,
       "spawnAnimDelay": 1,
       "minSpawnDelay": 0,
       "maxSpawnDelay": 1,
@@ -326,14 +326,14 @@
       "criticalHitDamage": 1.5,
       "projectileWidth": 0.1,
       "range": 13,
-      "cost": 42,
+      "cost": 40,
       "maxAttackSpeed": 7.5,
       "maxCooldown": 10,
       "maxCriticalHitChance": 100,
       "maxProjectileWidth": 0.75,
       "minAttackSpeed": 0.25,
       "minBaseDamage": 1,
-      "minCooldown": 0.1,
+      "minCooldown": 0.25,
       "minCriticalHitChance": 0,
       "minCriticalHitDamage": 1,
       "minProjectileWidth": 0.025,
@@ -351,7 +351,7 @@
       "criticalHitDamage": 1.5,
       "projectileWidth": 0.1,
       "range": 13,
-      "cost": 42
+      "cost": 40
     },
     {
       "name": "Ammunition AK",
@@ -556,7 +556,7 @@
       "criticalHitDamage": 1.5,
       "projectileWidth": 0.1,
       "range": 13,
-      "cost": 42
+      "cost": 40
     },
     {
       "name": "Barrel AK",
@@ -825,7 +825,7 @@
       "criticalHitDamage": 1.5,
       "projectileWidth": 0.1,
       "range": 13,
-      "cost": 42
+      "cost": 40
     },
     {
       "name": "30s Double Grip",
@@ -1060,7 +1060,7 @@
       "criticalHitDamage": 1.5,
       "projectileWidth": 0.1,
       "range": 13,
-      "cost": 42
+      "cost": 40
     },
     {
       "name": "Billard Ball Drum",
@@ -1284,7 +1284,7 @@
       "criticalHitDamage": 1.5,
       "projectileWidth": 0.1,
       "range": 13,
-      "cost": 42
+      "cost": 40
     },
     {
       "name": "Basic Iron Sights",
@@ -1478,7 +1478,7 @@
       "criticalHitDamage": 1.5,
       "projectileWidth": 0.1,
       "range": 13,
-      "cost": 42
+      "cost": 40
     },
     {
       "name": "Adjustable Break Trigger",

@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class ShopUI : UIMenu
 {
@@ -42,12 +43,16 @@ public class ShopUI : UIMenu
 	private List<ShopCostUI> _shopCostUIs;
 
 	public List<ToolTipUI> shopItems;
+	[SerializeField] private TextMeshProUGUI _shopRefreshCost;
 
 	private void Start()
 	{
 		shopItems = new List<ToolTipUI>();
 		RefreshShop(3);
 
+		int rerollCost = (int)(25 * (1 + GameManager.Instance.GameManagerValues[0]._weaponPartMultiplierPerLevel * 5 * (GameManager.Instance._currentLevelArray - 1)));
+		_rerollCost = rerollCost;
+		_shopRefreshCost.text = "$: " + _rerollCost;
 		_newShopButton.OnButtonExecute += () => TryRefreshShop(3);
 	}
 

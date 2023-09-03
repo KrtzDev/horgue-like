@@ -89,7 +89,7 @@ public class AI_Agent_Rikayon : AI_Agent_Enemy
     public override void CheckForBossStage()
     {
 
-        if (HealthComponent.currentHealth <= HealthComponent.maxHealth / 2.5 && _currentBossStage == 0)
+        if (HealthComponent.currentHealth <= HealthComponent.maxHealth / 2.25f && _currentBossStage == 0)
         {
             transform.LookAt(PlayerTransform);
 
@@ -107,7 +107,7 @@ public class AI_Agent_Rikayon : AI_Agent_Enemy
             gameObject.GetComponent<Status>().RemoveAllEffects();
             gameObject.GetComponent <AI_Agent_Rikayon> ().enabled = false;
         } 
-        else if (HealthComponent.currentHealth <= HealthComponent.maxHealth / 4.5 && _currentBossStage == 1)
+        else if (HealthComponent.currentHealth <= HealthComponent.maxHealth / 4.75f && _currentBossStage == 1)
         {
             transform.LookAt(PlayerTransform);
 
