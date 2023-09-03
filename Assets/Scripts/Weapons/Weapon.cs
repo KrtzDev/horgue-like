@@ -117,11 +117,11 @@ public class Weapon : ScriptableObject
 
 	public void UpdateAimDirection()
 	{
-		if(Time.timeScale != 0)
-        {
+		if (Time.timeScale != 0)
+		{
 			Vector2 input = InputManager.Instance.CharacterInputActions.Character.Aim.ReadValue<Vector2>();
 			AimWeapon(input);
-        }
+		}
 	}
 
 	private void AimWeapon(Vector2 input)
@@ -155,20 +155,20 @@ public class Weapon : ScriptableObject
 			critChance = CalculateCritChance(weapon, GameManager.Instance.damageCalcKind),
 			critDamage = CalculateCritDamage(weapon, GameManager.Instance.damageCalcKind),
 			range = CalculatefinalRange(weapon, GameManager.Instance.damageCalcKind),
-			dps = CalculateDPS(CalculateDamage(weapon, GameManager.Instance.damageCalcKind), 
-				CalculateAttackSpeed(weapon, GameManager.Instance.damageCalcKind), 
+			dps = CalculateDPS(CalculateDamage(weapon, GameManager.Instance.damageCalcKind),
+				CalculateAttackSpeed(weapon, GameManager.Instance.damageCalcKind),
 				CalculateCooldown(weapon, GameManager.Instance.damageCalcKind),
 				CalculateCritChance(weapon, GameManager.Instance.damageCalcKind),
 				CalculateCritDamage(weapon, GameManager.Instance.damageCalcKind),
 				weapon.magazine.capacity),
 
 			capacity = weapon.magazine.capacity,
-            attackPattern = weapon.barrel.attackPattern,
-            motionPattern = weapon.barrel.motionPattern,
-            statusEffect = weapon.ammunition.statusEffect
-        };
+			attackPattern = weapon.barrel.attackPattern,
+			motionPattern = weapon.barrel.motionPattern,
+			statusEffect = weapon.ammunition.statusEffect
+		};
 
-        _weaponStats = weaponStats;
+		_weaponStats = weaponStats;
 
 		return weaponStats;
 	}
@@ -217,7 +217,7 @@ public class Weapon : ScriptableObject
 	}
 
 	private float CalculateDPS(float damage, float attackSpeed, float cooldown, float critChance, float critDamage, float capacity)
-    {
+	{
 		float critDamagePerShot = damage * (critChance / 100) * critDamage;
 		float normalDamagePerShot = damage * (1 - critChance / 100);
 		float fullDamagePerShot = critDamagePerShot + normalDamagePerShot;
@@ -227,7 +227,7 @@ public class Weapon : ScriptableObject
 		float damagePerSecond = fullDamagePerMagazine / cycleTime;
 
 		return damagePerSecond;
-    }
+	}
 
 	private float CalculateDamage(Weapon weapon, DamageCalcKind damageCalcKind)
 	{
@@ -264,14 +264,14 @@ public class Weapon : ScriptableObject
 			partCount++;
 		}
 
-		if(partCount <= 0) // base
+		if (partCount <= 0) // base
 			return _currentWeaponSkeleton.skeletonBaseStats.baseDamage;
 
 		float partsDamage = damageCalcKind == DamageCalcKind.Mean ? totalDamage / partCount : totalDamage;
 		// float damage = _currentWeaponSkeleton.skeletonBaseStats.baseDamage + (_currentWeaponSkeleton.skeletonBaseStats.baseDamage * partsDamage * .1f);
 		float damage = _currentWeaponSkeleton.skeletonBaseStats.baseDamage + partsDamage;
 
-		if(damage < _currentWeaponSkeleton.skeletonBaseStats.minBaseDamage) // min
+		if (damage < _currentWeaponSkeleton.skeletonBaseStats.minBaseDamage) // min
 			return _currentWeaponSkeleton.skeletonBaseStats.minBaseDamage;
 
 		// no max
@@ -315,16 +315,16 @@ public class Weapon : ScriptableObject
 			partCount++;
 		}
 
-		if(partCount <= 0) // base
+		if (partCount <= 0) // base
 			return _currentWeaponSkeleton.skeletonBaseStats.attackSpeed;
 
 		float partsAttackSpeed = damageCalcKind == DamageCalcKind.Mean ? totalAttackSpeed / partCount : totalAttackSpeed;
 		float attackSpeed = _currentWeaponSkeleton.skeletonBaseStats.attackSpeed + partsAttackSpeed;
 
-		if(attackSpeed < _currentWeaponSkeleton.skeletonBaseStats.minAttackSpeed) // min
+		if (attackSpeed < _currentWeaponSkeleton.skeletonBaseStats.minAttackSpeed) // min
 			return _currentWeaponSkeleton.skeletonBaseStats.minAttackSpeed;
 
-		if(attackSpeed > _currentWeaponSkeleton.skeletonBaseStats.maxAttackSpeed) // max
+		if (attackSpeed > _currentWeaponSkeleton.skeletonBaseStats.maxAttackSpeed) // max
 			return _currentWeaponSkeleton.skeletonBaseStats.maxAttackSpeed;
 
 		return attackSpeed;
@@ -366,16 +366,16 @@ public class Weapon : ScriptableObject
 			partCount++;
 		}
 
-		if(partCount <= 0) // base
+		if (partCount <= 0) // base
 			return _currentWeaponSkeleton.skeletonBaseStats.cooldown;
 
 		float partsCooldown = damageCalcKind == DamageCalcKind.Mean ? totalCooldown / partCount : totalCooldown;
 		float cooldown = _currentWeaponSkeleton.skeletonBaseStats.cooldown + partsCooldown;
 
-		if(cooldown < _currentWeaponSkeleton.skeletonBaseStats.minCooldown) // min
+		if (cooldown < _currentWeaponSkeleton.skeletonBaseStats.minCooldown) // min
 			return _currentWeaponSkeleton.skeletonBaseStats.minCooldown;
 
-		if(cooldown > _currentWeaponSkeleton.skeletonBaseStats.maxCooldown) // max
+		if (cooldown > _currentWeaponSkeleton.skeletonBaseStats.maxCooldown) // max
 			return _currentWeaponSkeleton.skeletonBaseStats.maxCooldown;
 
 		return cooldown;
@@ -417,17 +417,17 @@ public class Weapon : ScriptableObject
 			partCount++;
 		}
 
-		if(partCount <= 0) // base
+		if (partCount <= 0) // base
 			return _currentWeaponSkeleton.skeletonBaseStats.projectileSize;
 
 		float partsProjectileSize = damageCalcKind == DamageCalcKind.Mean ? totalProjectileSize / partCount : totalProjectileSize;
 		float projectileSize = _currentWeaponSkeleton.skeletonBaseStats.projectileSize + partsProjectileSize;
 
-		if(projectileSize < _currentWeaponSkeleton.skeletonBaseStats.minProjectileSize) // min
+		if (projectileSize < _currentWeaponSkeleton.skeletonBaseStats.minProjectileSize) // min
 			return _currentWeaponSkeleton.skeletonBaseStats.minProjectileSize;
 
-		if(projectileSize > _currentWeaponSkeleton.skeletonBaseStats.maxProjectileSize) // max
-			return _currentWeaponSkeleton.skeletonBaseStats.maxProjectileSize;		
+		if (projectileSize > _currentWeaponSkeleton.skeletonBaseStats.maxProjectileSize) // max
+			return _currentWeaponSkeleton.skeletonBaseStats.maxProjectileSize;
 
 		return projectileSize;
 	}
@@ -468,16 +468,16 @@ public class Weapon : ScriptableObject
 			partCount++;
 		}
 
-		if(partCount <= 0) // base
+		if (partCount <= 0) // base
 			return _currentWeaponSkeleton.skeletonBaseStats.critChance;
 
 		float partsCritChance = damageCalcKind == DamageCalcKind.Mean ? totalCritChance / partCount : totalCritChance;
 		float critChance = _currentWeaponSkeleton.skeletonBaseStats.critChance + partsCritChance;
 
-		if(critChance  < _currentWeaponSkeleton.skeletonBaseStats.minCritChance) // min
+		if (critChance  < _currentWeaponSkeleton.skeletonBaseStats.minCritChance) // min
 			return _currentWeaponSkeleton.skeletonBaseStats.minCritChance;
 
-		if(critChance  > _currentWeaponSkeleton.skeletonBaseStats.maxCritChance) // max
+		if (critChance  > _currentWeaponSkeleton.skeletonBaseStats.maxCritChance) // max
 			return _currentWeaponSkeleton.skeletonBaseStats.maxCritChance;
 
 		return critChance;
@@ -519,13 +519,13 @@ public class Weapon : ScriptableObject
 			partCount++;
 		}
 
-		if(partCount <= 0) // base
+		if (partCount <= 0) // base
 			return _currentWeaponSkeleton.skeletonBaseStats.critDamage;
 
 		float partsCritDamage = damageCalcKind == DamageCalcKind.Mean ? totalCritDamage / partCount : totalCritDamage;
 		float critDamage = _currentWeaponSkeleton.skeletonBaseStats.critDamage + partsCritDamage;
 
-		if(critDamage < _currentWeaponSkeleton.skeletonBaseStats.minCritDamage) // min
+		if (critDamage < _currentWeaponSkeleton.skeletonBaseStats.minCritDamage) // min
 			return _currentWeaponSkeleton.skeletonBaseStats.minCritDamage;
 
 		// no max
@@ -569,13 +569,13 @@ public class Weapon : ScriptableObject
 			partCount++;
 		}
 
-		if(partCount <= 0) // base
+		if (partCount <= 0) // base
 			return _currentWeaponSkeleton.skeletonBaseStats.range;
 
 		float partsRange = damageCalcKind == DamageCalcKind.Mean ? totalRange / partCount : totalRange;
 		float range = _currentWeaponSkeleton.skeletonBaseStats.range + partsRange;
 
-		if(range < _currentWeaponSkeleton.skeletonBaseStats.minRange) // min
+		if (range < _currentWeaponSkeleton.skeletonBaseStats.minRange) // min
 			return _currentWeaponSkeleton.skeletonBaseStats.minRange;
 
 		// no max
@@ -637,9 +637,8 @@ public class Weapon : ScriptableObject
 
 				projectile.OnHit += CleanUpProjectile;
 				projectile.OnLifeTimeEnd += CleanUpProjectile;
-
-				_capacity--;
 			}
+			_capacity--;
 
 			_shotDelay = 1 / weaponStats.attackspeed;
 
@@ -670,11 +669,11 @@ public class Weapon : ScriptableObject
 			float distanceToEnemy;
 
 			if (!enemy.GetComponent<AI_Agent_Enemy>()._useHeightControl)
-            {
+			{
 				distanceToEnemy = Vector3.Distance(_weaponTransform.position, enemy.transform.position);
-            }
+			}
 			else
-            {
+			{
 				distanceToEnemy = Vector3.Distance(_weaponTransform.position, enemy.transform.position + enemy.GetComponent<AI_Agent_Enemy>()._heightGO.transform.localPosition);
 			}
 
@@ -733,7 +732,7 @@ public class Weapon : ScriptableObject
 
 		FindObjectOfType<ReloadIndicator>().UseReloadIndicator(weaponSprite, _reloadTime);
 
-		if(!AudioManager.Instance.IsSoundPlaying("WeaponReloadEmpty"))
+		if (!AudioManager.Instance.IsSoundPlaying("WeaponReloadEmpty"))
 			AudioManager.Instance.PlaySound("WeaponReloadEmpty");
 
 		await Task.Delay((int)(_reloadTime * 1000));

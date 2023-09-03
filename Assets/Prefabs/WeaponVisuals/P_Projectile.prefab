@@ -142,7 +142,7 @@ MonoBehaviour:
   spawnTransform: {fileID: 0}
   _hitLayerMask:
     serializedVersion: 2
-    m_Bits: 641
+    m_Bits: 640
   _enemyLayerMask:
     serializedVersion: 2
     m_Bits: 128
