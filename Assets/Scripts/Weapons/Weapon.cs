@@ -96,7 +96,7 @@ public class Weapon : ScriptableObject
 		_capacity = CalculateWeaponStats(this).capacity;
 
 		if (SceneManager.GetActiveScene().name != "SCENE_Weapon_Crafting")
-			_projectilePool = ObjectPool<Projectile>.CreatePool(_projectile, 100, null);
+			_projectilePool = ObjectPool<Projectile>.CreatePool(_projectile, 1000, null);
 
 		if (barrel.motionPattern.explosionVfx != null)
 			_attackPatternExplosiveVFXPool = ObjectPool<HorgueVFX>.CreatePool(barrel.motionPattern.explosionVfx, 25, null);

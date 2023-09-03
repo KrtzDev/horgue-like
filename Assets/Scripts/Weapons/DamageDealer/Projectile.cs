@@ -96,7 +96,7 @@ public class Projectile : DamageDealer
 			}
 			else
 			{
-				OnHit.Invoke(this);
+				OnHit?.Invoke(this);
 			}
 			return true;
 		}
