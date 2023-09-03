@@ -117,8 +117,11 @@ public class Weapon : ScriptableObject
 
 	public void UpdateAimDirection()
 	{
-		Vector2 input = InputManager.Instance.CharacterInputActions.Character.Aim.ReadValue<Vector2>();
-		AimWeapon(input);
+		if(Time.timeScale != 0)
+        {
+			Vector2 input = InputManager.Instance.CharacterInputActions.Character.Aim.ReadValue<Vector2>();
+			AimWeapon(input);
+        }
 	}
 
 	private void AimWeapon(Vector2 input)

@@ -54,15 +54,18 @@ public class PlayerJump : MonoBehaviour
 
     private void Jump(InputAction.CallbackContext ctx)
     {
-        if (ctx.performed && !_isJumping && IsGrounded && !_jumpAttempt && Time.deltaTime != 0)
+        if(Time.timeScale != 0)
         {
-            JumpAbility();
-        }
-        else if (ctx.performed && _isJumping && !IsGrounded && !_jumpAttempt)
-        {
-            if(Physics.Raycast(this.transform.position, Vector3.down, _bufferJumpCheckValueY, _character.WalkLayer))
+            if (ctx.performed && !_isJumping && IsGrounded && !_jumpAttempt)
             {
-                _jumpAttempt = true;
+                JumpAbility();
+            }
+            else if (ctx.performed && _isJumping && !IsGrounded && !_jumpAttempt)
+            {
+                if (Physics.Raycast(this.transform.position, Vector3.down, _bufferJumpCheckValueY, _character.WalkLayer))
+                {
+                    _jumpAttempt = true;
+                }
             }
         }
     }

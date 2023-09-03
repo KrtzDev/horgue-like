@@ -76,7 +76,6 @@ public class WeaponHolster : MonoBehaviour
 		{
 			GameManager.Instance.weaponControll = WeaponControllKind.AllAuto;
 		}
-		Debug.Log(GameManager.Instance.weaponControll);
 	}
 
 	private void OnDisable()
@@ -99,7 +98,7 @@ public class WeaponHolster : MonoBehaviour
 
 	private void Update()
 	{
-		if (GameManager.Instance == null)
+		if (GameManager.Instance == null || Time.timeScale == 0)
 			return;
 
 		if (GameManager.Instance.weaponControll == WeaponControllKind.AllManual || GameManager.Instance.weaponControll == WeaponControllKind.AutoShootManualAim)
