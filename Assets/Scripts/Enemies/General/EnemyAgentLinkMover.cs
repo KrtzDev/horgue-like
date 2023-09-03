@@ -22,7 +22,7 @@ public class EnemyAgentLinkMover : MonoBehaviour
         agent.autoTraverseOffMeshLink = false;
         while (true)
         {
-            if (agent.isOnOffMeshLink)
+            if (agent.isOnOffMeshLink && !GetComponent<HealthComponent>().isDead)
             {
                 if (m_Method == OffMeshLinkMoveMethod.NormalSpeed)
                     yield return StartCoroutine(NormalSpeed(agent));

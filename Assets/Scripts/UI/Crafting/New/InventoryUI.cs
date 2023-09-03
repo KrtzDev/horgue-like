@@ -77,12 +77,17 @@ public class InventoryUI : UIMenu
 	{
 		GameManager.Instance.inventory.RemoveFromInventory(weaponPart.weaponPart);
 
+		WeaponPart oldPart =_weaponUI.weapon.GetWeaponPartOfType(weaponPart.weaponPart);
+		AddToInventory(oldPart);
+
 		_weaponUI.SetNewWeaponPart(weaponPart);
 
 		AudioManager.Instance.PlaySound("WeaponPartEquip");
 
 		weaponPart.DestroyToolTip();
 		Destroy(weaponPart.gameObject);
+
+
 
 		StartCoroutine(FillInventoryUI());
 	}
@@ -170,6 +175,7 @@ public class InventoryUI : UIMenu
 			if (inventorySlot.HasWeaponPart())
 			{
 				inventorySlot.Select();
+				OnInventorySlotSelected(inventorySlot);
 				_currentSelection = inventorySlot.GetWeaponPart();
 			}
 			else

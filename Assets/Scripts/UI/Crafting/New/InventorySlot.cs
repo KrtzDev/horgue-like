@@ -30,6 +30,8 @@ public class InventorySlot : Selectable
 	{
 		_weaponPart = weaponPart;
 
+		sellButton.OnButtonExecute -= Sell;
+		equipButton.OnButtonExecute -= Equip;
 		sellButton.OnButtonExecute += Sell;
 		equipButton.OnButtonExecute += Equip;
 	}
