@@ -74,7 +74,8 @@ public class ShopUI : UIMenu
 		for (int i = 0; i < numberOfItems; i++)
 		{
 			ToolTipUI tooltipUI = Instantiate(_toolTipUI_prefab, _shopItemContainer);
-			WeaponPart weaponPart = RewardManager.Instance.GetReward();
+			WeaponPart weaponPart = CheckForRedraw();
+
 			RewardManager.Instance.ClearRewards();
 
 			tooltipUI.OnBuy += OnItemBought;
@@ -90,6 +91,19 @@ public class ShopUI : UIMenu
 		SetUpNavigation();
 
 		StartCoroutine(SelectFirstItemAfterFrame());
+	}
+
+	private WeaponPart CheckForRedraw()
+	{
+		WeaponPart weaponPart = RewardManager.Instance.GetReward();
+
+		if (shopItems.Find(e => e.weaponPart == weaponPart))
+		{
+			Debug.Log("Redraw");
+			return CheckForRedraw();
+		}
+		else
+			return weaponPart;
 	}
 
 	private void OnItemBought(ToolTipUI tooltipUi)
