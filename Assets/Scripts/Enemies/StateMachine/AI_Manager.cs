@@ -18,9 +18,11 @@ public class AI_Manager : MonoBehaviour
         }
     }
 
-    public List<AI_Agent> PasuKan = new List<AI_Agent>();
-    public List<AI_Agent> RangedRobot = new List<AI_Agent>();
-    public List<AI_Agent> Sniper = new List<AI_Agent>();
+    public List<AI_Agent_Enemy> PasuKan = new List<AI_Agent_Enemy>();
+    public List<AI_Agent_Enemy> RangedRobot = new List<AI_Agent_Enemy>();
+    public List<AI_Agent_Enemy> Sniper = new List<AI_Agent_Enemy>();
+    public List<AI_Agent_Enemy> Drone = new List<AI_Agent_Enemy>();
+    public List<AI_Agent_Enemy> Orc = new List<AI_Agent_Enemy>();
 
     private void Awake()
     {
@@ -33,14 +35,14 @@ public class AI_Manager : MonoBehaviour
         Destroy(gameObject);
     }
 
-    public void MakeAgentCircleTarget(List<AI_Agent> EnemyType, Transform target, float radiusAroundTarget)
+    public void MakeAgentCircleTarget(List<AI_Agent_Enemy> EnemyType, Transform target, float radiusAroundTarget)
     {
         for (int i = 0; i < EnemyType.Count; i++)
         {
             float xPos = target.position.x + radiusAroundTarget * Mathf.Cos(2 * Mathf.PI * i / PasuKan.Count);
             float yPos = target.position.y;
             float zPos = target.position.z + radiusAroundTarget * Mathf.Sin(2 * Mathf.PI * i / PasuKan.Count);
-            EnemyType[i]._navMeshAgent.destination = new Vector3(xPos, yPos, zPos);
+            EnemyType[i].NavMeshAgent.destination = new Vector3(xPos, yPos, zPos);
         }
     }
 
@@ -53,7 +55,7 @@ public class AI_Manager : MonoBehaviour
         while (time < maxTime)
         {
             agent.transform.rotation = Quaternion.Slerp(agent.transform.rotation, lookRotation, time);
-            time += Time.deltaTime * agent._lookRotationSpeed;
+            time += Time.deltaTime * agent.LookRotationSpeed;
 
             yield return null;
         }

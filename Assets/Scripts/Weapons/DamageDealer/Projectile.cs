@@ -11,11 +11,19 @@ public class Projectile : DamageDealer
 	public float finalCooldown;
 	public float finalProjectileSize;
 	public float finalCritChance;
+	public float finalCritDamage;
 	public float finalRange;
 
 	public AttackPattern attackPattern;
 	public MotionPattern motionPattern;
 	public StatusEffectSO statusEffect;
+	public ObjectPool<HorgueVFX> statusEffectInitialDamageVFXPool;
+	public ObjectPool<HorgueVFX> statusEffectDamageOverTimeVFXPool;
+	public ObjectPool<HorgueVFX> statusEffectSlowVFXPool;
+	public ObjectPool<HorgueVFX> statusEffectKnockbackVFXPool;
+	public ObjectPool<HorgueVFX> statusEffectPropagationVFXPool;
+
+
 	public Transform spawnTransform;
 
 	[SerializeField]
@@ -23,7 +31,13 @@ public class Projectile : DamageDealer
 	[SerializeField]
 	private LayerMask _enemyLayerMask;
 
-	public AI_Agent TargetedEnemy { get; set; }
+	[Space]
+    [SerializeField]
+    private LayerMask _objLayerMask1;
+    [SerializeField]
+    private LayerMask _objLayerMask2;
+
+    public AI_Agent_Enemy TargetedEnemy { get; set; }
 	public int PierceAmount { get; set; }
 	public float LifeTime { get; set; }
 
@@ -59,23 +73,36 @@ public class Projectile : DamageDealer
 	{
 		if (collider.TryGetComponent(out HealthComponent health))
 		{
-			if (finalCritChance > UnityEngine.Random.Range(0, 100))
-				finalBaseDamage *= 2;
+			if (finalCritChance > UnityEngine.Random.Range(0, 100))             // Can crit?
+			{
+				finalBaseDamage *= finalCritDamage; // Apply Crit Damage
+				AudioManager.Instance.PlaySound("HitIndicatorCrit");
+			}
+			else
+            {
+				AudioManager.Instance.PlaySound("HitIndicator");
+			}
 
-			health.TakeDamage((int)finalBaseDamage);
+			health.TakeDamage((int)finalBaseDamage, false);
+			StatsTracker.Instance.damageDealtLevel += finalBaseDamage;
 
 			if (statusEffect != null)
 			{
-				if (health.TryGetComponent(out AI_Agent enemy))
+				if (health.TryGetComponent(out AI_Agent_Enemy enemy))
 				{
 					StatusEffect thisStatusEffect = new StatusEffect(statusEffect);
+					thisStatusEffect.initialDamageVFXPool = statusEffectInitialDamageVFXPool;
+					thisStatusEffect.damageOverTimeVFXPool = statusEffectDamageOverTimeVFXPool;
+					thisStatusEffect.slowVFXPool = statusEffectSlowVFXPool;
+					thisStatusEffect.knockbackVFXPool = statusEffectKnockbackVFXPool;
+					thisStatusEffect.propagationVFXPool = statusEffectPropagationVFXPool;
 					thisStatusEffect.ApplyStatusEffect(enemy, this);
 					thisStatusEffect.OnHitEnemy.Invoke(this);
 				}
 			}
 			else
 			{
-				OnHit.Invoke(this);
+				OnHit?.Invoke(this);
 			}
 			return true;
 		}
@@ -91,5 +118,15 @@ public class Projectile : DamageDealer
 				OnHit?.Invoke(this);
 			}
 		}
+
+		if ((_objLayerMask1.value & (1 << other.gameObject.layer)) > 9)
+		{
+            other.GetComponent<ExplosiveObject>().BulletHit();
+        }
+
+		if ((_objLayerMask2.value & (1 << other.gameObject.layer)) > 9)
+		{
+            other.GetComponent<DestroyableObject>().BulletHit();
+        }
 	}
 }

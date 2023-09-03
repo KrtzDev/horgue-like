@@ -8,6 +8,12 @@ public class StatusEffect
 	public Action<StatusEffect> OnStatusEffectEnded;
 	public Action<Projectile> OnHitEnemy;
 
+	[HideInInspector] public ObjectPool<HorgueVFX> initialDamageVFXPool;
+	[HideInInspector] public ObjectPool<HorgueVFX> damageOverTimeVFXPool;
+	[HideInInspector] public ObjectPool<HorgueVFX> slowVFXPool;
+	[HideInInspector] public ObjectPool<HorgueVFX> knockbackVFXPool;
+	[HideInInspector] public ObjectPool<HorgueVFX> propagationVFXPool;
+
 	public StatusEffectSO StatusEffectSO { get; private set; }
 
 	[Header("General")]
@@ -18,25 +24,21 @@ public class StatusEffect
 	[Header("Effects")]
 	[SerializeField] private bool _hasInitialExtraDamage;
 	[SerializeField] private float _initialDamage;
-	[SerializeField] private HorgueVFX _initialDamageVFX;
 
 	[Space]
 	[SerializeField] private bool _hasDamageOverTime;
 	[SerializeField] private float _dotDamage;
 	[SerializeField] private float _dotDuration;
-	[SerializeField] private HorgueVFX _dotDamageVFX;
 
 	[Space]
 	[SerializeField] private bool _hasSlow;
 	[SerializeField] private float _slowAmount;
 	[SerializeField] private float _slowDuration;
-	[SerializeField] private HorgueVFX _slowVFX;
 
 	[Space]
 	[SerializeField] private bool _hasKnockBack;
 	[SerializeField] private KnockBackType _knockBackType;
 	[SerializeField] private float _knockBackStrength;
-	[SerializeField] private HorgueVFX _knockBackVFX;
 
 	[Space]
 	[SerializeField] private bool _hasPierce;
@@ -50,9 +52,8 @@ public class StatusEffect
 	[SerializeField] private float _propagationRange;
 	[SerializeField] private int _maxPropagateToCount;
 	[SerializeField] private int _consecutivePropagationCount;
-	[SerializeField] private HorgueVFX _propagationVFX;
 
-	private AI_Agent _enemy;
+	private AI_Agent_Enemy _enemy;
 	private Projectile _projectile;
 
 	private List<Effect> _effects = new List<Effect>();
@@ -61,7 +62,7 @@ public class StatusEffect
 	private float _currentTickTimer;
 	float _delta = 0;
 
-	public List<AI_Agent> propagatedToEnemies = new List<AI_Agent>();
+	public List<AI_Agent_Enemy> propagatedToEnemies = new List<AI_Agent_Enemy>();
 	private int _timesPropagated = 0;
 
 	public StatusEffect(StatusEffectSO statusEffectSO)
@@ -74,22 +75,18 @@ public class StatusEffect
 
 		_hasInitialExtraDamage = statusEffectSO.hasInitialExtraDamage;
 		_initialDamage = statusEffectSO.initialDamage;
-		_initialDamageVFX = statusEffectSO.initialDamageVFX;
 
 		_hasDamageOverTime = statusEffectSO.hasDamageOverTime;
 		_dotDamage = statusEffectSO.dotDamage;
 		_dotDuration = statusEffectSO.dotDuration;
-		_dotDamageVFX = statusEffectSO.dotDamageVFX;
 
 		_hasSlow = statusEffectSO.hasSlow;
 		_slowAmount = statusEffectSO.slowAmount;
 		_slowDuration = statusEffectSO.slowDuration;
-		_slowVFX = statusEffectSO.slowVFX;
 
 		_hasKnockBack = statusEffectSO.hasKnockBack;
 		_knockBackType = statusEffectSO.knockBackType;
 		_knockBackStrength = statusEffectSO.knockBackStrength;
-		_knockBackVFX = statusEffectSO.knockBackVFX;
 
 		_hasPierce = statusEffectSO.hasPierce;
 		_maxPierceAmount = statusEffectSO.maxPierceAmount;
@@ -101,10 +98,9 @@ public class StatusEffect
 		_propagationRange = statusEffectSO.propagationRange;
 		_maxPropagateToCount = statusEffectSO.maxPropagateToCount;
 		_consecutivePropagationCount = statusEffectSO.consecutivePropagationCount;
-		_propagationVFX = statusEffectSO.propagationVFX;
 	}
 
-	public void ApplyStatusEffect(AI_Agent enemy, Projectile projectile)
+	public void ApplyStatusEffect(AI_Agent_Enemy enemy, Projectile projectile)
 	{
 		OnHitEnemy += OnEnemyHit;
 
@@ -127,7 +123,11 @@ public class StatusEffect
 		_projectile = projectile;
 
 		if (_hasInitialExtraDamage)
+		{
 			AddEffect(new DamageOnce(_enemy, _initialDamage));
+
+			PlayVFXFromPool(initialDamageVFXPool);
+		}
 		if (_hasDamageOverTime)
 			AddEffect(new DamageOverTime(_enemy, _dotDamage, _dotDuration));
 		if (_hasSlow)
@@ -145,6 +145,8 @@ public class StatusEffect
 					break;
 			}
 			AddEffect(new KnockBack(_enemy, new Vector3(knockBackDirection.x, 0, knockBackDirection.z).normalized * _knockBackStrength));
+
+			PlayVFXFromPool(knockbackVFXPool);
 		}
 
 		for (int i = 0; i < _effects.Count; i++)
@@ -228,6 +230,11 @@ public class StatusEffect
 
 	private void OnEffectsTicked()
 	{
+		if (_hasDamageOverTime)
+			PlayVFXFromPool(damageOverTimeVFXPool);
+		if (_hasSlow)
+			PlayVFXFromPool(slowVFXPool);
+
 		if (!_canPropagate || _timesPropagated >= _consecutivePropagationCount)
 			return;
 
@@ -239,7 +246,6 @@ public class StatusEffect
 		if (_propagationChance < UnityEngine.Random.Range(1, 100))
 			return;
 
-		_propagationVFX?.Play();
 		_timesPropagated++;
 
 		Collider[] enemies = Physics.OverlapSphere(_enemy.gameObject.transform.position, _propagationRange, _layersToPropagateTo);
@@ -251,7 +257,7 @@ public class StatusEffect
 
 		for (int i = 0; i < enemies.Length; i++)
 		{
-			AI_Agent enemy = enemies[i].GetComponent<AI_Agent>();
+			AI_Agent_Enemy enemy = enemies[i].GetComponent<AI_Agent_Enemy>();
 			if (enemy == _enemy || propagatedToEnemies.Contains(enemy))
 				continue;
 
@@ -265,9 +271,30 @@ public class StatusEffect
 					effectToPropagate.propagatedToEnemies = propagatedToEnemies;
 					effectToPropagate.ApplyStatusEffect(enemy, _projectile);
 					propagatedTo++;
+
+					//needs to somehow respect the direction to the propagated to enemy and send that information to the VFX
+					PlayVFXFromPool(propagationVFXPool);
 				}
 			}
 		}
+	}
 
+	private void PlayVFXFromPool(ObjectPool<HorgueVFX> VFXobjectPool)
+	{
+		if (VFXobjectPool != null)
+		{
+			HorgueVFX spawnedKnockBackVFX = VFXobjectPool.GetObject();
+			spawnedKnockBackVFX.transform.SetParent(_enemy.transform);
+			spawnedKnockBackVFX.transform.localPosition = Vector3.zero;
+			spawnedKnockBackVFX.Play();
+			_enemy.GetComponent<EnemyHealthComponent>().OnEnemyDied += () => ReturnEffectToPoolOnDied(VFXobjectPool, spawnedKnockBackVFX);
+			spawnedKnockBackVFX.ReturnToPoolAfterTime(VFXobjectPool, _effectDuration);
+		}
+	}
+
+	private void ReturnEffectToPoolOnDied(ObjectPool<HorgueVFX> vfxPool, HorgueVFX horgueVFX)
+	{
+		horgueVFX.transform.SetParent(null);
+		horgueVFX.ReturnToPoolAfterTime(vfxPool, .5f);
 	}
 }

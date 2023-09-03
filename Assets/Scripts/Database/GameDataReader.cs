@@ -2,12 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using TMPro;
 
+[DefaultExecutionOrder(-1)]
 public class GameDataReader : MonoBehaviour
 {
     public TextAsset gameData;
     public Button startButton;
+    public Button bossButton;
+    public bool _dataRetrieved = false;
+    private bool _hasLoadedData = false;
 
     [Header("PLAYER DATA")]
     [SerializeField] private PlayerData _playerData;
@@ -15,13 +20,11 @@ public class GameDataReader : MonoBehaviour
     [Header("ENEMY DATA")]
     [SerializeField] private List<BasicEnemyData> _enemyData = new List<BasicEnemyData>();
 
-    [Header("LEVEL DATA")]
-    [SerializeField] private List<GameManagerValues> _LevelData = new List<GameManagerValues>();
-
     [Header("ENEMY SPAWNER DATA")]
     [SerializeField] private List<EnemySpawnerData> _enemySpawnerData = new List<EnemySpawnerData>();
 
     [Header("FIREARM DATA")]
+    [SerializeField] private List<SkeletonBaseStats> _firearmData = new List<SkeletonBaseStats>();
     [SerializeField] private List<Ammunition> _ammunitionData = new List<Ammunition>();
     [SerializeField] private List<Barrel> _barrelData = new List<Barrel>();
     [SerializeField] private List<Grip> _gripData = new List<Grip>();
@@ -32,7 +35,9 @@ public class GameDataReader : MonoBehaviour
     public PlayerList myPlayerList = new();
     public EnemyList myEnemyList = new();
     public LevelList myLevelList = new();
+
     // Firearm
+    public FirearmList myFirearmList = new();
     public AmmunitionList myAmmunitionList = new();
     public BarrelList myBarrelList = new();
     public GripList myGripList = new();
@@ -48,6 +53,8 @@ public class GameDataReader : MonoBehaviour
         public string name;
         public float movementSpeed;
         public float maxHealth;
+        public float invincibilityTime;
+        public float levelMultiplier;
     }
 
     [System.Serializable]
@@ -64,16 +71,22 @@ public class GameDataReader : MonoBehaviour
         public float elementalResistance;
         public float technicalResistance;
         public float healthDropChance;
+
+        public float baseDmgMultiplier;
+        public float dmgModifier;
+        public float addDmgModifier;
+        public float baseHealthMultiplier;
+        public float healthModifier;
+        public float addHealthModifier;
     }
 
     [System.Serializable]
     public class Level
     {
         public string name;
-        public float healthBonus;
-        public float damageBonus;
         public int TimeToSurvive;
-        public int spawnTick;
+        public float weaponPartMultiplierPerLevel;
+        public float spawnTick;
         public int spawnsPerTick;
         public int minEnemyCount;
         public int maxEnemyCount;
@@ -90,6 +103,35 @@ public class GameDataReader : MonoBehaviour
     }
 
     [System.Serializable]
+    public class FirearmDB
+    {
+        [Header("Stats")]
+        public string name;
+        public float attackSpeed;
+        public float baseDamage;
+        public float cooldown;
+        public float criticalHitChance;
+        public float criticalHitDamage;
+        public float projectileWidth;
+        public float range;
+
+        [Header("Max Stats")]
+        public float maxAttackSpeed;
+        public float maxCooldown;
+        public float maxProjectileWidth;
+        public float maxCriticalHitChance;
+
+        [Header("Min Stats")]
+        public float minBaseDamage;
+        public float minAttackSpeed;
+        public float minCooldown;
+        public float minProjectileWidth;
+        public float minCriticalHitChance;
+        public float minCriticalHitDamage;
+        public float minRange;
+    }
+
+    [System.Serializable]
     public class AmmunitionDB
     {
         public string name;
@@ -99,8 +141,11 @@ public class GameDataReader : MonoBehaviour
         public float baseDamage;
         public float cooldown;
         public float criticalHitChance;
+        public float criticalHitDamage;
         public float projectileWidth;
         public float range;
+        public float cost;
+		public string rarity;
     }
 
     [System.Serializable]
@@ -115,9 +160,12 @@ public class GameDataReader : MonoBehaviour
         public float baseDamage;
         public float cooldown;
         public float criticalHitChance;
+        public float criticalHitDamage;
         public float projectileWidth;
         public float range;
-    }
+        public float cost;
+		public string rarity;
+	}
 
     [System.Serializable]
     public class GripDB
@@ -131,9 +179,12 @@ public class GameDataReader : MonoBehaviour
         public float baseDamage;
         public float cooldown;
         public float criticalHitChance;
+        public float criticalHitDamage;
         public float projectileWidth;
         public float range;
-    }
+        public float cost;
+		public string rarity;
+	}
 
     [System.Serializable]
     public class MagazineDB
@@ -147,9 +198,12 @@ public class GameDataReader : MonoBehaviour
         public float baseDamage;
         public float cooldown;
         public float criticalHitChance;
+        public float criticalHitDamage;
         public float projectileWidth;
         public float range;
-    }
+        public float cost;
+		public string rarity;
+	}
 
     [System.Serializable]
     public class SightDB
@@ -162,9 +216,12 @@ public class GameDataReader : MonoBehaviour
         public float baseDamage;
         public float cooldown;
         public float criticalHitChance;
+        public float criticalHitDamage;
         public float projectileWidth;
         public float range;
-    }
+        public float cost;
+		public string rarity;
+	}
 
     [System.Serializable]
     public class TriggerMechanismDB
@@ -176,9 +233,12 @@ public class GameDataReader : MonoBehaviour
         public float baseDamage;
         public float cooldown;
         public float criticalHitChance;
+        public float criticalHitDamage;
         public float projectileWidth;
         public float range;
-    }
+        public float cost;
+		public string rarity;
+	}
 
     #endregion
 
@@ -202,6 +262,11 @@ public class GameDataReader : MonoBehaviour
         public Level[] Level;
     }
 
+    [System.Serializable]
+    public class FirearmList
+    {
+        public FirearmDB[] Firearm;
+    }
 
     [System.Serializable]
     public class AmmunitionList
@@ -243,16 +308,50 @@ public class GameDataReader : MonoBehaviour
 
     #endregion
 
-    private void OnEnable()
+    public void GetGameData()
     {
-        StartCoroutine(GetListsFromJSON());
+        if(!_hasLoadedData)
+        {
+            GetListFromJSON();
+
+            if (SceneManager.GetActiveScene().name == "SCENE_Main_Menu")
+            {
+                startButton = GameObject.Find("StartButton").GetComponent<Button>();
+                bossButton = GameObject.Find("BossLevelButton").GetComponent<Button>();
+                StartCoroutine(EnableButton(0));
+
+                return;
+            }
+
+            _hasLoadedData = true;
+        }
+        else
+        {
+            if (SceneManager.GetActiveScene().name == "SCENE_Main_Menu")
+            {
+                startButton = GameObject.Find("StartButton").GetComponent<Button>();
+                bossButton = GameObject.Find("BossLevelButton").GetComponent<Button>();
+                StartCoroutine(EnableButton(0));
+
+                return;
+            }
+        }
     }
 
-    private IEnumerator GetListsFromJSON()
+    public void SetGameData()
+    {
+        StartCoroutine(SetPlayerData());
+        StartCoroutine(SetEnemyData());
+        StartCoroutine(SetLevelData());
+        StartCoroutine(SetFireArmData());
+    }
+
+    private void GetListFromJSON()
     {
         myPlayerList = JsonUtility.FromJson<PlayerList>(gameData.text);
         myEnemyList = JsonUtility.FromJson<EnemyList>(gameData.text);
         myLevelList = JsonUtility.FromJson<LevelList>(gameData.text);
+        myFirearmList = JsonUtility.FromJson<FirearmList>(gameData.text);
         myAmmunitionList = JsonUtility.FromJson<AmmunitionList>(gameData.text);
         myBarrelList = JsonUtility.FromJson<BarrelList>(gameData.text);
         myGripList = JsonUtility.FromJson<GripList>(gameData.text);
@@ -260,53 +359,38 @@ public class GameDataReader : MonoBehaviour
         mySightList = JsonUtility.FromJson<SightList>(gameData.text);
         myTriggerMechanismList = JsonUtility.FromJson<TriggerMechanismList>(gameData.text);
 
-        yield return null;
-
-        StartCoroutine(GetData());
+        SetGameData();
     }
 
-    private IEnumerator GetData()
+    private IEnumerator EnableButton(float time)
     {
-        StartCoroutine(GetPlayerData());
-        StartCoroutine(GetEnemyData());
-        StartCoroutine(GetLevelData());
-        StartCoroutine(GetFireArmData());
+        yield return new WaitForSecondsRealtime(time); // Wait until everything is set
 
-        yield return null;
-
-        Debug.Log("DONE DATA");
-
-        if(startButton != null)
-        {
-            StartCoroutine(EnableButton());
-        }
-    }
-
-    private IEnumerator EnableButton()
-    {
         startButton.GetComponent<Button>().interactable = true;
-        startButton.GetComponentInChildren<TextMeshProUGUI>().text = "START";
-
-        yield return null;
+        startButton.GetComponentInChildren<TextMeshProUGUI>().text = "Start";
+        bossButton.GetComponent<Button>().interactable = true;
+        bossButton.GetComponentInChildren<TextMeshProUGUI>().text = "Boss level";
 
         Debug.Log("DONE BUTTON");
     }
 
-    private IEnumerator GetPlayerData()
+    private IEnumerator SetPlayerData()
     {
-        _playerData._movementSpeed = myPlayerList.Player[0].movementSpeed;
-        _playerData._maxHealth = Mathf.RoundToInt(myPlayerList.Player[0].maxHealth);
+        _playerData.movementSpeed = myPlayerList.Player[0].movementSpeed;
+        _playerData.maxHealth = Mathf.RoundToInt(myPlayerList.Player[0].maxHealth);
+        _playerData.invincibilityTime = myPlayerList.Player[0].invincibilityTime;
+        _playerData.levelMultiplier = myPlayerList.Player[0].levelMultiplier;
 
         yield return null;
     }
-    private IEnumerator GetEnemyData()
+    private IEnumerator SetEnemyData()
     {
         for (int i = 0; i < _enemyData.Count; i++)
         {
             if (i == 0)
             {
-                _enemyData[i]._maxHealth = (int)myEnemyList.Enemies[0].maxHealth; //* GameManager.Instance._GameManagerValues[GameManager.Instance._currentLevelArray]._healthBonus);
-                _enemyData[i]._damagePerHit = (int)myEnemyList.Enemies[0].damagePerHit; //* GameManager.Instance._GameManagerValues[GameManager.Instance._currentLevelArray]._damageBonus);
+                _enemyData[i]._maxHealth = (int)(myEnemyList.Enemies[0].maxHealth);  // * GameManager.Instance.GameManagerValues[GameManager.Instance._currentLevelArray]._healthBonus);
+                _enemyData[i]._damagePerHit = (int)(myEnemyList.Enemies[0].damagePerHit); // * GameManager.Instance.GameManagerValues[GameManager.Instance._currentLevelArray]._damageBonus);
                 _enemyData[i]._attackSpeed = myEnemyList.Enemies[i].attackSpeed;
                 _enemyData[i]._givenXP = (int)myEnemyList.Enemies[i].givenXP;
                 _enemyData[i]._maxMoveSpeed = myEnemyList.Enemies[i].maxMoveSpeed;
@@ -315,6 +399,13 @@ public class GameDataReader : MonoBehaviour
                 _enemyData[i]._elementalResistance = myEnemyList.Enemies[i].elementalResistance;
                 _enemyData[i]._technicalResistance = myEnemyList.Enemies[i].technicalResistance;
                 _enemyData[i]._healthDropChance = myEnemyList.Enemies[i].healthDropChance;
+
+                _enemyData[i].baseDmgMultiplier = myEnemyList.Enemies[i].baseDmgMultiplier;
+                _enemyData[i].dmgModifier = myEnemyList.Enemies[i].dmgModifier;
+                _enemyData[i].addDmgModifier = myEnemyList.Enemies[i].addDmgModifier;
+                _enemyData[i].baseHealthMultiplier = myEnemyList.Enemies[i].baseHealthMultiplier;
+                _enemyData[i].healthModifier = myEnemyList.Enemies[i].healthModifier;
+                _enemyData[i].addHealthModifier = myEnemyList.Enemies[i].addHealthModifier;
             }
             else
             {
@@ -328,16 +419,24 @@ public class GameDataReader : MonoBehaviour
                 _enemyData[i]._elementalResistance = myEnemyList.Enemies[i].elementalResistance * _enemyData[0]._elementalResistance;
                 _enemyData[i]._technicalResistance = myEnemyList.Enemies[i].technicalResistance * _enemyData[0]._technicalResistance;
                 _enemyData[i]._healthDropChance = myEnemyList.Enemies[i].healthDropChance * _enemyData[0]._healthDropChance;
+
+                _enemyData[i].baseDmgMultiplier = myEnemyList.Enemies[i].baseDmgMultiplier * _enemyData[0].baseDmgMultiplier;
+                _enemyData[i].dmgModifier = myEnemyList.Enemies[i].dmgModifier * _enemyData[0].dmgModifier;
+                _enemyData[i].addDmgModifier = myEnemyList.Enemies[i].addDmgModifier * _enemyData[0].addDmgModifier;
+                _enemyData[i].baseHealthMultiplier = myEnemyList.Enemies[i].baseHealthMultiplier * _enemyData[0].baseHealthMultiplier;
+                _enemyData[i].healthModifier = myEnemyList.Enemies[i].healthModifier * _enemyData[0].healthModifier;
+                _enemyData[i].addHealthModifier = myEnemyList.Enemies[i].addHealthModifier * _enemyData[0].addHealthModifier;
             }
         }
 
         yield return null;
     }
-    private IEnumerator GetLevelData()
+    private IEnumerator SetLevelData()
     {
-
         for (int i = 0; i < _enemySpawnerData.Count; i++)
         {
+            _enemySpawnerData[i]._timeToSurvive = myLevelList.Level[i].TimeToSurvive;
+            _enemySpawnerData[i]._weaponPartMultiplierPerLevel = myLevelList.Level[i].weaponPartMultiplierPerLevel;
             _enemySpawnerData[i]._spawnTick = myLevelList.Level[i].spawnTick;
             _enemySpawnerData[i]._spawnsPerTick = myLevelList.Level[i].spawnsPerTick;
             _enemySpawnerData[i]._minEnemyCount = myLevelList.Level[i].minEnemyCount;
@@ -354,52 +453,78 @@ public class GameDataReader : MonoBehaviour
             _enemySpawnerData[i]._maxFarZoneOcc = myLevelList.Level[i].maxFarZoneOcc;
         }
 
-        for (int i = 0; i < _LevelData.Count; i++)
-        {
-            _LevelData[i]._healthBonus = myLevelList.Level[i].healthBonus;
-            _LevelData[i]._damageBonus = myLevelList.Level[i].damageBonus;
-            _LevelData[i]._timeToSurvive = myLevelList.Level[i].TimeToSurvive;
-        }
-
         yield return null;
     }
-    private IEnumerator GetFireArmData()
+    private IEnumerator SetFireArmData()
     {
-        GetAmmunitionData();
-        GetBarrelData();
-        GetGripData();
-        GetMagazineData();
-        GetSightData();
-        GetTriggerMechanismData();
+        SetFireArmSkeletonData();
+        SetAmmunitionData();
+        SetBarrelData();
+        SetGripData();
+        SetMagazineData();
+        SetSightData();
+        SetTriggerMechanismData();
 
         yield return null;
     }
 
-    private void GetAmmunitionData()
+    private void SetFireArmSkeletonData()
+    {
+        for (int i = 0; i < _firearmData.Count; i++)
+        {
+            _firearmData[i].baseDamage      = myFirearmList.Firearm[i].baseDamage;
+            _firearmData[i].attackSpeed     = myFirearmList.Firearm[i].attackSpeed;
+            _firearmData[i].cooldown        = myFirearmList.Firearm[i].cooldown;
+            _firearmData[i].projectileSize  = myFirearmList.Firearm[i].projectileWidth;
+            _firearmData[i].critChance      = myFirearmList.Firearm[i].criticalHitChance;
+            _firearmData[i].critDamage      = myFirearmList.Firearm[i].criticalHitDamage;
+            _firearmData[i].range           = myFirearmList.Firearm[i].range;
+
+            _firearmData[i].maxAttackSpeed      = myFirearmList.Firearm[i].maxAttackSpeed;
+            _firearmData[i].maxCooldown         = myFirearmList.Firearm[i].maxCooldown;
+            _firearmData[i].maxProjectileSize   = myFirearmList.Firearm[i].maxProjectileWidth;
+            _firearmData[i].maxCritChance       = myFirearmList.Firearm[i].maxCriticalHitChance;
+            _firearmData[i].minAttackSpeed      = myFirearmList.Firearm[i].minAttackSpeed;
+            _firearmData[i].minBaseDamage       = myFirearmList.Firearm[i].minBaseDamage;
+            _firearmData[i].minCooldown         = myFirearmList.Firearm[i].minCooldown;
+            _firearmData[i].minCritChance       = myFirearmList.Firearm[i].minCriticalHitChance;
+            _firearmData[i].minCritDamage       = myFirearmList.Firearm[i].minCriticalHitDamage;
+            _firearmData[i].minProjectileSize   = myFirearmList.Firearm[i].minProjectileWidth;
+            _firearmData[i].minRange            = myFirearmList.Firearm[i].minRange;
+        }
+    }
+
+    private void SetAmmunitionData()
     {
         for (int i = 0; i < _ammunitionData.Count; i++)
         {
-            if(i == 0)
+            if (i == 0)
             {
                 _ammunitionData[i].baseDamage = myAmmunitionList.Ammunition[i].baseDamage;
                 _ammunitionData[i].attackSpeed = myAmmunitionList.Ammunition[i].attackSpeed;
                 _ammunitionData[i].cooldown = myAmmunitionList.Ammunition[i].cooldown;
                 _ammunitionData[i].projectileSize = myAmmunitionList.Ammunition[i].projectileWidth;
                 _ammunitionData[i].critChance = myAmmunitionList.Ammunition[i].criticalHitChance;
+                _ammunitionData[i].critDamage = myAmmunitionList.Ammunition[i].criticalHitDamage;
                 _ammunitionData[i].range = myAmmunitionList.Ammunition[i].range;
+                _ammunitionData[i].cost = myAmmunitionList.Ammunition[i].cost;
+				_ammunitionData[i].rarity = myAmmunitionList.Ammunition[i].rarity;
             }
             else
             {
-                _ammunitionData[i].baseDamage = myAmmunitionList.Ammunition[i].baseDamage * myAmmunitionList.Ammunition[0].baseDamage;
-                _ammunitionData[i].attackSpeed = myAmmunitionList.Ammunition[i].attackSpeed * myAmmunitionList.Ammunition[0].attackSpeed;
-                _ammunitionData[i].cooldown = myAmmunitionList.Ammunition[i].cooldown * myAmmunitionList.Ammunition[0].cooldown;
-                _ammunitionData[i].projectileSize = myAmmunitionList.Ammunition[i].projectileWidth * myAmmunitionList.Ammunition[0].projectileWidth;
-                _ammunitionData[i].critChance = myAmmunitionList.Ammunition[i].criticalHitChance * myAmmunitionList.Ammunition[0].criticalHitChance;
-                _ammunitionData[i].range = myAmmunitionList.Ammunition[i].range * myAmmunitionList.Ammunition[0].range;
-            }
+                _ammunitionData[i].baseDamage = myAmmunitionList.Ammunition[i].baseDamage * _ammunitionData[0].baseDamage;
+                _ammunitionData[i].attackSpeed = myAmmunitionList.Ammunition[i].attackSpeed * _ammunitionData[0].attackSpeed;
+                _ammunitionData[i].cooldown = myAmmunitionList.Ammunition[i].cooldown * _ammunitionData[0].cooldown;
+                _ammunitionData[i].projectileSize = myAmmunitionList.Ammunition[i].projectileWidth * _ammunitionData[0].projectileSize;
+                _ammunitionData[i].critChance = myAmmunitionList.Ammunition[i].criticalHitChance * _ammunitionData[0].critChance;
+                _ammunitionData[i].critDamage = myAmmunitionList.Ammunition[i].criticalHitDamage * _ammunitionData[0].critDamage;
+                _ammunitionData[i].range = myAmmunitionList.Ammunition[i].range * _ammunitionData[0].range;
+                _ammunitionData[i].cost = (int)(myAmmunitionList.Ammunition[i].cost * _ammunitionData[0].cost);
+				_ammunitionData[i].rarity = myAmmunitionList.Ammunition[i].rarity;
+			}
         }
     }
-    private void GetBarrelData()
+    private void SetBarrelData()
     {
         for (int i = 0; i < _barrelData.Count; i++)
         {
@@ -410,74 +535,118 @@ public class GameDataReader : MonoBehaviour
                 _barrelData[i].cooldown = myBarrelList.Barrel[i].cooldown;
                 _barrelData[i].projectileSize = myBarrelList.Barrel[i].projectileWidth;
                 _barrelData[i].critChance = myBarrelList.Barrel[i].criticalHitChance;
+                _barrelData[i].critDamage = myBarrelList.Barrel[i].criticalHitDamage;
                 _barrelData[i].range = myBarrelList.Barrel[i].range;
-            }
+                _barrelData[i].cost = myBarrelList.Barrel[i].cost;
+				_barrelData[i].rarity = myBarrelList.Barrel[i].rarity;
+			}
             else
             {
-                _barrelData[i].baseDamage = myBarrelList.Barrel[i].baseDamage * myBarrelList.Barrel[0].baseDamage;
-                _barrelData[i].attackSpeed = myBarrelList.Barrel[i].attackSpeed * myBarrelList.Barrel[0].attackSpeed;
-                _barrelData[i].cooldown = myBarrelList.Barrel[i].cooldown * myBarrelList.Barrel[0].cooldown;
-                _barrelData[i].projectileSize = myBarrelList.Barrel[i].projectileWidth * myBarrelList.Barrel[0].projectileWidth;
-                _barrelData[i].critChance = myBarrelList.Barrel[i].criticalHitChance * myBarrelList.Barrel[0].criticalHitChance;
-                _barrelData[i].range = myBarrelList.Barrel[i].range * myBarrelList.Barrel[0].range;
-            }
+                _barrelData[i].baseDamage = myBarrelList.Barrel[i].baseDamage * _barrelData[0].baseDamage;
+                _barrelData[i].attackSpeed = myBarrelList.Barrel[i].attackSpeed * _barrelData[0].attackSpeed;
+                _barrelData[i].cooldown = myBarrelList.Barrel[i].cooldown * _barrelData[0].cooldown;
+                _barrelData[i].projectileSize = myBarrelList.Barrel[i].projectileWidth * _barrelData[0].projectileSize;
+                _barrelData[i].critChance = myBarrelList.Barrel[i].criticalHitChance * _barrelData[0].critChance;
+                _barrelData[i].critDamage = myBarrelList.Barrel[i].criticalHitDamage * _barrelData[0].critDamage;
+                _barrelData[i].range = myBarrelList.Barrel[i].range * _barrelData[0].range;
+                _barrelData[i].cost = (int)(myBarrelList.Barrel[i].cost * _barrelData[0].cost);
+				_barrelData[i].rarity = myBarrelList.Barrel[i].rarity;
+			}
         }
     }
-    private void GetGripData()
+    private void SetGripData()
     {
         for (int i = 0; i < _gripData.Count; i++)
         {
             if (i == 0)
             {
+                _gripData[i].baseDamage = myGripList.Grip[i].baseDamage;
                 _gripData[i].attackSpeed = myGripList.Grip[i].attackSpeed;
                 _gripData[i].cooldown = myGripList.Grip[i].cooldown;
+                _gripData[i].projectileSize = myGripList.Grip[i].projectileWidth;
                 _gripData[i].critChance = myGripList.Grip[i].criticalHitChance;
-            }
+                _gripData[i].critDamage = myGripList.Grip[i].criticalHitDamage;
+                _gripData[i].range = myGripList.Grip[i].range;
+                _gripData[i].cost = myGripList.Grip[i].cost;
+				_gripData[i].rarity = myGripList.Grip[i].rarity;
+			}
             else
             {
-                _gripData[i].attackSpeed = myGripList.Grip[i].attackSpeed * myGripList.Grip[0].attackSpeed;
-                _gripData[i].cooldown = myGripList.Grip[i].cooldown * myGripList.Grip[0].cooldown;
-                _gripData[i].critChance = myGripList.Grip[i].criticalHitChance * myGripList.Grip[0].criticalHitChance;
-            }
+                _gripData[i].baseDamage = myGripList.Grip[i].baseDamage * _gripData[0].baseDamage;
+                _gripData[i].attackSpeed = myGripList.Grip[i].attackSpeed * _gripData[0].attackSpeed;
+                _gripData[i].cooldown = myGripList.Grip[i].cooldown * _gripData[0].cooldown;
+                _gripData[i].projectileSize = myGripList.Grip[i].projectileWidth * _gripData[0].projectileSize;
+                _gripData[i].critChance = myGripList.Grip[i].criticalHitChance * _gripData[0].critChance;
+                _gripData[i].critDamage = myGripList.Grip[i].criticalHitDamage * _gripData[0].critDamage;
+                _gripData[i].range = myGripList.Grip[i].range * _gripData[0].range;
+                _gripData[i].cost = (int)(myGripList.Grip[i].cost * _gripData[0].cost);
+				_gripData[i].rarity = myGripList.Grip[i].rarity;
+			}
         }
     }
-    private void GetMagazineData()
+    private void SetMagazineData()
     {
         for (int i = 0; i < _magazineData.Count; i++)
         {
             if (i == 0)
             {
+                _magazineData[i].baseDamage = myMagazineList.Magazine[i].baseDamage;
                 _magazineData[i].attackSpeed = myMagazineList.Magazine[i].attackSpeed;
                 _magazineData[i].cooldown = myMagazineList.Magazine[i].cooldown;
                 _magazineData[i].projectileSize = myMagazineList.Magazine[i].projectileWidth;
+                _magazineData[i].critChance = myMagazineList.Magazine[i].criticalHitChance;
+                _magazineData[i].critDamage = myMagazineList.Magazine[i].criticalHitDamage;
+                _magazineData[i].range = myMagazineList.Magazine[i].range;
+                _magazineData[i].cost = myMagazineList.Magazine[i].cost;
+				_magazineData[i].rarity = myMagazineList.Magazine[i].rarity;
+                _magazineData[i].capacity = myMagazineList.Magazine[i].capacity;
             }
             else
             {
-                _magazineData[i].attackSpeed = myMagazineList.Magazine[i].attackSpeed * myMagazineList.Magazine[0].attackSpeed;
-                _magazineData[i].cooldown = myMagazineList.Magazine[i].cooldown * myMagazineList.Magazine[0].cooldown;
-                _magazineData[i].projectileSize = myMagazineList.Magazine[i].projectileWidth * myMagazineList.Magazine[0].projectileWidth;
-            }
+                _magazineData[i].baseDamage = myMagazineList.Magazine[i].baseDamage * _magazineData[0].baseDamage;
+                _magazineData[i].attackSpeed = myMagazineList.Magazine[i].attackSpeed * _magazineData[0].attackSpeed;
+                _magazineData[i].cooldown = myMagazineList.Magazine[i].cooldown * _magazineData[0].cooldown;
+                _magazineData[i].projectileSize = myMagazineList.Magazine[i].projectileWidth * _magazineData[0].projectileSize;
+                _magazineData[i].critChance = myMagazineList.Magazine[i].criticalHitChance * _magazineData[0].critChance;
+                _magazineData[i].critDamage = myMagazineList.Magazine[i].criticalHitDamage * _magazineData[0].critDamage;
+                _magazineData[i].range = myMagazineList.Magazine[i].range * _magazineData[0].range;
+                _magazineData[i].cost = (int)(myMagazineList.Magazine[i].cost * _magazineData[0].cost);
+                _magazineData[i].capacity = myMagazineList.Magazine[i].capacity * _magazineData[0].capacity;
+                _magazineData[i].rarity = myMagazineList.Magazine[i].rarity;
+			}
         }
     }
-    private void GetSightData()
+    private void SetSightData()
     {
         for (int i = 0; i < _sightData.Count; i++)
         {
             if (i == 0)
             {
+                _sightData[i].baseDamage = mySightList.Sight[i].baseDamage;
                 _sightData[i].attackSpeed = mySightList.Sight[i].attackSpeed;
+                _sightData[i].cooldown = mySightList.Sight[i].cooldown;
+                _sightData[i].projectileSize = mySightList.Sight[i].projectileWidth;
                 _sightData[i].critChance = mySightList.Sight[i].criticalHitChance;
+                _sightData[i].critDamage = mySightList.Sight[i].criticalHitDamage;
                 _sightData[i].range = mySightList.Sight[i].range;
+                _sightData[i].cost = mySightList.Sight[i].cost;
+				_sightData[i].rarity = mySightList.Sight[i].rarity;
             }
             else
             {
-                _sightData[i].attackSpeed = mySightList.Sight[i].attackSpeed * mySightList.Sight[0].attackSpeed;
-                _sightData[i].critChance = mySightList.Sight[i].criticalHitChance * mySightList.Sight[0].criticalHitChance;
-                _sightData[i].range = mySightList.Sight[i].range * mySightList.Sight[0].range;
-            }
+                _sightData[i].baseDamage = mySightList.Sight[i].baseDamage * _sightData[0].baseDamage;
+                _sightData[i].attackSpeed = mySightList.Sight[i].attackSpeed * _sightData[0].attackSpeed;
+                _sightData[i].cooldown = mySightList.Sight[i].cooldown * _sightData[0].cooldown;
+                _sightData[i].projectileSize = mySightList.Sight[i].projectileWidth * _sightData[0].projectileSize;
+                _sightData[i].critChance = mySightList.Sight[i].criticalHitChance * _sightData[0].critChance;
+                _sightData[i].critDamage = mySightList.Sight[i].criticalHitDamage * _sightData[0].critDamage;
+                _sightData[i].range = mySightList.Sight[i].range * _sightData[0].range;
+                _sightData[i].cost = (int)(mySightList.Sight[i].cost * _sightData[0].cost);
+				_sightData[i].rarity = mySightList.Sight[i].rarity;
+			}
         }
     }
-    private void GetTriggerMechanismData()
+    private void SetTriggerMechanismData()
     {
         for (int i = 0; i < _triggerMechanismData.Count; i++)
         {
@@ -486,17 +655,25 @@ public class GameDataReader : MonoBehaviour
                 _triggerMechanismData[i].baseDamage = myTriggerMechanismList.TriggerMechanism[i].baseDamage;
                 _triggerMechanismData[i].attackSpeed = myTriggerMechanismList.TriggerMechanism[i].attackSpeed;
                 _triggerMechanismData[i].cooldown = myTriggerMechanismList.TriggerMechanism[i].cooldown;
+                _triggerMechanismData[i].projectileSize = myTriggerMechanismList.TriggerMechanism[i].projectileWidth;
                 _triggerMechanismData[i].critChance = myTriggerMechanismList.TriggerMechanism[i].criticalHitChance;
+                _triggerMechanismData[i].critDamage = myTriggerMechanismList.TriggerMechanism[i].criticalHitDamage;
                 _triggerMechanismData[i].range = myTriggerMechanismList.TriggerMechanism[i].range;
-            }
+                _triggerMechanismData[i].cost = myTriggerMechanismList.TriggerMechanism[i].cost;
+				_triggerMechanismData[i].rarity = myTriggerMechanismList.TriggerMechanism[i].rarity;
+			}
             else
             {
-                _triggerMechanismData[i].baseDamage = myTriggerMechanismList.TriggerMechanism[i].baseDamage * myTriggerMechanismList.TriggerMechanism[0].baseDamage;
-                _triggerMechanismData[i].attackSpeed = myTriggerMechanismList.TriggerMechanism[i].attackSpeed * myTriggerMechanismList.TriggerMechanism[0].attackSpeed;
-                _triggerMechanismData[i].cooldown = myTriggerMechanismList.TriggerMechanism[i].cooldown * myTriggerMechanismList.TriggerMechanism[0].cooldown;
-                _triggerMechanismData[i].critChance = myTriggerMechanismList.TriggerMechanism[i].criticalHitChance * myTriggerMechanismList.TriggerMechanism[0].criticalHitChance;
-                _triggerMechanismData[i].range = myTriggerMechanismList.TriggerMechanism[i].range * myTriggerMechanismList.TriggerMechanism[0].range;
-            }
-        }
+                _triggerMechanismData[i].baseDamage = myTriggerMechanismList.TriggerMechanism[i].baseDamage * _triggerMechanismData[0].baseDamage;
+                _triggerMechanismData[i].attackSpeed = myTriggerMechanismList.TriggerMechanism[i].attackSpeed * _triggerMechanismData[0].attackSpeed;
+                _triggerMechanismData[i].cooldown = myTriggerMechanismList.TriggerMechanism[i].cooldown * _triggerMechanismData[0].cooldown;
+                _triggerMechanismData[i].projectileSize = myTriggerMechanismList.TriggerMechanism[i].projectileWidth * _triggerMechanismData[0].projectileSize;
+                _triggerMechanismData[i].critChance = myTriggerMechanismList.TriggerMechanism[i].criticalHitChance * _triggerMechanismData[0].critChance;
+                _triggerMechanismData[i].critDamage = myTriggerMechanismList.TriggerMechanism[i].criticalHitDamage * _triggerMechanismData[0].critDamage;
+                _triggerMechanismData[i].range = myTriggerMechanismList.TriggerMechanism[i].range * _triggerMechanismData[0].range;
+                _triggerMechanismData[i].cost = (int)(myTriggerMechanismList.TriggerMechanism[i].cost * _triggerMechanismData[0].cost);
+				_triggerMechanismData[i].rarity = myTriggerMechanismList.TriggerMechanism[i].rarity;
+			}
+		}
     }
 }

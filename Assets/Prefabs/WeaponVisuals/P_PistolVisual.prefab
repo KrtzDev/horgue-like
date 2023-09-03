@@ -7,6 +7,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2151660649474069461, guid: fc7cfcac5028693478d8962153e78d3f,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2539871023174872679, guid: fc7cfcac5028693478d8962153e78d3f,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 4372090028141597004, guid: fc7cfcac5028693478d8962153e78d3f,
         type: 3}
       propertyPath: m_RootOrder
@@ -66,6 +76,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: P_PistolVisual
+      objectReference: {fileID: 0}
+    - target: {fileID: 6722250866933505903, guid: fc7cfcac5028693478d8962153e78d3f,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 8226857533788239212, guid: fc7cfcac5028693478d8962153e78d3f,
         type: 3}

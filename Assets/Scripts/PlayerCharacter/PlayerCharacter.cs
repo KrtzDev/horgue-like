@@ -1,4 +1,6 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class PlayerCharacter : MonoBehaviour
 {
@@ -8,21 +10,32 @@ public class PlayerCharacter : MonoBehaviour
     private Camera _camera;
 	[SerializeField]
 	private Transform _weaponSpawnTransform;
+	[SerializeField]
+	private Inventory _inventory;
     [SerializeField]
-    public PlayerData _playerData;
-    private HealthComponent _healthComponent;
+    public PlayerData playerData;
+    [HideInInspector] public HealthComponent healthComponent;
+    private PlayerInputMappings _inputActions;
 
     public Rigidbody CharacterRigidbody { get => _characterRigidbody; set => _characterRigidbody = value; }
     public Camera Camera { get => _camera; set => _camera = value; }
 	public Transform WeaponSpawnTransform { get => _weaponSpawnTransform; set => _weaponSpawnTransform = value; }
+	public Inventory Inventory { get => _inventory; set => _inventory = value; }
 
     private float _waterDamageTimer;
 
+    public LayerMask WalkLayer;
+    public LayerMask GroundLayer;
+    public LayerMask EnemyLayer;
+
     private void Awake()
     {
-        _healthComponent = this.GetComponent<HealthComponent>();
-        _healthComponent._maxHealth = _playerData._maxHealth;
-        _healthComponent._currentHealth = _healthComponent._maxHealth;
+        healthComponent = this.GetComponent<HealthComponent>();
+        healthComponent.maxHealth = (int)(playerData.maxHealth * (1 + (playerData.levelMultiplier * GameManager.Instance._currentLevelArray)));
+        healthComponent.currentHealth = healthComponent.maxHealth;
+
+        _inputActions = InputManager.Instance?.CharacterInputActions;
+        _inputActions.Character.Pause.performed += PauseGame;
     }
 
     private void Update()
@@ -35,9 +48,19 @@ public class PlayerCharacter : MonoBehaviour
     {
         if(collision.collider.CompareTag("Wasser") && _waterDamageTimer <= 0)
         {
-            this.GetComponent<HealthComponent>().TakeDamage(1);
+            this.GetComponent<HealthComponent>().TakeDamage(2, true);
             _waterDamageTimer = 0.5f;
         }
 
+    }
+
+    private void PauseGame(InputAction.CallbackContext ctx)
+    {
+        if (Time.timeScale != 0 && ctx.performed && !GameManager.Instance._gameIsPaused && SceneManager.GetActiveScene().name.StartsWith("SCENE_Level"))
+        {
+            UIManager.Instance.PauseMenu.gameObject.SetActive(true);
+            GameManager.Instance._gameIsPaused = true;
+            Time.timeScale = 0;
+        }
     }
 }

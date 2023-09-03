@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be6e2ff82e748554fac9aa08b7a7fad0, type: 3}
+  m_Name: ES_Level_Boss
+  m_EditorClassIdentifier: 
+  _spawnTick: 1
+  _spawnsPerTick: 1
+  _minEnemyCount: 0
+  _maxEnemyCount: 1
+  _spawnAnimDelay: 1
+  _minSpawnDelay: 0
+  _maxSpawnDelay: 1
+  _safeZoneSize: 5
+  _closeZoneSize: 10
+  _midZoneSize: 20
+  _farZoneSize: 30
+  _maxCloseZoneOcc: 8
+  _maxMidZoneOcc: 15
+  _maxFarZoneOcc: 20

@@ -9,9 +9,13 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2281259203997546296}
-  m_Layer: 0
+  - component: {fileID: 553730736}
+  - component: {fileID: 553730735}
+  - component: {fileID: 853386258498877072}
+  - component: {fileID: 8907462625038058073}
+  m_Layer: 13
   m_Name: Barrel_Explosive
-  m_TagString: Untagged
+  m_TagString: ExplosiveObject
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -24,7 +28,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1505180309730979202}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 6, y: -0.00000047683716, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -33,6 +37,66 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &553730736
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1505180309730979202}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0.5, z: 0}
+--- !u!114 &553730735
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1505180309730979202}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d05ee80fd3cf8d4688d316afe1a2565, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _isTriggered: 0
+  _object: {fileID: 6373298157891756798}
+  _explosionTimer: 2
+--- !u!208 &853386258498877072
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1505180309730979202}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 0
+  m_Extents: {x: 0.2, y: 0.5, z: 0.2}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0.5, z: 0}
+  m_TimeToStationary: 0.5
+--- !u!114 &8907462625038058073
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1505180309730979202}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e3fdca004f2d45fe8abbed571a8abd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_OverrideArea: 0
+  m_Area: 0
+  m_IgnoreFromBuild: 1
+  m_AffectedAgents: ffffffff
 --- !u!1 &1805808376469575719
 GameObject:
   m_ObjectHideFlags: 0
@@ -44,7 +108,7 @@ GameObject:
   - component: {fileID: 460609242807296900}
   - component: {fileID: 4773028148525974354}
   - component: {fileID: 8742591419964105277}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Ring.003
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,7 +158,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: 730136087fdb75c4d95d47ee3cc8a3d1, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -127,7 +191,7 @@ GameObject:
   - component: {fileID: 4906854174360554210}
   - component: {fileID: 5934193751933724822}
   - component: {fileID: 8922066195985851916}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Cylinder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -177,7 +241,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: 730136087fdb75c4d95d47ee3cc8a3d1, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -210,7 +274,7 @@ GameObject:
   - component: {fileID: 2113571945177574601}
   - component: {fileID: 5366358859816714821}
   - component: {fileID: 2666330448372018705}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Ring
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -260,7 +324,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: 69a740b054cac614ca1071b50236c89b, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -293,7 +357,7 @@ GameObject:
   - component: {fileID: 5697882760796080480}
   - component: {fileID: 5803032633089472006}
   - component: {fileID: 5326659283928434718}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Ring.002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -343,7 +407,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: 69a740b054cac614ca1071b50236c89b, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -376,7 +440,7 @@ GameObject:
   - component: {fileID: 4076688105388351171}
   - component: {fileID: 4387540718447826947}
   - component: {fileID: 5525985137607272768}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Ring.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -426,7 +490,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: 69a740b054cac614ca1071b50236c89b, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -459,7 +523,7 @@ GameObject:
   - component: {fileID: 6373298156980827495}
   - component: {fileID: 6373298156980827515}
   - component: {fileID: 6373298156980827492}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: ExplosionRadius
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -542,7 +606,7 @@ GameObject:
   - component: {fileID: 6373298157319685807}
   - component: {fileID: 6373298157319685805}
   - component: {fileID: 6373298157319685806}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Explosion
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -612,8 +676,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6373298157891756797}
-  m_Layer: 0
-  m_Name: asset
+  m_Layer: 13
+  m_Name: Barrel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -650,7 +714,7 @@ GameObject:
   - component: {fileID: 6373298157934058584}
   - component: {fileID: 6373298157934058590}
   - component: {fileID: 6373298157934058591}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: ExplosionFireball
   m_TagString: Untagged
   m_Icon: {fileID: 0}

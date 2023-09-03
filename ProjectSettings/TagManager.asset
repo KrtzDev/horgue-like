@@ -10,6 +10,9 @@ TagManager:
   - UI
   - Wasser
   - EnemyPool
+  - Ground
+  - ExplosiveObject
+  - DestroyableObject
   layers:
   - Default
   - TransparentFX
@@ -23,9 +26,9 @@ TagManager:
   - Ground
   - Obstacle
   - SpawningZones
-  - 
-  - 
-  - 
+  - EnemyGround
+  - ExplosiveObject
+  - DestroyableObject
   - 
   - 
   - 

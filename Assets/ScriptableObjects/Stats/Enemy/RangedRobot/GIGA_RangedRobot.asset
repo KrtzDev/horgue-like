@@ -12,17 +12,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e53ff1b8ade7b5340af8b4e886fb2c85, type: 3}
   m_Name: GIGA_RangedRobot
   m_EditorClassIdentifier: 
-  _maxHealth: 60
-  _damagePerHit: 100
-  _attackSpeed: 3.5
-  _givenXP: 3
-  _moveSpeed: 1
-  _armor: 1
-  _elementalResistance: 1
-  _technicalResistance: 1
-  _attackRange: 15
-  _retreatRange: 8
-  _followTime: 1.5
+  _maxHealth: 75
+  _damagePerHit: 25
+  _attackSpeed: 2.5
+  _givenXP: 10
+  _maxMoveSpeed: 10.5
+  _acceleration: 7.5
+  _armor: 35
+  _elementalResistance: -100
+  _technicalResistance: 0
+  _healthDropChance: 0.04
+  baseDmgMultiplier: 1
+  dmgModifier: 0.2
+  addDmgModifier: 0.15
+  baseHealthMultiplier: 1
+  healthModifier: 0.325
+  addHealthModifier: 0.225
+  _attackRange: 16
+  _retreatRange: 5
   _maxJumpAttackRange: 0
   _minJumpAttackRange: 0
   _jumpAttackChance: 0
@@ -30,8 +37,7 @@ MonoBehaviour:
   _jumpPrepTime: 0
   _jumpTime: 0
   _jumpForce: 0
-  _basicDamage: 0
-  HeightCurve:
+  _heightCurve:
     serializedVersion: 2
     m_Curve: []
     m_PreInfinity: 2

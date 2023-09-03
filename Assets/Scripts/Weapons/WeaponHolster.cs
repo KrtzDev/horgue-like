@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -10,8 +9,8 @@ public class WeaponHolster : MonoBehaviour
 
 	private List<WeaponSpawnSlot> _weaponSpawnSlots = new List<WeaponSpawnSlot>();
 
-	private void Start()
-	{
+	public void Initialize()
+    {
 		if (GameManager.Instance == null)
 			return;
 
@@ -35,6 +34,8 @@ public class WeaponHolster : MonoBehaviour
 		}
 
 		InputManager.Instance.CharacterInputActions.Character.SwitchMode.performed += SwitchWeaponControllMode;
+		InputManager.Instance.CharacterInputActions.Character.Aim.performed += SwitchWeaponControllMode_OnAim;
+		InputManager.Instance.CharacterInputActions.Character.Aim.canceled += SwitchWeaponControllMode_OnAim;
 
 		InputManager.Instance.CharacterInputActions.Character.Shoot.performed += ShootWeapons;
 		InputManager.Instance.CharacterInputActions.Character.Shoot.canceled += ShootWeapons;
@@ -42,8 +43,39 @@ public class WeaponHolster : MonoBehaviour
 
 	private void SwitchWeaponControllMode(InputAction.CallbackContext ctx)
 	{
-		GameManager.Instance.weaponControll = (WeaponControllKind)(((int)GameManager.Instance.weaponControll + 1) % 3);
+		// GameManager.Instance.weaponControll = (WeaponControllKind)(((int)GameManager.Instance.weaponControll + 1) % 3);
+
+		if(ctx.performed)
+        {
+			if (GameManager.Instance.weaponControll == WeaponControllKind.AllAuto && GameManager.Instance.returnToAutoShooting == true)
+			{
+				GameManager.Instance.weaponControll = WeaponControllKind.AutoShootManualAim;
+				GameManager.Instance.returnToAutoShooting = false;
+			}
+			else if (GameManager.Instance.weaponControll == WeaponControllKind.AutoShootManualAim && GameManager.Instance.returnToAutoShooting == false)
+			{
+				GameManager.Instance.weaponControll = WeaponControllKind.AllAuto;
+				GameManager.Instance.returnToAutoShooting = true;
+			}
+		}
+
 		Debug.Log(GameManager.Instance.weaponControll);
+	}
+
+	private void SwitchWeaponControllMode_OnAim(InputAction.CallbackContext ctx)
+	{
+		// GameManager.Instance.weaponControll = (WeaponControllKind)(((int)GameManager.Instance.weaponControll + 1) % 3);
+
+		if (ctx.performed && GameManager.Instance.weaponControll == WeaponControllKind.AllAuto)
+		{
+			GameManager.Instance.weaponControll = WeaponControllKind.AutoShootManualAim;
+			GameManager.Instance.returnToAutoShooting = true;
+		}
+		
+		if (ctx.canceled && GameManager.Instance.weaponControll == WeaponControllKind.AutoShootManualAim && GameManager.Instance.returnToAutoShooting == true)
+		{
+			GameManager.Instance.weaponControll = WeaponControllKind.AllAuto;
+		}
 	}
 
 	private void OnDisable()
@@ -66,16 +98,13 @@ public class WeaponHolster : MonoBehaviour
 
 	private void Update()
 	{
-		if (GameManager.Instance == null)
+		if (GameManager.Instance == null || Time.timeScale == 0)
 			return;
 
 		if (GameManager.Instance.weaponControll == WeaponControllKind.AllManual || GameManager.Instance.weaponControll == WeaponControllKind.AutoShootManualAim)
 		{
 			foreach (Weapon weapon in weapons)
-			{
-				Debug.Log("Aim");
 				weapon.UpdateAimDirection();
-			}
 		}
 		if (GameManager.Instance.weaponControll == WeaponControllKind.AllManual)
 		{
@@ -105,8 +134,6 @@ public class WeaponHolster : MonoBehaviour
 	private void TryShootAllWeapons()
 	{
 		foreach (Weapon weapon in weapons)
-		{
 			weapon.TryShoot();
-		}
 	}
 }

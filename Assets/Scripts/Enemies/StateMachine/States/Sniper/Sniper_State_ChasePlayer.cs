@@ -8,64 +8,64 @@ public class Sniper_State_ChasePlayer : AI_State_ChasePlayer
 
     public override void Enter(AI_Agent agent)
     {
+        base.Enter(agent);
+
         _sniper = agent as AI_Agent_Sniper;
 
-        agent._animator.SetBool("isChasing", true);
+        agent.Animator.SetBool("isChasing", true);
     }
 
     public override void Update(AI_Agent agent)
     {
-        if (!agent._navMeshAgent.enabled)
+        if (!agent.NavMeshAgent.enabled)
         {
             return;
         }
 
-        if (!agent._useMovementPrediction)
+        if (!agent.UseMovementPrediction)
         {
-            if (agent._followDecoy)
+            if (agent.FollowDecoy)
             {
-                _followPosition = agent._decoyTransform.position;
-                agent.SetTarget(agent, _followPosition);
+                _sniper._followPosition = agent.DecoyTransform.position;
+                agent.SetTarget(agent, _sniper._followPosition);
             }
             else
             {
-                _followPosition = agent._playerTransform.position;
-                agent.SetTarget(agent, _followPosition);
+                _sniper._followPosition = agent.PlayerTransform.position;
+                agent.SetTarget(agent, _sniper._followPosition);
             }
         }
         else
         {
-            if (agent._followDecoy)
+            if (agent.FollowDecoy)
             {
-                _followPosition = agent._decoyTransform.position;
-                agent.SetTarget(agent, _followPosition);
+                _sniper._followPosition = agent.DecoyTransform.position;
+                agent.SetTarget(agent, _sniper._followPosition);
             }
             else
             {
-                _followPosition = agent._playerTransform.position + (agent._player.GetComponent<PlayerMovement>().AverageVelocity * agent._movementPredictionTime);
+                _sniper._followPosition = agent.PlayerTransform.position + (agent.Player.GetComponent<PlayerMovement>().AverageVelocity * agent.MovementPredictionTime);
 
-                Vector3 directionToTarget = (_followPosition - agent.transform.position).normalized;
-                Vector3 directionToPlayer = (agent._playerTransform.position - agent.transform.position).normalized;
+                Vector3 directionToTarget = (_sniper._followPosition - agent.transform.position).normalized;
+                Vector3 directionToPlayer = (agent.PlayerTransform.position - agent.transform.position).normalized;
 
                 float dot = Vector3.Dot(directionToPlayer, directionToTarget);
-                if (dot < agent._movementPredictionThreshold)
+                if (dot < agent.MovementPredictionThreshold)
                 {
-                    _followPosition = agent._playerTransform.position;
+                    _sniper._followPosition = agent.PlayerTransform.position;
                 }
 
-                agent.SetTarget(agent, _followPosition);
+                agent.SetTarget(agent, _sniper._followPosition);
             }
-
-            StartRotating(agent);
         }
 
-        float distance = Vector3.Distance(agent.transform.position, _followPosition);
+        float distance = Vector3.Distance(agent.transform.position, _sniper._followPosition);
         CheckForBehaviour(agent, distance);
     }
 
     public override void Exit(AI_Agent agent)
     {
-        agent._animator.SetBool("isChasing", false);
+        agent.Animator.SetBool("isChasing", false);
     }
 
     private void StartRotating(AI_Agent agent)
@@ -75,37 +75,28 @@ public class Sniper_State_ChasePlayer : AI_State_ChasePlayer
             AI_Manager.Instance.StopCoroutine(LookCoroutine);
         }
 
-        LookCoroutine = AI_Manager.Instance.StartCoroutine(AI_Manager.Instance.LookAtTarget(agent, _followPosition, _maxTime));
+        LookCoroutine = AI_Manager.Instance.StartCoroutine(AI_Manager.Instance.LookAtTarget(agent, _sniper._followPosition, _maxTime));
     }
 
     private void CheckForBehaviour(AI_Agent agent, float distance)
     {
         RaycastHit hit;
-        if (Physics.Raycast(_sniper.ProjectilePoint.transform.position, (_followPosition + new Vector3(0, 0.5f, 0) - _sniper.ProjectilePoint.transform.position), out hit, distance, agent._groundLayer))
+        if (Physics.Raycast(_sniper.ProjectilePoint.transform.position, (_sniper._followPosition + new Vector3(0, 0.5f, 0) - _sniper.ProjectilePoint.transform.position), out hit, distance, agent.GroundLayer))
         {
-            if (distance < agent._enemyData._retreatRange)
+            if (distance < _enemy._enemyData._retreatRange)
             {
-                agent._animator.SetBool("isRetreating", true);
-                agent._animator.SetBool("isAttacking", false);
-                agent._animator.SetBool("isChasing", false);
-                agent._stateMachine.ChangeState(AI_StateID.Retreat);
+                agent.StateMachine.ChangeState(AI_StateID.Retreat);
             }
         }
         else
         {
-            if (distance < agent._enemyData._attackRange && distance > agent._enemyData._retreatRange)
+            if (distance <= _enemy._enemyData._retreatRange)
             {
-                agent._animator.SetBool("isAttacking", true);
-                agent._animator.SetBool("isChasing", false);
-                agent._animator.SetBool("isRetreating", false);
-                agent._stateMachine.ChangeState(AI_StateID.Attack);
+                agent.StateMachine.ChangeState(AI_StateID.Retreat);
             }
-            else if (distance < agent._enemyData._retreatRange)
+            else if (distance < _enemy._enemyData._attackRange)
             {
-                agent._animator.SetBool("isRetreating", true);
-                agent._animator.SetBool("isAttacking", false);
-                agent._animator.SetBool("isChasing", false);
-                agent._stateMachine.ChangeState(AI_StateID.Retreat);
+                agent.StateMachine.ChangeState(AI_StateID.Attack);
             }
         }
     }

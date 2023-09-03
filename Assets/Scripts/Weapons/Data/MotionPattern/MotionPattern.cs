@@ -52,7 +52,7 @@ public class MotionPattern : ScriptableObject
 
 		projectile.GetComponent<Rigidbody>().velocity = projectile.transform.forward * _speed;
 
-		_lastPlayerPos = GameManager.Instance.player.transform.position;
+		LateUpdateMotion(projectile);
 	}
 
 	private void DisableGravity(Projectile projectile)
@@ -86,7 +86,17 @@ public class MotionPattern : ScriptableObject
 
 		if (projectile.TargetedEnemy.isActiveAndEnabled)
 		{
-			Vector3 direction = (projectile.TargetedEnemy.transform.position + Vector3.up) - projectile.transform.position;
+			Vector3 direction;
+
+			if (!projectile.TargetedEnemy._useHeightControl)
+            {
+				direction = (projectile.TargetedEnemy.transform.position + Vector3.up) - projectile.transform.position;
+			}
+			else
+            {
+				direction = (projectile.TargetedEnemy.transform.position + projectile.TargetedEnemy._heightGO.transform.position + Vector3.up) - projectile.transform.position;
+			}
+
 			Vector3 rotateTowardsDirection = Vector3.RotateTowards(projectile.transform.forward, direction, _homingStrength * Time.deltaTime, .0f);
 			projectile.transform.rotation = Quaternion.LookRotation(rotateTowardsDirection);
 			projectile.GetComponent<Rigidbody>().velocity = projectile.transform.forward * projectile.GetComponent<Rigidbody>().velocity.magnitude;
@@ -103,7 +113,7 @@ public class MotionPattern : ScriptableObject
 				if (angle < smallestAngle)
 				{
 					smallestAngle = angle;
-					projectile.TargetedEnemy = enemies[i].GetComponent<AI_Agent>();
+					projectile.TargetedEnemy = enemies[i].GetComponent<AI_Agent_Enemy>();
 				}
 			}
 		}
@@ -125,12 +135,16 @@ public class MotionPattern : ScriptableObject
 		if (!_followPlayer)
 			return;
 
-		Vector3 playerMoveDelta = GameManager.Instance.player.transform.position - _lastPlayerPos;
+		Vector3 playerMoveDelta = GameManager.Instance._player.transform.position - _lastPlayerPos;
 		projectile.transform.position += playerMoveDelta + (projectile.GetComponent<Rigidbody>().velocity * Time.deltaTime);
 	}
 
 	public void LateUpdateMotion(Projectile projectile)
 	{
-		_lastPlayerPos = GameManager.Instance.player.transform.position;
+		if (!_followPlayer)
+			return;
+
+		if(GameManager.Instance._player != null)
+			_lastPlayerPos = GameManager.Instance._player.transform.position;
 	}
 }

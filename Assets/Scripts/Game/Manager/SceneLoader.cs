@@ -5,12 +5,11 @@ using UnityEngine.SceneManagement;
 
 public class SceneLoader : Singleton<SceneLoader>
 {
-	private const string scenePath = "Assets/Scenes/Game Scenes/";
+	private const string SCENE_PATH = "Assets/Scenes/Game Scenes/";
 
     public Action CompletedSceneLoad;
 
-    public SceneFader SceneFader { get; private set; }
-
+	private SceneFader _sceneFader;
     [SerializeField]
     private SceneFader _sceneFaderUI_prefab;
 
@@ -20,12 +19,12 @@ public class SceneLoader : Singleton<SceneLoader>
     protected override void Awake()
     {
         base.Awake();
-        SceneFader = Instantiate(_sceneFaderUI_prefab);
+        _sceneFader = Instantiate(_sceneFaderUI_prefab);
     }
 
     public void LoadScene(string sceneToLoad)
     {
-        _sceneToLoad = SceneUtility.GetBuildIndexByScenePath(scenePath + sceneToLoad + ".unity");
+        _sceneToLoad = SceneUtility.GetBuildIndexByScenePath(SCENE_PATH + sceneToLoad + ".unity");
         _currentScene = SceneManager.GetActiveScene();
 
         InputManager.Instance.DisableCharacterInputs();
@@ -45,7 +44,7 @@ public class SceneLoader : Singleton<SceneLoader>
 
     private IEnumerator FadeOut()
     {
-        WaitForSeconds waitTime = new WaitForSeconds(SceneFader.FadeOut());
+        WaitForSecondsRealtime waitTime = new WaitForSecondsRealtime(_sceneFader.FadeOut());
         yield return waitTime;
         UnloadScene();
     }
@@ -73,7 +72,7 @@ public class SceneLoader : Singleton<SceneLoader>
 
     private IEnumerator FadeIn()
     {
-        WaitForSeconds waitTime = new WaitForSeconds(SceneFader.FadeIn());
+        WaitForSecondsRealtime waitTime = new WaitForSecondsRealtime(_sceneFader.FadeIn());
         yield return waitTime;
     }
 }

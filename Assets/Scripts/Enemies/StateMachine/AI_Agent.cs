@@ -3,94 +3,61 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-// https://www.youtube.com/watch?v=1H9jrKyWKs0&t=34s
-
-[RequireComponent(typeof(NavMeshAgent), typeof(Animator), typeof(EnemyHealthComponent))]
-[DefaultExecutionOrder(1)]
 public class AI_Agent : MonoBehaviour
 {
-    // Enemy Types
+    [HideInInspector] public AI_StateMachine StateMachine;
+    public AI_StateID InitialState;
+    [HideInInspector] public NavMeshAgent NavMeshAgent;
+    [HideInInspector] public ObstacleAgent ObstacleAgent;
+    [HideInInspector] public Animator Animator;
+    [HideInInspector] public Rigidbody RigidBody;
+    [HideInInspector] public float OriginalAnimationSpeed;
+    [HideInInspector] public bool IsAffectedByAbility;
 
-    [HideInInspector] public AI_StateMachine _stateMachine;
-    public AI_StateID _initialState;
-    public BasicEnemyData _enemyData;
-    [HideInInspector] public NavMeshAgent _navMeshAgent;
-    [HideInInspector] public ObstacleAgent _obstacleAgent;
-    [HideInInspector] public Animator _animator;
-    [HideInInspector] public Rigidbody _rb;
-    [HideInInspector] public EnemyHealthComponent _healthComponent;
+    public LayerMask GroundLayer;
+    public LayerMask EnemyLayer;
+    public LayerMask PlayerLayer;
 
-    public LayerMask _groundLayer;
-    public LayerMask _enemyLayer;
-    public LayerMask _playerLayer;
+    public GameObject Player;
+    public Transform PlayerTransform;
+    [HideInInspector] public Transform DecoyTransform;
 
-    [HideInInspector] public GameObject _player;
-    [HideInInspector] public Transform _playerTransform;
-    [HideInInspector] public Transform _decoyTransform;
-
-    [HideInInspector] public float _attackTimer;
-    [HideInInspector] public float _lookRotationSpeed = 1f;
-    [HideInInspector] public bool _followDecoy;
-    public bool _canUseSkill;
+    [HideInInspector] public float AttackTimer;
+    [HideInInspector] public float LookRotationSpeed = 1f;
+    [HideInInspector] public bool FollowDecoy;
+    public bool CanUseSkill;
 
     [Header("Movement Prediction")]
-    public bool _useMovementPrediction;
-    [Range(-1f, 1f)] public float _movementPredictionThreshold = 0f;
-    [Range(0.25f, 2f)] public float _movementPredictionTime = 1f;
+    public bool UseMovementPrediction;
+    [Range(-1f, 1f)] public float MovementPredictionThreshold = 0f;
+    [Range(0.25f, 2f)] public float MovementPredictionTime = 1f;
 
     protected virtual void Start()
     {
-        // Register States
-
-        _navMeshAgent = GetComponent<NavMeshAgent>();
-        _obstacleAgent = GetComponent<ObstacleAgent>();
-        _animator = GetComponent<Animator>();
-        _rb = GetComponent<Rigidbody>();
-        _healthComponent = GetComponent<EnemyHealthComponent>();
-        _player = GameObject.FindGameObjectWithTag("Player");
-        _playerTransform = _player.GetComponent<Transform>();
-        _decoyTransform = GameObject.FindGameObjectWithTag("Decoy").transform;
-
-        SetEnemyData();
-
-        _stateMachine = new AI_StateMachine(this);
-        RegisterStates();
-        _stateMachine.ChangeState(_initialState);
-    }
-
-    protected virtual void Update()
-    {
-        _stateMachine.Update(GetComponent<AI_Agent>());
+        IsAffectedByAbility = false;
     }
 
     protected virtual void RegisterStates()
     {
-        _stateMachine.RegisterState(new AI_State_Idle());
-        _stateMachine.RegisterState(new AI_State_ChasePlayer());
-        _stateMachine.RegisterState(new AI_State_Retreat());
-        _stateMachine.RegisterState(new AI_State_Attack());
-        _stateMachine.RegisterState(new AI_State_SpecialAttack());
-        _stateMachine.RegisterState(new AI_State_Death());
+        StateMachine.RegisterState(new AI_State_Idle());
+        StateMachine.RegisterState(new AI_State_ChasePlayer());
+        StateMachine.RegisterState(new AI_State_Retreat());
+        StateMachine.RegisterState(new AI_State_Attack());
+        StateMachine.RegisterState(new AI_State_SpecialAttack());
+        StateMachine.RegisterState(new AI_State_Death());
     }
 
-    private void SetEnemyData()
-    {
-        _navMeshAgent.speed = _enemyData._maxMoveSpeed;
-        _navMeshAgent.acceleration = _enemyData._acceleration;
-        _attackTimer = 0f;
-    }
-
-    private void SetState(AI_StateID state) => _stateMachine.ChangeState(state);
+    public void SetState(AI_StateID state) => StateMachine.ChangeState(state);
 
     public void SetTarget(AI_Agent agent, Vector3 followPosition)
     {
-        if (agent._obstacleAgent.enabled && agent.enabled)
+        if (agent.ObstacleAgent.enabled && agent.enabled)
         {
-            agent._obstacleAgent.SetDestination(followPosition);
+            agent.ObstacleAgent.SetDestination(followPosition);
         }
-        else if (agent._navMeshAgent.enabled && agent.enabled)
+        else if (agent.NavMeshAgent.enabled && agent.enabled)
         {
-            if (agent._navMeshAgent.pathStatus == NavMeshPathStatus.PathInvalid)
+            if (agent.NavMeshAgent.pathStatus == NavMeshPathStatus.PathInvalid)
             {
                 GameManager.Instance.EnemyDied();
                 agent.gameObject.SetActive(false);
@@ -98,8 +65,10 @@ public class AI_Agent : MonoBehaviour
             }
             else
             {
-                agent._navMeshAgent.SetDestination(followPosition);
+                agent.NavMeshAgent.SetDestination(followPosition);
             }
         }
     }
+
+    public void SetAgentActive() => gameObject.GetComponent<AI_Agent>().enabled = true;
 }

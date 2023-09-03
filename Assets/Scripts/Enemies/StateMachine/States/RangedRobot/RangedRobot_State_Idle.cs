@@ -8,68 +8,59 @@ public class RangedRobot_State_Idle : AI_State_Idle
 
     public override void Enter(AI_Agent agent)
     {
+        base.Enter(agent);
+
         _rangedRobot = agent as AI_Agent_RangedRobot;
 
-        _followPosition = agent.transform.position;
+        _rangedRobot._followPosition = agent.transform.position;
 
-        agent.SetTarget(agent, _followPosition);
-
-        _followTimer = 0;
+        agent.SetTarget(agent, _rangedRobot._followPosition);
     }
 
     public override void Update(AI_Agent agent)
     {
-        if (!agent._navMeshAgent.enabled)
+        if (!agent.NavMeshAgent.enabled)
         {
             return;
         }
 
-        if (agent._followDecoy)
+        if (agent.FollowDecoy)
         {
-            _followPosition = agent._decoyTransform.position;
+            _rangedRobot._followPosition = agent.DecoyTransform.position;
         }
         else
         {
-            _followPosition = agent._playerTransform.position;
+            _rangedRobot._followPosition = agent.PlayerTransform.position;
         }
 
-        float distance = Vector3.Distance(agent.transform.position, _followPosition);
+        float distance = Vector3.Distance(agent.transform.position, _rangedRobot._followPosition);
 
         RaycastHit hit;
-        if (Physics.Raycast(_rangedRobot.ProjectilePoint.transform.position, (_followPosition + new Vector3(0, 0.5f, 0) - _rangedRobot.ProjectilePoint.transform.position), out hit, distance, agent._groundLayer))
+        if (Physics.Raycast(_rangedRobot.ProjectilePoint.transform.position, (_rangedRobot._followPosition + new Vector3(0, 0.5f, 0) - _rangedRobot.ProjectilePoint.transform.position), out hit, distance, agent.GroundLayer))
         {
-            if (distance < agent._enemyData._retreatRange)
+            if (distance <= _enemy._enemyData._retreatRange)
             {
-                agent._animator.SetBool("isRetreating", true);
-                agent._animator.SetBool("isAttacking", false);
-                agent._animator.SetBool("isChasing", false);
-                agent._stateMachine.ChangeState(AI_StateID.Retreat);
+                agent.StateMachine.ChangeState(AI_StateID.Retreat);
+            }
+            else
+            {
+                agent.StateMachine.ChangeState(AI_StateID.ChasePlayer);
             }
         }
         else
         {
-            if (distance < agent._enemyData._attackRange && distance > agent._enemyData._retreatRange)
+            if (distance <= _enemy._enemyData._retreatRange)
             {
-                agent._animator.SetBool("isAttacking", true);
-                agent._animator.SetBool("isChasing", false);
-                agent._animator.SetBool("isRetreating", false);
-                agent._stateMachine.ChangeState(AI_StateID.Attack);
+                agent.StateMachine.ChangeState(AI_StateID.Retreat);
             }
-            else if (distance < agent._enemyData._retreatRange)
+            else if (distance < _enemy._enemyData._attackRange)
             {
-                agent._animator.SetBool("isRetreating", true);
-                agent._animator.SetBool("isAttacking", false);
-                agent._animator.SetBool("isChasing", false);
-                agent._stateMachine.ChangeState(AI_StateID.Retreat);
+                agent.StateMachine.ChangeState(AI_StateID.Attack);
             }
-        }
-
-        _followTimer += Time.deltaTime;
-
-        if (_followTimer >= agent._enemyData._followTime)
-        {
-            agent._animator.SetBool("isChasing", true);
-            agent._stateMachine.ChangeState(AI_StateID.ChasePlayer);
+            else if (distance >= _enemy._enemyData._attackRange)
+            {
+                agent.StateMachine.ChangeState(AI_StateID.ChasePlayer);
+            }
         }
     }
 

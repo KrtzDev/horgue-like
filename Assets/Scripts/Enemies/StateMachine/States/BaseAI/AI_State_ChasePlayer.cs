@@ -7,9 +7,10 @@ public class AI_State_ChasePlayer : AI_State
 {
     protected Coroutine LookCoroutine;
 
-    public Vector3 _followPosition;
     public float _timer;
-    public float _maxTime = 0.1f;
+    public float _maxTime = 0.0f;
+
+    public AI_Agent_Enemy _enemy;
 
     public AI_StateID GetID()
     {
@@ -18,6 +19,7 @@ public class AI_State_ChasePlayer : AI_State
 
     public virtual void Enter(AI_Agent agent)
     {
+        _enemy = agent as AI_Agent_Enemy;
     }
 
     public virtual void Update(AI_Agent agent)

@@ -1,14 +1,15 @@
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class UIImageFillAmountWaveProgress : UIImageFillAmount
 {
     private EnemySpawner _enemySpawner;
 
-    public Text _enemiesKilledText;
-    public Text _CurrentLevelWave;
-    public Text _ScoreText;
-    public Text _LevelTimer;
+    public TextMeshProUGUI _enemiesKilledText;
+    public TextMeshProUGUI _CurrentLevelWave;
+    public TextMeshProUGUI _ScoreText;
+    public TextMeshProUGUI _LevelTimer;
 
     private int _enemiesKilled;
     private int _maxEnemiesAmount;
@@ -24,10 +25,10 @@ public class UIImageFillAmountWaveProgress : UIImageFillAmount
     {
 		_maxEnemiesAmount = _enemySpawner._enemySpawnerData._maxEnemyCount;
 
-        _CurrentLevelWave.text = "Level: " + GameManager.Instance._currentLevel + " -- Wave: " + GameManager.Instance._currentWave;
+        _CurrentLevelWave.text = "Level: " + GameManager.Instance._currentLevel;
 	}
 
-    public override void FixedUpdate()
+    public override void OnGUI()
     {
 		if (!GameManager.Instance) return;
 
@@ -61,8 +62,9 @@ public class UIImageFillAmountWaveProgress : UIImageFillAmount
 
         // EnemiesKilledText.text = _enemiesKilled + " / " + _maxEnemiesAmount;
         _enemiesKilledText.text = _enemiesKilled.ToString("000");
-        _ScoreText.text = GameManager.Instance._currentScore.ToString("000");
+		int money = GameManager.Instance.inventory.Wallet.GetMoneyAmount();
+		_ScoreText.text = money.ToString("000");
 
-        base.FixedUpdate();
+        base.OnGUI();
     }
 }

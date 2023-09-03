@@ -4,20 +4,35 @@ using UnityEngine;
 
 public class TrapSpikes : MonoBehaviour
 {
-    private Animator _spikes;
+    private Animator _animator;
 
-    [SerializeField]
+    [SerializeField] private int _spikeDamage;
+
     private bool _isTriggered;
 
-    [SerializeField]
-    private bool _isAutomated;
-    [SerializeField]
-    private float _cooldown;
+    [Header("On Trigger")]
+    [SerializeField] private GameObject _cube;
+    [SerializeField] private Material _trapMaterialOnActivation;
+    private Material _oldTrapMaterial;
+    [SerializeField] private float _delay;
+    [SerializeField] private float _rearming;
+    
+    [Header("Automatic")]
+    [SerializeField] private bool _isAutomated;
+    [SerializeField] private float _cooldown;
+    
     private float _timing;
+
+    private Spikes _spikes;
 
     private void Start()
     {
-        _spikes = GetComponent<Animator>();
+        _animator = GetComponent<Animator>();
+        _spikes = GetComponentInChildren<Spikes>();
+
+        _spikes._trapDamage = _spikeDamage;
+        _oldTrapMaterial = _cube.GetComponent<MeshRenderer>().material;
+
     }
 
     private void Update()
@@ -25,10 +40,16 @@ public class TrapSpikes : MonoBehaviour
         if (!_isAutomated)
             return;
 
-        if (Time.time > _timing + _cooldown)
+        if(Time.time > _timing + _cooldown)
         {
-            _spikes.SetTrigger("Triggered");
-            _timing = Time.time;
+            _cube.GetComponent<MeshRenderer>().material = _trapMaterialOnActivation;
+
+            if (Time.time > _timing + _cooldown + _delay)
+            {
+                _animator.SetTrigger("Triggered");
+                // AudioManager.Instance.PlaySound("TrapSpikes");
+                _timing = Time.time;
+            }
         }
     }
 
@@ -37,18 +58,43 @@ public class TrapSpikes : MonoBehaviour
         if (_isAutomated)
             return;
 
-        if (!_isTriggered)
+        if (other.CompareTag("Enemy") || other.CompareTag("Player"))
         {
-            _spikes.SetTrigger("Triggered");
-            _isTriggered = true;
+            if (!_isTriggered)
+            {
+                StartCoroutine(ActivateTrap());
+                _isTriggered = true;
+            }
         }
     }
 
-    private void OnTriggerExit(Collider other)
+    private IEnumerator ActivateTrap()
+    {
+        _cube.GetComponent<MeshRenderer>().material = _trapMaterialOnActivation;
+
+        yield return new WaitForSeconds(_delay);
+
+        // AudioManager.Instance.PlaySound("TrapSpikes");
+        _animator.SetTrigger("Triggered");
+    }
+
+    public void RearmTrap()
     {
         if (_isAutomated)
             return;
 
+        StartCoroutine(ReamingTrap());
+    }
+
+    private IEnumerator ReamingTrap()
+    {
+        yield return new WaitForSeconds(_rearming);
+
         _isTriggered = false;
+    }
+
+    private void ResetMaterial()
+    {
+        _cube.GetComponent<MeshRenderer>().material = _oldTrapMaterial;
     }
 }

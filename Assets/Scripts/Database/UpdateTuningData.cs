@@ -8,13 +8,33 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Networking;
+using UnityEngine.SceneManagement;
 
 public class UpdateTuningData : MonoBehaviour
 {
-	public void Start()
-	{
+    private void Start()
+    {
+		GameDataReader = FindObjectOfType<GameDataReader>();
+#if UNITY_EDITOR
+		SceneLoader.Instance.CompletedSceneLoad += OnCompletedSceneLoad;
+#else
 		GetTuningDataGame();
+#endif
 	}
+
+#if UNITY_EDITOR
+	private void OnCompletedSceneLoad()
+    {
+		if (!GameDataReader._dataRetrieved && SceneManager.GetActiveScene().name == "SCENE_Main_Menu")
+		{
+			GetTuningDataGame();
+		}
+		else
+		{
+			GameDataReader.GetGameData();
+		}
+	}
+#endif
 
 	public class ExportError
 	{
@@ -28,29 +48,24 @@ public class UpdateTuningData : MonoBehaviour
 	private static List<string[]> s_DataUpdateQueue = new List<string[]>();
 	static UnityWebRequest www;
 
-	public GameDataReader GameDataReader;
-	public bool dataRetrieved = false;
+	private GameDataReader GameDataReader;
+	private bool _canGetData;
 
 	public void GetTuningDataGame()
 	{
-		if (true)
-		{
-			s_DataUpdateQueue.Clear();
-			// ADD ALL SPREADSHEETS YOU WANT DO RETRIEVE CONFIG DATA FROM
-			// FIRST PART IS LOCAL FILE NAME TO CACHE (IN ASSETS FOLDER), SECOND IS SPREADSHEET KEY
-			s_DataUpdateQueue.Add(new string[] { "GameData.json", "1dbgvJsZAh6RdSJZYxfwGvvmaSeoRMNVGeIIugai8UIU" });
+		s_DataUpdateQueue.Clear();
+		// ADD ALL SPREADSHEETS YOU WANT DO RETRIEVE CONFIG DATA FROM
+		// FIRST PART IS LOCAL FILE NAME TO CACHE (IN ASSETS FOLDER), SECOND IS SPREADSHEET KEY
+		s_DataUpdateQueue.Add(new string[] { "GameData.json", "1dbgvJsZAh6RdSJZYxfwGvvmaSeoRMNVGeIIugai8UIU" });
 
-			Debug.Log("Get Data");
-			SendNextRequestGame();
-		}
-		else
-		{
-			Debug.Log("Game Data set Active");
-			GameDataReader.gameObject.SetActive(true);
-		}
+		Debug.Log("Get Data");
+		SendNextRequestGame();
+
+		// Debug.Log("Game Data set Active");
+		// GameDataReader.GetGameData();
 	}
 
-	static void SendNextRequestGame()
+	private void SendNextRequestGame()
 	{
 		if (s_DataUpdateQueue.Count == 0)
 		{
@@ -66,7 +81,7 @@ public class UpdateTuningData : MonoBehaviour
 
 	private void Update()
 	{
-		if (!dataRetrieved)
+		if (!GameDataReader._dataRetrieved && SceneManager.GetActiveScene().name == "SCENE_Main_Menu")
 		{
 			while (!www.isDone)
 				return;
@@ -79,8 +94,8 @@ public class UpdateTuningData : MonoBehaviour
 				error = true;
 				errorMessage = "Error updating data from sheet '" + s_DataUpdateQueue[0][1] + "' : " + www.error;
 
-				dataRetrieved = true;
-				GameDataReader.gameObject.SetActive(true);
+				GameDataReader._dataRetrieved = true;
+				GameDataReader.GetGameData();
 			}
 			else
 			{
@@ -93,8 +108,8 @@ public class UpdateTuningData : MonoBehaviour
 						error = true;
 						errorMessage = "Error updating data from sheet '" + jsonError.error + "'";
 
-						dataRetrieved = true;
-						GameDataReader.gameObject.SetActive(true);
+						GameDataReader._dataRetrieved = true;
+						GameDataReader.GetGameData();
 					}
 				}
 				catch
@@ -108,8 +123,8 @@ public class UpdateTuningData : MonoBehaviour
 				Debug.LogError(errorMessage);
 				//EditorApplication.update -= Update;
 
-				dataRetrieved = true;
-				GameDataReader.gameObject.SetActive(true);
+				GameDataReader._dataRetrieved = true;
+				GameDataReader.GetGameData();
 			}
 			else
 			{
@@ -125,11 +140,11 @@ public class UpdateTuningData : MonoBehaviour
 				if (s_DataUpdateQueue.Count == 0)
 				{
 					// Queue complete
-					dataRetrieved = true;
+					GameDataReader._dataRetrieved = true;
 					TextAsset data = new TextAsset(www.downloadHandler.text);
 					data.name = "GameData1";
 					GameDataReader.gameData = data;
-					GameDataReader.gameObject.SetActive(true);
+					GameDataReader.GetGameData();
 					//EditorApplication.update -= Update;
 					//AssetDatabase.Refresh();
 					www = null;

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AI_Agent_Sniper : AI_Agent
+public class AI_Agent_Sniper : AI_Agent_Enemy
 {
     [Header("Projectile")]
     [SerializeField] private GameObject _projectile;
@@ -22,29 +22,38 @@ public class AI_Agent_Sniper : AI_Agent
         base.Update();
     }
 
-    protected override void RegisterStates()
+    protected override void SetEnemyData()
     {
-        _stateMachine.RegisterState(new Sniper_State_Idle());
-        _stateMachine.RegisterState(new Sniper_State_ChasePlayer());
-        _stateMachine.RegisterState(new Sniper_State_Retreat());
-        _stateMachine.RegisterState(new Sniper_State_Attack());
-        _stateMachine.RegisterState(new AI_State_Death());
+        base.SetEnemyData();
+
+        _projectile.GetComponent<EnemyProjectile>().baseDamage = damagePerHit;
     }
 
-    public void SetDeactive()
+    protected override void RegisterStates()
     {
-        this.gameObject.SetActive(false);
+        StateMachine.RegisterState(new Sniper_State_Idle());
+        StateMachine.RegisterState(new Sniper_State_ChasePlayer());
+        StateMachine.RegisterState(new Sniper_State_Retreat());
+        StateMachine.RegisterState(new Sniper_State_Attack());
+        StateMachine.RegisterState(new AI_State_Death());
+    }
+
+    public override void SetDeactive()
+    {
+        base.SetDeactive();
         AI_Manager.Instance.Sniper.Remove(this);
     }
 
-    public void Shoot()
+    public override void Shoot()
     {
         Rigidbody rb = Instantiate(_projectile, ProjectilePoint.position, Quaternion.identity).GetComponent<Rigidbody>();
         rb.AddForce(TargetDirection * _projectileSpeed, ForceMode.Impulse);
     }
 
-    public void DoneShooting()
+    public override void DoneShooting()
     {
-        this.GetComponent<Animator>().SetBool("isShooting", false);
+        Animator.SetBool("isShooting", false);
+        Animator.SetBool("isAttacking", false);
+        StateMachine.ChangeState(AI_StateID.Idle);
     }
 }

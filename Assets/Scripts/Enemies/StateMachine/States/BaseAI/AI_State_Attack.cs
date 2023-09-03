@@ -4,15 +4,19 @@ using UnityEngine;
 
 public class AI_State_Attack : AI_State 
 {
-    public Vector3 _followPosition;
+    protected Coroutine LookCoroutine;
+
+    public AI_Agent_Enemy _enemy;
+    public float _maxTime = 0.1f;
+
     public AI_StateID GetID()
     {
         return AI_StateID.Attack;
     }
 
     public virtual void Enter(AI_Agent agent)
-    {
-
+    {          
+        _enemy = agent as AI_Agent_Enemy;
     }
 
     public virtual void Update(AI_Agent agent)

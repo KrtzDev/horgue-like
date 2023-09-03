@@ -18,9 +18,10 @@ MonoBehaviour:
   tickRate:
     min: 0
     max: 0
-  hasInitialExtraDamage: 0
-  initialDamage: 10
-  initialDamageVFX: {fileID: 0}
+  hasInitialExtraDamage: 1
+  initialDamage: 0
+  initialDamageVFX: {fileID: 5758294487887650858, guid: b84cbbb38c608b34fa5812d2e85d4221,
+    type: 3}
   hasDamageOverTime: 0
   dotDamage: 0
   dotDuration: 0

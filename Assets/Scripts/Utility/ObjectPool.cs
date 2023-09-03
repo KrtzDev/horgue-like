@@ -8,6 +8,8 @@ public class ObjectPool<T> where T : MonoBehaviour
     private int _size;
     private List<T> _availableObjectsPool;
 
+	public int Count => _availableObjectsPool.Count;
+
     public static ObjectPool<T> CreatePool(T prefab, int size, Transform parentTransform)
     {
         ObjectPool<T> pool = new ObjectPool<T>(prefab, size);
@@ -53,13 +55,14 @@ public class ObjectPool<T> where T : MonoBehaviour
     private void CreateObject()
     {
         T poolableObject = Object.Instantiate(_prefab, Vector3.zero, Quaternion.identity, _parent.transform);
-        poolableObject.gameObject.transform.parent = _parent.transform;
+        poolableObject.gameObject.transform.SetParent(_parent.transform);
         poolableObject.gameObject.SetActive(false);
 		_availableObjectsPool.Add(poolableObject);
 	}
 
     public void ReturnObjectToPool(T returnObject)
     {
+		returnObject.transform.SetParent(_parent.transform);
         _availableObjectsPool.Add(returnObject);
 		returnObject.gameObject.SetActive(false);
 	}

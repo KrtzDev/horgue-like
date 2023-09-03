@@ -13,44 +13,46 @@ public class PasuKan_State_JumpAttack : AI_State_SpecialAttack
 
     public override void Enter(AI_Agent agent)
     {
-        agent._navMeshAgent.enabled = false;
-        agent._rb.velocity = new Vector3(0, agent._rb.velocity.y, 0);
+        base.Enter(agent);
+
+        agent.NavMeshAgent.enabled = false;
+        agent.RigidBody.velocity = new Vector3(0, agent.RigidBody.velocity.y, 0);
 
         _startingPosition = agent.transform.position;
-        _followPosition = agent._player.transform.position;
-        agent._animator.SetTrigger("jumpAttack");
-        agent._animator.SetFloat("jumpTime", -1f);
+        _followPosition = agent.Player.transform.position;
+        agent.Animator.SetTrigger("jumpAttack");
+        agent.Animator.SetFloat("jumpTime", -1f);
     }
 
     public override void Update(AI_Agent agent)
     {
-        if(_jumpPrepTime <= agent._enemyData._jumpPrepTime)
+        if(_jumpPrepTime <= _enemy._enemyData._jumpPrepTime)
         {
             _jumpPrepTime += Time.deltaTime;
         }
         else
         {
-            if (_jumpTime <= agent._enemyData._jumpTime)
+            if (_jumpTime <= _enemy._enemyData._jumpTime)
             {
                 _jumpTime += Time.deltaTime;
-                _jumpFactor += Time.deltaTime * agent._enemyData._jumpForce;
+                _jumpFactor += Time.deltaTime * _enemy._enemyData._jumpForce;
 
-                agent._animator.transform.position = Vector3.Lerp(_startingPosition, _followPosition, _jumpFactor) + Vector3.up * agent._enemyData._heightCurve.Evaluate(_jumpTime) * agent._enemyData._jumpForce;
-                agent._animator.transform.rotation = Quaternion.Slerp(agent._animator.transform.rotation, Quaternion.LookRotation(_followPosition - agent._animator.transform.position), _jumpFactor);
-                agent._animator.SetFloat("jumpTime", _jumpTime);
+                agent.Animator.transform.position = Vector3.Lerp(_startingPosition, _followPosition, _jumpFactor) + Vector3.up * _enemy._enemyData._heightCurve.Evaluate(_jumpTime) * _enemy._enemyData._jumpForce;
+                agent.Animator.transform.rotation = Quaternion.Slerp(agent.Animator.transform.rotation, Quaternion.LookRotation(_followPosition - agent.Animator.transform.position), _jumpFactor);
+                agent.Animator.SetFloat("jumpTime", _jumpTime);
 
-                if (agent._animator.transform.position == _followPosition)
+                if (agent.Animator.transform.position == _followPosition)
                 {
-                    agent._animator.SetTrigger("jumpAttackEnded");
-                    agent._animator.SetBool("isChasing", true);
-                    agent._stateMachine.ChangeState(AI_StateID.ChasePlayer);
+                    agent.Animator.SetTrigger("jumpAttackEnded");
+                    agent.Animator.SetBool("isChasing", true);
+                    agent.StateMachine.ChangeState(AI_StateID.ChasePlayer);
                 }
             }
             else
             {
-                agent._animator.SetTrigger("jumpAttackEnded");
-                agent._animator.SetBool("isChasing", true);
-                agent._stateMachine.ChangeState(AI_StateID.ChasePlayer);
+                agent.Animator.SetTrigger("jumpAttackEnded");
+                agent.Animator.SetBool("isChasing", true);
+                agent.StateMachine.ChangeState(AI_StateID.ChasePlayer);
             }
         }
 
@@ -76,10 +78,10 @@ public class PasuKan_State_JumpAttack : AI_State_SpecialAttack
 
     public override void Exit(AI_Agent agent)
     {
-        agent._navMeshAgent.enabled = true;
-        if(NavMesh.SamplePosition(agent.transform.position, out NavMeshHit hit, 1f, agent._navMeshAgent.areaMask))
+        agent.NavMeshAgent.enabled = true;
+        if(NavMesh.SamplePosition(agent.transform.position, out NavMeshHit hit, 1f, agent.NavMeshAgent.areaMask))
         {
-            agent._navMeshAgent.Warp(hit.position);
+            agent.NavMeshAgent.Warp(hit.position);
         }
     }
 }

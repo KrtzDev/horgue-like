@@ -1,0 +1,72 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e53ff1b8ade7b5340af8b4e886fb2c85, type: 3}
+  m_Name: Orc
+  m_EditorClassIdentifier: 
+  _maxHealth: 170
+  _damagePerHit: 10
+  _attackSpeed: 3
+  _givenXP: 5
+  _maxMoveSpeed: 11
+  _acceleration: 10
+  _armor: 200
+  _elementalResistance: 200
+  _technicalResistance: -100
+  _healthDropChance: 0.08
+  baseDmgMultiplier: 1
+  dmgModifier: 0.2
+  addDmgModifier: 0.15
+  baseHealthMultiplier: 1
+  healthModifier: 0.325
+  addHealthModifier: 0.225
+  _attackRange: 1.6
+  _retreatRange: 0
+  _maxJumpAttackRange: 0
+  _minJumpAttackRange: 0
+  _jumpAttackChance: 0
+  _jumpAttackCooldown: 0
+  _jumpPrepTime: 0
+  _jumpTime: 0
+  _jumpForce: 0
+  _heightCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.57777655
+      value: 3.257011
+      inSlope: -0.024796013
+      outSlope: -0.024796013
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.9987488
+      value: -0.01651001
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4

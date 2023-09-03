@@ -5,23 +5,26 @@ using UnityEngine;
 public class CoinDrop : MonoBehaviour
 {
     [SerializeField] private Animator _animator;
-    [SerializeField] private AudioSource _collectSound;
     [SerializeField] GameObject _destroy;
-    public int _givenScore;
+    private bool _hasGivenScore = false;
+    public int givenScore;
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Player") && !_hasGivenScore)
         {
             StartPickUpAnimation();
+            _hasGivenScore = true;
         }
     }
 
     private void StartPickUpAnimation()
     {
-        _collectSound.Play();
+        gameObject.transform.parent.gameObject.GetComponent<Collider>().enabled = false;
+        AudioManager.Instance.PlaySound("Coin");
         _animator.SetBool("pickup", true);
-        GameManager.Instance._currentScore += _givenScore;
+		GameManager.Instance.inventory.Wallet.Store(givenScore);
+        StatsTracker.Instance.scoreCollectedLevel += givenScore;
     }
 
     public void Delete()

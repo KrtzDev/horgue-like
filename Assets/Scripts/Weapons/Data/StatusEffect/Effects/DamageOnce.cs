@@ -4,7 +4,7 @@
 
 	private HealthComponent _enemyHealth;
 
-	public DamageOnce(AI_Agent enemy, float additionalDamage)
+	public DamageOnce(AI_Agent_Enemy enemy, float additionalDamage)
 	{
 		_enemy = enemy;
 		_additionalDamage = additionalDamage;
@@ -14,7 +14,7 @@
 
 	public override void Tick(float delta)
 	{
-		_enemyHealth.TakeDamage((int)_additionalDamage);
+		_enemyHealth.TakeDamage((int)_additionalDamage, false);
 
 		OnEffectTicked?.Invoke(this);
 		OnEffectEnded?.Invoke(this);

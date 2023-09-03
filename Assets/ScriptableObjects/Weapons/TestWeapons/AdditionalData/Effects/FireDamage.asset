@@ -13,14 +13,15 @@ MonoBehaviour:
   m_Name: FireDamage
   m_EditorClassIdentifier: 
   _statusName: Fire
-  triggerChance: 20
+  triggerChance: 40
   effectDuration: 6
   tickRate:
     min: 1
     max: 3
   hasInitialExtraDamage: 1
   initialDamage: 10
-  initialDamageVFX: {fileID: 0}
+  initialDamageVFX: {fileID: 2569725102754683723, guid: 00b5e2bc5a30cc74099c2782c4870515,
+    type: 3}
   hasDamageOverTime: 1
   dotDamage: 3
   dotDuration: 6
