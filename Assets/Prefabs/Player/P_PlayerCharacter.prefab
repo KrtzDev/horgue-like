@@ -11347,6 +11347,7 @@ MonoBehaviour:
   _damageFlashMaterial: {fileID: 2100000, guid: 406dc313de4d32543abbb12222c4612f,
     type: 2}
   _damageFlashTime: 0.1125
+  _secondsForOneFlash: 0.25
 --- !u!114 &1382852200032817076
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -29080,6 +29081,7 @@ GameObject:
   - component: {fileID: 6993877236670802813}
   - component: {fileID: 8491761180075588916}
   - component: {fileID: 340462363}
+  - component: {fileID: 6532193134221942313}
   m_Layer: 6
   m_Name: cm
   m_TagString: Untagged
@@ -29195,6 +29197,23 @@ MonoBehaviour:
   m_LegacyHeightOffset: 3.4028235e+38
   m_LegacyHeadingBias: 3.4028235e+38
   m_HeadingIsSlave: 0
+--- !u!114 &6532193134221942313
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5037849427907521827}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68bb026fafb42b14791938953eaace77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_NoiseProfile: {fileID: 11400000, guid: e9ce97b7a206dc64d90931ea044e0c72, type: 2}
+  m_PivotOffset: {x: 0, y: 0, z: 0}
+  m_AmplitudeGain: 0
+  m_FrequencyGain: 1
+  mNoiseOffsets: {x: 0, y: 0, z: 0}
 --- !u!1 &5111895465351101509
 GameObject:
   m_ObjectHideFlags: 0
