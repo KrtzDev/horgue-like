@@ -7,7 +7,9 @@ using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+#if UNITY_EDITOR
 [InitializeOnLoad]
+#endif
 public class Bootstrapper
 {
 	private const string INIT_SCENE_PATH = "Assets/Scenes/Game Scenes/SCENE_Init.unity";
@@ -58,12 +60,12 @@ public class Bootstrapper
     private static void LoadMainMenuScene()
     {
         SceneManager.LoadSceneAsync("SCENE_Main_Menu",LoadSceneMode.Additive).completed += SetGameplaySceneActive;
-        activeEditorScenes.Add("SCENE_Main_Menu");
+        _activeEditorScenes.Add("SCENE_Main_Menu");
     }
 
     private static void SetGameplaySceneActive(AsyncOperation asyncOperation)
     {
-        SceneManager.SetActiveScene(SceneManager.GetSceneByName(activeEditorScenes.Last()));
+        SceneManager.SetActiveScene(SceneManager.GetSceneByName(_activeEditorScenes.Last()));
     }
 #endif
 }

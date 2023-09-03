@@ -29,6 +29,8 @@ public class ShopUI : UIMenu
 	[SerializeField]
 	private HoldButton _newShopButton;
 	[SerializeField]
+	private int _rerollCost;
+	[SerializeField]
 	private HoldButton _sellButton;
 	[SerializeField]
 	private HoldButton _equipButton;
@@ -36,12 +38,35 @@ public class ShopUI : UIMenu
 	[SerializeField]
 	private ToolTipUI _toolTipUI_prefab;
 
+	[SerializeField]
+	private List<ShopCostUI> _shopCostUIs;
+
 	public List<ToolTipUI> shopItems;
 
 	private void Start()
 	{
 		shopItems = new List<ToolTipUI>();
-		for (int i = 0; i < 3; i++)
+		RefreshShop(3);
+
+		_newShopButton.OnButtonExecute += () => TryRefreshShop(3);
+	}
+
+	private void TryRefreshShop(int numberOfItems)
+	{
+		if(GameManager.Instance.inventory.Wallet.TryPay(_rerollCost))
+			RefreshShop(numberOfItems);
+	}
+
+	private void RefreshShop(int numberOfItems)
+	{
+		for (int i = 0; i < shopItems.Count; i++)
+		{
+			shopItems[i].CleanUp();
+		}
+
+		shopItems.Clear();
+
+		for (int i = 0; i < numberOfItems; i++)
 		{
 			ToolTipUI tooltipUI = Instantiate(_toolTipUI_prefab, _shopItemContainer);
 			WeaponPart weaponPart = RewardManager.Instance.GetReward();
@@ -52,12 +77,11 @@ public class ShopUI : UIMenu
 			tooltipUI.OnSelected += OnToolTipSelected;
 			tooltipUI.OnDeselected += OnToolTipDeselected;
 			tooltipUI.buyButton = _buyButton;
-			tooltipUI.newShopButton = _newShopButton;
 
 			tooltipUI.Initialize(weaponPart);
 			shopItems.Add(tooltipUI);
 		}
-
+		UpdateShopCostUIs();
 		SetUpNavigation();
 	}
 
@@ -74,6 +98,14 @@ public class ShopUI : UIMenu
 
 		if (shopItems.Count > 0)
 			StartCoroutine(SelectFirstItemAfterFrame());
+
+		UpdateShopCostUIs();
+	}
+
+	private void UpdateShopCostUIs()
+	{
+		for (int i = 0; i < shopItems.Count; i++)
+			_shopCostUIs[i].CostText.text = $"$: {shopItems[i].weaponPart.cost}";
 	}
 
 	private IEnumerator SelectFirstItemAfterFrame()

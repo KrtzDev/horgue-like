@@ -1,5 +1,4 @@
-﻿using Unity.VisualScripting.Dependencies.Sqlite;
-using UnityEngine;
+﻿using UnityEngine;
 
 [CreateAssetMenu(fileName = "new SkeletonBaseStats", menuName = "ModularWeapon/SkeletonBaseStats")]
 public class SkeletonBaseStats : ScriptableObject
