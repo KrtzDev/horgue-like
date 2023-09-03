@@ -142,10 +142,16 @@ MonoBehaviour:
   spawnTransform: {fileID: 0}
   _hitLayerMask:
     serializedVersion: 2
-    m_Bits: 641
+    m_Bits: 25217
   _enemyLayerMask:
     serializedVersion: 2
     m_Bits: 128
+  _objLayerMask1:
+    serializedVersion: 2
+    m_Bits: 8192
+  _objLayerMask2:
+    serializedVersion: 2
+    m_Bits: 16384
 --- !u!96 &-7501764012399251321
 TrailRenderer:
   serializedVersion: 2

@@ -18,13 +18,16 @@ public class ExplosiveObject : MonoBehaviour
     }
 
     private void Update()
-    {
-        /*
+    {  
         if (_isTriggered && !_destroyed)
         {
             TriggerExplosive();
         }
-        */
+    }
+
+    public void BulletHit()
+    {
+        _isTriggered = true;
     }
 
     public void TriggerExplosive()
