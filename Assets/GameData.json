@@ -137,7 +137,7 @@
   "Level": [
     {
       "name": "Level1",
-      "TimeToSurvive": 1,
+      "TimeToSurvive": 45,
       "spawnTick": 4.5,
       "spawnsPerTick": 7,
       "minEnemyCount": 12,
@@ -326,7 +326,7 @@
       "criticalHitDamage": 1.5,
       "projectileWidth": 0.1,
       "range": 13,
-      "cost": 50,
+      "cost": 35,
       "maxAttackSpeed": 7.5,
       "maxCooldown": 10,
       "maxCriticalHitChance": 100,
@@ -351,7 +351,7 @@
       "criticalHitDamage": 1.5,
       "projectileWidth": 0.1,
       "range": 13,
-      "cost": 50
+      "cost": 35
     },
     {
       "name": "Ammunition AK",
@@ -556,7 +556,7 @@
       "criticalHitDamage": 1.5,
       "projectileWidth": 0.1,
       "range": 13,
-      "cost": 50
+      "cost": 35
     },
     {
       "name": "Barrel AK",
@@ -825,7 +825,7 @@
       "criticalHitDamage": 1.5,
       "projectileWidth": 0.1,
       "range": 13,
-      "cost": 50
+      "cost": 35
     },
     {
       "name": "30s Double Grip",
@@ -1060,7 +1060,7 @@
       "criticalHitDamage": 1.5,
       "projectileWidth": 0.1,
       "range": 13,
-      "cost": 50
+      "cost": 35
     },
     {
       "name": "Billard Ball Drum",
@@ -1284,7 +1284,7 @@
       "criticalHitDamage": 1.5,
       "projectileWidth": 0.1,
       "range": 13,
-      "cost": 50
+      "cost": 35
     },
     {
       "name": "Basic Iron Sights",
@@ -1478,7 +1478,7 @@
       "criticalHitDamage": 1.5,
       "projectileWidth": 0.1,
       "range": 13,
-      "cost": 50
+      "cost": 35
     },
     {
       "name": "Adjustable Break Trigger",

@@ -150,6 +150,8 @@ public class PlayerJump : MonoBehaviour
 
         Vector2 jumpDir = new Vector2(_character.CharacterRigidbody.velocity.x, _jumpForce);
         _character.CharacterRigidbody.AddForce(jumpDir, ForceMode.Impulse);
+
+        AudioManager.Instance.PlaySound("Jump");
     }
 
     #region Draw_Gizmos
