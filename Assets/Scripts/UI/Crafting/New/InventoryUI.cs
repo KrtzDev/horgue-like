@@ -77,6 +77,9 @@ public class InventoryUI : UIMenu
 	{
 		GameManager.Instance.inventory.RemoveFromInventory(weaponPart.weaponPart);
 
+		WeaponPart oldPart =_weaponUI.weapon.GetWeaponPartOfType(weaponPart.weaponPart);
+		AddToInventory(oldPart);
+
 		_weaponUI.SetNewWeaponPart(weaponPart);
 
 		AudioManager.Instance.PlaySound("WeaponPartEquip");
