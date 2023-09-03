@@ -13,6 +13,9 @@ public class MainMenu : MonoBehaviour
     {
 		Time.timeScale = 1;
 		_controlSchemeActive = false;
+
+		if(!AudioManager.Instance.IsSoundPlaying("Theme"))
+			AudioManager.Instance.PlaySound("Theme");
 	}
 
     public void StartGame()

@@ -15,10 +15,15 @@ public class UpdateTuningData : MonoBehaviour
     private void Start()
     {
 		GameDataReader = FindObjectOfType<GameDataReader>();
+#if UNITY_EDITOR
 		SceneLoader.Instance.CompletedSceneLoad += OnCompletedSceneLoad;
+#else
+		GetTuningDataGame();
+#endif
 	}
 
-    private void OnCompletedSceneLoad()
+#if UNITY_EDITOR
+	private void OnCompletedSceneLoad()
     {
 		if (!GameDataReader._dataRetrieved && SceneManager.GetActiveScene().name == "SCENE_Main_Menu")
 		{
@@ -29,6 +34,7 @@ public class UpdateTuningData : MonoBehaviour
 			GameDataReader.GetGameData();
 		}
 	}
+#endif
 
 	public class ExportError
 	{
@@ -43,27 +49,23 @@ public class UpdateTuningData : MonoBehaviour
 	static UnityWebRequest www;
 
 	private GameDataReader GameDataReader;
+	private bool _canGetData;
 
 	public void GetTuningDataGame()
 	{
-		if (true)
-		{
-			s_DataUpdateQueue.Clear();
-			// ADD ALL SPREADSHEETS YOU WANT DO RETRIEVE CONFIG DATA FROM
-			// FIRST PART IS LOCAL FILE NAME TO CACHE (IN ASSETS FOLDER), SECOND IS SPREADSHEET KEY
-			s_DataUpdateQueue.Add(new string[] { "GameData.json", "1dbgvJsZAh6RdSJZYxfwGvvmaSeoRMNVGeIIugai8UIU" });
+		s_DataUpdateQueue.Clear();
+		// ADD ALL SPREADSHEETS YOU WANT DO RETRIEVE CONFIG DATA FROM
+		// FIRST PART IS LOCAL FILE NAME TO CACHE (IN ASSETS FOLDER), SECOND IS SPREADSHEET KEY
+		s_DataUpdateQueue.Add(new string[] { "GameData.json", "1dbgvJsZAh6RdSJZYxfwGvvmaSeoRMNVGeIIugai8UIU" });
 
-			Debug.Log("Get Data");
-			SendNextRequestGame();
-		}
-		else
-		{
-			Debug.Log("Game Data set Active");
-			GameDataReader.GetGameData();
-		}
+		Debug.Log("Get Data");
+		SendNextRequestGame();
+
+		// Debug.Log("Game Data set Active");
+		// GameDataReader.GetGameData();
 	}
 
-	static void SendNextRequestGame()
+	private void SendNextRequestGame()
 	{
 		if (s_DataUpdateQueue.Count == 0)
 		{

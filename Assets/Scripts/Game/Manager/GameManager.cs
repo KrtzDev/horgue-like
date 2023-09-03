@@ -4,6 +4,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine.AI;
 
+[DefaultExecutionOrder(-1)]
 public class GameManager : Singleton<GameManager>
 {
 	private enum WinningCondition
@@ -115,9 +116,6 @@ public class GameManager : Singleton<GameManager>
 			_gameIsPaused = false;
 			bossCheat = false;
 
-			AudioManager.Instance.StopSound("Theme", 0f);
-			AudioManager.Instance.PlaySound("Theme");
-
 			StatsTracker.Instance.ResetAllStats();
 
 			return;
@@ -174,13 +172,11 @@ public class GameManager : Singleton<GameManager>
 			WeaponHolster weaponHolster = FindObjectOfType<WeaponHolster>();
 			BossCheat(weaponHolster);
 			weaponHolster.Initialize();
-			UIManager.Instance.GameUI.GetComponent<UIWeapon>().SetMaxCapacity(weaponHolster);
 		}
 		else
         {
 			WeaponHolster weaponHolster = FindObjectOfType<WeaponHolster>();
 			weaponHolster.Initialize();
-			UIManager.Instance.GameUI.GetComponent<UIWeapon>().SetMaxCapacity(weaponHolster);
 		}
 
 		_currentAbility = null;
