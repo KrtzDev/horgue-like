@@ -8,6 +8,8 @@ public class ObjectPool<T> where T : MonoBehaviour
     private int _size;
     private List<T> _availableObjectsPool;
 
+	public int Count => _availableObjectsPool.Count;
+
     public static ObjectPool<T> CreatePool(T prefab, int size, Transform parentTransform)
     {
         ObjectPool<T> pool = new ObjectPool<T>(prefab, size);

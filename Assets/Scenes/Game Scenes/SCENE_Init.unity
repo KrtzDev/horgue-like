@@ -682,7 +682,7 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: Swamp
     clip: {fileID: 8300000, guid: e0af5d1440d38a241ad55914a7bfc12e, type: 3}
-    volume: 0.025
+    volume: 0.015
     pitch: 1
     loop: 1
     source: {fileID: 0}
