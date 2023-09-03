@@ -343,6 +343,19 @@ MonoBehaviour:
   _playerCanUseAbilities: 0
   _currentAbility: {fileID: 0}
   inventory: {fileID: 1161142122}
+  bossCheat: 0
+  amm1: {fileID: 11400000, guid: f528b1d8c0c1746459b3d3c20a7a3cc8, type: 2}
+  amm2: {fileID: 11400000, guid: b922ec72a85ec784d8299148869a45d3, type: 2}
+  trigger1: {fileID: 11400000, guid: 91c39c5e52357aa40b95e54bae74ee3d, type: 2}
+  trigger2: {fileID: 11400000, guid: e5398cc8c1902d14880e5a0609687a27, type: 2}
+  grip1: {fileID: 11400000, guid: be60f2d844d0c024b894cb6440dc9f75, type: 2}
+  grip2: {fileID: 11400000, guid: 97dec1cd5dae84349b447f89207d519e, type: 2}
+  magazine1: {fileID: 11400000, guid: 316b1d3a766537848af8edb8c9389398, type: 2}
+  magazine2: {fileID: 11400000, guid: 95555f8b3dbf33a419293c5b8b068d46, type: 2}
+  barrel1: {fileID: 11400000, guid: b7781e5776bd4384badec6b3f28d12ca, type: 2}
+  barrel2: {fileID: 11400000, guid: 72479c756f21df24d8c149c9273c1cc1, type: 2}
+  sight1: {fileID: 11400000, guid: bde4ddc51abd0b8489ceb37bad395f0d, type: 2}
+  sight2: {fileID: 11400000, guid: 349d596668c422e4aa979fc1117f8724, type: 2}
 --- !u!1 &1115456804
 GameObject:
   m_ObjectHideFlags: 0
@@ -512,19 +525,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <Wallet>k__BackingField:
-    _money: 100
-  _weaponParts:
-  - {fileID: 11400000, guid: 83a1eecf3296d7f4b998eceec3eeac24, type: 2}
-  - {fileID: 11400000, guid: 69e3f0420738dfc42bfbd5097f3a11c1, type: 2}
-  - {fileID: 11400000, guid: 06383c904fd901f4397c4c2bf73d2f55, type: 2}
-  - {fileID: 11400000, guid: 316b1d3a766537848af8edb8c9389398, type: 2}
-  - {fileID: 11400000, guid: 832f95a126aa30a4f951dc5232bf1d68, type: 2}
-  - {fileID: 11400000, guid: 1dfe9618dd4cde245a63e8ed2ec4c446, type: 2}
-  - {fileID: 11400000, guid: 11ac8506e60030e46b8707a9502514e3, type: 2}
-  - {fileID: 11400000, guid: ce8559b172bc8aa4aacb122fe4357af1, type: 2}
-  - {fileID: 11400000, guid: 349d596668c422e4aa979fc1117f8724, type: 2}
-  - {fileID: 11400000, guid: 6bdbb3067dd4f3041825cbf51f743164, type: 2}
-  - {fileID: 11400000, guid: 48a85ca93228dc642839926706b12be3, type: 2}
+    _money: 0
+  _weaponParts: []
 --- !u!1 &1354712360
 GameObject:
   m_ObjectHideFlags: 0

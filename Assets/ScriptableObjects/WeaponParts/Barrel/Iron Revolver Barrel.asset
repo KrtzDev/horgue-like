@@ -15,16 +15,16 @@ MonoBehaviour:
   <WeaponPartUISprite>k__BackingField: {fileID: 21300000, guid: f58bf1761cfa7d147b72bc19c35e8ad5,
     type: 3}
   <WeaponPartPrefab>k__BackingField: {fileID: 0}
-  baseDamage: 31.5
+  baseDamage: 36.225
   attackSpeed: 0
   cooldown: 0.3
   projectileSize: 0.040000003
-  critChance: 3
+  critChance: 3.45
   critDamage: 0
-  range: 9.099999
-  levelObtained: 1
-  cost: 60
+  range: 10.464999
+  levelObtained: 7
+  cost: 108.75
   rarity: rare
-  weight: 25
-  attackPattern: {fileID: 11400000, guid: af8c671aae019504f856c1b9c52782e4, type: 2}
+  weight: 28
+  attackPattern: {fileID: 11400000, guid: c2f19eaf00c4f82409d7d54481096bac, type: 2}
   motionPattern: {fileID: 11400000, guid: 9aa305ff9050739458fbff74de9180b1, type: 2}

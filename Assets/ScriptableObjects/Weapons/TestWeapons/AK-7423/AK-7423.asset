@@ -13,16 +13,17 @@ MonoBehaviour:
   m_Name: AK-7423
   m_EditorClassIdentifier: 
   _weaponStats:
-    damage: 47.25
-    attackspeed: 1.55
-    cooldown: 1.5999999
-    projectileSize: 0.09
-    critChance: 15.5
-    critDamage: 1.575
-    range: 15.6
-    capacity: 30
-    attackPattern: {fileID: 0}
-    motionPattern: {fileID: 0}
+    dps: 0
+    damage: 0
+    attackspeed: 0
+    cooldown: 0
+    projectileSize: 0
+    critChance: 0
+    critDamage: 0
+    range: 0
+    capacity: 0
+    attackPattern: {fileID: 11400000, guid: c2f19eaf00c4f82409d7d54481096bac, type: 2}
+    motionPattern: {fileID: 11400000, guid: 9aa305ff9050739458fbff74de9180b1, type: 2}
     statusEffect: {fileID: 0}
   _weaponSkeleton: {fileID: 4852173439239307193, guid: 534ea9bec0f3ace4cb13174feb65375c,
     type: 3}
@@ -34,16 +35,18 @@ MonoBehaviour:
   defaultTriggerMechanism: {fileID: 11400000, guid: 0f7624e58b0f3704dbc533de49e53d62,
     type: 2}
   defaultSight: {fileID: 11400000, guid: 612593ce1e077ac4cac55bf8ff35000b, type: 2}
-  grip: {fileID: 11400000, guid: 0276b4dcb70fffb41b116150bb36184b, type: 2}
-  barrel: {fileID: 11400000, guid: 515593ea7be837b42a2b624475df7156, type: 2}
-  magazine: {fileID: 11400000, guid: 656a4e1564f625e479b4f25ced411e93, type: 2}
-  ammunition: {fileID: 11400000, guid: f5a77338c7e17fc45a1deac92addcff1, type: 2}
-  triggerMechanism: {fileID: 11400000, guid: 0f7624e58b0f3704dbc533de49e53d62, type: 2}
-  sight: {fileID: 11400000, guid: 612593ce1e077ac4cac55bf8ff35000b, type: 2}
+  grip: {fileID: 11400000, guid: 97dec1cd5dae84349b447f89207d519e, type: 2}
+  barrel: {fileID: 11400000, guid: 72479c756f21df24d8c149c9273c1cc1, type: 2}
+  magazine: {fileID: 11400000, guid: 95555f8b3dbf33a419293c5b8b068d46, type: 2}
+  ammunition: {fileID: 11400000, guid: b922ec72a85ec784d8299148869a45d3, type: 2}
+  triggerMechanism: {fileID: 11400000, guid: e5398cc8c1902d14880e5a0609687a27, type: 2}
+  sight: {fileID: 11400000, guid: 349d596668c422e4aa979fc1117f8724, type: 2}
   _enemyLayer:
     serializedVersion: 2
     m_Bits: 128
   _groundLayer:
     serializedVersion: 2
     m_Bits: 513
-  _capacity: 30
+  _capacity: 20
+  _isReloading: 0
+  _reloadTime: 0.1

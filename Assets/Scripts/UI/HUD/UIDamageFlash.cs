@@ -1,6 +1,9 @@
+using Cinemachine;
 using System.Collections;
+using TMPro.EditorUtilities;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.InputSystem;
 
 public class UIDamageFlash : MonoBehaviour
 {
@@ -11,6 +14,18 @@ public class UIDamageFlash : MonoBehaviour
     [SerializeField] private Vector2 _posOffset;
 
     Coroutine _currentFlashRoutine = null;
+
+    [SerializeField] private CinemachineBasicMultiChannelPerlin _cam;
+    [SerializeField] private float _screenShakeIntensity = 1f;
+
+    private Gamepad _pad;
+    [SerializeField] private float _lowFrequencyPulse = 0.25f;
+    [SerializeField] private float _highFrequencyPulse = 1f;
+
+    private void Start()
+    {
+        _cam = FindObjectOfType<CinemachineBasicMultiChannelPerlin>();
+    }
 
     public void DamageFlash(float secondsForOneFlash, float maxAlphaBackground, float maxAlphaTexture)
     {
@@ -34,6 +49,10 @@ public class UIDamageFlash : MonoBehaviour
         float flashInDuration = secondsForOneFlash / 2;
         for (float t = 0; t <= flashInDuration; t += Time.deltaTime)
         {
+            _cam.m_AmplitudeGain = _screenShakeIntensity;
+
+            RumblePulse(_lowFrequencyPulse, _highFrequencyPulse);
+
             Color colorThisFrame = _backgroundImage.color;
             colorThisFrame.a = Mathf.Lerp(0, maxAlphaBackground, t / flashInDuration);
             _backgroundImage.color = colorThisFrame;
@@ -48,6 +67,10 @@ public class UIDamageFlash : MonoBehaviour
         float flashOutDuration = secondsForOneFlash / 2;
         for (float t = 0; t <= flashOutDuration; t += Time.deltaTime)
         {
+            _cam.m_AmplitudeGain = 0;
+
+            StopRumble();
+
             Color colorThisFrame = _backgroundImage.color;
             colorThisFrame.a = Mathf.Lerp(maxAlphaBackground, 0, t / flashOutDuration);
             _backgroundImage.color = colorThisFrame;
@@ -63,4 +86,23 @@ public class UIDamageFlash : MonoBehaviour
         _textureImage.color = new Color(0, 0, 0, 0);
     }
 
+    private void RumblePulse(float lowFrequency, float highFrequency)
+    {
+        _pad = Gamepad.current;
+
+        if (_pad != null)
+        {
+            _pad.SetMotorSpeeds(lowFrequency, highFrequency);
+        }
+    }
+
+    private void StopRumble()
+    {
+        _pad = Gamepad.current;
+
+        if (_pad != null)
+        {
+            _pad.SetMotorSpeeds(0f, 0f);
+        }
+    } 
 }

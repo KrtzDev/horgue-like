@@ -26,7 +26,7 @@ public class Status : MonoBehaviour
 		_statusEffects.Remove(statusEffect);
 	}
 
-	private void RemoveAllEffects()
+	public void RemoveAllEffects()
 	{
 		for (int i = 0; i < _statusEffects.Count; i++)
 		{

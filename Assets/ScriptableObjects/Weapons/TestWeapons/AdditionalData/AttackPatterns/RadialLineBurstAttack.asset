@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78c9c38ba2ce9c44b98df93461aa56b8, type: 3}
   m_Name: RadialLineBurstAttack
   m_EditorClassIdentifier: 
-  _patternName: Radial Burst
+  _patternName: Radial Line Burst
   _pattern: {fileID: 6679049981621152435, guid: 1d5a73a67f154d8488cfb9630bd0e49a,
     type: 3}
   _maxSimultaniousProjectiles: 5

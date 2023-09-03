@@ -136,7 +136,7 @@ MonoBehaviour:
   finalCritChance: 30
   finalCritDamage: 0
   finalRange: 12.8125
-  attackPattern: {fileID: 11400000, guid: 526278176c5d56e4b9357d9dc8b3ed6e, type: 2}
+  attackPattern: {fileID: 0}
   motionPattern: {fileID: 0}
   statusEffect: {fileID: 0}
   spawnTransform: {fileID: 0}

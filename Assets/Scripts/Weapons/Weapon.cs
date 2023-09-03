@@ -85,6 +85,7 @@ public class Weapon : ScriptableObject
 	public void Initialize(Transform owningTransform)
 	{
 		Debug.Log("Inizialized " + _weaponSkeleton);
+
 		OwningTransform = owningTransform;
 		_currentWeaponSkeleton = Instantiate(_weaponSkeleton, owningTransform);
 		_currentPatternPrefab = Instantiate(barrel.attackPattern.GetPattern(), _currentWeaponSkeleton.ProjectileSpawnPosition);
@@ -728,10 +729,13 @@ public class Weapon : ScriptableObject
 		// could play first reload sound, then 2nd when reload is finished
 
 		FindObjectOfType<ReloadIndicator>().UseReloadIndicator(weaponSprite, _reloadTime);
-		AudioManager.Instance.PlaySound("WeaponReloadEmpty");
+
+		if(!AudioManager.Instance.IsSoundPlaying("WeaponReloadEmpty"))
+			AudioManager.Instance.PlaySound("WeaponReloadEmpty");
 
 		await Task.Delay((int)(_reloadTime * 1000));
-		AudioManager.Instance.PlaySound("WeaponReloadFull");
+		if (!AudioManager.Instance.IsSoundPlaying("WeaponReloadFull"))
+			AudioManager.Instance.PlaySound("WeaponReloadFull");
 
 		_capacity = magazine.capacity;
 		_isReloading = false;
