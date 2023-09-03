@@ -110,7 +110,7 @@ public class ToolTipUI : Selectable
 			if (ammunition.statusEffect != null)
 			{
 				statusEffectStatUI = Instantiate(_statUI_prefab, _statParent);
-				statusEffectStatUI.Initialize("Effect", ammunition.statusEffect.StatusName());
+				statusEffectStatUI.Initialize("Effect: ", ammunition.statusEffect.StatusName());
 			}
 		}
 	}
