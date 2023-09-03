@@ -6,10 +6,12 @@ using System.Collections;
 public class AudioManager : Singleton<AudioManager>
 {
     public Sound[] sounds;
+    [SerializeField] private AudioMixerGroup _master;
+    [SerializeField] private AudioMixer _mixer;
 
     private void Start()
     {
-        foreach(Sound s in sounds)
+        foreach (Sound s in sounds)
         {
             s.source = gameObject.AddComponent<AudioSource>();
             s.source.clip = s.clip;
@@ -31,6 +33,8 @@ public class AudioManager : Singleton<AudioManager>
             Debug.LogWarning("Sound: '" + name + "' not found!");
             return;
         }
+
+        s.source.outputAudioMixerGroup = _master;
         s.source.Play();
     }
 
@@ -71,5 +75,11 @@ public class AudioManager : Singleton<AudioManager>
         s.source.Stop();
 
         yield break;
+    }
+
+    public void SetAudioVolume(float volume)
+    {
+        _master.audioMixer.SetFloat("Volume", Mathf.Log10(volume) * 20);
+        _mixer.SetFloat("Volume", Mathf.Log10(volume) * 20);
     }
 }
