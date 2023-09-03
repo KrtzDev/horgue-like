@@ -98,6 +98,7 @@ public class AI_Agent_Rikayon : AI_Agent_Enemy
             Animator.SetTrigger("bossStage1");
             _currentBossStage = 1;
             HealthComponent.canTakeDamage = false;
+            DestroySpawnPositionChilds();
 
             NavMeshAgent.speed *= _bossStageMovementMultiplier.x;
             NavMeshAgent.acceleration *= _bossStageMovementMultiplier.x;
@@ -115,6 +116,7 @@ public class AI_Agent_Rikayon : AI_Agent_Enemy
             Animator.SetTrigger("bossStage2");
             _currentBossStage = 2;
             HealthComponent.canTakeDamage = false;
+            DestroySpawnPositionChilds();
 
             NavMeshAgent.speed /= _bossStageMovementMultiplier.x;
             NavMeshAgent.acceleration /= _bossStageMovementMultiplier.x;

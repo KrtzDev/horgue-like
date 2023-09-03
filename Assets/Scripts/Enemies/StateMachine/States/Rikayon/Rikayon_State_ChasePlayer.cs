@@ -13,6 +13,7 @@ public class Rikayon_State_ChasePlayer : AI_State_ChasePlayer
         agent.Animator.SetBool("isChasing", true);
 
         _rikayon = agent as AI_Agent_Rikayon;
+        _rikayon.DestroySpawnPositionChilds();
     }
 
     public override void Update(AI_Agent agent)
