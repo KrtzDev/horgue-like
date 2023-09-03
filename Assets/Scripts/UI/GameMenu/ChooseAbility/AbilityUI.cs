@@ -164,7 +164,7 @@ public class AbilityUI : UIButton, IPointerEnterHandler, IPointerExitHandler, IS
             
             ChooseAbility.instance._abilityCoolDownToReplace.GetComponent<Image>().sprite = _ability._icon;
 
-            while (elapsedTime < 0.5f)
+            while (elapsedTime < 1.15f)
             {
                 elapsedTime += Time.unscaledDeltaTime;
 

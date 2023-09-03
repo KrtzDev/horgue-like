@@ -22,7 +22,7 @@ public class WeaponPart : ScriptableObject
 
 	[Space(22)]
 	[SerializeField]
-	public float cost;
+	public int cost;
 
 	[HideInInspector]
 	public string rarity;

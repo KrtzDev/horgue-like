@@ -587,7 +587,7 @@ MonoBehaviour:
   - name: Dash
     clip: {fileID: 8300000, guid: fc4e8dc1173787a478e836f4cc3a73bc, type: 3}
     volume: 0.03
-    pitch: 0.75
+    pitch: 1.12
     loop: 0
     source: {fileID: 0}
   - name: Steps
@@ -610,7 +610,7 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: Jump
     clip: {fileID: 8300000, guid: eda86c2e8e94c47489e01caf847d2367, type: 3}
-    volume: 0.03
+    volume: 0.015
     pitch: 0.975
     loop: 0
     source: {fileID: 0}
@@ -640,13 +640,13 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: WeaponReloadEmpty
     clip: {fileID: 8300000, guid: ace79a9e0d4a65547af6715539b6e0c0, type: 3}
-    volume: 0.05
+    volume: 0.03
     pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: WeaponReloadFull
     clip: {fileID: 8300000, guid: c11fb3b3ced9fff40a645a5a5d1157a1, type: 3}
-    volume: 0.05
+    volume: 0.025
     pitch: 1
     loop: 0
     source: {fileID: 0}
@@ -752,6 +752,8 @@ MonoBehaviour:
     pitch: 1
     loop: 0
     source: {fileID: 0}
+  _master: {fileID: 24300002, guid: 82385dd8143972c4c9b0ae6a7285337a, type: 2}
+  _mixer: {fileID: 24100000, guid: 82385dd8143972c4c9b0ae6a7285337a, type: 2}
 --- !u!1001 &1497091691
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1574,6 +1576,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2028828741}
+  - component: {fileID: 2028828742}
   m_Layer: 0
   m_Name: Game_Bootstrapper
   m_TagString: Untagged
@@ -1605,6 +1608,14 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!81 &2028828742
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2028828740}
+  m_Enabled: 1
 --- !u!114 &795601514089258368
 MonoBehaviour:
   m_ObjectHideFlags: 0
