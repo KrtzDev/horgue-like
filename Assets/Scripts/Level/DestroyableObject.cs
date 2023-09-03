@@ -24,12 +24,15 @@ public class DestroyableObject : MonoBehaviour
 
     private void Update()
     {
-        /*
         if (_isTriggered && !_destroyed)
         {
             DestroyObject();
         }
-        */
+    }
+
+    public void BulletHit()
+    {
+        _isTriggered = true;
     }
 
     private void SpawnLoot()

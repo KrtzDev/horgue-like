@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using static UnityEditor.PlayerSettings;
 
 public class Projectile : DamageDealer
 {
@@ -31,7 +32,13 @@ public class Projectile : DamageDealer
 	[SerializeField]
 	private LayerMask _enemyLayerMask;
 
-	public AI_Agent_Enemy TargetedEnemy { get; set; }
+	[Space]
+    [SerializeField]
+    private LayerMask _objLayerMask1;
+    [SerializeField]
+    private LayerMask _objLayerMask2;
+
+    public AI_Agent_Enemy TargetedEnemy { get; set; }
 	public int PierceAmount { get; set; }
 	public float LifeTime { get; set; }
 
@@ -112,5 +119,15 @@ public class Projectile : DamageDealer
 				OnHit?.Invoke(this);
 			}
 		}
+
+		if ((_objLayerMask1.value & (1 << other.gameObject.layer)) > 9)
+		{
+            other.GetComponent<ExplosiveObject>().BulletHit();
+        }
+
+		if ((_objLayerMask2.value & (1 << other.gameObject.layer)) > 9)
+		{
+            other.GetComponent<DestroyableObject>().BulletHit();
+        }
 	}
 }
