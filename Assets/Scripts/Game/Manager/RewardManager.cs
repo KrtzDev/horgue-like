@@ -60,6 +60,19 @@ public class RewardManager : Singleton<RewardManager>
 		_weightByRarity.Add("unique", 5);
 	}
 
+	public Color GetColorFromRarity(string rarity)
+	{
+		if (rarity == "uncommon")
+			return new Color32(0xCC, 0xCC, 0xCC, 0xFF);
+		else if (rarity == "rare")
+			return new Color32(0x6A, 0xA8, 0x4F, 0xFF);
+		else if(rarity == "special")
+			return new Color32(0x00, 0xcc, 0xff, 0xFF);
+		else if (rarity == "unique")
+			return new Color32(0xe1, 0xbe, 0x18, 0xFF);
+		else return Color.white;
+	}
+
 	private async void OnCompletedSceneLoad()
 	{
 		await Task.Delay(10);

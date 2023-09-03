@@ -31,9 +31,11 @@ public class ToolTipUI : Selectable
 	private StatUI _statUI_prefab;
 	[SerializeField]
 	private StatUI _statUI_Projectile_Trajectory_prefab;
+	[SerializeField]
+	private RarityBadgeUI _rarityBadgeUI;
 
 	public WeaponPart weaponPart;
-	private int _value;
+	private int _cost;
 
 	private bool _selected;
 
@@ -53,7 +55,8 @@ public class ToolTipUI : Selectable
 	{
 		_partImage.sprite = weaponPartData.WeaponPartUISprite;
 		weaponPart = weaponPartData;
-		_value = (int)weaponPartData.cost;
+		_cost = (int)weaponPartData.cost;
+		_rarityBadgeUI.SetColor(RewardManager.Instance.GetColorFromRarity(weaponPart.rarity));
 
 		InitializeStats(weaponPartData);
 		LayoutRebuilder.ForceRebuildLayoutImmediate(_layoutGroup.transform as RectTransform);
@@ -117,7 +120,7 @@ public class ToolTipUI : Selectable
 		if (!_selected)
 			return;
 
-		if (!GameManager.Instance.inventory.Wallet.TryPay(_value))
+		if (!GameManager.Instance.inventory.Wallet.TryPay(_cost))
 		{
 			OnBuyFailed.Invoke();
 			return;
