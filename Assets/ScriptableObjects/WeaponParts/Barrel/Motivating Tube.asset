@@ -26,5 +26,5 @@ MonoBehaviour:
   cost: 145
   rarity: special
   weight: 17
-  attackPattern: {fileID: 11400000, guid: af8c671aae019504f856c1b9c52782e4, type: 2}
-  motionPattern: {fileID: 11400000, guid: ae12939332eb87e409f2573bbc5b3916, type: 2}
+  attackPattern: {fileID: 11400000, guid: 58859f55055f33d4d98e70ec594fcec0, type: 2}
+  motionPattern: {fileID: 11400000, guid: 39feb2f6def94064babb93072ee1193f, type: 2}
