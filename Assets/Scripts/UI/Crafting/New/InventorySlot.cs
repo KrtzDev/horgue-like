@@ -45,6 +45,7 @@ public class InventorySlot : Selectable
 
 		OnEquip.Invoke(_weaponPart);
 		equipButton.OnButtonExecute -= Equip;
+		sellButton.OnButtonExecute -= Sell;
 	}
 
 	private void Sell()
@@ -52,16 +53,19 @@ public class InventorySlot : Selectable
 		if (!_selected || !HasWeaponPart())
 			return;
 
+		sellButton.OnButtonExecute -= Sell;
+		equipButton.OnButtonExecute -= Equip;
 		_selected = false;
 
 		GameManager.Instance.inventory.Wallet.Store((int)(_weaponPart.weaponPart.cost * 0.5f));
 		GameManager.Instance.inventory.RemoveFromInventory(_weaponPart.weaponPart);
 
-		OnSell.Invoke(_weaponPart.weaponPart);
-		sellButton.OnButtonExecute -= Sell;
-
 		_weaponPart.DestroyToolTip();
-		Destroy(_weaponPart.gameObject);
+		WeaponPartUI[] weaponPartUIs = transform.GetComponentsInChildren<WeaponPartUI>();
+		for (int i = 0; i < weaponPartUIs.Length; i++)
+			Destroy(weaponPartUIs[i].gameObject);
+
+		OnSell.Invoke(_weaponPart.weaponPart);
 	}
 
 	public void Setselected(bool selected)

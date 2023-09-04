@@ -95,6 +95,7 @@ public class InventoryUI : UIMenu
 	private void OnItemSold(WeaponPart weaponPart)
 	{
 		StartCoroutine(FillInventoryUI());
+
 	}
 
 	private void AddToInventory(WeaponPart weaponPart)
@@ -149,12 +150,12 @@ public class InventoryUI : UIMenu
 
 	private IEnumerator FillInventoryUI()
 	{
+		yield return new WaitForEndOfFrame();
+
 		Inventory playerInventory = GameManager.Instance.inventory;
 		List<WeaponPart> weaponParts = playerInventory.GetAll();
 
 		ClearInventoryUI();
-
-		yield return new WaitForEndOfFrame();
 
 		for (int i = 0; i < weaponParts.Count; i++)
 		{
