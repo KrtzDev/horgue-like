@@ -78,7 +78,7 @@
     },
     {
       "name": "Rikayon",
-      "maxHealth": 675,
+      "maxHealth": 875,
       "damagePerHit": 4.5,
       "attackSpeed": 1,
       "givenXP": 0,
@@ -271,10 +271,10 @@
     {
       "name": "LevelBoss",
       "TimeToSurvive": 0,
-      "spawnTick": 6,
-      "spawnsPerTick": 10,
-      "minEnemyCount": 10,
-      "maxEnemyCount": 25,
+      "spawnTick": 5,
+      "spawnsPerTick": 15,
+      "minEnemyCount": 15,
+      "maxEnemyCount": 30,
       "spawnAnimDelay": 1,
       "minSpawnDelay": 0,
       "maxSpawnDelay": 1,
