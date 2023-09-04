@@ -650,6 +650,9 @@ public class Weapon : ScriptableObject
 
 	private void CleanUpProjectile(Projectile projectile)
 	{
+		projectile.OnHit -= CleanUpProjectile;
+		projectile.OnLifeTimeEnd -= CleanUpProjectile;
+
 		if (projectile.motionPattern.shouldExplodeOnDeath)
 			projectile.DoExplosion();
 
