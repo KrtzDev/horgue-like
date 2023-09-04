@@ -15,14 +15,13 @@ public class UpdateTuningData : MonoBehaviour
     private void Start()
     {
 		GameDataReader = FindObjectOfType<GameDataReader>();
-#if UNITY_EDITOR
 		SceneLoader.Instance.CompletedSceneLoad += OnCompletedSceneLoad;
+#if UNITY_EDITOR
 #else
 		GetTuningDataGame();
 #endif
 	}
 
-#if UNITY_EDITOR
 	private void OnCompletedSceneLoad()
     {
 		if (!GameDataReader._dataRetrieved && SceneManager.GetActiveScene().name == "SCENE_Main_Menu")
@@ -34,7 +33,6 @@ public class UpdateTuningData : MonoBehaviour
 			GameDataReader.GetGameData();
 		}
 	}
-#endif
 
 	public class ExportError
 	{
@@ -67,6 +65,11 @@ public class UpdateTuningData : MonoBehaviour
 
 	private void SendNextRequestGame()
 	{
+		if (GameDataReader._dataRetrieved)
+		{
+			GameDataReader.GetGameData();
+		}
+
 		if (s_DataUpdateQueue.Count == 0)
 		{
 			Debug.LogError("Queue empty - add some items!");
