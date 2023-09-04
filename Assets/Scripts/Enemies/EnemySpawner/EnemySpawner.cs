@@ -42,6 +42,7 @@ public class EnemySpawner : MonoBehaviour
 
     [Header("Boss?")]
     public EnemiesToSpawn bossEnemy;
+    public List<BoxCollider> bossSpawn = new List<BoxCollider>();
 
     [Header("Box Colliders")]
     [SerializeField] private BoxCollider _safeZone;
@@ -77,7 +78,7 @@ public class EnemySpawner : MonoBehaviour
         if(SceneManager.GetActiveScene().name.Contains("Boss"))
         {
 		    _enemyObjectPool.Add(lastKey + 1, ObjectPool<AI_Agent_Enemy>.CreatePool(bossEnemy._enemy, 1, _enemyObjectPoolParent.transform));
-            SpawnEnemies(bossEnemy, 1, lastKey + 1);
+            SpawnEnemies(bossEnemy, 1, lastKey + 1, true);
 		}
 
         _spawnTimer = _enemySpawnerData._spawnTick - 1f;
@@ -112,7 +113,7 @@ public class EnemySpawner : MonoBehaviour
                     enemiesToBeSpawned = Mathf.RoundToInt((float)(enemy._spawnRatio * 0.01 * _enemySpawnerData._spawnsPerTick));  // spawn until min amount is achieved
                 }
                 _enemiesSpawned += enemiesToBeSpawned;
-                SpawnEnemies(enemy, enemiesToBeSpawned, spawnIndex);
+                SpawnEnemies(enemy, enemiesToBeSpawned, spawnIndex, false);
                 spawnIndex++;
             }
 
@@ -138,16 +139,15 @@ public class EnemySpawner : MonoBehaviour
         _spawnTimer += Time.deltaTime;
     }
 
-    private void SpawnEnemies(EnemiesToSpawn enemies, int enemiesToBeSpawned, int spawnIndex) // GameManager.Instance._enemyCount has to be subtracted on Enemy Death in Enemy Script
+    private void SpawnEnemies(EnemiesToSpawn enemies, int enemiesToBeSpawned, int spawnIndex, bool spawnBoss) // GameManager.Instance._enemyCount has to be subtracted on Enemy Death in Enemy Script
     {
-
         int zoneNumber = Random.Range(0,3);
 
         for (int i = 0; i < enemiesToBeSpawned; i++)
         {
             float spawnDelay = Random.Range(_enemySpawnerData._minSpawnDelay, _enemySpawnerData._maxSpawnDelay);
 
-            SetBounds(enemies._spawnBias, zoneNumber);
+            SetBounds(enemies._spawnBias, zoneNumber, spawnBoss);
             StartCoroutine(DoSpawnEnemy(enemies, spawnIndex, GetRandomPositionInBounds(_bounds, enemies._enemy), spawnDelay));
 
             zoneNumber++;
@@ -160,7 +160,7 @@ public class EnemySpawner : MonoBehaviour
             }
         }
     }
-    private void SetBounds(SpawnBias spawnBias, int zoneNumber)
+    private void SetBounds(SpawnBias spawnBias, int zoneNumber, bool spawnBoss)
     {
         switch (spawnBias) // Add Detection if Zones are full
         {
@@ -177,7 +177,14 @@ public class EnemySpawner : MonoBehaviour
                 DeterminePossibleBound(spawnBias, zoneNumber, 0);
                 break;
             case SpawnBias.Level: // Spawns the Enemies at the furthest away LevelSpawnPoint
-                DetermineRandomSpawnLocation();
+                if (spawnBoss)
+                {
+                    _bounds = bossSpawn[0].bounds;
+                }
+                else
+                {
+                    DetermineRandomSpawnLocation(_levelZone);
+                }
                 break;
         }
     }
@@ -193,16 +200,16 @@ public class EnemySpawner : MonoBehaviour
         }
     }
 
-    private void DetermineRandomSpawnLocation()
+    private void DetermineRandomSpawnLocation(List<BoxCollider> SpawnCollider)
     {
         List<RandomSpawnLocation> randomSpawnLocation = new List<RandomSpawnLocation>();
         int zoneNumber = 0;
         float distanceToBounds = 0;
         float distanceToMidZone = _enemySpawnerData._midZoneSize * Mathf.Sqrt(2);
 
-        for (int i = 0; i < _levelZone.Count; i++)
+        for (int i = 0; i < SpawnCollider.Count; i++)
         {
-            distanceToBounds = Vector3.Distance(new Vector3(_levelZone[i].transform.position.x, _player.transform.position.y, _levelZone[i].transform.position.z), _player.transform.position);
+            distanceToBounds = Vector3.Distance(new Vector3(SpawnCollider[i].transform.position.x, _player.transform.position.y, SpawnCollider[i].transform.position.z), _player.transform.position);
 
             if (distanceToBounds > distanceToMidZone)
             {
@@ -216,7 +223,7 @@ public class EnemySpawner : MonoBehaviour
             float lowestDistance = Mathf.Infinity;
             List<int> bestSpawnNumbers = new List<int>();
 
-            zoneNumber = Random.Range(0, _levelZone.Count);
+            zoneNumber = Random.Range(0, SpawnCollider.Count);
 
             for (int i = 0; i < Mathf.RoundToInt(Mathf.RoundToInt(randomSpawnLocation.Count * 0.575f)); i++)
             {
@@ -241,7 +248,7 @@ public class EnemySpawner : MonoBehaviour
                 zoneNumber = bestSpawnNumbers[Random.Range(0, bestSpawnNumbers.Count)];
             }
 
-            _bounds = _levelZone[zoneNumber].bounds;  
+            _bounds = SpawnCollider[zoneNumber].bounds;  
         }
     }
 
@@ -321,7 +328,7 @@ public class EnemySpawner : MonoBehaviour
                         DeterminePossibleBound(SpawnBias.Far, 0, 0);
                         break;
                     case SpawnBias.Far:
-                        SetBounds(SpawnBias.Level, 0);
+                        SetBounds(SpawnBias.Level, 0, false);
                         break;
                 }
             }
