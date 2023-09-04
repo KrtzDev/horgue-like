@@ -2,9 +2,9 @@ using DG.Tweening;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
 
 public class ShopUI : UIMenu
 {
@@ -43,7 +43,7 @@ public class ShopUI : UIMenu
 	private List<ShopCostUI> _shopCostUIs;
 
 	public List<ToolTipUI> shopItems;
-	[SerializeField] private TextMeshProUGUI _shopRefreshCost;
+	[SerializeField] private TMP_Text _shopRefreshCost;
 
 	private void Start()
 	{
@@ -58,7 +58,7 @@ public class ShopUI : UIMenu
 
 	private void TryRefreshShop(int numberOfItems)
 	{
-		if(GameManager.Instance.inventory.Wallet.TryPay(_rerollCost))
+		if (GameManager.Instance.inventory.Wallet.TryPay(_rerollCost))
 			RefreshShop(numberOfItems);
 	}
 
@@ -125,6 +125,8 @@ public class ShopUI : UIMenu
 
 	private void UpdateShopCostUIs()
 	{
+		for (int i = 0; i < _shopCostUIs.Count; i++)
+			_shopCostUIs[i].CostText.text = "$: 0";
 		for (int i = 0; i < shopItems.Count; i++)
 			_shopCostUIs[i].CostText.text = $"$: {shopItems[i].weaponPart.cost}";
 	}
@@ -132,7 +134,8 @@ public class ShopUI : UIMenu
 	private IEnumerator SelectFirstItemAfterFrame()
 	{
 		yield return new WaitForEndOfFrame();
-		shopItems[0].Select();
+		if (shopItems.Count > 0)
+			shopItems[0].Select();
 	}
 
 	private void OnItemBuyFalied()
