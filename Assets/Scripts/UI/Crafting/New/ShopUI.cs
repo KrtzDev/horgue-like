@@ -50,7 +50,7 @@ public class ShopUI : UIMenu
 		shopItems = new List<ToolTipUI>();
 		RefreshShop(3);
 
-		int rerollCost = (int)(25 * (1 + GameManager.Instance.GameManagerValues[0]._weaponPartMultiplierPerLevel * 5 * (GameManager.Instance._currentLevelArray - 1)));
+		int rerollCost = (int)(25 * (1 + GameManager.Instance.GameManagerValues[0]._weaponPartMultiplierPerLevel * 5 * (GameManager.Instance._currentLevel - 1)));
 		_rerollCost = rerollCost;
 		_shopRefreshCost.text = "$: " + _rerollCost;
 		_newShopButton.OnButtonExecute += () => TryRefreshShop(3);

@@ -152,7 +152,8 @@
       "maxCloseZoneOcc": 8,
       "maxMidZoneOcc": 18,
       "maxFarZoneOcc": 28,
-      "weaponPartMultiplierPerLevel": 0.025
+      "weaponPartMultiplierPerLevel": 0.025,
+      "healthPackValue": 10
     },
     {
       "name": "Level1.5",
@@ -171,7 +172,8 @@
       "maxCloseZoneOcc": 8,
       "maxMidZoneOcc": 18,
       "maxFarZoneOcc": 28,
-      "weaponPartMultiplierPerLevel": 0.025
+      "weaponPartMultiplierPerLevel": 0.025,
+      "healthPackValue": 15
     },
     {
       "name": "Level2",
@@ -190,7 +192,8 @@
       "maxCloseZoneOcc": 8,
       "maxMidZoneOcc": 18,
       "maxFarZoneOcc": 28,
-      "weaponPartMultiplierPerLevel": 0.025
+      "weaponPartMultiplierPerLevel": 0.025,
+      "healthPackValue": 20
     },
     {
       "name": "Level2.5",
@@ -209,7 +212,8 @@
       "maxCloseZoneOcc": 8,
       "maxMidZoneOcc": 18,
       "maxFarZoneOcc": 28,
-      "weaponPartMultiplierPerLevel": 0.025
+      "weaponPartMultiplierPerLevel": 0.025,
+      "healthPackValue": 25
     },
     {
       "name": "Level3",
@@ -228,7 +232,8 @@
       "maxCloseZoneOcc": 8,
       "maxMidZoneOcc": 18,
       "maxFarZoneOcc": 28,
-      "weaponPartMultiplierPerLevel": 0.025
+      "weaponPartMultiplierPerLevel": 0.025,
+      "healthPackValue": 30
     },
     {
       "name": "Level3.5",
@@ -247,7 +252,8 @@
       "maxCloseZoneOcc": 8,
       "maxMidZoneOcc": 18,
       "maxFarZoneOcc": 28,
-      "weaponPartMultiplierPerLevel": 0.025
+      "weaponPartMultiplierPerLevel": 0.025,
+      "healthPackValue": 35
     },
     {
       "name": "Level4",
@@ -266,7 +272,8 @@
       "maxCloseZoneOcc": 8,
       "maxMidZoneOcc": 18,
       "maxFarZoneOcc": 28,
-      "weaponPartMultiplierPerLevel": 0.025
+      "weaponPartMultiplierPerLevel": 0.025,
+      "healthPackValue": 40
     },
     {
       "name": "LevelBoss",
@@ -285,7 +292,8 @@
       "maxCloseZoneOcc": 8,
       "maxMidZoneOcc": 18,
       "maxFarZoneOcc": 28,
-      "weaponPartMultiplierPerLevel": 0.025
+      "weaponPartMultiplierPerLevel": 0.025,
+      "healthPackValue": 45
     },
     {
       "name": "LevelNewGamePlus",
@@ -304,7 +312,8 @@
       "maxCloseZoneOcc": 8,
       "maxMidZoneOcc": 18,
       "maxFarZoneOcc": 28,
-      "weaponPartMultiplierPerLevel": 0.025
+      "weaponPartMultiplierPerLevel": 0.025,
+      "healthPackValue": 50
     }
   ],
   "Player": [

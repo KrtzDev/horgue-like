@@ -324,7 +324,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 13e4e87bbee05684c803ee8265c4eefe, type: 2}
   - {fileID: 11400000, guid: 1de1f6f20ca28814d80004febe7eed3a, type: 2}
   - {fileID: 11400000, guid: d0e3587d7f1e81b46bed0a82e7760c99, type: 2}
-  _maxLevels: 8
+  maxLevels: 8
   _winningCondition: 1
   _currentTimeToSurvive: 0
   _neededEnemyKill: 0
@@ -332,18 +332,19 @@ MonoBehaviour:
   _enemiesKilled: 0
   killedBoss: 0
   _currentLevel: 1
-  _currentLevelArray: 0
+  _currentLeveslArray: 0
   _gameIsPaused: 0
   _newGamePlus: 0
   firstLevelNumberInBuild: 2
   lastLevelNumberInBuild: 8
   lastLevelNumbers: {x: 0, y: 0}
   _player: {fileID: 0}
-  _currentPlayerHealth: 0
   _playerCanUseAbilities: 0
   _currentAbility: {fileID: 0}
   inventory: {fileID: 1161142122}
   _coin: {fileID: -7381036341604054680, guid: bc346ef89f6462d419a727974cda75b8, type: 3}
+  _healthPack: {fileID: 8737902351533088682, guid: 03c15c294a93b874ca9153b08ea682dd,
+    type: 3}
   bossCheat: 0
   amm1: {fileID: 11400000, guid: f528b1d8c0c1746459b3d3c20a7a3cc8, type: 2}
   amm2: {fileID: 11400000, guid: b922ec72a85ec784d8299148869a45d3, type: 2}

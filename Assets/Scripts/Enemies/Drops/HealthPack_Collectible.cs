@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class HealthPack_Collectible : Collectible
 {
-    [SerializeField] private int _healAmount;
+    [SerializeField] public int healAmount;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -14,7 +14,7 @@ public class HealthPack_Collectible : Collectible
 
             HealthComponent hp = other.GetComponent<HealthComponent>();
 
-            hp.currentHealth += _healAmount;
+            hp.currentHealth += healAmount;
             if (hp.currentHealth > hp.maxHealth)
             {
                 hp.currentHealth = hp.maxHealth;

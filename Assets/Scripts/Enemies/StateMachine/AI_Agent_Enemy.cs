@@ -53,8 +53,8 @@ public class AI_Agent_Enemy : AI_Agent
         NavMeshAgent.acceleration = _enemyData._acceleration;
         AttackTimer = 0f;
 
-        float enemyDamageMultiplier = _enemyData.baseDmgMultiplier + (_enemyData.baseDmgMultiplier * (GameManager.Instance._currentLevelArray * _enemyData.dmgModifier) * (1 + (GameManager.Instance._currentLevelArray * _enemyData.addDmgModifier)));
-        float enemyHealthMultiplier = _enemyData.baseHealthMultiplier + (_enemyData.baseHealthMultiplier * (GameManager.Instance._currentLevelArray * _enemyData.healthModifier) * (1 + (GameManager.Instance._currentLevelArray * _enemyData.addHealthModifier)));
+        float enemyDamageMultiplier = _enemyData.baseDmgMultiplier + (_enemyData.baseDmgMultiplier * ((GameManager.Instance._currentLevel - 1) * _enemyData.dmgModifier) * (1 + ((GameManager.Instance._currentLevel - 1) * _enemyData.addDmgModifier)));
+        float enemyHealthMultiplier = _enemyData.baseHealthMultiplier + (_enemyData.baseHealthMultiplier * ((GameManager.Instance._currentLevel - 1) * _enemyData.healthModifier) * (1 + ((GameManager.Instance._currentLevel - 1) * _enemyData.addHealthModifier)));
 
         damagePerHit = (int)(_enemyData._damagePerHit * enemyDamageMultiplier);
         HealthComponent.maxHealth = (int)(_enemyData._maxHealth * enemyHealthMultiplier);

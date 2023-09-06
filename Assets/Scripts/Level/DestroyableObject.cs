@@ -40,6 +40,18 @@ public class DestroyableObject : MonoBehaviour
         if (_loot == null)
             return;
 
+        if(_loot.GetComponent<HealthPack_Collectible>())
+        {
+            if (GameManager.Instance._currentLevel - 1 < GameManager.Instance.maxLevels)
+            {
+                _loot.GetComponent<HealthPack_Collectible>().healAmount = GameManager.Instance.GameManagerValues[GameManager.Instance._currentLevel - 1].healthPackValue;
+            }
+            else
+            {
+                _loot.GetComponent<HealthPack_Collectible>().healAmount = GameManager.Instance.GameManagerValues[GameManager.Instance.maxLevels].healthPackValue;
+            }
+        }
+
         Vector3 _pos = _lootSpawn.transform.position;
         Quaternion _rot = _lootSpawn.transform.rotation;
         Instantiate(_loot, _pos, _rot);

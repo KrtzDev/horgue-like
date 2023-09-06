@@ -24,7 +24,7 @@ public class GameManager : Singleton<GameManager>
 	private GameDataReader _gameDataReader;
 
 	public List<EnemySpawnerData> GameManagerValues = new List<EnemySpawnerData>();
-	[SerializeField] private int _maxLevels;
+	public int maxLevels;
 
 	private EnemySpawner _currentEnemySpawner;
 
@@ -45,7 +45,7 @@ public class GameManager : Singleton<GameManager>
 
 	public int _currentLevel = 1;
 	// private int _lastLevel;
-	public int _currentLevelArray;
+	public int _currentLeveslArray;
 
 	private int _numberOfRewards = 6;
 
@@ -59,7 +59,6 @@ public class GameManager : Singleton<GameManager>
 
 	[Header("Player")]
 	public GameObject _player;
-	public int _currentPlayerHealth;
 	public bool _playerCanUseAbilities;
 	public Ability _currentAbility;
 
@@ -67,6 +66,8 @@ public class GameManager : Singleton<GameManager>
 	public Inventory inventory;
 	public ObjectPool<CollectibleAttractor> coinPool;
 	[SerializeField] private CollectibleAttractor _coin;
+	public ObjectPool<CollectibleAttractor> healthPackPool;
+	[SerializeField] private CollectibleAttractor _healthPack;
 
 	[Header("Boss Cheat")]
 	public bool bossCheat;
@@ -96,7 +97,6 @@ public class GameManager : Singleton<GameManager>
 		inventory.Wallet.Reset();
 		inventory.ResetInventory();
 		_currentLevel = 1;
-		_currentLevelArray = _currentLevel - 1;
 		_gameIsPaused = false;
 		_newGamePlus = false;
 		lastLevelNumbers = Vector2Int.zero;
@@ -137,21 +137,24 @@ public class GameManager : Singleton<GameManager>
 		}
 
 		coinPool = ObjectPool<CollectibleAttractor>.CreatePool(_coin, 1000, null);
+		healthPackPool = ObjectPool<CollectibleAttractor>.CreatePool(_healthPack, 100, null);
 
 		StatsTracker.Instance.ResetLevelStats();
 
 		_gameDataReader.GetGameData();
 		_gameDataReader.SetGameData();
 
-		if(_currentLevelArray < _maxLevels)
+		if(_currentLevel - 1 < maxLevels)
         {
-			_currentTimeToSurvive = GameManagerValues[_currentLevelArray]._timeToSurvive;
-        }
+			_currentTimeToSurvive = GameManagerValues[_currentLevel - 1]._timeToSurvive;
+			_currentEnemySpawner = FindObjectOfType<EnemySpawner>();
+			_currentEnemySpawner._enemySpawnerData = GameManagerValues[maxLevels];
+		}
 		else
         {
-			_currentTimeToSurvive = GameManagerValues[_maxLevels]._timeToSurvive;
+			_currentTimeToSurvive = GameManagerValues[maxLevels]._timeToSurvive;
 			_currentEnemySpawner = FindObjectOfType<EnemySpawner>();
-			_currentEnemySpawner._enemySpawnerData = GameManagerValues[_maxLevels];
+			_currentEnemySpawner._enemySpawnerData = GameManagerValues[maxLevels];
 		}
 
 		_hasWon = false;
@@ -214,13 +217,13 @@ public class GameManager : Singleton<GameManager>
 		{
 			_hasWon = true;
 
-			if(_currentLevelArray < _maxLevels)
+			if(_currentLevel - 1 < maxLevels)
 			{
-				_currentTimeToSurvive = GameManagerValues[_currentLevelArray]._timeToSurvive;
+				_currentTimeToSurvive = GameManagerValues[_currentLevel - 1]._timeToSurvive;
 			}
 			else
 			{
-				_currentTimeToSurvive = GameManagerValues[_maxLevels]._timeToSurvive;
+				_currentTimeToSurvive = GameManagerValues[maxLevels]._timeToSurvive;
 			}
 
 			RoundWon();
@@ -277,7 +280,6 @@ public class GameManager : Singleton<GameManager>
 		UIManager.Instance.DisplayRewards(rewards);
 
 		_currentLevel += 1;
-		_currentLevelArray = _currentLevel - 1;
 
 		// UIManager.Instance.ShowWaveEndScreen(LevelStatus.Won);
 
