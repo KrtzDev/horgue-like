@@ -28,6 +28,6 @@ public class Coin_Collectible : Collectible
 
     public void Delete()
     {
-        Destroy(_destroy);
+        GameManager.Instance.coinPool.ReturnObjectToPool(GetComponentInParent<CollectibleAttractor>());
     }
 }

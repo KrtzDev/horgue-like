@@ -4,21 +4,36 @@ using UnityEngine;
 
 public class CollectibleAttractor : MonoBehaviour
 {
-    [SerializeField] private float _attractorSpeed;
+    public float attractorSpeed;
     [SerializeField] private Collectible _collectible;
+    public Collider playerCollider;
+    public bool moveToPlayer;
+
+    private void Awake()
+    {
+        moveToPlayer = false;
+    }
+
+    private void Update()
+    {
+        if(moveToPlayer)
+        {
+            MoveToPlayer(playerCollider);
+        }
+    }
 
     private void OnTriggerStay(Collider other)
     {
         if (other.CompareTag("Player") && !_collectible._wasPickedUp)
         {
-            Vector3 targetPos = other.transform.position;
-
-            if (transform.position.y > other.transform.position.y)
-            {
-                targetPos = new(other.transform.position.x, transform.position.y, other.transform.position.z);
-            }
-
-            transform.position = Vector3.MoveTowards(transform.position, targetPos, _attractorSpeed * Time.deltaTime);
+            MoveToPlayer(other);
         }
+    }
+
+    public void MoveToPlayer(Collider other)
+    {
+        Vector3 targetPos = other.transform.position;
+
+        transform.position = Vector3.MoveTowards(transform.position, targetPos, attractorSpeed * Time.deltaTime);
     }
 }

@@ -343,6 +343,7 @@ MonoBehaviour:
   _playerCanUseAbilities: 0
   _currentAbility: {fileID: 0}
   inventory: {fileID: 1161142122}
+  _coin: {fileID: -7381036341604054680, guid: bc346ef89f6462d419a727974cda75b8, type: 3}
   bossCheat: 0
   amm1: {fileID: 11400000, guid: f528b1d8c0c1746459b3d3c20a7a3cc8, type: 2}
   amm2: {fileID: 11400000, guid: b922ec72a85ec784d8299148869a45d3, type: 2}
