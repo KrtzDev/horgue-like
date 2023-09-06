@@ -2,19 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CoinDrop : MonoBehaviour
+public class Coin_Collectible : Collectible
 {
     [SerializeField] private Animator _animator;
     [SerializeField] GameObject _destroy;
-    private bool _hasGivenScore = false;
     public int givenScore;
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player") && !_hasGivenScore)
+        if (other.CompareTag("Player") && !_wasPickedUp)
         {
             StartPickUpAnimation();
-            _hasGivenScore = true;
+            _wasPickedUp = true;
         }
     }
 
@@ -29,6 +28,6 @@ public class CoinDrop : MonoBehaviour
 
     public void Delete()
     {
-        Destroy(_destroy);
+        GameManager.Instance.coinPool.ReturnObjectToPool(GetComponentInParent<CollectibleAttractor>());
     }
 }

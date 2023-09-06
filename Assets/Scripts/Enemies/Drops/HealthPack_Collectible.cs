@@ -2,14 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HealthDrop : MonoBehaviour
+public class HealthPack_Collectible : Collectible
 {
     [SerializeField] private int _healAmount;
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.CompareTag("Player"))
+        if(other.CompareTag("Player") && !_wasPickedUp)
         {
+            _wasPickedUp = true;
+
             HealthComponent hp = other.GetComponent<HealthComponent>();
 
             hp.currentHealth += _healAmount;

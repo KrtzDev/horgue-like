@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine.AI;
+using System.Collections;
 
 [DefaultExecutionOrder(-1)]
 public class GameManager : Singleton<GameManager>
@@ -64,6 +65,8 @@ public class GameManager : Singleton<GameManager>
 
 	[SerializeField]
 	public Inventory inventory;
+	public ObjectPool<CollectibleAttractor> coinPool;
+	[SerializeField] private CollectibleAttractor _coin;
 
 	[Header("Boss Cheat")]
 	public bool bossCheat;
@@ -120,7 +123,6 @@ public class GameManager : Singleton<GameManager>
 		if (SceneManager.GetActiveScene().name == "SCENE_Main_Menu")
 		{
 			ResetGame();
-
 			return;
 		}
 
@@ -133,6 +135,8 @@ public class GameManager : Singleton<GameManager>
 			_winningCondition = WinningCondition.SurviveForTime;
 		 	killedBoss = false;
 		}
+
+		coinPool = ObjectPool<CollectibleAttractor>.CreatePool(_coin, 1000, null);
 
 		StatsTracker.Instance.ResetLevelStats();
 
@@ -270,7 +274,6 @@ public class GameManager : Singleton<GameManager>
 			rewards.Add(RewardManager.Instance.GetReward());
 		}
 
-		UIManager.Instance.ShowLevelEndScreen(LevelStatus.Won);
 		UIManager.Instance.DisplayRewards(rewards);
 
 		_currentLevel += 1;
@@ -279,6 +282,40 @@ public class GameManager : Singleton<GameManager>
 		// UIManager.Instance.ShowWaveEndScreen(LevelStatus.Won);
 
 		EnemyStopFollowing();
+		StartCoroutine(AttractCoins());
+	}
+
+	private IEnumerator AttractCoins()
+    {
+		bool coinMove = false;
+
+		Debug.Log(coinPool.ActiveCount());
+
+		while (coinPool.ActiveCount() > 0)
+		{
+			if (!coinMove)
+			{
+				Collider playerCollider = _player.GetComponent<Collider>();
+
+				for (int i = 0; i < coinPool.Count; i++)
+				{
+					if(coinPool.GetObjectAtIndex(i).isActiveAndEnabled)
+                    {
+						coinPool.GetObjectAtIndex(i).GetComponent<Rigidbody>().useGravity = false;
+						coinPool.GetObjectAtIndex(i).GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
+						coinPool.GetObjectAtIndex(i).playerCollider = playerCollider;
+						coinPool.GetObjectAtIndex(i).moveToPlayer = true;
+						coinPool.GetObjectAtIndex(i).attractorSpeed *= 4f;
+						coinPool.GetObjectAtIndex(i).GetComponentInChildren<Coin_Collectible>().givenScore = Mathf.RoundToInt(coinPool.GetObjectAtIndex(i).GetComponentInChildren<Coin_Collectible>().givenScore * 0.5f);
+					}
+				}
+
+				coinMove = true;
+			}
+			yield return null;
+		}
+
+		UIManager.Instance.ShowLevelEndScreen(LevelStatus.Won);
 	}
 
 	private void EnemyStopFollowing()
