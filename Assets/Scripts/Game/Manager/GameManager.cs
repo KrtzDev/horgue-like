@@ -148,7 +148,7 @@ public class GameManager : Singleton<GameManager>
         {
 			_currentTimeToSurvive = GameManagerValues[_currentLevel - 1]._timeToSurvive;
 			_currentEnemySpawner = FindObjectOfType<EnemySpawner>();
-			_currentEnemySpawner._enemySpawnerData = GameManagerValues[maxLevels];
+			_currentEnemySpawner._enemySpawnerData = GameManagerValues[_currentLevel - 1];
 		}
 		else
         {
