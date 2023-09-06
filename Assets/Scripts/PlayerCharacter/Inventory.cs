@@ -23,6 +23,10 @@ public class Inventory : MonoBehaviour
 	{
 		_weaponParts.Remove(weaponPart);
 	}
+	public void ResetInventory()
+    {
+		_weaponParts.Clear();
+    }
 
 	public WeaponPart GetFromInventory(int index)
 	{
@@ -33,4 +37,5 @@ public class Inventory : MonoBehaviour
 	{
 		return _weaponParts;
 	}
+
 }

@@ -85,11 +85,20 @@ public class GameManager : Singleton<GameManager>
 	{
 		SceneLoader.Instance.CompletedSceneLoad += OnCompletedSceneLoad;
 
+		ResetGame();
+	}
+
+	private void ResetGame()
+    {
 		inventory.Wallet.Reset();
+		inventory.ResetInventory();
 		_currentLevel = 1;
 		_currentLevelArray = _currentLevel - 1;
 		_gameIsPaused = false;
+		_newGamePlus = false;
+		lastLevelNumbers = Vector2Int.zero;
 		bossCheat = false;
+		StatsTracker.Instance.ResetAllStats();
 	}
 
 	private void OnCompletedSceneLoad()
@@ -110,13 +119,7 @@ public class GameManager : Singleton<GameManager>
 
 		if (SceneManager.GetActiveScene().name == "SCENE_Main_Menu")
 		{
-			inventory.Wallet.Reset();
-			_currentLevel = 1;
-			_currentLevelArray = _currentLevel - 1;
-			_gameIsPaused = false;
-			bossCheat = false;
-
-			StatsTracker.Instance.ResetAllStats();
+			ResetGame();
 
 			return;
 		}
