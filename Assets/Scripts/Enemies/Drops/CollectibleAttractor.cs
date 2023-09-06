@@ -6,7 +6,7 @@ public class CollectibleAttractor : MonoBehaviour
 {
     public float attractorSpeed;
     [SerializeField] private Collectible _collectible;
-    public Collider playerCollider;
+    [HideInInspector] public Collider playerCollider;
     public bool moveToPlayer;
 
     private void Awake()

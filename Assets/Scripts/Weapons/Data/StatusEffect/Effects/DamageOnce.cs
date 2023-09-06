@@ -1,4 +1,5 @@
-﻿public class DamageOnce : Effect
+﻿
+public class DamageOnce : Effect
 {
 	private float _additionalDamage;
 

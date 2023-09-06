@@ -15,14 +15,14 @@ public class StatusEffectSO : ScriptableObject
 	[Header("Effects")]
 	public bool hasInitialExtraDamage;
 	[DrawIf(nameof(hasInitialExtraDamage), true)]
-	public float initialDamage;
+	[Range(0.0f, 10.0f)] public float initialDamagePercent;
 	[DrawIf(nameof(hasInitialExtraDamage), true)]
 	public HorgueVFX initialDamageVFX;
 
 	[Space]
 	public bool hasDamageOverTime;
 	[DrawIf(nameof(hasDamageOverTime), true)]
-	public float dotDamage;
+	[Range(0.0f, 10.0f)] public float dotDamagePercent;
 	[DrawIf(nameof(hasDamageOverTime), true)]
 	public float dotDuration;
 	[DrawIf(nameof(hasDamageOverTime), true)]

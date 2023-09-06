@@ -42,7 +42,23 @@ public class DestroyableObject : MonoBehaviour
 
         Vector3 _pos = _lootSpawn.transform.position;
         Quaternion _rot = _lootSpawn.transform.rotation;
-        Instantiate(_loot, _pos, _rot);
+
+        if(_loot.GetComponentInChildren<HealthPack_Collectible>() != null)
+        {
+            GameObject newHealthPack = GameManager.Instance.healthPackPool.GetObject().gameObject;
+
+            if (GameManager.Instance._currentLevel - 1 < GameManager.Instance.maxLevels)
+            {
+                newHealthPack.GetComponentInChildren<HealthPack_Collectible>().healAmount = GameManager.Instance.GameManagerValues[GameManager.Instance._currentLevel - 1].healthPackValue;
+            }
+            else
+            {
+                newHealthPack.GetComponentInChildren<HealthPack_Collectible>().healAmount = GameManager.Instance.GameManagerValues[GameManager.Instance.maxLevels].healthPackValue;
+            }
+
+            newHealthPack.transform.position = _pos;
+            newHealthPack.transform.rotation = Quaternion.identity;
+        }
     }
 
     public void DestroyObject()

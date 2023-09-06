@@ -102,7 +102,21 @@ public class EnemyHealthComponent : HealthComponent
 		{
 			Vector3 spawnPos = _hitParticlePosition.position;
 
-			Instantiate(_healthDrop, spawnPos, Quaternion.identity);
+			// Instantiate(_healthDrop, spawnPos, Quaternion.identity);
+
+			GameObject newHealthPack = GameManager.Instance.healthPackPool.GetObject().gameObject;
+
+			if (GameManager.Instance._currentLevel - 1 < GameManager.Instance.maxLevels)
+			{
+				newHealthPack.GetComponentInChildren<HealthPack_Collectible>().healAmount = GameManager.Instance.GameManagerValues[GameManager.Instance._currentLevel - 1].healthPackValue;
+			}
+			else
+			{
+				newHealthPack.GetComponentInChildren<HealthPack_Collectible>().healAmount = GameManager.Instance.GameManagerValues[GameManager.Instance.maxLevels].healthPackValue;
+			}
+
+			newHealthPack.transform.position = spawnPos;
+			newHealthPack.transform.rotation = Quaternion.identity;
 		}
 	}
 

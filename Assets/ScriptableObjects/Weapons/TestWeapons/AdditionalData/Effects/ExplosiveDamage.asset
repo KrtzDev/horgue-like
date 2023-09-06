@@ -19,11 +19,11 @@ MonoBehaviour:
     min: 0
     max: 0
   hasInitialExtraDamage: 1
-  initialDamage: 20
+  initialDamagePercent: 2
   initialDamageVFX: {fileID: 3622428853669183405, guid: 813be39cad3c3324f80213783306de23,
     type: 3}
   hasDamageOverTime: 0
-  dotDamage: 0
+  dotDamagePercent: 0
   dotDuration: 0
   dotDamageVFX: {fileID: 0}
   hasSlow: 0
