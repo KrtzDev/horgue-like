@@ -9,9 +9,19 @@ public class Spikes : MonoBehaviour
         // Allowing different trap damage scaling
         if (other.CompareTag("Enemy"))
         {
-            if (other.GetComponent<HealthComponent>() != null)
+            if(other.GetComponent<AI_Agent_Enemy>()._isBossEnemy)
             {
-                other.GetComponent<HealthComponent>().TakeDamage(_trapDamage, false);
+                if (other.GetComponent<HealthComponent>() != null)
+                {
+                    other.GetComponent<HealthComponent>().TakeDamage(_trapDamage = (int)(other.GetComponent<HealthComponent>().maxHealth * 0.025f), false);
+                }
+            }
+            else
+            {
+                if (other.GetComponent<HealthComponent>() != null)
+                {
+                    other.GetComponent<HealthComponent>().TakeDamage(_trapDamage = other.GetComponent<HealthComponent>().maxHealth, false);
+                }
             }
         }
         else if (other.CompareTag("Player"))
