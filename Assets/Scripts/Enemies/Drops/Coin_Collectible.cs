@@ -6,6 +6,8 @@ public class Coin_Collectible : Collectible
 {
     [SerializeField] private Animator _animator;
     [SerializeField] GameObject _destroy;
+    [SerializeField] private Material _coinGold;
+    [SerializeField] private Material _coinSilver;
     public int givenScore;
 
     private void OnTriggerEnter(Collider other)
@@ -29,5 +31,15 @@ public class Coin_Collectible : Collectible
     public void Delete()
     {
         GameManager.Instance.coinPool.ReturnObjectToPool(GetComponentInParent<CollectibleAttractor>());
+    }
+
+    public void SetCoinGold()
+    {
+        GetComponent<MeshRenderer>().material = _coinGold;
+    }
+
+    public void SetCoinSilver()
+    {
+        GetComponent<MeshRenderer>().material = _coinSilver;
     }
 }

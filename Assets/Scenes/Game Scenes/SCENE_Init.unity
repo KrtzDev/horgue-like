@@ -684,7 +684,7 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: Swamp
     clip: {fileID: 8300000, guid: e0af5d1440d38a241ad55914a7bfc12e, type: 3}
-    volume: 0.015
+    volume: 0.0125
     pitch: 1
     loop: 1
     source: {fileID: 0}
@@ -750,7 +750,7 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: ForceSphere
     clip: {fileID: 8300000, guid: cabfae866cab347928b74b7d0ca6bfa9, type: 3}
-    volume: 0.045
+    volume: 0.0525
     pitch: 1
     loop: 0
     source: {fileID: 0}

@@ -270,6 +270,7 @@ public class GameManager : Singleton<GameManager>
 		Debug.Log("Round won");
 		InputManager.Instance.CharacterInputActions.Disable();
 		_playerCanUseAbilities = false;
+		_player.GetComponent<HealthComponent>().canTakeDamage = false;
 
 		List<WeaponPart> rewards = new List<WeaponPart>();
 		for (int i = 0; i < _numberOfRewards; i++)
@@ -309,6 +310,7 @@ public class GameManager : Singleton<GameManager>
 						coinPool.GetObjectAtIndex(i).moveToPlayer = true;
 						coinPool.GetObjectAtIndex(i).attractorSpeed *= 4f;
 						coinPool.GetObjectAtIndex(i).GetComponentInChildren<Coin_Collectible>().givenScore = Mathf.RoundToInt(coinPool.GetObjectAtIndex(i).GetComponentInChildren<Coin_Collectible>().givenScore * 0.5f);
+						coinPool.GetObjectAtIndex(i).GetComponentInChildren<Coin_Collectible>().SetCoinSilver();
 					}
 				}
 
