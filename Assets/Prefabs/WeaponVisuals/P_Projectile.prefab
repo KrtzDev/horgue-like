@@ -136,6 +136,7 @@ MonoBehaviour:
   finalCritChance: 30
   finalCritDamage: 0
   finalRange: 12.8125
+  finalKnockback: 15
   attackPattern: {fileID: 0}
   motionPattern: {fileID: 0}
   statusEffect: {fileID: 0}

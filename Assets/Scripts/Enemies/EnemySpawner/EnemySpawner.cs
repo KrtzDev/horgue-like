@@ -24,8 +24,9 @@ public enum SpawnBias { Close, Mid, Far, Level };
 
 public class EnemySpawner : MonoBehaviour
 {
-    public GameObject _enemySpawnIndicator;
     public GameObject _enemyObjectPoolParent;
+    public GameObject _enemySpawnIndicator;
+    public GameObject spawnIndicatorParent;
     private GameObject _player;
     [SerializeField] private GameObject _boxZoneParent;
 
@@ -69,13 +70,15 @@ public class EnemySpawner : MonoBehaviour
     {
         int lastKey = 0;
 
+        spawnIndicatorParent = Instantiate(spawnIndicatorParent, new Vector3(0, 0, 0), Quaternion.identity);
+
         for (int i = 0; i < _enemiesToSpawn.Count; i++)
         {
             _enemyObjectPool.Add(i, ObjectPool<AI_Agent_Enemy>.CreatePool(_enemiesToSpawn[i]._enemy, _enemySpawnerData._maxEnemyCount, _enemyObjectPoolParent.transform));
             lastKey = i;
         }
 
-        if(SceneManager.GetActiveScene().name.Contains("Boss"))
+        if (SceneManager.GetActiveScene().name.Contains("Boss"))
         {
 		    _enemyObjectPool.Add(lastKey + 1, ObjectPool<AI_Agent_Enemy>.CreatePool(bossEnemy._enemy, 1, _enemyObjectPoolParent.transform));
             SpawnEnemies(bossEnemy, 1, lastKey + 1, true);
@@ -446,7 +449,7 @@ public class EnemySpawner : MonoBehaviour
             if (NavMesh.SamplePosition(spawnPosition, out Hit, 2f, enemy_nvq))
             {
                 GameObject spawnIndicator = _enemySpawnIndicator;
-                Instantiate(spawnIndicator, Hit.position, Quaternion.identity);
+                Instantiate(spawnIndicator, Hit.position, Quaternion.identity, spawnIndicatorParent.transform);
             }
             else
             {

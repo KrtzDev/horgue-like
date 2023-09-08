@@ -121,7 +121,6 @@ public class PlayerAbilities : MonoBehaviour
     {
         if (ctx.canceled)
         {
-            Debug.Log("Release Button");
             ButtonHeld = false;
         }
     }

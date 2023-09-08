@@ -77,7 +77,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86a64adfa455dca49b11ad4dc7f5831d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attractorSpeed: 3
+  attractorSpeed: 3.5
   _collectible: {fileID: 142143167073650170}
   playerCollider: {fileID: 0}
   moveToPlayer: 0
