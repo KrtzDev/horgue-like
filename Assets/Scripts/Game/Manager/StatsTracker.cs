@@ -8,14 +8,15 @@ public class StatsTracker : Singleton<StatsTracker>
     public float damageDealtLevel;
     public int shotsFiredLevel;
     public int jumpsUsedLevel;
-    public int scoreCollectedLevel;
+    public float coinsCollectedLevel;
+    public float coinsCollectedEndOfRound;
     public int enemiesKilledLevel;
 
     [Header("Total Stats")]
     public float damageDealtTotal;
     public int shotsFiredTotal;
     public int jumpsUsedTotal;
-    public int scoreCollectedTotal;
+    public int coinsCollectedTotal;
     public int enemiesKilledTotal;
 
     public void ResetAllStats()
@@ -29,7 +30,7 @@ public class StatsTracker : Singleton<StatsTracker>
         damageDealtTotal = 0;
         shotsFiredTotal = 0;
         jumpsUsedTotal = 0;
-        scoreCollectedTotal = 0;
+        coinsCollectedTotal = 0;
         enemiesKilledTotal = 0;
     }
 
@@ -38,7 +39,8 @@ public class StatsTracker : Singleton<StatsTracker>
         damageDealtLevel = 0;
         shotsFiredLevel = 0;
         jumpsUsedLevel = 0;
-        scoreCollectedLevel = 0;
+        coinsCollectedLevel = 0;
+        coinsCollectedEndOfRound = 0;
         enemiesKilledLevel = 0;
     }
 
@@ -47,7 +49,8 @@ public class StatsTracker : Singleton<StatsTracker>
         damageDealtTotal += damageDealtLevel;
         shotsFiredTotal += shotsFiredLevel;
         jumpsUsedTotal += jumpsUsedLevel;
-        scoreCollectedTotal += scoreCollectedLevel;
+        coinsCollectedTotal += Mathf.RoundToInt(coinsCollectedLevel - 0.5f);
+        coinsCollectedTotal += Mathf.RoundToInt(coinsCollectedEndOfRound - 0.5f);
         enemiesKilledTotal += enemiesKilledLevel;
     }
 }

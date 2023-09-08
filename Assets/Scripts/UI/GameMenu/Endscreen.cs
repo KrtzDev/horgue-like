@@ -67,7 +67,8 @@ public class Endscreen : MonoBehaviour
 			FormatNumber(StatsTracker.Instance.shotsFiredLevel) + "\n" +
 			FormatNumber(StatsTracker.Instance.jumpsUsedLevel) + "\n" +
 			FormatNumber(StatsTracker.Instance.enemiesKilledLevel) + "\n" +
-			FormatNumber(StatsTracker.Instance.scoreCollectedLevel);
+			FormatNumber(StatsTracker.Instance.coinsCollectedLevel) + "\n" +
+			FormatNumber(StatsTracker.Instance.coinsCollectedEndOfRound * 2) + " / 2 = " + Mathf.RoundToInt(StatsTracker.Instance.coinsCollectedEndOfRound - 0.5f);
 	}
 
 	private void SetTotalStatsText()
@@ -77,7 +78,7 @@ public class Endscreen : MonoBehaviour
 			FormatNumber(StatsTracker.Instance.shotsFiredTotal) + "\n" +
 			FormatNumber(StatsTracker.Instance.jumpsUsedTotal) + "\n" +
 			FormatNumber(StatsTracker.Instance.enemiesKilledTotal) + "\n" +
-			FormatNumber(StatsTracker.Instance.scoreCollectedTotal);
+			FormatNumber(StatsTracker.Instance.coinsCollectedTotal);
 	}
 
 	private string FormatNumber(float num)
