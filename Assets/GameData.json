@@ -98,7 +98,7 @@
     {
       "name": "Drone",
       "maxHealth": 0.2,
-      "damagePerHit": 0.6,
+      "damagePerHit": 1.2,
       "attackSpeed": 2.25,
       "givenXP": 4,
       "maxMoveSpeed": 8,
@@ -120,8 +120,8 @@
       "damagePerHit": 1,
       "attackSpeed": 3,
       "givenXP": 8,
-      "maxMoveSpeed": 12,
-      "acceleration": 11,
+      "maxMoveSpeed": 10,
+      "acceleration": 10,
       "armor": 200,
       "elementalResistance": 200,
       "technicalResistance": -100,
@@ -137,7 +137,7 @@
   "Level": [
     {
       "name": "Level1",
-      "TimeToSurvive": 15,
+      "TimeToSurvive": 55,
       "spawnTick": 4.5,
       "spawnsPerTick": 7,
       "minEnemyCount": 12,
