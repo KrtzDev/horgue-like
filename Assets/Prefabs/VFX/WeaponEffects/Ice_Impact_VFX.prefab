@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3490087235228499210}
   - component: {fileID: 184763098076372355}
   m_Layer: 0
-  m_Name: ParticleSystem_Fire_Small
+  m_Name: Ice_Impact_VFX
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1364,24 +1364,24 @@ ParticleSystem:
       maxColor: {r: 1, g: 1, b: 1, a: 1}
       maxGradient:
         serializedVersion: 2
-        key0: {r: 1, g: 0.979303, b: 0.7971698, a: 0}
-        key1: {r: 1, g: 0.92156863, b: 0.23137255, a: 0.39607844}
-        key2: {r: 1, g: 0.34117648, b: 0.13333334, a: 0}
-        key3: {r: 0.5849056, g: 0.05797815, b: 0.052420773, a: 0}
-        key4: {r: 0, g: 0, b: 0, a: 0}
+        key0: {r: 0.79607844, g: 0.9826077, b: 1, a: 0}
+        key1: {r: 0.29019606, g: 0.84982526, b: 1, a: 0.5686275}
+        key2: {r: 0.1372549, g: 1, b: 0.9056146, a: 0}
+        key3: {r: 0, g: 0.8862745, b: 0.7288752, a: 0}
+        key4: {r: 0, g: 0.7919233, b: 0.8867924, a: 0}
         key5: {r: 0, g: 0, b: 0, a: 0}
         key6: {r: 0, g: 0, b: 0, a: 0}
         key7: {r: 0, g: 0, b: 0, a: 0}
         ctime0: 0
-        ctime1: 4732
-        ctime2: 14905
+        ctime1: 9445
+        ctime2: 17155
         ctime3: 65535
-        ctime4: 0
+        ctime4: 65535
         ctime5: 0
         ctime6: 0
         ctime7: 0
         atime0: 0
-        atime1: 13107
+        atime1: 16384
         atime2: 65535
         atime3: 0
         atime4: 0
@@ -6253,11 +6253,11 @@ ParticleSystem:
       maxColor: {r: 1, g: 1, b: 1, a: 1}
       maxGradient:
         serializedVersion: 2
-        key0: {r: 1, g: 0.979303, b: 0.7971698, a: 0}
-        key1: {r: 1, g: 0.92156863, b: 0.23137255, a: 0.7529412}
-        key2: {r: 1, g: 0.34117648, b: 0.13333334, a: 0}
-        key3: {r: 0.9137255, g: 0.11764706, b: 0.3882353, a: 0}
-        key4: {r: 0, g: 0, b: 0, a: 0}
+        key0: {r: 0.79607844, g: 1, b: 0.9882914, a: 0}
+        key1: {r: 0.23137254, g: 0.5133365, b: 1, a: 0.7529412}
+        key2: {r: 0.13333333, g: 0.6963223, b: 1, a: 0}
+        key3: {r: 0.11764703, g: 0.9137255, b: 0.8345499, a: 0}
+        key4: {r: 0.11764703, g: 0.9137255, b: 0.8345499, a: 0}
         key5: {r: 0, g: 0, b: 0, a: 0}
         key6: {r: 0, g: 0, b: 0, a: 0}
         key7: {r: 0, g: 0, b: 0, a: 0}
@@ -6265,7 +6265,7 @@ ParticleSystem:
         ctime1: 4732
         ctime2: 14905
         ctime3: 65535
-        ctime4: 0
+        ctime4: 65535
         ctime5: 0
         ctime6: 0
         ctime7: 0

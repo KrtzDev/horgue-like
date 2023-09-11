@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7351086227825365292}
   - component: {fileID: 4006764972701033732}
   m_Layer: 0
-  m_Name: P_DamageVFX
+  m_Name: E_DamageVFX
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4761,7 +4761,7 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: bfc3c60ce6bfaf04993dfcbcc6b5f76e, type: 2}
+  - {fileID: 2100000, guid: 9b054619115a261438001a0c9f5537b6, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

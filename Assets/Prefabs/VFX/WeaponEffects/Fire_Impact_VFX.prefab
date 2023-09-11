@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3490087235228499210}
   - component: {fileID: 184763098076372355}
   m_Layer: 0
-  m_Name: ParticleSystem_Fire_Small
+  m_Name: Fire_Impact_VFX
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
