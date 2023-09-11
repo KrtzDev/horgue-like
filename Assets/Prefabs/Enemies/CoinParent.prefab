@@ -202,6 +202,8 @@ MonoBehaviour:
   _wasPickedUp: 0
   _animator: {fileID: 2954434917807214887}
   _destroy: {fileID: 2954434917669188068}
+  _coinGold: {fileID: 2100000, guid: cb438b8af16ffb6498823f89b48cf764, type: 2}
+  _coinSilver: {fileID: 2100000, guid: a8d2f714a8c1a5f4c873ad6753aa0a14, type: 2}
   givenScore: 0
 --- !u!135 &8138154308285396310
 SphereCollider:

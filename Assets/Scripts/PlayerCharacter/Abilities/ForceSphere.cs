@@ -54,6 +54,17 @@ public class ForceSphere : MonoBehaviour
                     enemy.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezeRotation;
                     enemy.GetComponent<Rigidbody>().velocity = Vector3.zero;
                     enemy.GetComponent<Rigidbody>().AddForce(direction * _playerAbilities.ForceSphereForce, ForceMode.Impulse);
+                    
+                    // deal 1/3 max hp to enemy but boss
+                    if(enemy.GetComponent<AI_Agent_Enemy>()._isBossEnemy)
+                    {
+                        enemy.GetComponent<HealthComponent>().TakeDamage((int)(enemy.GetComponent<HealthComponent>().maxHealth * 0.0125f), false);
+                    }
+                    else
+                    {
+                        enemy.GetComponent<HealthComponent>().TakeDamage((int)(enemy.GetComponent<HealthComponent>().maxHealth * 0.5f), false);
+                    }
+
                     StartCoroutine(EnableEnemyAfterKnockback(enemy));
                 }
             }
