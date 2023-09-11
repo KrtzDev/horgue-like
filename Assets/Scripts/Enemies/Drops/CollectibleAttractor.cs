@@ -7,6 +7,7 @@ public class CollectibleAttractor : MonoBehaviour
     public float attractorSpeed;
     [SerializeField] private Collectible _collectible;
     [HideInInspector] public Collider playerCollider;
+    [SerializeField] private bool healthPack;
     public bool moveToPlayer;
 
     private void Awake()
@@ -26,7 +27,17 @@ public class CollectibleAttractor : MonoBehaviour
     {
         if (other.CompareTag("Player") && !_collectible._wasPickedUp)
         {
-            MoveToPlayer(other);
+            if(healthPack)
+            {
+                if(other.GetComponent<HealthComponent>().currentHealth < other.GetComponent<HealthComponent>().maxHealth)
+                {
+                    MoveToPlayer(other);
+                }
+            }
+            else
+            {
+                MoveToPlayer(other);
+            }
         }
     }
 

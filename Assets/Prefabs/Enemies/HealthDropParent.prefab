@@ -80,6 +80,7 @@ MonoBehaviour:
   attractorSpeed: 3.5
   _collectible: {fileID: 142143167073650170}
   playerCollider: {fileID: 0}
+  healthPack: 1
   moveToPlayer: 0
 --- !u!65 &6393572020907611971
 BoxCollider:
