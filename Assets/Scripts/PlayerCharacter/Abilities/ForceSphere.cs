@@ -54,16 +54,18 @@ public class ForceSphere : MonoBehaviour
                     enemy.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezeRotation;
                     enemy.GetComponent<Rigidbody>().velocity = Vector3.zero;
                     enemy.GetComponent<Rigidbody>().AddForce(direction * _playerAbilities.ForceSphereForce, ForceMode.Impulse);
-                    
-                    // deal 1/3 max hp to enemy but boss
-                    if(enemy.GetComponent<AI_Agent_Enemy>()._isBossEnemy)
+
+                    // deal average of weapon damage
+                    float damage = 0;
+                    for (int i = 0; i < _playerCharacter.GetComponent<WeaponHolster>().weapons.Count; i++)
                     {
-                        enemy.GetComponent<HealthComponent>().TakeDamage((int)(enemy.GetComponent<HealthComponent>().maxHealth * 0.0125f), false);
+                        damage += _playerCharacter.GetComponent<WeaponHolster>().weapons[i].weaponStats.damage;
                     }
-                    else
-                    {
-                        enemy.GetComponent<HealthComponent>().TakeDamage((int)(enemy.GetComponent<HealthComponent>().maxHealth * 0.5f), false);
-                    }
+
+                    damage = damage / _playerCharacter.GetComponent<WeaponHolster>().weapons.Count;
+                    Debug.Log(damage);
+
+                    enemy.GetComponent<HealthComponent>().TakeDamage((int)(damage), false);
 
                     StartCoroutine(EnableEnemyAfterKnockback(enemy));
                 }
