@@ -82,14 +82,14 @@ public class ToolTipUI : Selectable
 			Barrel barrel = weaponPartData as Barrel;
 
 			attackPatternStatUI = Instantiate(_statUI_highlight_two_lines_prefab, _statParent);
-			attackPatternStatUI.Initialize("Projectile Trajectory: ", barrel.attackPattern.PatternName());
+			attackPatternStatUI.Initialize("Projectile Trajectory: ", barrel.attackPattern.PatternName(), attackPatternStatUI.GetComponent<StatUI>().highlightColor);
 		}
 		else if (weaponPartData is Magazine)
 		{
 			Magazine mag = weaponPartData as Magazine;
 
 			capacityStatUI = Instantiate(_statUI_highlight_prefab, _statParent);
-			capacityStatUI.Initialize("Capacity: ", "   " + mag.capacity.ToString());
+			capacityStatUI.Initialize("Capacity: ", "   " + mag.capacity.ToString(), capacityStatUI.GetComponent<StatUI>().highlightColor);
 		}
 		else if (weaponPartData is Ammunition)
 		{
@@ -98,13 +98,18 @@ public class ToolTipUI : Selectable
 			if (ammunition.statusEffect != null)
 			{
 				statusEffectStatUI = Instantiate(_statUI_highlight_prefab, _statParent);
-				statusEffectStatUI.Initialize("Effect: ", ammunition.statusEffect.StatusName());
+				statusEffectStatUI.Initialize("Effect: ", ammunition.statusEffect.StatusName(), statusEffectStatUI.GetComponent<StatUI>().highlightColor);
+			}
+			else
+            {
+				emptyStatUI = Instantiate(_statUI_highlight_prefab, _statParent);
+				emptyStatUI.Initialize("Effect:", "None", emptyStatUI.GetComponent<StatUI>().highlightColor);
 			}
 		}
 		else
         {
-			attackPatternStatUI = Instantiate(_statUI_highlight_prefab, _statParent);
-			attackPatternStatUI.Initialize("Effect:", "None");
+			emptyStatUI = Instantiate(_statUI_highlight_prefab, _statParent);
+			emptyStatUI.Initialize("Effect:", "None", emptyStatUI.GetComponent<StatUI>().highlightColor);
 		}
 
 		damageStatUI = Instantiate(_statUI_prefab, _statParent);

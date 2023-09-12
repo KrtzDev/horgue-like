@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8713472024154021306}
   - component: {fileID: 9018271247152603339}
   m_Layer: 5
-  m_Name: P_UI_Stat_DPS
+  m_Name: P_UI_Stat_Black
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -62,7 +62,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.1792453, g: 0.1792453, b: 0.1792453, a: 1}
+  m_Color: {r: 0.21568628, g: 0.21568628, b: 0.21568628, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -96,6 +96,7 @@ MonoBehaviour:
   statBackground: {fileID: 8713472024154021306}
   positiveColor: {r: 0.23921567, g: 0.50980395, b: 0.24825953, a: 1}
   negativeColor: {r: 0.6320754, g: 0.3428711, b: 0.3428711, a: 1}
+  highlightColor: {r: 0.59607846, g: 0.49411765, b: 0.43529412, a: 1}
 --- !u!1 &7361048270457705148
 GameObject:
   m_ObjectHideFlags: 0
