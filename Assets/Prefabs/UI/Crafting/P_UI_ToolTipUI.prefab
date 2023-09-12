@@ -677,7 +677,9 @@ MonoBehaviour:
   _contentRect: {fileID: 5452614881417057406}
   _statUI_prefab: {fileID: 9018271247152603339, guid: dda6b321a08fb4f429ba9fe2654739a8,
     type: 3}
-  _statUI_Projectile_Trajectory_prefab: {fileID: 9018271247152603339, guid: 9de4f56ca87ea6449847f7d259d1a0f7,
+  _statUI_highlight_prefab: {fileID: 9018271247152603339, guid: b9bc15b8bde69564091e09b7846dfbf3,
+    type: 3}
+  _statUI_highlight_two_lines_prefab: {fileID: 9018271247152603339, guid: 9de4f56ca87ea6449847f7d259d1a0f7,
     type: 3}
   _rarityBadgeUI: {fileID: 2830343763936792879}
   weaponPart: {fileID: 0}
@@ -691,6 +693,7 @@ MonoBehaviour:
   attackPatternStatUI: {fileID: 0}
   capacityStatUI: {fileID: 0}
   statusEffectStatUI: {fileID: 0}
+  emptyStatUI: {fileID: 0}
 --- !u!1 &8623937125551465015
 GameObject:
   m_ObjectHideFlags: 0

@@ -20,11 +20,11 @@ public class WalletUI : MonoBehaviour
 	private void Start()
 	{
 		int value = GameManager.Instance.inventory.Wallet.GetMoneyAmount();
-		_moneyText.text = $"$: {value}";
+		_moneyText.text = $"$ {value}";
 	}
 
 	private void UpdateMoneyUI(int value)
 	{
-		_moneyText.text = $"$: {value}";
+		_moneyText.text = $"$ {value}";
 	}
 }
