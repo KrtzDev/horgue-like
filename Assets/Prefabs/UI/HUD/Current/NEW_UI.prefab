@@ -4035,6 +4035,8 @@ MonoBehaviour:
   _posOffset: {x: 250, y: 125}
   _cam: {fileID: 0}
   _screenShakeIntensity: 1.5
+  _lowFrequencyPulse: 0.25
+  _highFrequencyPulse: 1
 --- !u!1 &6830427890891645879
 GameObject:
   m_ObjectHideFlags: 0
@@ -4303,7 +4305,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &466530485752633727
 RectTransform:
   m_ObjectHideFlags: 0

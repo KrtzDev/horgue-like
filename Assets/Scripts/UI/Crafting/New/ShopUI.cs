@@ -52,7 +52,7 @@ public class ShopUI : UIMenu
 
 		int rerollCost = (int)(25 * (1 + GameManager.Instance.GameManagerValues[0]._weaponPartMultiplierPerLevel * 5 * (GameManager.Instance._currentLevel - 1)));
 		_rerollCost = rerollCost;
-		_shopRefreshCost.text = "$: " + _rerollCost;
+		_shopRefreshCost.text = "Cost: $ " + _rerollCost;
 		_newShopButton.OnButtonExecute += () => TryRefreshShop(3);
 	}
 
@@ -126,9 +126,9 @@ public class ShopUI : UIMenu
 	private void UpdateShopCostUIs()
 	{
 		for (int i = 0; i < _shopCostUIs.Count; i++)
-			_shopCostUIs[i].CostText.text = "$: 0";
+			_shopCostUIs[i].CostText.text = "$ 0";
 		for (int i = 0; i < shopItems.Count; i++)
-			_shopCostUIs[i].CostText.text = $"$: {shopItems[i].weaponPart.cost}";
+			_shopCostUIs[i].CostText.text = $"$ {shopItems[i].weaponPart.cost}";
 	}
 
 	private IEnumerator SelectFirstItemAfterFrame()

@@ -178,7 +178,7 @@ public class WeaponUI : MonoBehaviour
 		if (!colorStats)
 		{
 			StatUI currenStat = Instantiate(_statUI_DPS_Prefab, _weaponStatsParent);
-			currenStat.Initialize("Damage/Second: ", weaponStats.dps.ToString("0.00"));
+			currenStat.Initialize("DPS: ", weaponStats.dps.ToString("0.00"));
 			currenStat = Instantiate(_statUI_Prefab, _weaponStatsParent);
 			currenStat.Initialize("Damage: ", weaponStats.damage.ToString("0.00"));
 			currenStat = Instantiate(_statUI_Prefab, _weaponStatsParent);
@@ -206,7 +206,7 @@ public class WeaponUI : MonoBehaviour
 		else if (_previousWeaponStats != null && colorStats)
 		{
 			StatUI currenStat = Instantiate(_statUI_DPS_Prefab, _weaponStatsParent);
-			currenStat.Initialize("Damage/Seconds: ", weaponStats.dps.ToString("0.00"));
+			currenStat.Initialize("DPS: ", weaponStats.dps.ToString("0.00"));
 			if (weaponStats.dps > _previousWeaponStats.dps)
 				currenStat.statBackground.color = currenStat.positiveColor;
 			else if (weaponStats.dps < _previousWeaponStats.dps)
@@ -270,17 +270,41 @@ public class WeaponUI : MonoBehaviour
 
 			currenStat = Instantiate(_statUI_Projectile_Trajectory_Prefab, _weaponStatsParent);
 			currenStat.Initialize("Projectile Trajectory: ", weaponStats.attackPattern.PatternName());
+			if (weaponStats.attackPattern != _previousWeaponStats.attackPattern)
+				currenStat.statBackground.color = currenStat.highlightColor;
+			else
+				currenStat.statBackground.color = currenStat.standartBackgroundColor;
 
 			currenStat = Instantiate(_statUI_Prefab, _weaponStatsParent);
 			if (weaponStats.statusEffect != null)
+            {
 				currenStat.Initialize("Effect: ", weaponStats.statusEffect.StatusName());
+				if (weaponStats.statusEffect != _previousWeaponStats.statusEffect)
+				{
+					currenStat.statBackground.color = currenStat.highlightColor;
+				}
+				else
+				{
+					currenStat.statBackground.color = currenStat.standartBackgroundColor;
+				}
+			}
 			else
+            {
 				currenStat.Initialize("Effect: ", "None");
+				if (weaponStats.statusEffect != _previousWeaponStats.statusEffect)
+				{
+					currenStat.statBackground.color = currenStat.highlightColor;
+				}
+				else
+				{
+					currenStat.statBackground.color = currenStat.standartBackgroundColor;
+				}
+			}
 		}
 		else
 		{
-			StatUI currenStat = Instantiate(_statUI_Prefab, _weaponStatsParent);
-			currenStat.Initialize("Damage/Second: ", weaponStats.dps.ToString("0.00"));
+			StatUI currenStat = Instantiate(_statUI_DPS_Prefab, _weaponStatsParent);
+			currenStat.Initialize("DPS: ", weaponStats.dps.ToString("0.00"));
 			currenStat = Instantiate(_statUI_Prefab, _weaponStatsParent);
 			currenStat.Initialize("Damage: ", weaponStats.damage.ToString("0.00"));
 			currenStat = Instantiate(_statUI_Prefab, _weaponStatsParent);

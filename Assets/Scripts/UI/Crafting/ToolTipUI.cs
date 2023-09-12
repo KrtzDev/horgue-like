@@ -30,7 +30,9 @@ public class ToolTipUI : Selectable
 	[SerializeField]
 	private StatUI _statUI_prefab;
 	[SerializeField]
-	private StatUI _statUI_Projectile_Trajectory_prefab;
+	private StatUI _statUI_highlight_prefab;
+	[SerializeField]
+	private StatUI _statUI_highlight_two_lines_prefab;
 	[SerializeField]
 	private RarityBadgeUI _rarityBadgeUI;
 
@@ -50,6 +52,7 @@ public class ToolTipUI : Selectable
 	public StatUI attackPatternStatUI;
 	public StatUI capacityStatUI;
 	public StatUI statusEffectStatUI;
+	public StatUI emptyStatUI;
 
 	public void Initialize(WeaponPart weaponPartData)
 	{
@@ -74,6 +77,41 @@ public class ToolTipUI : Selectable
 
 	private void InitializeStats(WeaponPart weaponPartData)
 	{
+		if (weaponPartData is Barrel)
+		{
+			Barrel barrel = weaponPartData as Barrel;
+
+			attackPatternStatUI = Instantiate(_statUI_highlight_two_lines_prefab, _statParent);
+			attackPatternStatUI.Initialize("Projectile Trajectory: ", barrel.attackPattern.PatternName(), attackPatternStatUI.GetComponent<StatUI>().highlightColor);
+		}
+		else if (weaponPartData is Magazine)
+		{
+			Magazine mag = weaponPartData as Magazine;
+
+			capacityStatUI = Instantiate(_statUI_highlight_prefab, _statParent);
+			capacityStatUI.Initialize("Capacity: ", "   " + mag.capacity.ToString(), capacityStatUI.GetComponent<StatUI>().highlightColor);
+		}
+		else if (weaponPartData is Ammunition)
+		{
+			Ammunition ammunition = weaponPartData as Ammunition;
+
+			if (ammunition.statusEffect != null)
+			{
+				statusEffectStatUI = Instantiate(_statUI_highlight_prefab, _statParent);
+				statusEffectStatUI.Initialize("Effect: ", ammunition.statusEffect.StatusName(), statusEffectStatUI.GetComponent<StatUI>().highlightColor);
+			}
+			else
+            {
+				emptyStatUI = Instantiate(_statUI_highlight_prefab, _statParent);
+				emptyStatUI.Initialize("Effect:", "None", emptyStatUI.GetComponent<StatUI>().highlightColor);
+			}
+		}
+		else
+        {
+			emptyStatUI = Instantiate(_statUI_highlight_prefab, _statParent);
+			emptyStatUI.Initialize("Effect:", "None", emptyStatUI.GetComponent<StatUI>().highlightColor);
+		}
+
 		damageStatUI = Instantiate(_statUI_prefab, _statParent);
 		damageStatUI.Initialize("Damage: ", weaponPartData.baseDamage.ToString("0.00"));
 		attackSpeedStatUI = Instantiate(_statUI_prefab, _statParent);
@@ -88,31 +126,6 @@ public class ToolTipUI : Selectable
 		critDamageStatUI.Initialize("Crit Damage: ", weaponPartData.critChance.ToString("0.00"));
 		rangeStatUI = Instantiate(_statUI_prefab, _statParent);
 		rangeStatUI.Initialize("Range: ", weaponPartData.range.ToString("0.00"));
-
-		if (weaponPartData is Barrel)
-		{
-			Barrel barrel = weaponPartData as Barrel;
-
-			attackPatternStatUI = Instantiate(_statUI_Projectile_Trajectory_prefab, _statParent);
-			attackPatternStatUI.Initialize("Projectile Trajectory: ", barrel.attackPattern.PatternName());
-		}
-		else if (weaponPartData is Magazine)
-		{
-			Magazine mag = weaponPartData as Magazine;
-
-			capacityStatUI = Instantiate(_statUI_prefab, _statParent);
-			capacityStatUI.Initialize("Capacity: ", mag.capacity.ToString());
-		}
-		else if (weaponPartData is Ammunition)
-		{
-			Ammunition ammunition = weaponPartData as Ammunition;
-
-			if (ammunition.statusEffect != null)
-			{
-				statusEffectStatUI = Instantiate(_statUI_prefab, _statParent);
-				statusEffectStatUI.Initialize("Effect: ", ammunition.statusEffect.StatusName());
-			}
-		}
 	}
 
 	private void Buy()
