@@ -46,7 +46,7 @@ public class MenuControll : MonoBehaviour
 		_menuTabs[_currentSelectedTab].UnFocusMenu();
 
 		_currentSelectedTab += navInput;
-		_currentSelectedTab = Mathf.Clamp(_currentSelectedTab, 0, _menuTabs.Count -1);
+		_currentSelectedTab = Mathf.Abs(_currentSelectedTab % _menuTabs.Count);
 		_menuTabs[_currentSelectedTab].KeepFocus();
 		_menuTabs[_currentSelectedTab].Select();
 	}
