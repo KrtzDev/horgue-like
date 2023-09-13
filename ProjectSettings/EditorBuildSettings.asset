@@ -38,4 +38,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Game Scenes/SCENE_Weapon_Crafting.unity
     guid: fbbb3b1e874237c42bf7c071f9f12af7
-  m_configObjects: {}
+  m_configObjects:
+    com.unity.input.settings: {fileID: 11400000, guid: cf8cca42311ed1744817c48672da7389,
+      type: 2}
