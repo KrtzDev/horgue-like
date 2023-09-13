@@ -29,8 +29,7 @@ public class ShopUI : UIMenu
 	private HoldButton _buyButton;
 	[SerializeField]
 	private HoldButton _newShopButton;
-	[SerializeField]
-	private int _rerollCost;
+
 	[SerializeField]
 	private HoldButton _sellButton;
 	[SerializeField]
@@ -41,9 +40,11 @@ public class ShopUI : UIMenu
 
 	[SerializeField]
 	private List<ShopCostUI> _shopCostUIs;
+	[SerializeField] 
+	private TMP_Text _shopRefreshCost;
 
 	public List<ToolTipUI> shopItems;
-	[SerializeField] private TMP_Text _shopRefreshCost;
+	private int _rerollCost;
 
 	private void Start()
 	{

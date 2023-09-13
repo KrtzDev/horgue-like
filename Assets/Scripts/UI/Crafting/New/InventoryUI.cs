@@ -55,7 +55,7 @@ public class InventoryUI : UIMenu
 			inventorySlot.OnSelected += OnInventorySlotSelected;
 		}
 
-		_shopUI.OnBought += AddToInventory;
+		_shopUI.OnBought += BuyAndEquip;
 
 		SetUpNavigation();
 	}
@@ -78,6 +78,7 @@ public class InventoryUI : UIMenu
 		GameManager.Instance.inventory.RemoveFromInventory(weaponPart.weaponPart);
 
 		WeaponPart oldPart =_weaponUI.weapon.GetWeaponPartOfType(weaponPart.weaponPart);
+
 		AddToInventory(oldPart);
 
 		_weaponUI.SetNewWeaponPart(weaponPart);
@@ -88,19 +89,27 @@ public class InventoryUI : UIMenu
 		Destroy(weaponPart.gameObject);
 
 
-
-		StartCoroutine(FillInventoryUI());
+		if (gameObject.activeSelf)
+			StartCoroutine(FillInventoryUI());
 	}
 
 	private void OnItemSold(WeaponPart weaponPart)
 	{
 		StartCoroutine(FillInventoryUI());
-
 	}
 
 	private void AddToInventory(WeaponPart weaponPart)
 	{
 		GameManager.Instance.inventory.AddToInventory(weaponPart);
+		if (gameObject.activeSelf)
+			StartCoroutine(FillInventoryUI());
+	}
+
+	private void BuyAndEquip(WeaponPart weaponPart)
+	{
+		WeaponPartUI weaponPartUI = InitializeNewWeaponPartUI(weaponPart, _shopUI.transform);
+		weaponPartUI.transform.SetParent(_shopUI.transform);
+		OnItemEquip(weaponPartUI);
 		if (gameObject.activeSelf)
 			StartCoroutine(FillInventoryUI());
 	}
@@ -159,14 +168,21 @@ public class InventoryUI : UIMenu
 
 		for (int i = 0; i < weaponParts.Count; i++)
 		{
-			WeaponPartUI weaponPartUI = Instantiate(_weaponPartUI, _inventorySlots[i].transform);
+			WeaponPartUI weaponPartUI = InitializeNewWeaponPartUI(weaponParts[i], _inventorySlots[i].transform);
 			_inventorySlots[i].SetWeaponPart(weaponPartUI);
-			weaponPartUI.Initialize(weaponParts[i]);
-			weaponPartUI.weaponUI = _weaponUI;
-			weaponPartUI.statsContainer = _comparisonContainerSelected;
 		}
 
 		SelectInventorySlot();
+	}
+
+	private WeaponPartUI InitializeNewWeaponPartUI(WeaponPart weaponPart, Transform parent)
+	{
+		WeaponPartUI weaponPartUI = Instantiate(_weaponPartUI, parent);
+		weaponPartUI.Initialize(weaponPart);
+		weaponPartUI.weaponUI = _weaponUI;
+		weaponPartUI.statsContainer = _comparisonContainerSelected;
+
+		return weaponPartUI;
 	}
 
 	private void SelectInventorySlot()

@@ -72,11 +72,9 @@ public class HolsterTabs : MonoBehaviour
 		_weaponTabs[_currentSelectedTab].ResetColors();
 
 		_currentSelectedTab += navInput;
-		_currentSelectedTab = Mathf.Clamp(_currentSelectedTab, 0, _weaponTabs.Count -1);
+		_currentSelectedTab = Mathf.Abs(_currentSelectedTab % _weaponTabs.Count);
 		_weaponTabs[_currentSelectedTab].SelectVisualy();
 		_weaponTabs[_currentSelectedTab].KeepFocus();
-
-
 	}
 
 	private void KeepTabSelected(InputAction.CallbackContext obj)
