@@ -34,6 +34,7 @@ public class WeaponHolster : MonoBehaviour
 		}
 
 		InputManager.Instance.CharacterInputActions.Character.SwitchMode.performed += SwitchWeaponControllMode;
+		InputManager.Instance.CharacterInputActions.Character.SwitchMode.canceled += SwitchWeaponControllMode;
 		InputManager.Instance.CharacterInputActions.Character.Aim.performed += SwitchWeaponControllMode_OnAim;
 		InputManager.Instance.CharacterInputActions.Character.Aim.canceled += SwitchWeaponControllMode_OnAim;
 
@@ -72,7 +73,7 @@ public class WeaponHolster : MonoBehaviour
 			GameManager.Instance.returnToAutoShooting = true;
 		}
 		
-		if (ctx.canceled && GameManager.Instance.weaponControll == WeaponControllKind.AutoShootManualAim && GameManager.Instance.returnToAutoShooting == true)
+		if ((ctx.canceled || ctx.ReadValue<Vector2>() == Vector2.zero) && GameManager.Instance.weaponControll == WeaponControllKind.AutoShootManualAim && GameManager.Instance.returnToAutoShooting == true)
 		{
 			GameManager.Instance.weaponControll = WeaponControllKind.AllAuto;
 		}
