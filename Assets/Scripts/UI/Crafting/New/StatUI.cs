@@ -15,14 +15,23 @@ public class StatUI : MonoBehaviour
 	public Color positiveColor;
 	[SerializeField]
 	public Color negativeColor;
+	public Color highlightColor;
 
-
-	private Color _standartBackgroundColor;
+	[HideInInspector]
+	public Color standartBackgroundColor;
 
 	public void Initialize(string statName, string value)
 	{
 		_statName.text = statName;
 		_value.text = value;
-		_standartBackgroundColor = statBackground.color;
+		standartBackgroundColor = statBackground.color;
+	}
+
+	public void Initialize(string statName, string value, Color color)
+	{
+		_statName.text = statName;
+		_value.text = value;
+		statBackground.color = color;
+		standartBackgroundColor = statBackground.color;
 	}
 }

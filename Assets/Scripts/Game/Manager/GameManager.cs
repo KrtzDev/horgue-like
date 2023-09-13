@@ -46,6 +46,7 @@ public class GameManager : Singleton<GameManager>
 	public int _currentLevel = 1;
 	// private int _lastLevel;
 	public int _currentLeveslArray;
+	public bool roundWon;
 
 	private int _numberOfRewards = 6;
 
@@ -99,6 +100,7 @@ public class GameManager : Singleton<GameManager>
 		_currentLevel = 1;
 		_gameIsPaused = false;
 		_newGamePlus = false;
+		roundWon = false;
 		lastLevelNumbers = Vector2Int.zero;
 		bossCheat = false;
 		StatsTracker.Instance.ResetAllStats();
@@ -265,11 +267,12 @@ public class GameManager : Singleton<GameManager>
 	private void RoundWon()
 	{
 		AudioManager.Instance.PlaySound("LevelConfirmation");
-		StatsTracker.Instance.AddLevelStatsToTotal();
 
 		Debug.Log("Round won");
+		roundWon = true;
 		InputManager.Instance.CharacterInputActions.Disable();
 		_playerCanUseAbilities = false;
+		_player.GetComponent<HealthComponent>().canTakeDamage = false;
 
 		List<WeaponPart> rewards = new List<WeaponPart>();
 		for (int i = 0; i < _numberOfRewards; i++)
@@ -308,7 +311,7 @@ public class GameManager : Singleton<GameManager>
 						coinPool.GetObjectAtIndex(i).playerCollider = playerCollider;
 						coinPool.GetObjectAtIndex(i).moveToPlayer = true;
 						coinPool.GetObjectAtIndex(i).attractorSpeed *= 4f;
-						coinPool.GetObjectAtIndex(i).GetComponentInChildren<Coin_Collectible>().givenScore = Mathf.RoundToInt(coinPool.GetObjectAtIndex(i).GetComponentInChildren<Coin_Collectible>().givenScore * 0.5f);
+						coinPool.GetObjectAtIndex(i).GetComponentInChildren<Coin_Collectible>().SetCoinSilver();
 					}
 				}
 
@@ -323,6 +326,7 @@ public class GameManager : Singleton<GameManager>
 	private void EnemyStopFollowing()
 	{
 		_enemySpawner._enemyObjectPoolParent.SetActive(false);
+		_enemySpawner.spawnIndicatorParent.SetActive(false);
 	}
 
 	private void RoundLost()

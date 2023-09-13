@@ -54,6 +54,19 @@ public class ForceSphere : MonoBehaviour
                     enemy.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezeRotation;
                     enemy.GetComponent<Rigidbody>().velocity = Vector3.zero;
                     enemy.GetComponent<Rigidbody>().AddForce(direction * _playerAbilities.ForceSphereForce, ForceMode.Impulse);
+
+                    // deal average of weapon damage
+                    float damage = 0;
+                    for (int i = 0; i < _playerCharacter.GetComponent<WeaponHolster>().weapons.Count; i++)
+                    {
+                        damage += _playerCharacter.GetComponent<WeaponHolster>().weapons[i].weaponStats.damage;
+                    }
+
+                    damage = damage / _playerCharacter.GetComponent<WeaponHolster>().weapons.Count;
+                    Debug.Log(damage);
+
+                    enemy.GetComponent<HealthComponent>().TakeDamage((int)(damage), false);
+
                     StartCoroutine(EnableEnemyAfterKnockback(enemy));
                 }
             }

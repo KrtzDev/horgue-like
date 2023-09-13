@@ -37,6 +37,8 @@ public class UIManager : Singleton<UIManager>
 
 	public void ShowLevelEndScreen(LevelStatus levelStatus)
 	{
+		StatsTracker.Instance.AddLevelStatsToTotal();
+
 		switch (levelStatus)
 		{
 			case LevelStatus.Won:
