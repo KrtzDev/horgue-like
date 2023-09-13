@@ -41,7 +41,9 @@ public class WeaponUI : MonoBehaviour
 	[SerializeField]
 	private StatUI _statUI_Prefab;
 	[SerializeField]
-	private StatUI _statUI_Projectile_Trajectory_Prefab;
+	private StatUI _statUI_Highlight_One_Line_Prefab;
+	[SerializeField]
+	private StatUI _statUI_Highlight_Two_Lines_Prefab;
 	[SerializeField]
 	private StatUI _statUI_DPS_Prefab;
 
@@ -195,9 +197,9 @@ public class WeaponUI : MonoBehaviour
 			currenStat.Initialize("Range: ", weaponStats.range.ToString("0.00"));
 			currenStat = Instantiate(_statUI_Prefab, _weaponStatsParent);
 			currenStat.Initialize("Capacity: ", weaponStats.capacity.ToString("0.00"));
-			currenStat = Instantiate(_statUI_Projectile_Trajectory_Prefab, _weaponStatsParent);
+			currenStat = Instantiate(_statUI_Highlight_Two_Lines_Prefab, _weaponStatsParent);
 			currenStat.Initialize("Projectile Trajectory: ", weaponStats.attackPattern.PatternName());
-			currenStat = Instantiate(_statUI_Prefab, _weaponStatsParent);
+			currenStat = Instantiate(_statUI_Highlight_One_Line_Prefab, _weaponStatsParent);
 			if (weaponStats.statusEffect != null)
 				currenStat.Initialize("Effect: ", weaponStats.statusEffect.StatusName());
 			else
@@ -268,24 +270,36 @@ public class WeaponUI : MonoBehaviour
 			else if (weaponStats.capacity < _previousWeaponStats.capacity)
 				currenStat.statBackground.color = currenStat.negativeColor;
 
-			currenStat = Instantiate(_statUI_Projectile_Trajectory_Prefab, _weaponStatsParent);
+			currenStat = Instantiate(_statUI_Highlight_Two_Lines_Prefab, _weaponStatsParent);
 			currenStat.Initialize("Projectile Trajectory: ", weaponStats.attackPattern.PatternName());
 			if (weaponStats.attackPattern != _previousWeaponStats.attackPattern)
+            {
 				currenStat.statBackground.color = currenStat.highlightColor;
+				currenStat.statName.color = currenStat.highlightTextColor;
+				currenStat.statValue.color = currenStat.highlightTextColor;
+			}
 			else
-				currenStat.statBackground.color = currenStat.standartBackgroundColor;
+            {
+				currenStat.statBackground.color = currenStat.standardBackgroundColor;
+				currenStat.statName.color = currenStat.standardTextColor;
+				currenStat.statValue.color = currenStat.standardTextColor;
+			}
 
-			currenStat = Instantiate(_statUI_Prefab, _weaponStatsParent);
+			currenStat = Instantiate(_statUI_Highlight_One_Line_Prefab, _weaponStatsParent);
 			if (weaponStats.statusEffect != null)
             {
 				currenStat.Initialize("Effect: ", weaponStats.statusEffect.StatusName());
 				if (weaponStats.statusEffect != _previousWeaponStats.statusEffect)
 				{
 					currenStat.statBackground.color = currenStat.highlightColor;
+					currenStat.statName.color = currenStat.highlightTextColor;
+					currenStat.statValue.color = currenStat.highlightTextColor;
 				}
 				else
 				{
-					currenStat.statBackground.color = currenStat.standartBackgroundColor;
+					currenStat.statBackground.color = currenStat.standardBackgroundColor;
+					currenStat.statName.color = currenStat.standardTextColor;
+					currenStat.statValue.color = currenStat.standardTextColor;
 				}
 			}
 			else
@@ -294,10 +308,14 @@ public class WeaponUI : MonoBehaviour
 				if (weaponStats.statusEffect != _previousWeaponStats.statusEffect)
 				{
 					currenStat.statBackground.color = currenStat.highlightColor;
+					currenStat.statName.color = currenStat.highlightTextColor;
+					currenStat.statValue.color = currenStat.highlightTextColor;
 				}
 				else
 				{
-					currenStat.statBackground.color = currenStat.standartBackgroundColor;
+					currenStat.statBackground.color = currenStat.standardBackgroundColor;
+					currenStat.statName.color = currenStat.standardTextColor;
+					currenStat.statValue.color = currenStat.standardTextColor;
 				}
 			}
 		}
@@ -321,9 +339,9 @@ public class WeaponUI : MonoBehaviour
 			currenStat.Initialize("Range: ", weaponStats.range.ToString("0.00"));
 			currenStat = Instantiate(_statUI_Prefab, _weaponStatsParent);
 			currenStat.Initialize("Capacity: ", weaponStats.capacity.ToString("0.00"));
-			currenStat = Instantiate(_statUI_Projectile_Trajectory_Prefab, _weaponStatsParent);
+			currenStat = Instantiate(_statUI_Highlight_Two_Lines_Prefab, _weaponStatsParent);
 			currenStat.Initialize("Projectile Trajectory: ", weaponStats.attackPattern.PatternName());
-			currenStat = Instantiate(_statUI_Prefab, _weaponStatsParent);
+			currenStat = Instantiate(_statUI_Highlight_One_Line_Prefab, _weaponStatsParent);
 			if (weaponStats.statusEffect != null)
 				currenStat.Initialize("Effect: ", weaponStats.statusEffect.StatusName().ToString());
 			else
