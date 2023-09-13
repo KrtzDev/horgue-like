@@ -60,6 +60,11 @@ public class PlayerCharacter : MonoBehaviour
         {
             UIManager.Instance.PauseMenu.gameObject.SetActive(true);
             GameManager.Instance._gameIsPaused = true;
+
+			Gamepad pad = Gamepad.current;
+			if (pad != null)
+				pad.PauseHaptics();
+
             Time.timeScale = 0;
         }
     }

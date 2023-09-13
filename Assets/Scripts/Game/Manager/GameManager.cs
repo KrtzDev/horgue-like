@@ -4,6 +4,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine.AI;
 using System.Collections;
+using UnityEngine.InputSystem;
 
 [DefaultExecutionOrder(-1)]
 public class GameManager : Singleton<GameManager>
@@ -89,8 +90,14 @@ public class GameManager : Singleton<GameManager>
 	private void Start()
 	{
 		SceneLoader.Instance.CompletedSceneLoad += OnCompletedSceneLoad;
-
+		Application.wantsToQuit += ApplicationCleanUp;
 		ResetGame();
+	}
+
+	private bool ApplicationCleanUp()
+	{
+		InputSystem.ResetHaptics();
+		return true;
 	}
 
 	private void ResetGame()
