@@ -284,9 +284,12 @@ public class StatusEffect
 	{
 		if (VFXobjectPool != null)
 		{
+			EnemyHealthComponent healthComponent = _enemy.GetComponent<EnemyHealthComponent>();
+
 			HorgueVFX spawnedKnockBackVFX = VFXobjectPool.GetObject();
-			spawnedKnockBackVFX.transform.SetParent(_enemy.transform);
+			spawnedKnockBackVFX.transform.SetParent(healthComponent.ParticlePosition);
 			spawnedKnockBackVFX.transform.localPosition = Vector3.zero;
+			spawnedKnockBackVFX.transform.localScale = _enemy.DesiredVFXScale;
 			spawnedKnockBackVFX.Play();
 			_enemy.GetComponent<EnemyHealthComponent>().OnEnemyDied += () => ReturnEffectToPoolOnDied(VFXobjectPool, spawnedKnockBackVFX);
 			spawnedKnockBackVFX.ReturnToPoolAfterTime(VFXobjectPool, _effectDuration);

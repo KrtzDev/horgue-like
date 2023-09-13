@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -20,7 +18,11 @@ public class AI_Agent_Enemy : AI_Agent
     public bool _useHeightControl;
     public GameObject _heightGO;
 
-    protected override void Start()
+	public Vector3 DesiredVFXScale => _desiredVFXScale;
+	[SerializeField]
+	private Vector3 _desiredVFXScale;
+
+	protected override void Start()
     {
         base.Start();
 
