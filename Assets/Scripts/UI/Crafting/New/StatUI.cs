@@ -4,34 +4,38 @@ using UnityEngine.UI;
 
 public class StatUI : MonoBehaviour
 {
-	[SerializeField]
-	private TMP_Text _statName;
-	[SerializeField]
-	private TMP_Text _value;
+	[Header("Name & Value")]
+	public TMP_Text statName;
+	public TMP_Text statValue;
 
-	[SerializeField]
+	[Header("Colors")]
 	public Image statBackground;
-	[SerializeField]
 	public Color positiveColor;
-	[SerializeField]
 	public Color negativeColor;
 	public Color highlightColor;
+	public Color highlightTextColor;
 
 	[HideInInspector]
-	public Color standartBackgroundColor;
+	public Color standardBackgroundColor;
+	[HideInInspector]
+	public Color standardTextColor;
 
-	public void Initialize(string statName, string value)
+	public void Initialize(string name, string value)
 	{
-		_statName.text = statName;
-		_value.text = value;
-		standartBackgroundColor = statBackground.color;
+		statName.text = name;
+		statValue.text = value;
+		standardBackgroundColor = statBackground.color;
+		standardTextColor = statName.color;
 	}
 
-	public void Initialize(string statName, string value, Color color)
+	public void Initialize(string name, string value, Color bgColor, Color textColor)
 	{
-		_statName.text = statName;
-		_value.text = value;
-		statBackground.color = color;
-		standartBackgroundColor = statBackground.color;
+		statName.text = name;
+		statValue.text = value;
+		statBackground.color = bgColor;
+		statName.color = textColor;
+		statValue.color = textColor;
+		standardBackgroundColor = statBackground.color;
+		standardTextColor = statName.color;
 	}
 }
