@@ -5,6 +5,8 @@ public class EnemyHealthComponent : HealthComponent
 {
 	public event Action OnEnemyDied;
 
+	public Transform ParticlePosition => _hitParticlePosition;
+
     [SerializeField] private Transform _hitParticlePosition;
     [SerializeField] private ParticleSystem _hitParticle;
 	public EnemyHealthBar _enemyHealthBar;

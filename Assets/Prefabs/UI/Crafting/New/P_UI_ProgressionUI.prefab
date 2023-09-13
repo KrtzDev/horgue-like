@@ -222,6 +222,7 @@ GameObject:
   m_Component:
   - component: {fileID: 388690418}
   - component: {fileID: 6125829607908593843}
+  - component: {fileID: 5880362647525465805}
   m_Layer: 5
   m_Name: Shop
   m_TagString: Untagged
@@ -267,6 +268,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b39455702d277040b89e7f72ca6c24a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _canvasGroup: {fileID: 5880362647525465805}
   _weaponUI: {fileID: 9083020944113373785}
   _comparisonUI: {fileID: 6136864517794705985}
   _walletUI: {fileID: 2273893404088161270}
@@ -287,6 +289,18 @@ MonoBehaviour:
   - {fileID: 6764191845053499610}
   shopItems: []
   _shopRefreshCost: {fileID: 118352824}
+--- !u!225 &5880362647525465805
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 388690417}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &545250692
 GameObject:
   m_ObjectHideFlags: 0
@@ -7044,6 +7058,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2147104480455940346}
   - component: {fileID: 5035685159186285804}
+  - component: {fileID: 196455988700160666}
   m_Layer: 5
   m_Name: Inventory
   m_TagString: Untagged
@@ -7086,6 +7101,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ffb8e7ff1d8c5d94189e1d786cec8d26, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _canvasGroup: {fileID: 196455988700160666}
   _shopUI: {fileID: 6125829607908593843}
   _comparisonUI: {fileID: 6136864517794705985}
   _weaponUI: {fileID: 9083020944113373785}
@@ -7101,6 +7117,18 @@ MonoBehaviour:
   _comparisonContainerShopItem: {fileID: 6584131402342506408}
   _toolTipUI_prefab: {fileID: 1632619086718026943, guid: 060763a266677f6469ac0e95f2facdfc,
     type: 3}
+--- !u!225 &196455988700160666
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6188293455996273530}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &6246457784336794806
 GameObject:
   m_ObjectHideFlags: 0

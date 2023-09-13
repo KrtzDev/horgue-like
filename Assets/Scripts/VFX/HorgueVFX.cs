@@ -48,5 +48,10 @@ public class HorgueVFX : MonoBehaviour
 				_longestDuration = _particleSystems[i].main.duration;
 		}
 	}
+
+	private void PlayInEditor()
+	{
+
+	}
 #endif
 }

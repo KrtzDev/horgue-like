@@ -1,4 +1,6 @@
 using UnityEngine;
+using DG.Tweening;
+using System;
 
 public class MenuTab : UIButton
 {
@@ -24,12 +26,18 @@ public class MenuTab : UIButton
 
 	private void FocusMenu()
 	{
-		AssociatedMenu.gameObject.SetActive(true);
-		AssociatedMenu.SetFocusedMenu();
+		AssociatedMenu.CanvasGroup.DOFade(1f,.2f).OnComplete(() => SetObjectActive(true));
 	}
 
 	public void UnFocusMenu()
 	{
-		AssociatedMenu.gameObject.SetActive(false);
+		AssociatedMenu.CanvasGroup.DOFade(0f,.2f).OnComplete(() => SetObjectActive(false));
+	}
+
+	private void SetObjectActive(bool active)
+	{
+		AssociatedMenu.gameObject.SetActive(active);
+		if (active == true)
+			AssociatedMenu.SetFocusedMenu();
 	}
 }
