@@ -1,4 +1,5 @@
-﻿using UnityEngine.AI;
+﻿using UnityEngine;
+using UnityEngine.AI;
 
 public class Slow : Effect
 {
@@ -25,9 +26,12 @@ public class Slow : Effect
 	public override void Tick(float delta)
 	{
 		_statusDuration -= delta;
+		if(_enemy is AI_Agent_Rikayon)
+			Debug.Log(_statusDuration);
 
 		if (_statusDuration <= 0)
 		{
+			Debug.Log("end slow");
 			_agent.speed = _originalSpeed;
 			OnEffectEnded?.Invoke(this);
 			return;
@@ -44,5 +48,10 @@ public class Slow : Effect
 	public override void ResetDuration()
 	{
 		_statusDuration = _startDuration;
+	}
+
+	public override void EndEffect()
+	{
+		_agent.speed = _originalSpeed;
 	}
 }

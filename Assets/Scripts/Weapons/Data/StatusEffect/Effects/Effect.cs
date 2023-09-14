@@ -23,4 +23,9 @@ public abstract class Effect
 		if(_TickVFX != null)
 			_TickVFX.Play();
 	}
+
+	public virtual void EndEffect()
+	{
+
+	}
 }

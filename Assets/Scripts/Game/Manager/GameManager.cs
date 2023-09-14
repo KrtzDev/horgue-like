@@ -291,8 +291,6 @@ public class GameManager : Singleton<GameManager>
 
 		_currentLevel += 1;
 
-		// UIManager.Instance.ShowWaveEndScreen(LevelStatus.Won);
-
 		EnemyStopFollowing();
 		StartCoroutine(AttractCoins());
 	}

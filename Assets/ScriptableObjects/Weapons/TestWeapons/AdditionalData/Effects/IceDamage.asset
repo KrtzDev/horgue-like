@@ -37,12 +37,12 @@ MonoBehaviour:
   hasPierce: 0
   maxPierceAmount: 0
   canPropagate: 0
-  propagatedEffect: {fileID: 11400000}
+  propagatedEffect: {fileID: 0}
   layersToPropagateTo:
     serializedVersion: 2
     m_Bits: 128
-  propagationChance: 75
-  propagationRange: 3
-  maxPropagateToCount: 8
-  consecutivePropagationCount: 3
+  propagationChance: 0
+  propagationRange: 0
+  maxPropagateToCount: 0
+  consecutivePropagationCount: 0
   propagationVFX: {fileID: 0}
