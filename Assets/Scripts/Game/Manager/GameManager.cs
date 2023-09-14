@@ -342,7 +342,6 @@ public class GameManager : Singleton<GameManager>
 		StatsTracker.Instance.AddLevelStatsToTotal();
 		InputManager.Instance.CharacterInputActions.Disable();
 		UIManager.Instance.ShowLevelEndScreen(LevelStatus.Lost);
-		UIManager.Instance.WaveEndScreen.gameObject.SetActive(false);
 		_playerCanUseAbilities = false;
 		EnemyStopFollowing();
 	}
