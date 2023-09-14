@@ -4075,6 +4075,78 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 593757093}
     m_Modifications:
+    - target: {fileID: 853370952582334588, guid: c4544ca0661e0f540b99141ef677f4d7,
+        type: 3}
+      propertyPath: m_text
+      value: 'Adriana P.
+
+        Alex R.
+
+        Anna H.
+
+        Ann-Kathrin K.
+
+        Cai
+        K.
+
+        Dilara A.
+
+        Florian P.
+
+        Frederik E.
+
+        Gregor
+        S.
+
+        Justin S.
+
+        Laura M.
+
+        Leonard S.
+
+        Leon
+        J.
+
+        Lisa K.
+
+        Lukas G.
+
+        Nadine J.
+
+        Nico A.
+
+        Nika
+        A.
+
+        Niklas R.
+
+        Paul R.
+
+        Philipp C.
+
+        Reinhard
+        B.
+
+        Robin H.
+
+        Rose L.
+
+        Ruben S.
+
+        Sebastian
+        R.
+
+        Simon S.
+
+        Steffen S.
+
+        Tina W.
+
+        Martin
+        M.
+
+        Nils E.'
+      objectReference: {fileID: 0}
     - target: {fileID: 3580325558764195104, guid: c4544ca0661e0f540b99141ef677f4d7,
         type: 3}
       propertyPath: m_Pivot.x
@@ -4194,6 +4266,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Credits_Text_Parent
+      objectReference: {fileID: 0}
+    - target: {fileID: 6769363445670342963, guid: c4544ca0661e0f540b99141ef677f4d7,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -1600
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c4544ca0661e0f540b99141ef677f4d7, type: 3}

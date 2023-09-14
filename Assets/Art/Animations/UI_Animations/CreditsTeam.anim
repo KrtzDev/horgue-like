@@ -845,7 +845,7 @@ AnimationClip:
   m_Events:
   - time: 1
     functionName: ChangeRole
-    data: Product Owner / Game Design
+    data: Game Design / Product Owner
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
@@ -887,7 +887,7 @@ AnimationClip:
     messageOptions: 0
   - time: 12
     functionName: ChangeRole
-    data: Developer / Scrum Master
+    data: Developer /     Scrum Master
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
