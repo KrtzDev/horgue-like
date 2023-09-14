@@ -4,10 +4,14 @@ using UnityEngine.UI;
 public class MainMenu : MonoBehaviour
 {
 	[SerializeField] private Button _controlButton;
-	[SerializeField] private Button _backButton;
+	[SerializeField] private Button _creditsButton;
+	[SerializeField] private Button _backButtonControls;
+	[SerializeField] private Button _backButtonCredits;
 	[SerializeField] private GameObject _controlScheme;
+	[SerializeField] private GameObject _credits;
 
 	private bool _controlSchemeActive;
+	private bool _creditsActive;
 
     private void Start()
     {
@@ -28,10 +32,35 @@ public class MainMenu : MonoBehaviour
 		GameManager.Instance._currentLevel = _levelIndex - 1;
 		SceneLoader.Instance.LoadScene(_levelIndex);
 	}
+
 	
 	public void EquipWeaponsForBoss()
     {
 		GameManager.Instance.bossCheat = true;
+    }
+
+	public void StartCredits()
+	{
+		_creditsActive= !_creditsActive;
+
+		if (_creditsActive)
+		{
+			_credits.SetActive(true);
+			_backButtonCredits.gameObject.SetActive(true);
+			_backButtonCredits.interactable = true;
+			_backButtonCredits.Select();
+		}
+		else
+		{
+			_credits.SetActive(false);
+			_creditsButton.Select();
+			_backButtonControls.gameObject.SetActive(false);
+		}
+	}
+
+	public void DeactivateCreditsButton()
+    {
+		_backButtonCredits.interactable = false;
     }
 
 	public void Quit()
@@ -46,14 +75,14 @@ public class MainMenu : MonoBehaviour
 		if(_controlSchemeActive)
         {
 			_controlScheme.SetActive(true);
-			_backButton.gameObject.SetActive(true);
-            _backButton.Select();
+			_backButtonControls.gameObject.SetActive(true);
+            _backButtonControls.Select();
 		}
 		else
         {
 			_controlScheme.SetActive(false);
 			_controlButton.Select();
-			_backButton.gameObject.SetActive(false);
+			_backButtonControls.gameObject.SetActive(false);
 		}
 	}
 
