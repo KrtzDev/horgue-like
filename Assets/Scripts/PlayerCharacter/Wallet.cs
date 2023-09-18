@@ -27,11 +27,12 @@ public class Wallet
 
 	public bool TryPay(int value)
 	{
-		if (_money - value <= 0)
+		if (_money - value < 0)
 			return false;
 
 		Pay(value);
 		return true;
+
 	}
 
 	private void Pay(int value)

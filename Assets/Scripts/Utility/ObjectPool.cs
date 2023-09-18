@@ -44,6 +44,11 @@ public class ObjectPool<T> where T : MonoBehaviour
         return instance;
     }
 
+    public T GetObjectAtIndex(int index)
+    {
+        return _parent.transform.GetChild(index).GetComponent<T>();
+    }
+
     private void CreateObjects()
     {
         for (int i = 0; i < _size; i++)
@@ -66,4 +71,19 @@ public class ObjectPool<T> where T : MonoBehaviour
         _availableObjectsPool.Add(returnObject);
 		returnObject.gameObject.SetActive(false);
 	}
+
+    public int ActiveCount()
+    {
+        int count = 0;
+
+        for(int i = 0; i < _parent.transform.childCount; i++)
+        {
+            if(_parent.transform.GetChild(i).gameObject.activeInHierarchy)
+            {
+                count++;
+            }
+        }
+
+        return count;
+    }
 }

@@ -60,7 +60,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.93333334, g: 0.9411765, b: 0.9490196, a: 1}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 0
@@ -157,7 +157,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.20784315, g: 0.19215688, b: 0.18431373, a: 1}
+  m_Color: {r: 0.11764706, g: 0.11764706, b: 0.11764706, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -675,9 +675,11 @@ MonoBehaviour:
   _layoutGroup: {fileID: 2734264759241265304}
   _statParent: {fileID: 5450814324576322202}
   _contentRect: {fileID: 5452614881417057406}
-  _statUI_prefab: {fileID: 9018271247152603339, guid: dda6b321a08fb4f429ba9fe2654739a8,
+  _statUI_prefab: {fileID: 9018271247152603339, guid: cd81a4d9a62c62c41a1fd30f83b2a8a3,
     type: 3}
-  _statUI_Projectile_Trajectory_prefab: {fileID: 9018271247152603339, guid: 9de4f56ca87ea6449847f7d259d1a0f7,
+  _statUI_highlight_prefab: {fileID: 9018271247152603339, guid: b9bc15b8bde69564091e09b7846dfbf3,
+    type: 3}
+  _statUI_highlight_two_lines_prefab: {fileID: 9018271247152603339, guid: 9de4f56ca87ea6449847f7d259d1a0f7,
     type: 3}
   _rarityBadgeUI: {fileID: 2830343763936792879}
   weaponPart: {fileID: 0}
@@ -691,6 +693,7 @@ MonoBehaviour:
   attackPatternStatUI: {fileID: 0}
   capacityStatUI: {fileID: 0}
   statusEffectStatUI: {fileID: 0}
+  emptyStatUI: {fileID: 0}
 --- !u!1 &8623937125551465015
 GameObject:
   m_ObjectHideFlags: 0

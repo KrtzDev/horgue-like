@@ -6,6 +6,7 @@ public class EnemySpawnerData : ScriptableObject
     [Header("Level Data")]
     public int _timeToSurvive;
     public float _weaponPartMultiplierPerLevel;
+    public int healthPackValue;
 
     [Header("Spawn Settings")]
     public float _spawnTick;

@@ -11274,20 +11274,20 @@ MonoBehaviour:
     type: 3}
   _dashCD: 3
   _dashForce: 30
-  _dashTime: 0.5
+  _dashTime: 0.25
   _forceSphereVisuals: {fileID: 8462656708722640411}
   _forceSpherePrefab: {fileID: 8401165594809964829, guid: c82b9ba1d0fedd94e97523635f7a74d6,
     type: 3}
   _forceSphereSpawnPosition: {fileID: 2712107493480440920}
   _forceSphereEffectPosition: {fileID: 7868157610372633933}
   _forceSphereEffect: {fileID: 0}
-  _forceSphereCD: 5
+  _forceSphereCD: 8
   ForceSphereStartRadius: 1
-  ForceSphereEndRadius: 8
+  ForceSphereEndRadius: 9
   ForceSphereDuration: 0.35
-  ForceSphereStartTransparency: 0.65
-  ForceSphereEndTransparency: 0.45
-  ForceSphereForce: 62
+  ForceSphereStartTransparency: 0.7
+  ForceSphereEndTransparency: 0.4
+  ForceSphereForce: 70
   IsUsingJetpack: 0
   _jetpackVisuals: {fileID: 366271092508608397}
   _jetpackEffectPosition: {fileID: 4828017958775833798}

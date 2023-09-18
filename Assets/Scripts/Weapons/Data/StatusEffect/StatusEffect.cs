@@ -23,10 +23,10 @@ public class StatusEffect
 
 	[Header("Effects")]
 	[SerializeField] private bool _hasInitialExtraDamage;
-	[SerializeField] private float _initialDamage;
+	[SerializeField] private float _initialDamagePercent;
 
 	[Space]
-	[SerializeField] private bool _hasDamageOverTime;
+	[SerializeField] private bool _hasDamageOverTimePercent;
 	[SerializeField] private float _dotDamage;
 	[SerializeField] private float _dotDuration;
 
@@ -74,10 +74,10 @@ public class StatusEffect
 		_tickRate = statusEffectSO.tickRate;
 
 		_hasInitialExtraDamage = statusEffectSO.hasInitialExtraDamage;
-		_initialDamage = statusEffectSO.initialDamage;
+		_initialDamagePercent = statusEffectSO.initialDamagePercent;
 
-		_hasDamageOverTime = statusEffectSO.hasDamageOverTime;
-		_dotDamage = statusEffectSO.dotDamage;
+		_hasDamageOverTimePercent = statusEffectSO.hasDamageOverTime;
+		_dotDamage = statusEffectSO.dotDamagePercent;
 		_dotDuration = statusEffectSO.dotDuration;
 
 		_hasSlow = statusEffectSO.hasSlow;
@@ -124,12 +124,12 @@ public class StatusEffect
 
 		if (_hasInitialExtraDamage)
 		{
-			AddEffect(new DamageOnce(_enemy, _initialDamage));
+			AddEffect(new DamageOnce(_enemy, _initialDamagePercent * projectile.finalBaseDamage));
 
 			PlayVFXFromPool(initialDamageVFXPool);
 		}
-		if (_hasDamageOverTime)
-			AddEffect(new DamageOverTime(_enemy, _dotDamage, _dotDuration));
+		if (_hasDamageOverTimePercent)
+			AddEffect(new DamageOverTime(_enemy, _dotDamage * projectile.finalBaseDamage, _dotDuration));
 		if (_hasSlow)
 			AddEffect(new Slow(_enemy, _slowAmount, _slowDuration));
 		if (_hasKnockBack)
@@ -170,6 +170,7 @@ public class StatusEffect
 		for (int i = 0; i < _effects.Count; i++)
 		{
 			_effects[i].OnEffectEnded -= RemoveEffect;
+			_effects[i].EndEffect();
 		}
 		_effects.Clear();
 	}
@@ -186,6 +187,7 @@ public class StatusEffect
 	private void RemoveEffect(Effect effect)
 	{
 		effect.OnEffectEnded -= RemoveEffect;
+		effect.EndEffect();
 		_effects.Remove(effect);
 	}
 
@@ -197,6 +199,8 @@ public class StatusEffect
 
 		if (_currentEffectTimer < 0)
 		{
+			RemoveAllEffects();
+
 			OnStatusEffectEnded.Invoke(this);
 			return;
 		}
@@ -230,7 +234,7 @@ public class StatusEffect
 
 	private void OnEffectsTicked()
 	{
-		if (_hasDamageOverTime)
+		if (_hasDamageOverTimePercent)
 			PlayVFXFromPool(damageOverTimeVFXPool);
 		if (_hasSlow)
 			PlayVFXFromPool(slowVFXPool);
@@ -283,11 +287,14 @@ public class StatusEffect
 	{
 		if (VFXobjectPool != null)
 		{
+			EnemyHealthComponent healthComponent = _enemy.GetComponent<EnemyHealthComponent>();
+
 			HorgueVFX spawnedKnockBackVFX = VFXobjectPool.GetObject();
-			spawnedKnockBackVFX.transform.SetParent(_enemy.transform);
+			spawnedKnockBackVFX.transform.SetParent(healthComponent.ParticlePosition);
 			spawnedKnockBackVFX.transform.localPosition = Vector3.zero;
+			spawnedKnockBackVFX.transform.localScale = Vector3.one;
 			spawnedKnockBackVFX.Play();
-			_enemy.GetComponent<EnemyHealthComponent>().OnEnemyDied += () => ReturnEffectToPoolOnDied(VFXobjectPool, spawnedKnockBackVFX);
+			healthComponent.OnEnemyDied += () => ReturnEffectToPoolOnDied(VFXobjectPool, spawnedKnockBackVFX);
 			spawnedKnockBackVFX.ReturnToPoolAfterTime(VFXobjectPool, _effectDuration);
 		}
 	}

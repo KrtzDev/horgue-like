@@ -1,13 +1,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using System.Linq;
 
 public class UIManager : Singleton<UIManager>
 {
 
 	public Endscreen Endscreen { get; private set; }
-	public WaveEndScreen WaveEndScreen { get; private set; }
 	public PauseMenu PauseMenu { get; private set; }
 	public CraftingMenu CraftingMenu { get; private set; }
 	public GameObject GameUI { get; private set; }
@@ -17,8 +15,6 @@ public class UIManager : Singleton<UIManager>
 
 	[SerializeField]
 	private Endscreen _endScreenUI_prefab;
-	[SerializeField]
-	private WaveEndScreen _waveEndScreenUI_prefab;
 	[SerializeField]
 	private PauseMenu _pauseMenuUI_prefab;
 	[SerializeField]
@@ -37,6 +33,8 @@ public class UIManager : Singleton<UIManager>
 
 	public void ShowLevelEndScreen(LevelStatus levelStatus)
 	{
+		StatsTracker.Instance.AddLevelStatsToTotal();
+
 		switch (levelStatus)
 		{
 			case LevelStatus.Won:
@@ -49,22 +47,6 @@ public class UIManager : Singleton<UIManager>
 				break;
 		}
 		Endscreen.gameObject.SetActive(true);
-	}
-
-	public void ShowWaveEndScreen(LevelStatus levelStatus)
-	{
-		switch (levelStatus)
-		{
-			case LevelStatus.Won:
-				WaveEndScreen.TitleText.text = "Wave Results";
-				break;
-			case LevelStatus.Lost:
-				WaveEndScreen.TitleText.text = "Lost";
-				break;
-			default:
-				break;
-		}
-		WaveEndScreen.gameObject.SetActive(true);
 	}
 
 	public void DisplayRewards(List<WeaponPart> rewards)
@@ -82,11 +64,7 @@ public class UIManager : Singleton<UIManager>
 			return;
 
 		if (SceneManager.GetActiveScene().name == "SCENE_Weapon_Crafting")
-		{
-			//CraftingMenu = Instantiate(_craftingMenuUI_prefab);
-			//CraftingMenu.gameObject.SetActive(true);
 			return;
-		}
 
 		if(SceneManager.GetActiveScene().name.StartsWith("SCENE_Level"))
 		{
@@ -94,8 +72,6 @@ public class UIManager : Singleton<UIManager>
 			PauseMenu.gameObject.SetActive(false);
 			Endscreen = Instantiate(_endScreenUI_prefab);
 			Endscreen.gameObject.SetActive(false);
-			WaveEndScreen = Instantiate(_waveEndScreenUI_prefab);
-			WaveEndScreen.gameObject.SetActive(false);
 
 			GameUI = Instantiate(_gameUI_prefab);
 			GameUI.gameObject.SetActive(true);

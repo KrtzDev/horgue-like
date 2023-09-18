@@ -5,8 +5,7 @@ using UnityEngine.SceneManagement;
 [CreateAssetMenu(fileName = "new Weapon", menuName = "ModularWeapon/Weapon")]
 public class Weapon : ScriptableObject
 {
-	[SerializeField]
-	private WeaponStats _weaponStats;
+	public WeaponStats weaponStats;
 
 	[Header("Visuals")]
 	[SerializeField]
@@ -168,7 +167,7 @@ public class Weapon : ScriptableObject
 			statusEffect = weapon.ammunition.statusEffect
 		};
 
-		_weaponStats = weaponStats;
+		this.weaponStats = weaponStats;
 
 		return weaponStats;
 	}

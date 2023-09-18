@@ -37,6 +37,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 570442342513492923}
   - {fileID: 7811060215864505707}
   - {fileID: 3897552319739817836}
   m_Father: {fileID: 0}
@@ -208,6 +209,7 @@ MonoBehaviour:
   damagePerHit: 0
   _useHeightControl: 0
   _heightGO: {fileID: 0}
+  _desiredVFXScale: {x: 0, y: 0, z: 0}
   _projectile: {fileID: 8451927325676435795, guid: cfda9bcf2cc39a54282424fcca06f77b,
     type: 3}
   <ProjectilePoint>k__BackingField: {fileID: 4725400963202416754}
@@ -2017,7 +2019,6 @@ Transform:
   - {fileID: 2167774417952609441}
   - {fileID: 2167774417952609447}
   - {fileID: 2167774417952609461}
-  - {fileID: 570442342513492923}
   - {fileID: 4725400963202416754}
   m_Father: {fileID: 3897552319739817836}
   m_RootOrder: 0
@@ -3112,7 +3113,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2167774417952609475}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5464017767939084461
 GameObject:
@@ -3220,7 +3221,7 @@ Transform:
   m_Children:
   - {fileID: 2167774417952609475}
   m_Father: {fileID: 5156603222856364096}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6816967860483866738
 GameObject:
@@ -3257,7 +3258,7 @@ RectTransform:
   - {fileID: 873782594085026437}
   - {fileID: 8308669628543115013}
   m_Father: {fileID: 5156603222856364096}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -3363,10 +3364,10 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9157300880690486904}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.25, z: 0}
-  m_LocalScale: {x: 1.25, y: 1, z: 1.25}
-  m_ConstrainProportionsScale: 0
+  m_LocalPosition: {x: 0, y: 1.3375, z: 0}
+  m_LocalScale: {x: 1.3, y: 1.3, z: 1.3}
+  m_ConstrainProportionsScale: 1
   m_Children: []
-  m_Father: {fileID: 2167774417952609475}
-  m_RootOrder: 7
+  m_Father: {fileID: 5156603222856364096}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

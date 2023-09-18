@@ -3,6 +3,8 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine.AI;
+using System.Collections;
+using UnityEngine.InputSystem;
 
 [DefaultExecutionOrder(-1)]
 public class GameManager : Singleton<GameManager>
@@ -23,7 +25,7 @@ public class GameManager : Singleton<GameManager>
 	private GameDataReader _gameDataReader;
 
 	public List<EnemySpawnerData> GameManagerValues = new List<EnemySpawnerData>();
-	[SerializeField] private int _maxLevels;
+	public int maxLevels;
 
 	private EnemySpawner _currentEnemySpawner;
 
@@ -44,7 +46,8 @@ public class GameManager : Singleton<GameManager>
 
 	public int _currentLevel = 1;
 	// private int _lastLevel;
-	public int _currentLevelArray;
+	public int _currentLeveslArray;
+	public bool roundWon;
 
 	private int _numberOfRewards = 6;
 
@@ -58,12 +61,15 @@ public class GameManager : Singleton<GameManager>
 
 	[Header("Player")]
 	public GameObject _player;
-	public int _currentPlayerHealth;
 	public bool _playerCanUseAbilities;
 	public Ability _currentAbility;
 
 	[SerializeField]
 	public Inventory inventory;
+	public ObjectPool<CollectibleAttractor> coinPool;
+	[SerializeField] private CollectibleAttractor _coin;
+	public ObjectPool<CollectibleAttractor> healthPackPool;
+	[SerializeField] private CollectibleAttractor _healthPack;
 
 	[Header("Boss Cheat")]
 	public bool bossCheat;
@@ -84,12 +90,27 @@ public class GameManager : Singleton<GameManager>
 	private void Start()
 	{
 		SceneLoader.Instance.CompletedSceneLoad += OnCompletedSceneLoad;
+		Application.wantsToQuit += ApplicationCleanUp;
+		ResetGame();
+	}
 
+	private bool ApplicationCleanUp()
+	{
+		InputSystem.ResetHaptics();
+		return true;
+	}
+
+	private void ResetGame()
+    {
 		inventory.Wallet.Reset();
+		inventory.ResetInventory();
 		_currentLevel = 1;
-		_currentLevelArray = _currentLevel - 1;
 		_gameIsPaused = false;
+		_newGamePlus = false;
+		roundWon = false;
+		lastLevelNumbers = Vector2Int.zero;
 		bossCheat = false;
+		StatsTracker.Instance.ResetAllStats();
 	}
 
 	private void OnCompletedSceneLoad()
@@ -110,14 +131,7 @@ public class GameManager : Singleton<GameManager>
 
 		if (SceneManager.GetActiveScene().name == "SCENE_Main_Menu")
 		{
-			inventory.Wallet.Reset();
-			_currentLevel = 1;
-			_currentLevelArray = _currentLevel - 1;
-			_gameIsPaused = false;
-			bossCheat = false;
-
-			StatsTracker.Instance.ResetAllStats();
-
+			ResetGame();
 			return;
 		}
 
@@ -131,20 +145,25 @@ public class GameManager : Singleton<GameManager>
 		 	killedBoss = false;
 		}
 
+		coinPool = ObjectPool<CollectibleAttractor>.CreatePool(_coin, 1000, null);
+		healthPackPool = ObjectPool<CollectibleAttractor>.CreatePool(_healthPack, 100, null);
+
 		StatsTracker.Instance.ResetLevelStats();
 
 		_gameDataReader.GetGameData();
 		_gameDataReader.SetGameData();
 
-		if(_currentLevelArray < _maxLevels)
+		if(_currentLevel - 1 < maxLevels)
         {
-			_currentTimeToSurvive = GameManagerValues[_currentLevelArray]._timeToSurvive;
-        }
+			_currentTimeToSurvive = GameManagerValues[_currentLevel - 1]._timeToSurvive;
+			_currentEnemySpawner = FindObjectOfType<EnemySpawner>();
+			_currentEnemySpawner._enemySpawnerData = GameManagerValues[_currentLevel - 1];
+		}
 		else
         {
-			_currentTimeToSurvive = GameManagerValues[_maxLevels]._timeToSurvive;
+			_currentTimeToSurvive = GameManagerValues[maxLevels]._timeToSurvive;
 			_currentEnemySpawner = FindObjectOfType<EnemySpawner>();
-			_currentEnemySpawner._enemySpawnerData = GameManagerValues[_maxLevels];
+			_currentEnemySpawner._enemySpawnerData = GameManagerValues[maxLevels];
 		}
 
 		_hasWon = false;
@@ -207,13 +226,13 @@ public class GameManager : Singleton<GameManager>
 		{
 			_hasWon = true;
 
-			if(_currentLevelArray < _maxLevels)
+			if(_currentLevel - 1 < maxLevels)
 			{
-				_currentTimeToSurvive = GameManagerValues[_currentLevelArray]._timeToSurvive;
+				_currentTimeToSurvive = GameManagerValues[_currentLevel - 1]._timeToSurvive;
 			}
 			else
 			{
-				_currentTimeToSurvive = GameManagerValues[_maxLevels]._timeToSurvive;
+				_currentTimeToSurvive = GameManagerValues[maxLevels]._timeToSurvive;
 			}
 
 			RoundWon();
@@ -255,11 +274,12 @@ public class GameManager : Singleton<GameManager>
 	private void RoundWon()
 	{
 		AudioManager.Instance.PlaySound("LevelConfirmation");
-		StatsTracker.Instance.AddLevelStatsToTotal();
 
 		Debug.Log("Round won");
+		roundWon = true;
 		InputManager.Instance.CharacterInputActions.Disable();
 		_playerCanUseAbilities = false;
+		_player.GetComponent<HealthComponent>().canTakeDamage = false;
 
 		List<WeaponPart> rewards = new List<WeaponPart>();
 		for (int i = 0; i < _numberOfRewards; i++)
@@ -267,20 +287,49 @@ public class GameManager : Singleton<GameManager>
 			rewards.Add(RewardManager.Instance.GetReward());
 		}
 
-		UIManager.Instance.ShowLevelEndScreen(LevelStatus.Won);
 		UIManager.Instance.DisplayRewards(rewards);
 
 		_currentLevel += 1;
-		_currentLevelArray = _currentLevel - 1;
-
-		// UIManager.Instance.ShowWaveEndScreen(LevelStatus.Won);
 
 		EnemyStopFollowing();
+		StartCoroutine(AttractCoins());
+	}
+
+	private IEnumerator AttractCoins()
+    {
+		bool coinMove = false;
+
+		while (coinPool.ActiveCount() > 0)
+		{
+			if (!coinMove)
+			{
+				Collider playerCollider = _player.GetComponent<Collider>();
+
+				for (int i = 0; i < coinPool.Count; i++)
+				{
+					if(coinPool.GetObjectAtIndex(i).isActiveAndEnabled)
+                    {
+						coinPool.GetObjectAtIndex(i).GetComponent<Rigidbody>().useGravity = false;
+						coinPool.GetObjectAtIndex(i).GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
+						coinPool.GetObjectAtIndex(i).playerCollider = playerCollider;
+						coinPool.GetObjectAtIndex(i).moveToPlayer = true;
+						coinPool.GetObjectAtIndex(i).attractorSpeed *= 4f;
+						coinPool.GetObjectAtIndex(i).GetComponentInChildren<Coin_Collectible>().SetCoinSilver();
+					}
+				}
+
+				coinMove = true;
+			}
+			yield return null;
+		}
+
+		UIManager.Instance.ShowLevelEndScreen(LevelStatus.Won);
 	}
 
 	private void EnemyStopFollowing()
 	{
 		_enemySpawner._enemyObjectPoolParent.SetActive(false);
+		_enemySpawner.spawnIndicatorParent.SetActive(false);
 	}
 
 	private void RoundLost()
@@ -289,7 +338,6 @@ public class GameManager : Singleton<GameManager>
 		StatsTracker.Instance.AddLevelStatsToTotal();
 		InputManager.Instance.CharacterInputActions.Disable();
 		UIManager.Instance.ShowLevelEndScreen(LevelStatus.Lost);
-		UIManager.Instance.WaveEndScreen.gameObject.SetActive(false);
 		_playerCanUseAbilities = false;
 		EnemyStopFollowing();
 	}

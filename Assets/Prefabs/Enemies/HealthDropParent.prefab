@@ -11,6 +11,8 @@ GameObject:
   - component: {fileID: 8315001480785179779}
   - component: {fileID: 8071124064750273930}
   - component: {fileID: 707974194864211813}
+  - component: {fileID: 8737902351533088682}
+  - component: {fileID: 6393572020907611971}
   m_Layer: 2
   m_Name: HealthDropParent
   m_TagString: Untagged
@@ -63,6 +65,36 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 116
   m_CollisionDetection: 0
+--- !u!114 &8737902351533088682
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4318080567083893032}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86a64adfa455dca49b11ad4dc7f5831d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attractorSpeed: 3.5
+  _collectible: {fileID: 142143167073650170}
+  playerCollider: {fileID: 0}
+  healthPack: 1
+  moveToPlayer: 0
+--- !u!65 &6393572020907611971
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4318080567083893032}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 4, y: 3, z: 4}
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!1001 &6233865106583188166
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -234,4 +266,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: daf22dfccc1dc3844b781469bd9bef5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _healAmount: 20
+  _wasPickedUp: 0
+  healAmount: 0

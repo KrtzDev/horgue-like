@@ -5,6 +5,8 @@ public class EnemyHealthComponent : HealthComponent
 {
 	public event Action OnEnemyDied;
 
+	public Transform ParticlePosition => _hitParticlePosition;
+
     [SerializeField] private Transform _hitParticlePosition;
     [SerializeField] private ParticleSystem _hitParticle;
 	public EnemyHealthBar _enemyHealthBar;
@@ -87,9 +89,12 @@ public class EnemyHealthComponent : HealthComponent
 
 	public void DropScore()
 	{
-		GameObject newCoin;
-		newCoin = Instantiate(_coinDrop, _hitParticlePosition.position, Quaternion.identity);
-		newCoin.GetComponentInChildren<CoinDrop>().givenScore =_enemy._enemyData._givenXP;
+		GameObject newCoin = GameManager.Instance.coinPool.GetObject().gameObject;
+		// GameObject newCoin;
+		// newCoin = Instantiate(_coinDrop, _hitParticlePosition.position, Quaternion.identity);
+		newCoin.GetComponentInChildren<Coin_Collectible>().givenScore =_enemy._enemyData._givenXP;
+		newCoin.transform.position = _hitParticlePosition.position;
+		newCoin.transform.rotation = Quaternion.identity;
 	}
 
 	public void DropHealthPotion()
@@ -99,7 +104,21 @@ public class EnemyHealthComponent : HealthComponent
 		{
 			Vector3 spawnPos = _hitParticlePosition.position;
 
-			Instantiate(_healthDrop, spawnPos, Quaternion.identity);
+			// Instantiate(_healthDrop, spawnPos, Quaternion.identity);
+
+			GameObject newHealthPack = GameManager.Instance.healthPackPool.GetObject().gameObject;
+
+			if (GameManager.Instance._currentLevel - 1 < GameManager.Instance.maxLevels)
+			{
+				newHealthPack.GetComponentInChildren<HealthPack_Collectible>().healAmount = GameManager.Instance.GameManagerValues[GameManager.Instance._currentLevel - 1].healthPackValue;
+			}
+			else
+			{
+				newHealthPack.GetComponentInChildren<HealthPack_Collectible>().healAmount = GameManager.Instance.GameManagerValues[GameManager.Instance.maxLevels].healthPackValue;
+			}
+
+			newHealthPack.transform.position = spawnPos;
+			newHealthPack.transform.rotation = Quaternion.identity;
 		}
 	}
 

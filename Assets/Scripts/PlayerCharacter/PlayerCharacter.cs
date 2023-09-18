@@ -31,7 +31,7 @@ public class PlayerCharacter : MonoBehaviour
     private void Awake()
     {
         healthComponent = this.GetComponent<HealthComponent>();
-        healthComponent.maxHealth = (int)(playerData.maxHealth * (1 + (playerData.levelMultiplier * GameManager.Instance._currentLevelArray)));
+        healthComponent.maxHealth = (int)(playerData.maxHealth * (1 + (playerData.levelMultiplier * (GameManager.Instance._currentLevel - 1))));
         healthComponent.currentHealth = healthComponent.maxHealth;
 
         _inputActions = InputManager.Instance?.CharacterInputActions;
@@ -60,6 +60,11 @@ public class PlayerCharacter : MonoBehaviour
         {
             UIManager.Instance.PauseMenu.gameObject.SetActive(true);
             GameManager.Instance._gameIsPaused = true;
+
+			Gamepad pad = Gamepad.current;
+			if (pad != null)
+				pad.PauseHaptics();
+
             Time.timeScale = 0;
         }
     }

@@ -120,7 +120,7 @@ MonoBehaviour:
   _cube: {fileID: 5226324673483859831}
   _trapMaterialOnActivation: {fileID: 2100000, guid: 3ffe8d7127b29b74aa1a7954a1b658cb,
     type: 2}
-  _delay: 0.4
+  _delay: 0.25
   _rearming: 2
   _isAutomated: 1
   _cooldown: 3

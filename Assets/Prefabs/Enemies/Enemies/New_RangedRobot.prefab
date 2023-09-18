@@ -29,7 +29,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3871121105585507087}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &152046248306376661
 GameObject:
@@ -132,7 +132,7 @@ Transform:
   m_GameObject: {fileID: 874447881319283041}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0.32, z: 0}
-  m_LocalScale: {x: 0.6, y: 0.6, z: 0.6}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3871121105585507087}
@@ -178,6 +178,7 @@ Transform:
   m_Children:
   - {fileID: 5173495340305066663}
   - {fileID: 3666517790206233024}
+  - {fileID: 144583643325216550}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -347,6 +348,7 @@ MonoBehaviour:
   damagePerHit: 0
   _useHeightControl: 0
   _heightGO: {fileID: 0}
+  _desiredVFXScale: {x: 0, y: 0, z: 0}
   _projectile: {fileID: 8451927325676435795, guid: 4746290bed9561b4590c43ddb406e723,
     type: 3}
   <ProjectilePoint>k__BackingField: {fileID: 7655688737593466814}
@@ -1894,7 +1896,6 @@ Transform:
   - {fileID: 3871121105585507181}
   - {fileID: 3871121105585507179}
   - {fileID: 3871121105585507193}
-  - {fileID: 144583643325216550}
   - {fileID: 7655688737593466814}
   m_Father: {fileID: 3666517790206233024}
   m_RootOrder: 0
@@ -3246,12 +3247,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7991837093886536001}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.25, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 2}
-  m_ConstrainProportionsScale: 0
+  m_LocalPosition: {x: 0, y: 0.945, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
   m_Children: []
-  m_Father: {fileID: 3871121105585507087}
-  m_RootOrder: 7
+  m_Father: {fileID: 5156603222856364096}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8446284897087840190
 GameObject:

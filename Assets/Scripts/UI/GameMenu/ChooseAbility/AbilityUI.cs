@@ -80,6 +80,7 @@ public class AbilityUI : UIButton, IPointerEnterHandler, IPointerExitHandler, IS
         ChooseAbility.instance.AbilityParent.GetComponent<LayoutGroup>().enabled = false;
 
         _selectionMarker.SetActive(false);
+        GetComponent<Button>().interactable = false;
 
         for (int i = 0; i < ChooseAbility.instance.AbilityParent.childCount; i++)
         {

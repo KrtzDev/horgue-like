@@ -47,7 +47,22 @@ public class Explosion : MonoBehaviour
 
             if (hitCollider.GetComponent<HealthComponent>() != null)
             {
-                hitCollider.GetComponent<HealthComponent>().TakeDamage(_explosionDamage, false);
+                if(hitCollider.GetComponent<PlayerCharacter>() != null)
+                {
+                    hitCollider.GetComponent<HealthComponent>().TakeDamage(_explosionDamage, false);
+                }
+                else if(hitCollider.GetComponent<AI_Agent_Enemy>() != null)
+                {
+                    if(hitCollider.GetComponent<AI_Agent_Enemy>()._isBossEnemy)
+                    {
+                        hitCollider.GetComponent<HealthComponent>().TakeDamage((int)(hitCollider.GetComponent<HealthComponent>().maxHealth * 0.05f), false);
+                        // what to do to Boss?
+                    }
+                    else
+                    {
+                        hitCollider.GetComponent<HealthComponent>().TakeDamage(hitCollider.GetComponent<HealthComponent>().maxHealth, false);
+                    }
+                }
             }
 
             StartCoroutine(Despawn());

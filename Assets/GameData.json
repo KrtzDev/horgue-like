@@ -24,7 +24,7 @@
       "maxHealth": 0.35,
       "damagePerHit": 1.5,
       "attackSpeed": 1.5,
-      "givenXP": 7,
+      "givenXP": 5,
       "maxMoveSpeed": 13,
       "acceleration": 9,
       "armor": 15,
@@ -35,15 +35,15 @@
       "dmgModifier": 0.2,
       "addDmgModifier": 0.15,
       "baseHealthMultiplier": 1,
-      "healthModifier": 0.35,
-      "addHealthModifier": 0.3
+      "healthModifier": 0.1,
+      "addHealthModifier": 1
     },
     {
       "name": "PasuKan",
       "maxHealth": 0.75,
       "damagePerHit": 1.5,
       "attackSpeed": 2.5,
-      "givenXP": 4,
+      "givenXP": 6,
       "maxMoveSpeed": 14,
       "acceleration": 12,
       "armor": 100,
@@ -54,15 +54,15 @@
       "dmgModifier": 0.2,
       "addDmgModifier": 0.15,
       "baseHealthMultiplier": 1,
-      "healthModifier": 0.35,
-      "addHealthModifier": 0.3
+      "healthModifier": 0.1,
+      "addHealthModifier": 1
     },
     {
       "name": "GIGARangedRobot",
       "maxHealth": 0.65,
       "damagePerHit": 2,
       "attackSpeed": 2.5,
-      "givenXP": 10,
+      "givenXP": 7,
       "maxMoveSpeed": 12,
       "acceleration": 8,
       "armor": 35,
@@ -73,12 +73,12 @@
       "dmgModifier": 0.2,
       "addDmgModifier": 0.15,
       "baseHealthMultiplier": 1,
-      "healthModifier": 0.35,
-      "addHealthModifier": 0.3
+      "healthModifier": 0.1,
+      "addHealthModifier": 1
     },
     {
       "name": "Rikayon",
-      "maxHealth": 875,
+      "maxHealth": 700,
       "damagePerHit": 4.5,
       "attackSpeed": 1,
       "givenXP": 0,
@@ -98,9 +98,9 @@
     {
       "name": "Drone",
       "maxHealth": 0.2,
-      "damagePerHit": 0.6,
+      "damagePerHit": 1.2,
       "attackSpeed": 2.25,
-      "givenXP": 3,
+      "givenXP": 4,
       "maxMoveSpeed": 8,
       "acceleration": 8,
       "armor": 10,
@@ -111,17 +111,17 @@
       "dmgModifier": 0.2,
       "addDmgModifier": 0.15,
       "baseHealthMultiplier": 1,
-      "healthModifier": 0.35,
-      "addHealthModifier": 0.3
+      "healthModifier": 0.1,
+      "addHealthModifier": 1
     },
     {
       "name": "Orc",
       "maxHealth": 1.5,
       "damagePerHit": 1,
       "attackSpeed": 3,
-      "givenXP": 5,
-      "maxMoveSpeed": 12,
-      "acceleration": 11,
+      "givenXP": 8,
+      "maxMoveSpeed": 10,
+      "acceleration": 10,
       "armor": 200,
       "elementalResistance": 200,
       "technicalResistance": -100,
@@ -130,14 +130,14 @@
       "dmgModifier": 0.2,
       "addDmgModifier": 0.15,
       "baseHealthMultiplier": 1,
-      "healthModifier": 0.35,
-      "addHealthModifier": 0.3
+      "healthModifier": 0.1,
+      "addHealthModifier": 1
     }
   ],
   "Level": [
     {
       "name": "Level1",
-      "TimeToSurvive": 40,
+      "TimeToSurvive": 55,
       "spawnTick": 4.5,
       "spawnsPerTick": 7,
       "minEnemyCount": 12,
@@ -152,11 +152,12 @@
       "maxCloseZoneOcc": 8,
       "maxMidZoneOcc": 18,
       "maxFarZoneOcc": 28,
-      "weaponPartMultiplierPerLevel": 0.025
+      "weaponPartMultiplierPerLevel": 0.05,
+      "healthPackValue": 15
     },
     {
       "name": "Level1.5",
-      "TimeToSurvive": 44,
+      "TimeToSurvive": 57,
       "spawnTick": 4.5,
       "spawnsPerTick": 7,
       "minEnemyCount": 12,
@@ -171,11 +172,12 @@
       "maxCloseZoneOcc": 8,
       "maxMidZoneOcc": 18,
       "maxFarZoneOcc": 28,
-      "weaponPartMultiplierPerLevel": 0.025
+      "weaponPartMultiplierPerLevel": 0.05,
+      "healthPackValue": 20
     },
     {
       "name": "Level2",
-      "TimeToSurvive": 48,
+      "TimeToSurvive": 59,
       "spawnTick": 4.25,
       "spawnsPerTick": 9,
       "minEnemyCount": 16,
@@ -190,11 +192,12 @@
       "maxCloseZoneOcc": 8,
       "maxMidZoneOcc": 18,
       "maxFarZoneOcc": 28,
-      "weaponPartMultiplierPerLevel": 0.025
+      "weaponPartMultiplierPerLevel": 0.05,
+      "healthPackValue": 25
     },
     {
       "name": "Level2.5",
-      "TimeToSurvive": 52,
+      "TimeToSurvive": 61,
       "spawnTick": 4.25,
       "spawnsPerTick": 9,
       "minEnemyCount": 16,
@@ -209,11 +212,12 @@
       "maxCloseZoneOcc": 8,
       "maxMidZoneOcc": 18,
       "maxFarZoneOcc": 28,
-      "weaponPartMultiplierPerLevel": 0.025
+      "weaponPartMultiplierPerLevel": 0.05,
+      "healthPackValue": 30
     },
     {
       "name": "Level3",
-      "TimeToSurvive": 56,
+      "TimeToSurvive": 63,
       "spawnTick": 4,
       "spawnsPerTick": 11,
       "minEnemyCount": 22,
@@ -228,11 +232,12 @@
       "maxCloseZoneOcc": 8,
       "maxMidZoneOcc": 18,
       "maxFarZoneOcc": 28,
-      "weaponPartMultiplierPerLevel": 0.025
+      "weaponPartMultiplierPerLevel": 0.05,
+      "healthPackValue": 35
     },
     {
       "name": "Level3.5",
-      "TimeToSurvive": 60,
+      "TimeToSurvive": 65,
       "spawnTick": 4,
       "spawnsPerTick": 11,
       "minEnemyCount": 22,
@@ -247,11 +252,12 @@
       "maxCloseZoneOcc": 8,
       "maxMidZoneOcc": 18,
       "maxFarZoneOcc": 28,
-      "weaponPartMultiplierPerLevel": 0.025
+      "weaponPartMultiplierPerLevel": 0.05,
+      "healthPackValue": 40
     },
     {
       "name": "Level4",
-      "TimeToSurvive": 65,
+      "TimeToSurvive": 70,
       "spawnTick": 3.5,
       "spawnsPerTick": 13,
       "minEnemyCount": 22,
@@ -266,7 +272,8 @@
       "maxCloseZoneOcc": 8,
       "maxMidZoneOcc": 18,
       "maxFarZoneOcc": 28,
-      "weaponPartMultiplierPerLevel": 0.025
+      "weaponPartMultiplierPerLevel": 0.075,
+      "healthPackValue": 45
     },
     {
       "name": "LevelBoss",
@@ -285,11 +292,12 @@
       "maxCloseZoneOcc": 8,
       "maxMidZoneOcc": 18,
       "maxFarZoneOcc": 28,
-      "weaponPartMultiplierPerLevel": 0.025
+      "weaponPartMultiplierPerLevel": 0.1,
+      "healthPackValue": 50
     },
     {
       "name": "LevelNewGamePlus",
-      "TimeToSurvive": 72,
+      "TimeToSurvive": 75,
       "spawnTick": 3,
       "spawnsPerTick": 15,
       "minEnemyCount": 20,
@@ -304,7 +312,8 @@
       "maxCloseZoneOcc": 8,
       "maxMidZoneOcc": 18,
       "maxFarZoneOcc": 28,
-      "weaponPartMultiplierPerLevel": 0.025
+      "weaponPartMultiplierPerLevel": 0.1,
+      "healthPackValue": 50
     }
   ],
   "Player": [
@@ -326,7 +335,7 @@
       "criticalHitDamage": 1.5,
       "projectileWidth": 0.1,
       "range": 13,
-      "cost": 40,
+      "cost": 60,
       "maxAttackSpeed": 7.5,
       "maxCooldown": 10,
       "maxCriticalHitChance": 100,
@@ -351,7 +360,7 @@
       "criticalHitDamage": 1.5,
       "projectileWidth": 0.1,
       "range": 13,
-      "cost": 40
+      "cost": 60
     },
     {
       "name": "Ammunition AK",
@@ -556,7 +565,7 @@
       "criticalHitDamage": 1.5,
       "projectileWidth": 0.1,
       "range": 13,
-      "cost": 40
+      "cost": 60
     },
     {
       "name": "Barrel AK",
@@ -825,7 +834,7 @@
       "criticalHitDamage": 1.5,
       "projectileWidth": 0.1,
       "range": 13,
-      "cost": 40
+      "cost": 60
     },
     {
       "name": "30s Double Grip",
@@ -891,7 +900,7 @@
       "name": "Grip AK",
       "attackSpeed": 0.05,
       "baseDamage": 0,
-      "cooldown": -0.05,
+      "cooldown": 0,
       "criticalHitChance": 0,
       "criticalHitDamage": 0,
       "projectileWidth": 0,
@@ -901,8 +910,8 @@
     },
     {
       "name": "Grip Revolver",
-      "attackSpeed": -0.05,
-      "baseDamage": 0.1,
+      "attackSpeed": -0.1,
+      "baseDamage": 0.15,
       "cooldown": 0.05,
       "criticalHitChance": 0,
       "criticalHitDamage": 0,
@@ -1060,7 +1069,7 @@
       "criticalHitDamage": 1.5,
       "projectileWidth": 0.1,
       "range": 13,
-      "cost": 40
+      "cost": 60
     },
     {
       "name": "Billard Ball Drum",
@@ -1173,7 +1182,7 @@
       "name": "Magazine AK",
       "capacity": 20,
       "attackSpeed": 0,
-      "baseDamage": 0,
+      "baseDamage": 0.025,
       "cooldown": -0.05,
       "criticalHitChance": 0,
       "criticalHitDamage": 0,
@@ -1185,9 +1194,9 @@
     {
       "name": "Magazine Revolver",
       "capacity": 10,
-      "attackSpeed": 0,
-      "baseDamage": 0,
-      "cooldown": 0.05,
+      "attackSpeed": 0.05,
+      "baseDamage": 0.025,
+      "cooldown": 0,
       "criticalHitChance": 0,
       "criticalHitDamage": 0,
       "projectileWidth": 0,
@@ -1284,7 +1293,7 @@
       "criticalHitDamage": 1.5,
       "projectileWidth": 0.1,
       "range": 13,
-      "cost": 40
+      "cost": 60
     },
     {
       "name": "Basic Iron Sights",
@@ -1417,7 +1426,7 @@
       "attackPattern": "Straight Line Shot",
       "attackSpeed": 0,
       "baseDamage": 0,
-      "cooldown": 0,
+      "cooldown": -0.05,
       "criticalHitChance": 0,
       "criticalHitDamage": 0,
       "projectileWidth": 0,
@@ -1429,7 +1438,7 @@
       "name": "Sight Revolver",
       "attackPattern": "Straight Line Shot",
       "attackSpeed": 0,
-      "baseDamage": 0,
+      "baseDamage": 0.05,
       "cooldown": 0,
       "criticalHitChance": 0,
       "criticalHitDamage": 0,
@@ -1478,7 +1487,7 @@
       "criticalHitDamage": 1.5,
       "projectileWidth": 0.1,
       "range": 13,
-      "cost": 40
+      "cost": 60
     },
     {
       "name": "Adjustable Break Trigger",
@@ -1641,9 +1650,9 @@
     },
     {
       "name": "Trigger AK",
-      "attackSpeed": 0.05,
-      "baseDamage": -0.1,
-      "cooldown": -0.05,
+      "attackSpeed": 0,
+      "baseDamage": 0.1,
+      "cooldown": 0,
       "criticalHitChance": 0,
       "criticalHitDamage": 0,
       "projectileWidth": 0,
@@ -1653,9 +1662,9 @@
     },
     {
       "name": "Trigger Revolver",
-      "attackSpeed": -0.1,
-      "baseDamage": 0.05,
-      "cooldown": 0.05,
+      "attackSpeed": -0.05,
+      "baseDamage": 0.125,
+      "cooldown": 0,
       "criticalHitChance": 0,
       "criticalHitDamage": 0,
       "projectileWidth": 0,
