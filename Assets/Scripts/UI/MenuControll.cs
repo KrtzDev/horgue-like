@@ -23,6 +23,11 @@ public class MenuControll : MonoBehaviour
 		InputManager.Instance.CharacterInputActions.UI.ShoulderButtons.started += KeepTabSelected;
 	}
 
+	private void OnDisable()
+	{
+		InputManager.Instance.CharacterInputActions.UI.Triggers.started -= NavigateTabs;
+		InputManager.Instance.CharacterInputActions.UI.ShoulderButtons.started -= KeepTabSelected;
+	}
 
 	private void Start()
 	{

@@ -125,7 +125,6 @@ public class StatusEffect
 		if (_hasInitialExtraDamage)
 		{
 			AddEffect(new DamageOnce(_enemy, _initialDamagePercent * projectile.finalBaseDamage));
-			Debug.Log(_initialDamagePercent * projectile.finalBaseDamage);
 
 			PlayVFXFromPool(initialDamageVFXPool);
 		}
@@ -171,6 +170,7 @@ public class StatusEffect
 		for (int i = 0; i < _effects.Count; i++)
 		{
 			_effects[i].OnEffectEnded -= RemoveEffect;
+			_effects[i].EndEffect();
 		}
 		_effects.Clear();
 	}
@@ -187,6 +187,7 @@ public class StatusEffect
 	private void RemoveEffect(Effect effect)
 	{
 		effect.OnEffectEnded -= RemoveEffect;
+		effect.EndEffect();
 		_effects.Remove(effect);
 	}
 
@@ -198,6 +199,8 @@ public class StatusEffect
 
 		if (_currentEffectTimer < 0)
 		{
+			RemoveAllEffects();
+
 			OnStatusEffectEnded.Invoke(this);
 			return;
 		}

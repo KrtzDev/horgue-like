@@ -7,7 +7,7 @@ public class Wallet
 	public event Action<int> OnMoneyChanged;
 
 	[SerializeField]
-	private float _money;
+	private int _money;
 
 	public void Reset()
 	{
@@ -16,27 +16,28 @@ public class Wallet
 
 	public int GetMoneyAmount()
 	{
-		return Mathf.RoundToInt(_money-0.5f);
+		return _money;
 	}
 
 	public void Store(int value)
 	{
 		_money += value;
-		OnMoneyChanged?.Invoke((int)_money);
+		OnMoneyChanged?.Invoke(_money);
 	}
 
 	public bool TryPay(int value)
 	{
-		if (_money - value <= 0)
+		if (_money - value < 0)
 			return false;
 
 		Pay(value);
 		return true;
+
 	}
 
 	private void Pay(int value)
 	{
 		_money -= value;
-		OnMoneyChanged?.Invoke((int)_money);
+		OnMoneyChanged?.Invoke(_money);
 	}
 }

@@ -291,8 +291,6 @@ public class GameManager : Singleton<GameManager>
 
 		_currentLevel += 1;
 
-		// UIManager.Instance.ShowWaveEndScreen(LevelStatus.Won);
-
 		EnemyStopFollowing();
 		StartCoroutine(AttractCoins());
 	}
@@ -300,8 +298,6 @@ public class GameManager : Singleton<GameManager>
 	private IEnumerator AttractCoins()
     {
 		bool coinMove = false;
-
-		Debug.Log(coinPool.ActiveCount());
 
 		while (coinPool.ActiveCount() > 0)
 		{
@@ -342,7 +338,6 @@ public class GameManager : Singleton<GameManager>
 		StatsTracker.Instance.AddLevelStatsToTotal();
 		InputManager.Instance.CharacterInputActions.Disable();
 		UIManager.Instance.ShowLevelEndScreen(LevelStatus.Lost);
-		UIManager.Instance.WaveEndScreen.gameObject.SetActive(false);
 		_playerCanUseAbilities = false;
 		EnemyStopFollowing();
 	}
