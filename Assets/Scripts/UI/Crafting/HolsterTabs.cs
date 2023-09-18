@@ -32,6 +32,12 @@ public class HolsterTabs : MonoBehaviour
 		InputManager.Instance.CharacterInputActions.UI.Triggers.started += KeepTabSelected;
 	}
 
+	private void OnDisable()
+	{
+		InputManager.Instance.CharacterInputActions.UI.ShoulderButtons.started -= NavigateTabs;
+		InputManager.Instance.CharacterInputActions.UI.Triggers.started -= KeepTabSelected;
+	}
+
 	private void Start()
 	{
 		DestroyOldTabs();

@@ -299,8 +299,6 @@ public class GameManager : Singleton<GameManager>
     {
 		bool coinMove = false;
 
-		Debug.Log(coinPool.ActiveCount());
-
 		while (coinPool.ActiveCount() > 0)
 		{
 			if (!coinMove)
