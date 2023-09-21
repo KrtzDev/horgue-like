@@ -148,6 +148,7 @@ public class GameManager : Singleton<GameManager>
 		coinPool = ObjectPool<CollectibleAttractor>.CreatePool(_coin, 1000, null);
 		healthPackPool = ObjectPool<CollectibleAttractor>.CreatePool(_healthPack, 100, null);
 
+		roundWon = false;
 		StatsTracker.Instance.ResetLevelStats();
 
 		_gameDataReader.GetGameData();
@@ -298,9 +299,12 @@ public class GameManager : Singleton<GameManager>
 	private IEnumerator AttractCoins()
     {
 		bool coinMove = false;
+		float maxWaitTime = 10f;
 
-		while (coinPool.ActiveCount() > 0)
+		while (coinPool.ActiveCount() > 0 && maxWaitTime > 0)
 		{
+			Debug.Log(coinPool.ActiveCount());
+			Debug.Log(maxWaitTime);
 			if (!coinMove)
 			{
 				Collider playerCollider = _player.GetComponent<Collider>();
@@ -309,17 +313,15 @@ public class GameManager : Singleton<GameManager>
 				{
 					if(coinPool.GetObjectAtIndex(i).isActiveAndEnabled)
                     {
-						coinPool.GetObjectAtIndex(i).GetComponent<Rigidbody>().useGravity = false;
-						coinPool.GetObjectAtIndex(i).GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
 						coinPool.GetObjectAtIndex(i).playerCollider = playerCollider;
 						coinPool.GetObjectAtIndex(i).moveToPlayer = true;
 						coinPool.GetObjectAtIndex(i).attractorSpeed *= 4f;
 						coinPool.GetObjectAtIndex(i).GetComponentInChildren<Coin_Collectible>().SetCoinSilver();
 					}
 				}
-
 				coinMove = true;
 			}
+			maxWaitTime -= Time.deltaTime;
 			yield return null;
 		}
 

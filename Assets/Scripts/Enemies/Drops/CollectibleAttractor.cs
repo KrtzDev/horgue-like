@@ -1,14 +1,14 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class CollectibleAttractor : MonoBehaviour
 {
     public float attractorSpeed;
-    [SerializeField] private Collectible _collectible;
-    [HideInInspector] public Collider playerCollider;
-    [SerializeField] private bool healthPack;
     public bool moveToPlayer;
+
+    [HideInInspector] public Collider playerCollider;
+
+    [SerializeField] private Collectible _collectible;
+    [SerializeField] private bool _healthPack;
 
     private void Awake()
     {
@@ -27,7 +27,7 @@ public class CollectibleAttractor : MonoBehaviour
     {
         if (other.CompareTag("Player") && !_collectible._wasPickedUp)
         {
-            if(healthPack)
+            if(_healthPack)
             {
                 if(other.GetComponent<HealthComponent>().currentHealth < other.GetComponent<HealthComponent>().maxHealth)
                 {
