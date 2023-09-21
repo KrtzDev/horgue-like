@@ -1,3 +1,4 @@
+using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -39,6 +40,12 @@ public class AudioSlider : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
 
 	public void OnPointerExit(PointerEventData eventData)
 	{
+		StartCoroutine(SelectAfterFrame());
+	}
+
+	private IEnumerator SelectAfterFrame()
+	{
+		yield return new WaitForEndOfFrame();
 		_slider.Select();
 	}
 }

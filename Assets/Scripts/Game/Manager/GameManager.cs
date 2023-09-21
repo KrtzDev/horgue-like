@@ -303,8 +303,6 @@ public class GameManager : Singleton<GameManager>
 
 		while (coinPool.ActiveCount() > 0 && maxWaitTime > 0)
 		{
-			Debug.Log(coinPool.ActiveCount());
-			Debug.Log(maxWaitTime);
 			if (!coinMove)
 			{
 				Collider playerCollider = _player.GetComponent<Collider>();
