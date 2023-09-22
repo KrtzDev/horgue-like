@@ -22,7 +22,7 @@
     {
       "name": "RangedRobot",
       "maxHealth": 0.35,
-      "damagePerHit": 1.5,
+      "damagePerHit": 2.1,
       "attackSpeed": 1.5,
       "givenXP": 5,
       "maxMoveSpeed": 13,
@@ -41,7 +41,7 @@
     {
       "name": "PasuKan",
       "maxHealth": 0.75,
-      "damagePerHit": 1.5,
+      "damagePerHit": 1.7,
       "attackSpeed": 2.5,
       "givenXP": 6,
       "maxMoveSpeed": 14,
@@ -60,7 +60,7 @@
     {
       "name": "GIGARangedRobot",
       "maxHealth": 0.65,
-      "damagePerHit": 2,
+      "damagePerHit": 2.5,
       "attackSpeed": 2.5,
       "givenXP": 7,
       "maxMoveSpeed": 12,
@@ -98,7 +98,7 @@
     {
       "name": "Drone",
       "maxHealth": 0.2,
-      "damagePerHit": 1.2,
+      "damagePerHit": 1.5,
       "attackSpeed": 2.25,
       "givenXP": 4,
       "maxMoveSpeed": 8,
@@ -117,7 +117,7 @@
     {
       "name": "Orc",
       "maxHealth": 1.5,
-      "damagePerHit": 1,
+      "damagePerHit": 1.3,
       "attackSpeed": 3,
       "givenXP": 8,
       "maxMoveSpeed": 10,

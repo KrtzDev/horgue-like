@@ -94,6 +94,11 @@ public class GameManager : Singleton<GameManager>
 		ResetGame();
 	}
 
+	private void OnApplicationFocus(bool focus)
+	{
+		weaponControll = WeaponControllKind.AllAuto;
+	}
+
 	private bool ApplicationCleanUp()
 	{
 		InputSystem.ResetHaptics();
