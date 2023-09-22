@@ -63,6 +63,9 @@ public class MenuControll : MonoBehaviour
 
 	private void SelectMenuMouse(UIMenu menu)
 	{
+		if (_currentSelectedTab == _menuTabs.FindIndex(e => e.AssociatedMenu == menu))
+			return;
+
 		_menuTabs[_currentSelectedTab].ResetColors();
 		_menuTabs[_currentSelectedTab].UnFocusMenu();
 

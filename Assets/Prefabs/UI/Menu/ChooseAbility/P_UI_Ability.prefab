@@ -4151,6 +4151,7 @@ GameObject:
   - component: {fileID: 8019457011726869254}
   - component: {fileID: 3728724650933056045}
   - component: {fileID: 925541605706483504}
+  - component: {fileID: 6641671557408826970}
   m_Layer: 5
   m_Name: P_UI_Ability
   m_TagString: Untagged
@@ -4263,6 +4264,20 @@ MonoBehaviour:
   _abilityNameText: {fileID: 4013818961204252072}
   _selectionMarker: {fileID: 7225570122070513653}
   _startScale: {x: 0, y: 0, z: 0}
+--- !u!114 &6641671557408826970
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8221644790415696287}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 571b4226c82a4d349b2463ff016d4a5a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <Button>k__BackingField: {fileID: 3728724650933056045}
+  <ButtonText>k__BackingField: {fileID: 6335887832977398133}
 --- !u!1 &8420345836620572692
 GameObject:
   m_ObjectHideFlags: 0

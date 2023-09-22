@@ -1473,6 +1473,7 @@ GameObject:
   - component: {fileID: 7254620540290556202}
   - component: {fileID: 7254620540290556203}
   - component: {fileID: 1934217904593071251}
+  - component: {fileID: 2788606663194244890}
   m_Layer: 5
   m_Name: BackToMainMenu
   m_TagString: Untagged
@@ -1622,6 +1623,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _textColorOnHover: {r: 0.93333334, g: 0.9411765, b: 0.9490196, a: 1}
+--- !u!114 &2788606663194244890
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7254620540290556205}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 571b4226c82a4d349b2463ff016d4a5a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <Button>k__BackingField: {fileID: 7254620540290556203}
+  <ButtonText>k__BackingField: {fileID: 7254620540135260007}
 --- !u!1 &7254620540303173817
 GameObject:
   m_ObjectHideFlags: 0
@@ -1848,6 +1863,7 @@ GameObject:
   - component: {fileID: 7254620540569301369}
   - component: {fileID: 465013095898513307}
   - component: {fileID: 8659355089288147398}
+  - component: {fileID: 1705922186180914496}
   m_Layer: 5
   m_Name: Continue
   m_TagString: Untagged
@@ -2009,6 +2025,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _textColorOnHover: {r: 0.93333334, g: 0.9411765, b: 0.9490196, a: 1}
+--- !u!114 &1705922186180914496
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7254620540569301371}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 571b4226c82a4d349b2463ff016d4a5a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <Button>k__BackingField: {fileID: 7254620540569301369}
+  <ButtonText>k__BackingField: {fileID: 7254620539325050860}
 --- !u!1 &7254620540576573077
 GameObject:
   m_ObjectHideFlags: 0
