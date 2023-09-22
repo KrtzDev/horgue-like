@@ -150,6 +150,8 @@ public class GameManager : Singleton<GameManager>
 		 	killedBoss = false;
 		}
 
+		weaponControll = WeaponControllKind.AllAuto;
+
 		coinPool = ObjectPool<CollectibleAttractor>.CreatePool(_coin, 1000, null);
 		healthPackPool = ObjectPool<CollectibleAttractor>.CreatePool(_healthPack, 100, null);
 
