@@ -82,6 +82,7 @@ public abstract class UIButton : MonoBehaviour, ISelectHandler, IDeselectHandler
 		if (!Button) Button = GetComponent<Button>();
 		if (!ButtonText) ButtonText = GetComponentInChildren<TMP_Text>();
 	}
+#endif
 
 	public void OnPointerExit(PointerEventData eventData)
 	{
@@ -97,5 +98,4 @@ public abstract class UIButton : MonoBehaviour, ISelectHandler, IDeselectHandler
 
 		this.Select();
 	}
-#endif
 }
