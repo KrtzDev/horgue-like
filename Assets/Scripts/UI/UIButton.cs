@@ -6,7 +6,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(Button))]
-public abstract class UIButton : MonoBehaviour, ISelectHandler, IDeselectHandler, IPointerDownHandler, IPointerUpHandler, IPointerExitHandler, IPointerEnterHandler
+public abstract class UIButton : MonoBehaviour, ISelectHandler, IDeselectHandler, IPointerDownHandler, IPointerUpHandler
 {
 	public event Action OnButtonSelect;
 	public event Action OnButtonDeselect;
@@ -83,19 +83,4 @@ public abstract class UIButton : MonoBehaviour, ISelectHandler, IDeselectHandler
 		if (!ButtonText) ButtonText = GetComponentInChildren<TMP_Text>();
 	}
 #endif
-
-	public void OnPointerExit(PointerEventData eventData)
-	{
-		this.Select();
-	}
-
-	public void OnPointerEnter(PointerEventData eventData)
-	{
-		GameObject currentselection = EventSystem.current.currentSelectedGameObject;
-
-		if (currentselection != null && currentselection != this.gameObject)
-			EventSystem.current.SetSelectedGameObject(null);
-
-		this.Select();
-	}
 }

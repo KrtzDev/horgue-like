@@ -17,5 +17,6 @@ public class PauseMenu : MonoBehaviour
 		}
 		GameManager.Instance._gameIsPaused = false;
 		UIManager.Instance.PauseMenu.gameObject.SetActive(false);
+		GameManager.Instance.weaponControll = WeaponControllKind.AllAuto;
 	}
 }

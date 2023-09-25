@@ -94,6 +94,11 @@ public class GameManager : Singleton<GameManager>
 		ResetGame();
 	}
 
+	private void OnApplicationFocus(bool focus)
+	{
+		weaponControll = WeaponControllKind.AllAuto;
+	}
+
 	private bool ApplicationCleanUp()
 	{
 		InputSystem.ResetHaptics();
@@ -144,6 +149,8 @@ public class GameManager : Singleton<GameManager>
 			_winningCondition = WinningCondition.SurviveForTime;
 		 	killedBoss = false;
 		}
+
+		weaponControll = WeaponControllKind.AllAuto;
 
 		coinPool = ObjectPool<CollectibleAttractor>.CreatePool(_coin, 1000, null);
 		healthPackPool = ObjectPool<CollectibleAttractor>.CreatePool(_healthPack, 100, null);
