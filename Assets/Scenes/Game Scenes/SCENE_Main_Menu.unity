@@ -4152,61 +4152,68 @@ PrefabInstance:
 
         Dilara A.
 
+        Eyner M.
+
         Florian P.
 
-        Frederik E.
+        Frederik
+        E.
 
-        Gregor
-        S.
+        Gregor S.
 
         Justin S.
 
-        Laura M.
+        Laura D.
+
+        Laura
+        M.
 
         Leonard S.
 
-        Leon
-        J.
+        Leon J.
 
         Lisa K.
 
         Lukas G.
 
+        Martin
+        M.
+
         Nadine J.
 
         Nico A.
+
+        Nicolas C.
 
         Nika
         A.
 
         Niklas R.
 
+        Nils E.
+
         Paul R.
 
-        Philipp C.
+        Philipp
+        C.
 
-        Reinhard
-        B.
+        Reinhard B.
 
         Robin H.
 
         Rose L.
 
-        Ruben S.
+        Ruben
+        S.
 
-        Sebastian
-        R.
+        Sebastian R.
 
         Simon S.
 
         Steffen S.
 
-        Tina W.
-
-        Martin
-        M.
-
-        Nils E.'
+        Tina
+        W.'
       objectReference: {fileID: 0}
     - target: {fileID: 3580325558764195104, guid: c4544ca0661e0f540b99141ef677f4d7,
         type: 3}
@@ -4328,10 +4335,20 @@ PrefabInstance:
       propertyPath: m_Name
       value: Credits_Text_Parent
       objectReference: {fileID: 0}
+    - target: {fileID: 6190035826632402821, guid: c4544ca0661e0f540b99141ef677f4d7,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6769363445670342963, guid: c4544ca0661e0f540b99141ef677f4d7,
         type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -1600
+      objectReference: {fileID: 0}
+    - target: {fileID: 7780011326411569119, guid: c4544ca0661e0f540b99141ef677f4d7,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -1650
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c4544ca0661e0f540b99141ef677f4d7, type: 3}
